@@ -1,0 +1,42 @@
+// TODO: Add a container to adjust the menu size
+.dropdown-menu {
+	@include animate(visibility, opacity);
+
+	background-color: color(white);	
+	border: rem(1) solid color(black);
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	visibility: hidden;
+}
+
+.dropdown-toggle::after {
+	content: "\25BC";
+}
+
+.dropdown-toggle:focus ~ .dropdown-menu,
+.dropdown-menu.active {
+	opacity: 1;
+	pointer-events: auto;
+	visibility: visible;
+	z-index: 20;
+}
+
+.dropdown-header,
+.dropdown-item {
+	padding: rem(8);
+}
+
+.dropdown-header {
+	color: color(gray);
+	font-size: $font-md;
+}
+
+// TODO: Fix hover color with left border
+.dropdown-item:hover {
+	background-color: color(lt-white);
+}
+
+.dropdown-divider {
+	border: rem(1) solid color(gray);
+}

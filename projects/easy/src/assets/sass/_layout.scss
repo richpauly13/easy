@@ -1,0 +1,45 @@
+// Layout styles
+.container {
+	@media screen and (min-width: $screen-sm) {
+		width: 80%;
+	}
+}
+
+.container-fluid {
+	@media screen and (min-width: $screen-sm) {
+		width: rem(448);
+	}
+
+	@media screen and (min-width: $screen-md) {
+		width: rem(768);
+	}
+
+	@media screen and (min-width: $screen-lg) {
+		width: rem(992);
+	}
+
+	@media screen and (min-width: $screen-xl) {
+		width: rem(1168);
+	}
+}
+
+.container,
+.container-fluid,
+.container-full {
+	margin-left: auto;
+	margin-right: auto;
+	padding: $gutter;
+	width: 100%;
+}
+
+.footer-sticky {
+	@include column;
+
+	align-items: stretch;
+	flex-wrap: nowrap;
+	height: 100%;
+
+	& :last-child {
+		margin-top: auto;
+	}
+}

@@ -1,0 +1,14 @@
+{
+  "name": "easy",
+  "version": "1.0.0",
+  "author": "Paul Chehak <pauly13@sbcglobal.net>",
+  "description": "Easy CSS framework.",
+  "bugs": "",
+  "license": "MIT",
+  "repository": "github:richpauly13/easy",
+  "private": false,
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  }
+}

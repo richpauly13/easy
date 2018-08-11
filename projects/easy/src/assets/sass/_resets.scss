@@ -1,0 +1,331 @@
+// Box-sizing
+*,
+*::after,
+*::before {
+  	box-sizing: inherit;
+}
+
+// Responsive fonts
+html {
+	-moz-osx-font-smoothing: grayscale;	
+	-ms-overflow-style: scrollbar;
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	box-sizing: border-box;
+	font-size: $screen-font-xs;
+	text-size-adjust: 100%;
+	
+	@media screen and (min-width: $screen-sm) {
+		font-size: $screen-font-sm;
+	}
+	
+	@media screen and (min-width: $screen-md) {
+		font-size: $screen-font-md;
+	}
+	
+	@media screen and (min-width: $screen-lg) {
+		font-size: $screen-font-lg;
+	}
+	
+	@media screen and (min-width: $screen-xl) {
+		font-size: $screen-font-xl;
+	}
+}
+
+// Main color, text, and sizing
+body {
+	background-color: color(lt-white);
+	color: color(lt-black);
+	font-family: $font-stack;
+	font-size: 1rem;
+	line-height: 1.618;
+	overflow-x: hidden;
+	text-rendering: optimizeLegibility;
+}
+
+body,
+html {
+	height: 100%;
+	width: 100%;
+}
+
+// Removes tap delay on mobile devices
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea {
+	touch-action: manipulation;
+}
+
+// Ensures elements are responsive and do not over flow containers
+button,
+canvas,
+embed,
+figure,
+img,
+input,
+label,
+object,
+progress,
+select,
+textarea,
+video {
+	max-width: 100%;
+}
+
+canvas,
+figure,
+img,
+video {
+	height: auto;
+}
+
+// Sets heading font sizes and bottom margins
+@each $heading, $font, $margin in $headings {
+	#{$heading},
+	.#{$heading} {
+		font-size: $font;
+		margin-bottom: $margin;
+	}
+}
+
+// Special element normalization and resets
+abbr[title] {
+	border-bottom: rem(1) dotted color(lt-black);
+	cursor: help;
+}
+
+address {
+	line-height: inherit;
+}
+
+blockquote {
+	padding: rem(16);
+}
+
+blockquote + footer {
+	color: color(dk-gray);
+	padding-bottom: rem(16);
+	padding-left: rem(24);
+	padding-right: rem(24);
+
+	&::before {
+		content: "\2012";
+
+		color: color(dk-gray);		
+		padding-right: rem(8);
+	}
+}
+
+blockquote,
+blockquote + footer {
+	border-left: rem(2) solid color(lt-gray);
+}
+
+caption {
+	caption-side: bottom;
+}
+
+dd {
+	margin-bottom: rem(8);
+}
+
+hr {
+	border-bottom: rem(1) solid color(dk-gray);
+}
+
+mark {
+	background-color: color(yellow);
+	color: color(lt-black);
+}
+
+address,
+dl {
+	margin-bottom: rem(16);
+}
+
+address,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+// Removes margins added by normalize.css
+address,
+dl,
+figure,
+h1,
+ol,
+pre {
+	margin: 0;
+}
+
+caption,
+img,
+label,
+td,
+th {
+	vertical-align: middle;
+}
+
+// Adds transform for better performance
+sub {
+	transform: translateY(rem(4));
+}
+
+sup {
+	transform: translateY(rem(-8));
+}
+
+// Removes positioning set by normalize.css
+sub,
+sup {
+	bottom: 0;
+	position: static;
+	top: 0;
+}
+
+// Code normalization and resets
+code,
+kbd,
+samp {
+	font-size: rem(16);
+}
+
+code,
+pre {
+	hyphens: none;
+	tab-size: 4;	
+}
+
+pre {
+	font-size: rem(8);
+	white-space: pre-wrap;
+	word-spacing: normal;
+}
+
+// Form normalization and resets
+fieldset {
+	min-width: 0;
+	padding: 0;
+}
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"] {
+	-webkit-appearance: listbox;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+input[type="range"] {
+	width: 100%;
+
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		margin-top: rem(-14);
+	}
+
+	&::-moz-range-track {
+		-moz-appearance: none;
+	}
+
+	&::-ms-track {
+		background: transparent;
+		border-color: transparent;
+		color: transparent;
+	}
+}
+
+label {
+	@include row-inline;
+}
+
+select {
+	overflow-y: auto;
+}
+
+select::-ms-value {
+	background-color: none;
+	color: inherit;
+}
+
+optgroup {
+	font-weight: bolder;
+}
+
+textarea {
+	resize: vertical;
+}
+
+a[role="button"],
+abbr[title],
+button,
+html input[type="button"],
+input,
+input[type="reset"],
+input[type="submit"],
+optgroup,
+select,
+textarea {
+	text-decoration: none;
+	font-family: inherit;
+	border: 0;
+}
+
+a[role="button"],
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	appearance: none;
+	background-color: transparent;		
+}
+
+a[role="button"],
+button,
+html input[type="button"],
+input[type="range"]
+input[type="reset"],
+input[type="submit"], select {
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+// Credit: https://css-tricks.com/html5-progress-element/
+progress {
+	appearance: none;
+	background-color: color(gray);
+	border: none;
+	color: color(dk-blue);
+
+	&::-webkit-progress-bar {
+		background-color: color(gray);
+		color: color(dk-blue);
+	}
+
+	&::-moz-progress-bar {
+		background-color: color(dk-blue);
+	}
+
+	&::-ms-fill {
+		border: none;
+	}
+}
+
+// Credit: https://github.com/suitcss/base
+[tabindex="-1"],
+input[type="range"] {
+	&:focus {
+		outline: none !important;
+	}
+}

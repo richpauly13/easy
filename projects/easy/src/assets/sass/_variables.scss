@@ -1,0 +1,66 @@
+// Breakpoint variables
+$screen-sm: 30em; // 480px
+$screen-md: 48em; // 800px
+$screen-lg: 64em; // 1024px
+$screen-xl: 75em; // 1200px
+
+// Font variables
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$font-xs: rem(12);
+$font-sm: rem(14);
+$font-md: rem(18);
+$font-lg: rem(24);
+$font-xl: rem(36);
+
+// Root font size variables - must remain in px for rem to work
+$screen-font-xs: 12px;
+$screen-font-sm: 13px;
+$screen-font-md: 14px;
+$screen-font-lg: 15px;
+$screen-font-xl: 16px;
+
+// Gutter variable
+$gutter: rem(16);
+
+// Colors map variable
+$colors: (
+	red: #ba000d,
+	lt-purple: #d05ce3,
+	purple: #9c27b0,
+	dk-purple: #6a0080,
+	yellow: #ffeb3b,
+	orange: #ff9800,
+	lt-green: #80e27e,
+	green: #4caf50,
+	dk-green: #087f23,
+	lt-blue: #6ec6ff,
+	blue: #2196f3,
+	dk-blue: #0069c0,
+	lt-gray: #efefef,
+	gray: #bdbdbd,
+	dk-gray: #8d8d8d,
+	lt-white: #fafafa,
+	white: #fff,
+	lt-black: #191919,
+	black: #000
+);
+
+// Headings list variable
+$headings: (
+	(h1, rem(32), rem(10.72)),
+	(h2, rem(24), rem(12)),
+	(h3, rem(18.72), rem(13.28)),
+	(h4, rem(16), rem(17.92)),
+	(h5, rem(13.28), rem(24)),
+	(h6, rem(12), rem(26.72)),
+);
+
+// Spacers map variable
+$spacers: (
+	xs: rem(8),
+	sm: rem(16),
+	md: rem(24),
+	lg: rem(32),
+	xl: rem(40)
+);

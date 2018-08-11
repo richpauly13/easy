@@ -1,0 +1,48 @@
+// Spacer styles
+@each $size, $rem in $spacers {
+	@each $ext in top, right, bottom, left {
+		.mar-#{str-slice($ext, 1, 1)}-#{$size} {
+			margin-#{$ext}: $rem;
+		}
+
+		.pad-#{str-slice($ext, 1, 1)}-#{$size} {
+			padding-#{$ext}: $rem;
+		}
+	}
+
+	.mar-rl-#{$size} {
+		margin-left: $rem;
+		margin-right: $rem;
+	}
+
+	.mar-tb-#{$size} {
+		margin-top: $rem;
+		margin-bottom: $rem;
+	}
+
+	.mar-a-#{$size} {
+		margin: $rem;
+	}
+
+	.pad-rl-#{$size} {
+		padding-left: $rem;
+		padding-right: $rem;
+	}
+
+	.pad-tb-#{$size} {
+		padding-top: $rem;
+		padding-bottom: $rem;
+	}
+
+	.pad-a-#{$size} {
+		padding: $rem;
+	}
+}
+
+.mar-n {
+	margin: 0;
+}
+
+.pad-n {
+	padding: 0;
+}

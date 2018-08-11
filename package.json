@@ -1,0 +1,70 @@
+{
+  "name": "easy-docs",
+  "version": "1.0.0",
+  "author": "Paul Chehak <pauly13@sbcglobal.net>",
+  "description": "Documentation for the Easy CSS framework.",
+  "bugs": {
+    "url": "https://github.com/richpauly13/easy/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richpauly13/easy.git"
+  },
+  "private": false,
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve -o",
+    "build": "ng build --prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "docs": "node node_modules/markdown-styleguide-generator/index.js",
+    "build-lib": "ng build --prod easy",
+    "npm-pack": "cd dist/easy && npm pack",
+    "package": "npm run build-lib && npm run npm-pack"
+  },
+  "dependencies": {
+    "@angular/animations": "^6.1.2",
+    "@angular/common": "^6.1.2",
+    "@angular/compiler": "^6.1.2",
+    "@angular/core": "^6.1.2",
+    "@angular/forms": "^6.1.2",
+    "@angular/http": "^6.1.2",
+    "@angular/platform-browser": "^6.1.2",
+    "@angular/platform-browser-dynamic": "^6.1.2",
+    "@angular/router": "^6.1.2",
+    "core-js": "^2.5.4",
+    "rxjs": "^6.0.0",
+    "zone.js": "~0.8.26"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.7.0",
+    "@angular-devkit/build-ng-packagr": "~0.7.0",
+    "@angular/cli": "^6.1.3",
+    "@angular/compiler-cli": "^6.1.2",
+    "@angular/language-service": "^6.1.2",
+    "@types/jasmine": "~2.8.6",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~4.2.1",
+    "gulp": "^4.0.0",
+    "gulp-shell": "^0.6.5",
+    "gulp-watch": "^5.0.1",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "^3.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.0",
+    "karma-jasmine": "~1.1.1",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "markdown-styleguide-generator": "^2.0.4",
+    "ng-packagr": "^4.0.1",
+    "protractor": "^5.4.0",
+    "ts-node": "~5.0.1",
+    "tsickle": ">=0.29.0",
+    "tslib": "^1.9.0",
+    "tslint": "~5.9.1",
+    "typescript": "~2.9.2"
+  }
+}

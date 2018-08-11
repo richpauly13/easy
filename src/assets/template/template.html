@@ -1,0 +1,37 @@
+{{> theme}}
+{{> highlight}}
+
+<nav class="pad-a-sm border-a-gray shadow-1 fixed-l styleguide-menu">
+    <ul>
+        {{#each menu}}
+        <li (click)="section = '{{name}}'" [ngClass]="{'bg-lt-gray': section === '{{name}}'}" class="hover bg-hover-lt-gray">
+            {{name}}
+            <ul *ngIf="section === '{{name}}'" class="pad-l-sm bg-lt-white submenu">
+                {{#each headings}}
+                <li class="hover bg-hover-lt-gray">{{name}}</li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/each}}
+    </ul>
+</nav>
+
+<article class="pad-a-lg styleguide">
+    {{#each sections}}
+    <section *ngIf="section === '{{section}}'" class="mar-b-lg shadow-1 border-a-gray section">
+        <div class="pad-a-sm border-b-gray bg-lt-gray">
+            <h1 *ngIf="!'{{heading}}'">{{section}}</h1>
+            <h2 *ngIf="'{{heading}}'">{{heading}}</h2>
+            {{{comment}}}
+        </div>
+
+        <div class="pad-a-sm border-b-gray">
+            {{{code}}}
+        </div>
+
+        <div class="pad-a-sm">
+            <pre>{{{markup}}}</pre>
+        </div>
+    </section>
+    {{/each}}
+</article>

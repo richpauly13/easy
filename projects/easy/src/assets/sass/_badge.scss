@@ -1,0 +1,41 @@
+/* SG
+# Badge
+
+Badges are styled with `.badge-*` classes.  If a badge does not contain text, it is not rendered.
+
+```
+<p class="badge-sm bg-dk-blue text-white">1</p>
+<p class="badge-md bg-dk-blue text-white">20</p>
+<p class="badge-lg bg-dk-blue text-white">300</p>
+<p class="badge-md bg-dk-blue text-white"></p>
+```
+*/
+
+// Badge styles
+.badge-sm,
+.badge-md,
+.badge-lg {
+	@include row-inline;
+
+	border-radius: rem(16);
+	justify-content: center;
+
+	&:empty {
+		display: none;
+	}
+}
+
+.badge-sm {
+	line-height: rem(8);
+	padding: rem(8);
+}
+
+.badge-md {
+	line-height: rem(10);
+	padding: rem(10);
+}
+
+.badge-lg {
+	line-height: rem(12);
+	padding: rem(12);
+}
