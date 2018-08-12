@@ -2,7 +2,7 @@
   "name": "easy-docs",
   "version": "1.0.0",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
-  "description": "Documentation for the Easy CSS framework.",
+  "description": "Documentation for the Easy CSS and Angular framework.",
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
   },
@@ -15,14 +15,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build": "ng build --prod",
+    "build": "npm run build-docs && npm run build-easy && npm run npm-pack",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
-    "build-lib": "ng build --prod easy",
-    "npm-pack": "cd dist/easy && npm pack",
-    "package": "npm run build-lib && npm run npm-pack"
+    "build-docs": "ng build --prod",
+    "build-easy": "ng build --prod easy",
+    "npm-pack": "cd dist/easy && npm pack"
   },
   "dependencies": {
     "@angular/animations": "^6.1.2",

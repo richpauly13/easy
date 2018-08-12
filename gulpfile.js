@@ -3,7 +3,7 @@ var shell = require('gulp-shell');
 var watch = require('gulp-watch');
 
 gulp.task('watch', function() {
-	gulp.watch('projects/easy/**/*', gulp.parallel('docs'));
+	watch(['projects/easy/src/assets/sass/*.scss', 'src/assets/template/*.*'], gulp.parallel('docs'));
 });
 
 gulp.task('docs',

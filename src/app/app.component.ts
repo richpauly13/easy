@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
     private selectedSection: string;
 
-    public get section() {
+    public get section(): string {
 		return this.selectedSection;
 	}
 

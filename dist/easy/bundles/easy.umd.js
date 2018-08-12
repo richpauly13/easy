@@ -8,7 +8,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
      */
-    var EasyService = (function () {
+    var EasyService = /** @class */ (function () {
         function EasyService() {
         }
         EasyService.decorators = [
@@ -26,7 +26,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
      */
-    var EasyComponent = (function () {
+    var EasyComponent = /** @class */ (function () {
         function EasyComponent() {
         }
         /**
@@ -52,7 +52,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
      */
-    var EasyModule = (function () {
+    var EasyModule = /** @class */ (function () {
         function EasyModule() {
         }
         EasyModule.decorators = [

@@ -3,7 +3,7 @@
 	"srcFolder": "C:\\Users\\Paul\\Documents\\Projects\\easy\\projects\\easy\\src\\assets\\sass",
 	"outputFile": "C:\\Users\\Paul\\Documents\\Projects\\easy\\src\\app\\app.component.html",
 	"templateFile": "C:\\Users\\Paul\\Documents\\Projects\\easy\\src\\assets\\template\\template.html",
-	"themeFile": "C:\\Users\\Paul\\Documents\\Projects\\easy\\src\\assets\\template\\theme.css",
+	"themeFile": "C:\\Users\\Paul\\Documents\\Projects\\easy\\node_modules\\markdown-styleguide-generator\\template\\theme.css",
 	"highlightFolder": "C:\\Users\\Paul\\Documents\\Projects\\easy\\node_modules\\highlight.js\\styles",
 	"highlightStyle": "docco",
 	"excludeDirs": [
