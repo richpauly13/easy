@@ -1,5 +1,3 @@
-{{> highlight}}
-
 <nav class="pad-a-sm border-a-gray shadow-1 fixed-l styleguide-menu">
     <ul>
         {{#each menu}}
@@ -8,7 +6,7 @@
             
             <ul *ngIf="section === '{{name}}'" class="pad-l-sm submenu">
                 {{#each headings}}
-                <li *ngIf="'{{name}}'" class="hover bg-hover-lt-gray">
+                <li *ngIf="'{{name}}'">
                     <a>{{name}}</a>
                 </li>
                 {{/each}}
@@ -18,10 +16,8 @@
     </ul>
 </nav>
 
-<main class="pad-a-lg styleguide">
-    <header>
-        <h1 [innerHTML]="section"></h1>
-    </header>
+<main class="pad-a-xl styleguide">
+    <h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
     {{#each sections}}
     <section *ngIf="section === '{{section}}'" class="mar-b-lg shadow-1 border-a-gray section">

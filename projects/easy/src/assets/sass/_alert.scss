@@ -7,15 +7,12 @@ Alerts are styled with `.alert-*` classes.
 <aside class="alert-bad" tabindex="-1" aria-labelledby="alert-text-1" role="alert">
 	<p id="alert-text-1">bad</p>
 </aside>
-
 <aside class="alert-good" tabindex="-1" aria-labelledby="alert-text-2" role="alert">
 	<p id="alert-text-2">good</p>
 </aside>
-
 <aside class="alert-info" tabindex="-1" aria-labelledby="alert-text-3" role="alert">
 	<p id="alert-text-3">info</p>
 </aside>
-
 <aside class="alert-warn" tabindex="-1" aria-labelledby="alert-text-4" role="alert">
 	<p id="alert-text-4">warn</p>
 </aside>
