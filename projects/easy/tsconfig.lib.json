@@ -11,7 +11,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "types": [],
+    "types": [
+
+    ],
     "lib": [
       "dom",
       "es2015"
@@ -19,6 +21,7 @@
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
+    "enableResourceInlining": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,

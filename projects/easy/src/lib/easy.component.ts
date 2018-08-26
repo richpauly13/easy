@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ez-easy',
-  template: `
-    <p>
-      easy works!
-    </p>
-  `,
-  styles: []
+	selector: 'ez-root',
+	template: ``,
+	styles: [
+
+	]
 })
 export class EasyComponent implements OnInit {
+	public constructor() {
 
-  constructor() { }
+	}
 
-  ngOnInit() {
-  }
+	public ngOnInit(): void {
 
+	}
 }

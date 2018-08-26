@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CssComponent } from './css.component';
 
-describe('ComponentsComponent', () => {
+describe('CssComponent', () => {
 	let component: CssComponent;
 	let fixture: ComponentFixture<CssComponent>;
 
@@ -21,7 +21,7 @@ describe('ComponentsComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create the component component', () => {
+	it('should be created', () => {
 		expect(component).toBeTruthy();
 	});
 

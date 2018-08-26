@@ -20,7 +20,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
-    "build-docs": "ng build --prod",
+    "build-docs": "ng build --prod easy-docs",
     "build-easy": "ng build --prod easy",
     "npm-pack": "cd dist/easy && npm pack"
   },
