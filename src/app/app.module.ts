@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ComponentsComponent } from './components/components.component';
+import { CssComponent } from './css/css.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ComponentsComponent
+		CssComponent
 	],
 	imports: [
 		BrowserModule,
@@ -18,4 +18,6 @@ import { ComponentsComponent } from './components/components.component';
 		AppComponent
 	]
 })
-export class AppModule { }
+export class AppModule {
+
+}
