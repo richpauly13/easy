@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'docs-components',
-    templateUrl: './components.component.html',
-    styleUrls: ['./components.component.scss']
+	selector: 'docs-components',
+	templateUrl: './components.component.html',
+	styleUrls: ['./components.component.scss']
 })
 export class ComponentsComponent implements OnInit {
-    private selectedSection: string;
+	private selectedSection: string;
 
-    public get section(): string {
-        return this.selectedSection;
-    }
+	public get section(): string {
+		return this.selectedSection;
+	}
 
-    public set section(section: string) {
-        this.selectedSection = section;
-    }
+	public set section(section: string) {
+		this.selectedSection = section;
+	}
 
-    public constructor() {
-        
-    }
+	public constructor() {
 
-    public ngOnInit() {
-        this.section = 'Alert';
-    }
+	}
+
+	public ngOnInit() {
+		this.section = 'Alert';
+	}
 }
