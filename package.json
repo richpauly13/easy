@@ -20,7 +20,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
-    "build-docs": "ng build --prod easy-docs",
+    "watch-easy": "ng build --watch",
+    "build-docs": "ng build --prod",
     "build-easy": "ng build --prod easy",
     "npm-pack": "cd dist/easy && npm pack"
   },
@@ -38,9 +39,9 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.7.0",
-    "@angular-devkit/build-ng-packagr": "~0.7.0",
-    "@angular/cli": "^6.1.5",
+    "@angular-devkit/build-angular": "~0.8.0-rc.0",
+    "@angular-devkit/build-ng-packagr": "~0.8.0-rc.0",
+    "@angular/cli": "^6.2.0-rc.0",
     "@angular/compiler-cli": "^6.1.4",
     "@angular/language-service": "^6.1.4",
     "@types/jasmine": "~2.8.6",
@@ -58,7 +59,7 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "markdown-styleguide-generator": "^2.0.4",
-    "ng-packagr": "^4.0.1",
+    "ng-packagr": "^4.1.0",
     "protractor": "^5.4.0",
     "ts-node": "~5.0.1",
     "tsickle": ">=0.29.0",
