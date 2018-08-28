@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'ez-root',
-	template: ``,
-	styles: [
-
+	templateUrl: './easy.component.html',
+	styleUrls: [
+		'./easy.component.scss'
 	]
 })
 export class EasyComponent implements OnInit {

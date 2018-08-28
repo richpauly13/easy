@@ -1,4 +1,4 @@
-// Global class styles
+// Global styles
 .center {
 	display: block;
 	margin-left: auto;
@@ -42,9 +42,9 @@ ul.list ul.list {
 	list-style: circle;
 }
 
-// Creates box-shadows
+// Creates box-shadows 1-5
 @for $shadow from 1 through 5 {
-	.shadow-#{$shadow} {
+	.box-shadow-#{$shadow} {
 		@include shadow($shadow);
 	}
 }

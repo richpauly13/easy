@@ -23,7 +23,8 @@
     "watch-easy": "ng build --watch",
     "build-docs": "ng build --prod",
     "build-easy": "ng build --prod easy",
-    "npm-pack": "cd dist/easy && npm pack"
+    "npm-pack": "cd dist/easy && npm pack",
+    "webdriver-update-ci": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37"
   },
   "dependencies": {
     "@angular/common": "^6.1.4",
