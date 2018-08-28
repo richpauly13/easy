@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
 	templateUrl: './css.component.html',
 	styleUrls: [
-        './css.component.scss'
-    ]
+		'./css.component.scss'
+	]
 })
 export class CssComponent implements OnInit {
 	private selectedSection: string;
