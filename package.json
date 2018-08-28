@@ -18,7 +18,7 @@
     "build": "npm run build-easy && npm run npm-pack && npm run build-docs",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "npm run webdriver-update-ci && ng e2e",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
     "watch-easy": "ng build --watch",
     "build-docs": "ng build --prod",
