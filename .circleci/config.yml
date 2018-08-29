@@ -39,6 +39,8 @@ jobs:
       - image: circleci/node:8.11.4-browsers
     working_directory: ~/easy
     steps:
+      - attach_workspace:
+        at: .
 
       # run lint
       - run: npm run lint
