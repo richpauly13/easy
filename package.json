@@ -2,16 +2,25 @@
   "name": "easy-docs",
   "version": "1.0.0",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
-  "description": "Documentation for the Easy CSS and Angular framework.",
+  "description": "Documentation for the Easy framework.",
+  "keywords": [
+    "angular",
+    "css",
+    "flexbox",
+    "responsive",
+    "accessible",
+    "framework"
+  ],
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
   },
+  "homepage": "https://richpauly13.github.io/easy/dist/easy-docs",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/richpauly13/easy.git"
   },
-  "private": false,
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
