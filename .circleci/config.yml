@@ -70,7 +70,7 @@ jobs:
           at: .
           
       # run unit tests
-      - run: npm run test
+      - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
 
   e2e:
     docker:
@@ -81,7 +81,8 @@ jobs:
           at: .
           
       # run e2e tests
-      - run: npm run e2e
+      - run: npm run webdriver-update-ci
+      - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
 
 workflows:
   version: 2
