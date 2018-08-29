@@ -80,6 +80,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "codeCoverage": true,
+            "progress": false,
             "styles": [
               "src/styles.scss"
             ],
@@ -193,7 +194,8 @@
             "main": "projects/easy/src/test.ts",
             "tsConfig": "projects/easy/tsconfig.spec.json",
             "karmaConfig": "projects/easy/karma.conf.js",
-            "codeCoverage": true
+            "codeCoverage": true,
+            "progress": false
           }
         },
         "lint": {
