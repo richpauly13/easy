@@ -27,9 +27,12 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-easy-
       
-      - run: sudo npm i npm -g
-      - run: sudo npm i @angular/cli@^6.2.0-rc.0 -g
       - run: npm i
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./*
 
       - save_cache:
           paths:
@@ -41,7 +44,8 @@ jobs:
       - image: circleci/node:8.11.4-browsers
     working_directory: ~/ez
     steps:
-      - checkout
+      - attach_workspace:
+          at: .
 
       # run lint
       - run: npm run lint
