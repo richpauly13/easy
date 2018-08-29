@@ -22,7 +22,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-easy-{{ .Branch }}-{{ checksum "package.json" }}
+          - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
           # fallback to using the latest cache if no exact match is found
           - v1-easy-
@@ -32,15 +32,14 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-easy-{{ .Branch }}-{{ checksum "package.json" }}
+          key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
   lint:
     docker:
       - image: circleci/node:8.11.4-browsers
     working_directory: ~/ez
     steps:
-      - attach_workspace:
-          at: .
+      - checkout
 
       # run lint
       - run: npm run lint
@@ -50,8 +49,7 @@ jobs:
       - image: circleci/node:8.11.4-browsers
     working_directory: ~/ez
     steps:
-      - attach_workspace:
-          at: .
+      - checkout
 
       # run build
       - run: npm run build
@@ -61,8 +59,7 @@ jobs:
       - image: circleci/node:8.11.4-browsers
     working_directory: ~/ez
     steps:
-      - attach_workspace:
-          at: .
+     - checkout
           
       # run unit tests
       - run: npm run test
@@ -72,8 +69,7 @@ jobs:
       - image: circleci/node:8.11.4-browsers
     working_directory: ~/ez
     steps:
-      - attach_workspace:
-          at: .
+      - checkout
           
       # run e2e tests
       - run: npm run e2e
