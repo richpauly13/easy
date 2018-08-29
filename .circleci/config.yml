@@ -40,7 +40,7 @@ jobs:
     working_directory: ~/easy
     steps:
       - attach_workspace:
-        at: .
+          at: .
 
       # run lint
       - run: npm run lint
@@ -51,7 +51,7 @@ jobs:
     working_directory: ~/easy
     steps:
       - attach_workspace:
-        at: .
+          at: .
 
       # run build
       - run: npm run build
@@ -62,7 +62,7 @@ jobs:
     working_directory: ~/easy
     steps:
       - attach_workspace:
-        at: .
+          at: .
           
       # run unit tests
       - run: npm run test
@@ -73,7 +73,7 @@ jobs:
     working_directory: ~/easy
     steps:
       - attach_workspace:
-        at: .
+          at: .
           
       # run e2e tests
       - run: npm run e2e
