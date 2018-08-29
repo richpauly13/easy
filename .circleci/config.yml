@@ -14,7 +14,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/easy
+    working_directory: ~/ez
 
     steps:
       - checkout
@@ -22,7 +22,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          - v1-easy-{{ .Branch }}-{{ checksum "package.json" }}
 
           # fallback to using the latest cache if no exact match is found
           - v1-easy-
@@ -32,12 +32,12 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: v1-easy-{{ .Branch }}-{{ checksum "package.json" }}
 
   lint:
     docker:
       - image: circleci/node:8.11.4-browsers
-    working_directory: ~/easy
+    working_directory: ~/ez
     steps:
       - attach_workspace:
           at: .
@@ -48,7 +48,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.11.4-browsers
-    working_directory: ~/easy
+    working_directory: ~/ez
     steps:
       - attach_workspace:
           at: .
@@ -59,7 +59,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:8.11.4-browsers
-    working_directory: ~/easy
+    working_directory: ~/ez
     steps:
       - attach_workspace:
           at: .
@@ -70,7 +70,7 @@ jobs:
   e2e:
     docker:
       - image: circleci/node:8.11.4-browsers
-    working_directory: ~/easy
+    working_directory: ~/ez
     steps:
       - attach_workspace:
           at: .
