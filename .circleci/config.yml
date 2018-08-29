@@ -59,7 +59,7 @@ jobs:
       - image: circleci/node:8.11.4-browsers
     working_directory: ~/ez
     steps:
-     - checkout
+      - checkout
           
       # run unit tests
       - run: npm run test
