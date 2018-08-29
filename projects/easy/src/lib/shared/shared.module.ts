@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 
 	],
 	exports: [
-        CommonModule
+		CommonModule
 	]
 })
 export class SharedModule {
