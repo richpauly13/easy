@@ -6,13 +6,8 @@ version: 2
 jobs:
   install:
     docker:
-      # specify the version you desire here
-      - image: circleci/node:8.11.4-browsers
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+      # Specify the version you desire here
+      - image: circleci/node:8-browsers
 
     working_directory: ~/ez
 
@@ -27,8 +22,11 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-easy-
       
+      # Install dependencies
       - run: npm i
+      - run: npm i npm -g
 
+      # Add dependencies to workspace
       - persist_to_workspace:
           root: .
           paths:
@@ -41,7 +39,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/node:8.11.4-browsers
+      - image: circleci/node:8-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
@@ -52,7 +50,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/node:8.11.4-browsers
+      - image: circleci/node:8-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
@@ -63,7 +61,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/node:8.11.4-browsers
+      - image: circleci/node:8-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
@@ -75,7 +73,7 @@ jobs:
 
   e2e:
     docker:
-      - image: circleci/node:8.11.4-browsers
+      - image: circleci/node:8-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
