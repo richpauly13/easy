@@ -6,8 +6,9 @@ version: 2
 jobs:
   install:
     docker:
+
       # Specify the version you desire here
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
 
     working_directory: ~/ez
 
@@ -43,7 +44,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
@@ -54,7 +55,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
@@ -65,7 +66,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
@@ -77,7 +78,7 @@ jobs:
 
   e2e:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10-browsers
     working_directory: ~/ez
     steps:
       - attach_workspace:
