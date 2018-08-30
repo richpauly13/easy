@@ -29,6 +29,7 @@ jobs:
       # Update dependencies
       - run: npm i
       - run: sudo npm i npm -g
+      - run: npm rebuild node-sass
 
       # Add dependencies to workspace
       - persist_to_workspace:
