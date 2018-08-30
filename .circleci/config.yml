@@ -12,17 +12,20 @@ jobs:
     working_directory: ~/ez
 
     steps:
+      # Checkout git repo
       - checkout
 
-      # Download and cache dependencies
+      # Download cached dependencies
       - restore_cache:
           keys:
           - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
-          # fallback to using the latest cache if no exact match is found
+          - v1-easy-{{ .Branch }}
+
+          # Fallback to using the latest cache if no exact match is found
           - v1-easy-
-      
-      # Install dependencies
+
+      # Update dependencies
       - run: npm i
       - run: sudo npm i npm -g
 
@@ -32,6 +35,7 @@ jobs:
           paths:
             - ./*
 
+      # Save dependencies to cache for next workflow run
       - save_cache:
           paths:
             - node_modules

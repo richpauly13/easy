@@ -32,8 +32,7 @@
               "includePaths": [
                 "projects/easy/src/assets/sass"
               ]
-            },
-            "scripts": []
+            }
           },
           "configurations": {
             "production": {
@@ -82,9 +81,6 @@
             "codeCoverage": true,
             "styles": [
               "src/styles.scss"
-            ],
-            "scripts": [
-                
             ],
             "assets": [
               "src/favicon.ico"
