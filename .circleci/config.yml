@@ -24,7 +24,7 @@ jobs:
       
       # Install dependencies
       - run: npm i
-      - run: npm i npm -g
+      - run: sudo npm i npm -g
 
       # Add dependencies to workspace
       - persist_to_workspace:
