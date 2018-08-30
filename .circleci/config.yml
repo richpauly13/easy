@@ -20,7 +20,7 @@ jobs:
           keys:
           - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
-          - v1-easy-{{ .Branch }}
+          - v1-easy-{{ .Branch }}-
 
           # Fallback to using the latest cache if no exact match is found
           - v1-easy-
