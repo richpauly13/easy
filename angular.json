@@ -141,7 +141,7 @@
           "inlineStyle": false,
           "inlineTemplate": false,
           "export": true,
-          "flat": false,
+          "flat": true,
           "spec": true
         },
         "@schematics/angular:directive": {
@@ -150,7 +150,9 @@
           "spec": true
         },
         "@schematics/angular:module": {
-          "export": false,
+          "commonModule": false,
+          "module": "components",
+          "export": true,
           "flat": false,
           "spec": true
         },
