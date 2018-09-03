@@ -5,7 +5,7 @@ import { EasyModule } from 'easy';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CssComponent } from './css/css.component';
+import { CssComponent } from './components/css.component';
 
 @NgModule({
 	imports: [

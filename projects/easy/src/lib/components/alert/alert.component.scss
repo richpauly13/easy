@@ -8,7 +8,6 @@ Alerts are styled with `.alert-*` classes.
 <aside class="alert-good">good</aside>
 <aside class="alert-info">info</aside>
 <aside class="alert-warn">warn</aside>
-
 <ez-alert class="alert-good">good</ez-alert>
 ```
 */
@@ -20,7 +19,6 @@ Alerts can be closed by adding a `<button>` tag with a `.close` class in the ale
 
 ```
 <aside class="alert-good close">close</aside>
-
 <ez-alert class="alert-good close">close</ez-alert>
 ```
 */

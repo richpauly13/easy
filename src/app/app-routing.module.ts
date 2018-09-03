@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CssComponent } from './css/css.component';
+import { CssComponent } from './components/css.component';
 
 const routes: Routes = [
 	{
-		path: 'css',
+		path: 'components',
 		component: CssComponent
 	},
 	{
 		path: '',
-		redirectTo: '/css',
+		redirectTo: '/components',
 		pathMatch: 'full'
 	},
 	{   path: '**',
-		redirectTo: '/css',
+		redirectTo: '/components',
 		pathMatch: 'full'
 	}
 ];

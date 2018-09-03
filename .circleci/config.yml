@@ -27,8 +27,8 @@ jobs:
           - v1-easy-
 
       # Update dependencies
-      - run: npm i
-      - run: sudo npm i npm -g
+      # - run: npm i
+      # - run: sudo npm i npm -g
 
       # Add dependencies to workspace
       - persist_to_workspace:
