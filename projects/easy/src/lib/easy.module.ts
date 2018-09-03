@@ -3,13 +3,10 @@ import { NgModule } from '@angular/core';
 import { ComponentsModule } from './components/components.module';
 import { CoreModule } from './core/core.module';
 import { EasyComponent } from './easy.component';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
 	imports: [
-		ComponentsModule,
-		CoreModule,
-		SharedModule
+		ComponentsModule
 	],
 	declarations: [
 		EasyComponent
@@ -17,8 +14,7 @@ import { SharedModule } from './shared/shared.module';
 	exports: [
 		ComponentsModule,
 		CoreModule,
-		EasyComponent,
-		SharedModule
+		EasyComponent
 	]
 })
 export class EasyModule {

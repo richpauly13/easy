@@ -1,0 +1,255 @@
+/* SG
+# Flexbox
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Flexbox/Container
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Flexbox/Container Alignment
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Flexbox/Container Wrap
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Flexbox/Item Alignment
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Flexbox/Item Grow & Shrink
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Flexbox/Item Order
+
+Coming soon.
+
+```
+```
+*/
+
+// Flexbox container styles
+.row,
+.row-full {
+	@include row;
+}
+
+.col,
+.col-full {
+	@include column;
+}
+
+.row-full {
+	width: 100%;
+}
+
+.col-full {
+	height: 100%;
+}
+
+// Flexbox container alignment styles
+.align-c,
+.col.align-m {
+	justify-content: center;
+}
+
+.align-l,
+.col.align-t {
+	justify-content: flex-start;
+}
+
+.align-r,
+.col.align-b {
+	justify-content: flex-end;
+}
+
+.align-m,
+.col.align-c {
+	align-items: center;
+	align-content: center;
+}
+
+.align-b,
+.col.align-r {
+	align-items: flex-end;
+	align-content: flex-end;
+}
+
+.align-sp {
+	justify-content: space-around;
+}
+
+.align-j {
+	justify-content: space-between;
+}
+
+.align-st,
+.col.align-st {
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.align-a {
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+
+// Flexbox container wrap styles
+.wrap-t,
+.col.wrap-l {
+	align-content: flex-start;
+}
+
+.wrap-b,
+.col.wrap-r {
+	align-content: flex-end;
+}
+
+.wrap-m,
+.col.wrap-c {
+	align-content: center;
+}
+
+.wrap-j {
+	align-content: space-between;
+}
+
+.wrap-sp {
+	align-content: space-around;
+}
+
+.wrap-st {
+	align-content: stretch;
+}
+
+.wrap {
+	flex-wrap: wrap;
+}
+
+// Flex item alignment styles
+.item-t,
+.col > .item-l {
+	align-self: flex-start;
+}
+
+.item-b,
+.col > .item-r {
+	align-self: flex-end;
+}
+
+.item-m,
+.col > .item-c {
+	align-self: center;
+}
+
+.item-l,
+.item-c {
+	margin-right: auto;
+}
+
+.item-r,
+.item-c {
+	margin-left: auto;
+}
+
+.col > .item-t,
+.col > .item-m {
+	margin-bottom: auto;
+}
+
+.col > .item-b,
+.col > .item-m {
+	margin-top: auto;
+}
+
+.item-st {
+	align-self: stretch;
+}
+
+// Flex item styles
+@for $number from 1 through 12 {
+
+	// Flex item grow and shrink styles
+	.flex-both-#{$number} {
+		@include flex($number, $number, 0);
+	}
+
+	.flex-grow-#{$number} {
+		@include flex($number, 0, 0);
+	}
+
+	.flex-shrink-#{$number} {
+		@include flex(0, $number, 0);
+	}
+
+	// Flex item order styles
+	.order {
+		order: $number;
+		
+		&-xs-#{$number} {
+			order: $number;
+		}
+
+		@media screen and (min-width: $screen-sm) {
+			&-sm-#{$number} {
+				order: $number;
+			}
+		}
+
+		@media screen and (min-width: $screen-md) {
+			&-md-#{$number} {
+				order: $number;
+			}
+		}
+
+		@media screen and (min-width: $screen-lg) {
+			&-lg-#{$number} {
+				order: $number;
+			}
+		}
+
+		@media screen and (min-width: $screen-xl) {
+			&-xl-#{$number} {
+				order: $number;
+			}
+		}
+	}
+}
+
+.flex-n {
+	@include flex(0, 0, 0);
+}

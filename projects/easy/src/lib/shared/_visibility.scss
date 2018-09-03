@@ -1,0 +1,132 @@
+/* SG
+# Visibility
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Visibility/Hide
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Visibility/Show
+
+Coming soon.
+
+```
+```
+*/
+
+// Hide styles
+.hide {
+	display: none;
+}
+
+.hide-xs {
+	@media screen and (max-width: $screen-sm) {
+		display: none;
+	}
+}
+
+.hide-sm {
+	@media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
+		display: none;
+	}
+}
+
+.hide-md {
+	@media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+		display: none;
+	}
+}
+
+.hide-lg {
+	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl) {
+		display: none;
+	}
+}
+
+.hide-xl {
+	@media screen and (min-width: $screen-xl) {
+		display: none;
+	}
+}
+
+.hide-print {
+	@media print {
+		display: none;
+	}
+}
+
+// Hidden except for screen readers
+.hidden-visually {
+	appearance: none;
+	border: 0;
+	clip: rect(rem(0, 0, 0, 0));
+	height: rem(1);
+	margin: rem(-1);
+	padding: 0;
+	position: absolute;
+	outline: 0;
+	overflow: hidden;	
+	width: rem(1);
+}
+
+// Show styles
+.show {
+	display: block;
+}
+
+.show-xs {
+	@media screen and (min-width: $screen-sm) {
+		display: none;
+	}
+}
+
+.show-sm {
+	@extend .hide;
+
+	@media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
+		display: block;
+	}
+}
+
+.show-md {
+	@extend .hide;
+
+	@media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+		display: block;
+	}
+}
+
+.show-lg {
+	@extend .hide;
+
+	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl) {
+		display: block;
+	}
+}
+
+.show-xl {
+	@extend .hide;
+
+	@media screen and (min-width: $screen-xl) {
+		display: block;
+	}
+}
+
+.show-print {
+	@extend .hide;
+
+	@media print {
+		display:block;
+	}
+}

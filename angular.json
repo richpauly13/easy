@@ -30,6 +30,8 @@
             ],
              "stylePreprocessorOptions": {
               "includePaths": [
+                "projects/easy/src/lib/core",
+                "projects/easy/src/lib/shared",
                 "projects/easy/src/assets/sass"
               ]
             }
@@ -78,10 +80,16 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "codeCoverage": true,
             "styles": [
               "src/styles.scss"
             ],
+             "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/easy/src/lib/core",
+                "projects/easy/src/lib/shared",
+                "projects/easy/src/assets/sass"
+              ]
+            },
             "assets": [
               "src/favicon.ico"
             ]
@@ -190,8 +198,7 @@
           "options": {
             "main": "projects/easy/src/test.ts",
             "tsConfig": "projects/easy/tsconfig.spec.json",
-            "karmaConfig": "projects/easy/karma.conf.js",
-            "codeCoverage": true
+            "karmaConfig": "projects/easy/karma.conf.js"
           }
         },
         "lint": {

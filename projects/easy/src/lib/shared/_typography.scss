@@ -1,0 +1,90 @@
+/* SG
+# Typography
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Typography/Font
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Typography/Text
+
+Coming soon.
+
+```
+```
+*/
+
+// Font size styles
+.text-xs {
+	font-size:  $font-xs;
+}
+
+.text-sm {
+	font-size:  $font-sm;
+}
+
+.text-md {
+	font-size:  $font-md;
+}
+
+.text-lg {
+	font-size:  $font-lg;
+}
+
+.text-xl {
+	font-size:  $font-xl;
+}
+
+// Text styles
+.text-c {
+	text-align: center;
+}
+
+.text-l {
+	text-align: left;
+}
+
+.text-r {
+	text-align: right;
+}
+
+.text-j {
+	text-align: justify;
+}
+
+.text-capitalize {
+	text-transform: capitalize;
+}
+
+.text-uppercase {
+	text-transform: uppercase;
+}
+
+.text-lowercase {
+	text-transform: lowercase;
+}
+
+.text-small-caps {
+	font-variant: small-caps;
+}
+
+.text-hyphens {
+	hyphens: auto;
+}
+
+.text-drop-cap::first-letter {
+	float: left;
+	font-size: $font-xl;
+	padding-right: space(xs);
+}

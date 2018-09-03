@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { EasyModule } from 'easy';
+
 import { CssComponent } from './css.component';
 
 describe('CssComponent', () => {
@@ -8,6 +10,9 @@ describe('CssComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
+			imports: [
+				EasyModule
+			],
 			declarations: [
 				CssComponent
 			]
