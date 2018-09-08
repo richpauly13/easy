@@ -51,7 +51,8 @@ jobs:
       - <<: *restore
 
       # Update dependencies
-      - run: sudo npm install -g greenkeeper-lockfile@2
+      - run: sudo npm i -g greenkeeper-lockfile@2
+      - run: sudo npm i -g npm
       - run: npm i
       - run: greenkeeper-lockfile-update
       - run: greenkeeper-lockfile-upload
@@ -82,7 +83,7 @@ jobs:
           at: .
 
       # run build
-      - run: npm run build-ci
+      - run: npm run build
 
   test:
     <<: *job_common

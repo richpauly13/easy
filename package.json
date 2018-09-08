@@ -30,7 +30,6 @@
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
     "watch-easy": "ng build easy --watch",
     "build": "npm run build-easy && npm run build-docs",
-    "build-ci": "ng build easy && ng build easy-docs",
     "build-docs": "npm run docs && ng build easy-docs --prod",
     "build-easy": "ng build easy --prod && npm run npm-pack",
     "npm-pack": "cd dist/easy && npm pack",
