@@ -51,8 +51,6 @@ jobs:
       - <<: *restore
 
       # Update dependencies
-      - run: npm rebuild node-sass
-      - run: npm i codecov --save-dev
       - run: sudo npm i -g npm
       - run: sudo npm install -g greenkeeper-lockfile@2
       - run: npm i
@@ -117,7 +115,7 @@ jobs:
           at: .
           
       # upload test results
-      - run: npm run codecov
+      - run: node_modules/.bin/codecov
 
 workflows:
   version: 2
