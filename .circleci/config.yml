@@ -52,7 +52,7 @@ jobs:
 
       # Update dependencies
       - run: npm rebuild node-sass
-      - run: npm i -g npm
+      - run: sudo npm i -g npm
       - run: npm install -g greenkeeper-lockfile@2
       - run: npm i
       - run: greenkeeper-lockfile-update

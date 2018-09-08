@@ -8,5 +8,8 @@
         "projects/easy/package.json"
       ]
     }
-  }
+  },
+  "ignore": [
+    "typescript"
+  ]
 }
