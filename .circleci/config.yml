@@ -8,7 +8,7 @@ version: 2
 base_image: &base_image
 
   # Specify the node version here
-  image: circleci/node:8.11.4
+  image: circleci/node:8.11.4-browsers
 
 job_common: &job_common
   docker:
@@ -21,7 +21,7 @@ save: &save
     key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
     paths:
       - .
-      - node_modules
+      - "node_modules"
 
       # save the git commit and ssh config
       # - ".git"
