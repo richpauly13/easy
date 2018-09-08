@@ -3,31 +3,60 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+# Workflow variables
+base_image: &base_image
+
+  # Specify the node version here
+  image: circleci/node:8.11.4
+
+job_common: &job_common
+  docker:
+    - <<: *base_image
+  working_directory: ~/ez
+
+# Save dependencies to cache for next workflow run
+save: &save
+  save_cache:
+    key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    paths:
+      - .
+      - node_modules
+
+      # save the git commit and ssh config
+      # - ".git"
+      # - "~/.ssh"
+
+# Download cached dependencies
+restore: &restore
+  restore_cache:
+    keys:
+    - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+
+    - v1-easy-{{ .Branch }}-
+
+    # Fallback to using the latest cache if no exact match is found
+    - v1-easy-
+
+# Workflow jobs
 jobs:
   install:
-    docker:
-
-      # Specify the version you desire here
-      - image: circleci/node:10-browsers
-
-    working_directory: ~/ez
+    <<: *job_common
 
     steps:
+
       # Checkout git repo
       - checkout
 
-      # Download cached dependencies
-      - restore_cache:
-          keys:
-          - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
-
-          - v1-easy-{{ .Branch }}-
-
-          # Fallback to using the latest cache if no exact match is found
-          - v1-easy-
+      - <<: *restore
 
       # Update dependencies
+      - run: npm rebuild node-sass
+      - run: npm i -g npm
+      - run: npm install -g greenkeeper-lockfile@2
       - run: npm i
+      - run: greenkeeper-lockfile-update
+      - run: greenkeeper-lockfile-upload
 
       # Add dependencies to workspace
       - persist_to_workspace:
@@ -35,16 +64,11 @@ jobs:
           paths:
             - ./*
 
-      # Save dependencies to cache for next workflow run
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - <<: *save
 
   lint:
-    docker:
-      - image: circleci/node:10-browsers
-    working_directory: ~/ez
+    <<: *job_common
+
     steps:
       - attach_workspace:
           at: .
@@ -53,9 +77,8 @@ jobs:
       - run: npm run lint
 
   build:
-    docker:
-      - image: circleci/node:10-browsers
-    working_directory: ~/ez
+    <<: *job_common
+
     steps:
       - attach_workspace:
           at: .
@@ -64,9 +87,8 @@ jobs:
       - run: npm run build-ci
 
   test:
-    docker:
-      - image: circleci/node:10-browsers
-    working_directory: ~/ez
+    <<: *job_common
+
     steps:
       - attach_workspace:
           at: .
@@ -76,9 +98,8 @@ jobs:
       - run: npm run test easy-docs -- --watch=false --progress=false --browsers=ChromeHeadlessCI
 
   e2e:
-    docker:
-      - image: circleci/node:10-browsers
-    working_directory: ~/ez
+    <<: *job_common
+
     steps:
       - attach_workspace:
           at: .
