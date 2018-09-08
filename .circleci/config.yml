@@ -116,7 +116,7 @@ jobs:
           at: .
           
       # upload test results
-      - run: bash <(curl -s https://codecov.io/bash)
+      - run: npm run codecov
 
 workflows:
   version: 2
