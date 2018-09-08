@@ -34,7 +34,7 @@
     "build-easy": "ng build easy --prod && npm run npm-pack",
     "npm-pack": "cd dist/easy && npm pack",
     "webdriver-update-ci": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37",
-    "codecov": "node_modules/.bin/codecov"
+    "codecov": "node_modules/.bin/codecov --disable=gcov"
   },
   "dependencies": {
     "@angular/common": "^6.1.0",
