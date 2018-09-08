@@ -108,6 +108,16 @@ jobs:
       - run: npm run webdriver-update-ci
       - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
 
+  e2e:
+    <<: *job_common
+
+    steps:
+      - attach_workspace:
+          at: .
+          
+      # upload test results
+      - run: bash <(curl -s https://codecov.io/bash)
+
 workflows:
   version: 2
   default_workflow:
@@ -125,3 +135,7 @@ workflows:
       - e2e:
           requires:
             - build
+      - codecov:
+          requires:
+            - test
+            - e2e
