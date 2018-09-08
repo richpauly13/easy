@@ -116,7 +116,7 @@ jobs:
           at: .
           
       # upload test results
-      - run: npm run codecov
+      - run: ./node_modules/.bin/codecov
 
 workflows:
   version: 2
