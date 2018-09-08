@@ -51,8 +51,6 @@ jobs:
       - <<: *restore
 
       # Update dependencies
-      - run: sudo npm i -g npm
-      - run: sudo npm install -g greenkeeper-lockfile@2
       - run: npm i
       - run: greenkeeper-lockfile-update
       - run: greenkeeper-lockfile-upload
@@ -115,7 +113,7 @@ jobs:
           at: .
           
       # upload test results
-      - run: node_modules/.bin/codecov
+      - run: npm run codecov
 
 workflows:
   version: 2
