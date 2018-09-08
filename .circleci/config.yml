@@ -51,6 +51,7 @@ jobs:
       - <<: *restore
 
       # Update dependencies
+      - run: sudo npm install -g greenkeeper-lockfile@2
       - run: npm i
       - run: greenkeeper-lockfile-update
       - run: greenkeeper-lockfile-upload
