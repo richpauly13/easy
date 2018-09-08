@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "dist/easy/package.json",
+        "package.json",
+        "projects/easy/ng-package.json",
+        "projects/easy/package.json"
+      ]
+    }
+  }
+}
