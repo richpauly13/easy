@@ -1,10 +1,10 @@
 {
 	"sgComment": "SG",
-	"srcFolder": ".\\projects\\easy\\src\\lib",
-	"outputFile": ".\\src\\app\\components\\css.component.html",
-	"templateFile": ".\\src\\assets\\template\\template.html",
-	"themeFile": ".\\node_modules\\markdown-styleguide-generator\\template\\theme.css",
-	"highlightFolder": ".\\node_modules\\highlight.js\\styles",
+	"srcFolder": "projects/easy/src/lib",
+	"outputFile": "src/app/components/css.component.html",
+	"templateFile": "src/assets/template/template.html",
+	"themeFile": "node_modules/markdown-styleguide-generator/template/theme.css",
+	"highlightFolder": "node_modules/highlight.js/styles",
 	"highlightStyle": "docco",
 	"excludeDirs": [
 		"target",
@@ -22,5 +22,5 @@
 	"customVars": {
 		"": ""
 	},
-	"jqFile": ".\\node_modules\\markdown-styleguide-generator\\template\\jquery.js"
+	"jqFile": "node_modules/markdown-styleguide-generator/template/jquery.js"
 }
