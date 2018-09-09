@@ -13,19 +13,14 @@ base_image: &base_image
 job_common: &job_common
   docker:
     - <<: *base_image
-  working_directory: ~/ez
+  working_directory: ~/easy
 
 # Save dependencies to cache for next workflow run
 save: &save
   save_cache:
     key: v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
     paths:
-      - .
-      - "node_modules"
-
-      # save the git commit and ssh config
-      # - ".git"
-      # - "~/.ssh"
+      - node_modules
 
 # Download cached dependencies
 restore: &restore
@@ -57,13 +52,13 @@ jobs:
       - run: greenkeeper-lockfile-update
       - run: greenkeeper-lockfile-upload
 
+      - <<: *save
+
       # Add dependencies to workspace
       - persist_to_workspace:
           root: .
           paths:
-            - ./*
-
-      - <<: *save
+            - .    
 
   lint:
     <<: *job_common
