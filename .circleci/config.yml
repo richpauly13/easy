@@ -18,7 +18,7 @@ job_common: &job_common
 # Save dependencies to cache for next workflow run
 save: &save
   save_cache:
-    key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    key: v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
     paths:
       - .
       - "node_modules"
@@ -31,12 +31,12 @@ save: &save
 restore: &restore
   restore_cache:
     keys:
-    - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    - v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
-    - v1-easy-{{ .Branch }}-
+    - v2-easy-{{ .Branch }}-
 
     # Fallback to using the latest cache if no exact match is found
-    - v1-easy-
+    - v2-easy-
 
 # Workflow jobs
 jobs:
