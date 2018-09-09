@@ -7,7 +7,6 @@
 	"highlightFolder": "node_modules/highlight.js/styles",
 	"highlightStyle": "docco",
 	"excludeDirs": [
-		"target",
 		"node_modules"
 	],
 	"fileExtensions": {
