@@ -107,8 +107,6 @@ jobs:
     <<: *job_common
 
     steps:
-      - <<: *restore
-
       - attach_workspace:
           at: .
           
