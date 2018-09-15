@@ -8,7 +8,7 @@ version: 2
 base_image: &base_image
 
   # Specify the node version here
-  image: circleci/node:8.11.4-browsers
+  image: circleci/node:8.12.0-browsers
 
 job_common: &job_common
   docker:
@@ -21,8 +21,6 @@ save: &save
     key: v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
     paths:
       - node_modules
-      - .git
-      - ~/.ssh
 
 # Download cached dependencies
 restore: &restore
@@ -103,7 +101,7 @@ jobs:
       - run: npm run webdriver-update-ci
       - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
 
-  codecov:
+  upload:
     <<: *job_common
 
     steps:
@@ -111,7 +109,6 @@ jobs:
           at: .
           
       # upload test results
-      - run: npm run codecov
       - run: sudo npm i -g greenkeeper-lockfile@2
       - run: greenkeeper-lockfile-upload
 
@@ -132,7 +129,7 @@ workflows:
       - e2e:
           requires:
             - build
-      - codecov:
+      - upload:
           requires:
             - test
             - e2e
