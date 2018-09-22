@@ -80,7 +80,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "codeCoverage": true,
             "sourceMap": true,
             "styles": [
               "src/styles.scss"
@@ -201,7 +200,6 @@
             "main": "projects/easy/src/test.ts",
             "tsConfig": "projects/easy/tsconfig.spec.json",
             "karmaConfig": "projects/easy/karma.conf.js",
-            "codeCoverage": true,
             "sourceMap": true
           }
         },

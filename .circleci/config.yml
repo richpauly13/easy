@@ -22,6 +22,10 @@ save: &save
     paths:
       - node_modules
 
+      # save the git commit and ssh config
+      - ".git"
+      - "~/.ssh"
+
 # Download cached dependencies
 restore: &restore
   restore_cache:
@@ -105,8 +109,7 @@ jobs:
     <<: *job_common
 
     steps:
-      - attach_workspace:
-          at: .
+      - <<: *restore
           
       # upload test results
       - run: sudo npm i -g greenkeeper-lockfile@2
