@@ -109,7 +109,8 @@ jobs:
     <<: *job_common
 
     steps:
-      - <<: *restore
+      - attach_workspace:
+          at: .
           
       # upload test results
       - run: sudo npm i -g greenkeeper-lockfile@2
