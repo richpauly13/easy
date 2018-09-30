@@ -22,10 +22,6 @@ save: &save
     paths:
       - node_modules
 
-      # save the git commit and ssh config
-      - ".git"
-      - "~/.ssh"
-
 # Download cached dependencies
 restore: &restore
   restore_cache:
@@ -50,10 +46,8 @@ jobs:
       - <<: *restore
 
       # Update dependencies
-      - run: sudo npm i -g greenkeeper-lockfile@2
       - run: sudo npm i -g npm
       - run: npm i
-      - run: greenkeeper-lockfile-update
       
       - <<: *save
 
@@ -105,17 +99,6 @@ jobs:
       - run: npm run webdriver-update-ci
       - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
 
-  upload:
-    <<: *job_common
-
-    steps:
-      - attach_workspace:
-          at: .
-          
-      # upload test results
-      - run: sudo npm i -g greenkeeper-lockfile@2
-      - run: greenkeeper-lockfile-upload
-
 workflows:
   version: 2
   default_workflow:
@@ -133,7 +116,3 @@ workflows:
       - e2e:
           requires:
             - build
-      - upload:
-          requires:
-            - test
-            - e2e
