@@ -36,7 +36,7 @@
     "webdriver-update-ci": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37"
   },
   "dependencies": {
-    "@angular/common": "^6.1.9",
+    "@angular/common": "^6.1.10",
     "@angular/compiler": "^6.1.9",
     "@angular/core": "^6.1.9",
     "@angular/forms": "^6.1.9",
