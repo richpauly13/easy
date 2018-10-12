@@ -99,8 +99,8 @@ input[type="radio"] {
 	flex-basis: 50%;
 }
 
-.checkbox-label::after,
-.radio-label::after {
+.checkbox-label::before,
+.radio-label::before {
 	content: "\00a0";
 
 	background-color: color(lt-gray);
@@ -111,12 +111,12 @@ input[type="radio"] {
 	width: rem(16);
 }
 
-.radio-label::after {
+.radio-label::before {
 	border-radius: 50%;
 }
 
-.checkbox:checked + .checkbox-label::after,
-.radio:checked +.radio-label::after {
+.checkbox:checked + .checkbox-label::before,
+.radio:checked +.radio-label::before {
 	background-color: color(blue);
 	border: rem(2) solid color(lt-gray);
 }
