@@ -69,7 +69,7 @@
     "karma-edge-launcher": "^0.4.2",
     "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "^1.1.2",
-    "karma-jasmine-html-reporter": "^1.3.1",
+    "karma-jasmine-html-reporter": "^1.4.0",
     "markdown-styleguide-generator": "^2.0.4",
     "ng-packagr": "^4.4.0",
     "protractor": "^5.4.1",
