@@ -47,7 +47,6 @@ jobs:
 
       # Update dependencies
       - run: sudo npm i -g npm
-      - run: npm rebuild node-sass
       - run: npm i
       
       - <<: *save
