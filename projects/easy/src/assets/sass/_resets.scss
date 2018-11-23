@@ -1,4 +1,12 @@
 // Responsive fonts
+
+// Box-sizing
+*,
+*::after,
+*::before {
+  	box-sizing: inherit;
+}
+
 html {
 	-moz-osx-font-smoothing: grayscale;	
 	-ms-overflow-style: scrollbar;
@@ -23,13 +31,6 @@ html {
 	@media screen and (min-width: $screen-xl) {
 		font-size: $screen-font-xl;
 	}
-}
-
-// Box-sizing
-*,
-*::after,
-*::before {
-  	box-sizing: inherit;
 }
 
 // Main color, text, and sizing
@@ -173,6 +174,14 @@ th {
 	vertical-align: middle;
 }
 
+// Removes positioning set by normalize.css
+sub,
+sup {
+	bottom: 0;
+	position: static;
+	top: 0;
+}
+
 // Adds transform for better performance
 sub {
 	transform: translateY(rem(4));
@@ -180,14 +189,6 @@ sub {
 
 sup {
 	transform: translateY(rem(-8));
-}
-
-// Removes positioning set by normalize.css
-sub,
-sup {
-	bottom: 0;
-	position: static;
-	top: 0;
 }
 
 // Code normalization and resets
