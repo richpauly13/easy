@@ -287,18 +287,16 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
 	appearance: none;
-	background-color: transparent;		
+	background-color: transparent;
+
+    &:hover {
+		cursor: pointer;
+	}	
 }
 
-a[role="button"],
-button,
-html input[type="button"],
-input[type="range"]
-input[type="reset"],
-input[type="submit"], select {
-	&:hover {
-		cursor: pointer;
-	}
+input[type="range"]:hover,
+select:hover {
+	cursor: pointer;
 }
 
 // Credit: https://css-tricks.com/html5-progress-element/
