@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { AlertComponent } from './alert.component';
+import { AlertDirective } from './alert.directive';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
@@ -8,10 +9,12 @@ import { SharedModule } from '../../shared/shared.module';
 		SharedModule
 	],
 	declarations: [
-		AlertComponent
+		AlertComponent,
+		AlertDirective
 	],
 	exports: [
-		AlertComponent
+		AlertComponent,
+		AlertDirective
 	]
 })
 export class AlertModule {
