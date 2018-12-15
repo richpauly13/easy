@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, HostBinding, NgModule, Injectable, defineInjectable } from '@angular/core';
+import { Component, Input, HostBinding, Directive, NgModule, Injectable, defineInjectable } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -59,6 +59,22 @@ AlertComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class AlertDirective {
+    constructor() {
+    }
+}
+AlertDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[ezAlert]'
+            },] }
+];
+/** @nocollapse */
+AlertDirective.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class SharedModule {
 }
 SharedModule.decorators = [
@@ -83,10 +99,12 @@ AlertModule.decorators = [
                     SharedModule
                 ],
                 declarations: [
-                    AlertComponent
+                    AlertComponent,
+                    AlertDirective
                 ],
                 exports: [
-                    AlertComponent
+                    AlertComponent,
+                    AlertDirective
                 ]
             },] }
 ];
@@ -193,6 +211,6 @@ EasyService.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertModule as ɵa };
+export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa };
 
 //# sourceMappingURL=easy.js.map

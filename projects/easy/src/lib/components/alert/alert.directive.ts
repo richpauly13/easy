@@ -1,10 +1,10 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: '[ezAlert]'
+	selector: '[ezAlert]'
 })
 export class AlertDirective {
    public constructor() {
-       
+
    }
 }

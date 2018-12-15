@@ -68,6 +68,23 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AlertDirective = /** @class */ (function () {
+        function AlertDirective() {
+        }
+        AlertDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezAlert]'
+                    },] }
+        ];
+        /** @nocollapse */
+        AlertDirective.ctorParameters = function () { return []; };
+        return AlertDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var SharedModule = /** @class */ (function () {
         function SharedModule() {
         }
@@ -96,10 +113,12 @@
                             SharedModule
                         ],
                         declarations: [
-                            AlertComponent
+                            AlertComponent,
+                            AlertDirective
                         ],
                         exports: [
-                            AlertComponent
+                            AlertComponent,
+                            AlertDirective
                         ]
                     },] }
         ];
@@ -229,6 +248,7 @@
     exports.EasyService = EasyService;
     exports.SharedModule = SharedModule;
     exports.ɵb = AlertComponent;
+    exports.ɵc = AlertDirective;
     exports.ɵa = AlertModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });

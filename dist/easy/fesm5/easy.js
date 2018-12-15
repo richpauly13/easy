@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, HostBinding, NgModule, Injectable, defineInjectable } from '@angular/core';
+import { Component, Input, HostBinding, Directive, NgModule, Injectable, defineInjectable } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -67,6 +67,23 @@ var AlertComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var AlertDirective = /** @class */ (function () {
+    function AlertDirective() {
+    }
+    AlertDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[ezAlert]'
+                },] }
+    ];
+    /** @nocollapse */
+    AlertDirective.ctorParameters = function () { return []; };
+    return AlertDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var SharedModule = /** @class */ (function () {
     function SharedModule() {
     }
@@ -95,10 +112,12 @@ var AlertModule = /** @class */ (function () {
                         SharedModule
                     ],
                     declarations: [
-                        AlertComponent
+                        AlertComponent,
+                        AlertDirective
                     ],
                     exports: [
-                        AlertComponent
+                        AlertComponent,
+                        AlertDirective
                     ]
                 },] }
     ];
@@ -221,6 +240,6 @@ var EasyService = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertModule as ɵa };
+export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa };
 
 //# sourceMappingURL=easy.js.map
