@@ -83,6 +83,7 @@
             "sourceMap": true,
             "watch": false,
             "codeCoverage": true,
+            "progress": false,
             "styles": [
               "src/styles.scss"
             ],
@@ -204,7 +205,8 @@
             "karmaConfig": "projects/easy/karma.conf.js",
             "sourceMap": true,
             "watch": false,
-            "codeCoverage": true
+            "codeCoverage": true,
+            "progress": false
           }
         },
         "lint": {
