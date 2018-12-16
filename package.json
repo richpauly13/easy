@@ -24,7 +24,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "test": "npm run test:easy && npm run test:docs",
+    "test": "ng test",
     "test:easy": "ng test easy --browsers=ChromeHeadlessCI",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "lint": "npm run format && ng lint",
