@@ -4,9 +4,6 @@
 #
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@1.0.1
-
 # Workflow variables
 base_image: &base_image
 
@@ -84,10 +81,9 @@ jobs:
       # run unit tests
       - run: npm run test easy -- --progress=false --browsers=ChromeHeadlessCI
       - run: npm run test easy-docs -- --progress=false --browsers=ChromeHeadlessCI
-
+      
       # upload code coverage reports to codecov
-      - codecov/upload
-          file: "lcov.info"
+      - run: bash <(curl -s https://codecov.io/bash)
 
   e2e:
     <<: *job_common
