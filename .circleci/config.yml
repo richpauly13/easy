@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
 
 # Workflow variables
 base_image: &base_image
@@ -12,44 +12,38 @@ base_image: &base_image
 
 job_common: &job_common
   docker:
-    - <<: *base_image
+    - \<<: *base_image
   working_directory: ~/easy
 
 # Save dependencies to cache for next workflow run
 save: &save
   save_cache:
-    key: v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    key: v1-easy-{{ checksum "package-lock.json" }}
     paths:
       - node_modules
 
 # Download cached dependencies
 restore: &restore
   restore_cache:
-    keys:
-    - v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
-
-    - v2-easy-{{ .Branch }}-
-
-    # Fallback to using the latest cache if no exact match is found
-    - v2-easy-
+    key: v1-easy-{{ checksum "package-lock.json" }}
 
 # Workflow jobs
 jobs:
   install:
-    <<: *job_common
+    \<<: *job_common
 
     steps:
 
       # Checkout git repo
       - checkout
 
-      - <<: *restore
+      - \<<: *restore
 
       # Update dependencies
       - run: sudo npm i -g npm
       - run: npm i
       
-      - <<: *save
+      - \<<: *save
 
       # Add dependencies to workspace
       - persist_to_workspace:
@@ -58,7 +52,7 @@ jobs:
             - .    
 
   lint:
-    <<: *job_common
+    \<<: *job_common
 
     steps:
       - attach_workspace:
@@ -68,7 +62,7 @@ jobs:
       - run: npm run lint
 
   build:
-    <<: *job_common
+    \<<: *job_common
 
     steps:
       - attach_workspace:
@@ -78,7 +72,7 @@ jobs:
       - run: npm run build
 
   test:
-    <<: *job_common
+    \<<: *job_common
 
     steps:
       - attach_workspace:
@@ -89,7 +83,7 @@ jobs:
       - run: npm run test easy-docs -- --progress=false --browsers=ChromeHeadlessCI
 
   e2e:
-    <<: *job_common
+    \<<: *job_common
 
     steps:
       - attach_workspace:
@@ -100,7 +94,6 @@ jobs:
       - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
 
 workflows:
-  version: 2
   default_workflow:
     jobs:
       - install
