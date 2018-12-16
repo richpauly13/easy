@@ -84,7 +84,9 @@ jobs:
       # run unit tests
       - run: npm run test easy -- --progress=false --browsers=ChromeHeadlessCI
       - run: npm run test easy-docs -- --progress=false --browsers=ChromeHeadlessCI
-      - run: bash <(curl -s https://codecov.io/bash)
+
+      # upload code coverage reports to codecov
+      - codecov/upload
 
   e2e:
     <<: *job_common
