@@ -12,7 +12,7 @@ base_image: &base_image
 
 job_common: &job_common
   docker:
-    - \<<: *base_image
+    - <<: *base_image
   working_directory: ~/easy
 
 # Save dependencies to cache for next workflow run
@@ -30,20 +30,20 @@ restore: &restore
 # Workflow jobs
 jobs:
   install:
-    \<<: *job_common
+    <<: *job_common
 
     steps:
 
       # Checkout git repo
       - checkout
 
-      - \<<: *restore
+      - <<: *restore
 
       # Update dependencies
       - run: sudo npm i -g npm
       - run: npm i
       
-      - \<<: *save
+      - <<: *save
 
       # Add dependencies to workspace
       - persist_to_workspace:
@@ -52,7 +52,7 @@ jobs:
             - .    
 
   lint:
-    \<<: *job_common
+    <<: *job_common
 
     steps:
       - attach_workspace:
@@ -62,7 +62,7 @@ jobs:
       - run: npm run lint
 
   build:
-    \<<: *job_common
+    <<: *job_common
 
     steps:
       - attach_workspace:
@@ -72,7 +72,7 @@ jobs:
       - run: npm run build
 
   test:
-    \<<: *job_common
+    <<: *job_common
 
     steps:
       - attach_workspace:
@@ -83,7 +83,7 @@ jobs:
       - run: npm run test easy-docs -- --progress=false --browsers=ChromeHeadlessCI
 
   e2e:
-    \<<: *job_common
+    <<: *job_common
 
     steps:
       - attach_workspace:
