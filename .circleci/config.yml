@@ -80,7 +80,7 @@ jobs:
           
       # run unit tests
       - run: npm run test:easy
-      - run: npm run test:easy-docs
+      - run: npm run test:docs
       
       # upload code coverage reports to codecov
       - run: bash <(curl -s https://codecov.io/bash)
