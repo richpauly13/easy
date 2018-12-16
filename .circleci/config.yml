@@ -87,7 +87,7 @@ jobs:
 
       # upload code coverage reports to codecov
       - codecov/upload
-        file: "lcov.info"
+          file: "lcov.info"
 
   e2e:
     <<: *job_common
