@@ -27,6 +27,7 @@ var AlertComponent = /** @class */ (function () {
             }
             else {
                 this.childClass = childClass;
+                this.close = false;
                 this.role = 'alert';
             }
         },

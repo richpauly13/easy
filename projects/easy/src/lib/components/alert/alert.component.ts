@@ -3,9 +3,7 @@ import { Component, Input, HostBinding, OnInit } from '@angular/core';
 @Component({
 	selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
 	templateUrl: './alert.component.html',
-	styleUrls: [
-		'./alert.component.scss'
-	]
+	styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
 	@HostBinding('attr.aria-describedby') ariaDescribedby: string;
@@ -21,6 +19,7 @@ export class AlertComponent implements OnInit {
 			this.role = 'alertdialog';
 		} else {
 			this.childClass = childClass;
+			this.close = false;
 			this.role = 'alert';
 		}
 	}
@@ -33,9 +32,7 @@ export class AlertComponent implements OnInit {
 
 	private childClass: string;
 
-	public constructor() {
-
-	}
+	public constructor() {}
 
 	public ngOnInit(): void {
 		this.hostClass = this.class;

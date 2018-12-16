@@ -6,8 +6,7 @@ import { Component, Input, HostBinding, Directive, NgModule, Injectable, defineI
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AlertComponent {
-    constructor() {
-    }
+    constructor() { }
     /**
      * @param {?} childClass
      * @return {?}
@@ -20,6 +19,7 @@ class AlertComponent {
         }
         else {
             this.childClass = childClass;
+            this.close = false;
             this.role = 'alert';
         }
     }

@@ -25,7 +25,7 @@
     "ng": "ng",
     "start": "ng serve -o",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "npm run format && ng lint",
     "e2e": "ng e2e",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
     "watch-easy": "ng build easy --watch",
@@ -33,6 +33,7 @@
     "build-docs": "npm run docs && ng build easy-docs --prod",
     "build-easy": "ng build easy --prod && npm run npm-pack",
     "npm-pack": "cd dist/easy && npm pack",
+    "format": "pretty-quick",
     "webdriver-update-ci": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37"
   },
   "dependencies": {
@@ -72,6 +73,8 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "markdown-styleguide-generator": "^2.0.4",
     "ng-packagr": "^4.4.5",
+    "prettier": "^1.15.3",
+    "pretty-quick": "^1.8.0",
     "protractor": "^5.4.1",
     "ts-node": "^7.0.1",
     "tsickle": "^0.34.0",
