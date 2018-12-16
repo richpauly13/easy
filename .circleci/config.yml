@@ -4,6 +4,9 @@
 #
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@1.0.1
+
 # Workflow variables
 base_image: &base_image
 

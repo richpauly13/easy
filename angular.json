@@ -82,6 +82,7 @@
             "karmaConfig": "src/karma.conf.js",
             "sourceMap": true,
             "watch": false,
+            "codeCoverage": true,
             "styles": [
               "src/styles.scss"
             ],
@@ -202,7 +203,8 @@
             "tsConfig": "projects/easy/tsconfig.spec.json",
             "karmaConfig": "projects/easy/karma.conf.js",
             "sourceMap": true,
-            "watch": false
+            "watch": false,
+            "codeCoverage": true
           }
         },
         "lint": {
