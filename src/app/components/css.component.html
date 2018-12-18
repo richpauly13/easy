@@ -1,472 +1,419 @@
 <nav class="pad-a-sm border-a-gray shadow-1 fixed-l styleguide-menu">
-    <ul>
-        <li>
-            <a (click)="section = 'Alert'" [ngClass]="{'bg-lt-gray': section === 'Alert'}" class="hover bg-hover-lt-gray">Alert</a>
-            
-            <ul *ngIf="section === 'Alert'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-                <li *ngIf="'Close'">
-                    <a>Close</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a (click)="section = 'Color'" [ngClass]="{'bg-lt-gray': section === 'Color'}" class="hover bg-hover-lt-gray">Color</a>
-            
-            <ul *ngIf="section === 'Color'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-                <li *ngIf="'Background'">
-                    <a>Background</a>
-                </li>
-                <li *ngIf="'Border'">
-                    <a>Border</a>
-                </li>
-                <li *ngIf="'Contrast'">
-                    <a>Contrast</a>
-                </li>
-                <li *ngIf="'Text'">
-                    <a>Text</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a (click)="section = 'Flexbox'" [ngClass]="{'bg-lt-gray': section === 'Flexbox'}" class="hover bg-hover-lt-gray">Flexbox</a>
-            
-            <ul *ngIf="section === 'Flexbox'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-                <li *ngIf="'Container'">
-                    <a>Container</a>
-                </li>
-                <li *ngIf="'Container Alignment'">
-                    <a>Container Alignment</a>
-                </li>
-                <li *ngIf="'Container Wrap'">
-                    <a>Container Wrap</a>
-                </li>
-                <li *ngIf="'Item Alignment'">
-                    <a>Item Alignment</a>
-                </li>
-                <li *ngIf="'Item Grow &amp; Shrink'">
-                    <a>Item Grow &amp; Shrink</a>
-                </li>
-                <li *ngIf="'Item Order'">
-                    <a>Item Order</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a (click)="section = 'Layout'" [ngClass]="{'bg-lt-gray': section === 'Layout'}" class="hover bg-hover-lt-gray">Layout</a>
-            
-            <ul *ngIf="section === 'Layout'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-                <li *ngIf="'Container'">
-                    <a>Container</a>
-                </li>
-                <li *ngIf="'Sticky Footer'">
-                    <a>Sticky Footer</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a (click)="section = 'Position'" [ngClass]="{'bg-lt-gray': section === 'Position'}" class="hover bg-hover-lt-gray">Position</a>
-            
-            <ul *ngIf="section === 'Position'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a (click)="section = 'Space'" [ngClass]="{'bg-lt-gray': section === 'Space'}" class="hover bg-hover-lt-gray">Space</a>
-            
-            <ul *ngIf="section === 'Space'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-                <li *ngIf="'Margin'">
-                    <a>Margin</a>
-                </li>
-                <li *ngIf="'Padding'">
-                    <a>Padding</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a (click)="section = 'Typography'" [ngClass]="{'bg-lt-gray': section === 'Typography'}" class="hover bg-hover-lt-gray">Typography</a>
-            
-            <ul *ngIf="section === 'Typography'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-                <li *ngIf="'Font'">
-                    <a>Font</a>
-                </li>
-                <li *ngIf="'Text'">
-                    <a>Text</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a (click)="section = 'Visibility'" [ngClass]="{'bg-lt-gray': section === 'Visibility'}" class="hover bg-hover-lt-gray">Visibility</a>
-            
-            <ul *ngIf="section === 'Visibility'" class="pad-l-sm submenu">
-                <li *ngIf="''">
-                    <a></a>
-                </li>
-                <li *ngIf="'Hide'">
-                    <a>Hide</a>
-                </li>
-                <li *ngIf="'Show'">
-                    <a>Show</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
+	<ul>
+		<li>
+			<a
+				(click)="section = 'Alert'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Alert' }"
+				class="hover bg-hover-lt-gray"
+				>Alert</a
+			>
+
+			<ul *ngIf="section === 'Alert'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Close'"><a>Close</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Color'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Color' }"
+				class="hover bg-hover-lt-gray"
+				>Color</a
+			>
+
+			<ul *ngIf="section === 'Color'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Background'"><a>Background</a></li>
+				<li *ngIf="'Border'"><a>Border</a></li>
+				<li *ngIf="'Contrast'"><a>Contrast</a></li>
+				<li *ngIf="'Text'"><a>Text</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Flexbox'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Flexbox' }"
+				class="hover bg-hover-lt-gray"
+				>Flexbox</a
+			>
+
+			<ul *ngIf="section === 'Flexbox'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Container'"><a>Container</a></li>
+				<li *ngIf="'Container Alignment'"><a>Container Alignment</a></li>
+				<li *ngIf="'Container Wrap'"><a>Container Wrap</a></li>
+				<li *ngIf="'Item Alignment'"><a>Item Alignment</a></li>
+				<li *ngIf="'Item Grow &amp; Shrink'"><a>Item Grow &amp; Shrink</a></li>
+				<li *ngIf="'Item Order'"><a>Item Order</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Layout'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Layout' }"
+				class="hover bg-hover-lt-gray"
+				>Layout</a
+			>
+
+			<ul *ngIf="section === 'Layout'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Container'"><a>Container</a></li>
+				<li *ngIf="'Sticky Footer'"><a>Sticky Footer</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Position'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Position' }"
+				class="hover bg-hover-lt-gray"
+				>Position</a
+			>
+
+			<ul *ngIf="section === 'Position'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Space'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Space' }"
+				class="hover bg-hover-lt-gray"
+				>Space</a
+			>
+
+			<ul *ngIf="section === 'Space'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Margin'"><a>Margin</a></li>
+				<li *ngIf="'Padding'"><a>Padding</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Typography'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Typography' }"
+				class="hover bg-hover-lt-gray"
+				>Typography</a
+			>
+
+			<ul *ngIf="section === 'Typography'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Font'"><a>Font</a></li>
+				<li *ngIf="'Text'"><a>Text</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Visibility'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Visibility' }"
+				class="hover bg-hover-lt-gray"
+				>Visibility</a
+			>
+
+			<ul *ngIf="section === 'Visibility'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Hide'"><a>Hide</a></li>
+				<li *ngIf="'Show'"><a>Show</a></li>
+			</ul>
+		</li>
+	</ul>
 </nav>
 
 <main class="pad-a-xl styleguide">
-    <h1 [innerHTML]="section" class="pad-t-xl"></h1>
+	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
-    <section *ngIf="section === 'Alert'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Alerts are styled with <code>.alert-*</code> classes.</p>
-        </article>
+	<section *ngIf="section === 'Alert'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Alerts are styled with <code>.alert-*</code> classes.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"><aside class="test alert-bad test">bad</aside>
-<aside class="test alert-good">good</aside>
-<aside class="alert-info test">info</aside>
-<aside class="alert-warn">warn</aside>
-<ez-alert class="alert-good">good</ez-alert></aside>
+		<aside class="pad-a-sm border-b-gray">
+			<aside class="test alert-bad test">bad</aside>
+			<aside class="test alert-good">good</aside>
+			<aside class="alert-info test">info</aside>
+			<aside class="alert-warn">warn</aside>
+			<ez-alert class="alert-good">good</ez-alert>
+		</aside>
 
-        <figure>
-            <pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"test alert-bad test"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+		<figure>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"test alert-bad test"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"test alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-info test"</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-warn"</span>&gt;</span>warn<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Alert'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Close'">Close</h2>
-            <p>Alerts can be closed by adding a <code>&lt;button&gt;</code> tag with a <code>.close</code> class in the alert.</p>
-        </article>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Alert'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Close'">Close</h2>
+			<p>
+				Alerts can be closed by adding a <code>&lt;button&gt;</code> tag with a
+				<code>.close</code> class in the alert.
+			</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"><aside class="alert-good close">close</aside>
-<ez-alert class="alert-good close">close</ez-alert></aside>
+		<aside class="pad-a-sm border-b-gray">
+			<aside class="alert-good close">close</aside>
+			<ez-alert class="alert-good close">close</ez-alert>
+		</aside>
 
-        <figure>
-            <pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+		<figure>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Coming soon.</p>
-        </article>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Background'">Background</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Background'">Background</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Border'">Border</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Border'">Border</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Contrast'">Contrast</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Contrast'">Contrast</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Text'">Text</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Text'">Text</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Container'">Container</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Container'">Container</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Container Alignment'">Container Alignment</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Container Alignment'">Container Alignment</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Container Wrap'">Container Wrap</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Container Wrap'">Container Wrap</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Item Alignment'">Item Alignment</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Item Alignment'">Item Alignment</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Item Grow &amp; Shrink'">Item Grow &amp; Shrink</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Item Grow &amp; Shrink'">Item Grow &amp; Shrink</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Item Order'">Item Order</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Item Order'">Item Order</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Container'">Container</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Container'">Container</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Sticky Footer'">Sticky Footer</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Sticky Footer'">Sticky Footer</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Position'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Position'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Margin'">Margin</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Margin'">Margin</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Padding'">Padding</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Padding'">Padding</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Font'">Font</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Font'">Font</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Text'">Text</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Text'">Text</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="''"></h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Hide'">Hide</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Hide'">Hide</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
-    <section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'Show'">Show</h2>
-            <p>Coming soon.</p>
-        </article>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Show'">Show</h2>
+			<p>Coming soon.</p>
+		</article>
 
-        <aside class="pad-a-sm border-b-gray"></aside>
+		<aside class="pad-a-sm border-b-gray"></aside>
 
-        <figure>
-            <pre class="pad-a-sm"></pre>
-        </figure>
-    </section>
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
 </main>
