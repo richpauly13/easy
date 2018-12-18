@@ -6,11 +6,10 @@ import { Component, Input, HostBinding, OnInit } from '@angular/core';
 	styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
-	@HostBinding('attr.aria-describedby') ariaDescribedby: string;
-	@HostBinding('attr.aria-labelledby') ariaLabelledby: string;
-	@HostBinding('attr.class') hostClass: string;
-	@HostBinding('attr.role') role: string;
-	@HostBinding('attr.tabindex') tabindex: string;
+	@HostBinding('attr.aria-labelledby') public ariaLabelledby: string;
+	@HostBinding('attr.class') public hostClass: string;
+	@HostBinding('attr.role') public role: string;
+	@HostBinding('attr.tabindex') public tabindex: string;
 	@Input()
 	public set class(childClass: string) {
 		if (childClass.includes('close')) {
@@ -22,6 +21,8 @@ export class AlertComponent implements OnInit {
 			this.close = false;
 			this.role = 'alert';
 		}
+
+		this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0].replace(/-/g, ' ');
 	}
 
 	public get class(): string {
@@ -29,6 +30,7 @@ export class AlertComponent implements OnInit {
 	}
 
 	public close: boolean;
+	public id: string;
 
 	private childClass: string;
 

@@ -8,11 +8,8 @@ describe('AlertComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [
-				AlertComponent
-			]
-		})
-		.compileComponents();
+			declarations: [AlertComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -21,7 +18,7 @@ describe('AlertComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should be created', () => {
 		expect(component).toBeTruthy();
 	});
 });

@@ -4,9 +4,9 @@
 Alerts are styled with `.alert-*` classes.
 
 ```
-<aside class="alert-bad">bad</aside>
-<aside class="alert-good">good</aside>
-<aside class="alert-info">info</aside>
+<aside class="test alert-bad test">bad</aside>
+<aside class="test alert-good">good</aside>
+<aside class="alert-info test">info</aside>
 <aside class="alert-warn">warn</aside>
 <ez-alert class="alert-good">good</ez-alert>
 ```
@@ -23,39 +23,37 @@ Alerts can be closed by adding a `<button>` tag with a `.close` class in the ale
 ```
 */
 
-@import "../../core/functions";
-@import "../../core/mixins";
-@import "../../core/variables";
+@import '../../core/functions';
+@import '../../core/mixins';
+@import '../../core/variables';
 
 // Alert styles
 :host {
-    &.alert-bad,
-    &.alert-good,
-    &.alert-info,
-    &.alert-warn {
-        @include row;
+	&.alert-bad,
+	&.alert-good,
+	&.alert-info,
+	&.alert-warn {
+		@include row;
 
-        color: color(white);
-        justify-content: space-between;
-        padding: rem(8 16);
-    }
+		color: color(white);
+		justify-content: space-between;
+		padding: rem(8 16);
+	}
 
-    &.alert-bad {
-        background-color: color(red);
-    }
+	&.alert-bad {
+		background-color: color(red);
+	}
 
-    &.alert-good {
-        background-color: color(dk-green);
-    }
+	&.alert-good {
+		background-color: color(dk-green);
+	}
 
-    &.alert-info {
-        background-color: color(dk-blue);
-    }
+	&.alert-info {
+		background-color: color(dk-blue);
+	}
 
-    &.alert-warn {
-        background-color: color(yellow);
-        color: color(lt-black);
-    }
+	&.alert-warn {
+		background-color: color(yellow);
+		color: color(lt-black);
+	}
 }
-
-

@@ -30,6 +30,7 @@ var AlertComponent = /** @class */ (function () {
                 this.close = false;
                 this.role = 'alert';
             }
+            this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0].replace(/-/g, ' ');
         },
         enumerable: true,
         configurable: true
@@ -47,14 +48,13 @@ var AlertComponent = /** @class */ (function () {
     AlertComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
-                    template: "<p [id]=\"\">\r\n    <ng-content></ng-content>\r\n</p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close alert\" [id]=\"\"  autofocus>X</button>\r\n",
+                    template: "<p [attr.id]=\"id\"><ng-content></ng-content></p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close alert\" autofocus>X</button>\r\n",
                     styles: [":host.alert-bad,:host.alert-good,:host.alert-info,:host.alert-warn{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;color:#fff;-webkit-box-pack:justify;justify-content:space-between;padding:.5rem 1rem}:host.alert-bad{background-color:#ba000d}:host.alert-good{background-color:#087f23}:host.alert-info{background-color:#0069c0}:host.alert-warn{background-color:#ffeb3b;color:#191919}"]
                 }] }
     ];
     /** @nocollapse */
     AlertComponent.ctorParameters = function () { return []; };
     AlertComponent.propDecorators = {
-        ariaDescribedby: [{ type: HostBinding, args: ['attr.aria-describedby',] }],
         ariaLabelledby: [{ type: HostBinding, args: ['attr.aria-labelledby',] }],
         hostClass: [{ type: HostBinding, args: ['attr.class',] }],
         role: [{ type: HostBinding, args: ['attr.role',] }],

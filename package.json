@@ -35,7 +35,7 @@
     "build:docs": "npm run docs && ng build easy-docs --prod",
     "build:easy": "ng build easy --prod && npm run pack",
     "pack": "cd dist/easy && npm pack",
-    "format": "pretty-quick --staged",
+    "format": "pretty-quick",
     "webdriver-update-ci": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37",
     "precommit": "npm run lint",
     "publish": "npm run build:easy && npm publish dist/easy"
@@ -59,7 +59,7 @@
     "@angular/cli": "^7.1.3",
     "@angular/compiler-cli": "^7.1.3",
     "@angular/language-service": "^7.1.3",
-    "@types/jasmine": "^3.3.1",
+    "@types/jasmine": "^3.3.2",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^10.12.15",
     "codecov": "^3.1.0",
