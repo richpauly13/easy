@@ -51,16 +51,6 @@ jobs:
           paths:
             - .    
 
-  lint:
-    <<: *job_common
-
-    steps:
-      - attach_workspace:
-          at: .
-
-      # run lint
-      - run: npm run lint
-
   build:
     <<: *job_common
 
@@ -100,12 +90,9 @@ workflows:
   default_workflow:
     jobs:
       - install
-      - lint:
-          requires:
-            - install
       - build:
           requires:
-            - lint
+            - install
       - test:
           requires:
             - build
