@@ -38,7 +38,8 @@
     "format": "pretty-quick",
     "webdriver-update-ci": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37",
     "precommit": "npm run lint",
-    "publish": "npm run build:easy && npm publish dist/easy"
+    "publish": "npm run build:easy && npm publish dist/easy",
+    "update": "ng update --all --force && npm i --save-dev typescript@3.1.6"
   },
   "dependencies": {
     "@angular/common": "^7.1.4",
@@ -54,9 +55,9 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.11.3",
-    "@angular-devkit/build-ng-packagr": "^0.11.3",
-    "@angular/cli": "^7.1.3",
+    "@angular-devkit/build-angular": "^0.11.4",
+    "@angular-devkit/build-ng-packagr": "^0.11.4",
+    "@angular/cli": "^7.1.4",
     "@angular/compiler-cli": "^7.1.4",
     "@angular/language-service": "^7.1.4",
     "@types/jasmine": "^3.3.4",
