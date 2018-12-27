@@ -100,12 +100,12 @@ workflows:
   default_workflow:
     jobs:
       - install
-      - lint:
-          requires:
-            - install
       - build:
           requires:
-            - lint
+            - install
+      - lint:
+          requires:
+            - build
       - test:
           requires:
             - build
