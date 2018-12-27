@@ -1,15 +1,10 @@
-var gulp  = require('gulp');
-var shell = require('gulp-shell');
-var watch = require('gulp-watch');
+const { watch } = require('gulp');
+const { exec } = require('child_process');
 
-gulp.task('watch', function() {
-	watch(['projects/easy/src/lib/**/*.scss', 'src/assets/template/*.*'], gulp.parallel('docs'));
-});
+function docs() {
+	return exec('npm run docs');
+}
 
-gulp.task('docs',
-	shell.task('npm run docs')
-);
+watch('projects/easy/src/lib/**/*.scss', { ignoreInitial: false }, docs);
 
-gulp.task('default', gulp.series('docs', 'watch', function(done) { 
-	done();
-}));
+exports.default = docs;
