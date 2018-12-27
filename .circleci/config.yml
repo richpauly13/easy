@@ -61,17 +61,7 @@ jobs:
       # run build
       - run: npm run build
 
-  lint:
-    <<: *job_common
-
-    steps:
-      - attach_workspace:
-          at: .
-
-      # run lint
-      - run: npm run precommit
-
-  test:
+  test_easy:
     <<: *job_common
 
     steps:
@@ -81,13 +71,20 @@ jobs:
       # run unit tests
       - run: npm run test:easy
 
-      # upload code coverage reports to codecov
+      # upload code coverage report to codecov
       - run: bash <(curl -s https://codecov.io/bash) -c -F easy
 
+  test_docs:
+    <<: *job_common
+
+    steps:
+      - attach_workspace:
+          at: .
+          
       # run unit tests
       - run: npm run test:docs
       
-      # upload code coverage reports to codecov
+      # upload code coverage report to codecov
       - run: bash <(curl -s https://codecov.io/bash) -c -F docs
 
   e2e:
@@ -108,10 +105,10 @@ workflows:
       - build:
           requires:
             - install
-      - lint:
+      - test_easy:
           requires:
             - build
-      - test:
+      - test_docs:
           requires:
             - build
       - e2e:
