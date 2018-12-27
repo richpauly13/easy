@@ -51,16 +51,6 @@ jobs:
           paths:
             - .    
 
-  lint:
-    <<: *job_common
-
-    steps:
-      - attach_workspace:
-          at: .
-
-      # run lint
-      - run: npm run lint
-
   build:
     <<: *job_common
 
@@ -71,6 +61,16 @@ jobs:
       # run build
       - run: npm run build
 
+  lint:
+    <<: *job_common
+
+    steps:
+      - attach_workspace:
+          at: .
+
+      # run lint
+      - run: npm run precommit
+
   test:
     <<: *job_common
 
@@ -80,10 +80,15 @@ jobs:
           
       # run unit tests
       - run: npm run test:easy
+
+      # upload code coverage reports to codecov
+      - run: bash <(curl -s https://codecov.io/bash) -c -F easy
+
+      # run unit tests
       - run: npm run test:docs
       
       # upload code coverage reports to codecov
-      - run: bash <(curl -s https://codecov.io/bash)
+      - run: bash <(curl -s https://codecov.io/bash) -c -F docs
 
   e2e:
     <<: *job_common
@@ -93,7 +98,7 @@ jobs:
           at: .
           
       # run e2e tests
-      - run: npm run webdriver-update-ci
+      - run: npm run update:webdriver
       - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
 
 workflows:
