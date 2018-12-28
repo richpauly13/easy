@@ -307,12 +307,78 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var CollapsibleComponent = /** @class */ (function () {
+        function CollapsibleComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        CollapsibleComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        CollapsibleComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-collapsible, .collapse, .expand',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [":host.collapse{display:none}:host.collapse:checked+.collapse-content{padding:.5rem}:host.collapse-label{background-color:#fafafa;padding:.5rem;width:100%}:host.collapse-content{margin:0;max-height:0;padding:0 .5rem}:host.expand{max-height:1.625rem}:host.collapse-content,:host.expand{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:max-height;transition-property:max-height;-webkit-transition-timing-function:linear;transition-timing-function:linear;overflow:hidden}:host.collapse:checked+.collapse-content,:host.expand:focus{max-height:67.5rem;overflow:auto}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        CollapsibleComponent.ctorParameters = function () { return []; };
+        return CollapsibleComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CollapsibleDirective = /** @class */ (function () {
+        function CollapsibleDirective() {
+        }
+        CollapsibleDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezCollapsible]'
+                    },] }
+        ];
+        /** @nocollapse */
+        CollapsibleDirective.ctorParameters = function () { return []; };
+        return CollapsibleDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var CollapsibleModule = /** @class */ (function () {
+        function CollapsibleModule() {
+        }
+        CollapsibleModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            CollapsibleComponent,
+                            CollapsibleDirective
+                        ],
+                        exports: [
+                            CollapsibleComponent,
+                            CollapsibleDirective
+                        ]
+                    },] }
+        ];
+        return CollapsibleModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentsModule = /** @class */ (function () {
         function ComponentsModule() {
         }
         ComponentsModule.decorators = [
             { type: i0.NgModule, args: [{
-                        exports: [AlertModule, BadgeModule, ButtonModule, CardModule]
+                        exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule]
                     },] }
         ];
         return ComponentsModule;
@@ -433,6 +499,9 @@
     exports.ɵk = CardComponent;
     exports.ɵl = CardDirective;
     exports.ɵj = CardModule;
+    exports.ɵn = CollapsibleComponent;
+    exports.ɵo = CollapsibleDirective;
+    exports.ɵm = CollapsibleModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

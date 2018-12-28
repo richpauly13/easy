@@ -1,0 +1,79 @@
+/* SG
+# Collapsible
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Collapsible/Collapse
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Collapsible/Accordion
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Collapsible/Expand
+
+Coming soon.
+
+```
+```
+*/
+
+@import '../../core/functions';
+@import '../../core/mixins';
+@import '../../core/variables';
+
+// Collapse, accordion, and expand styles
+:host {
+	&.collapse {
+		display: none;
+
+		&:checked + .collapse-content {
+			padding: rem(8);
+		}
+	}
+
+	&.collapse-label {
+		background-color: color(lt-white);
+		padding: rem(8);
+		width: 100%;
+	}
+
+	&.collapse-content {
+		margin: 0;
+		max-height: 0;
+		padding: rem(0 8);
+	}
+
+	&.expand {
+		max-height: rem(26);
+	}
+
+	&.collapse-content,
+	&.expand {
+		@include animate(max-height);
+
+		overflow: hidden;
+	}
+
+	&.collapse:checked + .collapse-content,
+	&.expand:focus {
+		max-height: rem(1080);
+		overflow: auto;
+	}
+}

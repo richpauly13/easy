@@ -260,11 +260,68 @@ CardModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class CollapsibleComponent {
+    constructor() {
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+}
+CollapsibleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ez-collapsible, .collapse, .expand',
+                template: "<ng-content></ng-content>\n",
+                styles: [":host.collapse{display:none}:host.collapse:checked+.collapse-content{padding:.5rem}:host.collapse-label{background-color:#fafafa;padding:.5rem;width:100%}:host.collapse-content{margin:0;max-height:0;padding:0 .5rem}:host.expand{max-height:1.625rem}:host.collapse-content,:host.expand{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:max-height;transition-property:max-height;-webkit-transition-timing-function:linear;transition-timing-function:linear;overflow:hidden}:host.collapse:checked+.collapse-content,:host.expand:focus{max-height:67.5rem;overflow:auto}"]
+            }] }
+];
+/** @nocollapse */
+CollapsibleComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CollapsibleDirective {
+    constructor() { }
+}
+CollapsibleDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[ezCollapsible]'
+            },] }
+];
+/** @nocollapse */
+CollapsibleDirective.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class CollapsibleModule {
+}
+CollapsibleModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    CollapsibleComponent,
+                    CollapsibleDirective
+                ],
+                exports: [
+                    CollapsibleComponent,
+                    CollapsibleDirective
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class ComponentsModule {
 }
 ComponentsModule.decorators = [
     { type: NgModule, args: [{
-                exports: [AlertModule, BadgeModule, ButtonModule, CardModule]
+                exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule]
             },] }
 ];
 
@@ -354,6 +411,6 @@ EasyService.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj };
+export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj, CollapsibleComponent as ɵn, CollapsibleDirective as ɵo, CollapsibleModule as ɵm };
 
 //# sourceMappingURL=easy.js.map

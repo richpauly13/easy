@@ -54,6 +54,21 @@
 		</li>
 		<li>
 			<a
+				(click)="section = 'Collapsible'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Collapsible' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Collapsible</a
+			>
+
+			<ul *ngIf="section === 'Collapsible'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Accordion'"><a>Accordion</a></li>
+				<li *ngIf="'Collapse'"><a>Collapse</a></li>
+				<li *ngIf="'Expand'"><a>Expand</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
 				(click)="section = 'Color'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Color' }"
 				class="hover bg-hover-lt-gray pad-a-xs"
@@ -399,6 +414,46 @@
     <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span></pre>
 		</figure>
+	</section>
+	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Accordion'">Accordion</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Collapse'">Collapse</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Expand'">Expand</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
 	</section>
 	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
 		<article class="pad-a-sm border-b-gray bg-lt-gray">
