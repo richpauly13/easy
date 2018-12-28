@@ -114,13 +114,11 @@ AlertModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BadgeComponent {
-    constructor() {
-    }
+    constructor() { }
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 BadgeComponent.decorators = [
     { type: Component, args: [{
@@ -137,8 +135,7 @@ BadgeComponent.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class BadgeDirective {
-    constructor() {
-    }
+    constructor() { }
 }
 BadgeDirective.decorators = [
     { type: Directive, args: [{
@@ -156,14 +153,8 @@ class BadgeModule {
 }
 BadgeModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    BadgeComponent,
-                    BadgeDirective
-                ],
-                exports: [
-                    BadgeComponent,
-                    BadgeDirective
-                ]
+                declarations: [BadgeComponent, BadgeDirective],
+                exports: [BadgeComponent, BadgeDirective]
             },] }
 ];
 
@@ -172,13 +163,11 @@ BadgeModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ButtonComponent {
-    constructor() {
-    }
+    constructor() { }
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 ButtonComponent.decorators = [
     { type: Component, args: [{
@@ -195,8 +184,7 @@ ButtonComponent.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ButtonDirective {
-    constructor() {
-    }
+    constructor() { }
 }
 ButtonDirective.decorators = [
     { type: Directive, args: [{
@@ -214,14 +202,8 @@ class ButtonModule {
 }
 ButtonModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    ButtonComponent,
-                    ButtonDirective
-                ],
-                exports: [
-                    ButtonComponent,
-                    ButtonDirective
-                ]
+                declarations: [ButtonComponent, ButtonDirective],
+                exports: [ButtonComponent, ButtonDirective]
             },] }
 ];
 
@@ -230,13 +212,11 @@ ButtonModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CardComponent {
-    constructor() {
-    }
+    constructor() { }
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 CardComponent.decorators = [
     { type: Component, args: [{
@@ -271,14 +251,8 @@ class CardModule {
 }
 CardModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    CardComponent,
-                    CardDirective
-                ],
-                exports: [
-                    CardComponent,
-                    CardDirective
-                ]
+                declarations: [CardComponent, CardDirective],
+                exports: [CardComponent, CardDirective]
             },] }
 ];
 
@@ -290,12 +264,7 @@ class ComponentsModule {
 }
 ComponentsModule.decorators = [
     { type: NgModule, args: [{
-                exports: [
-                    AlertModule,
-                    BadgeModule,
-                    ButtonModule,
-                    CardModule
-                ]
+                exports: [AlertModule, BadgeModule, ButtonModule, CardModule]
             },] }
 ];
 

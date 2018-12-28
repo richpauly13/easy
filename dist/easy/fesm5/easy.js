@@ -138,8 +138,7 @@ var BadgeComponent = /** @class */ (function () {
     BadgeComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     BadgeComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-badge, .badge-sm, .badge-md, .badge-lg',
@@ -178,14 +177,8 @@ var BadgeModule = /** @class */ (function () {
     }
     BadgeModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [
-                        BadgeComponent,
-                        BadgeDirective
-                    ],
-                    exports: [
-                        BadgeComponent,
-                        BadgeDirective
-                    ]
+                    declarations: [BadgeComponent, BadgeDirective],
+                    exports: [BadgeComponent, BadgeDirective]
                 },] }
     ];
     return BadgeModule;
@@ -204,8 +197,7 @@ var ButtonComponent = /** @class */ (function () {
     ButtonComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     ButtonComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-button, .btn-xs, .btn-sm, .btn-md, .btn-lg, .btn-xl, .btn-full, .btn-group-col, .btn-group-full, .btn-group-row',
@@ -244,14 +236,8 @@ var ButtonModule = /** @class */ (function () {
     }
     ButtonModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [
-                        ButtonComponent,
-                        ButtonDirective
-                    ],
-                    exports: [
-                        ButtonComponent,
-                        ButtonDirective
-                    ]
+                    declarations: [ButtonComponent, ButtonDirective],
+                    exports: [ButtonComponent, ButtonDirective]
                 },] }
     ];
     return ButtonModule;
@@ -270,8 +256,7 @@ var CardComponent = /** @class */ (function () {
     CardComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     CardComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-card, .card',
@@ -310,14 +295,8 @@ var CardModule = /** @class */ (function () {
     }
     CardModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [
-                        CardComponent,
-                        CardDirective
-                    ],
-                    exports: [
-                        CardComponent,
-                        CardDirective
-                    ]
+                    declarations: [CardComponent, CardDirective],
+                    exports: [CardComponent, CardDirective]
                 },] }
     ];
     return CardModule;
@@ -332,12 +311,7 @@ var ComponentsModule = /** @class */ (function () {
     }
     ComponentsModule.decorators = [
         { type: NgModule, args: [{
-                    exports: [
-                        AlertModule,
-                        BadgeModule,
-                        ButtonModule,
-                        CardModule
-                    ]
+                    exports: [AlertModule, BadgeModule, ButtonModule, CardModule]
                 },] }
     ];
     return ComponentsModule;
