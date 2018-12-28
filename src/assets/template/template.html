@@ -1,36 +1,37 @@
 <nav class="pad-a-sm border-a-gray shadow-1 fixed-l styleguide-menu">
-    <ul>
-        {{#each menu}}
-        <li>
-            <a (click)="section = '{{name}}'" [ngClass]="{'bg-lt-gray': section === '{{name}}'}" class="hover bg-hover-lt-gray">{{name}}</a>
-            
-            <ul *ngIf="section === '{{name}}'" class="pad-l-sm submenu">
-                {{#each headings}}
-                <li *ngIf="'{{name}}'">
-                    <a>{{name}}</a>
-                </li>
-                {{/each}}
-            </ul>
-        </li>
-        {{/each}}
-    </ul>
+	<ul>
+		{{#each menu}}
+		<li>
+			<a
+				(click)="section = '{{name}}'"
+				[ngClass]="{'bg-lt-gray': section === '{{name}}'}"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>{{name}}</a
+			>
+
+			<ul *ngIf="section === '{{name}}'" class="pad-l-sm submenu">
+				{{#each headings}}
+				<li *ngIf="'{{name}}'"><a>{{name}}</a></li>
+				{{/each}}
+			</ul>
+		</li>
+		{{/each}}
+	</ul>
 </nav>
 
 <main class="pad-a-xl styleguide">
-    <h1 [innerHTML]="section" class="pad-t-xl"></h1>
+	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
-    {{#each sections}}
-    <section *ngIf="section === '{{section}}'" class="mar-b-lg shadow-1 border-a-gray section">
-        <article class="pad-a-sm border-b-gray bg-lt-gray">
-            <h2 *ngIf="'{{heading}}'">{{heading}}</h2>
-            {{{comment}}}
-        </article>
+	{{#each sections}}
+	<section *ngIf="section === '{{section}}'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'{{heading}}'">{{heading}}</h2>
+			{{{comment}}}
+		</article>
 
-        <aside class="pad-a-sm border-b-gray">{{{code}}}</aside>
+		<aside class="pad-a-sm border-b-gray">{{{code}}}</aside>
 
-        <figure>
-            <pre class="pad-a-sm">{{{markup}}}</pre>
-        </figure>
-    </section>
-    {{/each}}
+		<figure><pre class="pad-a-sm">{{{markup}}}</pre></figure>
+	</section>
+	{{/each}}
 </main>

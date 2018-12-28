@@ -21,18 +21,28 @@ Coming soon.
 	width: 100%;
 }
 
-.fixed-t {
-	top: 0;
-}
-
-.fixed-r {
-	right: 0;
-}
-
 .fixed-b {
 	bottom: 0;
 }
 
-.fixed-l {
+.fixed-l,
+.sticky-l {
 	left: 0;
+}
+
+.fixed-r,
+.sticky-r {
+	right: 0;
+}
+
+.fixed-t,
+.sticky-t {
+	top: 0;
+}
+
+.sticky-l,
+.sticky-r,
+.sticky-t {
+	position: sticky;
+	z-index: 10;
 }

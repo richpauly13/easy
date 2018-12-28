@@ -4,7 +4,7 @@
 			<a
 				(click)="section = 'Alert'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Alert' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Alert</a
 			>
 
@@ -15,9 +15,21 @@
 		</li>
 		<li>
 			<a
+				(click)="section = 'Badge'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Badge' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Badge</a
+			>
+
+			<ul *ngIf="section === 'Badge'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+			</ul>
+		</li>
+		<li>
+			<a
 				(click)="section = 'Color'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Color' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Color</a
 			>
 
@@ -33,7 +45,7 @@
 			<a
 				(click)="section = 'Flexbox'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Flexbox' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Flexbox</a
 			>
 
@@ -51,7 +63,7 @@
 			<a
 				(click)="section = 'Layout'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Layout' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Layout</a
 			>
 
@@ -65,7 +77,7 @@
 			<a
 				(click)="section = 'Position'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Position' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Position</a
 			>
 
@@ -77,7 +89,7 @@
 			<a
 				(click)="section = 'Space'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Space' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Space</a
 			>
 
@@ -91,7 +103,7 @@
 			<a
 				(click)="section = 'Typography'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Typography' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Typography</a
 			>
 
@@ -105,7 +117,7 @@
 			<a
 				(click)="section = 'Visibility'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Visibility' }"
-				class="hover bg-hover-lt-gray"
+				class="hover bg-hover-lt-gray pad-a-xs"
 				>Visibility</a
 			>
 
@@ -128,9 +140,9 @@
 		</article>
 
 		<aside class="pad-a-sm border-b-gray">
-			<aside class="test alert-bad test">bad</aside>
-			<aside class="test alert-good">good</aside>
-			<aside class="alert-info test">info</aside>
+			<aside class="alert-bad">bad</aside>
+			<aside class="alert-good">good</aside>
+			<aside class="alert-info">info</aside>
 			<aside class="alert-warn">warn</aside>
 			<ez-alert class="alert-good">good</ez-alert>
 		</aside>
@@ -138,9 +150,9 @@
 		<figure>
 			<pre
 				class="pad-a-sm"
-			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"test alert-bad test"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"test alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-info test"</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-bad"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-info"</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-warn"</span>&gt;</span>warn<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
 		</figure>
@@ -164,6 +176,34 @@
 				class="pad-a-sm"
 			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Badge'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>
+				Badges are styled with <code>.badge-*</code> classes. If a badge does not contain
+				text, it is not rendered.
+			</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray">
+			<p class="badge-sm bg-dk-blue text-white">1</p>
+			<p class="badge-md bg-dk-blue text-white">20</p>
+			<p class="badge-lg bg-dk-blue text-white">300</p>
+			<p class="badge-md bg-dk-blue text-white"></p>
+			<ez-badge class="badge-sm bg-dk-blue text-white">10 </ez-badge>
+		</aside>
+
+		<figure>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span>20<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-lg bg-dk-blue text-white"</span>&gt;</span>300<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ez-badge</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>10
+<span class="hljs-tag">&lt;/<span class="hljs-title">ez-badge</span>&gt;</span></pre>
 		</figure>
 	</section>
 	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">

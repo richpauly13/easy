@@ -49,7 +49,7 @@
         AlertComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
-                        template: "<p [attr.id]=\"id\"><ng-content></ng-content></p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close alert\" autofocus>X</button>\r\n",
+                        template: "<p [attr.id]=\"id\">\r\n    <ng-content></ng-content>\r\n</p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close alert\" autofocus>X</button>\r\n",
                         styles: [":host.alert-bad,:host.alert-good,:host.alert-info,:host.alert-warn{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;color:#fff;-webkit-box-pack:justify;justify-content:space-between;padding:.5rem 1rem}:host.alert-bad{background-color:#ba000d}:host.alert-good{background-color:#087f23}:host.alert-info{background-color:#0069c0}:host.alert-warn{background-color:#ffeb3b;color:#191919}"]
                     }] }
         ];
@@ -130,15 +130,80 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var BadgeComponent = /** @class */ (function () {
+        function BadgeComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        BadgeComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        BadgeComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-badge, .badge-sm, .badge-md, .badge-lg',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [":host.badge-lg,:host.badge-md,:host.badge-sm{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;display:-webkit-inline-box;display:inline-flex;border-radius:1rem;-webkit-box-pack:center;justify-content:center}:host.badge-lg:empty,:host.badge-md:empty,:host.badge-sm:empty{display:none}:host.badge-sm{line-height:.5rem;padding:.5rem}:host.badge-md{line-height:.625rem;padding:.625rem}:host.badge-lg{line-height:.75rem;padding:.75rem}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        BadgeComponent.ctorParameters = function () { return []; };
+        return BadgeComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BadgeDirective = /** @class */ (function () {
+        function BadgeDirective() {
+        }
+        BadgeDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezBadge]'
+                    },] }
+        ];
+        /** @nocollapse */
+        BadgeDirective.ctorParameters = function () { return []; };
+        return BadgeDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var BadgeModule = /** @class */ (function () {
+        function BadgeModule() {
+        }
+        BadgeModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            BadgeComponent,
+                            BadgeDirective
+                        ],
+                        exports: [
+                            BadgeComponent,
+                            BadgeDirective
+                        ]
+                    },] }
+        ];
+        return BadgeModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentsModule = /** @class */ (function () {
         function ComponentsModule() {
         }
         ComponentsModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [],
-                        declarations: [],
                         exports: [
                             AlertModule,
+                            BadgeModule
                         ]
                     },] }
         ];
@@ -251,6 +316,9 @@
     exports.ɵb = AlertComponent;
     exports.ɵc = AlertDirective;
     exports.ɵa = AlertModule;
+    exports.ɵe = BadgeComponent;
+    exports.ɵf = BadgeDirective;
+    exports.ɵd = BadgeModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

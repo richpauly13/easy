@@ -1,18 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import { AlertModule } from './alert/alert.module';
+import { BadgeModule } from './badge/badge.module';
 
 @NgModule({
-	imports: [
-
-	],
-	declarations: [
-
-	],
-	exports: [
-		AlertModule,
-	]
+	exports: [AlertModule, BadgeModule]
 })
-export class ComponentsModule {
-
-}
+export class ComponentsModule {}

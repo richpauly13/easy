@@ -41,7 +41,7 @@ class AlertComponent {
 AlertComponent.decorators = [
     { type: Component, args: [{
                 selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
-                template: "<p [attr.id]=\"id\"><ng-content></ng-content></p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close alert\" autofocus>X</button>\r\n",
+                template: "<p [attr.id]=\"id\">\r\n    <ng-content></ng-content>\r\n</p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close alert\" autofocus>X</button>\r\n",
                 styles: [":host.alert-bad,:host.alert-good,:host.alert-info,:host.alert-warn{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;color:#fff;-webkit-box-pack:justify;justify-content:space-between;padding:.5rem 1rem}:host.alert-bad{background-color:#ba000d}:host.alert-good{background-color:#087f23}:host.alert-info{background-color:#0069c0}:host.alert-warn{background-color:#ffeb3b;color:#191919}"]
             }] }
 ];
@@ -113,14 +113,70 @@ AlertModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class BadgeComponent {
+    constructor() {
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+}
+BadgeComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ez-badge, .badge-sm, .badge-md, .badge-lg',
+                template: "<ng-content></ng-content>\n",
+                styles: [":host.badge-lg,:host.badge-md,:host.badge-sm{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;display:-webkit-inline-box;display:inline-flex;border-radius:1rem;-webkit-box-pack:center;justify-content:center}:host.badge-lg:empty,:host.badge-md:empty,:host.badge-sm:empty{display:none}:host.badge-sm{line-height:.5rem;padding:.5rem}:host.badge-md{line-height:.625rem;padding:.625rem}:host.badge-lg{line-height:.75rem;padding:.75rem}"]
+            }] }
+];
+/** @nocollapse */
+BadgeComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BadgeDirective {
+    constructor() { }
+}
+BadgeDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[ezBadge]'
+            },] }
+];
+/** @nocollapse */
+BadgeDirective.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BadgeModule {
+}
+BadgeModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    BadgeComponent,
+                    BadgeDirective
+                ],
+                exports: [
+                    BadgeComponent,
+                    BadgeDirective
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class ComponentsModule {
 }
 ComponentsModule.decorators = [
     { type: NgModule, args: [{
-                imports: [],
-                declarations: [],
                 exports: [
                     AlertModule,
+                    BadgeModule
                 ]
             },] }
 ];
@@ -211,6 +267,6 @@ EasyService.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa };
+export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd };
 
 //# sourceMappingURL=easy.js.map
