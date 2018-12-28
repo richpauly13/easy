@@ -1,0 +1,35 @@
+/* SG
+# Card
+
+Cards are styled with `.cards` and `.card` classes.
+
+```
+<section class="card">
+	<p>card</p>
+</section>
+<section class="card">
+	<p>card</p>
+</section>
+<section class="card">
+	<p>card</p>
+</section>
+```
+*/
+
+@import '../../core/functions';
+@import '../../core/mixins';
+@import '../../core/variables';
+
+// Card styles
+:host {
+	&.card {
+		@include row-inline;
+		@include shadow(1);
+
+		border: rem(1) solid color(gray);
+		flex-direction: column;
+		margin: rem(8);
+		min-width: rem(400);
+		padding: rem(16);
+	}
+}

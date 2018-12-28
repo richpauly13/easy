@@ -39,7 +39,7 @@ Coming soon.
 }
 
 .form-field {
-	@include animate(box-shadow);	
+	@include animate(box-shadow);
 	@include flex(1, 0, 0);
 
 	background-color: color(lt-white);
@@ -81,8 +81,8 @@ option {
 }
 
 // Checkbox styles
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
 	margin-right: rem(16);
 	vertical-align: middle;
 }
@@ -101,7 +101,7 @@ input[type="radio"] {
 
 .checkbox-label::before,
 .radio-label::before {
-	content: "\00a0";
+	content: '\00a0';
 
 	background-color: color(lt-gray);
 	display: inline-block;
@@ -116,7 +116,7 @@ input[type="radio"] {
 }
 
 .checkbox:checked + .checkbox-label::before,
-.radio:checked +.radio-label::before {
+.radio:checked + .radio-label::before {
 	background-color: color(blue);
 	border: rem(2) solid color(lt-gray);
 }
@@ -124,7 +124,7 @@ input[type="radio"] {
 // Placeholder styles
 ::-webkit-input-placeholder {
 	color: color(gray);
-	opacity: .54;
+	opacity: 0.54;
 }
 
 :-ms-input-placeholder {
@@ -143,17 +143,6 @@ input[type="radio"] {
 
 // Validation styles
 .form-label.required::after {
-	content: "\2217";
+	content: '\2217';
 	color: color(red);
-}
-
-.disabled,
-:disabled,
-[disabled] {
-	background-color: color(gray);
-	color: color(lt-black);
-	
-	&:hover {
-		cursor: not-allowed;
-	}
 }

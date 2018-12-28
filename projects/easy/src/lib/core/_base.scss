@@ -13,6 +13,17 @@
 	color: inherit;
 }
 
+.disabled,
+:disabled,
+[disabled] {
+	background-color: color(gray);
+	color: color(lt-black);
+
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
 .hover:hover {
 	cursor: pointer;
 }

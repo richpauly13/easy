@@ -18,16 +18,12 @@ Cards are styled with `.cards` and `.card` classes.
 
 // Card styles
 .card {
-    @include row-inline;
+	@include row-inline;
 	@include shadow(1);
 
-    border: rem(1) solid color(gray);
-    flex-direction: column;
+	border: rem(1) solid color(gray);
+	flex-direction: column;
 	margin: rem(8);
 	min-width: rem(400);
 	padding: rem(16);
-}
-
-.card-text {
-
 }

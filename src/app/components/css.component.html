@@ -27,6 +27,33 @@
 		</li>
 		<li>
 			<a
+				(click)="section = 'Button'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Button' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Button</a
+			>
+
+			<ul *ngIf="section === 'Button'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Group'"><a>Group</a></li>
+				<li *ngIf="'Rounded'"><a>Rounded</a></li>
+				<li *ngIf="'States'"><a>States</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Card'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Card' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Card</a
+			>
+
+			<ul *ngIf="section === 'Card'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+			</ul>
+		</li>
+		<li>
+			<a
 				(click)="section = 'Color'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Color' }"
 				class="hover bg-hover-lt-gray pad-a-xs"
@@ -161,8 +188,8 @@
 		<article class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Close'">Close</h2>
 			<p>
-				Alerts can be closed by adding a <code>&lt;button&gt;</code> tag with a
-				<code>.close</code> class in the alert.
+				Alerts can be closed by adding a <code>&lt;button&gt;</code> tag with a <code>.close</code> class in the
+				alert.
 			</p>
 		</article>
 
@@ -182,8 +209,8 @@
 		<article class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>
-				Badges are styled with <code>.badge-*</code> classes. If a badge does not contain
-				text, it is not rendered.
+				Badges are styled with <code>.badge-*</code> classes. If a badge does not contain text, it is not
+				rendered.
 			</p>
 		</article>
 
@@ -204,6 +231,158 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-badge</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>10
 <span class="hljs-tag">&lt;/<span class="hljs-title">ez-badge</span>&gt;</span></pre>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Buttons are styled with <code>.btn-*</code> classes.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray">
+			<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
+			<button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
+			<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+			<button class="btn-lg bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
+			<button class="btn-xl bg-dk-blue text-white bg-hover-blue" type="button">xl</button>
+			<button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>
+		</aside>
+
+		<figure>
+			<pre
+				class="pad-a-sm"
+			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-sm bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-lg bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;lg&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xl bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Group'">Group</h2>
+			<p>Buttons can be grouped with <code>.btn-group-*</code> classes.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray">
+			<section class="btn-group-row" role="group" aria-label="button row group">
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+			</section>
+			<section class="btn-group-col" role="group" aria-label="button column group">
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+			</section>
+			<section class="btn-group-full" role="group" aria-label="button full row group">
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+			</section>
+		</aside>
+
+		<figure>
+			<pre
+				class="pad-a-sm"
+			>&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-row"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button row group"</span>&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-col"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button column group"</span>&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-full"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button full row group"</span>&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;/section&gt;</pre>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Rounded'">Rounded</h2>
+			<p>Buttons can be rounded with the <code>.rounded</code> class.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray">
+			<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
+			<button class="btn-sm rounded bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
+			<button class="btn-md rounded bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+			<button class="btn-lg rounded bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
+			<button class="btn-xl rounded bg-dk-blue text-white bg-hover-blue" type="button">xl</button>
+			<button class="btn-full rounded bg-dk-blue text-white bg-hover-blue" type="button">full</button>
+		</aside>
+
+		<figure>
+			<pre
+				class="pad-a-sm"
+			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-sm rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-lg rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;lg&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xl rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'States'">States</h2>
+			<p>Buttons can be disabled with the <code>disabled</code> attribute or <code>.disabled</code> class.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray">
+			<button class="btn-md" type="button" disabled>disabled</button>
+			<button class="btn-md disabled" type="button">disabled</button>
+		</aside>
+
+		<figure>
+			<pre
+				class="pad-a-sm"
+			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span> disabled&gt;disabled&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md disabled"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;disabled&lt;/button&gt;</pre>
+		</figure>
+	</section>
+	<section *ngIf="section === 'Card'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Cards are styled with <code>.cards</code> and <code>.card</code> classes.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray">
+			<section class="card"><p>card</p></section>
+			<section class="card"><p>card</p></section>
+			<section class="card"><p>card</p></section>
+		</aside>
+
+		<figure>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"card"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span></pre>
 		</figure>
 	</section>
 	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">

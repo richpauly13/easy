@@ -4,5 +4,5 @@ import { Directive } from '@angular/core';
 	selector: '[ezBadge]'
 })
 export class BadgeDirective {
-	constructor() {}
+	public constructor() {}
 }
