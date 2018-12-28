@@ -1,19 +1,22 @@
 @mixin animate($types...) {
-	transition-duration: .3s;
-	transition-property: $types;	
+	transition-duration: 0.3s;
+	transition-property: $types;
 	transition-timing-function: linear;
 }
 
 @mixin column {
 	@include flexbox;
 
+	align-content: flex-start;
+	align-items: flex-start;
 	flex-direction: column;
+	justify-content: center;
 }
 
-@mixin flex($grow, $shrink, $basis) {	
+@mixin flex($grow, $shrink, $basis) {
 	@if $basis == auto {
 		flex-basis: auto;
-	} @else if unit($basis) == "%" {
+	} @else if unit($basis) == '%' {
 		flex-basis: $basis;
 	} @else if type-of($basis) == number {
 		flex-basis: rem($basis);
@@ -57,7 +60,7 @@
 	} @else if $depth > 5 {
 		@warn "Invalid $depth `#{$depth}` for mixin `shadow`.";
 	} @else {
-		box-shadow: bottom-shadow($depth, $color), top-shadow($depth, $color);  
+		box-shadow: bottom-shadow($depth, $color), top-shadow($depth, $color);
 	}
 }
 

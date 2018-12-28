@@ -126,16 +126,6 @@ Buttons can be grouped with `.btn-group-*` classes.
 
 		padding-bottom: rem(16);
 		padding-top: rem(16);
-
-		& .btn-xs,
-		& .btn-sm,
-		& .btn-md,
-		& .btn-lg,
-		& .btn-xl {
-			border-bottom: rem(1) solid color(white);
-			border-left: rem(1) solid color(white);
-			margin: 0;
-		}
 	}
 
 	&.btn-group-col {
@@ -144,15 +134,45 @@ Buttons can be grouped with `.btn-group-*` classes.
 
 	&.btn-group-full {
 		width: 100%;
-
-		& .btn-xs,
-		& .btn-sm,
-		& .btn-md,
-		& .btn-lg,
-		& .btn-xl {
-			@include flex(1, 0, auto);
-		}
 	}
 
 	// TODO:  Add toggle buttons
+}
+
+:host-context(.btn-group-col) {
+	&.btn-xs,
+	&.btn-sm,
+	&.btn-md,
+	&.btn-lg,
+	&.btn-xl {
+		border-bottom: rem(1) solid color(white);
+		border-left: rem(1) solid color(white);
+		margin: 0;
+	}
+}
+
+:host-context(.btn-group-full) {
+	&.btn-xs,
+	&.btn-sm,
+	&.btn-md,
+	&.btn-lg,
+	&.btn-xl {
+		@include flex(1, 0, auto);
+
+		border-bottom: rem(1) solid color(white);
+		border-left: rem(1) solid color(white);
+		margin: 0;
+	}
+}
+
+:host-context(.btn-group-row) {
+	&.btn-xs,
+	&.btn-sm,
+	&.btn-md,
+	&.btn-lg,
+	&.btn-xl {
+		border-bottom: rem(1) solid color(white);
+		border-left: rem(1) solid color(white);
+		margin: 0;
+	}
 }
