@@ -261,13 +261,11 @@ CardModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class CollapsibleComponent {
-    constructor() {
-    }
+    constructor() { }
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 CollapsibleComponent.decorators = [
     { type: Component, args: [{
@@ -302,14 +300,8 @@ class CollapsibleModule {
 }
 CollapsibleModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    CollapsibleComponent,
-                    CollapsibleDirective
-                ],
-                exports: [
-                    CollapsibleComponent,
-                    CollapsibleDirective
-                ]
+                declarations: [CollapsibleComponent, CollapsibleDirective],
+                exports: [CollapsibleComponent, CollapsibleDirective]
             },] }
 ];
 

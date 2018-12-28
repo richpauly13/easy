@@ -316,8 +316,7 @@
         CollapsibleComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         CollapsibleComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-collapsible, .collapse, .expand',
@@ -356,14 +355,8 @@
         }
         CollapsibleModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [
-                            CollapsibleComponent,
-                            CollapsibleDirective
-                        ],
-                        exports: [
-                            CollapsibleComponent,
-                            CollapsibleDirective
-                        ]
+                        declarations: [CollapsibleComponent, CollapsibleDirective],
+                        exports: [CollapsibleComponent, CollapsibleDirective]
                     },] }
         ];
         return CollapsibleModule;

@@ -15,14 +15,14 @@ job_common: &job_common
     - <<: *base_image
   working_directory: ~/easy
 
-# Save dependencies to cache for next workflow run
+# Save dependencies to cache
 save: &save
   save_cache:
     key: v1-easy-{{ checksum "package-lock.json" }}
     paths:
       - node_modules
 
-# Download cached dependencies
+# Restore cached dependencies
 restore: &restore
   restore_cache:
     key: v1-easy-{{ checksum "package-lock.json" }}
@@ -37,12 +37,18 @@ jobs:
       # Checkout git repo
       - checkout
 
+      # Restore cached dependencies
       - <<: *restore
 
-      # Update dependencies
-      - run: sudo npm i -g npm
-      - run: npm i
+      - run:
+          name: Update npm
+          command: sudo npm i -g npm --silent
+
+      - run:
+          name: Update dependencies
+          command: npm i --silent
       
+      # Cache dependencies
       - <<: *save
 
       # Add dependencies to workspace
@@ -58,8 +64,9 @@ jobs:
       - attach_workspace:
           at: .
 
-      # run build
-      - run: npm run build
+      - run:
+          name: Build easy and docs
+          command: npm run build
 
   test_easy:
     <<: *job_common
@@ -68,11 +75,13 @@ jobs:
       - attach_workspace:
           at: .
           
-      # run unit tests
-      - run: npm run test:easy
+      - run:
+          name: Run easy unit tests
+          command: npm run test:easy
 
-      # upload code coverage report to codecov
-      - run: bash <(curl -s https://codecov.io/bash) -c -F easy
+      - run:
+          name: Upload easy code coverage report to codecov 
+          command: bash <(curl -s https://codecov.io/bash) -c -F easy
 
   test_docs:
     <<: *job_common
@@ -81,11 +90,13 @@ jobs:
       - attach_workspace:
           at: .
           
-      # run unit tests
-      - run: npm run test:docs
+      - run:
+          name: Run docs unit tests
+          command: npm run test:docs
       
-      # upload code coverage report to codecov
-      - run: bash <(curl -s https://codecov.io/bash) -c -F docs
+      - run:
+          name: Upload docs code coverage report to codecov 
+          command: bash <(curl -s https://codecov.io/bash) -c -F docs
 
   e2e:
     <<: *job_common
@@ -94,9 +105,13 @@ jobs:
       - attach_workspace:
           at: .
           
-      # run e2e tests
-      - run: npm run update:webdriver
-      - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
+      - run:
+          name: Install correct selenium webdriver
+          command: npm run update:webdriver
+
+      - run:
+          name: Run docs e2e tests
+          command: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
 
 workflows:
   default_workflow:

@@ -315,8 +315,7 @@ var CollapsibleComponent = /** @class */ (function () {
     CollapsibleComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     CollapsibleComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-collapsible, .collapse, .expand',
@@ -355,14 +354,8 @@ var CollapsibleModule = /** @class */ (function () {
     }
     CollapsibleModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [
-                        CollapsibleComponent,
-                        CollapsibleDirective
-                    ],
-                    exports: [
-                        CollapsibleComponent,
-                        CollapsibleDirective
-                    ]
+                    declarations: [CollapsibleComponent, CollapsibleDirective],
+                    exports: [CollapsibleComponent, CollapsibleDirective]
                 },] }
     ];
     return CollapsibleModule;
