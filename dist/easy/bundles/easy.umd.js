@@ -366,12 +366,72 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var DropdownComponent = /** @class */ (function () {
+        function DropdownComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        DropdownComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        DropdownComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-dropdown, .dropdown-menu, .dropdown-toggle, .dropdown-header, .dropdown-item, .dropdown-divider',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [":host .dropdown-menu{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:visibility,opacity;transition-property:visibility,opacity;-webkit-transition-timing-function:linear;transition-timing-function:linear;background-color:#fff;border:.0625rem solid #000;opacity:0;pointer-events:none;position:absolute;visibility:hidden}:host .dropdown-toggle::after{content:\"\\25BC\"}:host .dropdown-menu.active,:host .dropdown-toggle:focus~.dropdown-menu{opacity:1;pointer-events:auto;visibility:visible;z-index:20}:host .dropdown-header,:host .dropdown-item{padding:.5rem}:host .dropdown-header{color:#bdbdbd;font-size:1.125rem}:host .dropdown-item:hover{background-color:#fafafa}:host .dropdown-divider{border:.0625rem solid #bdbdbd}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        DropdownComponent.ctorParameters = function () { return []; };
+        return DropdownComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var DropdownDirective = /** @class */ (function () {
+        function DropdownDirective() {
+        }
+        DropdownDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezDropdown]'
+                    },] }
+        ];
+        /** @nocollapse */
+        DropdownDirective.ctorParameters = function () { return []; };
+        return DropdownDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var DropdownModule = /** @class */ (function () {
+        function DropdownModule() {
+        }
+        DropdownModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [DropdownComponent, DropdownDirective],
+                        exports: [DropdownComponent, DropdownDirective]
+                    },] }
+        ];
+        return DropdownModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentsModule = /** @class */ (function () {
         function ComponentsModule() {
         }
         ComponentsModule.decorators = [
             { type: i0.NgModule, args: [{
-                        exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule]
+                        exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule, DropdownModule]
                     },] }
         ];
         return ComponentsModule;
@@ -495,6 +555,9 @@
     exports.ɵn = CollapsibleComponent;
     exports.ɵo = CollapsibleDirective;
     exports.ɵm = CollapsibleModule;
+    exports.ɵq = DropdownComponent;
+    exports.ɵr = DropdownDirective;
+    exports.ɵp = DropdownModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

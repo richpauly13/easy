@@ -365,12 +365,72 @@ var CollapsibleModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var DropdownComponent = /** @class */ (function () {
+    function DropdownComponent() {
+    }
+    /**
+     * @return {?}
+     */
+    DropdownComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+    };
+    DropdownComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'ez-dropdown, .dropdown-menu, .dropdown-toggle, .dropdown-header, .dropdown-item, .dropdown-divider',
+                    template: "<ng-content></ng-content>\n",
+                    styles: [":host .dropdown-menu{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:visibility,opacity;transition-property:visibility,opacity;-webkit-transition-timing-function:linear;transition-timing-function:linear;background-color:#fff;border:.0625rem solid #000;opacity:0;pointer-events:none;position:absolute;visibility:hidden}:host .dropdown-toggle::after{content:\"\\25BC\"}:host .dropdown-menu.active,:host .dropdown-toggle:focus~.dropdown-menu{opacity:1;pointer-events:auto;visibility:visible;z-index:20}:host .dropdown-header,:host .dropdown-item{padding:.5rem}:host .dropdown-header{color:#bdbdbd;font-size:1.125rem}:host .dropdown-item:hover{background-color:#fafafa}:host .dropdown-divider{border:.0625rem solid #bdbdbd}"]
+                }] }
+    ];
+    /** @nocollapse */
+    DropdownComponent.ctorParameters = function () { return []; };
+    return DropdownComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var DropdownDirective = /** @class */ (function () {
+    function DropdownDirective() {
+    }
+    DropdownDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: '[ezDropdown]'
+                },] }
+    ];
+    /** @nocollapse */
+    DropdownDirective.ctorParameters = function () { return []; };
+    return DropdownDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var DropdownModule = /** @class */ (function () {
+    function DropdownModule() {
+    }
+    DropdownModule.decorators = [
+        { type: NgModule, args: [{
+                    declarations: [DropdownComponent, DropdownDirective],
+                    exports: [DropdownComponent, DropdownDirective]
+                },] }
+    ];
+    return DropdownModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var ComponentsModule = /** @class */ (function () {
     function ComponentsModule() {
     }
     ComponentsModule.decorators = [
         { type: NgModule, args: [{
-                    exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule]
+                    exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule, DropdownModule]
                 },] }
     ];
     return ComponentsModule;
@@ -473,6 +533,6 @@ var EasyService = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj, CollapsibleComponent as ɵn, CollapsibleDirective as ɵo, CollapsibleModule as ɵm };
+export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj, CollapsibleComponent as ɵn, CollapsibleDirective as ɵo, CollapsibleModule as ɵm, DropdownComponent as ɵq, DropdownDirective as ɵr, DropdownModule as ɵp };
 
 //# sourceMappingURL=easy.js.map

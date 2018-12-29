@@ -85,6 +85,18 @@
 		</li>
 		<li>
 			<a
+				(click)="section = 'Dropdown'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Dropdown' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Dropdown</a
+			>
+
+			<ul *ngIf="section === 'Dropdown'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+			</ul>
+		</li>
+		<li>
+			<a
 				(click)="section = 'Flexbox'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Flexbox' }"
 				class="hover bg-hover-lt-gray pad-a-xs"
@@ -497,6 +509,16 @@
 	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
 		<article class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Text'">Text</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Dropdown'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</article>
 

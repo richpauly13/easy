@@ -17,3 +17,6 @@ export { CardModule as ɵj } from './lib/components/card/card.module';
 export { CollapsibleComponent as ɵn } from './lib/components/collapsible/collapsible.component';
 export { CollapsibleDirective as ɵo } from './lib/components/collapsible/collapsible.directive';
 export { CollapsibleModule as ɵm } from './lib/components/collapsible/collapsible.module';
+export { DropdownComponent as ɵq } from './lib/components/dropdown/dropdown.component';
+export { DropdownDirective as ɵr } from './lib/components/dropdown/dropdown.directive';
+export { DropdownModule as ɵp } from './lib/components/dropdown/dropdown.module';
