@@ -375,13 +375,12 @@
         DropdownComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         DropdownComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-dropdown, .dropdown-menu, .dropdown-toggle, .dropdown-header, .dropdown-item, .dropdown-divider',
                         template: "<ng-content></ng-content>\n",
-                        styles: [":host .dropdown-menu{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:visibility,opacity;transition-property:visibility,opacity;-webkit-transition-timing-function:linear;transition-timing-function:linear;background-color:#fff;border:.0625rem solid #000;opacity:0;pointer-events:none;position:absolute;visibility:hidden}:host .dropdown-toggle::after{content:\"\\25BC\"}:host .dropdown-menu.active,:host .dropdown-toggle:focus~.dropdown-menu{opacity:1;pointer-events:auto;visibility:visible;z-index:20}:host .dropdown-header,:host .dropdown-item{padding:.5rem}:host .dropdown-header{color:#bdbdbd;font-size:1.125rem}:host .dropdown-item:hover{background-color:#fafafa}:host .dropdown-divider{border:.0625rem solid #bdbdbd}"]
+                        styles: [":host .dropdown-menu{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:visibility,opacity;transition-property:visibility,opacity;-webkit-transition-timing-function:linear;transition-timing-function:linear;background-color:#fff;border:.0625rem solid #000;opacity:0;pointer-events:none;position:absolute;visibility:hidden}:host .dropdown-toggle::after{content:'\\25BC'}:host .dropdown-menu.active,:host .dropdown-toggle:focus~.dropdown-menu{opacity:1;pointer-events:auto;visibility:visible;z-index:20}:host .dropdown-header,:host .dropdown-item{padding:.5rem}:host .dropdown-header{color:#bdbdbd;font-size:1.125rem}:host .dropdown-item:hover{background-color:#fafafa}:host .dropdown-divider{border:.0625rem solid #bdbdbd}"]
                     }] }
         ];
         /** @nocollapse */
@@ -426,12 +425,132 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var FormComponent = /** @class */ (function () {
+        function FormComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        FormComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        FormComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-form',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [".fieldset{border:.0625rem solid #2196f3;padding:.375rem .625rem .75rem}.field-group,.form-group{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;align-items:center}.form-group{margin:-.5rem}.field-group{flex-basis:0;-webkit-box-flex:1;flex-grow:1;flex-shrink:0;padding:.5rem}.form-label{flex-basis:0;-webkit-box-flex:1;flex-grow:1;flex-shrink:0;flex-basis:5.625rem;font-size:1.125rem;max-width:8.75rem}.form-field{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:-webkit-box-shadow;transition-property:box-shadow,-webkit-box-shadow;-webkit-transition-timing-function:linear;transition-timing-function:linear;flex-basis:0;-webkit-box-flex:1;flex-grow:1;flex-shrink:0;background-color:#fafafa;flex-basis:14.375rem;padding:2.5rem}.form-field:not([multiple]):not(textarea){height:2.5rem}.form-field:focus{-webkit-box-shadow:0 .09375rem .25rem rgba(33,150,243,.24),0 .09375rem .375rem rgba(33,150,243,.12);box-shadow:0 .09375rem .25rem rgba(33,150,243,.24),0 .09375rem .375rem rgba(33,150,243,.12);border:.0625rem solid #2196f3;padding:.4375rem}.form-field.disabled,.form-field[disabled]{background-color:#2196f3}select:not([multiple]).form-field{padding-left:.375rem}select:not([multiple]).form-field:focus{padding-left:.4375rem}select::-ms-value{background-color:#fafafa;color:#191919}option{color:#bdbdbd}input[type=checkbox],input[type=radio]{margin-right:1rem;vertical-align:middle}.checkbox,.radio{display:none}.checkbox-group .checkbox,.radio-group .radio{flex-basis:0;-webkit-box-flex:1;flex-grow:1;flex-shrink:0;flex-basis:50%}.checkbox-label::before,.radio-label::before{content:'\\00a0';background-color:#efefef;display:inline-block;height:1rem;margin-right:.375rem;vertical-align:middle;width:1rem}.radio-label::before{border-radius:50%}.checkbox:checked+.checkbox-label::before,.radio:checked+.radio-label::before{background-color:#2196f3;border:.125rem solid #efefef}::-webkit-input-placeholder{color:#bdbdbd;opacity:.54}:-ms-input-placeholder{color:#bdbdbd}::-moz-placeholder{color:#bdbdbd;opacity:1}:-moz-placeholder{color:#bdbdbd;opacity:1}.form-label.required::after{content:'\\2217';color:#ba000d}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        FormComponent.ctorParameters = function () { return []; };
+        return FormComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var FormDirective = /** @class */ (function () {
+        function FormDirective() {
+        }
+        FormDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezForm]'
+                    },] }
+        ];
+        /** @nocollapse */
+        FormDirective.ctorParameters = function () { return []; };
+        return FormDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var FormModule = /** @class */ (function () {
+        function FormModule() {
+        }
+        FormModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [FormComponent, FormDirective],
+                        exports: [FormComponent, FormDirective]
+                    },] }
+        ];
+        return FormModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var GridComponent = /** @class */ (function () {
+        function GridComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        GridComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        GridComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-grid',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        GridComponent.ctorParameters = function () { return []; };
+        return GridComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var GridDirective = /** @class */ (function () {
+        function GridDirective() {
+        }
+        GridDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezGrid]'
+                    },] }
+        ];
+        /** @nocollapse */
+        GridDirective.ctorParameters = function () { return []; };
+        return GridDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var GridModule = /** @class */ (function () {
+        function GridModule() {
+        }
+        GridModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [GridComponent, GridDirective],
+                        exports: [GridComponent, GridDirective]
+                    },] }
+        ];
+        return GridModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentsModule = /** @class */ (function () {
         function ComponentsModule() {
         }
         ComponentsModule.decorators = [
             { type: i0.NgModule, args: [{
-                        exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule, DropdownModule]
+                        exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule, DropdownModule, FormModule, GridModule]
                     },] }
         ];
         return ComponentsModule;
@@ -558,6 +677,12 @@
     exports.ɵq = DropdownComponent;
     exports.ɵr = DropdownDirective;
     exports.ɵp = DropdownModule;
+    exports.ɵt = FormComponent;
+    exports.ɵu = FormDirective;
+    exports.ɵs = FormModule;
+    exports.ɵw = GridComponent;
+    exports.ɵx = GridDirective;
+    exports.ɵv = GridModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
