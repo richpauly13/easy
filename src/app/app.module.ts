@@ -8,19 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CssComponent } from './components/css.component';
 
 @NgModule({
-	imports: [
-		AppRoutingModule,
-		BrowserModule,
-		EasyModule
-	],
-	declarations: [
-		AppComponent,
-		CssComponent
-	],
-	bootstrap: [
-		AppComponent
-	]
+	imports: [AppRoutingModule, BrowserModule, EasyModule],
+	declarations: [AppComponent, CssComponent],
+	bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule {}

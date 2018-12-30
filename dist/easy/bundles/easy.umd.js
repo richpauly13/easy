@@ -93,9 +93,7 @@
             { type: i0.NgModule, args: [{
                         imports: [],
                         declarations: [],
-                        exports: [
-                            common.CommonModule
-                        ]
+                        exports: [common.CommonModule]
                     },] }
         ];
         return SharedModule;
@@ -111,13 +109,16 @@
         AlertModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [
+                            // prettier-ignore
                             SharedModule
                         ],
                         declarations: [
+                            // prettier-ignore
                             AlertComponent,
                             AlertDirective
                         ],
                         exports: [
+                            // prettier-ignore
                             AlertComponent,
                             AlertDirective
                         ]
@@ -178,8 +179,16 @@
         }
         BadgeModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [BadgeComponent, BadgeDirective],
-                        exports: [BadgeComponent, BadgeDirective]
+                        declarations: [
+                            // prettier-ignore
+                            BadgeComponent,
+                            BadgeDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            BadgeComponent,
+                            BadgeDirective
+                        ]
                     },] }
         ];
         return BadgeModule;
@@ -237,8 +246,16 @@
         }
         ButtonModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [ButtonComponent, ButtonDirective],
-                        exports: [ButtonComponent, ButtonDirective]
+                        declarations: [
+                            // prettier-ignore
+                            ButtonComponent,
+                            ButtonDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            ButtonComponent,
+                            ButtonDirective
+                        ]
                     },] }
         ];
         return ButtonModule;
@@ -296,8 +313,16 @@
         }
         CardModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [CardComponent, CardDirective],
-                        exports: [CardComponent, CardDirective]
+                        declarations: [
+                            // prettier-ignore
+                            CardComponent,
+                            CardDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            CardComponent,
+                            CardDirective
+                        ]
                     },] }
         ];
         return CardModule;
@@ -355,8 +380,16 @@
         }
         CollapsibleModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [CollapsibleComponent, CollapsibleDirective],
-                        exports: [CollapsibleComponent, CollapsibleDirective]
+                        declarations: [
+                            // prettier-ignore
+                            CollapsibleComponent,
+                            CollapsibleDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            CollapsibleComponent,
+                            CollapsibleDirective
+                        ]
                     },] }
         ];
         return CollapsibleModule;
@@ -414,8 +447,16 @@
         }
         DropdownModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [DropdownComponent, DropdownDirective],
-                        exports: [DropdownComponent, DropdownDirective]
+                        declarations: [
+                            // prettier-ignore
+                            DropdownComponent,
+                            DropdownDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            DropdownComponent,
+                            DropdownDirective
+                        ]
                     },] }
         ];
         return DropdownModule;
@@ -434,8 +475,7 @@
         FormComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         FormComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-form',
@@ -474,8 +514,16 @@
         }
         FormModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [FormComponent, FormDirective],
-                        exports: [FormComponent, FormDirective]
+                        declarations: [
+                            // prettier-ignore
+                            FormComponent,
+                            FormDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            FormComponent,
+                            FormDirective
+                        ]
                     },] }
         ];
         return FormModule;
@@ -494,8 +542,7 @@
         GridComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         GridComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-grid',
@@ -534,11 +581,85 @@
         }
         GridModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [GridComponent, GridDirective],
-                        exports: [GridComponent, GridDirective]
+                        declarations: [
+                            // prettier-ignore
+                            GridComponent,
+                            GridDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            GridComponent,
+                            GridDirective
+                        ]
                     },] }
         ];
         return GridModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ModalComponent = /** @class */ (function () {
+        function ModalComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        ModalComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        ModalComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-modal',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [".backdrop,.modal-lg,.modal-md,.modal-sm{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:visibility,opacity;transition-property:visibility,opacity;-webkit-transition-timing-function:linear;transition-timing-function:linear;opacity:0;pointer-events:none;position:fixed;visibility:hidden}.backdrop{background-color:#bdbdbd;bottom:0;left:0;opacity:.6;right:0;top:0;z-index:2}.modal-sm{bottom:20%;left:36%;right:36%;top:26%;z-index:3}.modal-sm.active,.modal-sm.active~.backdrop,.modal-sm:target,.modal-sm:target~.backdrop{opacity:1;pointer-events:auto;visibility:visible}.modal-md{bottom:10%;left:30%;right:30%;top:20%}.modal-lg{bottom:2%;left:24%;right:24%;top:14%}.modal-body{background-color:#fff;height:75%;overflow-y:auto;padding:1rem;width:100%}.modal-footer,.modal-header{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;align-items:center;padding:.5rem;width:100%}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        ModalComponent.ctorParameters = function () { return []; };
+        return ModalComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ModalDirective = /** @class */ (function () {
+        function ModalDirective() {
+        }
+        ModalDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezModal]'
+                    },] }
+        ];
+        /** @nocollapse */
+        ModalDirective.ctorParameters = function () { return []; };
+        return ModalDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ModalModule = /** @class */ (function () {
+        function ModalModule() {
+        }
+        ModalModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            ModalComponent,
+                            ModalDirective
+                        ],
+                        exports: [
+                            ModalComponent,
+                            ModalDirective
+                        ]
+                    },] }
+        ];
+        return ModalModule;
     }());
 
     /**
@@ -550,7 +671,18 @@
         }
         ComponentsModule.decorators = [
             { type: i0.NgModule, args: [{
-                        exports: [AlertModule, BadgeModule, ButtonModule, CardModule, CollapsibleModule, DropdownModule, FormModule, GridModule]
+                        exports: [
+                            // prettier-ignore
+                            AlertModule,
+                            BadgeModule,
+                            ButtonModule,
+                            CardModule,
+                            CollapsibleModule,
+                            DropdownModule,
+                            FormModule,
+                            GridModule,
+                            ModalModule
+                        ]
                     },] }
         ];
         return ComponentsModule;
@@ -586,8 +718,7 @@
         EasyComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         EasyComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-root',
@@ -609,17 +740,9 @@
         }
         EasyModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [
-                            ComponentsModule
-                        ],
-                        declarations: [
-                            EasyComponent
-                        ],
-                        exports: [
-                            ComponentsModule,
-                            CoreModule,
-                            EasyComponent
-                        ]
+                        imports: [ComponentsModule],
+                        declarations: [EasyComponent],
+                        exports: [ComponentsModule, CoreModule, EasyComponent]
                     },] }
         ];
         return EasyModule;
@@ -683,6 +806,9 @@
     exports.ɵw = GridComponent;
     exports.ɵx = GridDirective;
     exports.ɵv = GridModule;
+    exports.ɵz = ModalComponent;
+    exports.ɵba = ModalDirective;
+    exports.ɵy = ModalModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

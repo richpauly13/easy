@@ -1,0 +1,85 @@
+/* SG
+# Modal
+
+Coming soon.
+
+```
+```
+*/
+
+@import '../../core/functions';
+@import '../../core/mixins';
+@import '../../core/variables';
+
+// Backdrop
+.backdrop,
+.modal-sm,
+.modal-md,
+.modal-lg {
+	@include animate(visibility, opacity);
+
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	visibility: hidden;
+}
+
+.backdrop {
+	background-color: color(gray);
+	bottom: 0;
+	left: 0;
+	opacity: 0.6;
+	right: 0;
+	top: 0;
+	z-index: 2;
+}
+
+// Modal sizes
+.modal-sm {
+	bottom: 20%;
+	left: 36%;
+	right: 36%;
+	top: 26%;
+	z-index: 3;
+
+	&:target,
+	&:target ~ .backdrop,
+	&.active,
+	&.active ~ .backdrop {
+		opacity: 1;
+		pointer-events: auto;
+		visibility: visible;
+	}
+}
+
+.modal-md {
+	bottom: 10%;
+	left: 30%;
+	right: 30%;
+	top: 20%;
+}
+
+.modal-lg {
+	bottom: 2%;
+	left: 24%;
+	right: 24%;
+	top: 14%;
+}
+
+// Modal header, body, and footer
+.modal-body {
+	background-color: color(white);
+	height: 75%;
+	overflow-y: auto;
+	padding: rem(16);
+	width: 100%;
+}
+
+.modal-header,
+.modal-footer {
+	@include row;
+
+	align-items: center;
+	padding: rem(8);
+	width: 100%;
+}

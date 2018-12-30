@@ -13,20 +13,11 @@ const routes: Routes = [
 		redirectTo: '/components',
 		pathMatch: 'full'
 	},
-	{   path: '**',
-		redirectTo: '/components',
-		pathMatch: 'full'
-	}
+	{ path: '**', redirectTo: '/components', pathMatch: 'full' }
 ];
 
 @NgModule({
-	imports: [
-		RouterModule.forRoot(routes, {useHash: true})
-	],
-	exports: [
-		RouterModule
-	]
+	imports: [RouterModule.forRoot(routes, { useHash: true })],
+	exports: [RouterModule]
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

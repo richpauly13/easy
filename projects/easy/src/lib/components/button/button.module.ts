@@ -4,7 +4,15 @@ import { ButtonComponent } from './button.component';
 import { ButtonDirective } from './button.directive';
 
 @NgModule({
-	declarations: [ButtonComponent, ButtonDirective],
-	exports: [ButtonComponent, ButtonDirective]
+	declarations: [
+		// prettier-ignore
+		ButtonComponent,
+		ButtonDirective
+	],
+	exports: [
+		// prettier-ignore
+		ButtonComponent,
+		ButtonDirective
+	]
 })
 export class ButtonModule {}

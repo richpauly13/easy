@@ -8,9 +8,11 @@ import { CollapsibleModule } from './collapsible/collapsible.module';
 import { DropdownModule } from './dropdown/dropdown.module';
 import { FormModule } from './form/form.module';
 import { GridModule } from './grid/grid.module';
+import { ModalModule } from './modal/modal.module';
 
 @NgModule({
 	exports: [
+		// prettier-ignore
 		AlertModule,
 		BadgeModule,
 		ButtonModule,
@@ -18,7 +20,8 @@ import { GridModule } from './grid/grid.module';
 		CollapsibleModule,
 		DropdownModule,
 		FormModule,
-		GridModule
+		GridModule,
+		ModalModule
 	]
 })
 export class ComponentsModule {}

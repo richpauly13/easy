@@ -4,7 +4,15 @@ import { CollapsibleComponent } from './collapsible.component';
 import { CollapsibleDirective } from './collapsible.directive';
 
 @NgModule({
-	declarations: [CollapsibleComponent, CollapsibleDirective],
-	exports: [CollapsibleComponent, CollapsibleDirective]
+	declarations: [
+		// prettier-ignore
+		CollapsibleComponent,
+		CollapsibleDirective
+	],
+	exports: [
+		// prettier-ignore
+		CollapsibleComponent,
+		CollapsibleDirective
+	]
 })
 export class CollapsibleModule {}

@@ -2,16 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-	imports: [
-
-	],
-	declarations: [
-
-	],
-	exports: [
-		CommonModule
-	]
+	imports: [],
+	declarations: [],
+	exports: [CommonModule]
 })
-export class SharedModule {
-
-}
+export class SharedModule {}

@@ -4,7 +4,15 @@ import { DropdownComponent } from './dropdown.component';
 import { DropdownDirective } from './dropdown.directive';
 
 @NgModule({
-	declarations: [DropdownComponent, DropdownDirective],
-	exports: [DropdownComponent, DropdownDirective]
+	declarations: [
+		// prettier-ignore
+		DropdownComponent,
+		DropdownDirective
+	],
+	exports: [
+		// prettier-ignore
+		DropdownComponent,
+		DropdownDirective
+	]
 })
 export class DropdownModule {}

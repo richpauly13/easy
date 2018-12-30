@@ -135,6 +135,9 @@
 
 			<ul *ngIf="section === 'Grid'" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Area'"><a>Area</a></li>
+				<li *ngIf="'Container'"><a>Container</a></li>
+				<li *ngIf="'Item'"><a>Item</a></li>
 			</ul>
 		</li>
 		<li>
@@ -149,6 +152,18 @@
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Container'"><a>Container</a></li>
 				<li *ngIf="'Sticky Footer'"><a>Sticky Footer</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Modal'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Modal' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Modal</a
+			>
+
+			<ul *ngIf="section === 'Modal'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
@@ -640,6 +655,36 @@
 
 		<figure><pre class="pad-a-sm"></pre></figure>
 	</section>
+	<section *ngIf="section === 'Grid'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Area'">Area</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Grid'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Container'">Container</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Grid'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Item'">Item</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
 	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
 		<article class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
@@ -663,6 +708,16 @@
 	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
 		<article class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Sticky Footer'">Sticky Footer</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Modal'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</article>
 

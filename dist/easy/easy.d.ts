@@ -26,3 +26,6 @@ export { FormModule as ɵs } from './lib/components/form/form.module';
 export { GridComponent as ɵw } from './lib/components/grid/grid.component';
 export { GridDirective as ɵx } from './lib/components/grid/grid.directive';
 export { GridModule as ɵv } from './lib/components/grid/grid.module';
+export { ModalComponent as ɵz } from './lib/components/modal/modal.component';
+export { ModalDirective as ɵba } from './lib/components/modal/modal.directive';
+export { ModalModule as ɵy } from './lib/components/modal/modal.module';

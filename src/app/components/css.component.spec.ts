@@ -10,14 +10,9 @@ describe('CssComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [
-				EasyModule
-			],
-			declarations: [
-				CssComponent
-			]
-		})
-		.compileComponents();
+			imports: [EasyModule],
+			declarations: [CssComponent]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

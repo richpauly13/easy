@@ -4,7 +4,15 @@ import { FormComponent } from './form.component';
 import { FormDirective } from './form.directive';
 
 @NgModule({
-	declarations: [FormComponent, FormDirective],
-	exports: [FormComponent, FormDirective]
+	declarations: [
+		// prettier-ignore
+		FormComponent,
+		FormDirective
+	],
+	exports: [
+		// prettier-ignore
+		FormComponent,
+		FormDirective
+	]
 })
 export class FormModule {}

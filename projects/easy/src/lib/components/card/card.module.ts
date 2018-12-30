@@ -4,7 +4,15 @@ import { CardComponent } from './card.component';
 import { CardDirective } from './card.directive';
 
 @NgModule({
-	declarations: [CardComponent, CardDirective],
-	exports: [CardComponent, CardDirective]
+	declarations: [
+		// prettier-ignore
+		CardComponent,
+		CardDirective
+	],
+	exports: [
+		// prettier-ignore
+		CardComponent,
+		CardDirective
+	]
 })
 export class CardModule {}
