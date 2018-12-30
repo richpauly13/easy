@@ -517,8 +517,7 @@ class ModalComponent {
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 ModalComponent.decorators = [
     { type: Component, args: [{
@@ -554,10 +553,12 @@ class ModalModule {
 ModalModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [
+                    // prettier-ignore
                     ModalComponent,
                     ModalDirective
                 ],
                 exports: [
+                    // prettier-ignore
                     ModalComponent,
                     ModalDirective
                 ]

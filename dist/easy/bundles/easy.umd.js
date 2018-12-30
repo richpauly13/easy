@@ -609,8 +609,7 @@
         ModalComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         ModalComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-modal',
@@ -650,10 +649,12 @@
         ModalModule.decorators = [
             { type: i0.NgModule, args: [{
                         declarations: [
+                            // prettier-ignore
                             ModalComponent,
                             ModalDirective
                         ],
                         exports: [
+                            // prettier-ignore
                             ModalComponent,
                             ModalDirective
                         ]

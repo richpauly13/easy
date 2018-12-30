@@ -3,7 +3,15 @@ import { ModalComponent } from './modal.component';
 import { ModalDirective } from './modal.directive';
 
 @NgModule({
-	declarations: [ModalComponent, ModalDirective],
-	exports: [ModalComponent, ModalDirective]
+	declarations: [
+		// prettier-ignore
+		ModalComponent,
+		ModalDirective
+	],
+	exports: [
+		// prettier-ignore
+		ModalComponent,
+		ModalDirective
+	]
 })
 export class ModalModule {}
