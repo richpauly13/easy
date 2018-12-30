@@ -569,6 +569,122 @@ ModalModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class NavComponent {
+    constructor() { }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+}
+NavComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ez-nav',
+                template: "<ng-content></ng-content>\n",
+                styles: [".nav-left,.nav-right{overflow-y:auto;width:auto}.nav-bottom .nav-row,.nav-item,.nav-link,.nav-top .nav-row{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start}.nav-bottom .nav-row,.nav-item,.nav-top .nav-row{display:block}.nav-item,.nav-link{color:inherit;-webkit-box-pack:center;justify-content:center;text-align:center;text-decoration:none}.nav-item:hover,.nav-link:hover{cursor:pointer;text-decoration:underline}@media screen and (min-width:48em){.nav-bottom .nav-row,.nav-item,.nav-top .nav-row{display:-webkit-box;display:flex}.nav-item,.nav-link{flex-basis:auto;-webkit-box-flex:1;flex-grow:1;flex-shrink:0}}.nav-left .nav-item,.nav-left .nav-link,.nav-right .nav-item,.nav-right .nav-link{-webkit-box-pack:start;justify-content:flex-start}.nav-link{padding:1rem}.nav-toggle{height:2.5rem;position:relative;width:2.5rem}.nav-toggle::after{content:\"\";background-color:#fff;-webkit-box-shadow:0 6px 0 #fff,0 12px 0 #fff;box-shadow:0 6px 0 #fff,0 12px 0 #fff;height:.125rem;position:absolute;width:1.5rem}@media screen and (min-width:64em){.nav-toggle{display:none}}"]
+            }] }
+];
+/** @nocollapse */
+NavComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class NavDirective {
+    constructor() { }
+}
+NavDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[ezNav]'
+            },] }
+];
+/** @nocollapse */
+NavDirective.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class NavModule {
+}
+NavModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    // prettier-ignore
+                    NavComponent,
+                    NavDirective
+                ],
+                exports: [
+                    // prettier-ignore
+                    NavComponent,
+                    NavDirective
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SliderComponent {
+    constructor() { }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+}
+SliderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ez-slider',
+                template: "<ng-content></ng-content>\n",
+                styles: ["input[type=range]::-webkit-slider-thumb{-webkit-box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);background:#fff;border:.0625rem solid #000;border-radius:.1875rem}input[type=range]::-moz-range-thumb{box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);background:#fff;border:.0625rem solid #000;border-radius:.1875rem}input[type=range]::-ms-thumb{box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);background:#fff;border:.0625rem solid #000;border-radius:.1875rem}input[type=range].slider-v::-webkit-slider-thumb{height:2.5rem;width:1rem}input[type=range].slider-v::-moz-range-thumb{height:2.5rem;width:1rem}input[type=range].slider-v::-ms-thumb{height:2.5rem;width:1rem}input[type=range].slider-h::-webkit-slider-thumb{height:1.5rem;width:2.5rem}input[type=range].slider-h::-moz-range-thumb{height:1.5rem;width:2.5rem}input[type=range].slider-h::-ms-thumb{height:1.5rem;width:2.5rem}input[type=range].slider-circle::-webkit-slider-thumb{border-radius:50%;height:2.5rem;width:2.5rem}input[type=range].slider-circle::-moz-range-thumb{border-radius:50%;height:2.5rem;width:2.5rem}input[type=range].slider-circle::-ms-thumb{border-radius:50%;height:2.5rem;width:2.5rem}input[type=range]::-webkit-slider-runnable-track{cursor:pointer;height:1rem;width:100%;-webkit-box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);background:#2196f3;border:.0625rem solid #000;border-radius:.1875rem}input[type=range]:focus::-webkit-slider-runnable-track{background:#2196f3}input[type=range]::-moz-range-track{cursor:pointer;height:1rem;width:100%;box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);background:#2196f3;border:.0625rem solid #000;border-radius:.1875rem}input[type=range]::-ms-track{cursor:pointer;height:1rem;width:100%;border-width:1rem 0}input[type=range]::-ms-fill-lower{box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);background:#2196f3;border:.0625rem solid #000;border-radius:.1875rem}input[type=range]:focus::-ms-fill-lower{background:#2196f3}input[type=range]::-ms-fill-upper{box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);background:#2196f3;border:.0625rem solid #000;border-radius:.1875rem}input[type=range]:focus::-ms-fill-upper{background:#2196f3}"]
+            }] }
+];
+/** @nocollapse */
+SliderComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SliderDirective {
+    constructor() { }
+}
+SliderDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[ezSlider]'
+            },] }
+];
+/** @nocollapse */
+SliderDirective.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class SliderModule {
+}
+SliderModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    // prettier-ignore
+                    SliderComponent,
+                    SliderDirective
+                ],
+                exports: [
+                    // prettier-ignore
+                    SliderComponent,
+                    SliderDirective
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class ComponentsModule {
 }
 ComponentsModule.decorators = [
@@ -583,7 +699,9 @@ ComponentsModule.decorators = [
                     DropdownModule,
                     FormModule,
                     GridModule,
-                    ModalModule
+                    ModalModule,
+                    NavModule,
+                    SliderModule
                 ]
             },] }
 ];
@@ -663,6 +781,6 @@ EasyService.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj, CollapsibleComponent as ɵn, CollapsibleDirective as ɵo, CollapsibleModule as ɵm, DropdownComponent as ɵq, DropdownDirective as ɵr, DropdownModule as ɵp, FormComponent as ɵt, FormDirective as ɵu, FormModule as ɵs, GridComponent as ɵw, GridDirective as ɵx, GridModule as ɵv, ModalComponent as ɵz, ModalDirective as ɵba, ModalModule as ɵy };
+export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj, CollapsibleComponent as ɵn, CollapsibleDirective as ɵo, CollapsibleModule as ɵm, DropdownComponent as ɵq, DropdownDirective as ɵr, DropdownModule as ɵp, FormComponent as ɵt, FormDirective as ɵu, FormModule as ɵs, GridComponent as ɵw, GridDirective as ɵx, GridModule as ɵv, ModalComponent as ɵz, ModalDirective as ɵba, ModalModule as ɵy, NavComponent as ɵbc, NavDirective as ɵbd, NavModule as ɵbb, SliderComponent as ɵbf, SliderDirective as ɵbg, SliderModule as ɵbe };
 
 //# sourceMappingURL=easy.js.map

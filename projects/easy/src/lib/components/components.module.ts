@@ -9,6 +9,8 @@ import { DropdownModule } from './dropdown/dropdown.module';
 import { FormModule } from './form/form.module';
 import { GridModule } from './grid/grid.module';
 import { ModalModule } from './modal/modal.module';
+import { NavModule } from './nav/nav.module';
+import { SliderModule } from './slider/slider.module';
 
 @NgModule({
 	exports: [
@@ -21,7 +23,9 @@ import { ModalModule } from './modal/modal.module';
 		DropdownModule,
 		FormModule,
 		GridModule,
-		ModalModule
+		ModalModule,
+		NavModule,
+		SliderModule
 	]
 })
 export class ComponentsModule {}

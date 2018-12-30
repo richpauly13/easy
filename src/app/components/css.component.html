@@ -168,6 +168,21 @@
 		</li>
 		<li>
 			<a
+				(click)="section = 'Nav'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Nav' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Nav</a
+			>
+
+			<ul *ngIf="section === 'Nav'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Items'"><a>Items</a></li>
+				<li *ngIf="'Links'"><a>Links</a></li>
+				<li *ngIf="'Placement'"><a>Placement</a></li>
+			</ul>
+		</li>
+		<li>
+			<a
 				(click)="section = 'Position'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Position' }"
 				class="hover bg-hover-lt-gray pad-a-xs"
@@ -175,6 +190,18 @@
 			>
 
 			<ul *ngIf="section === 'Position'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Slider'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Slider' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Slider</a
+			>
+
+			<ul *ngIf="section === 'Slider'" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
@@ -725,7 +752,57 @@
 
 		<figure><pre class="pad-a-sm"></pre></figure>
 	</section>
+	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Items'">Items</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Links'">Links</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="'Placement'">Placement</h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
 	<section *ngIf="section === 'Position'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Slider'" class="mar-b-lg shadow-1 border-a-gray section">
 		<article class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
