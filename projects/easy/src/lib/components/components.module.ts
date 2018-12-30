@@ -11,6 +11,8 @@ import { GridModule } from './grid/grid.module';
 import { ModalModule } from './modal/modal.module';
 import { NavModule } from './nav/nav.module';
 import { SliderModule } from './slider/slider.module';
+import { SlideshowModule } from './slideshow/slideshow.module';
+import { SpinnerModule } from './spinner/spinner.module';
 
 @NgModule({
 	exports: [
@@ -25,7 +27,9 @@ import { SliderModule } from './slider/slider.module';
 		GridModule,
 		ModalModule,
 		NavModule,
-		SliderModule
+		SliderModule,
+		SlideshowModule,
+		SpinnerModule
 	]
 })
 export class ComponentsModule {}

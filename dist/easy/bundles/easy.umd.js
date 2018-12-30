@@ -676,13 +676,12 @@
         NavComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         NavComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-nav',
                         template: "<ng-content></ng-content>\n",
-                        styles: [".nav-left,.nav-right{overflow-y:auto;width:auto}.nav-bottom .nav-row,.nav-item,.nav-link,.nav-top .nav-row{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start}.nav-bottom .nav-row,.nav-item,.nav-top .nav-row{display:block}.nav-item,.nav-link{color:inherit;-webkit-box-pack:center;justify-content:center;text-align:center;text-decoration:none}.nav-item:hover,.nav-link:hover{cursor:pointer;text-decoration:underline}@media screen and (min-width:48em){.nav-bottom .nav-row,.nav-item,.nav-top .nav-row{display:-webkit-box;display:flex}.nav-item,.nav-link{flex-basis:auto;-webkit-box-flex:1;flex-grow:1;flex-shrink:0}}.nav-left .nav-item,.nav-left .nav-link,.nav-right .nav-item,.nav-right .nav-link{-webkit-box-pack:start;justify-content:flex-start}.nav-link{padding:1rem}.nav-toggle{height:2.5rem;position:relative;width:2.5rem}.nav-toggle::after{content:\"\";background-color:#fff;-webkit-box-shadow:0 6px 0 #fff,0 12px 0 #fff;box-shadow:0 6px 0 #fff,0 12px 0 #fff;height:.125rem;position:absolute;width:1.5rem}@media screen and (min-width:64em){.nav-toggle{display:none}}"]
+                        styles: [".nav-left,.nav-right{overflow-y:auto;width:auto}.nav-bottom .nav-row,.nav-item,.nav-link,.nav-top .nav-row{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start}.nav-bottom .nav-row,.nav-item,.nav-top .nav-row{display:block}.nav-item,.nav-link{color:inherit;-webkit-box-pack:center;justify-content:center;text-align:center;text-decoration:none}.nav-item:hover,.nav-link:hover{cursor:pointer;text-decoration:underline}@media screen and (min-width:48em){.nav-bottom .nav-row,.nav-item,.nav-top .nav-row{display:-webkit-box;display:flex}.nav-item,.nav-link{flex-basis:auto;-webkit-box-flex:1;flex-grow:1;flex-shrink:0}}.nav-left .nav-item,.nav-left .nav-link,.nav-right .nav-item,.nav-right .nav-link{-webkit-box-pack:start;justify-content:flex-start}.nav-link{padding:1rem}.nav-toggle{height:2.5rem;position:relative;width:2.5rem}.nav-toggle::after{content:'';background-color:#fff;-webkit-box-shadow:0 6px 0 #fff,0 12px 0 #fff;box-shadow:0 6px 0 #fff,0 12px 0 #fff;height:.125rem;position:absolute;width:1.5rem}@media screen and (min-width:64em){.nav-toggle{display:none}}"]
                     }] }
         ];
         /** @nocollapse */
@@ -744,8 +743,7 @@
         SliderComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         SliderComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-slider',
@@ -803,6 +801,142 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var SlideshowComponent = /** @class */ (function () {
+        function SlideshowComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        SlideshowComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        SlideshowComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-slideshow',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        SlideshowComponent.ctorParameters = function () { return []; };
+        return SlideshowComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SlideshowDirective = /** @class */ (function () {
+        function SlideshowDirective() {
+        }
+        SlideshowDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezSlideshow]'
+                    },] }
+        ];
+        /** @nocollapse */
+        SlideshowDirective.ctorParameters = function () { return []; };
+        return SlideshowDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SlideshowModule = /** @class */ (function () {
+        function SlideshowModule() {
+        }
+        SlideshowModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            // prettier-ignore
+                            SlideshowComponent,
+                            SlideshowDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            SlideshowComponent,
+                            SlideshowDirective
+                        ]
+                    },] }
+        ];
+        return SlideshowModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SpinnerComponent = /** @class */ (function () {
+        function SpinnerComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        SpinnerComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        SpinnerComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-spinner, .spinner, .spinner-dotted',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [":host .spinner,:host .spinner-dotted{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;display:-webkit-inline-box;display:inline-flex;-webkit-animation:2s linear infinite spinner;animation:2s linear infinite spinner;border-radius:50%;height:7.5rem;width:7.5rem}:host .spinner{border-color:#efefef #efefef #efefef #2196f3;border-style:solid;border-width:1rem}:host .spinner-dotted{border-style:dotted;border-color:#0069c0 #2196f3 #6ec6ff #39f;border-width:1.125rem .875rem .75rem .5rem}@-webkit-keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        SpinnerComponent.ctorParameters = function () { return []; };
+        return SpinnerComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SpinnerDirective = /** @class */ (function () {
+        function SpinnerDirective() {
+        }
+        SpinnerDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezSpinner]'
+                    },] }
+        ];
+        /** @nocollapse */
+        SpinnerDirective.ctorParameters = function () { return []; };
+        return SpinnerDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SpinnerModule = /** @class */ (function () {
+        function SpinnerModule() {
+        }
+        SpinnerModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            // prettier-ignore
+                            SpinnerComponent,
+                            SpinnerDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            SpinnerComponent,
+                            SpinnerDirective
+                        ]
+                    },] }
+        ];
+        return SpinnerModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentsModule = /** @class */ (function () {
         function ComponentsModule() {
         }
@@ -820,7 +954,9 @@
                             GridModule,
                             ModalModule,
                             NavModule,
-                            SliderModule
+                            SliderModule,
+                            SlideshowModule,
+                            SpinnerModule
                         ]
                     },] }
         ];
@@ -954,6 +1090,12 @@
     exports.ɵbf = SliderComponent;
     exports.ɵbg = SliderDirective;
     exports.ɵbe = SliderModule;
+    exports.ɵbi = SlideshowComponent;
+    exports.ɵbj = SlideshowDirective;
+    exports.ɵbh = SlideshowModule;
+    exports.ɵbl = SpinnerComponent;
+    exports.ɵbm = SpinnerDirective;
+    exports.ɵbk = SpinnerModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
