@@ -809,8 +809,7 @@ var SlideshowComponent = /** @class */ (function () {
     SlideshowComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     SlideshowComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-slideshow',
@@ -877,13 +876,12 @@ var SpinnerComponent = /** @class */ (function () {
     SpinnerComponent.prototype.ngOnInit = /**
      * @return {?}
      */
-    function () {
-    };
+    function () { };
     SpinnerComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-spinner, .spinner, .spinner-dotted',
                     template: "<ng-content></ng-content>\n",
-                    styles: [":host .spinner,:host .spinner-dotted{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;display:-webkit-inline-box;display:inline-flex;-webkit-animation:2s linear infinite spinner;animation:2s linear infinite spinner;border-radius:50%;height:7.5rem;width:7.5rem}:host .spinner{border-color:#efefef #efefef #efefef #2196f3;border-style:solid;border-width:1rem}:host .spinner-dotted{border-style:dotted;border-color:#0069c0 #2196f3 #6ec6ff #39f;border-width:1.125rem .875rem .75rem .5rem}@-webkit-keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}"]
+                    styles: [":host.spinner,:host.spinner-dotted{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;display:-webkit-inline-box;display:inline-flex;-webkit-animation:2s linear infinite spinner;animation:2s linear infinite spinner;border-radius:50%;height:7.5rem;width:7.5rem}:host.spinner{border-color:#efefef #efefef #efefef #2196f3;border-style:solid;border-width:1rem}:host.spinner-dotted{border-style:dotted;border-color:#0069c0 #2196f3 #6ec6ff #39f;border-width:1.125rem .875rem .75rem .5rem}@-webkit-keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}"]
                 }] }
     ];
     /** @nocollapse */
