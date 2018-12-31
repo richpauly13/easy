@@ -1,0 +1,60 @@
+/* SG
+# Switch
+
+Coming soon.
+
+```
+```
+*/
+
+@import '../../core/functions';
+@import '../../core/mixins';
+@import '../../core/variables';
+
+// Switch styles
+.switch {
+	display: none;
+
+	&:checked + .switch-label::after {
+		left: rem(-26);
+	}
+
+	&:checked + .switch-label::before {
+		background-color: color(green);
+	}
+}
+
+.switch-label {
+	margin-left: rem(50);
+	padding: rem(0 10);
+	position: relative;
+	user-select: none;
+
+	&::after,
+	&::before {
+		// TODO: Animate only what is needed
+		@include animate(all);
+
+		content: '';
+		position: absolute;
+	}
+
+	&::before {
+		background-color: color(red);
+		border-radius: rem(16);
+		border: rem(1) solid color(black);
+		bottom: rem(-50);
+		height: rem(16);
+		top: rem(-4);
+		width: rem(24);
+	}
+
+	&::after {
+		background-color: color(white);
+		border-radius: 50%;
+		height: rem(20);
+		left: rem(-46);
+		top: rem(-2);
+		width: rem(20);
+	}
+}

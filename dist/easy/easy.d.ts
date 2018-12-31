@@ -41,3 +41,9 @@ export { SlideshowModule as ɵbh } from './lib/components/slideshow/slideshow.mo
 export { SpinnerComponent as ɵbl } from './lib/components/spinner/spinner.component';
 export { SpinnerDirective as ɵbm } from './lib/components/spinner/spinner.directive';
 export { SpinnerModule as ɵbk } from './lib/components/spinner/spinner.module';
+export { SwitchComponent as ɵbo } from './lib/components/switch/switch.component';
+export { SwitchDirective as ɵbp } from './lib/components/switch/switch.directive';
+export { SwitchModule as ɵbn } from './lib/components/switch/switch.module';
+export { TabComponent as ɵbr } from './lib/components/tab/tab.component';
+export { TabDirective as ɵbs } from './lib/components/tab/tab.directive';
+export { TabModule as ɵbq } from './lib/components/tab/tab.module';

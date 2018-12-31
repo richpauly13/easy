@@ -245,6 +245,30 @@
 		</li>
 		<li>
 			<a
+				(click)="section = 'Switch'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Switch' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Switch</a
+			>
+
+			<ul *ngIf="section === 'Switch'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+			</ul>
+		</li>
+		<li>
+			<a
+				(click)="section = 'Tab'"
+				[ngClass]="{ 'bg-lt-gray': section === 'Tab' }"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				>Tab</a
+			>
+
+			<ul *ngIf="section === 'Tab'" class="pad-l-sm submenu">
+				<li *ngIf="''"><a></a></li>
+			</ul>
+		</li>
+		<li>
+			<a
 				(click)="section = 'Typography'"
 				[ngClass]="{ 'bg-lt-gray': section === 'Typography' }"
 				class="hover bg-hover-lt-gray pad-a-xs"
@@ -893,6 +917,26 @@
 			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner-dotted"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></pre>
 		</figure>
+	</section>
+	<section *ngIf="section === 'Switch'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
+	</section>
+	<section *ngIf="section === 'Tab'" class="mar-b-lg shadow-1 border-a-gray section">
+		<article class="pad-a-sm border-b-gray bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</article>
+
+		<aside class="pad-a-sm border-b-gray"></aside>
+
+		<figure><pre class="pad-a-sm"></pre></figure>
 	</section>
 	<section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
 		<article class="pad-a-sm border-b-gray bg-lt-gray">

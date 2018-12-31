@@ -13,6 +13,8 @@ import { NavModule } from './nav/nav.module';
 import { SliderModule } from './slider/slider.module';
 import { SlideshowModule } from './slideshow/slideshow.module';
 import { SpinnerModule } from './spinner/spinner.module';
+import { SwitchModule } from './switch/switch.module';
+import { TabModule } from './tab/tab.module';
 
 @NgModule({
 	exports: [
@@ -29,7 +31,9 @@ import { SpinnerModule } from './spinner/spinner.module';
 		NavModule,
 		SliderModule,
 		SlideshowModule,
-		SpinnerModule
+		SpinnerModule,
+		SwitchModule,
+		TabModule
 	]
 })
 export class ComponentsModule {}

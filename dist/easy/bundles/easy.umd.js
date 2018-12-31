@@ -935,6 +935,142 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var SwitchComponent = /** @class */ (function () {
+        function SwitchComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        SwitchComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        SwitchComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-switch',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [".switch{display:none}.switch:checked+.switch-label::after{left:-1.625rem}.switch:checked+.switch-label::before{background-color:#4caf50}.switch-label{margin-left:3.125rem;padding:0 .625rem;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.switch-label::after,.switch-label::before{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:all;transition-property:all;-webkit-transition-timing-function:linear;transition-timing-function:linear;content:\"\";position:absolute}.switch-label::before{background-color:#ba000d;border-radius:1rem;border:.0625rem solid #000;bottom:-3.125rem;height:1rem;top:-.25rem;width:1.5rem}.switch-label::after{background-color:#fff;border-radius:50%;height:1.25rem;left:-2.875rem;top:-.125rem;width:1.25rem}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        SwitchComponent.ctorParameters = function () { return []; };
+        return SwitchComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SwitchDirective = /** @class */ (function () {
+        function SwitchDirective() {
+        }
+        SwitchDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezSwitch]'
+                    },] }
+        ];
+        /** @nocollapse */
+        SwitchDirective.ctorParameters = function () { return []; };
+        return SwitchDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var SwitchModule = /** @class */ (function () {
+        function SwitchModule() {
+        }
+        SwitchModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            // prettier-ignore
+                            SwitchComponent,
+                            SwitchDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            SwitchComponent,
+                            SwitchDirective
+                        ]
+                    },] }
+        ];
+        return SwitchModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TabComponent = /** @class */ (function () {
+        function TabComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        TabComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        TabComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-tab',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        TabComponent.ctorParameters = function () { return []; };
+        return TabComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TabDirective = /** @class */ (function () {
+        function TabDirective() {
+        }
+        TabDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezTab]'
+                    },] }
+        ];
+        /** @nocollapse */
+        TabDirective.ctorParameters = function () { return []; };
+        return TabDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TabModule = /** @class */ (function () {
+        function TabModule() {
+        }
+        TabModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            // prettier-ignore
+                            TabComponent,
+                            TabDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            TabComponent,
+                            TabDirective
+                        ]
+                    },] }
+        ];
+        return TabModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentsModule = /** @class */ (function () {
         function ComponentsModule() {
         }
@@ -954,7 +1090,9 @@
                             NavModule,
                             SliderModule,
                             SlideshowModule,
-                            SpinnerModule
+                            SpinnerModule,
+                            SwitchModule,
+                            TabModule
                         ]
                     },] }
         ];
@@ -1094,6 +1232,12 @@
     exports.ɵbl = SpinnerComponent;
     exports.ɵbm = SpinnerDirective;
     exports.ɵbk = SpinnerModule;
+    exports.ɵbo = SwitchComponent;
+    exports.ɵbp = SwitchDirective;
+    exports.ɵbn = SwitchModule;
+    exports.ɵbr = TabComponent;
+    exports.ɵbs = TabDirective;
+    exports.ɵbq = TabModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
