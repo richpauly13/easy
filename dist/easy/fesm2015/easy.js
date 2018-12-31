@@ -802,14 +802,13 @@ class SwitchComponent {
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 SwitchComponent.decorators = [
     { type: Component, args: [{
                 selector: 'ez-switch',
                 template: "<ng-content></ng-content>\n",
-                styles: [".switch{display:none}.switch:checked+.switch-label::after{left:-1.625rem}.switch:checked+.switch-label::before{background-color:#4caf50}.switch-label{margin-left:3.125rem;padding:0 .625rem;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.switch-label::after,.switch-label::before{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:all;transition-property:all;-webkit-transition-timing-function:linear;transition-timing-function:linear;content:\"\";position:absolute}.switch-label::before{background-color:#ba000d;border-radius:1rem;border:.0625rem solid #000;bottom:-3.125rem;height:1rem;top:-.25rem;width:1.5rem}.switch-label::after{background-color:#fff;border-radius:50%;height:1.25rem;left:-2.875rem;top:-.125rem;width:1.25rem}"]
+                styles: [".switch{display:none}.switch:checked+.switch-label::after{left:-1.625rem}.switch:checked+.switch-label::before{background-color:#4caf50}.switch-label{margin-left:3.125rem;padding:0 .625rem;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.switch-label::after,.switch-label::before{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:all;transition-property:all;-webkit-transition-timing-function:linear;transition-timing-function:linear;content:'';position:absolute}.switch-label::before{background-color:#ba000d;border-radius:1rem;border:.0625rem solid #000;bottom:-3.125rem;height:1rem;top:-.25rem;width:1.5rem}.switch-label::after{background-color:#fff;border-radius:50%;height:1.25rem;left:-2.875rem;top:-.125rem;width:1.25rem}"]
             }] }
 ];
 /** @nocollapse */
@@ -860,8 +859,7 @@ class TabComponent {
     /**
      * @return {?}
      */
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 TabComponent.decorators = [
     { type: Component, args: [{
@@ -913,6 +911,122 @@ TabModule.decorators = [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class TableComponent {
+    constructor() { }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+}
+TableComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ez-table',
+                template: "<ng-content></ng-content>\n",
+                styles: [".table,.table-cell,.table-header,.table-row{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-ms-overflow-style:-ms-autohiding-scrollbar;white-space:nowrap;width:100%}.table{-webkit-box-align:stretch;align-items:stretch;border-collapse:collapse;border-spacing:0}@media screen and (min-width:75em){.table{-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column}}.table-bordered{border:.0625rem solid #000}.table-bordered .table-header{border-bottom:.0625rem solid #000}.table-bordered .table-cell{border-top:.0625rem solid #000;border-right:.0625rem solid #000}.table-bordered .table-cell:last-child{border-right:none}.table-striped .table-row:nth-child(even){background-color:#fafafa}.table-hover .table-row:hover{background-color:#6ec6ff}.table-cell{flex-basis:0;-webkit-box-flex:1;flex-grow:1;flex-shrink:0;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;white-space:pre-wrap}"]
+            }] }
+];
+/** @nocollapse */
+TableComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class TableDirective {
+    constructor() { }
+}
+TableDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[ezTable]'
+            },] }
+];
+/** @nocollapse */
+TableDirective.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class TableModule {
+}
+TableModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    // prettier-ignore
+                    TableComponent,
+                    TableDirective
+                ],
+                exports: [
+                    // prettier-ignore
+                    TableComponent,
+                    TableDirective
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class TooltipComponent {
+    constructor() { }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+    }
+}
+TooltipComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ez-tooltip',
+                template: "<ng-content></ng-content>\n",
+                styles: [""]
+            }] }
+];
+/** @nocollapse */
+TooltipComponent.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class TooltipDirective {
+    constructor() { }
+}
+TooltipDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[ezTooltip]'
+            },] }
+];
+/** @nocollapse */
+TooltipDirective.ctorParameters = () => [];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class TooltipModule {
+}
+TooltipModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [
+                    // prettier-ignore
+                    TooltipComponent,
+                    TooltipDirective
+                ],
+                exports: [
+                    // prettier-ignore
+                    TooltipComponent,
+                    TooltipDirective
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class ComponentsModule {
 }
 ComponentsModule.decorators = [
@@ -933,7 +1047,9 @@ ComponentsModule.decorators = [
                     SlideshowModule,
                     SpinnerModule,
                     SwitchModule,
-                    TabModule
+                    TabModule,
+                    TableModule,
+                    TooltipModule
                 ]
             },] }
 ];
@@ -1013,6 +1129,6 @@ EasyService.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj, CollapsibleComponent as ɵn, CollapsibleDirective as ɵo, CollapsibleModule as ɵm, DropdownComponent as ɵq, DropdownDirective as ɵr, DropdownModule as ɵp, FormComponent as ɵt, FormDirective as ɵu, FormModule as ɵs, GridComponent as ɵw, GridDirective as ɵx, GridModule as ɵv, ModalComponent as ɵz, ModalDirective as ɵba, ModalModule as ɵy, NavComponent as ɵbc, NavDirective as ɵbd, NavModule as ɵbb, SliderComponent as ɵbf, SliderDirective as ɵbg, SliderModule as ɵbe, SlideshowComponent as ɵbi, SlideshowDirective as ɵbj, SlideshowModule as ɵbh, SpinnerComponent as ɵbl, SpinnerDirective as ɵbm, SpinnerModule as ɵbk, SwitchComponent as ɵbo, SwitchDirective as ɵbp, SwitchModule as ɵbn, TabComponent as ɵbr, TabDirective as ɵbs, TabModule as ɵbq };
+export { ComponentsModule, CoreModule, EasyComponent, EasyModule, EasyService, SharedModule, AlertComponent as ɵb, AlertDirective as ɵc, AlertModule as ɵa, BadgeComponent as ɵe, BadgeDirective as ɵf, BadgeModule as ɵd, ButtonComponent as ɵh, ButtonDirective as ɵi, ButtonModule as ɵg, CardComponent as ɵk, CardDirective as ɵl, CardModule as ɵj, CollapsibleComponent as ɵn, CollapsibleDirective as ɵo, CollapsibleModule as ɵm, DropdownComponent as ɵq, DropdownDirective as ɵr, DropdownModule as ɵp, FormComponent as ɵt, FormDirective as ɵu, FormModule as ɵs, GridComponent as ɵw, GridDirective as ɵx, GridModule as ɵv, ModalComponent as ɵz, ModalDirective as ɵba, ModalModule as ɵy, NavComponent as ɵbc, NavDirective as ɵbd, NavModule as ɵbb, SliderComponent as ɵbf, SliderDirective as ɵbg, SliderModule as ɵbe, SlideshowComponent as ɵbi, SlideshowDirective as ɵbj, SlideshowModule as ɵbh, SpinnerComponent as ɵbl, SpinnerDirective as ɵbm, SpinnerModule as ɵbk, SwitchComponent as ɵbo, SwitchDirective as ɵbp, SwitchModule as ɵbn, TabComponent as ɵbr, TabDirective as ɵbs, TabModule as ɵbq, TableComponent as ɵbu, TableDirective as ɵbv, TableModule as ɵbt, TooltipComponent as ɵbx, TooltipDirective as ɵby, TooltipModule as ɵbw };
 
 //# sourceMappingURL=easy.js.map

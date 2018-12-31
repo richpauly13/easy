@@ -944,13 +944,12 @@
         SwitchComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         SwitchComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-switch',
                         template: "<ng-content></ng-content>\n",
-                        styles: [".switch{display:none}.switch:checked+.switch-label::after{left:-1.625rem}.switch:checked+.switch-label::before{background-color:#4caf50}.switch-label{margin-left:3.125rem;padding:0 .625rem;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.switch-label::after,.switch-label::before{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:all;transition-property:all;-webkit-transition-timing-function:linear;transition-timing-function:linear;content:\"\";position:absolute}.switch-label::before{background-color:#ba000d;border-radius:1rem;border:.0625rem solid #000;bottom:-3.125rem;height:1rem;top:-.25rem;width:1.5rem}.switch-label::after{background-color:#fff;border-radius:50%;height:1.25rem;left:-2.875rem;top:-.125rem;width:1.25rem}"]
+                        styles: [".switch{display:none}.switch:checked+.switch-label::after{left:-1.625rem}.switch:checked+.switch-label::before{background-color:#4caf50}.switch-label{margin-left:3.125rem;padding:0 .625rem;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.switch-label::after,.switch-label::before{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:all;transition-property:all;-webkit-transition-timing-function:linear;transition-timing-function:linear;content:'';position:absolute}.switch-label::before{background-color:#ba000d;border-radius:1rem;border:.0625rem solid #000;bottom:-3.125rem;height:1rem;top:-.25rem;width:1.5rem}.switch-label::after{background-color:#fff;border-radius:50%;height:1.25rem;left:-2.875rem;top:-.125rem;width:1.25rem}"]
                     }] }
         ];
         /** @nocollapse */
@@ -1012,8 +1011,7 @@
         TabComponent.prototype.ngOnInit = /**
          * @return {?}
          */
-            function () {
-            };
+            function () { };
         TabComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'ez-tab',
@@ -1071,6 +1069,142 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var TableComponent = /** @class */ (function () {
+        function TableComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        TableComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        TableComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-table',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [".table,.table-cell,.table-header,.table-row{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-ms-overflow-style:-ms-autohiding-scrollbar;white-space:nowrap;width:100%}.table{-webkit-box-align:stretch;align-items:stretch;border-collapse:collapse;border-spacing:0}@media screen and (min-width:75em){.table{-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column}}.table-bordered{border:.0625rem solid #000}.table-bordered .table-header{border-bottom:.0625rem solid #000}.table-bordered .table-cell{border-top:.0625rem solid #000;border-right:.0625rem solid #000}.table-bordered .table-cell:last-child{border-right:none}.table-striped .table-row:nth-child(even){background-color:#fafafa}.table-hover .table-row:hover{background-color:#6ec6ff}.table-cell{flex-basis:0;-webkit-box-flex:1;flex-grow:1;flex-shrink:0;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;white-space:pre-wrap}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        TableComponent.ctorParameters = function () { return []; };
+        return TableComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TableDirective = /** @class */ (function () {
+        function TableDirective() {
+        }
+        TableDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezTable]'
+                    },] }
+        ];
+        /** @nocollapse */
+        TableDirective.ctorParameters = function () { return []; };
+        return TableDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TableModule = /** @class */ (function () {
+        function TableModule() {
+        }
+        TableModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            // prettier-ignore
+                            TableComponent,
+                            TableDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            TableComponent,
+                            TableDirective
+                        ]
+                    },] }
+        ];
+        return TableModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TooltipComponent = /** @class */ (function () {
+        function TooltipComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        TooltipComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        TooltipComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'ez-tooltip',
+                        template: "<ng-content></ng-content>\n",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        TooltipComponent.ctorParameters = function () { return []; };
+        return TooltipComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TooltipDirective = /** @class */ (function () {
+        function TooltipDirective() {
+        }
+        TooltipDirective.decorators = [
+            { type: i0.Directive, args: [{
+                        selector: '[ezTooltip]'
+                    },] }
+        ];
+        /** @nocollapse */
+        TooltipDirective.ctorParameters = function () { return []; };
+        return TooltipDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var TooltipModule = /** @class */ (function () {
+        function TooltipModule() {
+        }
+        TooltipModule.decorators = [
+            { type: i0.NgModule, args: [{
+                        declarations: [
+                            // prettier-ignore
+                            TooltipComponent,
+                            TooltipDirective
+                        ],
+                        exports: [
+                            // prettier-ignore
+                            TooltipComponent,
+                            TooltipDirective
+                        ]
+                    },] }
+        ];
+        return TooltipModule;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var ComponentsModule = /** @class */ (function () {
         function ComponentsModule() {
         }
@@ -1092,7 +1226,9 @@
                             SlideshowModule,
                             SpinnerModule,
                             SwitchModule,
-                            TabModule
+                            TabModule,
+                            TableModule,
+                            TooltipModule
                         ]
                     },] }
         ];
@@ -1238,6 +1374,12 @@
     exports.ɵbr = TabComponent;
     exports.ɵbs = TabDirective;
     exports.ɵbq = TabModule;
+    exports.ɵbu = TableComponent;
+    exports.ɵbv = TableDirective;
+    exports.ɵbt = TableModule;
+    exports.ɵbx = TooltipComponent;
+    exports.ɵby = TooltipDirective;
+    exports.ɵbw = TooltipModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -15,6 +15,8 @@ import { SlideshowModule } from './slideshow/slideshow.module';
 import { SpinnerModule } from './spinner/spinner.module';
 import { SwitchModule } from './switch/switch.module';
 import { TabModule } from './tab/tab.module';
+import { TableModule } from './table/table.module';
+import { TooltipModule } from './tooltip/tooltip.module';
 
 @NgModule({
 	exports: [
@@ -33,7 +35,9 @@ import { TabModule } from './tab/tab.module';
 		SlideshowModule,
 		SpinnerModule,
 		SwitchModule,
-		TabModule
+		TabModule,
+		TableModule,
+		TooltipModule
 	]
 })
 export class ComponentsModule {}
