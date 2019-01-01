@@ -8,7 +8,6 @@
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>{{name}}</a
 			>
-
 			<ul *ngIf="section === '{{name}}'" class="pad-l-sm submenu">
 				{{#each headings}}
 				<li *ngIf="'{{name}}'"><a>{{name}}</a></li>
@@ -19,7 +18,7 @@
 	</ul>
 </nav>
 
-<main class="pad-a-xl styleguide" id="content">
+<main class="pad-a-xl styleguide" id="content" tabindex="0">
 	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
 	{{#each sections}}

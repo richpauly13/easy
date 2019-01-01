@@ -14,24 +14,22 @@ var AlertComponent = /** @class */ (function () {
          * @return {?}
          */
         function () {
-            return this.childClass;
+            return this.classList;
         },
         set: /**
-         * @param {?} childClass
+         * @param {?} classList
          * @return {?}
          */
-        function (childClass) {
-            if (childClass.includes('close')) {
-                this.childClass = childClass.replace(/ close/g, '');
+        function (classList) {
+            if (classList.includes('close')) {
                 this.close = true;
                 this.role = 'alertdialog';
             }
             else {
-                this.childClass = childClass;
                 this.close = false;
                 this.role = 'alert';
             }
-            this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0].replace(/-/g, ' ');
+            this.classList = classList.replace(/ close|close /g, '');
         },
         enumerable: true,
         configurable: true
@@ -43,13 +41,14 @@ var AlertComponent = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
         this.hostClass = this.class;
         this.tabindex = '-1';
     };
     AlertComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
-                    template: "<p [attr.id]=\"id\"><ng-content></ng-content></p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close alert\" autofocus>X</button>\r\n",
+                    template: "<p [attr.id]=\"id\"><ng-content></ng-content></p>\r\n\r\n<button *ngIf=\"close\" class=\"close\" type=\"button\" aria-label=\"close-alert\" autofocus>X</button>\r\n",
                     styles: [":host.alert-bad,:host.alert-good,:host.alert-info,:host.alert-warn{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;color:#fff;-webkit-box-pack:justify;justify-content:space-between;padding:.5rem 1rem}:host.alert-bad{background-color:#ba000d}:host.alert-good{background-color:#087f23}:host.alert-info{background-color:#0069c0}:host.alert-warn{background-color:#ffeb3b;color:#191919}"]
                 }] }
     ];
@@ -109,16 +108,13 @@ var AlertModule = /** @class */ (function () {
     AlertModule.decorators = [
         { type: NgModule, args: [{
                     imports: [
-                        // prettier-ignore
                         SharedModule
                     ],
                     declarations: [
-                        // prettier-ignore
                         AlertComponent,
                         AlertDirective
                     ],
                     exports: [
-                        // prettier-ignore
                         AlertComponent,
                         AlertDirective
                     ]
@@ -180,12 +176,10 @@ var BadgeModule = /** @class */ (function () {
     BadgeModule.decorators = [
         { type: NgModule, args: [{
                     declarations: [
-                        // prettier-ignore
                         BadgeComponent,
                         BadgeDirective
                     ],
                     exports: [
-                        // prettier-ignore
                         BadgeComponent,
                         BadgeDirective
                     ]

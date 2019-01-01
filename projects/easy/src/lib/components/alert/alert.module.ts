@@ -5,19 +5,8 @@ import { AlertDirective } from './alert.directive';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-	imports: [
-		// prettier-ignore
-		SharedModule
-	],
-	declarations: [
-		// prettier-ignore
-		AlertComponent,
-		AlertDirective
-	],
-	exports: [
-		// prettier-ignore
-		AlertComponent,
-		AlertDirective
-	]
+	imports: [SharedModule],
+	declarations: [AlertComponent, AlertDirective],
+	exports: [AlertComponent, AlertDirective]
 })
 export class AlertModule {}

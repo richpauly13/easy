@@ -15,11 +15,11 @@ Alerts are styled with `.alert-*` classes.
 /* SG
 # Alert/Close
 
-Alerts can be closed by adding a `<button>` tag with a `.close` class in the alert.
+Alerts can be closed by adding a `.close` class in the alert.
 
 ```
 <aside class="alert-good close">close</aside>
-<ez-alert class="alert-good close">close</ez-alert>
+<ez-alert class="close alert-good">close</ez-alert>
 ```
 */
 

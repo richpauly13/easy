@@ -7,7 +7,7 @@ export declare class AlertComponent implements OnInit {
     class: string;
     close: boolean;
     id: string;
-    private childClass;
+    private classList;
     constructor();
     ngOnInit(): void;
 }
