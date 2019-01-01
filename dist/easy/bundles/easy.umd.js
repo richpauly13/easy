@@ -22,14 +22,16 @@
              * @return {?}
              */ function (classList) {
                 if (classList.includes('close')) {
+                    this.classList = classList.replace(/ close|close /g, '');
                     this.close = true;
                     this.role = 'alertdialog';
                 }
                 else {
+                    this.classList = classList;
                     this.close = false;
                     this.role = 'alert';
                 }
-                this.classList = classList.replace(/ close|close /g, '');
+                this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
             },
             enumerable: true,
             configurable: true
@@ -41,7 +43,6 @@
          * @return {?}
          */
             function () {
-                this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
                 this.hostClass = this.class;
                 this.tabindex = '-1';
             };
@@ -107,17 +108,9 @@
         }
         AlertModule.decorators = [
             { type: i0.NgModule, args: [{
-                        imports: [
-                            SharedModule
-                        ],
-                        declarations: [
-                            AlertComponent,
-                            AlertDirective
-                        ],
-                        exports: [
-                            AlertComponent,
-                            AlertDirective
-                        ]
+                        imports: [SharedModule],
+                        declarations: [AlertComponent, AlertDirective],
+                        exports: [AlertComponent, AlertDirective]
                     },] }
         ];
         return AlertModule;
@@ -175,14 +168,8 @@
         }
         BadgeModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [
-                            BadgeComponent,
-                            BadgeDirective
-                        ],
-                        exports: [
-                            BadgeComponent,
-                            BadgeDirective
-                        ]
+                        declarations: [BadgeComponent, BadgeDirective],
+                        exports: [BadgeComponent, BadgeDirective]
                     },] }
         ];
         return BadgeModule;

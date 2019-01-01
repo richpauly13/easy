@@ -14,14 +14,16 @@ class AlertComponent {
      */
     set class(classList) {
         if (classList.includes('close')) {
+            this.classList = classList.replace(/ close|close /g, '');
             this.close = true;
             this.role = 'alertdialog';
         }
         else {
+            this.classList = classList;
             this.close = false;
             this.role = 'alert';
         }
-        this.classList = classList.replace(/ close|close /g, '');
+        this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
     }
     /**
      * @return {?}
@@ -33,7 +35,6 @@ class AlertComponent {
      * @return {?}
      */
     ngOnInit() {
-        this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
         this.hostClass = this.class;
         this.tabindex = '-1';
     }
@@ -92,17 +93,9 @@ class AlertModule {
 }
 AlertModule.decorators = [
     { type: NgModule, args: [{
-                imports: [
-                    SharedModule
-                ],
-                declarations: [
-                    AlertComponent,
-                    AlertDirective
-                ],
-                exports: [
-                    AlertComponent,
-                    AlertDirective
-                ]
+                imports: [SharedModule],
+                declarations: [AlertComponent, AlertDirective],
+                exports: [AlertComponent, AlertDirective]
             },] }
 ];
 
@@ -150,14 +143,8 @@ class BadgeModule {
 }
 BadgeModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [
-                    BadgeComponent,
-                    BadgeDirective
-                ],
-                exports: [
-                    BadgeComponent,
-                    BadgeDirective
-                ]
+                declarations: [BadgeComponent, BadgeDirective],
+                exports: [BadgeComponent, BadgeDirective]
             },] }
 ];
 

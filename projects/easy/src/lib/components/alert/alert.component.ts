@@ -13,14 +13,16 @@ export class AlertComponent implements OnInit {
 	@Input()
 	public set class(classList: string) {
 		if (classList.includes('close')) {
+			this.classList = classList.replace(/ close|close /g, '');
 			this.close = true;
 			this.role = 'alertdialog';
 		} else {
+			this.classList = classList;
 			this.close = false;
 			this.role = 'alert';
 		}
 
-		this.classList = classList.replace(/ close|close /g, '');
+		this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
 	}
 
 	public get class(): string {
@@ -35,7 +37,6 @@ export class AlertComponent implements OnInit {
 	public constructor() {}
 
 	public ngOnInit(): void {
-		this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
 		this.hostClass = this.class;
 		this.tabindex = '-1';
 	}
