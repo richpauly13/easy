@@ -1,5 +1,4 @@
 dist/**/*.*
-src/assets/**/*.*
 package.json
 package-lock.json
 tslint.json
