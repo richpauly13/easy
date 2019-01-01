@@ -2,13 +2,8 @@
 	<ul>
 		{{#each menu}}
 		<li>
-			<a
-				(click)="section = '{{name}}'"
-				[ngClass]="{'bg-lt-gray': section === '{{name}}'}"
-				class="hover bg-hover-lt-gray pad-a-xs"
-				>{{name}}</a
-			>
-			<ul *ngIf="section === '{{name}}'" class="pad-l-sm submenu">
+			<a (click)="onClick('{{name}}')" [ngClass]="{'bg-lt-gray': checkSection('{{name}}')}" class="hover bg-hover-lt-gray pad-a-xs">{{name}}</a>
+			<ul *ngIf="checkSection('{{name}}')" class="pad-l-sm submenu">
 				{{#each headings}}
 				<li *ngIf="'{{name}}'"><a>{{name}}</a></li>
 				{{/each}}
@@ -22,15 +17,15 @@
 	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
 	{{#each sections}}
-	<section *ngIf="section === '{{section}}'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	<article *ngIf="checkSection('{{section}}')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'{{heading}}'">{{heading}}</h2>
 			{{{comment}}}
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">{{{code}}}</aside>
+		<section class="pad-a-sm border-b-gray">{{{code}}}</section>
 
 		<figure><pre class="pad-a-sm">{{{markup}}}</pre></figure>
-	</section>
+	</article>
 	{{/each}}
 </main>

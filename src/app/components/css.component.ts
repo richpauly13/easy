@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./css.component.scss']
 })
 export class CssComponent implements OnInit {
-	private selectedSection: string;
-
 	public get section(): string {
 		return this.selectedSection;
 	}
@@ -15,9 +13,19 @@ export class CssComponent implements OnInit {
 		this.selectedSection = section;
 	}
 
+	private selectedSection: string;
+
 	public constructor() {}
 
 	public ngOnInit() {
 		this.section = 'Alert';
+	}
+
+	public checkSection(section: string) {
+		return this.section === section;
+	}
+
+	public onClick(name: string) {
+		this.section = name;
 	}
 }

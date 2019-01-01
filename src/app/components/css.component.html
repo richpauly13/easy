@@ -2,35 +2,35 @@
 	<ul>
 		<li>
 			<a
-				(click)="section = 'Alert'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Alert' }"
+				(click)="onClick('Alert')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Alert') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Alert</a
 			>
-			<ul *ngIf="section === 'Alert'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Alert')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Close'"><a>Close</a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Badge'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Badge' }"
+				(click)="onClick('Badge')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Badge') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Badge</a
 			>
-			<ul *ngIf="section === 'Badge'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Badge')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Button'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Button' }"
+				(click)="onClick('Button')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Button') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Button</a
 			>
-			<ul *ngIf="section === 'Button'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Button')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Group'"><a>Group</a></li>
 				<li *ngIf="'Rounded'"><a>Rounded</a></li>
@@ -39,23 +39,23 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Card'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Card' }"
+				(click)="onClick('Card')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Card') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Card</a
 			>
-			<ul *ngIf="section === 'Card'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Card')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Collapsible'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Collapsible' }"
+				(click)="onClick('Collapsible')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Collapsible') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Collapsible</a
 			>
-			<ul *ngIf="section === 'Collapsible'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Collapsible')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Accordion'"><a>Accordion</a></li>
 				<li *ngIf="'Collapse'"><a>Collapse</a></li>
@@ -64,12 +64,12 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Color'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Color' }"
+				(click)="onClick('Color')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Color') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Color</a
 			>
-			<ul *ngIf="section === 'Color'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Color')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Background'"><a>Background</a></li>
 				<li *ngIf="'Border'"><a>Border</a></li>
@@ -79,23 +79,23 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Dropdown'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Dropdown' }"
+				(click)="onClick('Dropdown')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Dropdown') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Dropdown</a
 			>
-			<ul *ngIf="section === 'Dropdown'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Dropdown')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Flexbox'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Flexbox' }"
+				(click)="onClick('Flexbox')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Flexbox') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Flexbox</a
 			>
-			<ul *ngIf="section === 'Flexbox'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Flexbox')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Container'"><a>Container</a></li>
 				<li *ngIf="'Container Alignment'"><a>Container Alignment</a></li>
@@ -107,23 +107,23 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Form'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Form' }"
+				(click)="onClick('Form')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Form') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Form</a
 			>
-			<ul *ngIf="section === 'Form'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Form')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Grid'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Grid' }"
+				(click)="onClick('Grid')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Grid') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Grid</a
 			>
-			<ul *ngIf="section === 'Grid'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Grid')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Area'"><a>Area</a></li>
 				<li *ngIf="'Container'"><a>Container</a></li>
@@ -132,12 +132,12 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Layout'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Layout' }"
+				(click)="onClick('Layout')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Layout') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Layout</a
 			>
-			<ul *ngIf="section === 'Layout'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Layout')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Container'"><a>Container</a></li>
 				<li *ngIf="'Sticky Footer'"><a>Sticky Footer</a></li>
@@ -145,23 +145,23 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Modal'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Modal' }"
+				(click)="onClick('Modal')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Modal') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Modal</a
 			>
-			<ul *ngIf="section === 'Modal'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Modal')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Nav'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Nav' }"
+				(click)="onClick('Nav')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Nav') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Nav</a
 			>
-			<ul *ngIf="section === 'Nav'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Nav')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Items'"><a>Items</a></li>
 				<li *ngIf="'Links'"><a>Links</a></li>
@@ -170,45 +170,45 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Position'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Position' }"
+				(click)="onClick('Position')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Position') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Position</a
 			>
-			<ul *ngIf="section === 'Position'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Position')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Slider'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Slider' }"
+				(click)="onClick('Slider')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Slider') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Slider</a
 			>
-			<ul *ngIf="section === 'Slider'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Slider')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Slideshow'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Slideshow' }"
+				(click)="onClick('Slideshow')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Slideshow') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Slideshow</a
 			>
-			<ul *ngIf="section === 'Slideshow'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Slideshow')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Space'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Space' }"
+				(click)="onClick('Space')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Space') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Space</a
 			>
-			<ul *ngIf="section === 'Space'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Space')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Margin'"><a>Margin</a></li>
 				<li *ngIf="'Padding'"><a>Padding</a></li>
@@ -216,45 +216,45 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Spinner'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Spinner' }"
+				(click)="onClick('Spinner')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Spinner') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Spinner</a
 			>
-			<ul *ngIf="section === 'Spinner'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Spinner')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Switch'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Switch' }"
+				(click)="onClick('Switch')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Switch') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Switch</a
 			>
-			<ul *ngIf="section === 'Switch'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Switch')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Tab'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Tab' }"
+				(click)="onClick('Tab')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Tab') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Tab</a
 			>
-			<ul *ngIf="section === 'Tab'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Tab')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Table'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Table' }"
+				(click)="onClick('Table')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Table') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Table</a
 			>
-			<ul *ngIf="section === 'Table'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Table')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Border'"><a>Border</a></li>
 				<li *ngIf="'Hover'"><a>Hover</a></li>
@@ -265,23 +265,23 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Tooltip'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Tooltip' }"
+				(click)="onClick('Tooltip')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Tooltip') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Tooltip</a
 			>
-			<ul *ngIf="section === 'Tooltip'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Tooltip')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 			</ul>
 		</li>
 		<li>
 			<a
-				(click)="section = 'Typography'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Typography' }"
+				(click)="onClick('Typography')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Typography') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Typography</a
 			>
-			<ul *ngIf="section === 'Typography'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Typography')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Font'"><a>Font</a></li>
 				<li *ngIf="'Text'"><a>Text</a></li>
@@ -289,12 +289,12 @@
 		</li>
 		<li>
 			<a
-				(click)="section = 'Visibility'"
-				[ngClass]="{ 'bg-lt-gray': section === 'Visibility' }"
+				(click)="onClick('Visibility')"
+				[ngClass]="{ 'bg-lt-gray': checkSection('Visibility') }"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				>Visibility</a
 			>
-			<ul *ngIf="section === 'Visibility'" class="pad-l-sm submenu">
+			<ul *ngIf="checkSection('Visibility')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
 				<li *ngIf="'Hide'"><a>Hide</a></li>
 				<li *ngIf="'Show'"><a>Show</a></li>
@@ -306,19 +306,19 @@
 <main class="pad-a-xl styleguide" id="content" tabindex="0">
 	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
-	<section *ngIf="section === 'Alert'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Alerts are styled with <code>.alert-*</code> classes.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<aside class="alert-bad">bad</aside>
 			<aside class="alert-good">good</aside>
 			<aside class="alert-info">info</aside>
 			<aside class="alert-warn">warn</aside>
 			<ez-alert class="alert-good">good</ez-alert>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -329,17 +329,17 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-warn"</span>&gt;</span>warn<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Alert'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Close'">Close</h2>
 			<p>Alerts can be closed by adding a <code>.close</code> class in the alert.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<aside class="alert-good close">close</aside>
 			<ez-alert class="close alert-good">close</ez-alert>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -347,23 +347,23 @@
 			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"close alert-good"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Badge'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Badge')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>
 				Badges are styled with <code>.badge-*</code> classes. If a badge does not contain
 				text, it is not rendered.
 			</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<p class="badge-sm bg-dk-blue text-white">1</p>
 			<p class="badge-md bg-dk-blue text-white">20</p>
 			<p class="badge-lg bg-dk-blue text-white">300</p>
 			<p class="badge-md bg-dk-blue text-white"></p>
 			<ez-badge class="badge-sm bg-dk-blue text-white">10</ez-badge>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -374,21 +374,21 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-badge</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-title">ez-badge</span>&gt;</span></pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Buttons are styled with <code>.btn-*</code> classes.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
 			<button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
 			<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 			<button class="btn-lg bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
 			<button class="btn-xl bg-dk-blue text-white bg-hover-blue" type="button">xl</button>
 			<button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -400,14 +400,14 @@
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xl bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Group'">Group</h2>
 			<p>Buttons can be grouped with <code>.btn-group-*</code> classes.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<section class="btn-group-row" role="group" aria-label="button row group">
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
@@ -429,7 +429,7 @@
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 			</section>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -456,14 +456,14 @@
     &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
 &lt;/section&gt;</pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Rounded'">Rounded</h2>
 			<p>Buttons can be rounded with the <code>.rounded</code> class.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">
 				xs
 			</button>
@@ -482,7 +482,7 @@
 			<button class="btn-full rounded bg-dk-blue text-white bg-hover-blue" type="button">
 				full
 			</button>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -494,20 +494,20 @@
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xl rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Button'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'States'">States</h2>
 			<p>
 				Buttons can be disabled with the <code>disabled</code> attribute or
 				<code>.disabled</code> class.
 			</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<button class="btn-md" type="button" disabled>disabled</button>
 			<button class="btn-md disabled" type="button">disabled</button>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -515,18 +515,18 @@
 			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span> disabled&gt;disabled&lt;/button&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md disabled"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;disabled&lt;/button&gt;</pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Card'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Card')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Cards are styled with <code>.cards</code> and <code>.card</code> classes.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<section class="card"><p>card</p></section>
 			<section class="card"><p>card</p></section>
 			<section class="card"><p>card</p></section>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -541,377 +541,377 @@
     <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span></pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Collapsible')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Collapsible')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Accordion'">Accordion</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Collapsible')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Collapse'">Collapse</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Collapsible'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Collapsible')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Expand'">Expand</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Background'">Background</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Border'">Border</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Contrast'">Contrast</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Color'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Text'">Text</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Dropdown'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Dropdown')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Container'">Container</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Container Alignment'">Container Alignment</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Container Wrap'">Container Wrap</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Item Alignment'">Item Alignment</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Item Grow &amp; Shrink'">Item Grow &amp; Shrink</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Flexbox'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Item Order'">Item Order</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Form'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Grid'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Grid'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Area'">Area</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Grid'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Container'">Container</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Grid'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Item'">Item</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Container'">Container</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Layout'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Sticky Footer'">Sticky Footer</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Modal'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Modal')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Items'">Items</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Links'">Links</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Nav'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Placement'">Placement</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Position'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Position')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Slider'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Slider')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Slideshow'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Slideshow')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Margin'">Margin</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Space'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Padding'">Padding</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Spinner'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Spinner')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>You may add spinners by adding a <code>spinner</code> class.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray">
+		<section class="pad-a-sm border-b-gray">
 			<p class="spinner"></p>
 			<p class="spinner-dotted"></p>
-		</aside>
+		</section>
 
 		<figure>
 			<pre
@@ -919,155 +919,155 @@
 			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner-dotted"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></pre>
 		</figure>
-	</section>
-	<section *ngIf="section === 'Switch'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Switch')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Tab'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Tab')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Table'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Table'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Border'">Border</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Table'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Hover'">Hover</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Table'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Striped'">Striped</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Table'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Table Cell'">Table Cell</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Table'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Table Row'">Table Row</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Tooltip'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Tooltip')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Font'">Font</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Typography'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Text'">Text</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Hide'">Hide</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
-	<section *ngIf="section === 'Visibility'" class="mar-b-lg shadow-1 border-a-gray section">
-		<article class="pad-a-sm border-b-gray bg-lt-gray">
+	</article>
+	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm border-b-gray bg-lt-gray">
 			<h2 *ngIf="'Show'">Show</h2>
 			<p>Coming soon.</p>
-		</article>
+		</section>
 
-		<aside class="pad-a-sm border-b-gray"></aside>
+		<section class="pad-a-sm border-b-gray"></section>
 
 		<figure><pre class="pad-a-sm"></pre></figure>
-	</section>
+	</article>
 </main>
