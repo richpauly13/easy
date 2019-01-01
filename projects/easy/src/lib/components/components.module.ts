@@ -20,7 +20,6 @@ import { TooltipModule } from './tooltip/tooltip.module';
 
 @NgModule({
 	exports: [
-		// prettier-ignore
 		AlertModule,
 		BadgeModule,
 		ButtonModule,

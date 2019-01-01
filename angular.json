@@ -25,10 +25,7 @@
 						"assets": ["src/favicon.ico"],
 						"styles": ["src/styles.scss"],
 						"stylePreprocessorOptions": {
-							"includePaths": [
-								"projects/easy/src/lib/core",
-								"projects/easy/src/lib/shared"
-							]
+							"includePaths": []
 						}
 					},
 					"configurations": {
@@ -81,11 +78,7 @@
 						"progress": false,
 						"styles": ["src/styles.scss"],
 						"stylePreprocessorOptions": {
-							"includePaths": [
-								"projects/easy/src/lib/core",
-								"projects/easy/src/lib/shared",
-								"projects/easy/src/assets/sass"
-							]
+							"includePaths": []
 						},
 						"assets": ["src/favicon.ico"]
 					}
@@ -148,7 +141,6 @@
 				"@schematics/angular:module": {
 					"commonModule": false,
 					"module": "components",
-					"export": true,
 					"flat": false,
 					"spec": true
 				},

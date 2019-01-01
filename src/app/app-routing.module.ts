@@ -13,7 +13,11 @@ const routes: Routes = [
 		redirectTo: '/components',
 		pathMatch: 'full'
 	},
-	{ path: '**', redirectTo: '/components', pathMatch: 'full' }
+	{
+		path: '**',
+		redirectTo: '/components',
+		pathMatch: 'full'
+	}
 ];
 
 @NgModule({

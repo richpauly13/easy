@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { ComponentsModule } from './components/components.module';
-import { CoreModule } from './core/core.module';
 import { EasyComponent } from './easy.component';
 
 @NgModule({
-	imports: [ComponentsModule],
+	imports: [RouterModule],
 	declarations: [EasyComponent],
-	exports: [ComponentsModule, CoreModule, EasyComponent]
+	exports: [ComponentsModule, EasyComponent]
 })
 export class EasyModule {}

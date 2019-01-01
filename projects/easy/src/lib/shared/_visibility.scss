@@ -67,17 +67,27 @@ Coming soon.
 }
 
 // Hidden except for screen readers
-.hidden-visually {
-	appearance: none;
-	border: 0;
-	clip: rect(rem(0, 0, 0, 0));
+.sr-only {
+	clip: rect(rem(1, 1, 1, 1));
 	height: rem(1);
-	margin: rem(-1);
-	padding: 0;
 	position: absolute;
-	outline: 0;
-	overflow: hidden;	
+	overflow: hidden;
 	width: rem(1);
+
+	&:hover,
+	&:active,
+	&:focus {
+		clip: auto;
+		color: color(lt-black);
+		display: block;
+		height: auto;
+		left: rem(5);
+		padding: rem(16);
+		text-decoration: none;
+		top: rem(5);
+		width: auto;
+		z-index: 100;
+	}
 }
 
 // Show styles
@@ -127,6 +137,6 @@ Coming soon.
 	@extend .hide;
 
 	@media print {
-		display:block;
+		display: block;
 	}
 }
