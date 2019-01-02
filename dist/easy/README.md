@@ -48,7 +48,6 @@ npm i --save easy-framework
 Import core styles into your app root module.
 
 app.module.ts
-
 ```
 import { EasyModule } from 'easy-framework';
 ```
@@ -56,7 +55,6 @@ import { EasyModule } from 'easy-framework';
 Add the `<ez-root>` tag in your app root
 
 app.component.html
-
 ```
 <ez-root>
     <router-outlet></router-outlet>
@@ -66,7 +64,6 @@ app.component.html
 Then, import component modules where needed.
 
 some.module.ts
-
 ```
 import { ButtonModule } from 'easy-framework';
 ```
