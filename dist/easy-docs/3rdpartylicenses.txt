@@ -275,7 +275,7 @@ MIT
 @angular/router
 MIT
 
-easy
+easy-framework
 MIT
 
 zone.js

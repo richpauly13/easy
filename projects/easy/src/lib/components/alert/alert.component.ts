@@ -40,4 +40,8 @@ export class AlertComponent implements OnInit {
 		this.hostClass = this.class;
 		this.tabindex = '-1';
 	}
+
+	public onClose(): void {
+		this.hostClass = 'hide';
+	}
 }

@@ -1,25 +1,25 @@
 // Responsive fonts
 html {
-	-moz-osx-font-smoothing: grayscale;	
+	-moz-osx-font-smoothing: grayscale;
 	-ms-overflow-style: scrollbar;
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	box-sizing: border-box;
 	font-size: $screen-font-xs;
 	text-size-adjust: 100%;
-	
+
 	@media screen and (min-width: $screen-sm) {
 		font-size: $screen-font-sm;
 	}
-	
+
 	@media screen and (min-width: $screen-md) {
 		font-size: $screen-font-md;
 	}
-	
+
 	@media screen and (min-width: $screen-lg) {
 		font-size: $screen-font-lg;
 	}
-	
+
 	@media screen and (min-width: $screen-xl) {
 		font-size: $screen-font-xl;
 	}
@@ -29,7 +29,7 @@ html {
 *,
 *::after,
 *::before {
-  	box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 // Main color, text, and sizing
@@ -114,9 +114,9 @@ blockquote + footer {
 	padding-right: rem(24);
 
 	&::before {
-		content: "\2012";
+		content: '\2012';
 
-		color: color(dk-gray);		
+		color: color(dk-gray);
 		padding-right: rem(8);
 	}
 }
@@ -165,6 +165,7 @@ pre {
 	margin: 0;
 }
 
+// Sets proper alignment
 caption,
 img,
 label,
@@ -200,7 +201,7 @@ samp {
 code,
 pre {
 	hyphens: none;
-	tab-size: 4;	
+	tab-size: 4;
 }
 
 pre {
@@ -215,18 +216,18 @@ fieldset {
 	padding: 0;
 }
 
-input[type="date"],
-input[type="datetime-local"],
-input[type="month"],
-input[type="time"] {
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='time'] {
 	-webkit-appearance: listbox;
 }
 
-input[type="number"] {
+input[type='number'] {
 	-moz-appearance: textfield;
 }
 
-input[type="range"] {
+input[type='range'] {
 	width: 100%;
 
 	&::-webkit-slider-thumb {
@@ -266,13 +267,13 @@ textarea {
 	resize: vertical;
 }
 
-a[role="button"],
+a[role='button'],
 abbr[title],
 button,
-html input[type="button"],
+html input[type='button'],
 input,
-input[type="reset"],
-input[type="submit"],
+input[type='reset'],
+input[type='submit'],
 optgroup,
 select,
 textarea {
@@ -281,20 +282,20 @@ textarea {
 	border: 0;
 }
 
-a[role="button"],
+a[role='button'],
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
 	appearance: none;
 	background-color: transparent;
 
-    &:hover {
+	&:hover {
 		cursor: pointer;
-	}	
+	}
 }
 
-input[type="range"]:hover,
+input[type='range']:hover,
 select:hover {
 	cursor: pointer;
 }
@@ -321,9 +322,9 @@ progress {
 }
 
 // Credit: https://github.com/suitcss/base
-[tabindex="-1"],
-input[type="range"] {
+[tabindex='-1'],
+input[type='range'] {
 	&:focus {
-		outline: none !important;
+		outline: none;
 	}
 }

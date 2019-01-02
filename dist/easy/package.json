@@ -1,5 +1,5 @@
 {
-  "name": "easy",
+  "name": "easy-framework",
   "version": "0.0.1",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
   "description": "Easy CSS framework.",
@@ -11,15 +11,15 @@
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
   },
-  "main": "bundles/easy.umd.js",
-  "module": "fesm5/easy.js",
-  "es2015": "fesm2015/easy.js",
-  "esm5": "esm5/easy.js",
-  "esm2015": "esm2015/easy.js",
-  "fesm5": "fesm5/easy.js",
-  "fesm2015": "fesm2015/easy.js",
-  "typings": "easy.d.ts",
-  "metadata": "easy.metadata.json",
+  "main": "bundles/easy-framework.umd.js",
+  "module": "fesm5/easy-framework.js",
+  "es2015": "fesm2015/easy-framework.js",
+  "esm5": "esm5/easy-framework.js",
+  "esm2015": "esm2015/easy-framework.js",
+  "fesm5": "fesm5/easy-framework.js",
+  "fesm2015": "fesm2015/easy-framework.js",
+  "typings": "easy-framework.d.ts",
+  "metadata": "easy-framework.metadata.json",
   "sideEffects": false,
   "dependencies": {
     "tslib": "^1.9.0"

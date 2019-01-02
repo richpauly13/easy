@@ -10,4 +10,5 @@ export declare class AlertComponent implements OnInit {
     private classList;
     constructor();
     ngOnInit(): void;
+    onClose(): void;
 }
