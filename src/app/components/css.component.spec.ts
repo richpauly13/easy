@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EasyModule } from 'easy';
+import { EasyModule } from 'easy-framework';
 
 import { CssComponent } from './css.component';
 

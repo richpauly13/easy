@@ -2,7 +2,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import { EasyModule } from 'easy';
+import { EasyModule } from 'easy-framework';
 
 describe('AppComponent', () => {
 	beforeEach(async(() => {
