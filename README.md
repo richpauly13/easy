@@ -10,7 +10,7 @@ Easy Angular Styles with a11Y
 
 ## Overview
 
-EASY is a CSS framework developed on 4 key principles:
+EASY is a CSS framework developed on 4 core principles:
 
 -   Flexible
 -   Accessible
@@ -25,26 +25,54 @@ The framework works nicely with Angular. You can use components, directives, CSS
 
 ### Accessible
 
-Most accessibility requirements are added automatically for the various components. Of course, it falls on the developer to ensure all code follows WCAG guidelines.
+Most accessibility requirements are added automatically. Of course, it falls on the developer to ensure all code follows WCAG guidelines.
 
 ### Responsive
 
-EASY was created with mobile first in mind. There are many layout options and they all look grerat on any device.
+EASY was created with mobile first in mind. There are many layout options and they all look great on any device.
 
 ### Lightweight
 
-Developers can use only the components needed for a particular project. This is done through module imports. If you choose to use the entire framework, it is still less than 1 MB.
+Developers can use only the components needed for a particular project. This is done through module imports. If you choose to use the entire framework, it is still less than 1k.
 
 ## Installation
 
 NPM:
 
-`npm i`
+```
+npm i --save easy-framework
+```
 
 ## Usage
 
+Import core styles in your app root module.
+
+```
+import { EasyModule } from 'easy-framework';
+```
+
+Then, import component modules as needed,
+
+```
+import { ButtonModule } from 'easy-framework';
+```
+
+## Documentation
+
+Read the [documentation](https://richpauly13.github.io/easy/dist/easy-docs).
+
 ## Contributing
+
+View the guidelines for [contributing](https://github.com/richpauly13/easy/blob/master/CONTRIBUTING.md).
 
 ## Issues
 
+Report an [issue](https://github.com/richpauly13/easy/issues).
+
+## Code of Conduct
+
+Review the [code of conduct](https://github.com/richpauly13/easy/blob/master/CODE_OF_CONDUCT.md).
+
 ## License
+
+See the [license](https://github.com/richpauly13/easy/blob/master/LICENSE).
