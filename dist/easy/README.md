@@ -1,6 +1,6 @@
 [![CircleCI branch](https://img.shields.io/circleci/project/github/richpauly13/easy/master.svg?label=circleci)](https://circleci.com/gh/richpauly13/easy) [![Dependabot badge](https://api.dependabot.com/badges/status?host=github&repo=richpauly13/easy)](https://dependabot.com) [![Dependency Status](https://david-dm.org/richpauly13/easy.svg)](https://david-dm.org/richpauly13/easy) [![devDependency Status](https://david-dm.org/richpauly13/easy/dev-status.svg)](https://david-dm.org/richpauly13/easy?type=dev)
 
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/richpauly13/easy/blob/master/LICENSE) [![codecov.io](https://codecov.io/github/richpauly13/easy/coverage.svg?branch=master)](https://codecov.io/github/richpauly13/easy?branch=master) [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![npm version](https://badge.fury.io/js/easy-framework.svg)](https://www.npmjs.com/easy-framework) [![downloads](https://badgen.net/npm/dt/easy-framework)](https://www.npmjs.com/package/easy-framework) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/richpauly13/easy/blob/master/LICENSE) [![codecov.io](https://codecov.io/github/richpauly13/easy/coverage.svg?branch=master)](https://codecov.io/github/richpauly13/easy?branch=master) [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 [![GitHub forks](https://img.shields.io/github/forks/richpauly13/easy.svg?style=social&label=Fork)](https://github.com/richpauly/easy/fork) [![GitHub stars](https://img.shields.io/github/stars/richpauly13/easy.svg?style=social&label=Star)](https://github.com/richpauly/easy)
 
@@ -48,6 +48,7 @@ npm i --save easy-framework
 Import core styles into your app root module.
 
 app.module.ts
+
 ```
 import { EasyModule } from 'easy-framework';
 ```
@@ -55,6 +56,7 @@ import { EasyModule } from 'easy-framework';
 Add the `<ez-root>` tag in your app root
 
 app.component.html
+
 ```
 <ez-root>
     <router-outlet></router-outlet>
@@ -64,6 +66,7 @@ app.component.html
 Then, import component modules where needed.
 
 some.module.ts
+
 ```
 import { ButtonModule } from 'easy-framework';
 ```

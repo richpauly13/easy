@@ -237,12 +237,10 @@
         ButtonModule.decorators = [
             { type: i0.NgModule, args: [{
                         declarations: [
-                            // prettier-ignore
                             ButtonComponent,
                             ButtonDirective
                         ],
                         exports: [
-                            // prettier-ignore
                             ButtonComponent,
                             ButtonDirective
                         ]

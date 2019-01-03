@@ -199,12 +199,10 @@ class ButtonModule {
 ButtonModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [
-                    // prettier-ignore
                     ButtonComponent,
                     ButtonDirective
                 ],
                 exports: [
-                    // prettier-ignore
                     ButtonComponent,
                     ButtonDirective
                 ]
