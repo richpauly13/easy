@@ -1,6 +1,6 @@
 {
   "name": "easy-framework",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
   "description": "Easy CSS framework.",
   "bugs": "",
@@ -8,8 +8,8 @@
   "repository": "github:richpauly13/easy",
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0"
   },
   "main": "bundles/easy-framework.umd.js",
   "module": "fesm5/easy-framework.js",
