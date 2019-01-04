@@ -77,7 +77,15 @@ Read the [documentation](https://richpauly13.github.io/easy/dist/easy-docs).
 
 ## Contributing
 
-Review the [code of conduct](https://github.com/richpauly13/easy/blob/master/CODE_OF_CONDUCT.md).
+1. Review the [code of conduct](https://github.com/richpauly13/easy/blob/master/CODE_OF_CONDUCT.md)
+1. Fork the repo
+1. Run `npm i`
+1. Run `ng serve`, `npm run watch:easy`, and `gulp` in three separate terminal windows
+1. Edit the code base
+1. Run `npm run build`
+1. Submit a pull request
+
+_NOTE: All code should include passing unit tests_
 
 ## Issues
 
