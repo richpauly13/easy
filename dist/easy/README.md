@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/easy-framework.svg)](https://www.npmjs.com/easy-framework) [![downloads](https://badgen.net/npm/dt/easy-framework)](https://www.npmjs.com/package/easy-framework) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/richpauly13/easy/blob/master/LICENSE) [![codecov.io](https://codecov.io/github/richpauly13/easy/coverage.svg?branch=master)](https://codecov.io/github/richpauly13/easy?branch=master) [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-[![GitHub forks](https://img.shields.io/github/forks/richpauly13/easy.svg?style=social&label=Fork)](https://github.com/richpauly/easy/fork) [![GitHub stars](https://img.shields.io/github/stars/richpauly13/easy.svg?style=social&label=Star)](https://github.com/richpauly/easy)
+[![GitHub forks](https://img.shields.io/github/forks/richpauly13/easy.svg?style=social&label=Fork)](https://github.com/richpauly13/easy/fork) [![GitHub stars](https://img.shields.io/github/stars/richpauly13/easy.svg?style=social&label=Star)](https://github.com/richpauly13/easy)
 
 # EASY
 
@@ -77,7 +77,17 @@ Read the [documentation](https://richpauly13.github.io/easy/dist/easy-docs).
 
 ## Contributing
 
-Review the [code of conduct](https://github.com/richpauly13/easy/blob/master/CODE_OF_CONDUCT.md).
+1. Review the [Code of Conduct](https://github.com/richpauly13/easy/blob/master/CODE_OF_CONDUCT.md)
+1. Fork the repo
+1. Run `npm i`
+1. Run `ng serve -o`, `npm run watch:easy`, and `gulp` in three separate terminal windows
+1. Open the projects/easy/src/lib folder in your code editor
+1. Edit the code base
+1. If you change any .scss files, update the documentation in the comments using this [format](https://github.com/emiloberg/markdown-styleguide-generator)
+1. Run `npm run build`
+1. Submit a pull request
+
+_NOTE: All code should include passing unit tests_
 
 ## Issues
 
