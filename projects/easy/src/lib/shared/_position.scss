@@ -16,6 +16,7 @@ Coming soon.
 	z-index: 10;
 }
 
+// TODO: See if this is needed
 .fixed-b,
 .fixed-t {
 	width: 100%;
@@ -25,24 +26,16 @@ Coming soon.
 	bottom: 0;
 }
 
-.fixed-l,
-.sticky-l {
+.fixed-l {
 	left: 0;
 }
 
-.fixed-r,
-.sticky-r {
+.fixed-r {
 	right: 0;
 }
 
-.fixed-t,
-.sticky-t {
+.fixed-t {
 	top: 0;
 }
 
-.sticky-l,
-.sticky-r,
-.sticky-t {
-	position: sticky;
-	z-index: 10;
-}
+// TODO: Add sticky, relative, and absolute

@@ -17,7 +17,7 @@ Coming soon.
 */
 
 /* SG
-# Color/Text
+# Color/Tsuffix
 
 Coming soon.
 
@@ -53,7 +53,7 @@ Coming soon.
 		}
 	}
 
-	// Text color styles
+	// Tsuffix color styles
 	@if $name != lt-white {
 		.text-#{$name},
 		.text-hover-#{$name}:hover {
@@ -63,9 +63,9 @@ Coming soon.
 
 	// Border color styles
 	@if $name != lt-white and $name != lt-black {
-		@each $ext in top, right, bottom, left {
-			.border-#{str-slice($ext, 1, 1)}-#{$name} {
-				border-#{$ext}: rem(1) solid $color;
+		@each $suffix in top, right, bottom, left {
+			.border-#{str-slice($suffix, 1, 1)}-#{$name} {
+				border-#{$suffix}: rem(1) solid $color;
 			}
 		}
 
@@ -73,14 +73,16 @@ Coming soon.
 			border: rem(1) solid $color;
 		}
 
+		.border-lr-#{$name},
+		.border-rl-#{$name} {
+			border-left: rem(1) solid $color;
+			border-right: rem(1) solid $color;
+		}
+
+		.border-bt-#{$name},
 		.border-tb-#{$name} {
 			border-top: rem(1) solid $color;
 			border-bottom: rem(1) solid $color;
-		}
-
-		.border-lr-#{$name} {
-			border-left: rem(1) solid $color;
-			border-right: rem(1) solid $color;
 		}
 	}
 }

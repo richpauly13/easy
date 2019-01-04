@@ -4,8 +4,8 @@ $screen-md: 48em; // 800px
 $screen-lg: 64em; // 1024px
 $screen-xl: 75em; // 1200px
 
-// Font variables
-$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+// Font family variables
+$font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $font-xs: rem(12);
 $font-sm: rem(14);
@@ -53,9 +53,8 @@ $headings: (
 	(h3, rem(18.72), rem(13.28)),
 	(h4, rem(16), rem(17.92)),
 	(h5, rem(13.28), rem(24)),
-	(h6, rem(12), rem(26.72)),
+	(h6, rem(12), rem(26.72))
 );
-
 // Spacers map variable
 $spacers: (
 	xs: rem(8),

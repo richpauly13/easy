@@ -5,34 +5,43 @@
 }
 
 @mixin column {
-	@include flexbox;
-
 	align-content: flex-start;
 	align-items: flex-start;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
 @mixin flex($grow, $shrink, $basis) {
-	@if $basis == auto {
-		flex-basis: auto;
-	} @else if unit($basis) == '%' {
-		flex-basis: $basis;
-	} @else if type-of($basis) == number {
+	@if type-of($basis) == number {
 		flex-basis: rem($basis);
 	} @else {
-		@warn "Invalid $basis `#{$basis}` for mixin `flex`.";
+		flex-basis: $basis;
 	}
 
 	flex-grow: $grow;
 	flex-shrink: $shrink;
 }
 
-@mixin flexbox {
-	align-content: center;
-	align-items: center;
-	display: flex;
-	justify-content: flex-start;
+// TODO: See if this can be simplified while adding min, max, and print
+@mixin media($size) {
+	@if $size == sm {
+		@media screen and (min-width: $screen-sm) {
+			@content;
+		}
+	} @else if $size == md {
+		@media screen and (min-width: $screen-md) {
+			@content;
+		}
+	} @else if $size == lg {
+		@media screen and (min-width: $screen-lg) {
+			@content;
+		}
+	} @else {
+		@media screen and (min-width: $screen-lg) {
+			@content;
+		}
+	}
 }
 
 @mixin range {
@@ -44,7 +53,10 @@
 }
 
 @mixin row {
-	@include flexbox;
+	align-content: center;
+	align-items: center;
+	display: flex;
+	justify-content: flex-start;
 }
 
 @mixin row-inline {

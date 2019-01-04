@@ -136,8 +136,6 @@ Buttons can be grouped with `.btn-group-*` classes.
 	&.btn-group-full {
 		width: 100%;
 	}
-
-	// TODO:  Add toggle buttons
 }
 
 :host-context(.btn-group-col) {
@@ -177,3 +175,5 @@ Buttons can be grouped with `.btn-group-*` classes.
 		margin: 0;
 	}
 }
+
+// TODO:  Add toggle buttons

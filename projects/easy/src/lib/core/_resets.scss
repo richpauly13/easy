@@ -8,19 +8,19 @@ html {
 	font-size: $screen-font-xs;
 	text-size-adjust: 100%;
 
-	@media screen and (min-width: $screen-sm) {
+	@include media(sm) {
 		font-size: $screen-font-sm;
 	}
 
-	@media screen and (min-width: $screen-md) {
+	@include media(md) {
 		font-size: $screen-font-md;
 	}
 
-	@media screen and (min-width: $screen-lg) {
+	@include media(lg) {
 		font-size: $screen-font-lg;
 	}
 
-	@media screen and (min-width: $screen-xl) {
+	@include media(xl) {
 		font-size: $screen-font-xl;
 	}
 }
@@ -89,6 +89,9 @@ video {
 	#{$heading},
 	.#{$heading} {
 		font-size: $font;
+	}
+
+	.#{$heading} {
 		margin-bottom: $margin;
 	}
 }
@@ -121,6 +124,7 @@ blockquote + footer {
 	}
 }
 
+// TODO: Make these classes
 blockquote,
 blockquote + footer {
 	border-left: rem(2) solid color(lt-gray);
@@ -165,13 +169,21 @@ pre {
 	margin: 0;
 }
 
-// Sets proper alignment
+// Sets proper vertical alignment
 caption,
 img,
 label,
 td,
 th {
 	vertical-align: middle;
+}
+
+// Removes positioning set by normalize.css
+sub,
+sup {
+	bottom: 0;
+	position: static;
+	top: 0;
 }
 
 // Adds transform for better performance
@@ -181,14 +193,6 @@ sub {
 
 sup {
 	transform: translateY(rem(-8));
-}
-
-// Removes positioning set by normalize.css
-sub,
-sup {
-	bottom: 0;
-	position: static;
-	top: 0;
 }
 
 // Code normalization and resets
@@ -289,15 +293,18 @@ input[type='reset'],
 input[type='submit'] {
 	appearance: none;
 	background-color: transparent;
+}
 
+a[role='button'],
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'],
+input[type='range'],
+select {
 	&:hover {
 		cursor: pointer;
 	}
-}
-
-input[type='range']:hover,
-select:hover {
-	cursor: pointer;
 }
 
 // Credit: https://css-tricks.com/html5-progress-element/

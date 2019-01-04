@@ -27,25 +27,25 @@ Coming soon.
 
 // Layout styles
 .container {
-	@media screen and (min-width: $screen-sm) {
+	@include media(sm) {
 		width: 80%;
 	}
 }
 
 .container-fluid {
-	@media screen and (min-width: $screen-sm) {
+	@include media(sm) {
 		width: rem(448);
 	}
 
-	@media screen and (min-width: $screen-md) {
+	@include media(md) {
 		width: rem(768);
 	}
 
-	@media screen and (min-width: $screen-lg) {
+	@include media(lg) {
 		width: rem(992);
 	}
 
-	@media screen and (min-width: $screen-xl) {
+	@include media(xl) {
 		width: rem(1168);
 	}
 }

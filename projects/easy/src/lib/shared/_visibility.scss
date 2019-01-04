@@ -26,36 +26,42 @@ Coming soon.
 */
 
 // Hide styles
-.hide {
+// TODO: add gt and lt classes
+.hide,
+.show-sm,
+.show-md,
+.show-lg,
+.show-xl,
+.show-print {
 	display: none;
 }
 
 .hide-xs {
-	@media screen and (max-width: $screen-sm) {
+	@include media(sm) {
 		display: none;
 	}
 }
 
 .hide-sm {
-	@media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
+	@media screen and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
 		display: none;
 	}
 }
 
 .hide-md {
-	@media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+	@media screen and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
 		display: none;
 	}
 }
 
 .hide-lg {
-	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl) {
+	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
 		display: none;
 	}
 }
 
 .hide-xl {
-	@media screen and (min-width: $screen-xl) {
+	@include media(xl) {
 		display: none;
 	}
 }
@@ -63,6 +69,47 @@ Coming soon.
 .hide-print {
 	@media print {
 		display: none;
+	}
+}
+
+// Show styles
+.show {
+	display: block;
+}
+
+.show-xs {
+	@include media(sm) {
+		display: none;
+	}
+}
+
+.show-sm {
+	@media screen and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+		display: block;
+	}
+}
+
+.show-md {
+	@media screen and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+		display: block;
+	}
+}
+
+.show-lg {
+	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+		display: block;
+	}
+}
+
+.show-xl {
+	@include media(xl) {
+		display: block;
+	}
+}
+
+.show-print {
+	@media print {
+		display: block;
 	}
 }
 
@@ -87,56 +134,5 @@ Coming soon.
 		top: rem(5);
 		width: auto;
 		z-index: 100;
-	}
-}
-
-// Show styles
-.show {
-	display: block;
-}
-
-.show-xs {
-	@media screen and (min-width: $screen-sm) {
-		display: none;
-	}
-}
-
-.show-sm {
-	@extend .hide;
-
-	@media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
-		display: block;
-	}
-}
-
-.show-md {
-	@extend .hide;
-
-	@media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
-		display: block;
-	}
-}
-
-.show-lg {
-	@extend .hide;
-
-	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl) {
-		display: block;
-	}
-}
-
-.show-xl {
-	@extend .hide;
-
-	@media screen and (min-width: $screen-xl) {
-		display: block;
-	}
-}
-
-.show-print {
-	@extend .hide;
-
-	@media print {
-		display: block;
 	}
 }

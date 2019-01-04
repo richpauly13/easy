@@ -53,7 +53,7 @@ app.module.ts
 import { EasyModule } from 'easy-framework';
 ```
 
-Add the `<ez-root>` tag in your app root
+Add the `<ez-root>` tag in your app root component.
 
 app.component.html
 

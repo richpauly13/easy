@@ -202,7 +202,6 @@ Coming soon.
 
 // Flex item styles
 @for $number from 1 through 12 {
-
 	// Flex item grow and shrink styles
 	.flex-both-#{$number} {
 		@include flex($number, $number, 0);
@@ -219,30 +218,30 @@ Coming soon.
 	// Flex item order styles
 	.order {
 		order: $number;
-		
+
 		&-xs-#{$number} {
 			order: $number;
 		}
 
-		@media screen and (min-width: $screen-sm) {
+		@include media(xs) {
 			&-sm-#{$number} {
 				order: $number;
 			}
 		}
 
-		@media screen and (min-width: $screen-md) {
+		@include media(md) {
 			&-md-#{$number} {
 				order: $number;
 			}
 		}
 
-		@media screen and (min-width: $screen-lg) {
+		@include media(lg) {
 			&-lg-#{$number} {
 				order: $number;
 			}
 		}
 
-		@media screen and (min-width: $screen-xl) {
+		@include media(xl) {
 			&-xl-#{$number} {
 				order: $number;
 			}
