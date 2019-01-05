@@ -37,9 +37,8 @@
     "pack": "cd dist/easy && npm pack",
     "format:fix": "pretty-quick --staged",
     "update:webdriver": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37",
-    "precommit": "run-s format:fix lint",
     "publish": "npm run build:easy && npm publish dist/easy",
-    "update": "ng update --all --force && npm i --save-dev typescript@3.1.6"
+    "update:ng": "ng update --all --force && npm i --save-dev typescript@3.1.6"
   },
   "dependencies": {
     "@angular/common": "^7.1.4",
@@ -89,5 +88,14 @@
     "tslib": "^1.9.3",
     "tslint": "^5.12.0",
     "typescript": "^3.1.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "run-s format:fix lint"
+    }
+  },
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.5.0"
   }
 }

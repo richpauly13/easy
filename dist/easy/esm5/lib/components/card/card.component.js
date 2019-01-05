@@ -17,7 +17,7 @@ var CardComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'ez-card, .card',
                     template: "<ng-content></ng-content>\n",
-                    styles: [":host.card{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;display:-webkit-inline-box;display:inline-flex;-webkit-box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);border:.0625rem solid #bdbdbd;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column;margin:.5rem;min-width:25rem;padding:1rem}"]
+                    styles: [":host.card{align-content:center;align-items:center;display:flex;justify-content:flex-start;display:inline-flex;box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12);border:.0625rem solid #bdbdbd;flex-direction:column;margin:.5rem;min-width:25rem;padding:1rem}"]
                 }] }
     ];
     /** @nocollapse */

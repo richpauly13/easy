@@ -17,7 +17,7 @@ var BadgeComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'ez-badge, .badge-sm, .badge-md, .badge-lg',
                     template: "<ng-content></ng-content>\n",
-                    styles: [":host.badge-lg,:host.badge-md,:host.badge-sm{align-content:center;-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;display:-webkit-inline-box;display:inline-flex;border-radius:1rem;-webkit-box-pack:center;justify-content:center}:host.badge-lg:empty,:host.badge-md:empty,:host.badge-sm:empty{display:none}:host.badge-sm{line-height:.5rem;padding:.5rem}:host.badge-md{line-height:.625rem;padding:.625rem}:host.badge-lg{line-height:.75rem;padding:.75rem}"]
+                    styles: [":host.badge-lg,:host.badge-md,:host.badge-sm{align-content:center;align-items:center;display:flex;justify-content:flex-start;display:inline-flex;border-radius:1rem;justify-content:center}:host.badge-lg:empty,:host.badge-md:empty,:host.badge-sm:empty{display:none}:host.badge-sm{line-height:.5rem;padding:.5rem}:host.badge-md{line-height:.625rem;padding:.625rem}:host.badge-lg{line-height:.75rem;padding:.75rem}"]
                 }] }
     ];
     /** @nocollapse */
