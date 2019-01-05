@@ -73,7 +73,7 @@ import { ButtonModule } from 'easy-framework';
 
 ## Documentation
 
-Read the [documentation](https://richpauly13.github.io/easy/docs).
+Read the [documentation](https://richpauly13.github.io/easy/).
 
 ## Contributing
 
