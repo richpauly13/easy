@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, HostBinding, OnInit, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
@@ -29,19 +29,25 @@ export class AlertComponent implements OnInit {
 		return this.classList;
 	}
 
+	@ViewChild('message') public message: ElementRef;
+
 	public close: boolean;
 	public id: string;
 
 	private classList: string;
 
-	public constructor() {}
+	public constructor(private elementRef: ElementRef) {}
 
 	public ngOnInit(): void {
 		this.hostClass = this.class;
 		this.tabindex = '-1';
 	}
 
-	public onClose(): void {
+	public closeAlert(): void {
 		this.hostClass = 'hide';
+	}
+
+	public trap(): void {
+		this.elementRef.nativeElement.focus();
 	}
 }

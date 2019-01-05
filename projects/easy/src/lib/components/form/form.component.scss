@@ -1,6 +1,63 @@
 /* SG
 # Form
 
+Forms are styled with `.form-*` classes.
+
+```
+<form class="form-h">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+    <label class="form-label" for="email">Email</label>
+    <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+</form>
+<form class="form-v">
+    <label class="form-label" for="name">Name</label>
+    <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+    <label class="form-label" for="email">Email</label>
+    <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+</form>
+```
+*/
+
+/* SG
+# Form/Fieldset
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Form/Group
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Form/Label
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Form/Field
+
+Coming soon.
+
+```
+```
+*/
+
+/* SG
+# Form/Field Group
+
 Coming soon.
 
 ```
@@ -12,44 +69,43 @@ Coming soon.
 @import '../../core/variables';
 
 // Form styles
-.fieldset {
-	border: rem(1) solid color(blue);
-	padding: rem(6 10 12);
-}
+:host {
+	&.field-group,
+	&.form-group,
+	&.form-h {
+		@include row;
+	}
 
-.form-group,
-.field-group {
-	@include row;
+	&.form-v {
+		@include column;
+	}
 
-	align-items: center;
-}
+	&.fieldset {
+		border: rem(1) solid color(blue);
+		padding: rem(6 10 12);
+	}
 
-.form-group {
-	margin: rem(-8);
-}
+	&.form-group {
+		margin: rem(-8);
+	}
 
-.field-group {
-	@include flex(1, 0, 0);
+	&.field-group {
+		padding: rem(8);
+	}
 
-	padding: rem(8);
-}
+	&.form-label {
+		font-size: $font-md;
+		max-width: rem(140);
+	}
 
-.form-label {
-	@include flex(1, 0, 0);
+	&.form-field {
+		@include animate(box-shadow);
 
-	flex-basis: rem(90);
-	font-size: $font-md;
-	max-width: rem(140);
+		background-color: inherit;
+	}
 }
 
 .form-field {
-	@include animate(box-shadow);
-	@include flex(1, 0, 0);
-
-	background-color: color(lt-white);
-	flex-basis: rem(230);
-	padding: rem(40);
-
 	&:not([multiple]):not(textarea) {
 		height: rem(40);
 	}
@@ -61,6 +117,7 @@ Coming soon.
 		padding: rem(7);
 	}
 
+	&:disabled,
 	&[disabled],
 	&.disabled {
 		background-color: color(blue);
@@ -126,27 +183,36 @@ input[type='radio'] {
 }
 
 // Placeholder styles
-::-webkit-input-placeholder {
-	color: color(gray);
-	opacity: 0.54;
-}
+.form-field {
+	&::-webkit-input-placeholder {
+		color: color(gray);
+		opacity: 0.54;
+	}
 
-:-ms-input-placeholder {
-	color: color(gray);
-}
+	&:-ms-input-placeholder {
+		color: color(gray);
+	}
 
-::-moz-placeholder {
-	color: color(gray);
-	opacity: 1;
-}
+	&::-moz-placeholder {
+		color: color(gray);
+		opacity: 1;
+	}
 
-:-moz-placeholder {
-	color: color(gray);
-	opacity: 1;
+	&:-moz-placeholder {
+		color: color(gray);
+		opacity: 1;
+	}
+
+	&::placeholder {
+		color: color(gray);
+	}
 }
 
 // Validation styles
-.form-label.required::after {
-	content: '\2217';
-	color: color(red);
+.form-label {
+	&:required::after,
+	&[required]::after &.required::after {
+		content: '\2217';
+		color: color(red);
+	}
 }

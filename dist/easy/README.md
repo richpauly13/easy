@@ -87,7 +87,7 @@ Read the [documentation](https://richpauly13.github.io/easy/dist/easy-docs).
 1. Run `npm run build`
 1. Submit a pull request
 
-_NOTE: All code should include passing unit tests_
+_NOTE: All code should include passing unit tests_.
 
 ## Issues
 

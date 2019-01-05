@@ -29,7 +29,7 @@ Buttons can be rounded with the `.rounded` class.
 */
 
 /* SG
-# Button/States
+# Button/State
 
 Buttons can be disabled with the `disabled` attribute or `.disabled` class.
 
@@ -138,7 +138,9 @@ Buttons can be grouped with `.btn-group-*` classes.
 	}
 }
 
-:host-context(.btn-group-col) {
+:host-context(.btn-group-col),
+:host-context(.btn-group-full),
+:host-context(.btn-group-row) {
 	&.btn-xs,
 	&.btn-sm,
 	&.btn-md,
@@ -157,22 +159,6 @@ Buttons can be grouped with `.btn-group-*` classes.
 	&.btn-lg,
 	&.btn-xl {
 		@include flex(1, 0, auto);
-
-		border-bottom: rem(1) solid color(white);
-		border-left: rem(1) solid color(white);
-		margin: 0;
-	}
-}
-
-:host-context(.btn-group-row) {
-	&.btn-xs,
-	&.btn-sm,
-	&.btn-md,
-	&.btn-lg,
-	&.btn-xl {
-		border-bottom: rem(1) solid color(white);
-		border-left: rem(1) solid color(white);
-		margin: 0;
 	}
 }
 

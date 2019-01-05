@@ -250,10 +250,6 @@ input[type='range'] {
 	}
 }
 
-label {
-	@include row-inline;
-}
-
 select {
 	overflow-y: auto;
 }
