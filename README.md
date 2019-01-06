@@ -33,7 +33,7 @@ EASY was created with mobile first in mind. There are many layout options and th
 
 ### Lightweight
 
-Developers can use only the components needed for a particular project. This is done through module imports. If you choose to use the entire framework, it is still less than 100k.
+Developers can use only the components needed for a particular project. This is done through module imports. If you choose to use the entire framework, it is still less than 200kB.
 
 ## Installation
 
@@ -89,4 +89,4 @@ Report an [issue](https://github.com/richpauly13/easy/issues).
 
 ## License
 
-Copyright (c) 2019, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE))
+Copyright (c) 2019, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE)).

@@ -141,8 +141,7 @@
 				"@schematics/angular:module": {
 					"commonModule": false,
 					"module": "components",
-					"flat": false,
-					"spec": true
+					"flat": false
 				},
 				"@schematics/angular:service": {
 					"export": true,

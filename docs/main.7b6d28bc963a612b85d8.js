@@ -16445,7 +16445,7 @@
 							configurable: !0
 						}),
 						(l.prototype.ngOnInit = function() {
-							this.section = 'Alert';
+							this.section = 'Form';
 						}),
 						(l.prototype.checkSection = function(l) {
 							return this.section === l;
@@ -32171,4 +32171,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.26d24a9d901cfc5daaf7.js.map
+//# sourceMappingURL=main.7b6d28bc963a612b85d8.js.map

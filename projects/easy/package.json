@@ -2,10 +2,29 @@
   "name": "easy-framework",
   "version": "0.0.7",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
-  "description": "Easy CSS framework.",
-  "bugs": "",
+  "description": "EASY CSS framework.",
+  "bugs": {
+    "url": "https://github.com/richpauly13/easy/issues"
+  },
   "license": "MIT",
-  "repository": "github:richpauly13/easy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richpauly13/easy.git"
+  },
+  "keywords": [
+    "angular",
+    "css",
+    "flexbox",
+    "responsive",
+    "accessible",
+    "framework",
+    "a11y"
+  ],
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.5.0"
+  },
+  "homepage": "https://github.com/richpauly13/easy",
   "private": false,
   "peerDependencies": {
     "@angular/common": "^6.0.0 || ^7.0.0",
