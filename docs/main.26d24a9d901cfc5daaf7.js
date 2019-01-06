@@ -16295,7 +16295,7 @@
 							null,
 							1,
 							'a',
-							[['class', 'sr-only']],
+							[['class', 'sr-only'], ['href', '#']],
 							null,
 							null,
 							null,
@@ -31657,7 +31657,7 @@
 							[
 								['class', 'pad-a-xl styleguide'],
 								['id', 'content'],
-								['tabindex', '0']
+								['tabindex', '-1']
 							],
 							null,
 							null,
@@ -32171,4 +32171,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.7f8238a46fc8f8c278f7.js.map
+//# sourceMappingURL=main.26d24a9d901cfc5daaf7.js.map

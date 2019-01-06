@@ -9,18 +9,23 @@
     "flexbox",
     "responsive",
     "accessible",
-    "framework"
+    "framework",
+    "a11y"
   ],
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
   },
-  "homepage": "https://richpauly13.github.io/easy/dist/easy-docs",
+  "homepage": "https://github.com/richpauly13/easy",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/richpauly13/easy.git"
   },
   "private": true,
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.5.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
@@ -88,14 +93,5 @@
     "tslib": "^1.9.3",
     "tslint": "^5.12.0",
     "typescript": "^3.1.6"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "run-s format:fix lint"
-    }
-  },
-  "engines": {
-    "node": "10.13.0",
-    "npm": "6.5.0"
   }
 }
