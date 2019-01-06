@@ -13,7 +13,6 @@
 	color: inherit;
 }
 
-.disabled,
 :disabled,
 [disabled] {
 	background-color: color(gray);
@@ -38,6 +37,15 @@ ol.list {
 
 	& ol.lst {
 		list-style: lower-alpha;
+	}
+}
+
+.readonly {
+	background-color: color(red);
+	color: color(lt-black);
+
+	&:hover {
+		cursor: not-allowed;
 	}
 }
 

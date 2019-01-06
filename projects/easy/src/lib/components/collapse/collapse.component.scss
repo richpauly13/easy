@@ -1,5 +1,5 @@
 /* SG
-# Collapsible
+# Collapse
 
 Coming soon.
 
@@ -8,7 +8,7 @@ Coming soon.
 */
 
 /* SG
-# Collapsible/Collapse
+# Collapse/Accordion
 
 Coming soon.
 
@@ -17,16 +17,7 @@ Coming soon.
 */
 
 /* SG
-# Collapsible/Accordion
-
-Coming soon.
-
-```
-```
-*/
-
-/* SG
-# Collapsible/Expand
+# Collapse/Expand
 
 Coming soon.
 
@@ -60,19 +51,13 @@ Coming soon.
 		padding: rem(0 8);
 	}
 
-	&.expand {
-		max-height: rem(26);
-	}
-
-	&.collapse-content,
-	&.expand {
+	&.collapse-content {
 		@include animate(max-height);
 
 		overflow: hidden;
 	}
 
-	&.collapse:checked + .collapse-content,
-	&.expand:focus {
+	&.collapse:checked + .collapse-content {
 		max-height: rem(1080);
 		overflow: auto;
 	}

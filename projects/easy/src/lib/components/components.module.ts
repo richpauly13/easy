@@ -4,7 +4,7 @@ import { AlertModule } from './alert/alert.module';
 import { BadgeModule } from './badge/badge.module';
 import { ButtonModule } from './button/button.module';
 import { CardModule } from './card/card.module';
-import { CollapsibleModule } from './collapsible/collapsible.module';
+import { CollapseModule } from './collapse/collapse.module';
 import { DropdownModule } from './dropdown/dropdown.module';
 import { FormModule } from './form/form.module';
 import { GridModule } from './grid/grid.module';
@@ -24,7 +24,7 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		BadgeModule,
 		ButtonModule,
 		CardModule,
-		CollapsibleModule,
+		CollapseModule,
 		DropdownModule,
 		FormModule,
 		GridModule,

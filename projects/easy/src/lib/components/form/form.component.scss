@@ -29,15 +29,6 @@ Coming soon.
 */
 
 /* SG
-# Form/Group
-
-Coming soon.
-
-```
-```
-*/
-
-/* SG
 # Form/Label
 
 Coming soon.
@@ -85,10 +76,6 @@ Coming soon.
 		padding: rem(6 10 12);
 	}
 
-	&.form-group {
-		margin: rem(-8);
-	}
-
 	&.field-group {
 		padding: rem(8);
 	}
@@ -115,12 +102,6 @@ Coming soon.
 
 		border: rem(1) solid color(blue);
 		padding: rem(7);
-	}
-
-	&:disabled,
-	&[disabled],
-	&.disabled {
-		background-color: color(blue);
 	}
 }
 

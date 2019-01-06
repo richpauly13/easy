@@ -1,8 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-	selector: '[ezCollapsible]'
+	selector: '[ezCollapse]'
 })
-export class CollapsibleDirective {
+export class CollapseDirective {
 	constructor() {}
 }

@@ -2,7 +2,13 @@
 	<ul>
 		{{#each menu}}
 		<li>
-			<a (click)="onClick('{{name}}')" [ngClass]="{'bg-lt-gray': checkSection('{{name}}')}" class="hover bg-hover-lt-gray pad-a-xs">{{name}}</a>
+			<a
+				(click)="onClick('{{name}}')"
+				[ngClass]="{'bg-lt-gray': checkSection('{{name}}')}"
+				class="hover bg-hover-lt-gray pad-a-xs"
+				href="#"
+				>{{name}}</a
+			>
 			<ul *ngIf="checkSection('{{name}}')" class="pad-l-sm submenu">
 				{{#each headings}}
 				<li *ngIf="'{{name}}'"><a>{{name}}</a></li>

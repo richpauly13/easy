@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CollapsibleService } from './collapsible.service';
+import { CollapseService } from './collapse.service';
 
-describe('CollapsibleService', () => {
+describe('CollapseService', () => {
 	beforeEach(() => TestBed.configureTestingModule({}));
 
 	it('should be created', () => {
-		const service: CollapsibleService = TestBed.get(CollapsibleService);
+		const service: CollapseService = TestBed.get(CollapseService);
 		expect(service).toBeTruthy();
 	});
 });

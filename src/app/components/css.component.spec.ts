@@ -1,6 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EasyModule } from 'easy-framework';
+import {
+	AlertModule,
+	BadgeModule,
+	ButtonModule,
+	CardModule,
+	CollapseModule,
+	DropdownModule,
+	FormModule,
+	GridModule,
+	ModalModule,
+	NavModule,
+	SliderModule,
+	SlideshowModule,
+	SpinnerModule,
+	SwitchModule,
+	TabModule,
+	TableModule,
+	TooltipModule
+} from 'easy-framework';
 
 import { CssComponent } from './css.component';
 
@@ -10,7 +28,25 @@ describe('CssComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [EasyModule],
+			imports: [
+				AlertModule,
+				BadgeModule,
+				ButtonModule,
+				CardModule,
+				CollapseModule,
+				DropdownModule,
+				FormModule,
+				GridModule,
+				ModalModule,
+				NavModule,
+				SliderModule,
+				SlideshowModule,
+				SpinnerModule,
+				SwitchModule,
+				TabModule,
+				TableModule,
+				TooltipModule
+			],
 			declarations: [CssComponent]
 		}).compileComponents();
 	}));
