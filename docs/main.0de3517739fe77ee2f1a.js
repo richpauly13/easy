@@ -16431,7 +16431,7 @@
 			var qg = Vo({
 				encapsulation: 0,
 				styles: [
-					'.fieldset[_nghost-%COMP%]{border:.0625rem solid #2196f3;padding:.375rem .625rem .75rem}.form-field[_nghost-%COMP%]{transition-duration:.3s;transition-property:box-shadow;transition-timing-function:linear;background-color:inherit;border:.0625rem solid #bdbdbd;padding:.75rem}.form-field[_nghost-%COMP%]:hover{border:.0625rem solid #000}.form-field[_nghost-%COMP%]:focus{box-shadow:0 .09375rem .25rem rgba(33,150,243,.24),0 .09375rem .375rem rgba(33,150,243,.12);border:.0625rem solid #2196f3}.form-field[_nghost-%COMP%]::-webkit-input-placeholder{color:#8d8d8d;opacity:.54}.form-field[_nghost-%COMP%]:-ms-input-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]::-ms-input-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]::placeholder{color:#8d8d8d;opacity:1}.form-group[_nghost-%COMP%]{max-width:100%}.form-label[_nghost-%COMP%]{font-size:1.125rem}.form-label[_nghost-%COMP%]:required::after, .form-label[required][_nghost-%COMP%]::after{content:"\\2217";color:#ba000d}select.form-field[_nghost-%COMP%]{max-height:5rem;padding-left:.375rem}select.form-field[_nghost-%COMP%]::-ms-value{background-color:#fafafa;color:#191919}textarea.form-field[_nghost-%COMP%]{height:6.25rem}.form-h.field-group[_nghost-%COMP%], .form-h   .field-group[_nghost-%COMP%], .form-v.field-group[_nghost-%COMP%], .form-v   .field-group[_nghost-%COMP%]{align-items:center;display:flex;flex-wrap:wrap;padding-bottom:.5rem}.form-h.form-field[_nghost-%COMP%], .form-h   .form-field[_nghost-%COMP%], .form-v.form-field[_nghost-%COMP%], .form-v   .form-field[_nghost-%COMP%]{flex:1 0 13.75rem}.form-h.form-label[_nghost-%COMP%], .form-h   .form-label[_nghost-%COMP%], .form-v.form-label[_nghost-%COMP%], .form-v   .form-label[_nghost-%COMP%]{flex:1 0 7.5rem;max-width:13.75rem}.form-h.field-group[_nghost-%COMP%], .form-h   .field-group[_nghost-%COMP%]{flex:1 0 7.5rem}.form-h.form-group[_nghost-%COMP%], .form-h   .form-group[_nghost-%COMP%]{align-items:center;display:flex;flex-wrap:wrap}.form-v.field-group[_nghost-%COMP%]:last-child, .form-v   .field-group[_nghost-%COMP%]:last-child{padding-bottom:0}input[type=checkbox][_ngcontent-%COMP%], input[type=radio][_ngcontent-%COMP%]{margin-right:1rem;vertical-align:middle}.checkbox[_ngcontent-%COMP%], .radio[_ngcontent-%COMP%]{display:none}.checkbox-group[_ngcontent-%COMP%]   .checkbox[_ngcontent-%COMP%], .radio-group[_ngcontent-%COMP%]   .radio[_ngcontent-%COMP%]{flex-basis:0;flex-grow:1;flex-shrink:0;flex-basis:50%}.checkbox-label[_ngcontent-%COMP%]::before, .radio-label[_ngcontent-%COMP%]::before{content:"\\00a0";background-color:#efefef;display:inline-block;height:1rem;margin-right:.375rem;vertical-align:middle;width:1rem}.radio-label[_ngcontent-%COMP%]::before{border-radius:50%}.checkbox[_ngcontent-%COMP%]:checked + .checkbox-label[_ngcontent-%COMP%]::before, .radio[_ngcontent-%COMP%]:checked + .radio-label[_ngcontent-%COMP%]::before{background-color:#2196f3;border:.125rem solid #efefef}'
+					".fieldset[_nghost-%COMP%]{border:.0625rem solid #2196f3;padding:.375rem .625rem .75rem}.form-field[_nghost-%COMP%]{transition-duration:.3s;transition-property:box-shadow;transition-timing-function:linear;background-color:inherit;border:.0625rem solid #bdbdbd;padding:.75rem}.form-field[_nghost-%COMP%]:hover{border:.0625rem solid #000}.form-field[_nghost-%COMP%]:focus{box-shadow:0 .09375rem .25rem rgba(33,150,243,.24),0 .09375rem .375rem rgba(33,150,243,.12);border:.0625rem solid #2196f3}.form-field[_nghost-%COMP%]::-webkit-input-placeholder{color:#8d8d8d;opacity:.54}.form-field[_nghost-%COMP%]:-ms-input-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]::-ms-input-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]::placeholder{color:#8d8d8d;opacity:1}.form-group[_nghost-%COMP%]{max-width:100%}.form-label[_nghost-%COMP%]{font-size:1.125rem}.form-label[_nghost-%COMP%]:required::after, .form-label[required][_nghost-%COMP%]::after{content:'\\2217';color:#ba000d}select.form-field[_nghost-%COMP%]{max-height:5rem;padding-left:.375rem}select.form-field[_nghost-%COMP%]::-ms-value{background-color:#fafafa;color:#191919}textarea.form-field[_nghost-%COMP%]{height:6.25rem}.form-h.field-group[_nghost-%COMP%], .form-h   .field-group[_nghost-%COMP%], .form-v.field-group[_nghost-%COMP%], .form-v   .field-group[_nghost-%COMP%]{align-items:center;display:flex;flex-wrap:wrap;padding-bottom:.5rem}.form-h.form-field[_nghost-%COMP%], .form-h   .form-field[_nghost-%COMP%], .form-v.form-field[_nghost-%COMP%], .form-v   .form-field[_nghost-%COMP%]{flex:1 0 13.75rem}.form-h.form-label[_nghost-%COMP%], .form-h   .form-label[_nghost-%COMP%], .form-v.form-label[_nghost-%COMP%], .form-v   .form-label[_nghost-%COMP%]{flex:1 0 7.5rem;max-width:13.75rem}.form-h.field-group[_nghost-%COMP%], .form-h   .field-group[_nghost-%COMP%]{flex:1 0 7.5rem}.form-h.form-group[_nghost-%COMP%], .form-h   .form-group[_nghost-%COMP%]{align-items:center;display:flex;flex-wrap:wrap}.form-v.field-group[_nghost-%COMP%]:last-child, .form-v   .field-group[_nghost-%COMP%]:last-child{padding-bottom:0}input[type=checkbox][_ngcontent-%COMP%], input[type=radio][_ngcontent-%COMP%]{margin-right:1rem;vertical-align:middle}.checkbox[_ngcontent-%COMP%], .radio[_ngcontent-%COMP%]{display:none}.checkbox-group[_ngcontent-%COMP%]   .checkbox[_ngcontent-%COMP%], .radio-group[_ngcontent-%COMP%]   .radio[_ngcontent-%COMP%]{flex-basis:0;flex-grow:1;flex-shrink:0;flex-basis:50%}.checkbox-label[_ngcontent-%COMP%]::before, .radio-label[_ngcontent-%COMP%]::before{content:'\\00a0';background-color:#efefef;display:inline-block;height:1rem;margin-right:.375rem;vertical-align:middle;width:1rem}.radio-label[_ngcontent-%COMP%]::before{border-radius:50%}.checkbox[_ngcontent-%COMP%]:checked + .checkbox-label[_ngcontent-%COMP%]::before, .radio[_ngcontent-%COMP%]:checked + .radio-label[_ngcontent-%COMP%]::before{background-color:#2196f3;border:.125rem solid #efefef}"
 				],
 				data: {}
 			});
@@ -27696,7 +27696,7 @@
 							0,
 							null,
 							null,
-							458,
+							464,
 							'article',
 							[['class', 'mar-b-lg shadow-1 border-a-gray section']],
 							null,
@@ -27988,7 +27988,12 @@
 							0,
 							1,
 							'textarea',
-							[['class', 'form-field'], ['id', 'notes'], ['name', 'notes']],
+							[
+								['class', 'form-field'],
+								['id', 'notes'],
+								['name', 'notes'],
+								['placeholder', 'Enter notes']
+							],
 							null,
 							null,
 							null,
@@ -27997,14 +28002,14 @@
 						)),
 						rs(53, 114688, null, 0, yg, [], null, null),
 						(l()(),
-						mi(54, 0, null, null, 404, 'figure', [], null, null, null, null, null)),
+						mi(54, 0, null, null, 410, 'figure', [], null, null, null, null, null)),
 						(l()(),
 						mi(
 							55,
 							0,
 							null,
 							null,
-							403,
+							409,
 							'pre',
 							[['class', 'pad-a-sm']],
 							null,
@@ -30042,7 +30047,7 @@
 							0,
 							null,
 							null,
-							22,
+							28,
 							'span',
 							[['class', 'hljs-tag']],
 							null,
@@ -30170,41 +30175,41 @@
 							null
 						)),
 						(l()(), Ss(-1, null, ['"notes"'])),
-						(l()(), Ss(-1, null, ['>'])),
+						(l()(), Ss(-1, null, [' '])),
 						(l()(),
 						mi(
 							436,
 							0,
 							null,
 							null,
-							4,
+							1,
 							'span',
-							[['class', 'hljs-tag']],
+							[['class', 'hljs-attribute']],
 							null,
 							null,
 							null,
 							null,
 							null
 						)),
-						(l()(), Ss(-1, null, ['</'])),
+						(l()(), Ss(-1, null, ['placeholder'])),
+						(l()(), Ss(-1, null, ['='])),
 						(l()(),
 						mi(
-							438,
+							439,
 							0,
 							null,
 							null,
 							1,
 							'span',
-							[['class', 'hljs-title']],
+							[['class', 'hljs-value']],
 							null,
 							null,
 							null,
 							null,
 							null
 						)),
-						(l()(), Ss(-1, null, ['textarea'])),
+						(l()(), Ss(-1, null, ['"Enter notes"'])),
 						(l()(), Ss(-1, null, ['>'])),
-						(l()(), Ss(-1, null, ['\n        '])),
 						(l()(),
 						mi(
 							442,
@@ -30236,9 +30241,9 @@
 							null,
 							null
 						)),
-						(l()(), Ss(-1, null, ['li'])),
+						(l()(), Ss(-1, null, ['textarea'])),
 						(l()(), Ss(-1, null, ['>'])),
-						(l()(), Ss(-1, null, ['\n    '])),
+						(l()(), Ss(-1, null, ['\n        '])),
 						(l()(),
 						mi(
 							448,
@@ -30270,9 +30275,9 @@
 							null,
 							null
 						)),
-						(l()(), Ss(-1, null, ['ul'])),
+						(l()(), Ss(-1, null, ['li'])),
 						(l()(), Ss(-1, null, ['>'])),
-						(l()(), Ss(-1, null, ['    \n'])),
+						(l()(), Ss(-1, null, ['\n    '])),
 						(l()(),
 						mi(
 							454,
@@ -30292,6 +30297,40 @@
 						(l()(),
 						mi(
 							456,
+							0,
+							null,
+							null,
+							1,
+							'span',
+							[['class', 'hljs-title']],
+							null,
+							null,
+							null,
+							null,
+							null
+						)),
+						(l()(), Ss(-1, null, ['ul'])),
+						(l()(), Ss(-1, null, ['>'])),
+						(l()(), Ss(-1, null, ['    \n'])),
+						(l()(),
+						mi(
+							460,
+							0,
+							null,
+							null,
+							4,
+							'span',
+							[['class', 'hljs-tag']],
+							null,
+							null,
+							null,
+							null,
+							null
+						)),
+						(l()(), Ss(-1, null, ['</'])),
+						(l()(),
+						mi(
+							462,
 							0,
 							null,
 							null,
@@ -36128,4 +36167,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.2f326a20f6587318f74d.js.map
+//# sourceMappingURL=main.0de3517739fe77ee2f1a.js.map
