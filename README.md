@@ -8,6 +8,8 @@
 
 **E**asy **A**ngular **S**tyles with a11**Y**
 
+_This project is a work in prgress. Not all components are styled or documented...yet._
+
 ## Overview
 
 EASY is a CSS framework developed on 4 core principles:
@@ -81,7 +83,7 @@ Read the [documentation](https://richpauly13.github.io/easy/).
 1. Run `npm run build`
 1. Submit a pull request
 
-_NOTE: All code should include passing unit tests_.
+_NOTE: All pull requests should include passing unit tests_.
 
 ## Issues
 
@@ -89,4 +91,4 @@ Report an [issue](https://github.com/richpauly13/easy/issues).
 
 ## License
 
-Copyright (c) 2019, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE)).
+Copyright (c) 2019, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE.md)).

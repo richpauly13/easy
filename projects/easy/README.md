@@ -6,7 +6,9 @@
 
 # EASY
 
-Easy Angular Styles with a11Y
+**E**asy **A**ngular **S**tyles with a11**Y**
+
+_This project is a work in prgress. Not all components are styled or documented...yet._
 
 ## Overview
 
@@ -33,15 +35,11 @@ EASY was created with mobile first in mind. There are many layout options and th
 
 ### Lightweight
 
-Developers can use only the components needed for a particular project. This is done through module imports. If you choose to use the entire framework, it is still less than 100k.
+Developers can use only the components needed for a particular project. This is done through module imports.
 
 ## Installation
 
-NPM:
-
-```
-npm i --save easy-framework
-```
+**NPM:** `npm i --save easy-framework`
 
 ## Usage
 
@@ -49,7 +47,7 @@ Import core styles into your app root module.
 
 app.module.ts
 
-```
+```ts
 import { EasyModule } from 'easy-framework';
 ```
 
@@ -57,17 +55,15 @@ Add the `<ez-root>` tag in your app root component.
 
 app.component.html
 
-```
-<ez-root>
-    <router-outlet></router-outlet>
-</ez-root>
+```html
+<ez-root> <router-outlet></router-outlet> </ez-root>
 ```
 
 Then, import component modules where needed.
 
 some.module.ts
 
-```
+```ts
 import { ButtonModule } from 'easy-framework';
 ```
 
@@ -87,7 +83,7 @@ Read the [documentation](https://richpauly13.github.io/easy/).
 1. Run `npm run build`
 1. Submit a pull request
 
-_NOTE: All code should include passing unit tests_.
+_NOTE: All pull requests should include passing unit tests_.
 
 ## Issues
 
@@ -95,4 +91,4 @@ Report an [issue](https://github.com/richpauly13/easy/issues).
 
 ## License
 
-See the [license](https://github.com/richpauly13/easy/blob/master/LICENSE).
+Copyright (c) 2019, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE.md)).

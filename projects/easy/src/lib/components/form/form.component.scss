@@ -94,7 +94,7 @@ Form fields are styled with a `.form-field` class. Different styles are applied 
         </li>
         <li class="field-group">
             <label class="form-label" for="notes">Notes</label>
-            <textarea class="form-field" name="notes" id="notes"></textarea>
+            <textarea class="form-field" name="notes" id="notes" placeholder="Enter notes"></textarea>
         </li>
     </ul>    
 </form>
