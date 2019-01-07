@@ -53,10 +53,8 @@
 }
 
 @mixin row {
-	align-content: center;
 	align-items: center;
 	display: flex;
-	justify-content: flex-start;
 }
 
 @mixin row-inline {

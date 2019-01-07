@@ -5,16 +5,28 @@ Forms are styled with `.form-*` classes.
 
 ```
 <form class="form-h">
-    <label class="form-label" for="name">Name</label>
-    <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
-    <label class="form-label" for="email">Email</label>
-    <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+        </li>
+    </ul>    
 </form>
 <form class="form-v">
-    <label class="form-label" for="name">Name</label>
-    <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
-    <label class="form-label" for="email">Email</label>
-    <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+        </li>
+    </ul>    
 </form>
 ```
 */
@@ -22,9 +34,24 @@ Forms are styled with `.form-*` classes.
 /* SG
 # Form/Fieldset
 
-Coming soon.
+Fieldsets are styled with a `.fieldset` class and have a `<legend>` tag as the first child.
 
 ```
+<form class="form-v">
+    <fieldset class="fieldset">
+        <legend>Contact</legend>
+        <ul class="form-group">
+            <li class="field-group">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+            </li>
+            <li class="field-group">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+            </li>
+        </ul>
+    </fieldset>    
+</form>
 ```
 */
 
@@ -40,9 +67,37 @@ Coming soon.
 /* SG
 # Form/Field
 
-Coming soon.
+Form fields are styled with a `.form-field` class. Different styles are applied based on the form control.
 
 ```
+<form class="form-v">
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="gender">Gender</label>
+            <select class="form-field" name="gender" id="gender">
+                <option>Select</option>
+                <option>Female</option>
+                <option>Male</option>
+            </select>
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="language">Language</label>
+            <select class="form-field" name="language" id="language" multiple>
+                <option>English</option>
+                <option>French</option>
+                <option>Spanish</option>
+            </select>
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="notes">Notes</label>
+            <textarea class="form-field" name="notes" id="notes"></textarea>
+        </li>
+    </ul>    
+</form>
 ```
 */
 
@@ -61,65 +116,121 @@ Coming soon.
 
 // Form styles
 :host {
-	&.field-group,
-	&.form-group,
-	&.form-h {
-		@include row;
-	}
-
-	&.form-v {
-		@include column;
-	}
-
 	&.fieldset {
 		border: rem(1) solid color(blue);
 		padding: rem(6 10 12);
-	}
-
-	&.field-group {
-		padding: rem(8);
-	}
-
-	&.form-label {
-		font-size: $font-md;
-		max-width: rem(140);
 	}
 
 	&.form-field {
 		@include animate(box-shadow);
 
 		background-color: inherit;
+		border: rem(1) solid color(gray);
+		padding: rem(12);
+
+		&:hover {
+			border: rem(1) solid color(black);
+		}
+
+		&:focus {
+			@include shadow(1, blue);
+
+			border: rem(1) solid color(blue);
+		}
+
+		&::-webkit-input-placeholder {
+			color: color(dk-gray);
+			opacity: 0.54;
+		}
+
+		&:-ms-input-placeholder {
+			color: color(dk-gray);
+			opacity: 1;
+		}
+
+		&::-moz-placeholder {
+			color: color(dk-gray);
+			opacity: 1;
+		}
+
+		&:-moz-placeholder {
+			color: color(dk-gray);
+			opacity: 1;
+		}
+
+		&::placeholder {
+			color: color(dk-gray);
+			opacity: 1;
+		}
+	}
+
+	&.form-group {
+		max-width: 100%;
+	}
+
+	&.form-label {
+		font-size: $font-md;
+
+		&:required::after,
+		&[required]::after {
+			content: '\2217';
+			color: color(red);
+		}
+	}
+
+	&select.form-field {
+		max-height: rem(80);
+		padding-left: rem(6);
+
+		&::-ms-value {
+			background-color: color(lt-white);
+			color: color(lt-black);
+		}
+	}
+
+	&textarea.form-field {
+		height: rem(100);
 	}
 }
 
-.form-field {
-	&:not([multiple]):not(textarea) {
-		height: rem(40);
+// Credit: https://webdesign.tutsplus.com/tutorials/building-responsive-forms-with-flexbox--cms-26767
+:host-context(.form-h),
+:host-context(.form-v) {
+	&.field-group {
+		@include row;
+
+		flex-wrap: wrap;
+		padding-bottom: rem(8);
 	}
 
-	&:focus {
-		@include shadow(1, blue);
+	&.form-field {
+		flex: 1 0 rem(220);
+	}
 
-		border: rem(1) solid color(blue);
-		padding: rem(7);
+	&.form-label {
+		flex: 1 0 rem(120);
+		max-width: rem(220);
 	}
 }
 
-select:not([multiple]).form-field {
-	padding-left: rem(6);
+:host-context(.form-h) {
+	&.field-group {
+		flex: 1 0 rem(120);
+	}
 
-	&:focus {
-		padding-left: rem(7);
+	&.form-group {
+		@include row;
+
+		flex-wrap: wrap;
 	}
 }
 
-select::-ms-value {
-	background-color: color(lt-white);
-	color: color(lt-black);
-}
-
-option {
-	color: color(gray);
+:host-context(.form-v) {
+	&.field-group {
+		&:last-child {
+			padding-bottom: 0;
+		}
+	}
 }
 
 // Checkbox styles
@@ -161,39 +272,4 @@ input[type='radio'] {
 .radio:checked + .radio-label::before {
 	background-color: color(blue);
 	border: rem(2) solid color(lt-gray);
-}
-
-// Placeholder styles
-.form-field {
-	&::-webkit-input-placeholder {
-		color: color(gray);
-		opacity: 0.54;
-	}
-
-	&:-ms-input-placeholder {
-		color: color(gray);
-	}
-
-	&::-moz-placeholder {
-		color: color(gray);
-		opacity: 1;
-	}
-
-	&:-moz-placeholder {
-		color: color(gray);
-		opacity: 1;
-	}
-
-	&::placeholder {
-		color: color(gray);
-	}
-}
-
-// Validation styles
-.form-label {
-	&:required::after,
-	&[required]::after &.required::after {
-		content: '\2217';
-		color: color(red);
-	}
 }

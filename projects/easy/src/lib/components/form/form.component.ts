@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector:
-		'ez-form, .fieldset, .field-group, .form-field, .form-h, .form-v, .form-group, .form-label',
+		'ez-form, .field-group, .fieldset, .form-field, .form-group, .form-h, .form-label, .form-v',
 	templateUrl: './form.component.html',
 	styleUrls: ['./form.component.scss']
 })

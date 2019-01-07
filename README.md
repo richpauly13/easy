@@ -33,7 +33,7 @@ EASY was created with mobile first in mind. There are many layout options and th
 
 ### Lightweight
 
-Developers can use only the components needed for a particular project. This is done through module imports. If you choose to use the entire framework, it is still less than 200kB.
+Developers can use only the components needed for a particular project. This is done through module imports.
 
 ## Installation
 

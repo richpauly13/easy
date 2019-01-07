@@ -17,15 +17,15 @@ export class CssComponent implements OnInit {
 
 	public constructor() {}
 
-	public ngOnInit() {
+	public ngOnInit(): void {
 		this.section = 'Alert';
 	}
 
-	public checkSection(section: string) {
+	public checkSection(section: string): boolean {
 		return this.section === section;
 	}
 
-	public onClick(name: string) {
+	public selectSection(name: string): void {
 		this.section = name;
 	}
 }

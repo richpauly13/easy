@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'ez-root',
@@ -7,7 +7,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 	encapsulation: ViewEncapsulation.None
 })
 export class EasyComponent implements OnInit {
-	public constructor() {}
+	@ViewChild('content') public content: ElementRef;
+
+	public constructor(private elementRef: ElementRef) {}
 
 	public ngOnInit(): void {}
+
+	public skip(): void {
+		this.content.nativeElement.focus();
+	}
 }

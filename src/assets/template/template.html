@@ -3,7 +3,7 @@
 		{{#each menu}}
 		<li>
 			<a
-				(click)="onClick('{{name}}')"
+				(click)="selectSection('{{name}}')"
 				[ngClass]="{'bg-lt-gray': checkSection('{{name}}')}"
 				class="hover bg-hover-lt-gray pad-a-xs"
 				href="#"
@@ -19,7 +19,7 @@
 	</ul>
 </nav>
 
-<main class="pad-a-xl styleguide" id="content" tabindex="-1">
+<main #content class="pad-a-xl styleguide" tabindex="-1">
 	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
 	{{#each sections}}
