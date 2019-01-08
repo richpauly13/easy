@@ -8,7 +8,7 @@
 
 **E**asy **A**ngular **S**tyles with a11**Y**
 
-_This project is a work in prgress. Not all components are styled or documented...yet._
+_This project is a work in progress. Not all components are created or documented...yet._
 
 ## Overview
 
