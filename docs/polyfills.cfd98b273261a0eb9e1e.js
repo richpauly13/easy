@@ -4450,7 +4450,7 @@
 			})('versions', []).push({
 				version: r.version,
 				mode: n('LQAc') ? 'pure' : 'global',
-				copyright: '\xa9 2018 Denis Pushkarev (zloirock.ru)'
+				copyright: '\xa9 2019 Denis Pushkarev (zloirock.ru)'
 			});
 		},
 		VXxg: function(t, e, n) {
@@ -5178,7 +5178,7 @@
 			);
 		},
 		g3g5: function(t, e) {
-			var n = (t.exports = { version: '2.6.1' });
+			var n = (t.exports = { version: '2.6.2' });
 			'number' == typeof __e && (__e = n);
 		},
 		g4EE: function(t, e, n) {
@@ -5845,16 +5845,16 @@
 									break;
 								default:
 									var f = +o;
-									if (0 === f) return o;
+									if (0 === f) return n;
 									if (f > s) {
 										var p = l(f / 10);
 										return 0 === p
-											? o
+											? n
 											: p <= s
 											? void 0 === i[p - 1]
 												? o.charAt(1)
 												: i[p - 1] + o.charAt(1)
-											: o;
+											: n;
 									}
 									u = i[f - 1];
 							}
@@ -6400,4 +6400,4 @@
 	},
 	[[1, 0]]
 ]);
-//# sourceMappingURL=polyfills.338571bc1efd68e98071.js.map
+//# sourceMappingURL=polyfills.cfd98b273261a0eb9e1e.js.map
