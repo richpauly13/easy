@@ -67,7 +67,7 @@ Coming soon.
 /* SG
 # Form/Field
 
-Form fields are styled with a `.form-field` class. Different styles are applied based on the form control.
+Form fields are styled with a `.form-field` class. Different styles are applied based on the form field.
 
 ```
 <form class="form-v">
@@ -116,17 +116,26 @@ Coming soon.
 
 // Form styles
 :host {
+	&.field-group {
+		@include row;
+
+		align-items: center;
+		flex-wrap: wrap;
+		padding: rem(8);
+	}
+
 	&.fieldset {
 		border: rem(1) solid color(blue);
 		padding: rem(6 10 12);
 	}
 
 	&.form-field {
-		@include animate(box-shadow);
+		@include animate(border box-shadow);
 
 		background-color: inherit;
 		border: rem(1) solid color(gray);
-		padding: rem(12);
+		flex: 1 0 rem(220);
+		padding: rem(8);
 
 		&:hover {
 			border: rem(1) solid color(black);
@@ -140,7 +149,7 @@ Coming soon.
 
 		&::-webkit-input-placeholder {
 			color: color(dk-gray);
-			opacity: 0.54;
+			opacity: 1;
 		}
 
 		&:-ms-input-placeholder {
@@ -164,27 +173,29 @@ Coming soon.
 		}
 	}
 
-	&.form-group {
-		max-width: 100%;
-	}
-
 	&.form-label {
+		flex: 1 0 rem(120);
 		font-size: $font-md;
-
-		&:required::after,
-		&[required]::after {
-			content: '\2217';
-			color: color(red);
-		}
+		max-width: rem(220);
 	}
 
 	&select.form-field {
-		max-height: rem(80);
-		padding-left: rem(6);
+		height: rem(36);
+		padding-left: rem(4);
 
 		&::-ms-value {
-			background-color: color(lt-white);
+			background-color: inherit;
 			color: color(lt-black);
+		}
+
+		&[multiple] {
+			height: rem(100);
+		}
+
+		&:not([multiple]) {
+			padding-bottom: 0;
+			padding-top: 0;
+			padding-right: 0;
 		}
 	}
 
@@ -193,43 +204,15 @@ Coming soon.
 	}
 }
 
-// Credit: https://webdesign.tutsplus.com/tutorials/building-responsive-forms-with-flexbox--cms-26767
-:host-context(.form-h),
-:host-context(.form-v) {
-	&.field-group {
-		@include row;
-
-		flex-wrap: wrap;
-		padding-bottom: rem(8);
-	}
-
-	&.form-field {
-		flex: 1 0 rem(220);
-	}
-
-	&.form-label {
-		flex: 1 0 rem(120);
-		max-width: rem(220);
-	}
-}
-
 :host-context(.form-h) {
 	&.field-group {
-		flex: 1 0 rem(120);
+		flex: 1 0 auto;
 	}
 
 	&.form-group {
 		@include row;
 
 		flex-wrap: wrap;
-	}
-}
-
-:host-context(.form-v) {
-	&.field-group {
-		&:last-child {
-			padding-bottom: 0;
-		}
 	}
 }
 
@@ -255,7 +238,6 @@ input[type='radio'] {
 .checkbox-label::before,
 .radio-label::before {
 	content: '\00a0';
-
 	background-color: color(lt-gray);
 	display: inline-block;
 	height: rem(16);

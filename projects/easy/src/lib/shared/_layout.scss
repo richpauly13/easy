@@ -27,7 +27,7 @@ Coming soon.
 
 // Layout styles
 .container {
-	@include media(sm) {
+	@include media(md) {
 		width: 80%;
 	}
 }

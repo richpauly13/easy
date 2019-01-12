@@ -254,17 +254,12 @@ select {
 	overflow-y: auto;
 }
 
-select::-ms-value {
-	background-color: none;
-	color: inherit;
-}
-
 optgroup {
 	font-weight: bolder;
 }
 
 option {
-	color: color(gray);
+	color: color(dk-gray);
 }
 
 textarea {
@@ -298,9 +293,9 @@ input[type='submit'] {
 a[role='button'],
 button,
 html input[type='button'],
+input[type='range'],
 input[type='reset'],
 input[type='submit'],
-input[type='range'],
 select {
 	&:hover {
 		cursor: pointer;

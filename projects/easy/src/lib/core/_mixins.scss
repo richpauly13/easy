@@ -5,18 +5,18 @@
 }
 
 @mixin column {
-	align-content: flex-start;
-	align-items: flex-start;
-	display: flex;
+	@include row;
+
 	flex-direction: column;
-	justify-content: center;
 }
 
 @mixin flex($grow, $shrink, $basis) {
-	@if type-of($basis) == number {
+	@if $basis == 0 {
+		flex-basis: 0%;
+	} @else if type-of($basis) == number {
 		flex-basis: rem($basis);
 	} @else {
-		flex-basis: $basis;
+		flex-basis: auto;
 	}
 
 	flex-grow: $grow;
@@ -53,8 +53,9 @@
 }
 
 @mixin row {
-	align-items: center;
+	align-items: flex-start;
 	display: flex;
+	justify-content: flex-start;
 }
 
 @mixin row-inline {
