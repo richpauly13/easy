@@ -1,30 +1,14 @@
 /* SG
 # Form
 
-Forms are styled with `.form-*` classes for horizontal or vertical alignment.
+Forms are styled with `.form-group`, `.field-group`, `.form-label`, `.form-field` classes.
 
 ```
-<form class="form-h">
+<form>
     <ul class="form-group">
         <li class="field-group">
             <label class="form-label" for="name">Name</label>
             <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
-        </li>
-        <li class="field-group">
-            <label class="form-label" for="email">Email</label>
-            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
-        </li>
-    </ul>    
-</form>
-<form class="form-v">
-    <ul class="form-group">
-        <li class="field-group">
-            <label class="form-label" for="name">Name</label>
-            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
-        </li>
-        <li class="field-group">
-            <label class="form-label" for="email">Email</label>
-            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
         </li>
     </ul>    
 </form>
@@ -37,7 +21,7 @@ Forms are styled with `.form-*` classes for horizontal or vertical alignment.
 Fieldsets are styled with a `.fieldset` class and have a `<legend>` tag as the first child.
 
 ```
-<form class="form-v">
+<form>
     <fieldset class="fieldset">
         <legend>Contact</legend>
         <ul class="form-group">
@@ -57,7 +41,7 @@ Fieldsets are styled with a `.fieldset` class and have a `<legend>` tag as the f
 Form labels are styled with a `.form-label` class.
 
 ```
-<form class="form-v">
+<form>
     <ul class="form-group">
         <li class="field-group">
             <label class="form-label" for="name">Name</label>
@@ -74,7 +58,7 @@ Form labels are styled with a `.form-label` class.
 Form fields are styled with a `.form-field` class. Different styles are applied based on the form field.
 
 ```
-<form class="form-v">
+<form>
     <ul class="form-group">
         <li class="field-group">
             <label class="form-label" for="name">Name</label>
@@ -111,7 +95,7 @@ Form fields are styled with a `.form-field` class. Different styles are applied 
 Checkboxes and radio buttons are grouped with a `.*-group` class.
 
 ```
-<form class="form-v">
+<form>
     <ul class="form-group">
         <li class="field-group">
             <label class="form-label" for="name">Name</label>
@@ -162,7 +146,7 @@ Checkboxes and radio buttons are grouped with a `.*-group` class.
 Field groups are styled with a `.field-group` class.
 
 ```
-<form class="form-h">
+<form>
     <ul class="form-group">
         <li class="field-group">
             <label class="form-label" for="name">Name</label>
@@ -176,14 +160,28 @@ Field groups are styled with a `.field-group` class.
 /* SG
 # Form/Form Group
 
-Form groups are styled with a `.form-group` class.
+Form groups are styled with a `.form-group` class for vertical fields and `.form-group-inline` for horizontal fields.
 
 ```
-<form class="form-h">
+<form>
+    <ul class="form-group-inline">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
+        </li>
+    </ul>    
     <ul class="form-group">
         <li class="field-group">
             <label class="form-label" for="name">Name</label>
             <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
         </li>
     </ul>    
 </form>
@@ -219,7 +217,7 @@ Form groups are styled with a `.form-group` class.
 	}
 
 	&.form-field {
-		@include animate(border box-shadow);
+		@include animate(border, box-shadow);
 
 		background-color: inherit;
 		border: rem(1) solid color(gray);
@@ -265,6 +263,12 @@ Form groups are styled with a `.form-group` class.
 		}
 	}
 
+	&.form-group-inline {
+		@include row;
+
+		flex-wrap: wrap;
+	}
+
 	&.form-label {
 		flex: 1 0 rem(120);
 		font-size: $font-md;
@@ -303,6 +307,7 @@ Form groups are styled with a `.form-group` class.
 	}
 
 	&.form-label {
+		flex: none;
 		font-size: rem(16);
 		padding-left: rem(8);
 		padding-right: rem(8);
@@ -313,14 +318,8 @@ Form groups are styled with a `.form-group` class.
 	}
 }
 
-:host-context(.form-h) {
+:host-context(.form-group-inline) {
 	&.field-group {
 		flex: 1 0 auto;
-	}
-
-	&.form-group {
-		@include row;
-
-		flex-wrap: wrap;
 	}
 }
