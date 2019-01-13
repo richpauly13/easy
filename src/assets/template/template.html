@@ -24,14 +24,20 @@
 
 	{{#each sections}}
 	<article *ngIf="checkSection('{{section}}')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'{{heading}}'">{{heading}}</h2>
 			{{{comment}}}
 		</section>
 
-		<section class="pad-a-sm border-b-gray">{{{code}}}</section>
+		<section
+			*ngIf="'{{code}}'"
+			[ngClass]="{'flexbox': checkSection('Flexbox')}"
+			class="pad-a-sm border-tb-gray"
+		>
+			{{{code}}}
+		</section>
 
-		<figure><pre class="pad-a-sm">{{{markup}}}</pre></figure>
+		<figure *ngIf="'{{markup}}'"><pre class="pad-a-sm">{{{markup}}}</pre></figure>
 	</article>
 	{{/each}}
 </main>

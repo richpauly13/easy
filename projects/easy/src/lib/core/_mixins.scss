@@ -58,12 +58,6 @@
 	justify-content: flex-start;
 }
 
-@mixin row-inline {
-	@include row;
-
-	display: inline-flex;
-}
-
 // Credit: https://css-tricks.com/snippets/sass/material-shadows-mixin/
 @mixin shadow($depth, $color: black) {
 	@if $depth < 1 {

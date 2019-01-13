@@ -1,3 +1,8 @@
+@import '../../../projects/easy/src/lib/core/functions';
+@import '../../../projects/easy/src/lib/core/mixins';
+@import '../../../projects/easy/src/lib/core/variables';
+
+// Styleguide styles
 .styleguide {
 	margin-left: 16rem;
 }
@@ -165,4 +170,34 @@
 
 .tex .hljs-formula {
 	opacity: 0.5;
+}
+
+// Docs styles
+.flexbox {
+	@include row;
+
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	ul {
+		border: rem(1) solid color(black);
+
+		li {
+			color: color(white);
+			height: rem(100);
+			width: rem(100);
+
+			&:first-child {
+				background-color: color(red);
+			}
+
+			&:nth-child(2) {
+				background-color: color(blue);
+			}
+
+			&:last-child {
+				background-color: color(green);
+			}
+		}
+	}
 }

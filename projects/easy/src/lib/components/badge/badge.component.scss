@@ -21,10 +21,8 @@ Badges are styled with `.badge-*` classes.  If a badge does not contain text, it
 	&.badge-sm,
 	&.badge-md,
 	&.badge-lg {
-		@include row-inline;
-
 		border-radius: rem(16);
-		justify-content: center;
+		display: inline-block;
 
 		&:empty {
 			display: none;

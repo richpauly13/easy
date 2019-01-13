@@ -79,7 +79,7 @@
 				<li *ngIf="'Background'"><a>Background</a></li>
 				<li *ngIf="'Border'"><a>Border</a></li>
 				<li *ngIf="'Contrast'"><a>Contrast</a></li>
-				<li *ngIf="'Tsuffix'"><a>Tsuffix</a></li>
+				<li *ngIf="'Text'"><a>Text</a></li>
 			</ul>
 		</li>
 		<li>
@@ -336,12 +336,22 @@
 	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
 	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Alerts are styled with <code>.alert-*</code> classes.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;aside class&#x3D;&quot;alert-bad&quot;&gt;bad&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-good&quot;&gt;good&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-info&quot;&gt;info&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-warn&quot;&gt;warn&lt;/aside&gt;
+&lt;ez-alert class&#x3D;&quot;alert-good&quot;&gt;good&lt;/ez-alert&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<aside class="alert-bad">bad</aside>
 			<aside class="alert-good">good</aside>
 			<aside class="alert-info">info</aside>
@@ -349,7 +359,15 @@
 			<ez-alert class="alert-good">good</ez-alert>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;alert-bad&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;bad&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;alert-good&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;good&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;alert-info&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;info&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;alert-warn&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;warn&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ez-alert&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;alert-good&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;good&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ez-alert&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-bad"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
@@ -360,17 +378,29 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Close'">Close</h2>
 			<p>Alerts can be closed by adding a <code>.close</code> class in the alert.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;aside class&#x3D;&quot;alert-good close&quot;&gt;close&lt;/aside&gt;
+&lt;ez-alert class&#x3D;&quot;close alert-good&quot;&gt;close&lt;/ez-alert&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<aside class="alert-good close">close</aside>
 			<ez-alert class="close alert-good">close</ez-alert>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;alert-good close&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;close&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;aside&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ez-alert&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;close alert-good&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;close&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ez-alert&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
@@ -378,7 +408,7 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Badge')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>
 				Badges are styled with <code>.badge-*</code> classes. If a badge does not contain
@@ -386,7 +416,17 @@
 			</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;p class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;1&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;20&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-lg bg-dk-blue text-white&quot;&gt;300&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;&lt;/p&gt;
+&lt;ez-badge class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;10&lt;/ez-badge&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<p class="badge-sm bg-dk-blue text-white">1</p>
 			<p class="badge-md bg-dk-blue text-white">20</p>
 			<p class="badge-lg bg-dk-blue text-white">300</p>
@@ -394,7 +434,15 @@
 			<ez-badge class="badge-sm bg-dk-blue text-white">10</ez-badge>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;badge-sm bg-dk-blue text-white&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;1&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;badge-md bg-dk-blue text-white&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;20&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;badge-lg bg-dk-blue text-white&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;300&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;badge-md bg-dk-blue text-white&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ez-badge&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;badge-sm bg-dk-blue text-white&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;10&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ez-badge&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
@@ -405,12 +453,23 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Buttons are styled with <code>.btn-*</code> classes.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;button class&#x3D;&quot;btn-xs bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xs&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-sm bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;sm&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-lg bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;lg&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-xl bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xl&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-full bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;full&lt;/button&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
 			<button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
 			<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
@@ -419,7 +478,16 @@
 			<button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-xs bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;xs&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-sm bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;sm&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-lg bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;lg&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-xl bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;xl&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-full bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;full&amp;lt;/button&amp;gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
@@ -431,12 +499,38 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Group'">Group</h2>
 			<p>Buttons can be grouped with <code>.btn-group-*</code> classes.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;section class&#x3D;&quot;btn-group-row&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button row group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section class&#x3D;&quot;btn-group-col&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button column group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section class&#x3D;&quot;btn-group-full&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button full row group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<section class="btn-group-row" role="group" aria-label="button row group">
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
@@ -460,7 +554,31 @@
 			</section>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;section &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-group-row&quot;&lt;/span&gt; role&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;group&quot;&lt;/span&gt; aria-label&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button row group&quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+&amp;lt;/section&amp;gt;
+&amp;lt;section &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-group-col&quot;&lt;/span&gt; role&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;group&quot;&lt;/span&gt; aria-label&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button column group&quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+&amp;lt;/section&amp;gt;
+&amp;lt;section &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-group-full&quot;&lt;/span&gt; role&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;group&quot;&lt;/span&gt; aria-label&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button full row group&quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+    &amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+&amp;lt;/section&amp;gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			>&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-row"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button row group"</span>&gt;
@@ -487,12 +605,23 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Rounded'">Rounded</h2>
 			<p>Buttons can be rounded with the <code>.rounded</code> class.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;button class&#x3D;&quot;btn-xs rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xs&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-sm rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;sm&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-md rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-lg rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;lg&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-xl rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xl&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-full rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;full&lt;/button&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">
 				xs
 			</button>
@@ -513,7 +642,16 @@
 			</button>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-xs rounded bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;xs&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-sm rounded bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;sm&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md rounded bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;md&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-lg rounded bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;lg&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-xl rounded bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;xl&amp;lt;/button&amp;gt;
+&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-full rounded bg-dk-blue text-white bg-hover-blue&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt;&amp;gt;full&amp;lt;/button&amp;gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
@@ -525,209 +663,322 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'State'">State</h2>
 			<p>Buttons can be disabled with the <code>disabled</code> attribute.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;button class&#x3D;&quot;btn-md&quot; type&#x3D;&quot;button&quot; disabled&gt;disabled&lt;/button&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<button class="btn-md" type="button" disabled>disabled</button>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;button &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;btn-md&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-class&quot;&gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;button&quot;&lt;/span&gt; disabled&amp;gt;disabled&amp;lt;/button&amp;gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span> disabled&gt;disabled&lt;/button&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Card')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
-			<h2 *ngIf="''"></h2>
-			<p>Cards are styled with <code>.cards</code> and <code>.card</code> classes.</p>
-		</section>
-
-		<section class="pad-a-sm border-b-gray">
-			<section class="card"><p>card</p></section>
-			<section class="card"><p>card</p></section>
-			<section class="card"><p>card</p></section>
-		</section>
-
-		<figure>
-			<pre
-				class="pad-a-sm"
-			><span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"card"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"card"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"card"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>card<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span></pre>
-		</figure>
-	</article>
-	<article *ngIf="checkSection('Collapse')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Collapse')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
+			<h2 *ngIf="''"></h2>
+			<p>Coming soon.</p>
+		</section>
+
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
+
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
+	</article>
+	<article *ngIf="checkSection('Collapse')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Accordion'">Accordion</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Collapse')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Expand'">Expand</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Background'">Background</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Border'">Border</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Contrast'">Contrast</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
-			<h2 *ngIf="'Tsuffix'">Tsuffix</h2>
+		<section class="pad-a-sm bg-lt-gray">
+			<h2 *ngIf="'Text'">Text</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Dropdown')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<p>Several classes are available to easily align content on the page with flexbox.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Container'">Container</h2>
-			<p>Coming soon.</p>
+			<p>
+				In order for flexbox to work, a parent container must have a <code>.row</code> or
+				<code>.col</code> class.
+			</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
+			<ul class="row">
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<ul class="col">
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Container Alignment'">Container Alignment</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Container Wrap'">Container Wrap</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Item Alignment'">Item Alignment</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Item Grow &amp; Shrink'">Item Grow &amp; Shrink</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Item Order'">Item Order</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>
 				Forms are styled with <code>.form-group</code>, <code>.field-group</code>,
@@ -735,7 +986,20 @@
 			</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group">
@@ -752,7 +1016,18 @@
 			</form>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;
+    &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;Name&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;/ul&amp;gt;    
+&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;'
+			"
+		>
 			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
@@ -764,12 +1039,59 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Checkbox'">Checkbox</h2>
 			<p>Checkboxes and radio buttons are grouped with a <code>.*-group</code> class.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;p class&#x3D;&quot;form-label&quot;&gt;Agree&lt;/p&gt;
+            &lt;ul class&#x3D;&quot;radio-group&quot;&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;radio&quot; name&#x3D;&quot;agree&quot; id&#x3D;&quot;yes&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;yes&quot;&gt;Yes&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;radio&quot; name&#x3D;&quot;agree&quot; id&#x3D;&quot;no&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;no&quot;&gt;No&lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;p class&#x3D;&quot;form-label&quot;&gt;Color&lt;/p&gt;
+            &lt;ul class&#x3D;&quot;checkbox-group&quot;&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;blue&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;blue&quot;&gt;Blue&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;green&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;green&quot;&gt;Green&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;red&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;red&quot;&gt;Red&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;yellow&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;yellow&quot;&gt;Yellow&lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group">
@@ -825,7 +1147,52 @@
 			</form>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;
+    &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;Name&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;p &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt;&amp;gt;Agree&amp;lt;/p&amp;gt;
+            &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;radio-group&quot;&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;radio&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;agree&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;yes&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;yes&quot;&lt;/span&gt;&amp;gt;Yes&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+                &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;radio&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;agree&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;no&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;no&quot;&lt;/span&gt;&amp;gt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;No&lt;/span&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+                &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;p &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt;&amp;gt;Color&amp;lt;/p&amp;gt;
+            &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;checkbox-group&quot;&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;color&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;blue&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;blue&quot;&lt;/span&gt;&amp;gt;Blue&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+                &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;color&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;green&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;green&quot;&lt;/span&gt;&amp;gt;Green&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+                &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;color&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;red&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;red&quot;&lt;/span&gt;&amp;gt;Red&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+                &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;color&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;yellow&quot;&lt;/span&gt;&amp;gt;
+                    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;yellow&quot;&lt;/span&gt;&amp;gt;Yellow&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+                &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;/ul&amp;gt;    
+&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;'
+			"
+		>
 			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
@@ -871,7 +1238,7 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Field'">Field</h2>
 			<p>
 				Form fields are styled with a <code>.form-field</code> class. Different styles are
@@ -879,7 +1246,40 @@
 			</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;gender&quot;&gt;Gender&lt;/label&gt;
+            &lt;select class&#x3D;&quot;form-field&quot; name&#x3D;&quot;gender&quot; id&#x3D;&quot;gender&quot;&gt;
+                &lt;option&gt;Select&lt;/option&gt;
+                &lt;option&gt;Female&lt;/option&gt;
+                &lt;option&gt;Male&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;language&quot;&gt;Language&lt;/label&gt;
+            &lt;select class&#x3D;&quot;form-field&quot; name&#x3D;&quot;language&quot; id&#x3D;&quot;language&quot; multiple&gt;
+                &lt;option&gt;English&lt;/option&gt;
+                &lt;option&gt;French&lt;/option&gt;
+                &lt;option&gt;Spanish&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;notes&quot;&gt;Notes&lt;/label&gt;
+            &lt;textarea class&#x3D;&quot;form-field&quot; name&#x3D;&quot;notes&quot; id&#x3D;&quot;notes&quot; placeholder&#x3D;&quot;Enter notes&quot;&gt;&lt;/textarea&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group">
@@ -921,7 +1321,38 @@
 			</form>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Name&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;id&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;name&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;placeholder&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;gender&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Gender&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;select&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;name&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;gender&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;id&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;gender&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Select&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Female&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Male&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;select&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;language&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Language&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;select&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;name&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;language&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;id&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;language&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;multiple&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;English&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;French&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;Spanish&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;option&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;select&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;notes&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Notes&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;label&lt;/span&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;textarea&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;name&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;notes&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;id&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;notes&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;placeholder&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;Enter notes&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;textarea&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;    
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
@@ -955,12 +1386,25 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Field Group'">Field Group</h2>
 			<p>Field groups are styled with a <code>.field-group</code> class.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group">
@@ -977,7 +1421,18 @@
 			</form>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;
+    &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;Name&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;/ul&amp;gt;    
+&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;'
+			"
+		>
 			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
@@ -989,7 +1444,7 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Fieldset'">Fieldset</h2>
 			<p>
 				Fieldsets are styled with a <code>.fieldset</code> class and have a
@@ -997,7 +1452,23 @@
 			</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;fieldset class&#x3D;&quot;fieldset&quot;&gt;
+        &lt;legend&gt;Contact&lt;/legend&gt;
+        &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+            &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+                &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/fieldset&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<form>
 				<fieldset class="fieldset">
 					<legend>Contact</legend>
@@ -1017,7 +1488,21 @@
 			</form>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;
+    &amp;lt;fieldset &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;fieldset&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;legend&amp;gt;Contact&amp;lt;/legend&amp;gt;
+        &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;Name&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+                &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+        &amp;lt;/ul&amp;gt;
+    &amp;lt;/fieldset&amp;gt;    
+&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;'
+			"
+		>
 			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;fieldset <span class="hljs-keyword">class</span>=<span class="hljs-string">"fieldset"</span>&gt;
         &lt;legend&gt;Contact&lt;/legend&gt;
@@ -1032,7 +1517,7 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Form Group'">Form Group</h2>
 			<p>
 				Form groups are styled with a <code>.form-group</code> class for vertical fields and
@@ -1040,7 +1525,34 @@
 			</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group-inline&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Enter email&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Enter email&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<form>
 				<ul class="form-group-inline">
 					<li class="field-group">
@@ -1089,7 +1601,32 @@
 			</form>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;
+    &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-group-inline&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;Name&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;email&quot;&lt;/span&gt;&amp;gt;Email&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;email&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;email&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter email&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;/ul&amp;gt;    
+    &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;Name&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;email&quot;&lt;/span&gt;&amp;gt;Email&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;email&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;email&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter email&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;/ul&amp;gt;    
+&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;'
+			"
+		>
 			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group-inline"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
@@ -1115,12 +1652,25 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Label'">Label</h2>
 			<p>Form labels are styled with a <code>.form-label</code> class.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group">
@@ -1137,7 +1687,18 @@
 			</form>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;
+    &amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;field-group&quot;&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-label&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;for&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt;&amp;gt;Name&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;label&lt;/span&gt;&amp;gt;
+            &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;input&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;form-field&quot;&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;type&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;text&quot;&lt;/span&gt; id&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; name&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;name&quot;&lt;/span&gt; placeholder&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;Enter name&quot;&lt;/span&gt;&amp;gt;
+        &amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;/ul&amp;gt;    
+&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;form&lt;/span&gt;&amp;gt;'
+			"
+		>
 			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
@@ -1149,197 +1710,281 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Area'">Area</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Container'">Container</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Item'">Item</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Container'">Container</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Sticky Footer'">Sticky Footer</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Modal')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Items'">Items</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Links'">Links</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Placement'">Placement</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Position')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Slider')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Slideshow')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Margin'">Margin</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Padding'">Padding</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Spinner')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>You may add spinners by adding a <code>spinner</code> class.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray">
+		<section
+			*ngIf="
+				'&lt;p class&#x3D;&quot;spinner&quot;&gt;&lt;/p&gt;
+&lt;p class&#x3D;&quot;spinner-dotted&quot;&gt;&lt;/p&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
 			<p class="spinner"></p>
 			<p class="spinner-dotted"></p>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;spinner&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;spinner-dotted&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
 			<pre
 				class="pad-a-sm"
 			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
@@ -1347,153 +1992,213 @@
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Switch')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Tab')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Border'">Border</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Hover'">Hover</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Striped'">Striped</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Table Cell'">Table Cell</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Table Row'">Table Row</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Tooltip')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Font'">Font</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Text'">Text</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Hide'">Hide</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm border-b-gray bg-lt-gray">
+		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Show'">Show</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section class="pad-a-sm border-b-gray"></section>
+		<section
+			*ngIf="''"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
 	</article>
 </main>

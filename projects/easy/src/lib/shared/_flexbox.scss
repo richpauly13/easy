@@ -1,18 +1,25 @@
 /* SG
 # Flexbox
 
-Coming soon.
-
-```
-```
+Several classes are available to easily align content on the page with flexbox.
 */
 
 /* SG
 # Flexbox/Container
 
-Coming soon.
+In order for flexbox to work, a parent container must have a `.row` or `.col` class.
 
 ```
+<ul class="row">
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<ul class="col">
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
 ```
 */
 
@@ -61,6 +68,10 @@ Coming soon.
 ```
 */
 
+@import '../core/functions';
+@import '../core/mixins';
+@import '../core/variables';
+
 // Flexbox container styles
 .row,
 .row-full {
@@ -78,10 +89,6 @@ Coming soon.
 
 .col-full {
 	height: 100%;
-}
-
-.row-inline {
-	@include row-inline;
 }
 
 // Flexbox container alignment styles
@@ -103,19 +110,16 @@ Coming soon.
 .align-m,
 .col.align-c {
 	align-items: center;
-	align-content: center;
 }
 
 .align-b,
 .col.align-r {
 	align-items: flex-end;
-	align-content: flex-end;
 }
 
 .align-t,
 .col.align-l {
 	align-items: flex-start;
-	align-content: flex-start;
 }
 
 .align-sp {
@@ -129,12 +133,10 @@ Coming soon.
 .align-st,
 .col.align-st {
 	align-items: stretch;
-	align-content: stretch;
 }
 
 .align-a {
 	align-items: center;
-	align-content: center;
 	justify-content: center;
 }
 
@@ -168,6 +170,10 @@ Coming soon.
 
 .wrap {
 	flex-wrap: wrap;
+}
+
+.wrap-n {
+	flex-wrap: nowrap;
 }
 
 // Flex item alignment styles

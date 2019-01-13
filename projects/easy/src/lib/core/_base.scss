@@ -40,14 +40,11 @@ ol.list {
 	}
 }
 
-.readonly {
-	background-color: color(red);
+/* :read-only,
+[readonly] {
+	background-color: color(gray);
 	color: color(lt-black);
-
-	&:hover {
-		cursor: not-allowed;
-	}
-}
+} */
 
 .rounded {
 	border-radius: rem(6);

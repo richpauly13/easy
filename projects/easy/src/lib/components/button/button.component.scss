@@ -80,9 +80,6 @@ Buttons can be grouped with `.btn-group-*` classes.
 	&.btn-lg,
 	&.btn-xl,
 	&.btn-full {
-		@include row-inline;
-
-		justify-content: center;
 		margin-bottom: rem(16);
 		margin-right: rem(16);
 

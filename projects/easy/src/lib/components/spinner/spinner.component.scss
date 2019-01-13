@@ -17,8 +17,6 @@ You may add spinners by adding a `spinner` class.
 	// Spinner styles
 	&.spinner,
 	&.spinner-dotted {
-		@include row-inline;
-
 		animation: spinner 2s linear infinite;
 		border-radius: 50%;
 		height: rem(120);

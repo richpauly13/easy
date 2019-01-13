@@ -17,7 +17,7 @@ Coming soon.
 */
 
 /* SG
-# Color/Tsuffix
+# Color/Text
 
 Coming soon.
 
@@ -53,7 +53,7 @@ Coming soon.
 		}
 	}
 
-	// Tsuffix color styles
+	// Text color styles
 	@if $name != lt-white {
 		.text-#{$name},
 		.text-hover-#{$name}:hover {

@@ -35,6 +35,7 @@ Alerts can be closed by adding a `.close` class in the alert.
 	&.alert-warn {
 		@include row;
 
+		align-items: center;
 		color: color(white);
 		justify-content: space-between;
 		padding: rem(8 16);
