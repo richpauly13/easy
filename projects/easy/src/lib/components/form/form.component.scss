@@ -1,7 +1,7 @@
 /* SG
 # Form
 
-Forms are styled with `.form-*` classes.
+Forms are styled with `.form-*` classes for horizontal or vertical alignment.
 
 ```
 <form class="form-h">
@@ -45,10 +45,6 @@ Fieldsets are styled with a `.fieldset` class and have a `<legend>` tag as the f
                 <label class="form-label" for="name">Name</label>
                 <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
             </li>
-            <li class="field-group">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">
-            </li>
         </ul>
     </fieldset>    
 </form>
@@ -58,9 +54,17 @@ Fieldsets are styled with a `.fieldset` class and have a `<legend>` tag as the f
 /* SG
 # Form/Label
 
-Coming soon.
+Form labels are styled with a `.form-label` class.
 
 ```
+<form class="form-v">
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+    </ul>    
+</form>
 ```
 */
 
@@ -102,11 +106,87 @@ Form fields are styled with a `.form-field` class. Different styles are applied 
 */
 
 /* SG
-# Form/Field Group
+# Form/Checkbox
 
-Coming soon.
+Checkboxes and radio buttons are grouped with a `.*-group` class.
 
 ```
+<form class="form-v">
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+        <li class="field-group">
+            <p class="form-label">Agree</p>
+            <ul class="radio-group">
+                <li class="field-group">
+                    <input class="form-field" type="radio" name="agree" id="yes">
+                    <label class="form-label" for="yes">Yes</label>
+                </li>
+                <li class="field-group">
+                    <input class="form-field" type="radio" name="agree" id="no">
+                    <label class="form-label" for="no">No</label>
+                </li>
+            </ul>
+        </li>
+        <li class="field-group">
+            <p class="form-label">Color</p>
+            <ul class="checkbox-group">
+                <li class="field-group">
+                    <input class="form-field" type="checkbox" name="color" id="blue">
+                    <label class="form-label" for="blue">Blue</label>
+                </li>
+                <li class="field-group">
+                    <input class="form-field" type="checkbox" name="color" id="green">
+                    <label class="form-label" for="green">Green</label>
+                </li>
+                <li class="field-group">
+                    <input class="form-field" type="checkbox" name="color" id="red">
+                    <label class="form-label" for="red">Red</label>
+                </li>
+                <li class="field-group">
+                    <input class="form-field" type="checkbox" name="color" id="yellow">
+                    <label class="form-label" for="yellow">Yellow</label>
+                </li>
+            </ul>
+        </li>
+    </ul>    
+</form>
+```
+*/
+
+/* SG
+# Form/Field Group
+
+Field groups are styles with a `.field-group` class.
+
+```
+<form class="form-h">
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+    </ul>    
+</form>
+```
+*/
+
+/* SG
+# Form/Form Group
+
+Form groups are styles with a `.form-group` class.
+
+```
+<form class="form-h">
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
+        </li>
+    </ul>    
+</form>
 ```
 */
 
@@ -116,6 +196,15 @@ Coming soon.
 
 // Form styles
 :host {
+	&.checkbox-group,
+	&.radio-group {
+		@include row;
+
+		align-items: center;
+		flex: 1 0 rem(220);
+		flex-wrap: wrap;
+	}
+
 	&.field-group {
 		@include row;
 
@@ -126,7 +215,7 @@ Coming soon.
 
 	&.fieldset {
 		border: rem(1) solid color(blue);
-		padding: rem(6 10 12);
+		padding: rem(0 10 12);
 	}
 
 	&.form-field {
@@ -134,7 +223,6 @@ Coming soon.
 
 		background-color: inherit;
 		border: rem(1) solid color(gray);
-		flex: 1 0 rem(220);
 		padding: rem(8);
 
 		&:hover {
@@ -147,9 +235,13 @@ Coming soon.
 			border: rem(1) solid color(blue);
 		}
 
+		&:not([type='checkbox']):not([type='radio']) {
+			flex: 1 0 rem(220);
+		}
+
 		&::-webkit-input-placeholder {
 			color: color(dk-gray);
-			opacity: 1;
+			opacity: 0.54;
 		}
 
 		&:-ms-input-placeholder {
@@ -204,6 +296,23 @@ Coming soon.
 	}
 }
 
+:host-context(.checkbox-group),
+:host-context(.radio-group) {
+	&.field-group {
+		padding: 0;
+	}
+
+	&.form-label {
+		font-size: rem(16);
+		padding-left: rem(8);
+		padding-right: rem(8);
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
 :host-context(.form-h) {
 	&.field-group {
 		flex: 1 0 auto;
@@ -214,44 +323,4 @@ Coming soon.
 
 		flex-wrap: wrap;
 	}
-}
-
-// Checkbox styles
-input[type='checkbox'],
-input[type='radio'] {
-	margin-right: rem(16);
-	vertical-align: middle;
-}
-
-.checkbox,
-.radio {
-	display: none;
-}
-
-.checkbox-group .checkbox,
-.radio-group .radio {
-	@include flex(1, 0, 0);
-
-	flex-basis: 50%;
-}
-
-.checkbox-label::before,
-.radio-label::before {
-	content: '\00a0';
-	background-color: color(lt-gray);
-	display: inline-block;
-	height: rem(16);
-	margin-right: rem(6);
-	vertical-align: middle;
-	width: rem(16);
-}
-
-.radio-label::before {
-	border-radius: 50%;
-}
-
-.checkbox:checked + .checkbox-label::before,
-.radio:checked + .radio-label::before {
-	background-color: color(blue);
-	border: rem(2) solid color(lt-gray);
 }

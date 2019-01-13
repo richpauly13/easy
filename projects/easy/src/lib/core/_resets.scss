@@ -220,6 +220,15 @@ fieldset {
 	padding: 0;
 }
 
+legend {
+	font-size: $font-md;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+	vertical-align: middle;
+}
+
 input[type='date'],
 input[type='datetime-local'],
 input[type='month'],
@@ -294,7 +303,9 @@ a[role='button'],
 button,
 html input[type='button'],
 input[type='range'],
+input[type='checkbox'],
 input[type='reset'],
+input[type='radio'],
 input[type='submit'],
 select {
 	&:hover {

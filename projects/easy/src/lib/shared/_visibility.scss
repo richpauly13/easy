@@ -114,13 +114,16 @@ Coming soon.
 }
 
 // Hidden except for screen readers
+.skip,
 .sr-only {
 	clip: rect(rem(1, 1, 1, 1));
 	height: rem(1);
 	position: absolute;
 	overflow: hidden;
 	width: rem(1);
+}
 
+.skip {
 	&:hover,
 	&:active,
 	&:focus {

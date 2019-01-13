@@ -80,6 +80,10 @@ Coming soon.
 	height: 100%;
 }
 
+.row-inline {
+	@include row-inline;
+}
+
 // Flexbox container alignment styles
 .align-c,
 .col.align-m {
@@ -106,6 +110,12 @@ Coming soon.
 .col.align-r {
 	align-items: flex-end;
 	align-content: flex-end;
+}
+
+.align-t,
+.col.align-l {
+	align-items: flex-start;
+	align-content: flex-start;
 }
 
 .align-sp {
