@@ -33618,7 +33618,7 @@
 						(l()(), hs(16777216, null, null, 1, null, Sy)),
 						ui(3, 16384, null, 0, Qc, [Zr, Ht], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), gs(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
-						(l()(), ji(-1, null, ['Field groups are styles with a '])),
+						(l()(), ji(-1, null, ['Field groups are styled with a '])),
 						(l()(), gs(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), ji(-1, null, ['.field-group'])),
 						(l()(), ji(-1, null, [' class.'])),
@@ -34881,7 +34881,7 @@
 						(l()(), hs(16777216, null, null, 1, null, Ty)),
 						ui(3, 16384, null, 0, Qc, [Zr, Ht], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), gs(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
-						(l()(), ji(-1, null, ['Form groups are styles with a '])),
+						(l()(), ji(-1, null, ['Form groups are styled with a '])),
 						(l()(), gs(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), ji(-1, null, ['.form-group'])),
 						(l()(), ji(-1, null, [' class.'])),
@@ -40635,4 +40635,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.67ef8ab77270956cbc1f.js.map
+//# sourceMappingURL=main.6aec49382b36f9bde4f9.js.map
