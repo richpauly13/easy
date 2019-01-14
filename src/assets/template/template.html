@@ -29,15 +29,9 @@
 			{{{comment}}}
 		</section>
 
-		<section
-			*ngIf="'{{code}}'"
-			[ngClass]="{'flexbox': checkSection('Flexbox')}"
-			class="pad-a-sm border-tb-gray"
-		>
-			{{{code}}}
-		</section>
+		<section [ngClass]="{'flexbox': checkSection('Flexbox')}" class="pad-a-sm border-tb-gray">{{{code}}}</section>
 
-		<figure *ngIf="'{{markup}}'"><pre class="pad-a-sm">{{{markup}}}</pre></figure>
+		<figure><pre class="pad-a-sm">{{{markup}}}</pre></figure>
 	</article>
 	{{/each}}
 </main>

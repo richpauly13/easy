@@ -25,7 +25,7 @@ export class CssComponent implements OnInit {
 		return this.section === section;
 	}
 
-	public selectSection(name: string): void {
-		this.section = name;
+	public selectSection(section: string): void {
+		this.section = section;
 	}
 }
