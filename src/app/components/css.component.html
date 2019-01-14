@@ -23,6 +23,7 @@
 			>
 			<ul *ngIf="checkSection('Badge')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
+				<li *ngIf="'Empty'"><a>Empty</a></li>
 			</ul>
 		</li>
 		<li>
@@ -104,12 +105,14 @@
 			>
 			<ul *ngIf="checkSection('Flexbox')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
-				<li *ngIf="'Container'"><a>Container</a></li>
-				<li *ngIf="'Container Alignment'"><a>Container Alignment</a></li>
+				<li *ngIf="'Container Column'"><a>Container Column</a></li>
+				<li *ngIf="'Container Row'"><a>Container Row</a></li>
 				<li *ngIf="'Container Wrap'"><a>Container Wrap</a></li>
-				<li *ngIf="'Item Alignment'"><a>Item Alignment</a></li>
-				<li *ngIf="'Item Grow &amp; Shrink'"><a>Item Grow &amp; Shrink</a></li>
-				<li *ngIf="'Item Order'"><a>Item Order</a></li>
+				<li *ngIf="'Full Container'"><a>Full Container</a></li>
+				<li *ngIf="'Item Column'"><a>Item Column</a></li>
+				<li *ngIf="'Item Row'"><a>Item Row</a></li>
+				<li *ngIf="'Item Size'"><a>Item Size</a></li>
+				<li *ngIf="'Order'"><a>Order</a></li>
 			</ul>
 		</li>
 		<li>
@@ -338,7 +341,9 @@
 	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Alerts are styled with <code>.alert-*</code> classes.</p>
+			<p>
+				Alerts are styled with an <code>.alert-[bad || good || info || warn]</code> class.
+			</p>
 		</section>
 
 		<section
@@ -380,7 +385,7 @@
 	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Close'">Close</h2>
-			<p>Alerts can be closed by adding a <code>.close</code> class in the alert.</p>
+			<p>Alerts are closed by adding a <code>.close</code> class.</p>
 		</section>
 
 		<section
@@ -410,10 +415,7 @@
 	<article *ngIf="checkSection('Badge')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
-			<p>
-				Badges are styled with <code>.badge-*</code> classes. If a badge does not contain
-				text, it is not rendered.
-			</p>
+			<p>Badges are styled with a <code>.badge-[sm || md || lg]</code> class</p>
 		</section>
 
 		<section
@@ -452,10 +454,43 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-badge</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-title">ez-badge</span>&gt;</span></pre>
 		</figure>
 	</article>
+	<article *ngIf="checkSection('Badge')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm bg-lt-gray">
+			<h2 *ngIf="'Empty'">Empty</h2>
+			<p>If a badge does not contain text, it is not rendered.</p>
+		</section>
+
+		<section
+			*ngIf="
+				'&lt;p class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;1&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;&lt;/p&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
+			<p class="badge-sm bg-dk-blue text-white">1</p>
+			<p class="badge-md bg-dk-blue text-white"></p>
+		</section>
+
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;badge-sm bg-dk-blue text-white&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;1&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;badge-md bg-dk-blue text-white&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></pre>
+		</figure>
+	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Buttons are styled with <code>.btn-*</code> classes.</p>
+			<p>
+				Buttons are styled with a
+				<code>.btn-[xs || sm || md || lg || xl || full]</code> class.
+			</p>
 		</section>
 
 		<section
@@ -501,7 +536,10 @@
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Group'">Group</h2>
-			<p>Buttons can be grouped with <code>.btn-group-*</code> classes.</p>
+			<p>
+				Buttons are grouped with a <code>.btn-group-[row || col || full]</code> class on a
+				parent container.
+			</p>
 		</section>
 
 		<section
@@ -607,7 +645,7 @@
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Rounded'">Rounded</h2>
-			<p>Buttons can be rounded with the <code>.rounded</code> class.</p>
+			<p>Buttons are rounded by adding a <code>.rounded</code> class.</p>
 		</section>
 
 		<section
@@ -665,7 +703,7 @@
 	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'State'">State</h2>
-			<p>Buttons can be disabled with the <code>disabled</code> attribute.</p>
+			<p>Buttons are disabled by adding a <code>disabled</code> attribute.</p>
 		</section>
 
 		<section
@@ -831,20 +869,6 @@
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Several classes are available to easily align content on the page with flexbox.</p>
-		</section>
-
-		<section
-			*ngIf="''"
-			[ngClass]="{ flexbox: checkSection('Flexbox') }"
-			class="pad-a-sm border-tb-gray"
-		></section>
-
-		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
-	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
-			<h2 *ngIf="'Container'">Container</h2>
 			<p>
 				In order for flexbox to work, a parent container must have a <code>.row</code> or
 				<code>.col</code> class.
@@ -854,72 +878,454 @@
 		<section
 			*ngIf="
 				'&lt;ul class&#x3D;&quot;row&quot;&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;row&lt;/li&gt;
+    &lt;li&gt;row&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul class&#x3D;&quot;col&quot;&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
+    &lt;li&gt;column&lt;/li&gt;
+    &lt;li&gt;column&lt;/li&gt;
 &lt;/ul&gt;'
 			"
 			[ngClass]="{ flexbox: checkSection('Flexbox') }"
 			class="pad-a-sm border-tb-gray"
 		>
 			<ul class="row">
-				<li></li>
-				<li></li>
-				<li></li>
+				<li>row</li>
+				<li>row</li>
 			</ul>
 			<ul class="col">
-				<li></li>
-				<li></li>
-				<li></li>
+				<li>column</li>
+				<li>column</li>
 			</ul>
 		</section>
 
 		<figure
 			*ngIf="
 				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;row&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;row&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
 &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
 &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;column&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;column&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
 &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;'
 			"
 		>
 			<pre
 				class="pad-a-sm"
 			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>column<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>column<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
-			<h2 *ngIf="'Container Alignment'">Container Alignment</h2>
-			<p>Coming soon.</p>
+			<h2 *ngIf="'Container Column'">Container Column</h2>
+			<p>
+				Use an
+				<code>.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]</code>
+				class to align ALL items in a <code>.col</code> flex container.
+			</p>
 		</section>
 
 		<section
-			*ngIf="''"
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col align-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-cm&quot;&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-bl&quot;&gt;
+    &lt;li&gt;baseline&lt;/li&gt;
+    &lt;li&gt;baseline&lt;/li&gt;
+&lt;/ul&gt;'
+			"
 			[ngClass]="{ flexbox: checkSection('Flexbox') }"
 			class="pad-a-sm border-tb-gray"
-		></section>
+		>
+			<ul class="col align-l">
+				<li>left (default)</li>
+				<li>left (default)</li>
+			</ul>
+			<ul class="col align-c">
+				<li>center</li>
+				<li>center</li>
+			</ul>
+			<ul class="col align-r">
+				<li>right</li>
+				<li>right</li>
+			</ul>
+			<ul class="col align-t">
+				<li>top (default)</li>
+				<li>top (default)</li>
+			</ul>
+			<ul class="col align-m">
+				<li>middle</li>
+				<li>middle</li>
+			</ul>
+			<ul class="col align-b">
+				<li>bottom</li>
+				<li>bottom</li>
+			</ul>
+			<ul class="col align-cm">
+				<li>center middle</li>
+				<li>center middle</li>
+			</ul>
+			<ul class="col align-sa">
+				<li>space around</li>
+				<li>space around</li>
+			</ul>
+			<ul class="col align-sb">
+				<li>space between</li>
+				<li>space between</li>
+			</ul>
+			<ul class="col align-st">
+				<li>stretch</li>
+				<li>stretch</li>
+			</ul>
+			<ul class="col align-bl">
+				<li>baseline</li>
+				<li>baseline</li>
+			</ul>
+		</section>
 
-		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-l&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;left (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;left (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-c&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-r&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;right&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;right&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-t&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;top (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;top (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-m&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-b&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;bottom&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;bottom&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-cm&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-sa&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space around&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space around&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-sb&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space between&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space between&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-st&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;stretch&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;stretch&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col align-bl&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;baseline&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;baseline&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-l"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-c"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-r"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-t"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-m"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-b"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-cm"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-sa"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-sb"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-st"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-bl"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>baseline<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>baseline<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+		</figure>
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm bg-lt-gray">
+			<h2 *ngIf="'Container Row'">Container Row</h2>
+			<p>
+				Use an
+				<code>.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]</code>
+				class to align ALL items in a <code>.row</code> flex container.
+			</p>
+		</section>
+
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row align-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-cm&quot;&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-bl&quot;&gt;
+    &lt;li&gt;baseline&lt;/li&gt;
+    &lt;li&gt;baseline&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
+			<ul class="row align-l">
+				<li>left (default)</li>
+				<li>left (default)</li>
+			</ul>
+			<ul class="row align-c">
+				<li>center</li>
+				<li>center</li>
+			</ul>
+			<ul class="row align-r">
+				<li>right</li>
+				<li>right</li>
+			</ul>
+			<ul class="row align-t">
+				<li>top (default)</li>
+				<li>top (default)</li>
+			</ul>
+			<ul class="row align-m">
+				<li>middle</li>
+				<li>middle</li>
+			</ul>
+			<ul class="row align-b">
+				<li>bottom</li>
+				<li>bottom</li>
+			</ul>
+			<ul class="row align-cm">
+				<li>center middle</li>
+				<li>center middle</li>
+			</ul>
+			<ul class="row align-sa">
+				<li>space around</li>
+				<li>space around</li>
+			</ul>
+			<ul class="row align-sb">
+				<li>space between</li>
+				<li>space between</li>
+			</ul>
+			<ul class="row align-st">
+				<li>stretch</li>
+				<li>stretch</li>
+			</ul>
+			<ul class="row align-bl">
+				<li>baseline</li>
+				<li>baseline</li>
+			</ul>
+		</section>
+
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-l&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;left (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;left (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-c&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-r&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;right&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;right&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-t&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;top (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;top (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-m&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-b&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;bottom&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;bottom&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-cm&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;center middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-sa&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space around&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space around&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-sb&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space between&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;space between&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-st&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;stretch&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;stretch&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row align-bl&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;baseline&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;baseline&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-l"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-c"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-r"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-t"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-m"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-b"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-cm"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-sa"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-sb"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-st"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-bl"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>baseline<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>baseline<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
@@ -937,7 +1343,7 @@
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
-			<h2 *ngIf="'Item Alignment'">Item Alignment</h2>
+			<h2 *ngIf="'Full Container'">Full Container</h2>
 			<p>Coming soon.</p>
 		</section>
 
@@ -951,7 +1357,345 @@
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
-			<h2 *ngIf="'Item Grow &amp; Shrink'">Item Grow &amp; Shrink</h2>
+			<h2 *ngIf="'Item Column'">Item Column</h2>
+			<p>
+				Use <code>.item-[l || c || r || t || m || b || cm || mc || st || bl]</code> classes
+				to align ONE child in a <code>.col</code> flex container.
+			</p>
+		</section>
+
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-l&quot;&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-c&quot;&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-r&quot;&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-t&quot;&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-m&quot;&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-b&quot;&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-cm&quot;&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-st&quot;&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-bl&quot;&gt;baseline&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-l">left (default)</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-c">center</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-r">right</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-t">top (default)</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-m">middle</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-b">bottom</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-cm">center middle</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-st">stretch</li>
+			</ul>
+			<ul class="col">
+				<li>default</li>
+				<li class="item-bl">baseline</li>
+			</ul>
+		</section>
+
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-l&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;left (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-c&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;center&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-r&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;right&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-t&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;top (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-m&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-b&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;bottom&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-cm&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;center middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-st&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;stretch&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-bl&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;baseline&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-c"</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-r"</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-t"</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-m"</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-b"</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-cm"</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-st"</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-bl"</span>&gt;</span>baseline<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+		</figure>
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm bg-lt-gray">
+			<h2 *ngIf="'Item Row'">Item Row</h2>
+			<p>
+				Use an <code>.item-[l || c || r || t || m || b || cm || mc || st || bl]</code> class
+				to align ONE child in a <code>.row</code> flex container.
+			</p>
+		</section>
+
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-l&quot;&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-c&quot;&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-r&quot;&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-t&quot;&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-m&quot;&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-b&quot;&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-cm&quot;&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-st&quot;&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-bl&quot;&gt;baseline&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox') }"
+			class="pad-a-sm border-tb-gray"
+		>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-l">left (default)</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-c">center</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-r">right</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-t">top (default)</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-m">middle</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-b">bottom</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-cm">center middle</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-st">stretch</li>
+			</ul>
+			<ul class="row">
+				<li>default</li>
+				<li class="item-bl">baseline</li>
+			</ul>
+		</section>
+
+		<figure
+			*ngIf="
+				'&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-l&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;left (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-c&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;center&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-r&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;right&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-t&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;top (default)&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-m&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-b&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;bottom&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-cm&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;center middle&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-st&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;stretch&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;default&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-attribute&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-value&quot;&gt;&quot;item-bl&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;baseline&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class&#x3D;&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class&#x3D;&quot;hljs-title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-c"</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-r"</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-t"</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-m"</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-b"</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-cm"</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-st"</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-bl"</span>&gt;</span>baseline<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+		</figure>
+	</article>
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
+		<section class="pad-a-sm bg-lt-gray">
+			<h2 *ngIf="'Item Size'">Item Size</h2>
 			<p>Coming soon.</p>
 		</section>
 
@@ -965,17 +1709,57 @@
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
-			<h2 *ngIf="'Item Order'">Item Order</h2>
-			<p>Coming soon.</p>
+			<h2 *ngIf="'Order'">Order</h2>
+			<p>Use <code>.item-[1 - 12]</code> classes to align children in a flex container.</p>
 		</section>
 
 		<section
-			*ngIf="''"
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li class&#x3D;&quot;order-2&quot;&gt;1&lt;/li&gt;
+    &lt;li class&#x3D;&quot;order-1&quot;&gt;2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li class&#x3D;&quot;order-2&quot;&gt;1&lt;/li&gt;
+    &lt;li class&#x3D;&quot;order-1&quot;&gt;2&lt;/li&gt;
+&lt;/ul&gt;'
+			"
 			[ngClass]="{ flexbox: checkSection('Flexbox') }"
 			class="pad-a-sm border-tb-gray"
-		></section>
+		>
+			<ul class="row">
+				<li class="order-2">1</li>
+				<li class="order-1">2</li>
+			</ul>
+			<ul class="col">
+				<li class="order-2">1</li>
+				<li class="order-1">2</li>
+			</ul>
+		</section>
 
-		<figure *ngIf="''"><pre class="pad-a-sm"></pre></figure>
+		<figure
+			*ngIf="
+				'&amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;order-2&quot;&lt;/span&gt;&amp;gt;1&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;order-1&quot;&lt;/span&gt;&amp;gt;2&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;ul &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;col&quot;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;order-2&quot;&lt;/span&gt;&amp;gt;1&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt; &lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;class&lt;/span&gt;&#x3D;&lt;span class&#x3D;&quot;hljs-string&quot;&gt;&quot;order-1&quot;&lt;/span&gt;&amp;gt;2&amp;lt;/&lt;span class&#x3D;&quot;hljs-keyword&quot;&gt;li&lt;/span&gt;&amp;gt;
+&amp;lt;/ul&amp;gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm"
+			>&lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"row"</span>&gt;
+    &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"order-2"</span>&gt;1&lt;/<span class="hljs-keyword">li</span>&gt;
+    &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"order-1"</span>&gt;2&lt;/<span class="hljs-keyword">li</span>&gt;
+&lt;/ul&gt;
+&lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"col"</span>&gt;
+    &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"order-2"</span>&gt;1&lt;/<span class="hljs-keyword">li</span>&gt;
+    &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"order-1"</span>&gt;2&lt;/<span class="hljs-keyword">li</span>&gt;
+&lt;/ul&gt;</pre>
+		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
@@ -1041,7 +1825,10 @@
 	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="'Checkbox'">Checkbox</h2>
-			<p>Checkboxes and radio buttons are grouped with a <code>.*-group</code> class.</p>
+			<p>
+				Checkboxes and radio buttons are grouped with a <code>.*-group</code> class on a
+				parent container.
+			</p>
 		</section>
 
 		<section
@@ -1964,7 +2751,7 @@
 	<article *ngIf="checkSection('Spinner')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
-			<p>You may add spinners by adding a <code>spinner</code> class.</p>
+			<p>Spinners are styled with a <code>.spinner[-dotted]</code> class.</p>
 		</section>
 
 		<section

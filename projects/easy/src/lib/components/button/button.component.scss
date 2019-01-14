@@ -1,7 +1,7 @@
 /* SG
 # Button
 
-Buttons are styled with `.btn-*` classes.
+Buttons are styled with a `.btn-[xs || sm || md || lg || xl || full]` class.
 
 ```
 <button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
@@ -16,7 +16,7 @@ Buttons are styled with `.btn-*` classes.
 /* SG
 # Button/Rounded
 
-Buttons can be rounded with the `.rounded` class.
+Buttons are rounded by adding a `.rounded` class.
 
 ```
 <button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
@@ -31,7 +31,7 @@ Buttons can be rounded with the `.rounded` class.
 /* SG
 # Button/State
 
-Buttons can be disabled with the `disabled` attribute.
+Buttons are disabled by adding a `disabled` attribute.
 
 ```
 <button class="btn-md" type="button" disabled>disabled</button>
@@ -41,7 +41,7 @@ Buttons can be disabled with the `disabled` attribute.
 /* SG
 # Button/Group
 
-Buttons can be grouped with `.btn-group-*` classes.
+Buttons are grouped with a `.btn-group-[row || col || full]` class on a parent container.
 
 ```
 <section class="btn-group-row" role="group" aria-label="button row group">

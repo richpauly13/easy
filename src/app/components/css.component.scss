@@ -172,31 +172,43 @@
 	opacity: 0.5;
 }
 
-// Docs styles
+// Doc styles
 .flexbox {
 	@include row;
 
 	flex-wrap: wrap;
-	justify-content: space-between;
 
 	ul {
 		border: rem(1) solid color(black);
+		margin: rem(6);
+
+		&.col {
+			height: rem(250);
+			width: rem(150);
+		}
+
+		&.row {
+			height: rem(150);
+			width: rem(250);
+		}
 
 		li {
+			@include row;
+
+			align-items: center;
 			color: color(white);
-			height: rem(100);
-			width: rem(100);
+			justify-content: center;
 
 			&:first-child {
-				background-color: color(red);
-			}
-
-			&:nth-child(2) {
 				background-color: color(blue);
+				min-height: rem(100);
+				min-width: rem(120);
 			}
 
 			&:last-child {
 				background-color: color(green);
+				min-height: rem(75);
+				min-width: rem(100);
 			}
 		}
 	}

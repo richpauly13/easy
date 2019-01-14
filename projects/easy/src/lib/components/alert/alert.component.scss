@@ -1,7 +1,7 @@
 /* SG
 # Alert
 
-Alerts are styled with `.alert-*` classes.
+Alerts are styled with an `.alert-[bad || good || info || warn]` class.
 
 ```
 <aside class="alert-bad">bad</aside>
@@ -15,7 +15,7 @@ Alerts are styled with `.alert-*` classes.
 /* SG
 # Alert/Close
 
-Alerts can be closed by adding a `.close` class in the alert.
+Alerts are closed by adding a `.close` class.
 
 ```
 <aside class="alert-good close">close</aside>

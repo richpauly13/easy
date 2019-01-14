@@ -1,7 +1,7 @@
 /* SG
 # Badge
 
-Badges are styled with `.badge-*` classes.  If a badge does not contain text, it is not rendered.
+Badges are styled with a `.badge-[sm || md || lg]` class
 
 ```
 <p class="badge-sm bg-dk-blue text-white">1</p>
@@ -9,6 +9,17 @@ Badges are styled with `.badge-*` classes.  If a badge does not contain text, it
 <p class="badge-lg bg-dk-blue text-white">300</p>
 <p class="badge-md bg-dk-blue text-white"></p>
 <ez-badge class="badge-sm bg-dk-blue text-white">10</ez-badge>
+```
+*/
+
+/* SG
+# Badge/Empty
+
+If a badge does not contain text, it is not rendered.
+
+```
+<p class="badge-sm bg-dk-blue text-white">1</p>
+<p class="badge-md bg-dk-blue text-white"></p>
 ```
 */
 

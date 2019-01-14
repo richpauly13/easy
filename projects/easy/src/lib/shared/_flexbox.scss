@@ -1,30 +1,128 @@
 /* SG
 # Flexbox
 
-Several classes are available to easily align content on the page with flexbox.
-*/
-
-/* SG
-# Flexbox/Container
-
 In order for flexbox to work, a parent container must have a `.row` or `.col` class.
 
 ```
 <ul class="row">
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>row</li>
+    <li>row</li>
 </ul>
 <ul class="col">
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>column</li>
+    <li>column</li>
 </ul>
 ```
 */
 
 /* SG
-# Flexbox/Container Alignment
+# Flexbox/Container Row
+
+Use an `.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]` class to align ALL items in a `.row` flex container.
+
+```
+<ul class="row align-l">
+    <li>left (default)</li>
+    <li>left (default)</li>
+</ul>
+<ul class="row align-c">
+    <li>center</li>
+    <li>center</li>
+</ul>
+<ul class="row align-r">
+    <li>right</li>
+    <li>right</li>
+</ul>
+<ul class="row align-t">
+    <li>top (default)</li>
+    <li>top (default)</li>
+</ul>
+<ul class="row align-m">
+    <li>middle</li>
+    <li>middle</li>
+</ul>
+<ul class="row align-b">
+    <li>bottom</li>
+    <li>bottom</li>
+</ul>
+<ul class="row align-cm">
+    <li>center middle</li>
+    <li>center middle</li>
+</ul>
+<ul class="row align-sa">
+    <li>space around</li>
+    <li>space around</li>
+</ul>
+<ul class="row align-sb">
+    <li>space between</li>
+    <li>space between</li>
+</ul>
+<ul class="row align-st">
+    <li>stretch</li>
+    <li>stretch</li>
+</ul>
+<ul class="row align-bl">
+    <li>baseline</li>
+    <li>baseline</li>
+</ul>
+```
+*/
+
+/* SG
+# Flexbox/Container Column
+
+Use an `.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]` class to align ALL items in a `.col` flex container.
+
+```
+<ul class="col align-l">
+    <li>left (default)</li>
+    <li>left (default)</li>
+</ul>
+<ul class="col align-c">
+    <li>center</li>
+    <li>center</li>
+</ul>
+<ul class="col align-r">
+    <li>right</li>
+    <li>right</li>
+</ul>
+<ul class="col align-t">
+    <li>top (default)</li>
+    <li>top (default)</li>
+</ul>
+<ul class="col align-m">
+    <li>middle</li>
+    <li>middle</li>
+</ul>
+<ul class="col align-b">
+    <li>bottom</li>
+    <li>bottom</li>
+</ul>
+<ul class="col align-cm">
+    <li>center middle</li>
+    <li>center middle</li>
+</ul>
+<ul class="col align-sa">
+    <li>space around</li>
+    <li>space around</li>
+</ul>
+<ul class="col align-sb">
+    <li>space between</li>
+    <li>space between</li>
+</ul>
+<ul class="col align-st">
+    <li>stretch</li>
+    <li>stretch</li>
+</ul>
+<ul class="col align-bl">
+    <li>baseline</li>
+    <li>baseline</li>
+</ul>
+```
+*/
+
+/* SG
+# Flexbox/Full Container
 
 Coming soon.
 
@@ -42,7 +140,97 @@ Coming soon.
 */
 
 /* SG
-# Flexbox/Item Alignment
+# Flexbox/Item Row
+
+Use an `.item-[l || c || r || t || m || b || cm || mc || st || bl]` class to align ONE child in a `.row` flex container.
+
+```
+<ul class="row">
+    <li>default</li>
+    <li class="item-l">left (default)</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-c">center</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-r">right</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-t">top (default)</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-m">middle</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-b">bottom</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-cm">center middle</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-st">stretch</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-bl">baseline</li>
+</ul>
+```
+*/
+
+/* SG
+# Flexbox/Item Column
+
+Use `.item-[l || c || r || t || m || b || cm || mc || st || bl]` classes to align ONE child in a `.col` flex container.
+
+```
+<ul class="col">
+    <li>default</li>
+    <li class="item-l">left (default)</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-c">center</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-r">right</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-t">top (default)</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-m">middle</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-b">bottom</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-cm">center middle</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-st">stretch</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-bl">baseline</li>
+</ul>
+```
+*/
+
+/* SG
+# Flexbox/Item Size
 
 Coming soon.
 
@@ -51,20 +239,19 @@ Coming soon.
 */
 
 /* SG
-# Flexbox/Item Grow & Shrink
+# Flexbox/Order
 
-Coming soon.
-
-```
-```
-*/
-
-/* SG
-# Flexbox/Item Order
-
-Coming soon.
+Use `.item-[1 - 12]` classes to align children in a flex container.
 
 ```
+<ul class="row">
+    <li class="order-2">1</li>
+    <li class="order-1">2</li>
+</ul>
+<ul class="col">
+    <li class="order-2">1</li>
+    <li class="order-1">2</li>
+</ul>
 ```
 */
 
@@ -92,66 +279,70 @@ Coming soon.
 }
 
 // Flexbox container alignment styles
-.align-c,
+.row.align-c,
 .col.align-m {
 	justify-content: center;
 }
 
-.align-l,
+.row.align-l,
 .col.align-t {
 	justify-content: flex-start;
 }
 
-.align-r,
+.row.align-r,
 .col.align-b {
 	justify-content: flex-end;
 }
 
-.align-m,
+.row.align-m,
 .col.align-c {
 	align-items: center;
 }
 
-.align-b,
+.row.align-b,
 .col.align-r {
 	align-items: flex-end;
 }
 
-.align-t,
+.row.align-t,
 .col.align-l {
 	align-items: flex-start;
 }
 
-.align-sp {
+.align-sa {
 	justify-content: space-around;
 }
 
-.align-j {
+.align-sb {
 	justify-content: space-between;
 }
 
-.align-st,
-.col.align-st {
+.align-st {
 	align-items: stretch;
 }
 
-.align-a {
+.align-bl {
+	align-items: baseline;
+}
+
+.align-cm,
+.align-mc {
 	align-items: center;
 	justify-content: center;
 }
 
 // Flexbox container wrap styles
-.wrap-t,
+.row.wrap-t,
 .col.wrap-l {
 	align-content: flex-start;
 }
 
-.wrap-b,
+.row.wrap-b,
 .col.wrap-r {
 	align-content: flex-end;
 }
 
-.wrap-m,
+.row.wrap-m,
 .col.wrap-c {
 	align-content: center;
 }
@@ -168,47 +359,59 @@ Coming soon.
 	align-content: stretch;
 }
 
-.wrap {
-	flex-wrap: wrap;
-}
-
-.wrap-n {
-	flex-wrap: nowrap;
-}
-
 // Flex item alignment styles
-.item-t,
-.col > .item-l {
+.row .item-t,
+.col .item-l {
 	align-self: flex-start;
 }
 
-.item-b,
-.col > .item-r {
+.row .item-b,
+.col .item-r {
 	align-self: flex-end;
 }
 
-.item-m,
-.col > .item-c {
+.row .item-m,
+.col .item-c {
 	align-self: center;
 }
 
-.item-l,
-.item-c {
+.row .item-l {
 	margin-right: auto;
 }
 
-.item-r,
-.item-c {
-	margin-left: auto;
-}
-
-.col > .item-t,
-.col > .item-m {
+.col .item-t {
 	margin-bottom: auto;
 }
 
-.col > .item-b,
-.col > .item-m {
+.row .item-r {
+	margin-left: auto;
+}
+
+.col .item-b {
+	margin-top: auto;
+}
+
+.row .item-c {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.col .item-m {
+	margin-bottom: auto;
+	margin-top: auto;
+}
+
+.row .item-cm,
+.row .item-mc {
+	align-self: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.col .item-cm,
+.col .item-mc {
+	align-self: center;
+	margin-bottom: auto;
 	margin-top: auto;
 }
 
@@ -216,55 +419,27 @@ Coming soon.
 	align-self: stretch;
 }
 
-// Flex item styles
+.item-bl {
+	align-self: baseline;
+}
+
+// Flex item size styles
 @for $number from 1 through 12 {
 	// Flex item grow and shrink styles
 	.flex-both-#{$number} {
-		@include flex($number, $number, 0);
+		@include flex($number, $number, auto);
 	}
 
 	.flex-grow-#{$number} {
-		@include flex($number, 0, 0);
+		@include flex($number, 0, auto);
 	}
 
 	.flex-shrink-#{$number} {
-		@include flex(0, $number, 0);
+		@include flex(0, $number, auto);
 	}
 
 	// Flex item order styles
-	.order {
+	.order-#{$number} {
 		order: $number;
-
-		&-xs-#{$number} {
-			order: $number;
-		}
-
-		@include media(xs) {
-			&-sm-#{$number} {
-				order: $number;
-			}
-		}
-
-		@include media(md) {
-			&-md-#{$number} {
-				order: $number;
-			}
-		}
-
-		@include media(lg) {
-			&-lg-#{$number} {
-				order: $number;
-			}
-		}
-
-		@include media(xl) {
-			&-xl-#{$number} {
-				order: $number;
-			}
-		}
 	}
-}
-
-.flex-n {
-	@include flex(0, 0, 0);
 }
