@@ -1,7 +1,6 @@
 !(function(e) {
 	function r(r) {
-		for (var n, f, i = r[0], l = r[1], a = r[2], c = 0, s = []; c < i.length; c++)
-			o[(f = i[c])] && s.push(o[f][0]), (o[f] = 0);
+		for (var n, f, i = r[0], l = r[1], a = r[2], c = 0, s = []; c < i.length; c++) o[(f = i[c])] && s.push(o[f][0]), (o[f] = 0);
 		for (n in l) Object.prototype.hasOwnProperty.call(l, n) && (e[n] = l[n]);
 		for (p && p(r); s.length; ) s.shift()();
 		return u.push.apply(u, a || []), t();
@@ -27,20 +26,13 @@
 			f.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t });
 		}),
 		(f.r = function(e) {
-			'undefined' != typeof Symbol &&
-				Symbol.toStringTag &&
-				Object.defineProperty(e, Symbol.toStringTag, { value: 'Module' }),
-				Object.defineProperty(e, '__esModule', { value: !0 });
+			'undefined' != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: 'Module' }), Object.defineProperty(e, '__esModule', { value: !0 });
 		}),
 		(f.t = function(e, r) {
 			if ((1 & r && (e = f(e)), 8 & r)) return e;
 			if (4 & r && 'object' == typeof e && e && e.__esModule) return e;
 			var t = Object.create(null);
-			if (
-				(f.r(t),
-				Object.defineProperty(t, 'default', { enumerable: !0, value: e }),
-				2 & r && 'string' != typeof e)
-			)
+			if ((f.r(t), Object.defineProperty(t, 'default', { enumerable: !0, value: e }), 2 & r && 'string' != typeof e))
 				for (var n in e)
 					f.d(
 						t,

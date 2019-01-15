@@ -25,8 +25,17 @@ Coming soon.
 ```
 */
 
+/* SG
+# Visibility/Accessibility
+
+Coming soon.
+
+```
+```
+*/
+
 // Hide styles
-// TODO: add gt and lt classes
+// TODO: Add gt and lt classes
 .hide,
 .show-sm,
 .show-md,
@@ -113,7 +122,7 @@ Coming soon.
 	}
 }
 
-// Hidden except for screen readers
+// Accessibility styles
 .skip,
 .sr-only {
 	clip: rect(rem(1, 1, 1, 1));
