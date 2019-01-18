@@ -64,7 +64,7 @@
     "@angular/cli": "^7.2.2",
     "@angular/compiler-cli": "^7.2.1",
     "@angular/language-service": "^7.2.1",
-    "@types/jasmine": "^3.3.5",
+    "@types/jasmine": "^3.3.6",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^10.12.18",
     "child_process": "^1.0.2",
@@ -87,12 +87,12 @@
     "ng-packagr": "^4.6.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.15.3",
-    "pretty-quick": "^1.9.0",
+    "pretty-quick": "^1.10.0",
     "protractor": "^5.4.2",
     "ts-node": "^7.0.1",
     "tsickle": "^0.34.0",
     "tslib": "^1.9.3",
     "tslint": "^5.12.1",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.4"
   }
 }
