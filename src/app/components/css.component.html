@@ -184,7 +184,6 @@
 			<a (click)="selectSection('Visibility')" [ngClass]="{ 'bg-lt-gray': checkSection('Visibility') }" class="hover bg-hover-lt-gray pad-a-xs" href="#">Visibility</a>
 			<ul *ngIf="checkSection('Visibility')" class="pad-l-sm submenu">
 				<li *ngIf="''"><a></a></li>
-				<li *ngIf="'Accessibility'"><a>Accessibility</a></li>
 				<li *ngIf="'Hide'"><a>Hide</a></li>
 				<li *ngIf="'Show'"><a>Show</a></li>
 			</ul>
@@ -1552,16 +1551,6 @@
 	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
 		<section class="pad-a-sm bg-lt-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
-		</section>
-
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
-
-		<figure><pre class="pad-a-sm"></pre></figure>
-	</article>
-	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
-			<h2 *ngIf="'Accessibility'">Accessibility</h2>
 			<p>Coming soon.</p>
 		</section>
 

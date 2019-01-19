@@ -25,17 +25,8 @@ Coming soon.
 ```
 */
 
-/* SG
-# Visibility/Accessibility
-
-Coming soon.
-
-```
-```
-*/
-
 // Hide styles
-// TODO: Add gt and lt classes
+// TODO: add gt and lt classes
 .hide,
 .show-sm,
 .show-md,
@@ -122,17 +113,18 @@ Coming soon.
 	}
 }
 
-// Accessibility styles
-.skip,
+// Hidden except for screen readers
+.show-focus,
 .sr-only {
-	clip: rect(rem(1, 1, 1, 1));
+	clip: rect(0, 0, 0, 0);
 	height: rem(1);
 	position: absolute;
 	overflow: hidden;
+	white-space: nowrap;
 	width: rem(1);
 }
 
-.skip {
+.show-focus {
 	&:hover,
 	&:active,
 	&:focus {

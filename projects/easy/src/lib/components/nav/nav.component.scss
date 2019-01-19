@@ -39,55 +39,37 @@ Coming soon.
 @import '../../core/variables';
 
 // Nav styles
-.nav-left,
-.nav-right {
+.nav-v {
 	overflow-y: auto;
 	width: auto;
 }
 
-.nav-top .nav-row,
-.nav-bottom .nav-row,
-.nav-item,
-.nav-link {
+.nav-h,
+.nav-h .nav-row {
 	@include row;
-}
 
-.nav-top .nav-row,
-.nav-bottom .nav-row,
-.nav-item {
-	display: block;
-
-	@media screen and (min-width: $screen-md) {
-		display: flex;
-	}
+	width: 100%;
 }
 
 .nav-item,
 .nav-link {
+	@include flex(1, 0, 0%);
+
 	color: inherit;
-	justify-content: center;
 	text-align: center;
 	text-decoration: none;
 
-	&:hover {
+	&:hover,
+	&:active,
+	&:focus {
 		cursor: pointer;
-		text-decoration: underline;
+		outline: rem(1) dotted color(white);
 	}
 
-	@media screen and (min-width: $screen-md) {
-		@include flex(1, 0, auto);
+	.nav-link {
+		display: block;
+		flex: none;
 	}
-}
-
-.nav-left .nav-item,
-.nav-left .nav-link,
-.nav-right .nav-item,
-.nav-right .nav-link {
-	justify-content: flex-start;
-}
-
-.nav-link {
-	padding: rem(16);
 }
 
 .nav-toggle {
