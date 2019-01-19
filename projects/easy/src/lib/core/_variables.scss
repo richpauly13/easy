@@ -44,16 +44,9 @@ $colors: (
 );
 
 // Headings list variable
-$headings: (
-	(h1, rem(32), rem(10.72)),
-	(h2, rem(24), rem(12)),
-	(h3, rem(18.72), rem(13.28)),
-	(h4, rem(16), rem(17.92)),
-	(h5, rem(13.28), rem(24)),
-	(h6, rem(12), rem(26.72))
-);
-// Spacers map variable
-$spacers: (
+$headings: ((h1, rem(32), rem(10.72)), (h2, rem(24), rem(12)), (h3, rem(18.72), rem(13.28)), (h4, rem(16), rem(17.92)), (h5, rem(13.28), rem(24)), (h6, rem(12), rem(26.72)));
+// Space map variable
+$space: (
 	xs: rem(8),
 	sm: rem(16),
 	md: rem(24),

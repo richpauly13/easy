@@ -243,3 +243,20 @@
 		}
 	}
 }
+
+.box {
+	border: rem(1) solid color(black);
+	margin: rem(16);
+	padding: 0;
+
+	p {
+		background-color: color(blue);
+		color: color(white);
+		text-align: center;
+
+		&[class*='pad'] {
+			display: inline-block;
+			margin: 0 rem(16);
+		}
+	}
+}

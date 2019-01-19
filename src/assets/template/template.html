@@ -1,4 +1,4 @@
-<nav class="pad-a-sm border-a-gray shadow-1 fixed-l styleguide-menu">
+<nav class="pad-a-sm border-a-gray box-shadow-1 fixed-l styleguide-menu">
 	<ul>
 		{{#each menu}}
 		<li>
@@ -17,15 +17,15 @@
 	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
 	{{#each sections}}
-	<article *ngIf="checkSection('{{section}}')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('{{section}}')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'{{heading}}'">{{heading}}</h2>
 			{{{comment}}}
 		</section>
 
-		<section [ngClass]="{'flexbox': checkSection('Flexbox')}" class="pad-a-sm border-tb-gray">{{{code}}}</section>
+		<section *ngIf="'{{code}}'" [ngClass]="{'flexbox': checkSection('Flexbox'), 'box': checkSection('Space')}" class="pad-a-sm">{{{code}}}</section>
 
-		<figure><pre class="pad-a-sm">{{{markup}}}</pre></figure>
+		<figure *ngIf="'{{code}}'"><pre class="pad-a-sm border-tb-gray">{{{markup}}}</pre></figure>
 	</article>
 	{{/each}}
 </main>

@@ -18,7 +18,7 @@ export class CssComponent implements OnInit {
 	public constructor() {}
 
 	public ngOnInit(): void {
-		this.section = 'Alert';
+		this.section = 'Space';
 	}
 
 	public checkSection(section: string): boolean {

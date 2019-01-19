@@ -1,4 +1,4 @@
-<nav class="pad-a-sm border-a-gray shadow-1 fixed-l styleguide-menu">
+<nav class="pad-a-sm border-a-gray box-shadow-1 fixed-l styleguide-menu">
 	<ul>
 		<li>
 			<a (click)="selectSection('Alert')" [ngClass]="{ 'bg-lt-gray': checkSection('Alert') }" class="hover bg-hover-lt-gray pad-a-xs" href="#">Alert</a>
@@ -194,13 +194,23 @@
 <main #content class="pad-a-xl styleguide" tabindex="-1">
 	<h1 [innerHTML]="section" class="pad-t-xl"></h1>
 
-	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Alert')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Alerts are styled with an <code>.alert-[bad || good || info || warn]</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;aside class&#x3D;&quot;alert-bad&quot;&gt;bad&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-good&quot;&gt;good&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-info&quot;&gt;info&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-warn&quot;&gt;warn&lt;/aside&gt;
+&lt;ez-alert class&#x3D;&quot;alert-good&quot;&gt;good&lt;/ez-alert&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<aside class="alert-bad">bad</aside>
 			<aside class="alert-good">good</aside>
 			<aside class="alert-info">info</aside>
@@ -208,9 +218,17 @@
 			<ez-alert class="alert-good">good</ez-alert>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;aside class&#x3D;&quot;alert-bad&quot;&gt;bad&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-good&quot;&gt;good&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-info&quot;&gt;info&lt;/aside&gt;
+&lt;aside class&#x3D;&quot;alert-warn&quot;&gt;warn&lt;/aside&gt;
+&lt;ez-alert class&#x3D;&quot;alert-good&quot;&gt;good&lt;/ez-alert&gt;'
+			"
+		>
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-bad"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-info"</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
@@ -218,31 +236,47 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Alert')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Alert')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Close'">Close</h2>
 			<p>Alerts are closed by adding a <code>.close</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="'&lt;aside class&#x3D;&quot;alert-good close&quot;&gt;close&lt;/aside&gt;
+&lt;ez-alert class&#x3D;&quot;close alert-good&quot;&gt;close&lt;/ez-alert&gt;'"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<aside class="alert-good close">close</aside>
 			<ez-alert class="close alert-good">close</ez-alert>
 		</section>
 
-		<figure>
+		<figure *ngIf="'&lt;aside class&#x3D;&quot;alert-good close&quot;&gt;close&lt;/aside&gt;
+&lt;ez-alert class&#x3D;&quot;close alert-good&quot;&gt;close&lt;/ez-alert&gt;'">
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"close alert-good"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Badge')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Badge')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Badges are styled with a <code>.badge-[sm || md || lg]</code> class</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;p class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;1&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;20&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-lg bg-dk-blue text-white&quot;&gt;300&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;&lt;/p&gt;
+&lt;ez-badge class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;10&lt;/ez-badge&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<p class="badge-sm bg-dk-blue text-white">1</p>
 			<p class="badge-md bg-dk-blue text-white">20</p>
 			<p class="badge-lg bg-dk-blue text-white">300</p>
@@ -250,9 +284,17 @@
 			<ez-badge class="badge-sm bg-dk-blue text-white">10</ez-badge>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;p class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;1&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;20&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-lg bg-dk-blue text-white&quot;&gt;300&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;&lt;/p&gt;
+&lt;ez-badge class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;10&lt;/ez-badge&gt;'
+			"
+		>
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span>20<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-lg bg-dk-blue text-white"</span>&gt;</span>300<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
@@ -260,39 +302,65 @@
 <span class="hljs-tag">&lt;<span class="hljs-title">ez-badge</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-title">ez-badge</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Badge')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Badge')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Empty'">Empty</h2>
 			<p>If a badge does not contain text, it is not rendered.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="'&lt;p class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;1&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;&lt;/p&gt;'"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<p class="badge-sm bg-dk-blue text-white">1</p>
 			<p class="badge-md bg-dk-blue text-white"></p>
 		</section>
 
-		<figure>
+		<figure *ngIf="'&lt;p class&#x3D;&quot;badge-sm bg-dk-blue text-white&quot;&gt;1&lt;/p&gt;
+&lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;&lt;/p&gt;'">
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Buttons are styled with a <code>.btn-[xs || sm || md || lg || xl || full]</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;button class&#x3D;&quot;btn-xs bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xs&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-sm bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;sm&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-lg bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;lg&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-xl bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xl&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-full bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;full&lt;/button&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button> <button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
 			<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-lg bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
 			<button class="btn-xl bg-dk-blue text-white bg-hover-blue" type="button">xl</button> <button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;button class&#x3D;&quot;btn-xs bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xs&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-sm bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;sm&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-lg bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;lg&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-xl bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xl&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-full bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;full&lt;/button&gt;'
+			"
+		>
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-sm bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
@@ -301,13 +369,39 @@
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Group'">Group</h2>
 			<p>Buttons are grouped with a <code>.btn-group-[row || col || full]</code> class on a parent container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;section class&#x3D;&quot;btn-group-row&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button row group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section class&#x3D;&quot;btn-group-col&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button column group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section class&#x3D;&quot;btn-group-full&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button full row group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<section class="btn-group-row" role="group" aria-label="button row group">
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
@@ -325,9 +419,33 @@
 			</section>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;section class&#x3D;&quot;btn-group-row&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button row group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section class&#x3D;&quot;btn-group-col&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button column group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;
+&lt;section class&#x3D;&quot;btn-group-full&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;button full row group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn-md bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;/section&gt;'
+			"
+		>
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			>&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-row"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button row group"</span>&gt;
     &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
     &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
@@ -351,22 +469,42 @@
 &lt;/section&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Rounded'">Rounded</h2>
 			<p>Buttons are rounded by adding a <code>.rounded</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;button class&#x3D;&quot;btn-xs rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xs&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-sm rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;sm&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-md rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-lg rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;lg&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-xl rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xl&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-full rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;full&lt;/button&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">xs</button> <button class="btn-sm rounded bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
 			<button class="btn-md rounded bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-lg rounded bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
 			<button class="btn-xl rounded bg-dk-blue text-white bg-hover-blue" type="button">xl</button>
 			<button class="btn-full rounded bg-dk-blue text-white bg-hover-blue" type="button">full</button>
 		</section>
 
-		<figure>
+		<figure
+			*ngIf="
+				'&lt;button class&#x3D;&quot;btn-xs rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xs&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-sm rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;sm&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-md rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;md&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-lg rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;lg&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-xl rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;xl&lt;/button&gt;
+&lt;button class&#x3D;&quot;btn-full rounded bg-dk-blue text-white bg-hover-blue&quot; type&#x3D;&quot;button&quot;&gt;full&lt;/button&gt;'
+			"
+		>
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-sm rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
@@ -375,127 +513,154 @@
 &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Button')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'State'">State</h2>
 			<p>Buttons are disabled by adding a <code>disabled</code> attribute.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"><button class="btn-md" type="button" disabled>disabled</button></section>
+		<section
+			*ngIf="'&lt;button class&#x3D;&quot;btn-md&quot; type&#x3D;&quot;button&quot; disabled&gt;disabled&lt;/button&gt;'"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
+			<button class="btn-md" type="button" disabled>disabled</button>
+		</section>
 
-		<figure>
+		<figure *ngIf="'&lt;button class&#x3D;&quot;btn-md&quot; type&#x3D;&quot;button&quot; disabled&gt;disabled&lt;/button&gt;'">
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span> disabled&gt;disabled&lt;/button&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Card')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Card')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Collapse')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Collapse')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Collapse')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Collapse')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Accordion'">Accordion</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Collapse')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Collapse')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Expand'">Expand</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Background'">Background</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Border'">Border</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Contrast'">Contrast</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Color')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Text'">Text</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Dropdown')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Dropdown')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>In order for flexbox to work, a parent container must have a <code>.row[-full]</code> or <code>.col[-full]</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;row&lt;/li&gt;
+    &lt;li&gt;row&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row-full&quot;&gt;
+    &lt;li&gt;full row&lt;/li&gt;
+    &lt;li&gt;full row&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;column&lt;/li&gt;
+    &lt;li&gt;column&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col-full&quot;&gt;
+    &lt;li&gt;full column&lt;/li&gt;
+    &lt;li&gt;full column&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="row">
 				<li>row</li>
 				<li>row</li>
@@ -514,8 +679,29 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;row&lt;/li&gt;
+    &lt;li&gt;row&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row-full&quot;&gt;
+    &lt;li&gt;full row&lt;/li&gt;
+    &lt;li&gt;full row&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;column&lt;/li&gt;
+    &lt;li&gt;column&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col-full&quot;&gt;
+    &lt;li&gt;full column&lt;/li&gt;
+    &lt;li&gt;full column&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
@@ -533,13 +719,58 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container Column'">Container Column</h2>
 			<p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.col</code> flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col align-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-cm&quot;&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="col align-l">
 				<li>left (default)</li>
 				<li>left (default)</li>
@@ -582,8 +813,53 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-l"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col align-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-cm&quot;&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col align-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-l"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
@@ -625,13 +901,58 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container Row'">Container Row</h2>
 			<p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.row</code> flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row align-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-cm&quot;&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="row align-l">
 				<li>left (default)</li>
 				<li>left (default)</li>
@@ -674,8 +995,53 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-l"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row align-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-cm&quot;&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+    &lt;li&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row align-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-l"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
@@ -717,13 +1083,50 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Column'">Item Column</h2>
 			<p>Use <code>.item-[l || c || r || t || m || b || cm || st]</code> classes to align ONE child in a <code>.col</code> flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-l&quot;&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-c&quot;&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-r&quot;&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-t&quot;&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-m&quot;&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-b&quot;&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-cm&quot;&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-st&quot;&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="col">
 				<li>default</li>
 				<li class="item-l">left (default)</li>
@@ -758,8 +1161,45 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-l&quot;&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-c&quot;&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-r&quot;&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-t&quot;&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-m&quot;&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-b&quot;&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-cm&quot;&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-st&quot;&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
@@ -793,13 +1233,26 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Order'">Item Order</h2>
 			<p>Use <code>.item-order-[1 - 12]</code> classes to align children in a flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li class&#x3D;&quot;item-order-2&quot;&gt;1&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-order-1&quot;&gt;2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li class&#x3D;&quot;item-order-2&quot;&gt;1&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-order-1&quot;&gt;2&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="row">
 				<li class="item-order-2">1</li>
 				<li class="item-order-1">2</li>
@@ -810,8 +1263,19 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm">&lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"row"</span>&gt;
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li class&#x3D;&quot;item-order-2&quot;&gt;1&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-order-1&quot;&gt;2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li class&#x3D;&quot;item-order-2&quot;&gt;1&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-order-1&quot;&gt;2&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"row"</span>&gt;
     &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"item-order-2"</span>&gt;1&lt;/<span class="hljs-keyword">li</span>&gt;
     &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"item-order-1"</span>&gt;2&lt;/<span class="hljs-keyword">li</span>&gt;
 &lt;/ul&gt;
@@ -821,13 +1285,50 @@
 &lt;/ul&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Row'">Item Row</h2>
 			<p>Use an <code>.item-[l || c || r || t || m || b || cm || st]</code> class to align ONE child in a <code>.row</code> flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-l&quot;&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-c&quot;&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-r&quot;&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-t&quot;&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-m&quot;&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-b&quot;&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-cm&quot;&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-st&quot;&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="row">
 				<li>default</li>
 				<li class="item-l">left (default)</li>
@@ -862,8 +1363,45 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-l&quot;&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-c&quot;&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-r&quot;&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-t&quot;&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-m&quot;&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-b&quot;&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-cm&quot;&gt;center middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-st&quot;&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
@@ -897,13 +1435,42 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Size'">Item Size</h2>
 			<p>Use <code>.item-[g || s || gs]-[1 - 12]</code> classes to grow and/or shrink children in a flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-g-1&quot;&gt;grow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-s-1&quot;&gt;shrink&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-gs-1&quot;&gt;grow &amp;amp; shrink&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-g-1&quot;&gt;grow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-s-1&quot;&gt;shrink&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-gs-1&quot;&gt;grow &amp;amp; shrink&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="row">
 				<li>default</li>
 				<li class="item-g-1">grow</li>
@@ -930,8 +1497,37 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-g-1&quot;&gt;grow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-s-1&quot;&gt;shrink&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-gs-1&quot;&gt;grow &amp;amp; shrink&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-g-1&quot;&gt;grow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-s-1&quot;&gt;shrink&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col&quot;&gt;
+    &lt;li&gt;default&lt;/li&gt;
+    &lt;li class&#x3D;&quot;item-gs-1&quot;&gt;grow &amp;amp; shrink&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-g-1"</span>&gt;</span>grow<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
@@ -957,13 +1553,48 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Wrap Column'">Wrap Column</h2>
 			<p>Use a <code>.wrap-[c || l || r || sa || sb || st]</code> class to align multi-column items in a <code>.col</code> flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col wrap-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="col wrap-c">
 				<li>center</li>
 				<li>center</li>
@@ -996,8 +1627,43 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-c"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;col wrap-c&quot;&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+    &lt;li&gt;center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-l&quot;&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+    &lt;li&gt;left (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-r&quot;&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+    &lt;li&gt;right&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;col wrap-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-c"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
@@ -1029,13 +1695,48 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Wrap Row'">Wrap Row</h2>
 			<p>Use a <code>.wrap-[m || t || b || sa || sb || st]</code> class to align multi-row items in a <code>.row</code> flex container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row wrap-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<ul class="row wrap-m">
 				<li>middle</li>
 				<li>middle</li>
@@ -1068,8 +1769,43 @@
 			</ul>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-m"</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;ul class&#x3D;&quot;row wrap-m&quot;&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+    &lt;li&gt;middle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-t&quot;&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+    &lt;li&gt;top (default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-b&quot;&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+    &lt;li&gt;bottom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-sa&quot;&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+    &lt;li&gt;space around&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-sb&quot;&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+    &lt;li&gt;space between&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class&#x3D;&quot;row wrap-st&quot;&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+    &lt;li&gt;stretch&lt;/li&gt;
+&lt;/ul&gt;'
+			"
+		>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-m"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
@@ -1101,13 +1837,26 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Forms are styled with <code>.form-group</code>, <code>.field-group</code>, <code>.form-label</code>, <code>.form-field</code> classes.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
@@ -1115,8 +1864,19 @@
 			</form>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
+		<figure
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
             &lt;<span class="hljs-keyword">label</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-label"</span> <span class="hljs-keyword">for</span>=<span class="hljs-string">"name"</span>&gt;Name&lt;/<span class="hljs-keyword">label</span>&gt;
@@ -1126,13 +1886,60 @@
 &lt;/<span class="hljs-keyword">form</span>&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Checkbox'">Checkbox</h2>
 			<p>Checkboxes and radio buttons are grouped with a <code>.*-group</code> class on a parent container.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;p class&#x3D;&quot;form-label&quot;&gt;Agree&lt;/p&gt;
+            &lt;ul class&#x3D;&quot;radio-group&quot;&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;radio&quot; name&#x3D;&quot;agree&quot; id&#x3D;&quot;yes&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;yes&quot;&gt;Yes&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;radio&quot; name&#x3D;&quot;agree&quot; id&#x3D;&quot;no&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;no&quot;&gt;No&lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;p class&#x3D;&quot;form-label&quot;&gt;Color&lt;/p&gt;
+            &lt;ul class&#x3D;&quot;checkbox-group&quot;&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;blue&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;blue&quot;&gt;Blue&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;green&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;green&quot;&gt;Green&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;red&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;red&quot;&gt;Red&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;yellow&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;yellow&quot;&gt;Yellow&lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
@@ -1156,8 +1963,53 @@
 			</form>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
+		<figure
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;p class&#x3D;&quot;form-label&quot;&gt;Agree&lt;/p&gt;
+            &lt;ul class&#x3D;&quot;radio-group&quot;&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;radio&quot; name&#x3D;&quot;agree&quot; id&#x3D;&quot;yes&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;yes&quot;&gt;Yes&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;radio&quot; name&#x3D;&quot;agree&quot; id&#x3D;&quot;no&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;no&quot;&gt;No&lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;p class&#x3D;&quot;form-label&quot;&gt;Color&lt;/p&gt;
+            &lt;ul class&#x3D;&quot;checkbox-group&quot;&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;blue&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;blue&quot;&gt;Blue&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;green&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;green&quot;&gt;Green&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;red&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;red&quot;&gt;Red&lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                    &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;color&quot; id&#x3D;&quot;yellow&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;yellow&quot;&gt;Yellow&lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
             &lt;<span class="hljs-keyword">label</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-label"</span> <span class="hljs-keyword">for</span>=<span class="hljs-string">"name"</span>&gt;Name&lt;/<span class="hljs-keyword">label</span>&gt;
@@ -1201,13 +2053,46 @@
 &lt;/<span class="hljs-keyword">form</span>&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Field'">Field</h2>
 			<p>Form fields are styled with a <code>.form-field</code> class. Different styles are applied based on the form field.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;gender&quot;&gt;Gender&lt;/label&gt;
+            &lt;select class&#x3D;&quot;form-field&quot; name&#x3D;&quot;gender&quot; id&#x3D;&quot;gender&quot;&gt;
+                &lt;option&gt;Select&lt;/option&gt;
+                &lt;option&gt;Female&lt;/option&gt;
+                &lt;option&gt;Male&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;language&quot;&gt;Language&lt;/label&gt;
+            &lt;select class&#x3D;&quot;form-field&quot; name&#x3D;&quot;language&quot; id&#x3D;&quot;language&quot; multiple&gt;
+                &lt;option&gt;English&lt;/option&gt;
+                &lt;option&gt;French&lt;/option&gt;
+                &lt;option&gt;Spanish&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;notes&quot;&gt;Notes&lt;/label&gt;
+            &lt;textarea class&#x3D;&quot;form-field&quot; name&#x3D;&quot;notes&quot; id&#x3D;&quot;notes&quot; placeholder&#x3D;&quot;Enter notes&quot;&gt;&lt;/textarea&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
@@ -1232,8 +2117,39 @@
 			</form>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
+		<figure
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;gender&quot;&gt;Gender&lt;/label&gt;
+            &lt;select class&#x3D;&quot;form-field&quot; name&#x3D;&quot;gender&quot; id&#x3D;&quot;gender&quot;&gt;
+                &lt;option&gt;Select&lt;/option&gt;
+                &lt;option&gt;Female&lt;/option&gt;
+                &lt;option&gt;Male&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;language&quot;&gt;Language&lt;/label&gt;
+            &lt;select class&#x3D;&quot;form-field&quot; name&#x3D;&quot;language&quot; id&#x3D;&quot;language&quot; multiple&gt;
+                &lt;option&gt;English&lt;/option&gt;
+                &lt;option&gt;French&lt;/option&gt;
+                &lt;option&gt;Spanish&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;notes&quot;&gt;Notes&lt;/label&gt;
+            &lt;textarea class&#x3D;&quot;form-field&quot; name&#x3D;&quot;notes&quot; id&#x3D;&quot;notes&quot; placeholder&#x3D;&quot;Enter notes&quot;&gt;&lt;/textarea&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-group"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"field-group"</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-label"</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">"name"</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
@@ -1263,13 +2179,26 @@
 <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Field Group'">Field Group</h2>
 			<p>Field groups are styled with a <code>.field-group</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
@@ -1277,8 +2206,19 @@
 			</form>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
+		<figure
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
             &lt;<span class="hljs-keyword">label</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-label"</span> <span class="hljs-keyword">for</span>=<span class="hljs-string">"name"</span>&gt;Name&lt;/<span class="hljs-keyword">label</span>&gt;
@@ -1288,13 +2228,29 @@
 &lt;/<span class="hljs-keyword">form</span>&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Fieldset'">Fieldset</h2>
 			<p>Fieldsets are styled with a <code>.fieldset</code> class and have a <code>&lt;legend&gt;</code> tag as the first child.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;fieldset class&#x3D;&quot;fieldset&quot;&gt;
+        &lt;legend&gt;Contact&lt;/legend&gt;
+        &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+            &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+                &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/fieldset&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<form>
 				<fieldset class="fieldset">
 					<legend>Contact</legend>
@@ -1305,8 +2261,22 @@
 			</form>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
+		<figure
+			*ngIf="
+				'&lt;form&gt;
+    &lt;fieldset class&#x3D;&quot;fieldset&quot;&gt;
+        &lt;legend&gt;Contact&lt;/legend&gt;
+        &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+            &lt;li class&#x3D;&quot;field-group&quot;&gt;
+                &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+                &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/fieldset&gt;    
+&lt;/form&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;fieldset <span class="hljs-keyword">class</span>=<span class="hljs-string">"fieldset"</span>&gt;
         &lt;legend&gt;Contact&lt;/legend&gt;
         &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
@@ -1319,13 +2289,40 @@
 &lt;/<span class="hljs-keyword">form</span>&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Form Group'">Form Group</h2>
 			<p>Form groups are styled with a <code>.form-group</code> class for vertical fields and <code>.form-group-inline</code> for horizontal fields.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group-inline&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Enter email&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Enter email&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<form>
 				<ul class="form-group-inline">
 					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
@@ -1338,8 +2335,33 @@
 			</form>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
+		<figure
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group-inline&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Enter email&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;email&quot;&gt;Email&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Enter email&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group-inline"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
             &lt;<span class="hljs-keyword">label</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-label"</span> <span class="hljs-keyword">for</span>=<span class="hljs-string">"name"</span>&gt;Name&lt;/<span class="hljs-keyword">label</span>&gt;
@@ -1363,13 +2385,26 @@
 &lt;/<span class="hljs-keyword">form</span>&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Form')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Label'">Label</h2>
 			<p>Form labels are styled with a <code>.form-label</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<form>
 				<ul class="form-group">
 					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
@@ -1377,8 +2412,19 @@
 			</form>
 		</section>
 
-		<figure>
-			<pre class="pad-a-sm">&lt;<span class="hljs-keyword">form</span>&gt;
+		<figure
+			*ngIf="
+				'&lt;form&gt;
+    &lt;ul class&#x3D;&quot;form-group&quot;&gt;
+        &lt;li class&#x3D;&quot;field-group&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;name&quot;&gt;Name&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-field&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Enter name&quot;&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-keyword">form</span>&gt;
     &lt;ul <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
         &lt;<span class="hljs-keyword">li</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"field-group"</span>&gt;
             &lt;<span class="hljs-keyword">label</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-label"</span> <span class="hljs-keyword">for</span>=<span class="hljs-string">"name"</span>&gt;Name&lt;/<span class="hljs-keyword">label</span>&gt;
@@ -1388,352 +2434,434 @@
 &lt;/<span class="hljs-keyword">form</span>&gt;</pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Area'">Area</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container'">Container</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Grid')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item'">Item</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Layout')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Layout')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container'">Container</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Layout')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Layout')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Sticky Footer'">Sticky Footer</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Modal')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Modal')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Items'">Items</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Links'">Links</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Nav')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Placement'">Placement</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Position')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Position')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Slider')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Slider')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Slideshow')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Slideshow')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Space')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<p>Resets are used to remove padding and margin from all elements. Use space classes to add spacing to elements.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Space')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Margin'">Margin</h2>
-			<p>Coming soon.</p>
+			<p>Use a <code>.mar-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]</code> class to add margin to an element.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section
+			*ngIf="
+				'&lt;p class&#x3D;&quot;mar-t-xs&quot;&gt;top extra small&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-r-sm&quot;&gt;right small&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-b-md&quot;&gt;bottom medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-l-lg&quot;&gt;left large&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-tb-xl&quot;&gt;top bottom extra large&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-lr-md&quot;&gt;left right medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-a-md&quot;&gt;all medium&lt;/p&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
+			<p class="mar-t-xs">top extra small</p>
+			<p class="mar-r-sm">right small</p>
+			<p class="mar-b-md">bottom medium</p>
+			<p class="mar-l-lg">left large</p>
+			<p class="mar-tb-xl">top bottom extra large</p>
+			<p class="mar-lr-md">left right medium</p>
+			<p class="mar-a-md">all medium</p>
+		</section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure
+			*ngIf="
+				'&lt;p class&#x3D;&quot;mar-t-xs&quot;&gt;top extra small&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-r-sm&quot;&gt;right small&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-b-md&quot;&gt;bottom medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-l-lg&quot;&gt;left large&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-tb-xl&quot;&gt;top bottom extra large&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-lr-md&quot;&gt;left right medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;mar-a-md&quot;&gt;all medium&lt;/p&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-t-xs"</span>&gt;<span class="hljs-attribute">top</span> extra small&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-r-sm"</span>&gt;<span class="hljs-attribute">right</span> small&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-b-md"</span>&gt;<span class="hljs-attribute">bottom</span> medium&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-l-lg"</span>&gt;<span class="hljs-attribute">left</span> large&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-tb-xl"</span>&gt;<span class="hljs-attribute">top</span> <span class="hljs-attribute">bottom</span> extra large&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-lr-md"</span>&gt;<span class="hljs-attribute">left</span> <span class="hljs-attribute">right</span> medium&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-a-md"</span>&gt;all medium&lt;/p&gt;</pre>
+		</figure>
 	</article>
-	<article *ngIf="checkSection('Space')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Space')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Padding'">Padding</h2>
-			<p>Coming soon.</p>
+			<p>Use a <code>.pad-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]</code> class to add padding to an element.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section
+			*ngIf="
+				'&lt;p class&#x3D;&quot;pad-t-xs&quot;&gt;top extra small&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-r-sm&quot;&gt;right small&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-b-md&quot;&gt;bottom medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-l-lg&quot;&gt;left large&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-tb-xl&quot;&gt;top bottom extra large&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-lr-md&quot;&gt;left right medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-a-md&quot;&gt;all medium&lt;/p&gt;'
+			"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
+			<p class="pad-t-xs">top extra small</p>
+			<p class="pad-r-sm">right small</p>
+			<p class="pad-b-md">bottom medium</p>
+			<p class="pad-l-lg">left large</p>
+			<p class="pad-tb-xl">top bottom extra large</p>
+			<p class="pad-lr-md">left right medium</p>
+			<p class="pad-a-md">all medium</p>
+		</section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure
+			*ngIf="
+				'&lt;p class&#x3D;&quot;pad-t-xs&quot;&gt;top extra small&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-r-sm&quot;&gt;right small&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-b-md&quot;&gt;bottom medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-l-lg&quot;&gt;left large&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-tb-xl&quot;&gt;top bottom extra large&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-lr-md&quot;&gt;left right medium&lt;/p&gt;
+&lt;p class&#x3D;&quot;pad-a-md&quot;&gt;all medium&lt;/p&gt;'
+			"
+		>
+			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-t-xs"</span>&gt;<span class="hljs-attribute">top</span> extra small&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-r-sm"</span>&gt;<span class="hljs-attribute">right</span> small&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-b-md"</span>&gt;<span class="hljs-attribute">bottom</span> medium&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-l-lg"</span>&gt;<span class="hljs-attribute">left</span> large&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-tb-xl"</span>&gt;<span class="hljs-attribute">top</span> <span class="hljs-attribute">bottom</span> extra large&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-lr-md"</span>&gt;<span class="hljs-attribute">left</span> <span class="hljs-attribute">right</span> medium&lt;/p&gt;
+&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-a-md"</span>&gt;all medium&lt;/p&gt;</pre>
+		</figure>
 	</article>
-	<article *ngIf="checkSection('Spinner')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Spinner')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Spinners are styled with a <code>.spinner[-dotted]</code> class.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray">
+		<section
+			*ngIf="'&lt;p class&#x3D;&quot;spinner&quot;&gt;&lt;/p&gt;
+&lt;p class&#x3D;&quot;spinner-dotted&quot;&gt;&lt;/p&gt;'"
+			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
+			class="pad-a-sm"
+		>
 			<p class="spinner"></p>
 			<p class="spinner-dotted"></p>
 		</section>
 
-		<figure>
+		<figure *ngIf="'&lt;p class&#x3D;&quot;spinner&quot;&gt;&lt;/p&gt;
+&lt;p class&#x3D;&quot;spinner-dotted&quot;&gt;&lt;/p&gt;'">
 			<pre
-				class="pad-a-sm"
+				class="pad-a-sm border-tb-gray"
 			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner-dotted"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></pre>
 		</figure>
 	</article>
-	<article *ngIf="checkSection('Switch')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Switch')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Tab')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Tab')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Border'">Border</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Hover'">Hover</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Striped'">Striped</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Table Cell'">Table Cell</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Table')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Table Row'">Table Row</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Tooltip')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Tooltip')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Typography')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Typography')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Font'">Font</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Typography')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Typography')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Text'">Text</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Visibility')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Visibility')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Hide'">Hide</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
-	<article *ngIf="checkSection('Visibility')" class="mar-b-lg shadow-1 border-a-gray section">
-		<section class="pad-a-sm bg-lt-gray">
+	<article *ngIf="checkSection('Visibility')" class="mar-b-lg box-shadow-1 border-lr-gray section">
+		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Show'">Show</h2>
 			<p>Coming soon.</p>
 		</section>
 
-		<section [ngClass]="{ flexbox: checkSection('Flexbox') }" class="pad-a-sm border-tb-gray"></section>
+		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
 
-		<figure><pre class="pad-a-sm"></pre></figure>
+		<figure *ngIf="''"><pre class="pad-a-sm border-tb-gray"></pre></figure>
 	</article>
 </main>
