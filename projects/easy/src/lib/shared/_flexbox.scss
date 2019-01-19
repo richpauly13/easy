@@ -1,16 +1,24 @@
 /* SG
 # Flexbox
 
-In order for flexbox to work, a parent container must have a `.row` or `.col` class.
+In order for flexbox to work, a parent container must have a `.row[-full]` or `.col[-full]` class.
 
 ```
 <ul class="row">
     <li>row</li>
     <li>row</li>
 </ul>
+<ul class="row-full">
+    <li>full row</li>
+    <li>full row</li>
+</ul>
 <ul class="col">
     <li>column</li>
     <li>column</li>
+</ul>
+<ul class="col-full">
+    <li>full column</li>
+    <li>full column</li>
 </ul>
 ```
 */
@@ -18,7 +26,7 @@ In order for flexbox to work, a parent container must have a `.row` or `.col` cl
 /* SG
 # Flexbox/Container Row
 
-Use an `.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]` class to align ALL items in a `.row` flex container.
+Use an `.align-[l || c || r || t || m || b || cm || sa || sb || st]` class to align ALL items in a `.row` flex container.
 
 ```
 <ul class="row align-l">
@@ -61,17 +69,13 @@ Use an `.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]`
     <li>stretch</li>
     <li>stretch</li>
 </ul>
-<ul class="row align-bl">
-    <li>baseline</li>
-    <li>baseline</li>
-</ul>
 ```
 */
 
 /* SG
 # Flexbox/Container Column
 
-Use an `.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]` class to align ALL items in a `.col` flex container.
+Use an `.align-[l || c || r || t || m || b || cm || sa || sb || st]` class to align ALL items in a `.col` flex container.
 
 ```
 <ul class="col align-l">
@@ -114,35 +118,91 @@ Use an `.align-[l || c || r || t || m || b || cm || mc || sa || sb || st || bl]`
     <li>stretch</li>
     <li>stretch</li>
 </ul>
-<ul class="col align-bl">
-    <li>baseline</li>
-    <li>baseline</li>
+```
+*/
+
+/* SG
+# Flexbox/Wrap Row
+
+Use a `.wrap-[m || t || b || sa || sb || st]` class to align multi-row items in a `.row` flex container.
+
+```
+<ul class="row wrap-m">
+    <li>middle</li>
+    <li>middle</li>
+    <li>middle</li>
+</ul>
+<ul class="row wrap-t">
+    <li>top (default)</li>
+    <li>top (default)</li>
+    <li>top (default)</li>
+</ul>
+<ul class="row wrap-b">
+    <li>bottom</li>
+    <li>bottom</li>
+    <li>bottom</li>
+</ul>
+<ul class="row wrap-sa">
+    <li>space around</li>
+    <li>space around</li>
+    <li>space around</li>
+</ul>
+<ul class="row wrap-sb">
+    <li>space between</li>
+    <li>space between</li>
+    <li>space between</li>
+</ul>
+<ul class="row wrap-st">
+    <li>stretch</li>
+    <li>stretch</li>
+    <li>stretch</li>
 </ul>
 ```
 */
 
 /* SG
-# Flexbox/Full Container
+# Flexbox/Wrap Column
 
-Coming soon.
-
-```
-```
-*/
-
-/* SG
-# Flexbox/Container Wrap
-
-Coming soon.
+Use a `.wrap-[c || l || r || sa || sb || st]` class to align multi-column items in a `.col` flex container.
 
 ```
+<ul class="col wrap-c">
+    <li>center</li>
+    <li>center</li>
+    <li>center</li>
+</ul>
+<ul class="col wrap-l">
+    <li>left (default)</li>
+    <li>left (default)</li>
+    <li>left (default)</li>
+</ul>
+<ul class="col wrap-r">
+    <li>right</li>
+    <li>right</li>
+    <li>right</li>
+</ul>
+<ul class="col wrap-sa">
+    <li>space around</li>
+    <li>space around</li>
+    <li>space around</li>
+</ul>
+<ul class="col wrap-sb">
+    <li>space between</li>
+    <li>space between</li>
+    <li>space between</li>
+</ul>
+<ul class="col wrap-st">
+    <li>stretch</li>
+    <li>stretch</li>
+    <li>stretch</li>
+</ul>
 ```
 */
 
 /* SG
 # Flexbox/Item Row
 
-Use an `.item-[l || c || r || t || m || b || cm || mc || st || bl]` class to align ONE child in a `.row` flex container.
+Use an `.item-[l || c || r || t || m || b || cm || st]` class to align ONE child in a `.row` flex container.
 
 ```
 <ul class="row">
@@ -176,10 +236,6 @@ Use an `.item-[l || c || r || t || m || b || cm || mc || st || bl]` class to ali
 <ul class="row">
     <li>default</li>
     <li class="item-st">stretch</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-bl">baseline</li>
 </ul>
 ```
 */
@@ -187,7 +243,7 @@ Use an `.item-[l || c || r || t || m || b || cm || mc || st || bl]` class to ali
 /* SG
 # Flexbox/Item Column
 
-Use `.item-[l || c || r || t || m || b || cm || mc || st || bl]` classes to align ONE child in a `.col` flex container.
+Use `.item-[l || c || r || t || m || b || cm || st]` classes to align ONE child in a `.col` flex container.
 
 ```
 <ul class="col">
@@ -222,35 +278,55 @@ Use `.item-[l || c || r || t || m || b || cm || mc || st || bl]` classes to alig
     <li>default</li>
     <li class="item-st">stretch</li>
 </ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-bl">baseline</li>
-</ul>
 ```
 */
 
 /* SG
 # Flexbox/Item Size
 
-Coming soon.
+Use `.item-[g || s || gs]-[1 - 12]` classes to grow and/or shrink children in a flex container.
 
 ```
+<ul class="row">
+    <li>default</li>
+    <li class="item-g-1">grow</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-s-1">shrink</li>
+</ul>
+<ul class="row">
+    <li>default</li>
+    <li class="item-gs-1">grow & shrink</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-g-1">grow</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-s-1">shrink</li>
+</ul>
+<ul class="col">
+    <li>default</li>
+    <li class="item-gs-1">grow & shrink</li>
+</ul>
 ```
 */
 
 /* SG
-# Flexbox/Order
+# Flexbox/Item Order
 
-Use `.item-[1 - 12]` classes to align children in a flex container.
+Use `.item-order-[1 - 12]` classes to align children in a flex container.
 
 ```
 <ul class="row">
-    <li class="order-2">1</li>
-    <li class="order-1">2</li>
+    <li class="item-order-2">1</li>
+    <li class="item-order-1">2</li>
 </ul>
 <ul class="col">
-    <li class="order-2">1</li>
-    <li class="order-1">2</li>
+    <li class="item-order-2">1</li>
+    <li class="item-order-1">2</li>
 </ul>
 ```
 */
@@ -321,12 +397,7 @@ Use `.item-[1 - 12]` classes to align children in a flex container.
 	align-items: stretch;
 }
 
-.align-bl {
-	align-items: baseline;
-}
-
-.align-cm,
-.align-mc {
+.align-cm {
 	align-items: center;
 	justify-content: center;
 }
@@ -335,28 +406,34 @@ Use `.item-[1 - 12]` classes to align children in a flex container.
 .row.wrap-t,
 .col.wrap-l {
 	align-content: flex-start;
+	flex-wrap: wrap;
 }
 
 .row.wrap-b,
 .col.wrap-r {
 	align-content: flex-end;
+	flex-wrap: wrap;
 }
 
 .row.wrap-m,
 .col.wrap-c {
 	align-content: center;
+	flex-wrap: wrap;
 }
 
-.wrap-j {
-	align-content: space-between;
-}
-
-.wrap-sp {
+.wrap-sa {
 	align-content: space-around;
+	flex-wrap: wrap;
+}
+
+.wrap-sb {
+	align-content: space-between;
+	flex-wrap: wrap;
 }
 
 .wrap-st {
 	align-content: stretch;
+	flex-wrap: wrap;
 }
 
 // Flex item alignment styles
@@ -401,15 +478,13 @@ Use `.item-[1 - 12]` classes to align children in a flex container.
 	margin-top: auto;
 }
 
-.row .item-cm,
-.row .item-mc {
+.row .item-cm {
 	align-self: center;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.col .item-cm,
-.col .item-mc {
+.col .item-cm {
 	align-self: center;
 	margin-bottom: auto;
 	margin-top: auto;
@@ -419,27 +494,25 @@ Use `.item-[1 - 12]` classes to align children in a flex container.
 	align-self: stretch;
 }
 
-.item-bl {
-	align-self: baseline;
-}
-
 // Flex item size styles
 @for $number from 1 through 12 {
 	// Flex item grow and shrink styles
-	.flex-both-#{$number} {
+	.item-gs-#{$number} {
 		@include flex($number, $number, auto);
 	}
 
-	.flex-grow-#{$number} {
+	.item-g-#{$number} {
 		@include flex($number, 0, auto);
 	}
 
-	.flex-shrink-#{$number} {
+	.item-s-#{$number} {
 		@include flex(0, $number, auto);
 	}
+}
 
-	// Flex item order styles
-	.order-#{$number} {
+// Flex item order styles
+@for $number from 1 through 12 {
+	.item-order-#{$number} {
 		order: $number;
 	}
 }

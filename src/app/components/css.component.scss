@@ -182,13 +182,43 @@
 		border: rem(1) solid color(black);
 		margin: rem(6);
 
+		&.col,
+		&.col-full {
+			width: rem(150);
+
+			&.wrap-l,
+			&.wrap-r,
+			&.wrap-c,
+			&.wrap-sa,
+			&.wrap-sb,
+			&.wrap-st {
+				width: rem(300);
+			}
+		}
+
 		&.col {
 			height: rem(250);
-			width: rem(150);
+		}
+
+		&.col-full {
+			height: rem(300);
+		}
+
+		&.row,
+		&.row-full {
+			height: rem(150);
+
+			&.wrap-t,
+			&.wrap-b,
+			&.wrap-m,
+			&.wrap-sa,
+			&.wrap-sb,
+			&.wrap-st {
+				height: rem(300);
+			}
 		}
 
 		&.row {
-			height: rem(150);
 			width: rem(250);
 		}
 
@@ -199,16 +229,16 @@
 			color: color(white);
 			justify-content: center;
 
-			&:first-child {
-				background-color: color(blue);
-				min-height: rem(100);
-				min-width: rem(120);
-			}
-
-			&:last-child {
+			&:nth-child(even) {
 				background-color: color(green);
 				min-height: rem(75);
 				min-width: rem(100);
+			}
+
+			&:nth-child(odd) {
+				background-color: color(blue);
+				min-height: rem(100);
+				min-width: rem(120);
 			}
 		}
 	}
