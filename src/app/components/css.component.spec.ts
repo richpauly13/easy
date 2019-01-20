@@ -1,55 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import {
-	AlertModule,
-	BadgeModule,
-	ButtonModule,
-	CardModule,
-	CollapseModule,
-	DropdownModule,
-	FormModule,
-	GridModule,
-	ModalModule,
-	NavModule,
-	SliderModule,
-	SlideshowModule,
-	SpinnerModule,
-	SwitchModule,
-	TabModule,
-	TableModule,
-	TooltipModule
-} from 'easy-framework';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CssComponent } from './css.component';
+import { CssModule } from './css.module';
 
 describe('CssComponent', () => {
 	let component: CssComponent;
 	let fixture: ComponentFixture<CssComponent>;
 
-	beforeEach(async(() => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [
-				AlertModule,
-				BadgeModule,
-				ButtonModule,
-				CardModule,
-				CollapseModule,
-				DropdownModule,
-				FormModule,
-				GridModule,
-				ModalModule,
-				NavModule,
-				SliderModule,
-				SlideshowModule,
-				SpinnerModule,
-				SwitchModule,
-				TabModule,
-				TableModule,
-				TooltipModule
-			],
-			declarations: [CssComponent]
+			imports: [CssModule]
 		}).compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(CssComponent);
@@ -57,16 +19,16 @@ describe('CssComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should be created', () => {
+	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it(`should have as section 'Alert'`, async(() => {
+	it(`should have as section 'Alert'`, () => {
 		expect(component.section).toEqual('Alert');
-	}));
+	});
 
-	it('should render section in a h1 tag', async(() => {
+	it('should render section in an h1 tag', () => {
 		const compiled = fixture.debugElement.nativeElement;
 		expect(compiled.querySelector('h1').textContent).toContain('Alert');
-	}));
+	});
 });

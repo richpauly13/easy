@@ -182,38 +182,23 @@
 		border: rem(1) solid color(black);
 		margin: rem(6);
 
-		&.col,
-		&.col-full {
+		&[class*='col'] {
+			height: rem(250);
 			width: rem(150);
 
-			&.wrap-l,
-			&.wrap-r,
-			&.wrap-c,
-			&.wrap-sa,
-			&.wrap-sb,
-			&.wrap-st {
+			&[class*='wrap'] {
 				width: rem(300);
 			}
-		}
-
-		&.col {
-			height: rem(250);
 		}
 
 		&.col-full {
 			height: rem(300);
 		}
 
-		&.row,
-		&.row-full {
+		&[class*='row'] {
 			height: rem(150);
 
-			&.wrap-t,
-			&.wrap-b,
-			&.wrap-m,
-			&.wrap-sa,
-			&.wrap-sb,
-			&.wrap-st {
+			&[class*='wrap'] {
 				height: rem(300);
 			}
 		}
@@ -226,19 +211,16 @@
 			@include row;
 
 			align-items: center;
+			background-color: color(blue);
 			color: color(white);
 			justify-content: center;
+			min-height: rem(100);
+			min-width: rem(120);
 
 			&:nth-child(even) {
 				background-color: color(green);
 				min-height: rem(75);
 				min-width: rem(100);
-			}
-
-			&:nth-child(odd) {
-				background-color: color(blue);
-				min-height: rem(100);
-				min-width: rem(120);
 			}
 		}
 	}
@@ -256,10 +238,6 @@
 
 		&:nth-child(even) {
 			background-color: color(green);
-		}
-
-		&:nth-child(odd) {
-			background-color: color(blue);
 		}
 
 		&[class*='pad'] {

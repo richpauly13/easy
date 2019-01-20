@@ -35,7 +35,7 @@ Coming soon.
 */
 
 /* SG
-# Color/Contrast
+# Color/Hover
 
 Coming soon.
 
@@ -73,13 +73,11 @@ Coming soon.
 			border: rem(1) solid $color;
 		}
 
-		.border-lr-#{$name},
-		.border-rl-#{$name} {
+		.border-lr-#{$name} {
 			border-left: rem(1) solid $color;
 			border-right: rem(1) solid $color;
 		}
 
-		.border-bt-#{$name},
 		.border-tb-#{$name} {
 			border-top: rem(1) solid $color;
 			border-bottom: rem(1) solid $color;
@@ -89,4 +87,4 @@ Coming soon.
 
 // TODO: Automate hover behavior based on color
 
-// TODO: Contrast overrides
+// TODO: Contrast overrides for accessibility

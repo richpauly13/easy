@@ -20,3 +20,4 @@ export * from './lib/components/table/table.module';
 export * from './lib/components/tooltip/tooltip.module';
 export * from './lib/easy.component';
 export * from './lib/easy.module';
+export * from './lib/components/components.module';

@@ -5,10 +5,10 @@ import { EasyModule } from 'easy-framework';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ComponentsModule } from './components/components.module';
+import { CssModule } from './components/css.module';
 
 @NgModule({
-	imports: [BrowserModule, EasyModule, AppRoutingModule, ComponentsModule],
+	imports: [BrowserModule, EasyModule, AppRoutingModule, CssModule],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
 })
