@@ -344,9 +344,12 @@
 			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
 			class="pad-a-sm"
 		>
-			<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button> <button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
-			<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-lg bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
-			<button class="btn-xl bg-dk-blue text-white bg-hover-blue" type="button">xl</button> <button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>
+			<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
+			<button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
+			<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+			<button class="btn-lg bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
+			<button class="btn-xl bg-dk-blue text-white bg-hover-blue" type="button">xl</button>
+			<button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>
 		</section>
 
 		<figure
@@ -403,18 +406,24 @@
 			class="pad-a-sm"
 		>
 			<section class="btn-group-row" role="group" aria-label="button row group">
-				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 			</section>
 			<section class="btn-group-col" role="group" aria-label="button column group">
-				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 			</section>
 			<section class="btn-group-full" role="group" aria-label="button full row group">
-				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 				<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
 			</section>
 		</section>
@@ -487,8 +496,10 @@
 			[ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }"
 			class="pad-a-sm"
 		>
-			<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">xs</button> <button class="btn-sm rounded bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
-			<button class="btn-md rounded bg-dk-blue text-white bg-hover-blue" type="button">md</button> <button class="btn-lg rounded bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
+			<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">xs</button>
+			<button class="btn-sm rounded bg-dk-blue text-white bg-hover-blue" type="button">sm</button>
+			<button class="btn-md rounded bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+			<button class="btn-lg rounded bg-dk-blue text-white bg-hover-blue" type="button">lg</button>
 			<button class="btn-xl rounded bg-dk-blue text-white bg-hover-blue" type="button">xl</button>
 			<button class="btn-full rounded bg-dk-blue text-white bg-hover-blue" type="button">full</button>
 		</section>
@@ -1859,7 +1870,10 @@
 		>
 			<form>
 				<ul class="form-group">
-					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
+					<li class="field-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+					</li>
 				</ul>
 			</form>
 		</section>
@@ -1942,21 +1956,42 @@
 		>
 			<form>
 				<ul class="form-group">
-					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
+					<li class="field-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+					</li>
 					<li class="field-group">
 						<p class="form-label">Agree</p>
 						<ul class="radio-group">
-							<li class="field-group"><input class="form-field" type="radio" name="agree" id="yes" /> <label class="form-label" for="yes">Yes</label></li>
-							<li class="field-group"><input class="form-field" type="radio" name="agree" id="no" /> <label class="form-label" for="no">No</label></li>
+							<li class="field-group">
+								<input class="form-field" type="radio" name="agree" id="yes" />
+								<label class="form-label" for="yes">Yes</label>
+							</li>
+							<li class="field-group">
+								<input class="form-field" type="radio" name="agree" id="no" />
+								<label class="form-label" for="no">No</label>
+							</li>
 						</ul>
 					</li>
 					<li class="field-group">
 						<p class="form-label">Color</p>
 						<ul class="checkbox-group">
-							<li class="field-group"><input class="form-field" type="checkbox" name="color" id="blue" /> <label class="form-label" for="blue">Blue</label></li>
-							<li class="field-group"><input class="form-field" type="checkbox" name="color" id="green" /> <label class="form-label" for="green">Green</label></li>
-							<li class="field-group"><input class="form-field" type="checkbox" name="color" id="red" /> <label class="form-label" for="red">Red</label></li>
-							<li class="field-group"><input class="form-field" type="checkbox" name="color" id="yellow" /> <label class="form-label" for="yellow">Yellow</label></li>
+							<li class="field-group">
+								<input class="form-field" type="checkbox" name="color" id="blue" />
+								<label class="form-label" for="blue">Blue</label>
+							</li>
+							<li class="field-group">
+								<input class="form-field" type="checkbox" name="color" id="green" />
+								<label class="form-label" for="green">Green</label>
+							</li>
+							<li class="field-group">
+								<input class="form-field" type="checkbox" name="color" id="red" />
+								<label class="form-label" for="red">Red</label>
+							</li>
+							<li class="field-group">
+								<input class="form-field" type="checkbox" name="color" id="yellow" />
+								<label class="form-label" for="yellow">Yellow</label>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -2095,7 +2130,10 @@
 		>
 			<form>
 				<ul class="form-group">
-					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
+					<li class="field-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+					</li>
 					<li class="field-group">
 						<label class="form-label" for="gender">Gender</label>
 						<select class="form-field" name="gender" id="gender">
@@ -2112,7 +2150,10 @@
 							<option>Spanish</option>
 						</select>
 					</li>
-					<li class="field-group"><label class="form-label" for="notes">Notes</label> <textarea class="form-field" name="notes" id="notes" placeholder="Enter notes"></textarea></li>
+					<li class="field-group">
+						<label class="form-label" for="notes">Notes</label>
+						<textarea class="form-field" name="notes" id="notes" placeholder="Enter notes"></textarea>
+					</li>
 				</ul>
 			</form>
 		</section>
@@ -2201,7 +2242,10 @@
 		>
 			<form>
 				<ul class="form-group">
-					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
+					<li class="field-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+					</li>
 				</ul>
 			</form>
 		</section>
@@ -2255,7 +2299,10 @@
 				<fieldset class="fieldset">
 					<legend>Contact</legend>
 					<ul class="form-group">
-						<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
+						<li class="field-group">
+							<label class="form-label" for="name">Name</label>
+							<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+						</li>
 					</ul>
 				</fieldset>
 			</form>
@@ -2325,12 +2372,24 @@
 		>
 			<form>
 				<ul class="form-group-inline">
-					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
-					<li class="field-group"><label class="form-label" for="email">Email</label> <input class="form-field" type="text" id="email" name="email" placeholder="Enter email" /></li>
+					<li class="field-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+					</li>
+					<li class="field-group">
+						<label class="form-label" for="email">Email</label>
+						<input class="form-field" type="text" id="email" name="email" placeholder="Enter email" />
+					</li>
 				</ul>
 				<ul class="form-group">
-					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
-					<li class="field-group"><label class="form-label" for="email">Email</label> <input class="form-field" type="text" id="email" name="email" placeholder="Enter email" /></li>
+					<li class="field-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+					</li>
+					<li class="field-group">
+						<label class="form-label" for="email">Email</label>
+						<input class="form-field" type="text" id="email" name="email" placeholder="Enter email" />
+					</li>
 				</ul>
 			</form>
 		</section>
@@ -2407,7 +2466,10 @@
 		>
 			<form>
 				<ul class="form-group">
-					<li class="field-group"><label class="form-label" for="name">Name</label> <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" /></li>
+					<li class="field-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-field" type="text" id="name" name="name" placeholder="Enter name" />
+					</li>
 				</ul>
 			</form>
 		</section>
