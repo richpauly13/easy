@@ -197,7 +197,12 @@
 	<article *ngIf="checkSection('Alert')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Alerts are styled with an <code>.alert-[bad || good || info || warn]</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Alerts are styled with an <code>.alert-[bad || good || info || warn]</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -229,17 +234,22 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-bad"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-info"</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-warn"</span>&gt;</span>warn<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">aside</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"alert-bad"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">aside</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">aside</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"alert-info"</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">aside</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"alert-warn"</span>&gt;</span>warn<span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ez-alert</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-name">ez-alert</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Alert')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Close'">Close</h2>
-			<p>Alerts are closed by adding a <code>.close</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Alerts are closed by adding a <code>.close</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -256,14 +266,19 @@
 &lt;ez-alert class&#x3D;&quot;close alert-good&quot;&gt;close&lt;/ez-alert&gt;'">
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"close alert-good"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">aside</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ez-alert</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"close alert-good"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-name">ez-alert</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Badge')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Badges are styled with a <code>.badge-[sm || md || lg]</code> class</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Badges are styled with a <code>.badge-[sm || md || lg]</code> class</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -295,17 +310,22 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span>20<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-lg bg-dk-blue text-white"</span>&gt;</span>300<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ez-badge</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-title">ez-badge</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge-md bg-dk-blue text-white"</span>&gt;</span>20<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge-lg bg-dk-blue text-white"</span>&gt;</span>300<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ez-badge</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge-sm bg-dk-blue text-white"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">ez-badge</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Badge')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Empty'">Empty</h2>
-			<p>If a badge does not contain text, it is not rendered.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>If a badge does not contain text, it is not rendered.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -322,14 +342,19 @@
 &lt;p class&#x3D;&quot;badge-md bg-dk-blue text-white&quot;&gt;&lt;/p&gt;'">
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge-sm bg-dk-blue text-white"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge-md bg-dk-blue text-white"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Buttons are styled with a <code>.btn-[xs || sm || md || lg || xl || full]</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Buttons are styled with a <code>.btn-[xs || sm || md || lg || xl || full]</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -364,18 +389,23 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-sm bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-lg bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;lg&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xl bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
+			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-xs bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-sm bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-lg bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;lg&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-xl bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-full bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Group'">Group</h2>
-			<p>Buttons are grouped with a <code>.btn-group-[row || col || full]</code> class on a parent container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Buttons are grouped with a <code>.btn-group-[row || col || full]</code> class on a parent container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -455,33 +485,38 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			>&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-row"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button row group"</span>&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+			>&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-group-row"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button row group"</span>&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
 &lt;/section&gt;
-&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-col"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button column group"</span>&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-group-col"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button column group"</span>&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
 &lt;/section&gt;
-&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-group-full"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button full row group"</span>&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;section <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-group-full"</span> role=<span class="hljs-string">"group"</span> aria-label=<span class="hljs-string">"button full row group"</span>&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+    &lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
 &lt;/section&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Rounded'">Rounded</h2>
-			<p>Buttons are rounded by adding a <code>.rounded</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Buttons are rounded by adding a <code>.rounded</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -516,18 +551,23 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xs rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-sm rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-lg rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;lg&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-xl rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
-&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-full rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
+			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-xs rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;xs&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-sm rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;sm&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;md&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-lg rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;lg&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-xl rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;xl&lt;/button&gt;
+&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-full rounded bg-dk-blue text-white bg-hover-blue"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span>&gt;full&lt;/button&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Button')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'State'">State</h2>
-			<p>Buttons are disabled by adding a <code>disabled</code> attribute.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Buttons are disabled by adding a <code>disabled</code> attribute.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -541,13 +581,18 @@
 		<figure *ngIf="'&lt;button class&#x3D;&quot;btn-md&quot; type&#x3D;&quot;button&quot; disabled&gt;disabled&lt;/button&gt;'">
 			<pre
 				class="pad-a-sm border-tb-gray"
-			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span>=</span><span class="hljs-string">"btn-md"</span> <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"button"</span> disabled&gt;disabled&lt;/button&gt;</pre>
+			>&lt;button <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"btn-md"</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"button"</span> disabled&gt;disabled&lt;/button&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Card')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -557,7 +602,12 @@
 	<article *ngIf="checkSection('Collapse')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -567,7 +617,12 @@
 	<article *ngIf="checkSection('Collapse')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Accordion'">Accordion</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -577,7 +632,12 @@
 	<article *ngIf="checkSection('Collapse')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Expand'">Expand</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -587,7 +647,12 @@
 	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -597,7 +662,12 @@
 	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Background'">Background</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -607,7 +677,12 @@
 	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Border'">Border</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -617,7 +692,12 @@
 	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Hover'">Hover</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -627,7 +707,12 @@
 	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Text'">Text</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -637,7 +722,12 @@
 	<article *ngIf="checkSection('Dropdown')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -647,7 +737,12 @@
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>In order for flexbox to work, a parent container must have a <code>.row[-full]</code> or <code>.col[-full]</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>In order for flexbox to work, a parent container must have a <code>.row[-full]</code> or <code>.col[-full]</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -710,30 +805,33 @@
 &lt;/ul&gt;'
 			"
 		>
-			<pre
-				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row-full"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>full row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>full row<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>column<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>column<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-full"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>full column<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>full column<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			<pre class="pad-a-sm border-tb-gray"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>row<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row-full"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>full row<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>full row<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>column<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>column<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col-full"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>full column<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>full column<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container Column'">Container Column</h2>
-			<p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.col</code> flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.col</code> flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -870,52 +968,57 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-l"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-c"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-r"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-t"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-m"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-b"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-cm"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-sa"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-sb"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col align-st"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-l"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-c"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-r"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-t"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-m"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-b"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-cm"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-sa"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-sb"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col align-st"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container Row'">Container Row</h2>
-			<p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.row</code> flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.row</code> flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1052,52 +1155,57 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-l"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-c"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-r"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-t"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-m"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-b"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-cm"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-sa"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-sb"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row align-st"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-l"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-c"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-r"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-t"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-m"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-b"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-cm"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-sa"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-sb"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row align-st"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Column'">Item Column</h2>
-			<p>Use <code>.item-[l || c || r || t || m || b || cm || st]</code> classes to align ONE child in a <code>.col</code> flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use <code>.item-[l || c || r || t || m || b || cm || st]</code> classes to align ONE child in a <code>.col</code> flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1208,46 +1316,49 @@
 &lt;/ul&gt;'
 			"
 		>
-			<pre
-				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-c"</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-r"</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-t"</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-m"</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-b"</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-cm"</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-st"</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			<pre class="pad-a-sm border-tb-gray"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-c"</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-r"</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-t"</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-m"</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-b"</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-cm"</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-st"</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Order'">Item Order</h2>
-			<p>Use <code>.item-order-[1 - 12]</code> classes to align children in a flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use <code>.item-order-[1 - 12]</code> classes to align children in a flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1299,7 +1410,12 @@
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Row'">Item Row</h2>
-			<p>Use an <code>.item-[l || c || r || t || m || b || cm || st]</code> class to align ONE child in a <code>.row</code> flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use an <code>.item-[l || c || r || t || m || b || cm || st]</code> class to align ONE child in a <code>.row</code> flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1410,46 +1526,49 @@
 &lt;/ul&gt;'
 			"
 		>
-			<pre
-				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-c"</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-r"</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-t"</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-m"</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-b"</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-cm"</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-st"</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			<pre class="pad-a-sm border-tb-gray"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-l"</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-c"</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-r"</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-t"</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-m"</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-b"</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-cm"</span>&gt;</span>center middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-st"</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item Size'">Item Size</h2>
-			<p>Use <code>.item-[g || s || gs]-[1 - 12]</code> classes to grow and/or shrink children in a flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use <code>.item-[g || s || gs]-[1 - 12]</code> classes to grow and/or shrink children in a flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1536,38 +1655,41 @@
 &lt;/ul&gt;'
 			"
 		>
-			<pre
-				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-g-1"</span>&gt;</span>grow<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-s-1"</span>&gt;</span>shrink<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-gs-1"</span>&gt;</span>grow &amp;amp; shrink<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-g-1"</span>&gt;</span>grow<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-s-1"</span>&gt;</span>shrink<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"item-gs-1"</span>&gt;</span>grow &amp;amp; shrink<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			<pre class="pad-a-sm border-tb-gray"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-g-1"</span>&gt;</span>grow<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-s-1"</span>&gt;</span>shrink<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-gs-1"</span>&gt;</span>grow &amp;amp; shrink<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-g-1"</span>&gt;</span>grow<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-s-1"</span>&gt;</span>shrink<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item-gs-1"</span>&gt;</span>grow &amp;amp; shrink<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Wrap Column'">Wrap Column</h2>
-			<p>Use a <code>.wrap-[c || l || r || sa || sb || st]</code> class to align multi-column items in a <code>.col</code> flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use a <code>.wrap-[c || l || r || sa || sb || st]</code> class to align multi-column items in a <code>.col</code> flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1674,42 +1796,47 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-c"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-l"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-r"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-sa"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-sb"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col wrap-st"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col wrap-c"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>center<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col wrap-l"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>left (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col wrap-r"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>right<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col wrap-sa"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col wrap-sb"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col wrap-st"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Flexbox')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Wrap Row'">Wrap Row</h2>
-			<p>Use a <code>.wrap-[m || t || b || sa || sb || st]</code> class to align multi-row items in a <code>.row</code> flex container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use a <code>.wrap-[m || t || b || sa || sb || st]</code> class to align multi-row items in a <code>.row</code> flex container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1816,42 +1943,47 @@
 		>
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-m"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-t"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-b"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-sa"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-sb"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row wrap-st"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></pre>
+			><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row wrap-m"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>middle<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row wrap-t"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>top (default)<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row wrap-b"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>bottom<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row wrap-sa"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space around<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row wrap-sb"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>space between<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row wrap-st"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>stretch<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Forms are styled with <code>.form-group</code>, <code>.field-group</code>, <code>.form-label</code>, <code>.form-field</code> classes.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Forms are styled with <code>.form-group</code>, <code>.field-group</code>, <code>.form-label</code>, <code>.form-field</code> classes.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -1903,7 +2035,12 @@
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Checkbox'">Checkbox</h2>
-			<p>Checkboxes and radio buttons are grouped with a <code>.*-group</code> class on a parent container.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Checkboxes and radio buttons are grouped with a <code>.*-group</code> class on a parent container.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2091,7 +2228,12 @@
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Field'">Field</h2>
-			<p>Form fields are styled with a <code>.form-field</code> class. Different styles are applied based on the form field.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Form fields are styled with a <code>.form-field</code> class. Different styles are applied based on the form field.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2190,40 +2332,45 @@
 &lt;/form&gt;'
 			"
 		>
-			<pre class="pad-a-sm border-tb-gray"><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-group"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"field-group"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-label"</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">"name"</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-field"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"name"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"name"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Enter name"</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"field-group"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-label"</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">"gender"</span>&gt;</span>Gender<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-field"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"gender"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"gender"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>Select<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>Female<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>Male<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"field-group"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-label"</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">"language"</span>&gt;</span>Language<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-field"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"language"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"language"</span> <span class="hljs-attribute">multiple</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>English<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>French<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">option</span>&gt;</span>Spanish<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"field-group"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">label</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-label"</span> <span class="hljs-attribute">for</span>=<span class="hljs-value">"notes"</span>&gt;</span>Notes<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">textarea</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-field"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"notes"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"notes"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Enter notes"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">textarea</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>    
-<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></pre>
+			<pre class="pad-a-sm border-tb-gray">&lt;form&gt;
+    &lt;ul <span class="hljs-keyword">class</span>="form-group"&gt;
+        &lt;li <span class="hljs-keyword">class</span>="field-group"&gt;
+            &lt;label <span class="hljs-keyword">class</span>="form-label" <span class="hljs-keyword">for</span>="name"&gt;<span class="hljs-type">Name</span>&lt;/label&gt;
+            &lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">class</span>="form-field" <span class="hljs-keyword">type</span>="text" id="name" <span class="hljs-type">name</span>="name" placeholder="Enter name"&gt;
+        &lt;/li&gt;
+        &lt;li <span class="hljs-keyword">class</span>="field-group"&gt;
+            &lt;label <span class="hljs-keyword">class</span>="form-label" <span class="hljs-keyword">for</span>="gender"&gt;Gender&lt;/label&gt;
+            &lt;<span class="hljs-keyword">select</span> <span class="hljs-keyword">class</span>="form-field" <span class="hljs-type">name</span>="gender" id="gender"&gt;
+                &lt;<span class="hljs-keyword">option</span>&gt;<span class="hljs-keyword">Select</span>&lt;/<span class="hljs-keyword">option</span>&gt;
+                &lt;<span class="hljs-keyword">option</span>&gt;Female&lt;/<span class="hljs-keyword">option</span>&gt;
+                &lt;<span class="hljs-keyword">option</span>&gt;Male&lt;/<span class="hljs-keyword">option</span>&gt;
+            &lt;/<span class="hljs-keyword">select</span>&gt;
+        &lt;/li&gt;
+        &lt;li <span class="hljs-keyword">class</span>="field-group"&gt;
+            &lt;label <span class="hljs-keyword">class</span>="form-label" <span class="hljs-keyword">for</span>="language"&gt;<span class="hljs-keyword">Language</span>&lt;/label&gt;
+            &lt;<span class="hljs-keyword">select</span> <span class="hljs-keyword">class</span>="form-field" <span class="hljs-type">name</span>="language" id="language" multiple&gt;
+                &lt;<span class="hljs-keyword">option</span>&gt;English&lt;/<span class="hljs-keyword">option</span>&gt;
+                &lt;<span class="hljs-keyword">option</span>&gt;French&lt;/<span class="hljs-keyword">option</span>&gt;
+                &lt;<span class="hljs-keyword">option</span>&gt;Spanish&lt;/<span class="hljs-keyword">option</span>&gt;
+            &lt;/<span class="hljs-keyword">select</span>&gt;
+        &lt;/li&gt;
+        &lt;li <span class="hljs-keyword">class</span>="field-group"&gt;
+            &lt;label <span class="hljs-keyword">class</span>="form-label" <span class="hljs-keyword">for</span>="notes"&gt;Notes&lt;/label&gt;
+            &lt;textarea <span class="hljs-keyword">class</span>="form-field" <span class="hljs-type">name</span>="notes" id="notes" placeholder="Enter notes"&gt;&lt;/textarea&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;    
+&lt;/form&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Field Group'">Field Group</h2>
-			<p>Field groups are styled with a <code>.field-group</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Field groups are styled with a <code>.field-group</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2275,7 +2422,12 @@
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Fieldset'">Fieldset</h2>
-			<p>Fieldsets are styled with a <code>.fieldset</code> class and have a <code>&lt;legend&gt;</code> tag as the first child.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Fieldsets are styled with a <code>.fieldset</code> class and have a <code>&lt;legend&gt;</code> tag as the first child.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2339,7 +2491,12 @@
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Form Group'">Form Group</h2>
-			<p>Form groups are styled with a <code>.form-group</code> class for vertical fields and <code>.form-group-inline</code> for horizontal fields.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Form groups are styled with a <code>.form-group</code> class for vertical fields and <code>.form-group-inline</code> for horizontal fields.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2447,7 +2604,12 @@
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Label'">Label</h2>
-			<p>Form labels are styled with a <code>.form-label</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Form labels are styled with a <code>.form-label</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2499,7 +2661,12 @@
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2509,7 +2676,12 @@
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Area'">Area</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2519,7 +2691,12 @@
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container'">Container</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2529,7 +2706,12 @@
 	<article *ngIf="checkSection('Grid')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Item'">Item</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2539,7 +2721,12 @@
 	<article *ngIf="checkSection('Layout')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2549,7 +2736,12 @@
 	<article *ngIf="checkSection('Layout')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Container'">Container</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2559,7 +2751,12 @@
 	<article *ngIf="checkSection('Layout')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Sticky Footer'">Sticky Footer</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2569,7 +2766,12 @@
 	<article *ngIf="checkSection('Modal')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2579,7 +2781,12 @@
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2589,7 +2796,12 @@
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Items'">Items</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2599,7 +2811,12 @@
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Links'">Links</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2609,7 +2826,12 @@
 	<article *ngIf="checkSection('Nav')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Placement'">Placement</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2619,7 +2841,12 @@
 	<article *ngIf="checkSection('Position')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2629,7 +2856,12 @@
 	<article *ngIf="checkSection('Slider')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2639,7 +2871,12 @@
 	<article *ngIf="checkSection('Slideshow')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2649,7 +2886,12 @@
 	<article *ngIf="checkSection('Space')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Resets are used to remove padding and margin from all elements. Use space classes to add spacing to elements.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Resets are used to remove padding and margin from all elements. Use space classes to add spacing to elements.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2659,7 +2901,12 @@
 	<article *ngIf="checkSection('Space')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Margin'">Margin</h2>
-			<p>Use a <code>.mar-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]</code> class to add margin to an element.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use a <code>.mar-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]</code> class to add margin to an element.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2695,19 +2942,26 @@
 &lt;p class&#x3D;&quot;mar-a-md&quot;&gt;all medium&lt;/p&gt;'
 			"
 		>
-			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-t-xs"</span>&gt;<span class="hljs-attribute">top</span> extra small&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-r-sm"</span>&gt;<span class="hljs-attribute">right</span> small&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-b-md"</span>&gt;<span class="hljs-attribute">bottom</span> medium&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-l-lg"</span>&gt;<span class="hljs-attribute">left</span> large&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-tb-xl"</span>&gt;<span class="hljs-attribute">top</span> <span class="hljs-attribute">bottom</span> extra large&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-lr-md"</span>&gt;<span class="hljs-attribute">left</span> <span class="hljs-attribute">right</span> medium&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"mar-a-md"</span>&gt;all medium&lt;/p&gt;</pre>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			>&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"mar-t-xs"</span>&gt;<span class="hljs-attribute">top</span> extra small&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"mar-r-sm"</span>&gt;<span class="hljs-attribute">right</span> small&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"mar-b-md"</span>&gt;<span class="hljs-attribute">bottom</span> medium&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"mar-l-lg"</span>&gt;<span class="hljs-attribute">left</span> large&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"mar-tb-xl"</span>&gt;<span class="hljs-attribute">top</span> bottom extra large&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"mar-lr-md"</span>&gt;<span class="hljs-attribute">left</span> right medium&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"mar-a-md"</span>&gt;all medium&lt;/p&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Space')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Padding'">Padding</h2>
-			<p>Use a <code>.pad-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]</code> class to add padding to an element.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Use a <code>.pad-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]</code> class to add padding to an element.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2743,19 +2997,26 @@
 &lt;p class&#x3D;&quot;pad-a-md&quot;&gt;all medium&lt;/p&gt;'
 			"
 		>
-			<pre class="pad-a-sm border-tb-gray">&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-t-xs"</span>&gt;<span class="hljs-attribute">top</span> extra small&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-r-sm"</span>&gt;<span class="hljs-attribute">right</span> small&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-b-md"</span>&gt;<span class="hljs-attribute">bottom</span> medium&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-l-lg"</span>&gt;<span class="hljs-attribute">left</span> large&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-tb-xl"</span>&gt;<span class="hljs-attribute">top</span> <span class="hljs-attribute">bottom</span> extra large&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-lr-md"</span>&gt;<span class="hljs-attribute">left</span> <span class="hljs-attribute">right</span> medium&lt;/p&gt;
-&lt;<span class="hljs-tag">p</span> class=<span class="hljs-string">"pad-a-md"</span>&gt;all medium&lt;/p&gt;</pre>
+			<pre
+				class="pad-a-sm border-tb-gray"
+			>&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"pad-t-xs"</span>&gt;<span class="hljs-attribute">top</span> extra small&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"pad-r-sm"</span>&gt;<span class="hljs-attribute">right</span> small&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"pad-b-md"</span>&gt;<span class="hljs-attribute">bottom</span> medium&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"pad-l-lg"</span>&gt;<span class="hljs-attribute">left</span> large&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"pad-tb-xl"</span>&gt;<span class="hljs-attribute">top</span> bottom extra large&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"pad-lr-md"</span>&gt;<span class="hljs-attribute">left</span> right medium&lt;/p&gt;
+&lt;<span class="hljs-selector-tag">p</span> class=<span class="hljs-string">"pad-a-md"</span>&gt;all medium&lt;/p&gt;</pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Spinner')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Spinners are styled with a <code>.spinner[-dotted]</code> class.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Spinners are styled with a <code>.spinner[-dotted]</code> class.</p>
+				</body>
+			</html>
 		</section>
 
 		<section
@@ -2772,14 +3033,19 @@
 &lt;p class&#x3D;&quot;spinner-dotted&quot;&gt;&lt;/p&gt;'">
 			<pre
 				class="pad-a-sm border-tb-gray"
-			><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"spinner-dotted"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></pre>
+			>&lt;p <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"spinner"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+&lt;p <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"spinner-dotted"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></pre>
 		</figure>
 	</article>
 	<article *ngIf="checkSection('Switch')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2789,7 +3055,12 @@
 	<article *ngIf="checkSection('Tab')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2799,7 +3070,12 @@
 	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2809,7 +3085,12 @@
 	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Border'">Border</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2819,7 +3100,12 @@
 	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Hover'">Hover</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2829,7 +3115,12 @@
 	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Striped'">Striped</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2839,7 +3130,12 @@
 	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Table Cell'">Table Cell</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2849,7 +3145,12 @@
 	<article *ngIf="checkSection('Table')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Table Row'">Table Row</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2859,7 +3160,12 @@
 	<article *ngIf="checkSection('Tooltip')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2869,7 +3175,12 @@
 	<article *ngIf="checkSection('Typography')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2879,7 +3190,12 @@
 	<article *ngIf="checkSection('Typography')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Font'">Font</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2889,7 +3205,12 @@
 	<article *ngIf="checkSection('Typography')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Text'">Text</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2899,7 +3220,12 @@
 	<article *ngIf="checkSection('Visibility')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="''"></h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2909,7 +3235,12 @@
 	<article *ngIf="checkSection('Visibility')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Hide'">Hide</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>
@@ -2919,7 +3250,12 @@
 	<article *ngIf="checkSection('Visibility')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2 *ngIf="'Show'">Show</h2>
-			<p>Coming soon.</p>
+			<html>
+				<head></head>
+				<body>
+					<p>Coming soon.</p>
+				</body>
+			</html>
 		</section>
 
 		<section *ngIf="''" [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm"></section>

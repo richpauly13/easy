@@ -105,15 +105,15 @@
 			}
 			var h,
 				g = { e: {} };
-			function b() {
+			function m() {
 				try {
 					return h.apply(this, arguments);
 				} catch (l) {
 					return (g.e = l), g;
 				}
 			}
-			function m(l) {
-				return (h = l), b;
+			function b(l) {
+				return (h = l), m;
 			}
 			function y(l) {
 				return (
@@ -150,10 +150,10 @@
 									r = this._subscriptions;
 								(this.closed = !0), (this._parent = null), (this._parents = null), (this._subscriptions = null);
 								for (var s = -1, o = e ? e.length : 0; u; ) u.remove(this), (u = (++s < o && e[s]) || null);
-								if ((f(t) && m(t).call(this) === g && ((n = !0), (l = l || (g.e instanceof v ? j(g.e.errors) : [g.e]))), p(r)))
+								if ((f(t) && b(t).call(this) === g && ((n = !0), (l = l || (g.e instanceof v ? j(g.e.errors) : [g.e]))), p(r)))
 									for (s = -1, o = r.length; ++s < o; ) {
 										var a = r[s];
-										if (d(a) && m(a.unsubscribe).call(a) === g) {
+										if (d(a) && b(a.unsubscribe).call(a) === g) {
 											(n = !0), (l = l || []);
 											var i = g.e;
 											i instanceof v ? (l = l.concat(j(i.errors))) : l.push(i);
@@ -1084,18 +1084,18 @@
 						n
 					);
 				})(V);
-			function bl() {
+			function ml() {
 				return new U();
 			}
-			function ml(l) {
-				for (var n in l) if (l[n] === ml) return n;
+			function bl(l) {
+				for (var n in l) if (l[n] === bl) return n;
 				throw Error('Could not find renamed property on target object.');
 			}
-			var yl = ml({ ngComponentDef: ml }),
-				vl = ml({ ngInjectableDef: ml }),
-				wl = ml({ ngInjectorDef: ml }),
-				jl = ml({ ngModuleDef: ml }),
-				xl = ml({ __NG_ELEMENT_ID__: ml });
+			var yl = bl({ ngComponentDef: bl }),
+				vl = bl({ ngInjectableDef: bl }),
+				wl = bl({ ngInjectorDef: bl }),
+				jl = bl({ ngModuleDef: bl }),
+				xl = bl({ __NG_ELEMENT_ID__: bl });
 			function kl(l) {
 				return { providedIn: l.providedIn || null, factory: l.factory, value: void 0 };
 			}
@@ -1178,7 +1178,7 @@
 				var u = n.indexOf('\n');
 				return -1 === u ? n : n.substring(0, u);
 			}
-			var Ul = ml({ __forward_ref__: ml });
+			var Ul = bl({ __forward_ref__: bl });
 			function Ll(l) {
 				return (
 					(l.__forward_ref__ = Ll),
@@ -1225,8 +1225,8 @@
 						(this.factory = l), (this.resolving = !1), (this.canSeeViewProviders = n), (this.injectImpl = u);
 					};
 				})(),
-				bn = gn.prototype;
-			function mn(l) {
+				mn = gn.prototype;
+			function bn(l) {
 				return 'function' == typeof l ? l.name || l : 'string' == typeof l ? l : null == l ? '' : 'object' == typeof l && 'function' == typeof l.type ? l.type.name || l.type : '' + l;
 			}
 			function yn(l) {
@@ -1404,8 +1404,8 @@
 				for (var u = n[Wl], e = 1; u && -1 === u.injectorIndex; ) (u = (n = n[en]) ? n[Wl] : null), e++;
 				return u ? u.injectorIndex | (e << 16) : -1;
 			}
-			var bu = {};
-			function mu(l, n, u, e, t, r) {
+			var mu = {};
+			function bu(l, n, u, e, t, r) {
 				var s = n[Bl],
 					o = s.data[l + pn],
 					a = (function(l, n, u, e, t) {
@@ -1429,14 +1429,14 @@
 							: e != s && 3 === o.type,
 						t & Dn.Host && r === o
 					);
-				return null !== a ? yu(s.data, n, a, o) : bu;
+				return null !== a ? yu(s.data, n, a, o) : mu;
 			}
 			function yu(l, n, u, e) {
 				var t,
 					r = n[u];
-				if (null != (t = r) && 'object' == typeof t && Object.getPrototypeOf(t) == bn) {
+				if (null != (t = r) && 'object' == typeof t && Object.getPrototypeOf(t) == mn) {
 					var s = r;
-					if (s.resolving) throw new Error('Circular dep for ' + mn(l[u]));
+					if (s.resolving) throw new Error('Circular dep for ' + bn(l[u]));
 					var o = cu(s.canSeeViewProviders);
 					s.resolving = !0;
 					var a = void 0;
@@ -1480,7 +1480,7 @@
 									try {
 										var a = r();
 										if (null != a || e & Dn.Optional) return a;
-										throw new Error('No provider for ' + mn(u) + '!');
+										throw new Error('No provider for ' + bn(u) + '!');
 									} finally {
 										Jn(s, o);
 									}
@@ -1493,8 +1493,8 @@
 										p = n[c + dn];
 										var f = n[Bl];
 										if (vu(r, c, f.data)) {
-											var h = mu(c, n, u, i, e, d);
-											if (h !== bu) return h;
+											var h = bu(c, n, u, i, e, d);
+											if (h !== mu) return h;
 										}
 										wu(e, n[Bl].data[c + pn] === d) && vu(r, c, n) ? ((i = f), (c = _n(p)), (n = Cn(p, n))) : (c = -1);
 									}
@@ -1505,7 +1505,7 @@
 								return g ? g.get(u, t, e & Dn.Optional) : Hn(u, t, e & Dn.Optional);
 							}
 							if (e & Dn.Optional) return t;
-							throw new Error('NodeInjector: NOT_FOUND [' + mn(u) + ']');
+							throw new Error('NodeInjector: NOT_FOUND [' + bn(u) + ']');
 						})(this._tNode, this._lView, l, void 0, n);
 					}),
 					l
@@ -2016,11 +2016,11 @@
 					return l;
 				},
 				ge = [],
-				be = he,
-				me = function() {
+				me = he,
+				be = function() {
 					return Array.prototype.slice.call(arguments);
 				},
-				ye = ml({ provide: String, useValue: ml }),
+				ye = bl({ provide: String, useValue: bl }),
 				ve = de.NULL,
 				we = /\n/gm,
 				je = '\u0275',
@@ -2081,12 +2081,12 @@
 										if (!0 === u.multi) {
 											var s = n.get(t);
 											if (s) {
-												if (s.fn !== me) throw ke(t);
-											} else n.set(t, (s = { token: u.provide, deps: [], useNew: !1, fn: me, value: ge }));
+												if (s.fn !== be) throw ke(t);
+											} else n.set(t, (s = { token: u.provide, deps: [], useNew: !1, fn: be, value: ge }));
 											s.deps.push({ token: (t = u), options: 6 });
 										}
 										var o = n.get(t);
-										if (o && o.fn == me) throw ke(t);
+										if (o && o.fn == be) throw ke(t);
 										n.set(t, r);
 									}
 							})(e, l);
@@ -2102,9 +2102,9 @@
 											var o, a;
 											if (!u || s & Dn.SkipSelf) s & Dn.Self || (a = t.get(n, r, Dn.Default));
 											else {
-												if ((a = u.value) == be) throw Error(je + 'Circular dependency');
+												if ((a = u.value) == me) throw Error(je + 'Circular dependency');
 												if (a === ge) {
-													u.value = be;
+													u.value = me;
 													var i = u.useNew,
 														p = u.fn,
 														d = u.deps,
@@ -2113,9 +2113,9 @@
 														f = [];
 														for (var h = 0; h < d.length; h++) {
 															var g = d[h],
-																b = g.options,
-																m = 2 & b ? e.get(g.token) : void 0;
-															f.push(l(g.token, m, e, m || 4 & b ? t : ve, 1 & b ? null : de.THROW_IF_NOT_FOUND, Dn.Default));
+																m = g.options,
+																b = 2 & m ? e.get(g.token) : void 0;
+															f.push(l(g.token, b, e, b || 4 & m ? t : ve, 1 & m ? null : de.THROW_IF_NOT_FOUND, Dn.Default));
 														}
 													}
 													u.value = a = i ? new ((o = p).bind.apply(o, c([void 0], f)))() : p.apply(void 0, f);
@@ -2124,7 +2124,7 @@
 											return a;
 										})(n, u, e, t, r, s);
 									} catch (o) {
-										throw (o instanceof Error || (o = new Error(o)), (o.ngTempTokenPath = o.ngTempTokenPath || []).unshift(n), u && u.value == be && (u.value = ge), o);
+										throw (o instanceof Error || (o = new Error(o)), (o.ngTempTokenPath = o.ngTempTokenPath || []).unshift(n), u && u.value == me && (u.value = ge), o);
 									}
 								})(l, e, this._records, this.parent, n, u);
 							} catch (r) {
@@ -2780,15 +2780,15 @@
 									: ((r = u), (s = p.createRenderer(null, null)), 'string' == typeof r ? (Mu(s) ? s.selectRootElement(r) : s.querySelector(r)) : r),
 								h = this.componentDef.onPush ? 136 : 132,
 								g = i ? te() : c.get(at),
-								b = p.createRenderer(f, this.componentDef);
-							u && f && (Mu(b) ? b.setAttribute(f, 'ng-version', rt.full) : f.setAttribute('ng-version', rt.full));
-							var m,
+								m = p.createRenderer(f, this.componentDef);
+							u && f && (Mu(m) ? m.setAttribute(f, 'ng-version', rt.full) : f.setAttribute('ng-version', rt.full));
+							var b,
 								y,
-								v = zu(null, Ku(-1, null, 1, 0, null, null, null), g, h, p, b, d, c),
+								v = zu(null, Ku(-1, null, 1, 0, null, null, null), g, h, p, m, d, c),
 								w = ou(v, null);
 							try {
 								p.begin && p.begin();
-								var j = ue(f, this.componentDef, v, p, b);
+								var j = ue(f, this.componentDef, v, p, m);
 								if (((y = v[Bl].data[0 + tn]), n))
 									for (var x = 0, k = v[Bl], _ = (y.projection = []), C = 0; C < n.length; C++) {
 										for (var I = n[C], S = null, E = null, P = 0; P < I.length; P++) {
@@ -2798,7 +2798,7 @@
 										}
 										_.push(S);
 									}
-								(m = ee(j, this.componentDef, v, g, [re])),
+								(b = ee(j, this.componentDef, v, g, [re])),
 									(function(l, n, u) {
 										var e = l[Bl],
 											t = ru();
@@ -2810,7 +2810,7 @@
 							}
 							var T = new dt(
 								this.componentType,
-								m,
+								b,
 								(function(l, n, u) {
 									return (
 										He ||
@@ -2874,7 +2874,7 @@
 			function gt() {
 				return (ht = !0), ft;
 			}
-			var bt = (function() {
+			var mt = (function() {
 					function l(l) {
 						if (
 							((this.defaultDoc = l),
@@ -2940,10 +2940,10 @@
 						l
 					);
 				})(),
-				mt = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:\/?#]*(?:[\/?#]|$))/gi,
+				bt = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:\/?#]*(?:[\/?#]|$))/gi,
 				yt = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+\/]+=*$/i;
 			function vt(l) {
-				return (l = String(l)).match(mt) || l.match(yt) ? l : (gt() && console.warn('WARNING: sanitizing unsafe URL value ' + l + ' (see http://g.co/ng/security#xss)'), 'unsafe:' + l);
+				return (l = String(l)).match(bt) || l.match(yt) ? l : (gt() && console.warn('WARNING: sanitizing unsafe URL value ' + l + ' (see http://g.co/ng/security#xss)'), 'unsafe:' + l);
 			}
 			function wt(l) {
 				var n,
@@ -3369,14 +3369,14 @@
 					}
 					return (l.prototype.clearCache = function() {}), (l.prototype.clearCacheFor = function(l) {}), (l.prototype.getModuleId = function(l) {}), l;
 				})(),
-				br = (function() {
+				mr = (function() {
 					return function() {};
 				})();
-			function mr() {
+			function br() {
 				var l = Ml.wtf;
 				return !(!l || !(ir = l.trace) || ((cr = ir.events), 0));
 			}
-			var yr = mr();
+			var yr = br();
 			function vr(l, n) {
 				return null;
 			}
@@ -3758,7 +3758,7 @@
 						var e = Vr({}, n);
 						return (function(l, n, u) {
 							return l
-								.get(br)
+								.get(mr)
 								.createCompiler([n])
 								.compileModuleAsync(u);
 						})(this.injector, e, l).then(function(l) {
@@ -3880,7 +3880,7 @@
 						o,
 						a.pipe(function(l) {
 							return cl()(
-								((n = bl),
+								((n = ml),
 								function(l) {
 									var u;
 									u =
@@ -4774,15 +4774,15 @@
 					);
 				})(),
 				gs = [new cs()],
-				bs = new fs([new es()]),
-				ms = new hs(gs),
+				ms = new fs([new es()]),
+				bs = new hs(gs),
 				ys = Nr(null, 'core', [{ provide: rr, useValue: 'unknown' }, { provide: Fr, deps: [de] }, { provide: Tr, deps: [] }, { provide: or, deps: [] }]),
 				vs = new Il('LocaleId');
 			function ws() {
-				return bs;
+				return ms;
 			}
 			function js() {
-				return ms;
+				return bs;
 			}
 			function xs(l) {
 				return l || 'en-US';
@@ -5061,8 +5061,8 @@
 				void 0 === s && (s = []), c || (c = Ns);
 				var h = lo(u),
 					g = h.matchedQueries,
-					b = h.references,
-					m = h.matchedQueryIds,
+					m = h.references,
+					b = h.matchedQueryIds,
 					y = null,
 					v = null;
 				r && ((y = (f = i(po(r), 2))[0]), (v = f[1])), (o = o || []);
@@ -5118,8 +5118,8 @@
 						directChildFlags: 0,
 						childMatchedQueries: 0,
 						matchedQueries: g,
-						matchedQueryIds: m,
-						references: b,
+						matchedQueryIds: b,
+						references: m,
 						ngContentIndex: e,
 						childCount: t,
 						bindings: w,
@@ -5144,7 +5144,7 @@
 					}
 				);
 			}
-			function bo(l, n, u) {
+			function mo(l, n, u) {
 				var e,
 					t = u.element,
 					r = l.root.selectorOrNode,
@@ -5161,7 +5161,7 @@
 					}
 				return e;
 			}
-			function mo(l, n, u, e) {
+			function bo(l, n, u, e) {
 				for (var t = 0; t < u.outputs.length; t++) {
 					var r = u.outputs[t],
 						s = yo(l, u.nodeIndex, ((p = r.eventName), (c = r.target) ? c + ':' + p : p)),
@@ -5985,18 +5985,18 @@
 					for (var u = l.def.nodes, e = 0, t = 0; t < u.length; t++) {
 						var r = u[t],
 							s = r.parent;
-						for (!s && r.flags & n && ba(l, t, r.flags & n, e++), 0 == (r.childFlags & n) && (t += r.childCount); s && 1 & s.flags && t === s.nodeIndex + s.childCount; )
+						for (!s && r.flags & n && ma(l, t, r.flags & n, e++), 0 == (r.childFlags & n) && (t += r.childCount); s && 1 & s.flags && t === s.nodeIndex + s.childCount; )
 							s.directChildFlags & n && (e = ga(l, s, n, e)), (s = s.parent);
 					}
 			}
 			function ga(l, n, u, e) {
 				for (var t = n.nodeIndex + 1; t <= n.nodeIndex + n.childCount; t++) {
 					var r = l.def.nodes[t];
-					r.flags & u && ba(l, t, r.flags & u, e++), (t += r.childCount);
+					r.flags & u && ma(l, t, r.flags & u, e++), (t += r.childCount);
 				}
 				return e;
 			}
-			function ba(l, n, u, e) {
+			function ma(l, n, u, e) {
 				var t = Es(l, n);
 				if (t) {
 					var r = t.instance;
@@ -6009,7 +6009,7 @@
 						131072 & u && r.ngOnDestroy());
 				}
 			}
-			function ma(l, n, u) {
+			function ba(l, n, u) {
 				var e = [];
 				for (var t in u) e.push({ propName: t, bindingType: u[t] });
 				return {
@@ -6225,20 +6225,20 @@
 				for (var t = 0, r = 0, s = 0, o = 0, a = 0, i = null, c = null, p = !1, d = !1, f = null, h = 0; h < n.length; h++) {
 					var g = n[h];
 					if (((g.nodeIndex = h), (g.parent = i), (g.bindingIndex = t), (g.outputIndex = r), (g.renderParent = c), (s |= g.flags), (a |= g.matchedQueryIds), g.element)) {
-						var b = g.element;
-						(b.publicProviders = i ? i.element.publicProviders : Object.create(null)),
-							(b.allProviders = b.publicProviders),
+						var m = g.element;
+						(m.publicProviders = i ? i.element.publicProviders : Object.create(null)),
+							(m.allProviders = m.publicProviders),
 							(p = !1),
 							(d = !1),
 							g.element.template && (a |= g.element.template.nodeMatchedQueries);
 					}
 					if ((Oa(i, g, n.length), (t += g.bindings.length), (r += g.outputs.length), !c && 3 & g.flags && (f = g), 20224 & g.flags)) {
 						p || ((p = !0), (i.element.publicProviders = Object.create(i.element.publicProviders)), (i.element.allProviders = i.element.publicProviders));
-						var m = 0 != (32768 & g.flags);
-						0 == (8192 & g.flags) || m
+						var b = 0 != (32768 & g.flags);
+						0 == (8192 & g.flags) || b
 							? (i.element.publicProviders[Fs(g.provider.token)] = g)
 							: (d || ((d = !0), (i.element.allProviders = Object.create(i.element.publicProviders))), (i.element.allProviders[Fs(g.provider.token)] = g)),
-							m && (i.element.componentProvider = g);
+							b && (i.element.componentProvider = g);
 					}
 					if (
 						(i
@@ -6338,13 +6338,13 @@
 					var s = void 0;
 					switch (201347067 & r.flags) {
 						case 1:
-							var o = bo(l, n, r),
+							var o = mo(l, n, r),
 								a = void 0;
 							if (33554432 & r.flags) {
 								var i = to(r.element.componentView);
 								a = Ts.createComponentView(l, r, i, o);
 							}
-							mo(l, a, r, o),
+							bo(l, a, r, o),
 								(s = { renderElement: o, componentView: a, viewContainer: null, template: r.element.template ? Lo(l, r) : void 0 }),
 								16777216 & r.flags && (s.viewContainer = Do(l, r, s));
 							break;
@@ -6445,8 +6445,8 @@
 												h > 7 && (g += Sa(i, f[7])),
 												h > 8 && (g += Sa(c, f[8])),
 												h > 9 && (g += Sa(p, f[9]));
-											var b = Is(l, n.nodeIndex).renderText;
-											l.renderer.setValue(b, g);
+											var m = Is(l, n.nodeIndex).renderText;
+											l.renderer.setValue(m, g);
 										}
 										return d;
 									})(l, n, u, e, t, r, s, o, a, i, c, p);
@@ -6456,18 +6456,18 @@
 											f = d.instance,
 											h = !1,
 											g = void 0,
-											b = n.bindings.length;
+											m = n.bindings.length;
 										return (
-											b > 0 && zs(l, n, 0, u) && ((h = !0), (g = fa(l, d, n, 0, u, g))),
-											b > 1 && zs(l, n, 1, e) && ((h = !0), (g = fa(l, d, n, 1, e, g))),
-											b > 2 && zs(l, n, 2, t) && ((h = !0), (g = fa(l, d, n, 2, t, g))),
-											b > 3 && zs(l, n, 3, r) && ((h = !0), (g = fa(l, d, n, 3, r, g))),
-											b > 4 && zs(l, n, 4, s) && ((h = !0), (g = fa(l, d, n, 4, s, g))),
-											b > 5 && zs(l, n, 5, o) && ((h = !0), (g = fa(l, d, n, 5, o, g))),
-											b > 6 && zs(l, n, 6, a) && ((h = !0), (g = fa(l, d, n, 6, a, g))),
-											b > 7 && zs(l, n, 7, i) && ((h = !0), (g = fa(l, d, n, 7, i, g))),
-											b > 8 && zs(l, n, 8, c) && ((h = !0), (g = fa(l, d, n, 8, c, g))),
-											b > 9 && zs(l, n, 9, p) && ((h = !0), (g = fa(l, d, n, 9, p, g))),
+											m > 0 && zs(l, n, 0, u) && ((h = !0), (g = fa(l, d, n, 0, u, g))),
+											m > 1 && zs(l, n, 1, e) && ((h = !0), (g = fa(l, d, n, 1, e, g))),
+											m > 2 && zs(l, n, 2, t) && ((h = !0), (g = fa(l, d, n, 2, t, g))),
+											m > 3 && zs(l, n, 3, r) && ((h = !0), (g = fa(l, d, n, 3, r, g))),
+											m > 4 && zs(l, n, 4, s) && ((h = !0), (g = fa(l, d, n, 4, s, g))),
+											m > 5 && zs(l, n, 5, o) && ((h = !0), (g = fa(l, d, n, 5, o, g))),
+											m > 6 && zs(l, n, 6, a) && ((h = !0), (g = fa(l, d, n, 6, a, g))),
+											m > 7 && zs(l, n, 7, i) && ((h = !0), (g = fa(l, d, n, 7, i, g))),
+											m > 8 && zs(l, n, 8, c) && ((h = !0), (g = fa(l, d, n, 8, c, g))),
+											m > 9 && zs(l, n, 9, p) && ((h = !0), (g = fa(l, d, n, 9, p, g))),
 											g && f.ngOnChanges(g),
 											65536 & n.flags && Cs(l, 256, n.nodeIndex) && f.ngOnInit(),
 											262144 & n.flags && f.ngDoCheck(),
@@ -6495,69 +6495,69 @@
 											f)
 										) {
 											var g = Ps(l, n.nodeIndex),
-												b = void 0;
+												m = void 0;
 											switch (201347067 & n.flags) {
 												case 32:
-													(b = new Array(d.length)),
-														h > 0 && (b[0] = u),
-														h > 1 && (b[1] = e),
-														h > 2 && (b[2] = t),
-														h > 3 && (b[3] = r),
-														h > 4 && (b[4] = s),
-														h > 5 && (b[5] = o),
-														h > 6 && (b[6] = a),
-														h > 7 && (b[7] = i),
-														h > 8 && (b[8] = c),
-														h > 9 && (b[9] = p);
+													(m = new Array(d.length)),
+														h > 0 && (m[0] = u),
+														h > 1 && (m[1] = e),
+														h > 2 && (m[2] = t),
+														h > 3 && (m[3] = r),
+														h > 4 && (m[4] = s),
+														h > 5 && (m[5] = o),
+														h > 6 && (m[6] = a),
+														h > 7 && (m[7] = i),
+														h > 8 && (m[8] = c),
+														h > 9 && (m[9] = p);
 													break;
 												case 64:
-													(b = {}),
-														h > 0 && (b[d[0].name] = u),
-														h > 1 && (b[d[1].name] = e),
-														h > 2 && (b[d[2].name] = t),
-														h > 3 && (b[d[3].name] = r),
-														h > 4 && (b[d[4].name] = s),
-														h > 5 && (b[d[5].name] = o),
-														h > 6 && (b[d[6].name] = a),
-														h > 7 && (b[d[7].name] = i),
-														h > 8 && (b[d[8].name] = c),
-														h > 9 && (b[d[9].name] = p);
+													(m = {}),
+														h > 0 && (m[d[0].name] = u),
+														h > 1 && (m[d[1].name] = e),
+														h > 2 && (m[d[2].name] = t),
+														h > 3 && (m[d[3].name] = r),
+														h > 4 && (m[d[4].name] = s),
+														h > 5 && (m[d[5].name] = o),
+														h > 6 && (m[d[6].name] = a),
+														h > 7 && (m[d[7].name] = i),
+														h > 8 && (m[d[8].name] = c),
+														h > 9 && (m[d[9].name] = p);
 													break;
 												case 128:
-													var m = u;
+													var b = u;
 													switch (h) {
 														case 1:
-															b = m.transform(u);
+															m = b.transform(u);
 															break;
 														case 2:
-															b = m.transform(e);
+															m = b.transform(e);
 															break;
 														case 3:
-															b = m.transform(e, t);
+															m = b.transform(e, t);
 															break;
 														case 4:
-															b = m.transform(e, t, r);
+															m = b.transform(e, t, r);
 															break;
 														case 5:
-															b = m.transform(e, t, r, s);
+															m = b.transform(e, t, r, s);
 															break;
 														case 6:
-															b = m.transform(e, t, r, s, o);
+															m = b.transform(e, t, r, s, o);
 															break;
 														case 7:
-															b = m.transform(e, t, r, s, o, a);
+															m = b.transform(e, t, r, s, o, a);
 															break;
 														case 8:
-															b = m.transform(e, t, r, s, o, a, i);
+															m = b.transform(e, t, r, s, o, a, i);
 															break;
 														case 9:
-															b = m.transform(e, t, r, s, o, a, i, c);
+															m = b.transform(e, t, r, s, o, a, i, c);
 															break;
 														case 10:
-															b = m.transform(e, t, r, s, o, a, i, c, p);
+															m = b.transform(e, t, r, s, o, a, i, c, p);
 													}
 											}
-											g.value = b;
+											g.value = m;
 										}
 										return f;
 									})(l, n, u, e, t, r, s, o, a, i, c, p);
@@ -6887,8 +6887,8 @@
 				return Pi(yi.destroy, Ba, null, [l]);
 			}
 			var gi,
-				bi,
 				mi,
+				bi,
 				yi = (function(l) {
 					return (
 						(l[(l.create = 0)] = 'create'),
@@ -6900,7 +6900,7 @@
 					);
 				})({});
 			function vi(l, n) {
-				(bi = l), (mi = n);
+				(mi = l), (bi = n);
 			}
 			function wi(l, n, u, e) {
 				return vi(l, n), Pi(yi.handleEvent, l.def.handleEvent, null, [l, n, u, e]);
@@ -7073,21 +7073,21 @@
 			}
 			function Pi(l, n, u, e) {
 				var t = gi,
-					r = bi,
-					s = mi;
+					r = mi,
+					s = bi;
 				try {
 					gi = l;
 					var o = n.apply(u, e);
-					return (bi = r), (mi = s), (gi = t), o;
+					return (mi = r), (bi = s), (gi = t), o;
 				} catch (a) {
-					if (Zt(a) || !bi) throw a;
+					if (Zt(a) || !mi) throw a;
 					throw (function(l, n) {
 						return l instanceof Error || (l = new Error(l.toString())), Rs(l, n), l;
 					})(a, Oi());
 				}
 			}
 			function Oi() {
-				return bi ? new Si(bi, mi) : null;
+				return mi ? new Si(mi, bi) : null;
 			}
 			var Ti = (function() {
 					function l(l) {
@@ -7837,12 +7837,12 @@
 					}
 					return (
 						(l.prototype.call = function(l, n) {
-							return n.subscribe(new bc(l, this.resultSelector));
+							return n.subscribe(new mc(l, this.resultSelector));
 						}),
 						l
 					);
 				})(),
-				bc = (function(l) {
+				mc = (function(l) {
 					function n(n, u) {
 						var e = l.call(this, n) || this;
 						return (e.resultSelector = u), (e.active = 0), (e.values = []), (e.observables = []), e;
@@ -7884,7 +7884,7 @@
 						n
 					);
 				})(X);
-			function mc(l) {
+			function bc(l) {
 				return new R(function(n) {
 					var u;
 					try {
@@ -9014,8 +9014,8 @@
 			function gp(l, n) {
 				('undefined' != typeof COMPILED && COMPILED) || ((Ml.ng = Ml.ng || {})[l] = n);
 			}
-			var bp = { ApplicationRef: Ur, NgZone: xr };
-			function mp(l) {
+			var mp = { ApplicationRef: Ur, NgZone: xr };
+			function bp(l) {
 				return ns(l);
 			}
 			var yp = new Il('EventManagerPlugins'),
@@ -9602,7 +9602,7 @@
 										  (function(l, n) {
 												var u = null;
 												try {
-													xt = xt || new bt(l);
+													xt = xt || new mt(l);
 													var e = n ? String(n) : '';
 													u = xt.getInertBodyElement(e);
 													var t = 5,
@@ -9863,7 +9863,7 @@
 						n
 					);
 				})(id),
-				bd = (function(l) {
+				md = (function(l) {
 					function n(n, u, e, t, r) {
 						var s = l.call(this, n, u) || this;
 						return (s.urlAfterRedirects = e), (s.state = t), (s.shouldActivate = r), s;
@@ -9888,7 +9888,7 @@
 						n
 					);
 				})(id),
-				md = (function(l) {
+				bd = (function(l) {
 					function n(n, u, e, t) {
 						var r = l.call(this, n, u) || this;
 						return (r.urlAfterRedirects = e), (r.state = t), r;
@@ -10544,7 +10544,7 @@
 					n
 				);
 			}
-			var bf = (function(l) {
+			var mf = (function(l) {
 				function n(n, u) {
 					var e = l.call(this, n) || this;
 					return (e.snapshot = u), xf(e, n), e;
@@ -10557,7 +10557,7 @@
 					n
 				);
 			})(pf);
-			function mf(l, n) {
+			function bf(l, n) {
 				var u = (function(l, n) {
 						var u = new wf([], {}, {}, '', {}, Sd, n, null, l.root, -1, {});
 						return new jf('', new hf(u, []));
@@ -10568,7 +10568,7 @@
 					s = new pc({}),
 					o = new pc(''),
 					a = new yf(e, t, s, o, r, Sd, n, u.root);
-				return (a.snapshot = u.root), new bf(new hf(a, []), u);
+				return (a.snapshot = u.root), new mf(new hf(a, []), u);
 			}
 			var yf = (function() {
 				function l(l, n, u, e, t, r, s, o) {
@@ -11612,7 +11612,7 @@
 				return e && 0 !== e.length
 					? cc(
 							e.map(function(e) {
-								return mc(function() {
+								return bc(function() {
 									var t,
 										r = Xf(e, n, u);
 									if (
@@ -11646,7 +11646,7 @@
 							return null !== l;
 						})
 						.map(function(n) {
-							return mc(function() {
+							return bc(function() {
 								return cc(
 									n.guards.map(function(t) {
 										var r,
@@ -11780,7 +11780,7 @@
 								o = [];
 							if ('**' === l.path) {
 								var a = u.length > 0 ? Ld(u).parameters : {};
-								t = new wf(u, a, Object.freeze(r({}, this.urlTree.queryParams)), this.urlTree.fragment, gh(l), e, l.component, l, ch(n), ph(n) + u.length, bh(l));
+								t = new wf(u, a, Object.freeze(r({}, this.urlTree.queryParams)), this.urlTree.fragment, gh(l), e, l.component, l, ch(n), ph(n) + u.length, mh(l));
 							} else {
 								var i = (function(l, n, u) {
 									if ('' === n.path) {
@@ -11798,7 +11798,7 @@
 								})(n, l, u);
 								(s = i.consumedSegments),
 									(o = u.slice(i.lastChild)),
-									(t = new wf(s, i.parameters, Object.freeze(r({}, this.urlTree.queryParams)), this.urlTree.fragment, gh(l), e, l.component, l, ch(n), ph(n) + s.length, bh(l)));
+									(t = new wf(s, i.parameters, Object.freeze(r({}, this.urlTree.queryParams)), this.urlTree.fragment, gh(l), e, l.component, l, ch(n), ph(n) + s.length, mh(l)));
 							}
 							var c = (function(l) {
 									return l.children ? l.children : l.loadChildren ? l._loadedConfig.routes : [];
@@ -11911,10 +11911,10 @@
 			function gh(l) {
 				return l.data || {};
 			}
-			function bh(l) {
+			function mh(l) {
 				return l.resolve || {};
 			}
-			function mh(l, n, u, e) {
+			function bh(l, n, u, e) {
 				var t = Xf(l, n, e);
 				return zd(t.resolve ? t.resolve(n, u) : t(n, u));
 			}
@@ -12057,7 +12057,7 @@
 									return a.triggerEvent(new wd(l));
 								}
 							)),
-							(this.routerState = mf(this.currentUrlTree, this.rootComponentType)),
+							(this.routerState = bf(this.currentUrlTree, this.rootComponentType)),
 							(this.transitions = new pc({
 								id: 0,
 								currentUrlTree: this.currentUrlTree,
@@ -12178,7 +12178,7 @@
 													d = l.extras,
 													f = new cd(l.id, n.serializeUrl(i), c, p);
 												u.next(f);
-												var h = mf(i, n.rootComponentType).snapshot;
+												var h = bf(i, n.rootComponentType).snapshot;
 												return cc(r({}, l, { targetSnapshot: h, urlAfterRedirects: i, extras: r({}, d, { skipLocationChange: !1, replaceUrl: !1 }) }));
 											}
 											return (n.rawUrlTree = l.rawUrl), l.resolve(null), oc;
@@ -12281,7 +12281,7 @@
 											}
 										}),
 										Sc(function(l) {
-											var u = new bd(l.id, n.serializeUrl(l.extractedUrl), n.serializeUrl(l.urlAfterRedirects), l.targetSnapshot, !!l.guardsResult);
+											var u = new md(l.id, n.serializeUrl(l.extractedUrl), n.serializeUrl(l.urlAfterRedirects), l.targetSnapshot, !!l.guardsResult);
 											n.triggerEvent(u);
 										}),
 										vc(function(l) {
@@ -12296,7 +12296,7 @@
 											if (l.guards.canActivateChecks.length)
 												return cc(l).pipe(
 													Sc(function(l) {
-														var u = new md(l.id, n.serializeUrl(l.extractedUrl), n.serializeUrl(l.urlAfterRedirects), l.targetSnapshot);
+														var u = new bd(l.id, n.serializeUrl(l.extractedUrl), n.serializeUrl(l.urlAfterRedirects), l.targetSnapshot);
 														n.triggerEvent(u);
 													}),
 													((u = n.paramsInheritanceStrategy),
@@ -12315,7 +12315,7 @@
 																						if (0 === t.length) return cc({});
 																						if (1 === t.length) {
 																							var r = t[0];
-																							return mh(l[r], n, u, e).pipe(
+																							return bh(l[r], n, u, e).pipe(
 																								ll(function(l) {
 																									var n;
 																									return ((n = {})[r] = l), n;
@@ -12326,7 +12326,7 @@
 																						return tl(t)
 																							.pipe(
 																								rl(function(t) {
-																									return mh(l[t], n, u, e).pipe(
+																									return bh(l[t], n, u, e).pipe(
 																										ll(function(l) {
 																											return (s[t] = l), l;
 																										})
@@ -12440,7 +12440,7 @@
 														new hf(i, t)
 													);
 												})(n.routeReuseStrategy, (u = l.targetSnapshot)._root, (e = l.currentRouterState) ? e._root : void 0)),
-												new bf(t, u));
+												new mf(t, u));
 											return r({}, l, { targetRouterState: s });
 										}),
 										Sc(function(l) {
@@ -13225,10 +13225,10 @@
 				gg = (function() {
 					return function() {};
 				})(),
-				bg = (function() {
+				mg = (function() {
 					return function() {};
 				})(),
-				mg = (function() {
+				bg = (function() {
 					return function() {};
 				})(),
 				yg = (function() {
@@ -13285,7 +13285,7 @@
 				return Ea(
 					0,
 					[
-						ma(402653184, 1, { content: 0 }),
+						ba(402653184, 1, { content: 0 }),
 						(l()(),
 						go(
 							1,
@@ -13351,7 +13351,7 @@
 				return Ea(
 					0,
 					[
-						ma(402653184, 1, { message: 0 }),
+						ba(402653184, 1, { message: 0 }),
 						(l()(), go(1, 0, [[1, 0], ['message', 1]], null, 1, 'p', [['tabindex', '-1']], [[1, 'id', 0]], null, null, null, null)),
 						xa(null, 0),
 						(l()(), ho(16777216, null, null, 1, null, Mg)),
@@ -13540,7 +13540,7 @@
 					null
 				);
 			}
-			function lb(l) {
+			function lm(l) {
 				return Ea(
 					0,
 					[
@@ -13560,15 +13560,15 @@
 					null
 				);
 			}
-			function nb(l) {
+			function nm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function ub(l) {
+			function um(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, nb)),
+						(l()(), ho(16777216, null, null, 1, null, nm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -13577,10 +13577,10 @@
 					null
 				);
 			}
-			function eb(l) {
+			function em(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function tb(l) {
+			function tm(l) {
 				return Ea(
 					0,
 					[
@@ -13592,7 +13592,7 @@
 					null
 				);
 			}
-			function rb(l) {
+			function rm(l) {
 				return Ea(
 					0,
 					[
@@ -13604,16 +13604,16 @@
 					null
 				);
 			}
-			function sb(l) {
+			function sm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 6, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, eb)),
+						(l()(), ho(16777216, null, null, 1, null, em)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, tb)),
+						(l()(), ho(16777216, null, null, 1, null, tm)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, rb)),
+						(l()(), ho(16777216, null, null, 1, null, rm)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -13622,10 +13622,10 @@
 					null
 				);
 			}
-			function ob(l) {
+			function om(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function ab(l) {
+			function am(l) {
 				return Ea(
 					0,
 					[
@@ -13637,7 +13637,7 @@
 					null
 				);
 			}
-			function ib(l) {
+			function im(l) {
 				return Ea(
 					0,
 					[
@@ -13649,7 +13649,7 @@
 					null
 				);
 			}
-			function cb(l) {
+			function cm(l) {
 				return Ea(
 					0,
 					[
@@ -13661,7 +13661,7 @@
 					null
 				);
 			}
-			function pb(l) {
+			function pm(l) {
 				return Ea(
 					0,
 					[
@@ -13673,20 +13673,20 @@
 					null
 				);
 			}
-			function db(l) {
+			function dm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 10, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, ob)),
+						(l()(), ho(16777216, null, null, 1, null, om)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, ab)),
+						(l()(), ho(16777216, null, null, 1, null, am)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, ib)),
+						(l()(), ho(16777216, null, null, 1, null, im)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, cb)),
+						(l()(), ho(16777216, null, null, 1, null, cm)),
 						ea(8, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, pb)),
+						(l()(), ho(16777216, null, null, 1, null, pm)),
 						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -13695,15 +13695,15 @@
 					null
 				);
 			}
-			function fb(l) {
+			function fm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function hb(l) {
+			function hm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, fb)),
+						(l()(), ho(16777216, null, null, 1, null, fm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -13712,10 +13712,10 @@
 					null
 				);
 			}
-			function gb(l) {
+			function gm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function bb(l) {
+			function mm(l) {
 				return Ea(
 					0,
 					[
@@ -13727,7 +13727,7 @@
 					null
 				);
 			}
-			function mb(l) {
+			function bm(l) {
 				return Ea(
 					0,
 					[
@@ -13739,7 +13739,7 @@
 					null
 				);
 			}
-			function yb(l) {
+			function ym(l) {
 				return Ea(
 					0,
 					[
@@ -13751,7 +13751,7 @@
 					null
 				);
 			}
-			function vb(l) {
+			function vm(l) {
 				return Ea(
 					0,
 					[
@@ -13763,7 +13763,7 @@
 					null
 				);
 			}
-			function wb(l) {
+			function wm(l) {
 				return Ea(
 					0,
 					[
@@ -13775,7 +13775,7 @@
 					null
 				);
 			}
-			function jb(l) {
+			function jm(l) {
 				return Ea(
 					0,
 					[
@@ -13787,7 +13787,7 @@
 					null
 				);
 			}
-			function xb(l) {
+			function xm(l) {
 				return Ea(
 					0,
 					[
@@ -13799,7 +13799,7 @@
 					null
 				);
 			}
-			function kb(l) {
+			function km(l) {
 				return Ea(
 					0,
 					[
@@ -13811,28 +13811,28 @@
 					null
 				);
 			}
-			function _b(l) {
+			function _m(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 18, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, gb)),
+						(l()(), ho(16777216, null, null, 1, null, gm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, bb)),
+						(l()(), ho(16777216, null, null, 1, null, mm)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, mb)),
+						(l()(), ho(16777216, null, null, 1, null, bm)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, yb)),
+						(l()(), ho(16777216, null, null, 1, null, ym)),
 						ea(8, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, vb)),
+						(l()(), ho(16777216, null, null, 1, null, vm)),
 						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, wb)),
+						(l()(), ho(16777216, null, null, 1, null, wm)),
 						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, jb)),
+						(l()(), ho(16777216, null, null, 1, null, jm)),
 						ea(14, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, xb)),
+						(l()(), ho(16777216, null, null, 1, null, xm)),
 						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, kb)),
+						(l()(), ho(16777216, null, null, 1, null, km)),
 						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -13849,10 +13849,10 @@
 					null
 				);
 			}
-			function Cb(l) {
+			function Cm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function Ib(l) {
+			function Im(l) {
 				return Ea(
 					0,
 					[
@@ -13864,7 +13864,7 @@
 					null
 				);
 			}
-			function Sb(l) {
+			function Sm(l) {
 				return Ea(
 					0,
 					[
@@ -13876,7 +13876,7 @@
 					null
 				);
 			}
-			function Eb(l) {
+			function Em(l) {
 				return Ea(
 					0,
 					[
@@ -13888,7 +13888,7 @@
 					null
 				);
 			}
-			function Pb(l) {
+			function Pm(l) {
 				return Ea(
 					0,
 					[
@@ -13900,7 +13900,7 @@
 					null
 				);
 			}
-			function Ob(l) {
+			function Om(l) {
 				return Ea(
 					0,
 					[
@@ -13912,7 +13912,7 @@
 					null
 				);
 			}
-			function Tb(l) {
+			function Tm(l) {
 				return Ea(
 					0,
 					[
@@ -13924,24 +13924,24 @@
 					null
 				);
 			}
-			function Mb(l) {
+			function Mm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 14, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Cb)),
+						(l()(), ho(16777216, null, null, 1, null, Cm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Ib)),
+						(l()(), ho(16777216, null, null, 1, null, Im)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Sb)),
+						(l()(), ho(16777216, null, null, 1, null, Sm)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Eb)),
+						(l()(), ho(16777216, null, null, 1, null, Em)),
 						ea(8, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Pb)),
+						(l()(), ho(16777216, null, null, 1, null, Pm)),
 						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Ob)),
+						(l()(), ho(16777216, null, null, 1, null, Om)),
 						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Tb)),
+						(l()(), ho(16777216, null, null, 1, null, Tm)),
 						ea(14, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -13950,10 +13950,10 @@
 					null
 				);
 			}
-			function Rb(l) {
+			function Rm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function Ab(l) {
+			function Am(l) {
 				return Ea(
 					0,
 					[
@@ -13965,7 +13965,7 @@
 					null
 				);
 			}
-			function Nb(l) {
+			function Nm(l) {
 				return Ea(
 					0,
 					[
@@ -13977,7 +13977,7 @@
 					null
 				);
 			}
-			function Db(l) {
+			function Dm(l) {
 				return Ea(
 					0,
 					[
@@ -13989,18 +13989,18 @@
 					null
 				);
 			}
-			function Fb(l) {
+			function Fm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 8, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Rb)),
+						(l()(), ho(16777216, null, null, 1, null, Rm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Ab)),
+						(l()(), ho(16777216, null, null, 1, null, Am)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Nb)),
+						(l()(), ho(16777216, null, null, 1, null, Nm)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Db)),
+						(l()(), ho(16777216, null, null, 1, null, Dm)),
 						ea(8, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14009,10 +14009,10 @@
 					null
 				);
 			}
-			function Vb(l) {
+			function Vm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function Ub(l) {
+			function Um(l) {
 				return Ea(
 					0,
 					[
@@ -14024,7 +14024,7 @@
 					null
 				);
 			}
-			function Lb(l) {
+			function Lm(l) {
 				return Ea(
 					0,
 					[
@@ -14036,16 +14036,16 @@
 					null
 				);
 			}
-			function Hb(l) {
+			function Hm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 6, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Vb)),
+						(l()(), ho(16777216, null, null, 1, null, Vm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Ub)),
+						(l()(), ho(16777216, null, null, 1, null, Um)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Lb)),
+						(l()(), ho(16777216, null, null, 1, null, Lm)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14054,15 +14054,15 @@
 					null
 				);
 			}
-			function zb(l) {
+			function zm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function Bb(l) {
+			function Bm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, zb)),
+						(l()(), ho(16777216, null, null, 1, null, zm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14071,10 +14071,10 @@
 					null
 				);
 			}
-			function qb(l) {
+			function qm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function Gb(l) {
+			function Gm(l) {
 				return Ea(
 					0,
 					[
@@ -14086,7 +14086,7 @@
 					null
 				);
 			}
-			function Qb(l) {
+			function Qm(l) {
 				return Ea(
 					0,
 					[
@@ -14098,7 +14098,7 @@
 					null
 				);
 			}
-			function Zb(l) {
+			function Zm(l) {
 				return Ea(
 					0,
 					[
@@ -14110,18 +14110,18 @@
 					null
 				);
 			}
-			function Wb(l) {
+			function Wm(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 8, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, qb)),
+						(l()(), ho(16777216, null, null, 1, null, qm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Gb)),
+						(l()(), ho(16777216, null, null, 1, null, Gm)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Qb)),
+						(l()(), ho(16777216, null, null, 1, null, Qm)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Zb)),
+						(l()(), ho(16777216, null, null, 1, null, Zm)),
 						ea(8, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14130,15 +14130,15 @@
 					null
 				);
 			}
-			function Kb(l) {
+			function Km(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function Yb(l) {
+			function Ym(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Kb)),
+						(l()(), ho(16777216, null, null, 1, null, Km)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14147,15 +14147,15 @@
 					null
 				);
 			}
-			function Jb(l) {
+			function Jm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function $b(l) {
+			function $m(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Jb)),
+						(l()(), ho(16777216, null, null, 1, null, Jm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14164,15 +14164,15 @@
 					null
 				);
 			}
-			function Xb(l) {
+			function Xm(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function lm(l) {
+			function lb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Xb)),
+						(l()(), ho(16777216, null, null, 1, null, Xm)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14181,10 +14181,10 @@
 					null
 				);
 			}
-			function nm(l) {
+			function nb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function um(l) {
+			function ub(l) {
 				return Ea(
 					0,
 					[
@@ -14196,7 +14196,7 @@
 					null
 				);
 			}
-			function em(l) {
+			function eb(l) {
 				return Ea(
 					0,
 					[
@@ -14208,16 +14208,16 @@
 					null
 				);
 			}
-			function tm(l) {
+			function tb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 6, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, nm)),
+						(l()(), ho(16777216, null, null, 1, null, nb)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, um)),
+						(l()(), ho(16777216, null, null, 1, null, ub)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, em)),
+						(l()(), ho(16777216, null, null, 1, null, eb)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14226,15 +14226,15 @@
 					null
 				);
 			}
-			function rm(l) {
+			function rb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function sm(l) {
+			function sb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, rm)),
+						(l()(), ho(16777216, null, null, 1, null, rb)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14243,15 +14243,15 @@
 					null
 				);
 			}
-			function om(l) {
+			function ob(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function am(l) {
+			function ab(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, om)),
+						(l()(), ho(16777216, null, null, 1, null, ob)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14260,15 +14260,15 @@
 					null
 				);
 			}
-			function im(l) {
+			function ib(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function cm(l) {
+			function cb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, im)),
+						(l()(), ho(16777216, null, null, 1, null, ib)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14277,10 +14277,10 @@
 					null
 				);
 			}
-			function pm(l) {
+			function pb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function dm(l) {
+			function db(l) {
 				return Ea(
 					0,
 					[
@@ -14292,7 +14292,7 @@
 					null
 				);
 			}
-			function fm(l) {
+			function fb(l) {
 				return Ea(
 					0,
 					[
@@ -14304,7 +14304,7 @@
 					null
 				);
 			}
-			function hm(l) {
+			function hb(l) {
 				return Ea(
 					0,
 					[
@@ -14316,7 +14316,7 @@
 					null
 				);
 			}
-			function gm(l) {
+			function gb(l) {
 				return Ea(
 					0,
 					[
@@ -14328,7 +14328,7 @@
 					null
 				);
 			}
-			function bm(l) {
+			function mb(l) {
 				return Ea(
 					0,
 					[
@@ -14340,22 +14340,22 @@
 					null
 				);
 			}
-			function mm(l) {
+			function bb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 12, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, pm)),
+						(l()(), ho(16777216, null, null, 1, null, pb)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, dm)),
+						(l()(), ho(16777216, null, null, 1, null, db)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, fm)),
+						(l()(), ho(16777216, null, null, 1, null, fb)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, hm)),
+						(l()(), ho(16777216, null, null, 1, null, hb)),
 						ea(8, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, gm)),
+						(l()(), ho(16777216, null, null, 1, null, gb)),
 						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, bm)),
+						(l()(), ho(16777216, null, null, 1, null, mb)),
 						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14364,15 +14364,15 @@
 					null
 				);
 			}
-			function ym(l) {
+			function yb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function vm(l) {
+			function vb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 2, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, ym)),
+						(l()(), ho(16777216, null, null, 1, null, yb)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14381,10 +14381,10 @@
 					null
 				);
 			}
-			function wm(l) {
+			function wb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function jm(l) {
+			function jb(l) {
 				return Ea(
 					0,
 					[
@@ -14396,7 +14396,7 @@
 					null
 				);
 			}
-			function xm(l) {
+			function xb(l) {
 				return Ea(
 					0,
 					[
@@ -14408,16 +14408,16 @@
 					null
 				);
 			}
-			function km(l) {
+			function kb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 6, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, wm)),
+						(l()(), ho(16777216, null, null, 1, null, wb)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, jm)),
+						(l()(), ho(16777216, null, null, 1, null, jb)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, xm)),
+						(l()(), ho(16777216, null, null, 1, null, xb)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14426,10 +14426,10 @@
 					null
 				);
 			}
-			function _m(l) {
+			function _b(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (l()(), go(1, 0, null, null, 0, 'a', [], null, null, null, null, null))], null, null);
 			}
-			function Cm(l) {
+			function Cb(l) {
 				return Ea(
 					0,
 					[
@@ -14441,7 +14441,7 @@
 					null
 				);
 			}
-			function Im(l) {
+			function Ib(l) {
 				return Ea(
 					0,
 					[
@@ -14453,16 +14453,16 @@
 					null
 				);
 			}
-			function Sm(l) {
+			function Sb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 6, 'ul', [['class', 'pad-l-sm submenu']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, _m)),
+						(l()(), ho(16777216, null, null, 1, null, _b)),
 						ea(2, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Cm)),
+						(l()(), ho(16777216, null, null, 1, null, Cb)),
 						ea(4, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Im)),
+						(l()(), ho(16777216, null, null, 1, null, Ib)),
 						ea(6, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
@@ -14471,10 +14471,10 @@
 					null
 				);
 			}
-			function Em(l) {
+			function Eb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 0, 'h2', [], null, null, null, null, null))], null, null);
 			}
-			function Pm(l) {
+			function Pb(l) {
 				return Ea(
 					0,
 					[
@@ -14511,7 +14511,7 @@
 					}
 				);
 			}
-			function Om(l) {
+			function Ob(l) {
 				return Ea(
 					0,
 					[
@@ -14519,91 +14519,91 @@
 						(l()(), go(1, 0, null, null, 89, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"alert-bad"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bad'])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(20, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"alert-good"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['good'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(38, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(43, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(43, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"alert-info"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['info'])),
 						(l()(), go(50, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(56, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"alert-warn"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['warn'])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(74, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ez-alert'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"alert-good"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['good'])),
 						(l()(), go(86, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ez-alert'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -14611,35 +14611,38 @@
 					null
 				);
 			}
-			function Tm(l) {
+			function Tb(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Em)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, Eb)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Alerts are styled with an '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.alert-[bad || good || info || warn]'])),
 						(l()(), Ca(-1, null, [' class.'])),
-						(l()(), ho(16777216, null, null, 1, null, Pm)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Om)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						(l()(), ho(16777216, null, null, 1, null, Pb)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, Ob)),
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, ''),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<aside class="alert-bad">bad</aside>\n<aside class="alert-good">good</aside>\n<aside class="alert-info">info</aside>\n<aside class="alert-warn">warn</aside>\n<ez-alert class="alert-good">good</ez-alert>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<aside class="alert-bad">bad</aside>\n<aside class="alert-good">good</aside>\n<aside class="alert-info">info</aside>\n<aside class="alert-warn">warn</aside>\n<ez-alert class="alert-good">good</ez-alert>'
 							);
@@ -14647,10 +14650,10 @@
 					null
 				);
 			}
-			function Mm(l) {
+			function Mb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (l()(), Ca(-1, null, ['Close']))], null, null);
 			}
-			function Rm(l) {
+			function Rb(l) {
 				return Ea(
 					0,
 					[
@@ -14677,7 +14680,7 @@
 					}
 				);
 			}
-			function Am(l) {
+			function Ab(l) {
 				return Ea(
 					0,
 					[
@@ -14685,37 +14688,37 @@
 						(l()(), go(1, 0, null, null, 35, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"alert-good close"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['close'])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['aside'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(20, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ez-alert'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"close alert-good"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['close'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ez-alert'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -14723,36 +14726,39 @@
 					null
 				);
 			}
-			function Nm(l) {
+			function Nb(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Mm)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, Mb)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Alerts are closed by adding a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.close'])),
 						(l()(), Ca(-1, null, [' class.'])),
-						(l()(), ho(16777216, null, null, 1, null, Rm)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Am)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						(l()(), ho(16777216, null, null, 1, null, Rb)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, Ab)),
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Close'),
-							l(n, 10, 0, '<aside class="alert-good close">close</aside>\n<ez-alert class="close alert-good">close</ez-alert>'),
-							l(n, 12, 0, '<aside class="alert-good close">close</aside>\n<ez-alert class="close alert-good">close</ez-alert>');
+							l(n, 13, 0, '<aside class="alert-good close">close</aside>\n<ez-alert class="close alert-good">close</ez-alert>'),
+							l(n, 15, 0, '<aside class="alert-good close">close</aside>\n<ez-alert class="close alert-good">close</ez-alert>');
 					},
 					null
 				);
 			}
-			function Dm(l) {
+			function Db(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 0, 'h2', [], null, null, null, null, null))], null, null);
 			}
-			function Fm(l) {
+			function Fb(l) {
 				return Ea(
 					0,
 					[
@@ -14782,7 +14788,7 @@
 					null
 				);
 			}
-			function Vm(l) {
+			function Vb(l) {
 				return Ea(
 					0,
 					[
@@ -14790,90 +14796,90 @@
 						(l()(), go(1, 0, null, null, 88, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"badge-sm bg-dk-blue text-white"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['1'])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(20, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"badge-md bg-dk-blue text-white"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['20'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(38, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(43, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(43, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"badge-lg bg-dk-blue text-white"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['300'])),
 						(l()(), go(50, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(56, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"badge-md bg-dk-blue text-white"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), go(67, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(69, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(69, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(73, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(75, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(75, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ez-badge'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(78, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(78, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(81, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(81, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"badge-sm bg-dk-blue text-white"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['10'])),
 						(l()(), go(85, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(87, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(87, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ez-badge'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -14881,35 +14887,38 @@
 					null
 				);
 			}
-			function Um(l) {
+			function Ub(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Dm)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, Db)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Badges are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.badge-[sm || md || lg]'])),
 						(l()(), Ca(-1, null, [' class'])),
-						(l()(), ho(16777216, null, null, 1, null, Fm)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Vm)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						(l()(), ho(16777216, null, null, 1, null, Fb)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, Vb)),
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, ''),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<p class="badge-sm bg-dk-blue text-white">1</p>\n<p class="badge-md bg-dk-blue text-white">20</p>\n<p class="badge-lg bg-dk-blue text-white">300</p>\n<p class="badge-md bg-dk-blue text-white"></p>\n<ez-badge class="badge-sm bg-dk-blue text-white">10</ez-badge>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<p class="badge-sm bg-dk-blue text-white">1</p>\n<p class="badge-md bg-dk-blue text-white">20</p>\n<p class="badge-lg bg-dk-blue text-white">300</p>\n<p class="badge-md bg-dk-blue text-white"></p>\n<ez-badge class="badge-sm bg-dk-blue text-white">10</ez-badge>'
 							);
@@ -14917,10 +14926,10 @@
 					null
 				);
 			}
-			function Lm(l) {
+			function Lb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (l()(), Ca(-1, null, ['Empty']))], null, null);
 			}
-			function Hm(l) {
+			function Hb(l) {
 				return Ea(
 					0,
 					[
@@ -14941,7 +14950,7 @@
 					null
 				);
 			}
-			function zm(l) {
+			function zb(l) {
 				return Ea(
 					0,
 					[
@@ -14949,36 +14958,36 @@
 						(l()(), go(1, 0, null, null, 34, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"badge-sm bg-dk-blue text-white"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['1'])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(20, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"badge-md bg-dk-blue text-white"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), go(31, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(33, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(33, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -14986,33 +14995,36 @@
 					null
 				);
 			}
-			function Bm(l) {
+			function Bb(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Lm)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, Lb)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['If a badge does not contain text, it is not rendered.'])),
-						(l()(), ho(16777216, null, null, 1, null, Hm)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, zm)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						(l()(), ho(16777216, null, null, 1, null, Hb)),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, zb)),
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Empty'),
-							l(n, 7, 0, '<p class="badge-sm bg-dk-blue text-white">1</p>\n<p class="badge-md bg-dk-blue text-white"></p>'),
-							l(n, 9, 0, '<p class="badge-sm bg-dk-blue text-white">1</p>\n<p class="badge-md bg-dk-blue text-white"></p>');
+							l(n, 10, 0, '<p class="badge-sm bg-dk-blue text-white">1</p>\n<p class="badge-md bg-dk-blue text-white"></p>'),
+							l(n, 12, 0, '<p class="badge-sm bg-dk-blue text-white">1</p>\n<p class="badge-md bg-dk-blue text-white"></p>');
 					},
 					null
 				);
 			}
-			function qm(l) {
+			function qb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 0, 'h2', [], null, null, null, null, null))], null, null);
 			}
-			function Gm(l) {
+			function Gb(l) {
 				return Ea(
 					0,
 					[
@@ -15046,91 +15058,91 @@
 					null
 				);
 			}
-			function Qm(l) {
+			function Qb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 86, 'figure', [], null, null, null, null, null)),
 						(l()(), go(1, 0, null, null, 85, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<button '])),
-						(l()(), go(3, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(3, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-xs bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(10, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(11, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(14, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>xs</button>\n<button '])),
-						(l()(), go(17, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(17, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(18, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-sm bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(24, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(24, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>sm</button>\n<button '])),
-						(l()(), go(31, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(31, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(32, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(35, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(38, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(38, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(39, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(42, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n<button '])),
-						(l()(), go(45, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(45, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-lg bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(52, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(53, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(56, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>lg</button>\n<button '])),
-						(l()(), go(59, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(59, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(60, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(63, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-xl bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(66, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(66, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(67, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>xl</button>\n<button '])),
-						(l()(), go(73, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(73, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(74, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(77, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-full bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(80, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(80, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(81, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
@@ -15142,35 +15154,38 @@
 					null
 				);
 			}
-			function Zm(l) {
+			function Zb(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, qm)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, qb)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Buttons are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.btn-[xs || sm || md || lg || xl || full]'])),
 						(l()(), Ca(-1, null, [' class.'])),
-						(l()(), ho(16777216, null, null, 1, null, Gm)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Qm)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						(l()(), ho(16777216, null, null, 1, null, Gb)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, Qb)),
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, ''),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button>\n<button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>\n<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n<button class="btn-lg bg-dk-blue text-white bg-hover-blue" type="button">lg</button>\n<button class="btn-xl bg-dk-blue text-white bg-hover-blue" type="button">xl</button>\n<button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<button class="btn-xs bg-dk-blue text-white bg-hover-blue" type="button">xs</button>\n<button class="btn-sm bg-dk-blue text-white bg-hover-blue" type="button">sm</button>\n<button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n<button class="btn-lg bg-dk-blue text-white bg-hover-blue" type="button">lg</button>\n<button class="btn-xl bg-dk-blue text-white bg-hover-blue" type="button">xl</button>\n<button class="btn-full bg-dk-blue text-white bg-hover-blue" type="button">full</button>'
 							);
@@ -15178,10 +15193,10 @@
 					null
 				);
 			}
-			function Wm(l) {
+			function Wb(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (l()(), Ca(-1, null, ['Group']))], null, null);
 			}
-			function Km(l) {
+			function Kb(l) {
 				return Ea(
 					0,
 					[
@@ -15266,14 +15281,14 @@
 					null
 				);
 			}
-			function Ym(l) {
+			function Yb(l) {
 				return Ea(
 					0,
 					[
 						(l()(), go(0, 0, null, null, 251, 'figure', [], null, null, null, null, null)),
 						(l()(), go(1, 0, null, null, 250, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<section '])),
-						(l()(), go(3, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(3, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
@@ -15286,77 +15301,77 @@
 						(l()(), go(13, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button row group"'])),
 						(l()(), Ca(-1, null, ['>\n    <button '])),
-						(l()(), go(16, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(17, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(20, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(23, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(23, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(24, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(27, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(30, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(30, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(31, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(37, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(37, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(38, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(41, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(44, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(44, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(45, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(48, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(51, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(51, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(55, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(58, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(59, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(62, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(65, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(65, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(66, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(69, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(72, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(72, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(73, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(79, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(79, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(80, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(83, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n</section>\n<section '])),
-						(l()(), go(86, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(86, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(87, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
@@ -15369,77 +15384,77 @@
 						(l()(), go(96, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button column group"'])),
 						(l()(), Ca(-1, null, ['>\n    <button '])),
-						(l()(), go(99, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(99, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(106, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(107, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(110, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(113, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(113, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(114, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(117, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(120, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(120, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(121, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(127, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(127, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(128, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(131, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(134, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(134, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(135, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(138, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(141, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(141, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(145, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(148, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(149, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(152, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(155, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(155, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(156, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(159, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(162, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(162, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(163, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n</section>\n<section '])),
-						(l()(), go(169, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(169, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(170, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
@@ -15452,70 +15467,70 @@
 						(l()(), go(179, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button full row group"'])),
 						(l()(), Ca(-1, null, ['>\n    <button '])),
-						(l()(), go(182, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(182, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(183, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(186, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(189, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(189, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(193, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(196, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(197, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(200, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(203, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(203, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(204, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(207, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(210, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(210, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(211, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(217, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(217, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(218, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(221, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(224, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(224, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(225, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(228, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(231, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(231, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(235, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n    <button '])),
-						(l()(), go(238, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(239, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(242, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(245, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(245, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(246, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
@@ -15527,35 +15542,38 @@
 					null
 				);
 			}
-			function Jm(l) {
+			function Jb(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Wm)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, Wb)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Buttons are grouped with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.btn-group-[row || col || full]'])),
 						(l()(), Ca(-1, null, [' class on a parent container.'])),
-						(l()(), ho(16777216, null, null, 1, null, Km)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Ym)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						(l()(), ho(16777216, null, null, 1, null, Kb)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, Yb)),
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Group'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<section class="btn-group-row" role="group" aria-label="button row group">\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n</section>\n<section class="btn-group-col" role="group" aria-label="button column group">\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n</section>\n<section class="btn-group-full" role="group" aria-label="button full row group">\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n</section>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<section class="btn-group-row" role="group" aria-label="button row group">\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n</section>\n<section class="btn-group-col" role="group" aria-label="button column group">\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n</section>\n<section class="btn-group-full" role="group" aria-label="button full row group">\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n    <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n</section>'
 							);
@@ -15563,10 +15581,10 @@
 					null
 				);
 			}
-			function $m(l) {
+			function $b(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (l()(), Ca(-1, null, ['Rounded']))], null, null);
 			}
-			function Xm(l) {
+			function Xb(l) {
 				return Ea(
 					0,
 					[
@@ -15607,84 +15625,84 @@
 						(l()(), go(0, 0, null, null, 86, 'figure', [], null, null, null, null, null)),
 						(l()(), go(1, 0, null, null, 85, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<button '])),
-						(l()(), go(3, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(3, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-xs rounded bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(10, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(11, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(14, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>xs</button>\n<button '])),
-						(l()(), go(17, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(17, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(18, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-sm rounded bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(24, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(24, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>sm</button>\n<button '])),
-						(l()(), go(31, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(31, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(32, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(35, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md rounded bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(38, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(38, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(39, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(42, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>md</button>\n<button '])),
-						(l()(), go(45, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(45, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-lg rounded bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(52, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(53, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(56, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>lg</button>\n<button '])),
-						(l()(), go(59, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(59, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(60, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(63, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-xl rounded bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(66, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(66, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(67, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"button"'])),
 						(l()(), Ca(-1, null, ['>xl</button>\n<button '])),
-						(l()(), go(73, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(73, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(74, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(77, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-full rounded bg-dk-blue text-white bg-hover-blue"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(80, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(80, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(81, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
@@ -15700,31 +15718,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, $m)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, $b)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Buttons are rounded by adding a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.rounded'])),
 						(l()(), Ca(-1, null, [' class.'])),
-						(l()(), ho(16777216, null, null, 1, null, Xm)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, Xb)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, ly)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Rounded'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">xs</button>\n<button class="btn-sm rounded bg-dk-blue text-white bg-hover-blue" type="button">sm</button>\n<button class="btn-md rounded bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n<button class="btn-lg rounded bg-dk-blue text-white bg-hover-blue" type="button">lg</button>\n<button class="btn-xl rounded bg-dk-blue text-white bg-hover-blue" type="button">xl</button>\n<button class="btn-full rounded bg-dk-blue text-white bg-hover-blue" type="button">full</button>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<button class="btn-xs rounded bg-dk-blue text-white bg-hover-blue" type="button">xs</button>\n<button class="btn-sm rounded bg-dk-blue text-white bg-hover-blue" type="button">sm</button>\n<button class="btn-md rounded bg-dk-blue text-white bg-hover-blue" type="button">md</button>\n<button class="btn-lg rounded bg-dk-blue text-white bg-hover-blue" type="button">lg</button>\n<button class="btn-xl rounded bg-dk-blue text-white bg-hover-blue" type="button">xl</button>\n<button class="btn-full rounded bg-dk-blue text-white bg-hover-blue" type="button">full</button>'
 							);
@@ -15761,14 +15782,14 @@
 						(l()(), go(0, 0, null, null, 16, 'figure', [], null, null, null, null, null)),
 						(l()(), go(1, 0, null, null, 15, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<button '])),
-						(l()(), go(3, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(3, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
 						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"btn-md"'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(10, 0, null, null, 3, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
 						(l()(), go(11, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
 						(l()(), Ca(-1, null, ['='])),
@@ -15784,24 +15805,27 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, uy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Buttons are disabled by adding a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['disabled'])),
 						(l()(), Ca(-1, null, [' attribute.'])),
 						(l()(), ho(16777216, null, null, 1, null, ey)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, ty)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'State'),
-							l(n, 10, 0, '<button class="btn-md" type="button" disabled>disabled</button>'),
-							l(n, 12, 0, '<button class="btn-md" type="button" disabled>disabled</button>');
+							l(n, 13, 0, '<button class="btn-md" type="button" disabled>disabled</button>'),
+							l(n, 15, 0, '<button class="btn-md" type="button" disabled>disabled</button>');
 					},
 					null
 				);
@@ -15840,19 +15864,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, sy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, oy)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, ay)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -15891,19 +15918,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, cy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, py)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, dy)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -15927,7 +15957,7 @@
 					null
 				);
 			}
-			function by(l) {
+			function my(l) {
 				return Ea(
 					0,
 					[
@@ -15938,23 +15968,26 @@
 					null
 				);
 			}
-			function my(l) {
+			function by(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, hy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, gy)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, by)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, my)),
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Accordion'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Accordion'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -15993,19 +16026,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, yy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, vy)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, wy)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Expand'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Expand'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -16044,19 +16080,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, xy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, ky)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, _y)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -16095,19 +16134,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Iy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Sy)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Ey)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Background'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Background'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -16146,19 +16188,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Oy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Ty)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, My)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Border'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Border'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -16197,19 +16242,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Ay)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Ny)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Dy)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Hover'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Hover'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -16248,19 +16296,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Vy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Uy)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Ly)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Text'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Text'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -16299,19 +16350,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, zy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, By)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, qy)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -16363,169 +16417,169 @@
 						(l()(), go(1, 0, null, null, 167, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['row'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['row'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(44, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row-full"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(56, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['full row'])),
 						(l()(), go(62, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['full row'])),
 						(l()(), go(74, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(80, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(86, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(91, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(91, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(98, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['column'])),
 						(l()(), go(104, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(110, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['column'])),
 						(l()(), go(116, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(122, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(128, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(133, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(133, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col-full"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['full column'])),
 						(l()(), go(146, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(152, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['full column'])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(164, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -16537,34 +16591,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Qy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['In order for flexbox to work, a parent container must have a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.row[-full]'])),
 						(l()(), Ca(-1, null, [' or '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.col[-full]'])),
 						(l()(), Ca(-1, null, [' class.'])),
 						(l()(), ho(16777216, null, null, 1, null, Zy)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Wy)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, ''),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<ul class="row">\n    <li>row</li>\n    <li>row</li>\n</ul>\n<ul class="row-full">\n    <li>full row</li>\n    <li>full row</li>\n</ul>\n<ul class="col">\n    <li>column</li>\n    <li>column</li>\n</ul>\n<ul class="col-full">\n    <li>full column</li>\n    <li>full column</li>\n</ul>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<ul class="row">\n    <li>row</li>\n    <li>row</li>\n</ul>\n<ul class="row-full">\n    <li>full row</li>\n    <li>full row</li>\n</ul>\n<ul class="col">\n    <li>column</li>\n    <li>column</li>\n</ul>\n<ul class="col-full">\n    <li>full column</li>\n    <li>full column</li>\n</ul>'
 							);
@@ -16649,421 +16706,421 @@
 						(l()(), go(1, 0, null, null, 419, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-l"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(44, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-c"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(56, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(62, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(74, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(80, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(86, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(91, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(91, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-r"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(98, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(104, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(110, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(116, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(122, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(128, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(133, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(133, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-t"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(146, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(152, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(164, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(170, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-m"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(194, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(200, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(206, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(212, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(217, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(217, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-b"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(224, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(230, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(242, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(248, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(254, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(259, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(259, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-cm"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(266, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center middle'])),
 						(l()(), go(272, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(278, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center middle'])),
 						(l()(), go(284, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(290, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(296, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(301, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(301, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-sa"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(308, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(314, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(320, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(326, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(332, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(338, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-sb"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(350, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(356, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(362, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(368, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(374, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(380, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(385, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(385, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(388, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(388, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col align-st"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(392, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(394, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(394, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(398, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(400, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(400, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(404, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(406, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(406, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(410, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(412, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(412, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(416, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(418, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(418, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -17075,34 +17132,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Yy)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use an '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.align-[l || c || r || t || m || b || cm || sa || sb || st]'])),
 						(l()(), Ca(-1, null, [' class to align ALL items in a '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.col'])),
 						(l()(), Ca(-1, null, [' flex container.'])),
 						(l()(), ho(16777216, null, null, 1, null, Jy)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, $y)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Container Column'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<ul class="col align-l">\n    <li>left (default)</li>\n    <li>left (default)</li>\n</ul>\n<ul class="col align-c">\n    <li>center</li>\n    <li>center</li>\n</ul>\n<ul class="col align-r">\n    <li>right</li>\n    <li>right</li>\n</ul>\n<ul class="col align-t">\n    <li>top (default)</li>\n    <li>top (default)</li>\n</ul>\n<ul class="col align-m">\n    <li>middle</li>\n    <li>middle</li>\n</ul>\n<ul class="col align-b">\n    <li>bottom</li>\n    <li>bottom</li>\n</ul>\n<ul class="col align-cm">\n    <li>center middle</li>\n    <li>center middle</li>\n</ul>\n<ul class="col align-sa">\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="col align-sb">\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="col align-st">\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<ul class="col align-l">\n    <li>left (default)</li>\n    <li>left (default)</li>\n</ul>\n<ul class="col align-c">\n    <li>center</li>\n    <li>center</li>\n</ul>\n<ul class="col align-r">\n    <li>right</li>\n    <li>right</li>\n</ul>\n<ul class="col align-t">\n    <li>top (default)</li>\n    <li>top (default)</li>\n</ul>\n<ul class="col align-m">\n    <li>middle</li>\n    <li>middle</li>\n</ul>\n<ul class="col align-b">\n    <li>bottom</li>\n    <li>bottom</li>\n</ul>\n<ul class="col align-cm">\n    <li>center middle</li>\n    <li>center middle</li>\n</ul>\n<ul class="col align-sa">\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="col align-sb">\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="col align-st">\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							);
@@ -17187,421 +17247,421 @@
 						(l()(), go(1, 0, null, null, 419, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-l"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(44, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(49, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-c"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(56, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(62, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(74, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(80, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(86, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(91, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(91, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-r"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(98, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(104, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(110, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(116, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(122, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(128, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(133, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(133, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-t"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(146, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(152, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(164, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(170, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-m"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(194, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(200, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(206, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(212, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(217, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(217, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-b"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(224, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(230, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(242, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(248, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(254, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(259, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(259, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-cm"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(266, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center middle'])),
 						(l()(), go(272, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(278, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center middle'])),
 						(l()(), go(284, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(290, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(296, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(301, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(301, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-sa"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(308, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(314, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(320, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(326, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(332, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(338, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-sb"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(350, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(356, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(362, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(368, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(374, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(380, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(385, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(385, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(388, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(388, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row align-st"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(392, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(394, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(394, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(398, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(400, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(400, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(404, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(406, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(406, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(410, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(412, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(412, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(416, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(418, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(418, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -17613,34 +17673,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, lv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use an '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.align-[l || c || r || t || m || b || cm || sa || sb || st]'])),
 						(l()(), Ca(-1, null, [' class to align ALL items in a '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.row'])),
 						(l()(), Ca(-1, null, [' flex container.'])),
 						(l()(), ho(16777216, null, null, 1, null, nv)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, uv)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Container Row'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<ul class="row align-l">\n    <li>left (default)</li>\n    <li>left (default)</li>\n</ul>\n<ul class="row align-c">\n    <li>center</li>\n    <li>center</li>\n</ul>\n<ul class="row align-r">\n    <li>right</li>\n    <li>right</li>\n</ul>\n<ul class="row align-t">\n    <li>top (default)</li>\n    <li>top (default)</li>\n</ul>\n<ul class="row align-m">\n    <li>middle</li>\n    <li>middle</li>\n</ul>\n<ul class="row align-b">\n    <li>bottom</li>\n    <li>bottom</li>\n</ul>\n<ul class="row align-cm">\n    <li>center middle</li>\n    <li>center middle</li>\n</ul>\n<ul class="row align-sa">\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="row align-sb">\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="row align-st">\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<ul class="row align-l">\n    <li>left (default)</li>\n    <li>left (default)</li>\n</ul>\n<ul class="row align-c">\n    <li>center</li>\n    <li>center</li>\n</ul>\n<ul class="row align-r">\n    <li>right</li>\n    <li>right</li>\n</ul>\n<ul class="row align-t">\n    <li>top (default)</li>\n    <li>top (default)</li>\n</ul>\n<ul class="row align-m">\n    <li>middle</li>\n    <li>middle</li>\n</ul>\n<ul class="row align-b">\n    <li>bottom</li>\n    <li>bottom</li>\n</ul>\n<ul class="row align-cm">\n    <li>center middle</li>\n    <li>center middle</li>\n</ul>\n<ul class="row align-sa">\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="row align-sb">\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="row align-st">\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							);
@@ -17715,385 +17778,385 @@
 						(l()(), go(1, 0, null, null, 383, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(31, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(31, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-l"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(44, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(50, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(55, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(55, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(62, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(74, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-c"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(86, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(92, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(98, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(110, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(116, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(122, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(127, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(127, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-r"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(134, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(146, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(151, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(151, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(164, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(170, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-t"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(194, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(199, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(199, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(206, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(212, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(218, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-m"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(230, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(242, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(247, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(247, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(254, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(260, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(266, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(271, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(271, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-b"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(278, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(284, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(290, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(295, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(295, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(302, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(308, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(314, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(319, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(319, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-cm"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center middle'])),
 						(l()(), go(326, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(332, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(338, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(350, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(356, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(362, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(367, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(367, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-st"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(374, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(380, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -18105,34 +18168,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, tv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.item-[l || c || r || t || m || b || cm || st]'])),
 						(l()(), Ca(-1, null, [' classes to align ONE child in a '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.col'])),
 						(l()(), Ca(-1, null, [' flex container.'])),
 						(l()(), ho(16777216, null, null, 1, null, rv)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, sv)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Item Column'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<ul class="col">\n    <li>default</li>\n    <li class="item-l">left (default)</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-c">center</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-r">right</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-t">top (default)</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-m">middle</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-b">bottom</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-cm">center middle</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-st">stretch</li>\n</ul>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<ul class="col">\n    <li>default</li>\n    <li class="item-l">left (default)</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-c">center</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-r">right</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-t">top (default)</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-m">middle</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-b">bottom</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-cm">center middle</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-st">stretch</li>\n</ul>'
 							);
@@ -18245,31 +18311,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, av)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.item-order-[1 - 12]'])),
 						(l()(), Ca(-1, null, [' classes to align children in a flex container.'])),
 						(l()(), ho(16777216, null, null, 1, null, iv)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, cv)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Item Order'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<ul class="row">\n    <li class="item-order-2">1</li>\n    <li class="item-order-1">2</li>\n</ul>\n<ul class="col">\n    <li class="item-order-2">1</li>\n    <li class="item-order-1">2</li>\n</ul>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<ul class="row">\n    <li class="item-order-2">1</li>\n    <li class="item-order-1">2</li>\n</ul>\n<ul class="col">\n    <li class="item-order-2">1</li>\n    <li class="item-order-1">2</li>\n</ul>'
 							);
@@ -18344,385 +18413,385 @@
 						(l()(), go(1, 0, null, null, 383, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(31, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(31, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-l"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(44, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(50, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(55, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(55, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(62, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(74, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-c"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(86, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(92, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(98, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(110, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(116, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(122, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(127, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(127, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-r"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(134, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(146, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(151, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(151, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(164, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(170, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-t"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(194, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(199, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(199, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(206, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(212, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(218, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-m"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(230, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(242, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(247, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(247, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(254, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(260, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(266, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(271, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(271, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-b"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(278, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(284, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(290, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(295, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(295, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(302, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(308, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(314, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(319, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(319, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-cm"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center middle'])),
 						(l()(), go(326, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(328, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(332, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(338, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(346, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(350, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(352, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(356, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(362, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(367, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(367, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-st"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(374, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(380, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(382, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -18734,34 +18803,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, dv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use an '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.item-[l || c || r || t || m || b || cm || st]'])),
 						(l()(), Ca(-1, null, [' class to align ONE child in a '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.row'])),
 						(l()(), Ca(-1, null, [' flex container.'])),
 						(l()(), ho(16777216, null, null, 1, null, fv)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, hv)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Item Row'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<ul class="row">\n    <li>default</li>\n    <li class="item-l">left (default)</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-c">center</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-r">right</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-t">top (default)</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-m">middle</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-b">bottom</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-cm">center middle</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-st">stretch</li>\n</ul>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<ul class="row">\n    <li>default</li>\n    <li class="item-l">left (default)</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-c">center</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-r">right</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-t">top (default)</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-m">middle</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-b">bottom</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-cm">center middle</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-st">stretch</li>\n</ul>'
 							);
@@ -18769,10 +18841,10 @@
 					null
 				);
 			}
-			function bv(l) {
+			function mv(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (l()(), Ca(-1, null, ['Item Size']))], null, null);
 			}
-			function mv(l) {
+			function bv(l) {
 				return Ea(
 					0,
 					[
@@ -18826,289 +18898,289 @@
 						(l()(), go(1, 0, null, null, 287, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(31, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(31, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-g-1"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['grow'])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(44, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(50, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(55, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(55, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(62, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(74, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-s-1"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['shrink'])),
 						(l()(), go(86, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(92, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(98, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(110, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(116, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(122, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(127, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(127, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-gs-1"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['grow &amp; shrink'])),
 						(l()(), go(134, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(146, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(151, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(151, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(164, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(170, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(175, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-g-1"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['grow'])),
 						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(194, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(199, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(199, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(206, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(212, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(218, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-s-1"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['shrink'])),
 						(l()(), go(230, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(242, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(247, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(247, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(254, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['default'])),
 						(l()(), go(260, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(266, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(271, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(271, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"item-gs-1"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['grow &amp; shrink'])),
 						(l()(), go(278, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(284, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -19120,31 +19192,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, bv)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, mv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.item-[g || s || gs]-[1 - 12]'])),
 						(l()(), Ca(-1, null, [' classes to grow and/or shrink children in a flex container.'])),
-						(l()(), ho(16777216, null, null, 1, null, mv)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, bv)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, yv)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Item Size'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<ul class="row">\n    <li>default</li>\n    <li class="item-g-1">grow</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-s-1">shrink</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-gs-1">grow &amp; shrink</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-g-1">grow</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-s-1">shrink</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-gs-1">grow &amp; shrink</li>\n</ul>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<ul class="row">\n    <li>default</li>\n    <li class="item-g-1">grow</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-s-1">shrink</li>\n</ul>\n<ul class="row">\n    <li>default</li>\n    <li class="item-gs-1">grow &amp; shrink</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-g-1">grow</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-s-1">shrink</li>\n</ul>\n<ul class="col">\n    <li>default</li>\n    <li class="item-gs-1">grow &amp; shrink</li>\n</ul>'
 							);
@@ -19221,325 +19296,325 @@
 						(l()(), go(1, 0, null, null, 323, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col wrap-c"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['center'])),
 						(l()(), go(44, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(50, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(56, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col wrap-l"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(74, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(80, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(86, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(92, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['left (default)'])),
 						(l()(), go(98, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(104, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(110, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(115, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(115, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col wrap-r"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(122, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(128, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(134, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(146, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), go(152, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(164, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(169, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(169, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col wrap-sa"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(176, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(194, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(200, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(206, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(212, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(218, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col wrap-sb"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(230, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(242, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(248, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(254, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(260, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(266, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(272, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(277, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(277, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"col wrap-st"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(284, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(290, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(296, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(302, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(308, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(314, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(320, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -19551,34 +19626,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, wv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.wrap-[c || l || r || sa || sb || st]'])),
 						(l()(), Ca(-1, null, [' class to align multi-column items in a '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.col'])),
 						(l()(), Ca(-1, null, [' flex container.'])),
 						(l()(), ho(16777216, null, null, 1, null, jv)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, xv)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Wrap Column'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<ul class="col wrap-c">\n    <li>center</li>\n    <li>center</li>\n    <li>center</li>\n</ul>\n<ul class="col wrap-l">\n    <li>left (default)</li>\n    <li>left (default)</li>\n    <li>left (default)</li>\n</ul>\n<ul class="col wrap-r">\n    <li>right</li>\n    <li>right</li>\n    <li>right</li>\n</ul>\n<ul class="col wrap-sa">\n    <li>space around</li>\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="col wrap-sb">\n    <li>space between</li>\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="col wrap-st">\n    <li>stretch</li>\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<ul class="col wrap-c">\n    <li>center</li>\n    <li>center</li>\n    <li>center</li>\n</ul>\n<ul class="col wrap-l">\n    <li>left (default)</li>\n    <li>left (default)</li>\n    <li>left (default)</li>\n</ul>\n<ul class="col wrap-r">\n    <li>right</li>\n    <li>right</li>\n    <li>right</li>\n</ul>\n<ul class="col wrap-sa">\n    <li>space around</li>\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="col wrap-sb">\n    <li>space between</li>\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="col wrap-st">\n    <li>stretch</li>\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							);
@@ -19655,325 +19733,325 @@
 						(l()(), go(1, 0, null, null, 323, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row wrap-m"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(14, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(20, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(26, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(32, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(38, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['middle'])),
 						(l()(), go(44, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(50, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(56, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row wrap-t"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(68, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(74, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(80, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(86, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(92, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['top (default)'])),
 						(l()(), go(98, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(104, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(110, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(115, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(115, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row wrap-b"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(122, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(128, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(134, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(140, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(146, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), go(152, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(164, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(169, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(169, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row wrap-sa"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(176, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(194, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(200, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space around'])),
 						(l()(), go(206, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(212, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(218, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row wrap-sb"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(230, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(242, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(248, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(254, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['space between'])),
 						(l()(), go(260, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(266, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(268, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(272, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(274, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(277, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(277, 0, null, null, 1, 'span', [['class', 'hljs-attr']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(280, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"row wrap-st"'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(284, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(286, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(290, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(292, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(296, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(298, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(302, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(304, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n    '])),
 						(l()(), go(308, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(310, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['stretch'])),
 						(l()(), go(314, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(316, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['li'])),
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), Ca(-1, null, ['\n'])),
 						(l()(), go(320, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['ul'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -19985,34 +20063,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, _v)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.wrap-[m || t || b || sa || sb || st]'])),
 						(l()(), Ca(-1, null, [' class to align multi-row items in a '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.row'])),
 						(l()(), Ca(-1, null, [' flex container.'])),
 						(l()(), ho(16777216, null, null, 1, null, Cv)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Iv)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Wrap Row'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<ul class="row wrap-m">\n    <li>middle</li>\n    <li>middle</li>\n    <li>middle</li>\n</ul>\n<ul class="row wrap-t">\n    <li>top (default)</li>\n    <li>top (default)</li>\n    <li>top (default)</li>\n</ul>\n<ul class="row wrap-b">\n    <li>bottom</li>\n    <li>bottom</li>\n    <li>bottom</li>\n</ul>\n<ul class="row wrap-sa">\n    <li>space around</li>\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="row wrap-sb">\n    <li>space between</li>\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="row wrap-st">\n    <li>stretch</li>\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<ul class="row wrap-m">\n    <li>middle</li>\n    <li>middle</li>\n    <li>middle</li>\n</ul>\n<ul class="row wrap-t">\n    <li>top (default)</li>\n    <li>top (default)</li>\n    <li>top (default)</li>\n</ul>\n<ul class="row wrap-b">\n    <li>bottom</li>\n    <li>bottom</li>\n    <li>bottom</li>\n</ul>\n<ul class="row wrap-sa">\n    <li>space around</li>\n    <li>space around</li>\n    <li>space around</li>\n</ul>\n<ul class="row wrap-sb">\n    <li>space between</li>\n    <li>space between</li>\n    <li>space between</li>\n</ul>\n<ul class="row wrap-st">\n    <li>stretch</li>\n    <li>stretch</li>\n    <li>stretch</li>\n</ul>'
 							);
@@ -20131,40 +20212,43 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 21, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 16, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 24, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 19, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Ev)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 13, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 16, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 14, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 13, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Forms are styled with '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.form-group'])),
 						(l()(), Ca(-1, null, [', '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.field-group'])),
 						(l()(), Ca(-1, null, [', '])),
-						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(15, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.form-label'])),
 						(l()(), Ca(-1, null, [', '])),
-						(l()(), go(15, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(18, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.form-field'])),
 						(l()(), Ca(-1, null, [' classes.'])),
 						(l()(), ho(16777216, null, null, 1, null, Pv)),
-						ea(19, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(22, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Ov)),
-						ea(21, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(24, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, ''),
 							l(
 								n,
-								19,
+								22,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n    </ul>    \n</form>'
 							),
 							l(
 								n,
-								21,
+								24,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n    </ul>    \n</form>'
 							);
@@ -20724,31 +20808,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Mv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Checkboxes and radio buttons are grouped with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.*-group'])),
 						(l()(), Ca(-1, null, [' class on a parent container.'])),
 						(l()(), ho(16777216, null, null, 1, null, Rv)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Av)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Checkbox'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <p class="form-label">Agree</p>\n            <ul class="radio-group">\n                <li class="field-group">\n                    <input class="form-field" type="radio" name="agree" id="yes">\n                    <label class="form-label" for="yes">Yes</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="radio" name="agree" id="no">\n                    <label class="form-label" for="no">No</label>\n                </li>\n            </ul>\n        </li>\n        <li class="field-group">\n            <p class="form-label">Color</p>\n            <ul class="checkbox-group">\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="blue">\n                    <label class="form-label" for="blue">Blue</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="green">\n                    <label class="form-label" for="green">Green</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="red">\n                    <label class="form-label" for="red">Red</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="yellow">\n                    <label class="form-label" for="yellow">Yellow</label>\n                </li>\n            </ul>\n        </li>\n    </ul>    \n</form>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <p class="form-label">Agree</p>\n            <ul class="radio-group">\n                <li class="field-group">\n                    <input class="form-field" type="radio" name="agree" id="yes">\n                    <label class="form-label" for="yes">Yes</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="radio" name="agree" id="no">\n                    <label class="form-label" for="no">No</label>\n                </li>\n            </ul>\n        </li>\n        <li class="field-group">\n            <p class="form-label">Color</p>\n            <ul class="checkbox-group">\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="blue">\n                    <label class="form-label" for="blue">Blue</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="green">\n                    <label class="form-label" for="green">Green</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="red">\n                    <label class="form-label" for="red">Red</label>\n                </li>\n                <li class="field-group">\n                    <input class="form-field" type="checkbox" name="color" id="yellow">\n                    <label class="form-label" for="yellow">Yellow</label>\n                </li>\n            </ul>\n        </li>\n    </ul>    \n</form>'
 							);
@@ -20835,411 +20922,135 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 404, 'figure', [], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 403, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
-						(l()(), go(2, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['form'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n    '])),
-						(l()(), go(8, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['ul'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(13, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 128, 'figure', [], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 127, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['<form>\n    <ul '])),
+						(l()(), go(3, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(16, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-group"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(20, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(22, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(25, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-group">\n        <li '])),
+						(l()(), go(6, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(28, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"field-group"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(32, 0, null, null, 16, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(34, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(37, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="field-group">\n            <label '])),
+						(l()(), go(9, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(40, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-label"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(43, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-label" '])),
+						(l()(), go(12, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['for'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(46, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"name"'])),
-						(l()(), Ca(-1, null, ['>'])),
+						(l()(), Ca(-1, null, ['="name">'])),
+						(l()(), go(15, 0, null, null, 1, 'span', [['class', 'hljs-type']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Name'])),
-						(l()(), go(50, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(52, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(56, 0, null, null, 34, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(58, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['</label>\n            <'])),
+						(l()(), go(18, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['input'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(61, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(64, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-field"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(67, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-field" '])),
+						(l()(), go(24, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['type'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(70, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"text"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(73, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['id'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(76, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"name"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(79, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="text" id="name" '])),
+						(l()(), go(27, 0, null, null, 1, 'span', [['class', 'hljs-type']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['name'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(82, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"name"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(85, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['placeholder'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(88, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"Enter name"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(92, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(94, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(98, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(100, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(103, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="name" placeholder="Enter name">\n        </li>\n        <li '])),
+						(l()(), go(30, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(106, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"field-group"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(110, 0, null, null, 16, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(112, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(115, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="field-group">\n            <label '])),
+						(l()(), go(33, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(118, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-label"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(121, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-label" '])),
+						(l()(), go(36, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['for'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(124, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"gender"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['Gender'])),
-						(l()(), go(128, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(130, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(134, 0, null, null, 22, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(136, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="gender">Gender</label>\n            <'])),
+						(l()(), go(39, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['select'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(139, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(42, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(142, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-field"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(145, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-field" '])),
+						(l()(), go(45, 0, null, null, 1, 'span', [['class', 'hljs-type']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['name'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(148, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"gender"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(151, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['id'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(154, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"gender"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n                '])),
-						(l()(), go(158, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(160, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="gender" id="gender">\n                <'])),
+						(l()(), go(48, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
 						(l()(), Ca(-1, null, ['>'])),
+						(l()(), go(51, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Select'])),
-						(l()(), go(164, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(166, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(54, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n                '])),
-						(l()(), go(170, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(172, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n                <'])),
+						(l()(), go(57, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['Female'])),
-						(l()(), go(176, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(178, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>Female</'])),
+						(l()(), go(60, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n                '])),
-						(l()(), go(182, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(184, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n                <'])),
+						(l()(), go(63, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['Male'])),
-						(l()(), go(188, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(190, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>Male</'])),
+						(l()(), go(66, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(194, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(196, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n            </'])),
+						(l()(), go(69, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['select'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(200, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(202, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(206, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(208, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(211, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n        </li>\n        <li '])),
+						(l()(), go(72, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(214, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"field-group"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(218, 0, null, null, 16, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(220, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(223, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="field-group">\n            <label '])),
+						(l()(), go(75, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(226, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-label"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(229, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-label" '])),
+						(l()(), go(78, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['for'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(232, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"language"'])),
-						(l()(), Ca(-1, null, ['>'])),
+						(l()(), Ca(-1, null, ['="language">'])),
+						(l()(), go(81, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Language'])),
-						(l()(), go(236, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(238, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(242, 0, null, null, 25, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(244, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['</label>\n            <'])),
+						(l()(), go(84, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['select'])),
 						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(247, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(87, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(250, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-field"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(253, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-field" '])),
+						(l()(), go(90, 0, null, null, 1, 'span', [['class', 'hljs-type']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['name'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(256, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"language"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(259, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['id'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(262, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"language"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(265, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['multiple'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n                '])),
-						(l()(), go(269, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(271, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="language" id="language" multiple>\n                <'])),
+						(l()(), go(93, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['English'])),
-						(l()(), go(275, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(277, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>English</'])),
+						(l()(), go(96, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n                '])),
-						(l()(), go(281, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(283, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n                <'])),
+						(l()(), go(99, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['French'])),
-						(l()(), go(287, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(289, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>French</'])),
+						(l()(), go(102, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n                '])),
-						(l()(), go(293, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(295, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n                <'])),
+						(l()(), go(105, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['Spanish'])),
-						(l()(), go(299, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(301, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>Spanish</'])),
+						(l()(), go(108, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['option'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(305, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(307, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n            </'])),
+						(l()(), go(111, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['select'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(311, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(313, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(317, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(319, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(322, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['>\n        </li>\n        <li '])),
+						(l()(), go(114, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(325, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"field-group"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(329, 0, null, null, 16, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(331, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(334, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="field-group">\n            <label '])),
+						(l()(), go(117, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(337, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-label"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(340, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-label" '])),
+						(l()(), go(120, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['for'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(343, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"notes"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['Notes'])),
-						(l()(), go(347, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(349, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['label'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n            '])),
-						(l()(), go(353, 0, null, null, 28, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(355, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['textarea'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(358, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="notes">Notes</label>\n            <textarea '])),
+						(l()(), go(123, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(361, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"form-field"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(364, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['="form-field" '])),
+						(l()(), go(126, 0, null, null, 1, 'span', [['class', 'hljs-type']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['name'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(367, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"notes"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(370, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['id'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(373, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"notes"'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(376, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['placeholder'])),
-						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(379, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['"Enter notes"'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), go(382, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(384, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['textarea'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n        '])),
-						(l()(), go(388, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(390, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['li'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n    '])),
-						(l()(), go(394, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(396, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['ul'])),
-						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['    \n'])),
-						(l()(), go(400, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(402, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['form'])),
-						(l()(), Ca(-1, null, ['>']))
+						(l()(), Ca(-1, null, ['="notes" id="notes" placeholder="Enter notes"></textarea>\n        </li>\n    </ul>    \n</form>']))
 					],
 					null,
 					null
@@ -21249,31 +21060,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Dv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Form fields are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.form-field'])),
 						(l()(), Ca(-1, null, [' class. Different styles are applied based on the form field.'])),
 						(l()(), ho(16777216, null, null, 1, null, Fv)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Vv)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Field'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="gender">Gender</label>\n            <select class="form-field" name="gender" id="gender">\n                <option>Select</option>\n                <option>Female</option>\n                <option>Male</option>\n            </select>\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="language">Language</label>\n            <select class="form-field" name="language" id="language" multiple>\n                <option>English</option>\n                <option>French</option>\n                <option>Spanish</option>\n            </select>\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="notes">Notes</label>\n            <textarea class="form-field" name="notes" id="notes" placeholder="Enter notes"></textarea>\n        </li>\n    </ul>    \n</form>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="gender">Gender</label>\n            <select class="form-field" name="gender" id="gender">\n                <option>Select</option>\n                <option>Female</option>\n                <option>Male</option>\n            </select>\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="language">Language</label>\n            <select class="form-field" name="language" id="language" multiple>\n                <option>English</option>\n                <option>French</option>\n                <option>Spanish</option>\n            </select>\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="notes">Notes</label>\n            <textarea class="form-field" name="notes" id="notes" placeholder="Enter notes"></textarea>\n        </li>\n    </ul>    \n</form>'
 							);
@@ -21392,31 +21206,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Lv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Field groups are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.field-group'])),
 						(l()(), Ca(-1, null, [' class.'])),
 						(l()(), ho(16777216, null, null, 1, null, Hv)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, zv)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Field Group'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n    </ul>    \n</form>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n    </ul>    \n</form>'
 							);
@@ -21545,34 +21362,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, qv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Fieldsets are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.fieldset'])),
 						(l()(), Ca(-1, null, [' class and have a '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<legend>'])),
 						(l()(), Ca(-1, null, [' tag as the first child.'])),
 						(l()(), ho(16777216, null, null, 1, null, Gv)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Qv)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Fieldset'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<form>\n    <fieldset class="fieldset">\n        <legend>Contact</legend>\n        <ul class="form-group">\n            <li class="field-group">\n                <label class="form-label" for="name">Name</label>\n                <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n            </li>\n        </ul>\n    </fieldset>    \n</form>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<form>\n    <fieldset class="fieldset">\n        <legend>Contact</legend>\n        <ul class="form-group">\n            <li class="field-group">\n                <label class="form-label" for="name">Name</label>\n                <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n            </li>\n        </ul>\n    </fieldset>    \n</form>'
 							);
@@ -21898,34 +21718,37 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 18, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 13, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Wv)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 7, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 10, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 8, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 7, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Form groups are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.form-group'])),
 						(l()(), Ca(-1, null, [' class for vertical fields and '])),
-						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.form-group-inline'])),
 						(l()(), Ca(-1, null, [' for horizontal fields.'])),
 						(l()(), ho(16777216, null, null, 1, null, Kv)),
-						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(16, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Yv)),
-						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(18, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Form Group'),
 							l(
 								n,
-								13,
+								16,
 								0,
 								'<form>\n    <ul class="form-group-inline">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="email">Email</label>\n            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">\n        </li>\n    </ul>    \n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="email">Email</label>\n            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">\n        </li>\n    </ul>    \n</form>'
 							),
 							l(
 								n,
-								15,
+								18,
 								0,
 								'<form>\n    <ul class="form-group-inline">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="email">Email</label>\n            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">\n        </li>\n    </ul>    \n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n        <li class="field-group">\n            <label class="form-label" for="email">Email</label>\n            <input class="form-field" type="text" id="email" name="email" placeholder="Enter email">\n        </li>\n    </ul>    \n</form>'
 							);
@@ -22044,31 +21867,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, $v)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Form labels are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.form-label'])),
 						(l()(), Ca(-1, null, [' class.'])),
 						(l()(), ho(16777216, null, null, 1, null, Xv)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, lw)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Label'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n    </ul>    \n</form>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<form>\n    <ul class="form-group">\n        <li class="field-group">\n            <label class="form-label" for="name">Name</label>\n            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">\n        </li>\n    </ul>    \n</form>'
 							);
@@ -22110,19 +21936,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, uw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, ew)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, tw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22161,19 +21990,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, sw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, ow)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, aw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Area'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Area'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22212,19 +22044,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, cw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, pw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, dw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Container'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Container'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22248,7 +22083,7 @@
 					null
 				);
 			}
-			function bw(l) {
+			function mw(l) {
 				return Ea(
 					0,
 					[
@@ -22259,23 +22094,26 @@
 					null
 				);
 			}
-			function mw(l) {
+			function bw(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, hw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, gw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, bw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, mw)),
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Item'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Item'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22314,19 +22152,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, yw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, vw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, ww)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22365,19 +22206,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, xw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, kw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, _w)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Container'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Container'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22416,19 +22260,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Iw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Sw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Ew)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Sticky Footer'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Sticky Footer'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22467,19 +22314,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Ow)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Tw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Mw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22518,19 +22368,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Aw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Nw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Dw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22569,19 +22422,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Vw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Uw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Lw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Items'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Items'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22620,19 +22476,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, zw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Bw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, qw)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Links'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Links'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22671,19 +22530,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Qw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Zw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Ww)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Placement'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Placement'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22722,19 +22584,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Yw)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Jw)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, $w)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22773,19 +22638,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, lj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, nj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, uj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22824,19 +22692,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, tj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, rj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, sj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22875,19 +22746,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, aj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Resets are used to remove padding and margin from all elements. Use space classes to add spacing to elements.'])),
 						(l()(), ho(16777216, null, null, 1, null, ij)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, cj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -22929,10 +22803,10 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 68, 'figure', [], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 67, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 62, 'figure', [], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 61, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(3, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(3, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(6, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -22941,7 +22815,7 @@
 						(l()(), go(9, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['top'])),
 						(l()(), Ca(-1, null, [' extra small</p>\n<'])),
-						(l()(), go(12, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(15, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -22950,7 +22824,7 @@
 						(l()(), go(18, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), Ca(-1, null, [' small</p>\n<'])),
-						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(24, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -22959,7 +22833,7 @@
 						(l()(), go(27, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), Ca(-1, null, [' medium</p>\n<'])),
-						(l()(), go(30, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(30, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(33, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -22968,7 +22842,7 @@
 						(l()(), go(36, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['left'])),
 						(l()(), Ca(-1, null, [' large</p>\n<'])),
-						(l()(), go(39, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(39, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(42, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -22976,26 +22850,20 @@
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), go(45, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['top'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(48, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['bottom'])),
-						(l()(), Ca(-1, null, [' extra large</p>\n<'])),
-						(l()(), go(51, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, [' bottom extra large</p>\n<'])),
+						(l()(), go(48, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
-						(l()(), go(54, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
+						(l()(), go(51, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"mar-lr-md"'])),
 						(l()(), Ca(-1, null, ['>'])),
-						(l()(), go(57, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(54, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['left'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(60, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['right'])),
-						(l()(), Ca(-1, null, [' medium</p>\n<'])),
-						(l()(), go(63, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, [' right medium</p>\n<'])),
+						(l()(), go(57, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
-						(l()(), go(66, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
+						(l()(), go(60, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"mar-a-md"'])),
 						(l()(), Ca(-1, null, ['>all medium</p>']))
 					],
@@ -23007,31 +22875,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, dj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.mar-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]'])),
 						(l()(), Ca(-1, null, [' class to add margin to an element.'])),
 						(l()(), ho(16777216, null, null, 1, null, fj)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, hj)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Margin'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<p class="mar-t-xs">top extra small</p>\n<p class="mar-r-sm">right small</p>\n<p class="mar-b-md">bottom medium</p>\n<p class="mar-l-lg">left large</p>\n<p class="mar-tb-xl">top bottom extra large</p>\n<p class="mar-lr-md">left right medium</p>\n<p class="mar-a-md">all medium</p>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<p class="mar-t-xs">top extra small</p>\n<p class="mar-r-sm">right small</p>\n<p class="mar-b-md">bottom medium</p>\n<p class="mar-l-lg">left large</p>\n<p class="mar-tb-xl">top bottom extra large</p>\n<p class="mar-lr-md">left right medium</p>\n<p class="mar-a-md">all medium</p>'
 							);
@@ -23039,10 +22910,10 @@
 					null
 				);
 			}
-			function bj(l) {
+			function mj(l) {
 				return Ea(0, [(l()(), go(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (l()(), Ca(-1, null, ['Padding']))], null, null);
 			}
-			function mj(l) {
+			function bj(l) {
 				return Ea(
 					0,
 					[
@@ -23076,10 +22947,10 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 68, 'figure', [], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 67, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 62, 'figure', [], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 61, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(3, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(3, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(6, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -23088,7 +22959,7 @@
 						(l()(), go(9, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['top'])),
 						(l()(), Ca(-1, null, [' extra small</p>\n<'])),
-						(l()(), go(12, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(12, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(15, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -23097,7 +22968,7 @@
 						(l()(), go(18, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['right'])),
 						(l()(), Ca(-1, null, [' small</p>\n<'])),
-						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(24, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -23106,7 +22977,7 @@
 						(l()(), go(27, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['bottom'])),
 						(l()(), Ca(-1, null, [' medium</p>\n<'])),
-						(l()(), go(30, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(30, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(33, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -23115,7 +22986,7 @@
 						(l()(), go(36, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['left'])),
 						(l()(), Ca(-1, null, [' large</p>\n<'])),
-						(l()(), go(39, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(39, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
 						(l()(), go(42, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
@@ -23123,26 +22994,20 @@
 						(l()(), Ca(-1, null, ['>'])),
 						(l()(), go(45, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['top'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(48, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['bottom'])),
-						(l()(), Ca(-1, null, [' extra large</p>\n<'])),
-						(l()(), go(51, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, [' bottom extra large</p>\n<'])),
+						(l()(), go(48, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
-						(l()(), go(54, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
+						(l()(), go(51, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"pad-lr-md"'])),
 						(l()(), Ca(-1, null, ['>'])),
-						(l()(), go(57, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(54, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['left'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(60, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['right'])),
-						(l()(), Ca(-1, null, [' medium</p>\n<'])),
-						(l()(), go(63, 0, null, null, 1, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, [' right medium</p>\n<'])),
+						(l()(), go(57, 0, null, null, 1, 'span', [['class', 'hljs-selector-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, [' class='])),
-						(l()(), go(66, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
+						(l()(), go(60, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"pad-a-md"'])),
 						(l()(), Ca(-1, null, ['>all medium</p>']))
 					],
@@ -23154,31 +23019,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, bj)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), ho(16777216, null, null, 1, null, mj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Use a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.pad-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]'])),
 						(l()(), Ca(-1, null, [' class to add padding to an element.'])),
-						(l()(), ho(16777216, null, null, 1, null, mj)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, bj)),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, yj)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
 						l(n, 3, 0, 'Padding'),
 							l(
 								n,
-								10,
+								13,
 								0,
 								'<p class="pad-t-xs">top extra small</p>\n<p class="pad-r-sm">right small</p>\n<p class="pad-b-md">bottom medium</p>\n<p class="pad-l-lg">left large</p>\n<p class="pad-tb-xl">top bottom extra large</p>\n<p class="pad-lr-md">left right medium</p>\n<p class="pad-a-md">all medium</p>'
 							),
 							l(
 								n,
-								12,
+								15,
 								0,
 								'<p class="pad-t-xs">top extra small</p>\n<p class="pad-r-sm">right small</p>\n<p class="pad-b-md">bottom medium</p>\n<p class="pad-l-lg">left large</p>\n<p class="pad-tb-xl">top bottom extra large</p>\n<p class="pad-lr-md">left right medium</p>\n<p class="pad-a-md">all medium</p>'
 							);
@@ -23213,39 +23081,34 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 34, 'figure', [], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 33, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
-						(l()(), go(2, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['p'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 29, 'figure', [], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 28, 'pre', [['class', 'pad-a-sm border-tb-gray']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['<p '])),
+						(l()(), go(3, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(10, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"spinner"'])),
 						(l()(), Ca(-1, null, ['>'])),
-						(l()(), go(13, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(10, 0, null, null, 5, 'span', [['class', 'xml']], null, null, null, null, null)),
+						(l()(), go(11, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(15, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(13, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>'])),
-						(l()(), Ca(-1, null, ['\n'])),
-						(l()(), go(19, 0, null, null, 10, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['<'])),
-						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
-						(l()(), Ca(-1, null, ['p'])),
-						(l()(), Ca(-1, null, [' '])),
-						(l()(), go(24, 0, null, null, 1, 'span', [['class', 'hljs-attribute']], null, null, null, null, null)),
+						(l()(), Ca(-1, null, ['\n<p '])),
+						(l()(), go(17, 0, null, null, 2, 'span', [['class', 'hljs-class']], null, null, null, null, null)),
+						(l()(), go(18, 0, null, null, 1, 'span', [['class', 'hljs-keyword']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['class'])),
 						(l()(), Ca(-1, null, ['='])),
-						(l()(), go(27, 0, null, null, 1, 'span', [['class', 'hljs-value']], null, null, null, null, null)),
+						(l()(), go(21, 0, null, null, 1, 'span', [['class', 'hljs-string']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['"spinner-dotted"'])),
 						(l()(), Ca(-1, null, ['>'])),
-						(l()(), go(30, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
+						(l()(), go(24, 0, null, null, 5, 'span', [['class', 'xml']], null, null, null, null, null)),
+						(l()(), go(25, 0, null, null, 4, 'span', [['class', 'hljs-tag']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['</'])),
-						(l()(), go(32, 0, null, null, 1, 'span', [['class', 'hljs-title']], null, null, null, null, null)),
+						(l()(), go(27, 0, null, null, 1, 'span', [['class', 'hljs-name']], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['p'])),
 						(l()(), Ca(-1, null, ['>']))
 					],
@@ -23257,22 +23120,25 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 15, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 10, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, wj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 4, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 7, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 5, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 4, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Spinners are styled with a '])),
-						(l()(), go(6, 0, null, null, 1, 'code', [], null, null, null, null, null)),
+						(l()(), go(9, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.spinner[-dotted]'])),
 						(l()(), Ca(-1, null, [' class.'])),
 						(l()(), ho(16777216, null, null, 1, null, jj)),
-						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(13, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, xj)),
-						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(15, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 10, 0, '<p class="spinner"></p>\n<p class="spinner-dotted"></p>'), l(n, 12, 0, '<p class="spinner"></p>\n<p class="spinner-dotted"></p>');
+						l(n, 3, 0, ''), l(n, 13, 0, '<p class="spinner"></p>\n<p class="spinner-dotted"></p>'), l(n, 15, 0, '<p class="spinner"></p>\n<p class="spinner-dotted"></p>');
 					},
 					null
 				);
@@ -23311,19 +23177,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, _j)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Cj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Ij)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23362,19 +23231,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Ej)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Pj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Oj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23413,19 +23285,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Mj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Rj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Aj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23464,19 +23339,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Dj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Fj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Vj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Border'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Border'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23515,19 +23393,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Lj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Hj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, zj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Hover'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Hover'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23566,19 +23447,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, qj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Gj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Qj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Striped'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Striped'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23617,19 +23501,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Wj)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Kj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Yj)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Table Cell'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Table Cell'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23668,19 +23555,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, $j)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Xj)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, lx)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Table Row'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Table Row'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23719,19 +23609,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, ux)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, ex)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, tx)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23770,19 +23663,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, sx)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, ox)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, ax)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23821,19 +23717,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, cx)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, px)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, dx)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Font'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Font'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23857,7 +23756,7 @@
 					null
 				);
 			}
-			function bx(l) {
+			function mx(l) {
 				return Ea(
 					0,
 					[
@@ -23868,23 +23767,26 @@
 					null
 				);
 			}
-			function mx(l) {
+			function bx(l) {
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, hx)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, gx)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, bx)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						(l()(), ho(16777216, null, null, 1, null, mx)),
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Text'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Text'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23923,19 +23825,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, yx)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, vx)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, wx)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, ''), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, ''), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -23974,19 +23879,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, xx)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, kx)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, _x)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Hide'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Hide'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -24025,19 +23933,22 @@
 				return Ea(
 					0,
 					[
-						(l()(), go(0, 0, null, null, 9, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
-						(l()(), go(1, 0, null, null, 4, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
+						(l()(), go(0, 0, null, null, 12, 'article', [['class', 'mar-b-lg box-shadow-1 border-lr-gray section']], null, null, null, null, null)),
+						(l()(), go(1, 0, null, null, 7, 'section', [['class', 'pad-a-sm bg-lt-gray border-tb-gray']], null, null, null, null, null)),
 						(l()(), ho(16777216, null, null, 1, null, Ix)),
 						ea(3, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), go(4, 0, null, null, 1, 'p', [], null, null, null, null, null)),
+						(l()(), go(4, 0, null, null, 4, 'html', [], null, null, null, null, null)),
+						(l()(), go(5, 0, null, null, 0, 'head', [], null, null, null, null, null)),
+						(l()(), go(6, 0, null, null, 2, 'body', [], null, null, null, null, null)),
+						(l()(), go(7, 0, null, null, 1, 'p', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['Coming soon.'])),
 						(l()(), ho(16777216, null, null, 1, null, Sx)),
-						ea(7, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
+						ea(10, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, Ex)),
-						ea(9, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
+						ea(12, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null)
 					],
 					function(l, n) {
-						l(n, 3, 0, 'Show'), l(n, 7, 0, ''), l(n, 9, 0, '');
+						l(n, 3, 0, 'Show'), l(n, 10, 0, ''), l(n, 12, 0, '');
 					},
 					null
 				);
@@ -24118,7 +24029,7 @@
 						ea(18, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(19, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Button'])),
-						(l()(), ho(16777216, null, null, 1, null, lb)),
+						(l()(), ho(16777216, null, null, 1, null, lm)),
 						ea(22, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(23, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24142,7 +24053,7 @@
 						ea(25, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(26, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Card'])),
-						(l()(), ho(16777216, null, null, 1, null, ub)),
+						(l()(), ho(16777216, null, null, 1, null, um)),
 						ea(29, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(30, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24166,7 +24077,7 @@
 						ea(32, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(33, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Collapse'])),
-						(l()(), ho(16777216, null, null, 1, null, sb)),
+						(l()(), ho(16777216, null, null, 1, null, sm)),
 						ea(36, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(37, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24190,7 +24101,7 @@
 						ea(39, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(40, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Color'])),
-						(l()(), ho(16777216, null, null, 1, null, db)),
+						(l()(), ho(16777216, null, null, 1, null, dm)),
 						ea(43, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(44, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24214,7 +24125,7 @@
 						ea(46, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(47, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Dropdown'])),
-						(l()(), ho(16777216, null, null, 1, null, hb)),
+						(l()(), ho(16777216, null, null, 1, null, hm)),
 						ea(50, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(51, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24238,7 +24149,7 @@
 						ea(53, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(54, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Flexbox'])),
-						(l()(), ho(16777216, null, null, 1, null, _b)),
+						(l()(), ho(16777216, null, null, 1, null, _m)),
 						ea(57, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(58, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24262,7 +24173,7 @@
 						ea(60, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(61, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Form'])),
-						(l()(), ho(16777216, null, null, 1, null, Mb)),
+						(l()(), ho(16777216, null, null, 1, null, Mm)),
 						ea(64, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(65, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24286,7 +24197,7 @@
 						ea(67, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(68, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Grid'])),
-						(l()(), ho(16777216, null, null, 1, null, Fb)),
+						(l()(), ho(16777216, null, null, 1, null, Fm)),
 						ea(71, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(72, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24310,7 +24221,7 @@
 						ea(74, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(75, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Layout'])),
-						(l()(), ho(16777216, null, null, 1, null, Hb)),
+						(l()(), ho(16777216, null, null, 1, null, Hm)),
 						ea(78, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(79, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24334,7 +24245,7 @@
 						ea(81, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(82, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Modal'])),
-						(l()(), ho(16777216, null, null, 1, null, Bb)),
+						(l()(), ho(16777216, null, null, 1, null, Bm)),
 						ea(85, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(86, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24358,7 +24269,7 @@
 						ea(88, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(89, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Nav'])),
-						(l()(), ho(16777216, null, null, 1, null, Wb)),
+						(l()(), ho(16777216, null, null, 1, null, Wm)),
 						ea(92, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(93, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24382,7 +24293,7 @@
 						ea(95, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(96, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Position'])),
-						(l()(), ho(16777216, null, null, 1, null, Yb)),
+						(l()(), ho(16777216, null, null, 1, null, Ym)),
 						ea(99, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(100, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24406,7 +24317,7 @@
 						ea(102, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(103, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Slider'])),
-						(l()(), ho(16777216, null, null, 1, null, $b)),
+						(l()(), ho(16777216, null, null, 1, null, $m)),
 						ea(106, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(107, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24430,7 +24341,7 @@
 						ea(109, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(110, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Slideshow'])),
-						(l()(), ho(16777216, null, null, 1, null, lm)),
+						(l()(), ho(16777216, null, null, 1, null, lb)),
 						ea(113, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(114, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24454,7 +24365,7 @@
 						ea(116, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(117, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Space'])),
-						(l()(), ho(16777216, null, null, 1, null, tm)),
+						(l()(), ho(16777216, null, null, 1, null, tb)),
 						ea(120, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(121, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24478,7 +24389,7 @@
 						ea(123, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(124, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Spinner'])),
-						(l()(), ho(16777216, null, null, 1, null, sm)),
+						(l()(), ho(16777216, null, null, 1, null, sb)),
 						ea(127, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(128, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24502,7 +24413,7 @@
 						ea(130, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(131, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Switch'])),
-						(l()(), ho(16777216, null, null, 1, null, am)),
+						(l()(), ho(16777216, null, null, 1, null, ab)),
 						ea(134, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(135, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24526,7 +24437,7 @@
 						ea(137, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(138, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Tab'])),
-						(l()(), ho(16777216, null, null, 1, null, cm)),
+						(l()(), ho(16777216, null, null, 1, null, cb)),
 						ea(141, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(142, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24550,7 +24461,7 @@
 						ea(144, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(145, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Table'])),
-						(l()(), ho(16777216, null, null, 1, null, mm)),
+						(l()(), ho(16777216, null, null, 1, null, bb)),
 						ea(148, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(149, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24574,7 +24485,7 @@
 						ea(151, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(152, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Tooltip'])),
-						(l()(), ho(16777216, null, null, 1, null, vm)),
+						(l()(), ho(16777216, null, null, 1, null, vb)),
 						ea(155, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(156, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24598,7 +24509,7 @@
 						ea(158, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(159, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Typography'])),
-						(l()(), ho(16777216, null, null, 1, null, km)),
+						(l()(), ho(16777216, null, null, 1, null, kb)),
 						ea(162, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(163, 0, null, null, 6, 'li', [], null, null, null, null, null)),
 						(l()(),
@@ -24622,21 +24533,21 @@
 						ea(165, 278528, null, 0, $i, [fs, hs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						_a(166, { 'bg-lt-gray': 0 }),
 						(l()(), Ca(-1, null, ['Visibility'])),
-						(l()(), ho(16777216, null, null, 1, null, Sm)),
+						(l()(), ho(16777216, null, null, 1, null, Sb)),
 						ea(169, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), go(170, 0, [['content', 1]], null, 137, 'main', [['class', 'pad-a-xl styleguide'], ['tabindex', '-1']], null, null, null, null, null)),
 						(l()(), go(171, 0, null, null, 0, 'h1', [['class', 'pad-t-xl']], [[8, 'innerHTML', 1]], null, null, null, null)),
-						(l()(), ho(16777216, null, null, 1, null, Tm)),
+						(l()(), ho(16777216, null, null, 1, null, Tb)),
 						ea(173, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Nm)),
+						(l()(), ho(16777216, null, null, 1, null, Nb)),
 						ea(175, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Um)),
+						(l()(), ho(16777216, null, null, 1, null, Ub)),
 						ea(177, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Bm)),
+						(l()(), ho(16777216, null, null, 1, null, Bb)),
 						ea(179, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Zm)),
+						(l()(), ho(16777216, null, null, 1, null, Zb)),
 						ea(181, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, Jm)),
+						(l()(), ho(16777216, null, null, 1, null, Jb)),
 						ea(183, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, ny)),
 						ea(185, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
@@ -24646,7 +24557,7 @@
 						ea(189, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, fy)),
 						ea(191, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, my)),
+						(l()(), ho(16777216, null, null, 1, null, by)),
 						ea(193, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, jy)),
 						ea(195, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
@@ -24700,7 +24611,7 @@
 						ea(243, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, fw)),
 						ea(245, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, mw)),
+						(l()(), ho(16777216, null, null, 1, null, bw)),
 						ea(247, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, jw)),
 						ea(249, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
@@ -24754,7 +24665,7 @@
 						ea(297, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, fx)),
 						ea(299, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
-						(l()(), ho(16777216, null, null, 1, null, mx)),
+						(l()(), ho(16777216, null, null, 1, null, bx)),
 						ea(301, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
 						(l()(), ho(16777216, null, null, 1, null, jx)),
 						ea(303, 16384, null, 0, Xi, [Zr, Ut], { ngIf: [0, 'ngIf'] }, null),
@@ -24791,10 +24702,10 @@
 						l(n, 81, 0, 'hover bg-hover-lt-gray pad-a-xs', h), l(n, 85, 0, u.checkSection('Modal'));
 						var g = l(n, 89, 0, u.checkSection('Nav'));
 						l(n, 88, 0, 'hover bg-hover-lt-gray pad-a-xs', g), l(n, 92, 0, u.checkSection('Nav'));
-						var b = l(n, 96, 0, u.checkSection('Position'));
-						l(n, 95, 0, 'hover bg-hover-lt-gray pad-a-xs', b), l(n, 99, 0, u.checkSection('Position'));
-						var m = l(n, 103, 0, u.checkSection('Slider'));
-						l(n, 102, 0, 'hover bg-hover-lt-gray pad-a-xs', m), l(n, 106, 0, u.checkSection('Slider'));
+						var m = l(n, 96, 0, u.checkSection('Position'));
+						l(n, 95, 0, 'hover bg-hover-lt-gray pad-a-xs', m), l(n, 99, 0, u.checkSection('Position'));
+						var b = l(n, 103, 0, u.checkSection('Slider'));
+						l(n, 102, 0, 'hover bg-hover-lt-gray pad-a-xs', b), l(n, 106, 0, u.checkSection('Slider'));
 						var y = l(n, 110, 0, u.checkSection('Slideshow'));
 						l(n, 109, 0, 'hover bg-hover-lt-gray pad-a-xs', y), l(n, 113, 0, u.checkSection('Slideshow'));
 						var v = l(n, 117, 0, u.checkSection('Space'));
@@ -24988,19 +24899,19 @@
 							function(l, n) {
 								return [
 									((u = l),
-									gp('probe', mp),
+									gp('probe', bp),
 									gp(
 										'coreTokens',
 										r(
 											{},
-											bp,
+											mp,
 											(u || []).reduce(function(l, n) {
 												return (l[n.name] = n.token), l;
 											}, {})
 										)
 									),
 									function() {
-										return mp;
+										return bp;
 									}),
 									Yh(n)
 								];
@@ -25043,8 +24954,8 @@
 						_o(1073742336, dg, dg, []),
 						_o(1073742336, hg, hg, []),
 						_o(1073742336, gg, gg, []),
-						_o(1073742336, bg, bg, []),
 						_o(1073742336, mg, mg, []),
+						_o(1073742336, bg, bg, []),
 						_o(1073742336, yg, yg, []),
 						_o(1073742336, vg, vg, []),
 						_o(1073742336, jg, jg, []),
@@ -25071,4 +24982,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.55477981a2c1da326d62.js.map
+//# sourceMappingURL=main.d3d9bb6360585fb25365.js.map
