@@ -355,32 +355,32 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 }
 
 // Flexbox container alignment styles
-.row.align-c,
+.align-c,
 .col.align-m {
 	justify-content: center;
 }
 
-.row.align-l,
+.align-l,
 .col.align-t {
 	justify-content: flex-start;
 }
 
-.row.align-r,
+.align-r,
 .col.align-b {
 	justify-content: flex-end;
 }
 
-.row.align-m,
+.align-m,
 .col.align-c {
 	align-items: center;
 }
 
-.row.align-b,
+.align-b,
 .col.align-r {
 	align-items: flex-end;
 }
 
-.row.align-t,
+.align-t,
 .col.align-l {
 	align-items: flex-start;
 }
@@ -403,19 +403,19 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 }
 
 // Flexbox container wrap styles
-.row.wrap-t,
+.wrap-t,
 .col.wrap-l {
 	align-content: flex-start;
 	flex-wrap: wrap;
 }
 
-.row.wrap-b,
+.wrap-b,
 .col.wrap-r {
 	align-content: flex-end;
 	flex-wrap: wrap;
 }
 
-.row.wrap-m,
+.wrap-m,
 .col.wrap-c {
 	align-content: center;
 	flex-wrap: wrap;
@@ -436,23 +436,27 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	flex-wrap: wrap;
 }
 
+.wrap-n {
+	flex-wrap: nowrap;
+}
+
 // Flex item alignment styles
-.row .item-t,
+.item-t,
 .col .item-l {
 	align-self: flex-start;
 }
 
-.row .item-b,
+.item-b,
 .col .item-r {
 	align-self: flex-end;
 }
 
-.row .item-m,
+.item-m,
 .col .item-c {
 	align-self: center;
 }
 
-.row .item-l {
+.item-l {
 	margin-right: auto;
 }
 
@@ -460,7 +464,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	margin-bottom: auto;
 }
 
-.row .item-r {
+.item-r {
 	margin-left: auto;
 }
 
@@ -468,7 +472,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	margin-top: auto;
 }
 
-.row .item-c {
+.item-c {
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -478,7 +482,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	margin-top: auto;
 }
 
-.row .item-cm {
+.item-cm {
 	align-self: center;
 	margin-left: auto;
 	margin-right: auto;
@@ -494,9 +498,8 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	align-self: stretch;
 }
 
-// Flex item size styles
-@for $number from 1 through 12 {
-	// Flex item grow and shrink styles
+// Flex item grow and shrink styles
+@for $number from 0 through 12 {
 	.item-gs-#{$number} {
 		@include flex($number, $number, auto);
 	}
@@ -508,6 +511,10 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	.item-s-#{$number} {
 		@include flex(0, $number, auto);
 	}
+}
+
+.item-gs-n {
+	flex: none;
 }
 
 // Flex item order styles
