@@ -1867,7 +1867,7 @@
 											f = u.prototype;
 										if (f.hasOwnProperty(t)) {
 											var l = e(f, t);
-											l && l.value ? ((l.value = h(l.value, s)), (c = (a = l).configurable), rt((o = u.prototype), (i = t), (a = nt(o, i, a)), c)) : (f[t] = h(f[t], s));
+											l && l.value ? ((l.value = h(l.value, s)), (c = (a = l).configurable), rt((o = u.prototype), (i = t), (a = nt(o, i, a)), c)) : f[t] && (f[t] = h(f[t], s));
 										} else f[t] && (f[t] = h(f[t], s));
 									}),
 								a.call(t, i, u, c)
@@ -3244,14 +3244,13 @@
 				u = n('ne8i'),
 				c = n('Xxuz'),
 				s = n('Ugos'),
-				f = Math.min,
-				l = [].push,
-				p = !!(function() {
-					try {
-						return new RegExp('x', 'y');
-					} catch (t) {}
-				})();
-			n('IU+Z')('split', 2, function(t, e, n, h) {
+				f = n('eeVq'),
+				l = Math.min,
+				p = [].push,
+				h = !f(function() {
+					RegExp(4294967295, 'y');
+				});
+			n('IU+Z')('split', 2, function(t, e, n, f) {
 				var v;
 				return (
 					(v =
@@ -3271,17 +3270,17 @@
 											u,
 											c = [],
 											f = 0,
-											p = void 0 === e ? 4294967295 : e >>> 0,
+											l = void 0 === e ? 4294967295 : e >>> 0,
 											h = new RegExp(t.source, (t.ignoreCase ? 'i' : '') + (t.multiline ? 'm' : '') + (t.unicode ? 'u' : '') + (t.sticky ? 'y' : '') + 'g');
 										(i = s.call(h, o)) &&
 										!(
 											(a = h.lastIndex) > f &&
-											(c.push(o.slice(f, i.index)), i.length > 1 && i.index < o.length && l.apply(c, i.slice(1)), (u = i[0].length), (f = a), c.length >= p)
+											(c.push(o.slice(f, i.index)), i.length > 1 && i.index < o.length && p.apply(c, i.slice(1)), (u = i[0].length), (f = a), c.length >= l)
 										);
 
 									)
 										h.lastIndex === i.index && h.lastIndex++;
-									return f === o.length ? (!u && h.test('')) || c.push('') : c.push(o.slice(f)), c.length > p ? c.slice(0, p) : c;
+									return f === o.length ? (!u && h.test('')) || c.push('') : c.push(o.slice(f)), c.length > l ? c.slice(0, l) : c;
 							  }
 							: '0'.split(void 0, 0).length
 							? function(t, e) {
@@ -3295,28 +3294,28 @@
 							return void 0 !== i ? i.call(n, o, r) : v.call(String(o), n, r);
 						},
 						function(t, e) {
-							var r = h(v, t, this, e, v !== n);
+							var r = f(v, t, this, e, v !== n);
 							if (r.done) return r.value;
 							var s = o(t),
-								l = String(this),
+								p = String(this),
 								d = i(s, RegExp),
 								g = s.unicode,
-								y = new d(p ? s : '^(?:' + s.source + ')', (s.ignoreCase ? 'i' : '') + (s.multiline ? 'm' : '') + (s.unicode ? 'u' : '') + (p ? 'y' : 'g')),
+								y = new d(h ? s : '^(?:' + s.source + ')', (s.ignoreCase ? 'i' : '') + (s.multiline ? 'm' : '') + (s.unicode ? 'u' : '') + (h ? 'y' : 'g')),
 								m = void 0 === e ? 4294967295 : e >>> 0;
 							if (0 === m) return [];
-							if (0 === l.length) return null === c(y, l) ? [l] : [];
-							for (var b = 0, k = 0, _ = []; k < l.length; ) {
-								y.lastIndex = p ? k : 0;
+							if (0 === p.length) return null === c(y, p) ? [p] : [];
+							for (var b = 0, k = 0, _ = []; k < p.length; ) {
+								y.lastIndex = h ? k : 0;
 								var S,
-									x = c(y, p ? l : l.slice(k));
-								if (null === x || (S = f(u(y.lastIndex + (p ? 0 : k)), l.length)) === b) k = a(l, k, g);
+									x = c(y, h ? p : p.slice(k));
+								if (null === x || (S = l(u(y.lastIndex + (h ? 0 : k)), p.length)) === b) k = a(p, k, g);
 								else {
-									if ((_.push(l.slice(b, k)), _.length === m)) return _;
+									if ((_.push(p.slice(b, k)), _.length === m)) return _;
 									for (var w = 1; w <= x.length - 1; w++) if ((_.push(x[w]), _.length === m)) return _;
 									k = b = S;
 								}
 							}
-							return _.push(l.slice(b)), _;
+							return _.push(p.slice(b)), _;
 						}
 					]
 				);
@@ -4556,7 +4555,7 @@
 			});
 		},
 		g3g5: function(t, e) {
-			var n = (t.exports = { version: '2.6.2' });
+			var n = (t.exports = { version: '2.6.3' });
 			'number' == typeof __e && (__e = n);
 		},
 		g4EE: function(t, e, n) {
@@ -5643,4 +5642,4 @@
 	},
 	[[1, 0]]
 ]);
-//# sourceMappingURL=polyfills.aba6ede9b51ee915e243.js.map
+//# sourceMappingURL=polyfills.3838c46a436d3ae41f00.js.map
