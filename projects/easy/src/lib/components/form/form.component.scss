@@ -219,7 +219,7 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 	&.form-field {
 		@include animate(border, box-shadow);
 
-		background-color: inherit;
+		background-color: color(white);
 		border: rem(1) solid color(gray);
 		padding: rem(8);
 

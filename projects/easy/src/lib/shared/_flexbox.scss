@@ -501,15 +501,16 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 // Flex item grow and shrink styles
 @for $number from 0 through 12 {
 	.item-gs-#{$number} {
-		@include flex($number, $number, auto);
+		flex-grow: $number;
+		flex-shrink: $number;
 	}
 
 	.item-g-#{$number} {
-		@include flex($number, 0, auto);
+		flex-grow: $number;
 	}
 
 	.item-s-#{$number} {
-		@include flex(0, $number, auto);
+		flex-shrink: $number;
 	}
 }
 
@@ -517,7 +518,15 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	flex: none;
 }
 
+.item-g,
+.item-gs,
+.item-s {
+	flex-basis: 0%;
+}
+
 // Flex item order styles
+
+// TODO: Base this on media queries
 @for $number from 1 through 12 {
 	.item-order-#{$number} {
 		order: $number;
