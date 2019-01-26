@@ -438,6 +438,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 
 .wrap-n {
 	flex-wrap: nowrap;
+	max-width: 100%;
 }
 
 // Flex item alignment styles
@@ -518,9 +519,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	flex: none;
 }
 
-.item-g,
-.item-gs,
-.item-s {
+[class*='flex-g'] {
 	flex-basis: 0%;
 }
 

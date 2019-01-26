@@ -2,7 +2,7 @@
   "name": "easy-docs",
   "version": "0.0.1",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
-  "description": "Documentation for the EASY framework.",
+  "description": "Documentation for EASY framework.",
   "keywords": [
     "angular",
     "css",
@@ -23,8 +23,8 @@
   },
   "private": true,
   "engines": {
-    "node": "10.13.0",
-    "npm": "6.5.0"
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
   "scripts": {
     "ng": "ng",
@@ -84,12 +84,12 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "karma-spec-reporter": "^0.0.32",
     "markdown-styleguide-generator": "^2.0.4",
-    "ng-packagr": "^4.6.0",
+    "ng-packagr": "^4.7.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.16.1",
     "pretty-quick": "^1.10.0",
     "protractor": "^5.4.2",
-    "ts-node": "^8.0.1",
+    "ts-node": "^8.0.2",
     "tsickle": "^0.34.0",
     "tslib": "^1.9.3",
     "tslint": "^5.12.1",

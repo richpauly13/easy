@@ -303,6 +303,7 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 :host-context(.checkbox-group),
 :host-context(.radio-group) {
 	&.field-group {
+		flex-wrap: nowrap;
 		padding: 0;
 	}
 
