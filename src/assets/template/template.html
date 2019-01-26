@@ -3,10 +3,13 @@
 		{{#each menu}}
 		<li>
 			<a (click)="selectSection('{{name}}')" [ngClass]="{'bg-lt-gray': checkSection('{{name}}')}" class="hover bg-hover-lt-gray pad-a-xs" href="#">{{name}}</a>
+
 			<ul *ngIf="checkSection('{{name}}')" class="pad-l-sm submenu">
-				{{#each headings}}
-				<li *ngIf="'{{name}}'"><a>{{name}}</a></li>
-				{{/each}}
+				{{#each headings}} {{#if name}}
+				<li>
+					<a>{{name}}</a>
+				</li>
+				{{/if}} {{/each}}
 			</ul>
 		</li>
 		{{/each}}
@@ -19,13 +22,18 @@
 	{{#each sections}}
 	<article *ngIf="checkSection('{{section}}')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
-			<h2 *ngIf="'{{heading}}'">{{heading}}</h2>
-			{{{comment}}}
+			{{#if heading}}
+			<h2>{{heading}}</h2>
+			{{/if}} {{{comment}}}
 		</section>
 
-		<section *ngIf="'{{code}}'" [ngClass]="{'flexbox': checkSection('Flexbox'), 'box': checkSection('Space')}" class="pad-a-sm">{{{code}}}</section>
-
-		<figure *ngIf="'{{code}}'"><pre class="pad-a-sm border-tb-gray">{{{markup}}}</pre></figure>
+		{{#if code}}
+		<section [ngClass]="{'flexbox': checkSection('Flexbox'), 'box': checkSection('Space')}" class="pad-a-sm">{{{code}}}</section>
+		{{/if}} {{#if markup}}
+		<figure>
+			<pre class="pad-a-sm border-tb-gray">{{{markup}}}</pre>
+		</figure>
+		{{/if}}
 	</article>
 	{{/each}}
 </main>

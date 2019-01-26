@@ -7,7 +7,7 @@
 	margin-left: 16rem;
 }
 
-.styleguide .hljs-attribute {
+.styleguide .hljs-attr {
 	color: #954121;
 }
 
@@ -24,10 +24,6 @@
 
 .styleguide code {
 	color: #6a0080;
-}
-
-.styleguide pre {
-	color: #000080;
 }
 
 .styleguide code,
@@ -75,8 +71,7 @@
 .hljs-string,
 .hljs-tag .hljs-value,
 .hljs-doctag,
-.tex .hljs-formula,
-.hljs-name {
+.tex .hljs-formula {
 	color: #219161;
 }
 
@@ -104,12 +99,13 @@
 .hljs-tag,
 .hljs-tag .hljs-title,
 .hljs-rule .hljs-property,
-.django .hljs-tag .hljs-keyword {
+.django .hljs-tag .hljs-keyword,
+.hljs-name {
 	color: #000080;
 	font-weight: normal;
 }
 
-.hljs-attribute,
+.hljs-attr,
 .hljs-variable,
 .instancevar,
 .lisp .hljs-body {
