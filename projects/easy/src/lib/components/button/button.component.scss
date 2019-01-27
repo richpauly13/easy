@@ -68,9 +68,9 @@ Buttons are grouped with a `.btn-group-[row || col || full]` class on a parent c
 ```
 */
 
-@import '../../core/functions';
-@import '../../core/mixins';
-@import '../../core/variables';
+@import '../../core/sass/functions';
+@import '../../core/sass/mixins';
+@import '../../core/sass/variables';
 
 // Button styles
 :host {

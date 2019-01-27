@@ -331,10 +331,6 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 ```
 */
 
-@import '../core/functions';
-@import '../core/mixins';
-@import '../core/variables';
-
 // Flexbox container styles
 .row,
 .row-full {

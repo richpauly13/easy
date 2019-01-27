@@ -23,9 +23,9 @@ Alerts are closed by adding a `.close` class.
 ```
 */
 
-@import '../../core/functions';
-@import '../../core/mixins';
-@import '../../core/variables';
+@import '../../core/sass/functions';
+@import '../../core/sass/mixins';
+@import '../../core/sass/variables';
 
 // Alert styles
 :host {

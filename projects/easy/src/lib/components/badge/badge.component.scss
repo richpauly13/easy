@@ -23,9 +23,9 @@ If a badge does not contain text, it is not rendered.
 ```
 */
 
-@import '../../core/functions';
-@import '../../core/mixins';
-@import '../../core/variables';
+@import '../../core/sass/functions';
+@import '../../core/sass/mixins';
+@import '../../core/sass/variables';
 
 // Badge styles
 :host {
