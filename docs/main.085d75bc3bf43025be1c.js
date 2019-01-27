@@ -13959,7 +13959,7 @@
 						(l()(), Ca(-1, null, ['Badges are styled with a '])),
 						(l()(), go(4, 0, null, null, 1, 'code', [], null, null, null, null, null)),
 						(l()(), Ca(-1, null, ['.badge-[sm || md || lg]'])),
-						(l()(), Ca(-1, null, [' class'])),
+						(l()(), Ca(-1, null, [' class.'])),
 						(l()(), go(7, 0, null, null, 16, 'section', [['class', 'pad-a-sm']], null, null, null, null, null)),
 						ea(8, 278528, null, 0, $i, [ds, fs, Ye, nt], { klass: [0, 'klass'], ngClass: [1, 'ngClass'] }, null),
 						ka(9, { flexbox: 0, box: 1 }),
@@ -21513,4 +21513,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.dff770dbf5d4fd8b7ffa.js.map
+//# sourceMappingURL=main.085d75bc3bf43025be1c.js.map
