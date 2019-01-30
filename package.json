@@ -1,6 +1,6 @@
 {
   "name": "easy-docs",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
   "description": "Documentation for EASY framework.",
   "keywords": [
@@ -45,7 +45,7 @@
     "copy:readme": "copy .\\README.md .\\dist\\easy",
     "pack": "cd dist/easy && npm pack",
     "package": "run-s build:easy copy:all pack",
-    "publish:easy": "cd dist/easy && npm publish easy-framework-0.0.14",
+    "publish:easy": "cd dist/easy && npm publish easy-framework-0.0.15.tgz",
     "update:ng": "ng update --all",
     "update:webdriver": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37"
   },
@@ -70,7 +70,7 @@
     "@angular/language-service": "^7.2.2",
     "@types/jasmine": "^3.3.8",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^10.12.18",
+    "@types/node": "^10.12.19",
     "child_process": "^1.0.2",
     "codecov": "^3.1.0",
     "codelyzer": "^4.5.0",
