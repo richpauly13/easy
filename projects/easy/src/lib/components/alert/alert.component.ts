@@ -6,6 +6,7 @@ import { Component, ElementRef, Input, HostBinding, OnInit, ViewChild } from '@a
 	styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
+	@ViewChild('message') public message: ElementRef;
 	@HostBinding('attr.aria-labelledby') public ariaLabelledby: string;
 	@HostBinding('attr.class') public hostClass: string;
 	@HostBinding('attr.role') public role: string;
@@ -28,8 +29,6 @@ export class AlertComponent implements OnInit {
 	public get class(): string {
 		return this.classList;
 	}
-
-	@ViewChild('message') public message: ElementRef;
 
 	public close: boolean;
 	public id: string;
