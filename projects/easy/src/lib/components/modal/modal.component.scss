@@ -16,7 +16,7 @@ Coming soon.
 .modal-sm,
 .modal-md,
 .modal-lg {
-	@include animate(visibility, opacity);
+	@include animate(opacity);
 
 	opacity: 0;
 	pointer-events: none;
@@ -28,24 +28,25 @@ Coming soon.
 	background-color: color(gray);
 	bottom: 0;
 	left: 0;
-	opacity: 0.6;
 	right: 0;
 	top: 0;
 	z-index: 2;
 }
 
 // Modal sizes
-.modal-sm {
+.modal-sm,
+.modal-md,
+.modal-lg {
 	bottom: 20%;
 	left: 36%;
 	right: 36%;
 	top: 26%;
 	z-index: 3;
 
-	&:target,
-	&:target ~ .backdrop,
 	&.active,
 	&.active ~ .backdrop {
+		@include animate(opacity);
+
 		opacity: 1;
 		pointer-events: auto;
 		visibility: visible;
@@ -71,7 +72,6 @@ Coming soon.
 	background-color: color(white);
 	height: 75%;
 	overflow-y: auto;
-	padding: rem(16);
 	width: 100%;
 }
 
@@ -79,7 +79,5 @@ Coming soon.
 .modal-footer {
 	@include row;
 
-	align-items: center;
-	padding: rem(8);
 	width: 100%;
 }
