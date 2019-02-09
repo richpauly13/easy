@@ -1,0 +1,66 @@
+// Global styles
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.circle {
+	border-radius: 50%;
+}
+
+.close {
+	color: inherit;
+}
+
+:disabled,
+[disabled] {
+	background-color: color(gray);
+	color: color(lt-black);
+
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
+.hover:hover {
+	cursor: pointer;
+}
+
+.list {
+	margin-bottom: rem(16);
+	margin-left: rem(40);
+}
+
+ol.list {
+	list-style: decimal;
+
+	& ol.lst {
+		list-style: lower-alpha;
+	}
+}
+
+/* :read-only,
+[readonly] {
+	background-color: color(gray);
+	color: color(lt-black);
+} */
+
+.rounded {
+	border-radius: rem(6);
+}
+
+ul.list {
+	list-style: disc;
+
+	& ul.list {
+		list-style: circle;
+	}
+}
+
+// Creates box-shadows 1-5
+@for $shadow from 1 through 5 {
+	.box-shadow-#{$shadow} {
+		@include shadow($shadow);
+	}
+}

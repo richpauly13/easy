@@ -199,7 +199,7 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 		@include row;
 
 		align-items: center;
-		flex: 1 0 rem(220);
+		flex: 1 1 rem(220);
 		flex-wrap: wrap;
 	}
 
@@ -303,6 +303,7 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 :host-context(.checkbox-group),
 :host-context(.radio-group) {
 	&.field-group {
+		flex: 0 0 rem(120);
 		flex-wrap: nowrap;
 		padding: 0;
 	}
@@ -311,7 +312,6 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 		flex: none;
 		font-size: rem(16);
 		padding-left: rem(8);
-		padding-right: rem(8);
 
 		&:hover {
 			cursor: pointer;
