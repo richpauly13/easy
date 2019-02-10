@@ -1,18 +1,8 @@
 /* SG
 # Form
 
-Forms are styled with `.form-group`, `.field-group`, `.form-label`, `.form-field` classes.
+Forms are styled with `.form-group`, `.field-group`, `.form-label`, and `.form-field` classes.
 
-```
-<form>
-    <ul class="form-group">
-        <li class="field-group">
-            <label class="form-label" for="name">Name</label>
-            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name">
-        </li>
-    </ul>    
-</form>
-```
 */
 
 /* SG
@@ -67,9 +57,9 @@ Form fields are styled with a `.form-field` class.  Different styles are applied
         <li class="field-group">
             <label class="form-label" for="gender">Gender</label>
             <select class="form-field" name="gender" id="gender">
-                <option>Select</option>
-                <option>Female</option>
-                <option>Male</option>
+                <option value="1">Select</option>
+                <option value="2">Female</option>
+                <option value="3">Male</option>
             </select>
         </li>
         <li class="field-group">
@@ -188,11 +178,22 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 ```
 */
 
+/* SG
+# Form/State
+
+Coming soon.
+
+```
+```
+*/
+
 @import '../../core/sass/functions';
 @import '../../core/sass/mixins';
 @import '../../core/sass/variables';
 
 // Form styles
+
+// TODO: split this into separate components
 :host {
 	&.checkbox-group,
 	&.radio-group {
@@ -221,25 +222,61 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 
 		background-color: color(white);
 		border: rem(1) solid color(gray);
-		padding: rem(8);
+
+		&[type='checkbox'],
+		&[type='radio'] {
+			appearance: none;
+			height: rem(16);
+			position: relative;
+			width: rem(16);
+
+			&::after {
+				display: block;
+				font-size: 1.175rem;
+				height: 0.95rem;
+				left: 0;
+				line-height: 0.8rem;
+				position: absolute;
+				text-align: center;
+				top: 0;
+				width: 0.95rem;
+			}
+		}
+
+		&[type='checkbox']:checked::after {
+			content: '\2713';
+		}
+
+		&[type='radio'] {
+			border-radius: 50%;
+
+			&:checked::after {
+				content: '\25CF';
+			}
+		}
 
 		&:hover {
+			@include animate(border);
+
 			border: rem(1) solid color(black);
 		}
 
 		&:focus {
+			@include animate(border, box-shadow);
 			@include shadow(1, blue);
 
 			border: rem(1) solid color(blue);
+			outline: 1px dotted color(blue);
 		}
 
 		&:not([type='checkbox']):not([type='radio']) {
 			flex: 1 0 rem(220);
+			padding: rem(8);
 		}
 
 		&::-webkit-input-placeholder {
 			color: color(dk-gray);
-			opacity: 0.54;
+			opacity: 1;
 		}
 
 		&:-ms-input-placeholder {
@@ -276,12 +313,14 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 	}
 
 	&select.form-field {
+		background-color: inherit;
+		color: color(dk-gray);
 		height: rem(36);
 		padding-left: rem(4);
 
 		&::-ms-value {
 			background-color: inherit;
-			color: color(lt-black);
+			color: color(dk-gray);
 		}
 
 		&[multiple] {

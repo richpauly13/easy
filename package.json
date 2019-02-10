@@ -45,7 +45,7 @@
     "copy:readme": "copy .\\README.md .\\dist\\easy",
     "pack": "cd dist/easy && npm pack",
     "package": "run-s build:easy copy:all pack",
-    "publish:easy": "cd dist/easy && npm publish easy-framework-0.0.15.tgz",
+    "publish:easy": "cd dist/easy && npm publish easy-framework-0.0.16.tgz",
     "update:ng": "ng update --all --force && npm i --save-dev typescript@3.2.4",
     "update:webdriver": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37"
   },

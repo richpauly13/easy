@@ -1,8 +1,8 @@
 {
   "name": "easy-framework",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
-  "description": "EASY CSS framework.",
+  "description": "EASY Angular and CSS framework.",
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
   },

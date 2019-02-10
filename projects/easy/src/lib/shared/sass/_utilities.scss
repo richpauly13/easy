@@ -1,4 +1,26 @@
+/* SG
+# Utilities
+
+Coming soon.
+
+*/
+
 // Global styles
+:disabled,
+[disabled] {
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
+:disabled,
+[disabled],
+:read-only,
+[readonly] {
+	background-color: color(gray);
+	color: color(lt-black);
+}
+
 .center {
 	display: block;
 	margin-left: auto;
@@ -11,16 +33,6 @@
 
 .close {
 	color: inherit;
-}
-
-:disabled,
-[disabled] {
-	background-color: color(gray);
-	color: color(lt-black);
-
-	&:hover {
-		cursor: not-allowed;
-	}
 }
 
 .hover:hover {
@@ -39,12 +51,6 @@ ol.list {
 		list-style: lower-alpha;
 	}
 }
-
-/* :read-only,
-[readonly] {
-	background-color: color(gray);
-	color: color(lt-black);
-} */
 
 .rounded {
 	border-radius: rem(6);
