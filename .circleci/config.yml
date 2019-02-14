@@ -8,7 +8,7 @@ version: 2.1
 base_image: &base_image
 
   # Specify the node version here
-  image: circleci/node:10.15.1-browsers
+  image: circleci/node:11.9.0-browsers
 
 job_common: &job_common
   docker:
@@ -44,9 +44,18 @@ jobs:
       # Restore cached dependencies
       - <<: *restore
 
+      # Update dependencies
       - run:
           name: Update npm
-          command: sudo npm i -g npm --silent
+          command: sudo npm i -g npm --silent && npm rebuild node-sass
+      
+      - run:
+          name: Update node-gyp
+          command: sudo npm i -g node-gyp
+
+      - run:
+          name: Rebuild node-sass
+          command: npm rebuild node-sass
 
       - run:
           name: Update dependencies
