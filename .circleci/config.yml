@@ -18,7 +18,7 @@ job_common: &job_common
 # Save dependencies to cache
 save: &save
   save_cache:
-    key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    key: v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
     paths:
       - node_modules
 
@@ -26,10 +26,10 @@ save: &save
 restore: &restore
   restore_cache:
     keys:
-      - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
       # Fallback in case checksum fails
-      - v1-easy-{{ .Branch }}-
+      - v2-easy-{{ .Branch }}-
 
 # Workflow jobs
 jobs:
@@ -55,7 +55,7 @@ jobs:
 
       - run:
           name: Rebuild node-sass
-          command: sudo npm rebuild node-sass
+          command: npm rebuild node-sass
 
       - run:
           name: Update dependencies
