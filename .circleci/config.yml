@@ -51,11 +51,7 @@ jobs:
       
       - run:
           name: Update node-gyp
-          command: sudo npm i -g node-gyp
-
-      - run:
-          name: Rebuild node-sass
-          command: npm rebuild node-sass
+          command: sudo npm i -g node-gyp --silent
 
       - run:
           name: Update dependencies
