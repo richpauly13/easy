@@ -55,11 +55,7 @@ jobs:
 
       - run:
           name: Update dependencies
-          command: npm i --silent
-
-      - run:
-          name: Fix ng-packagr
-          command: cd node_modules/ng-packagr && npm i && npm audit fix
+          command: npm i && npm audit fix --silent
       
       # Cache dependencies
       - <<: *save          
