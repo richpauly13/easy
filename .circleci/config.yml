@@ -59,7 +59,7 @@ jobs:
 
       - run:
           name: Fix ng-packagr
-          command: cd node*/ng-p* && npm i --save autoprefixer --silent
+          command: cd node_modules/ng-packagr && npm i --save autoprefixer && npm audit fix --force
       
       # Cache dependencies
       - <<: *save          
