@@ -8,17 +8,12 @@ Coming soon.
 // Global styles
 :disabled,
 [disabled] {
+	background-color: color(lt-gray);
+	color: color(lt-black);
+
 	&:hover {
 		cursor: not-allowed;
 	}
-}
-
-:disabled,
-[disabled],
-:read-only,
-[readonly] {
-	background-color: color(gray);
-	color: color(lt-black);
 }
 
 .center {

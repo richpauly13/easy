@@ -184,6 +184,18 @@ Form groups are styled with a `.form-group` class for vertical fields and `.form
 Coming soon.
 
 ```
+<form>
+    <ul class="form-group">
+        <li class="field-group">
+            <label class="form-label" for="name">Disabled</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" disabled>
+        </li>
+        <li class="field-group">
+            <label class="form-label" for="name">Readonly</label>
+            <input class="form-field" type="text" id="name" name="name" placeholder="Enter name" readonly>
+        </li>
+    </ul>    
+</form>
 ```
 */
 
@@ -220,8 +232,18 @@ Coming soon.
 	&.form-field {
 		@include animate(border, box-shadow);
 
-		background-color: color(white);
 		border: rem(1) solid color(gray);
+
+		&:not(:disabled),
+		&:not([disabled]) {
+			background-color: color(white);
+		}
+
+		&:read-only:not(select),
+		&[readonly]:not(select) {
+			background-color: color(lt-gray);
+			color: color(lt-black);
+		}
 
 		&[type='checkbox'],
 		&[type='radio'] {
