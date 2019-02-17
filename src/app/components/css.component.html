@@ -75,11 +75,6 @@
 			</ul>
 		</li>
 		<li>
-			<a (click)="selectSection('Dropdown')" [ngClass]="{ 'bg-lt-gray': checkSection('Dropdown') }" class="hover bg-hover-lt-gray pad-a-xs" href="#">Dropdown</a>
-
-			<ul *ngIf="checkSection('Dropdown')" class="pad-l-sm submenu"></ul>
-		</li>
-		<li>
 			<a (click)="selectSection('Flexbox')" [ngClass]="{ 'bg-lt-gray': checkSection('Flexbox') }" class="hover bg-hover-lt-gray pad-a-xs" href="#">Flexbox</a>
 
 			<ul *ngIf="checkSection('Flexbox')" class="pad-l-sm submenu">
@@ -560,11 +555,6 @@
 	<article *ngIf="checkSection('Color')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2>Text</h2>
-			<p>Coming soon.</p>
-		</section>
-	</article>
-	<article *ngIf="checkSection('Dropdown')" class="mar-b-lg box-shadow-1 border-lr-gray section">
-		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<p>Coming soon.</p>
 		</section>
 	</article>
@@ -1513,7 +1503,7 @@
 	<article *ngIf="checkSection('Form')" class="mar-b-lg box-shadow-1 border-lr-gray section">
 		<section class="pad-a-sm bg-lt-gray border-tb-gray">
 			<h2>State</h2>
-			<p>Coming soon.</p>
+			<p>Form fields can be disabled by adding a <code>disabled</code> attribute or readonly by adding a <code>readonly</code> attribute.</p>
 		</section>
 
 		<section [ngClass]="{ flexbox: checkSection('Flexbox'), box: checkSection('Space') }" class="pad-a-sm">

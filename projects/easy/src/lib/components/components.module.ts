@@ -5,7 +5,6 @@ import { BadgeModule } from './badge/badge.module';
 import { ButtonModule } from './button/button.module';
 import { CardModule } from './card/card.module';
 import { CollapseModule } from './collapse/collapse.module';
-import { DropdownModule } from './dropdown/dropdown.module';
 import { FormModule } from './form/form.module';
 import { GridModule } from './grid/grid.module';
 import { ModalModule } from './modal/modal.module';
@@ -25,7 +24,6 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		ButtonModule,
 		CardModule,
 		CollapseModule,
-		DropdownModule,
 		FormModule,
 		GridModule,
 		ModalModule,

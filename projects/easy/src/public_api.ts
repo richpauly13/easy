@@ -6,7 +6,6 @@ export * from './lib/components/badge/badge.module';
 export * from './lib/components/button/button.module';
 export * from './lib/components/card/card.module';
 export * from './lib/components/collapse/collapse.module';
-export * from './lib/components/dropdown/dropdown.module';
 export * from './lib/components/form/form.module';
 export * from './lib/components/grid/grid.module';
 export * from './lib/components/modal/modal.module';

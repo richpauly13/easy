@@ -82,8 +82,6 @@ Read the [documentation](https://richpauly13.github.io/easy/).
 1. If you change any .scss files, update the documentation in the comments using this [format](https://github.com/emiloberg/markdown-styleguide-generator)
 1. Submit a pull request
 
-_NOTE: All pull requests should include passing unit tests_.
-
 ## Issues
 
 Report an [issue](https://github.com/richpauly13/easy/issues).
