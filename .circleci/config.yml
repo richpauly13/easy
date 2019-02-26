@@ -55,7 +55,7 @@ jobs:
 
       - run:
           name: Update dependencies
-          command: npm i && npm audit fix --silent
+          command: npm i --silent
       
       # Cache dependencies
       - <<: *save          
