@@ -1580,7 +1580,7 @@
 								.slice(2)
 								.join('.'));
 					};
-				})())('7.2.9'),
+				})())('7.2.10'),
 				Un = !0,
 				Ln = !1;
 			function Vn() {
@@ -20572,4 +20572,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.ba0cf556c574e9fa5840.js.map
+//# sourceMappingURL=main.35590856eafd4a90f0f4.js.map
