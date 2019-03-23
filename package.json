@@ -33,7 +33,7 @@
     "test:easy": "ng test easy --browsers=ChromeHeadlessCI",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "npm run update:webdriver && ng e2e --no-webdriver-update",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
     "watch:easy": "ng build easy --watch",
     "build": "run-s build:easy build:docs",
@@ -47,7 +47,7 @@
     "package": "run-s build:easy copy:all pack",
     "publish:easy": "cd dist/easy && npm publish easy-framework-0.0.17.tgz",
     "update:ng": "ng update --all --force && npm i --save-dev typescript@3.2.4",
-    "update:webdriver": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.37"
+    "update:webdriver": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.46"
   },
   "dependencies": {
     "@angular/common": "^7.2.10",
@@ -70,7 +70,7 @@
     "@angular/language-service": "^7.2.10",
     "@types/jasmine": "^3.3.12",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^11.11.5",
+    "@types/node": "^11.11.6",
     "child_process": "^1.0.2",
     "codecov": "^4.0.0-0",
     "codelyzer": "^5.0.0-beta.1",
@@ -92,7 +92,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
-    "protractor": "^5.4.2",
+    "protractor": "^6.0.0",
     "ts-node": "^8.0.3",
     "tsickle": "^0.34.3",
     "tslib": "^1.9.3",

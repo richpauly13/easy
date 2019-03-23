@@ -8,7 +8,7 @@ version: 2.1
 base_image: &base_image
 
   # Specify the node version here
-  image: circleci/node:11.9.0-browsers
+  image: circleci/node:11.12.0-browsers
 
 job_common: &job_common
   docker:
@@ -121,7 +121,7 @@ jobs:
 
       - run:
           name: Run docs e2e tests
-          command: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --webdriver-update=false
+          command: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js
 
 workflows:
   default_workflow:
@@ -136,6 +136,6 @@ workflows:
       - test_docs:
           requires:
             - build
-      - e2e:
-          requires:
-            - build
+      # - e2e:
+      #     requires:
+      #      - build
