@@ -1,6 +1,6 @@
 {
   "name": "easy-framework",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "author": "Paul Chehak <pauly13@sbcglobal.net>",
   "description": "EASY Angular and CSS framework.",
   "bugs": {
@@ -21,13 +21,13 @@
     "a11y"
   ],
   "engines": {
-    "node": ">=10.0.0",
-    "npm": ">=6.0.0"
+    "node": "^10.0.0",
+    "npm": "^6.0.0"
   },
   "homepage": "https://github.com/richpauly13/easy",
   "private": false,
   "peerDependencies": {
-    "@angular/common": ">=6.0.0",
-    "@angular/core": ">=6.0.0"
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0"
   }
 }
