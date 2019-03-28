@@ -53,7 +53,7 @@ Coming soon.
 
 .nav-item,
 .nav-link {
-	@include flex(1, 0, 0%);
+	@include flex(1, 0, auto);
 
 	color: inherit;
 	text-align: center;

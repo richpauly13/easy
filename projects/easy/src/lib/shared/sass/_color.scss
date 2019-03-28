@@ -47,16 +47,16 @@ Coming soon.
 @each $name, $color in $colors {
 	// Background color styles
 	@if $name != lt-black {
-		.bg-#{$name},
-		.bg-hover-#{$name}:hover {
+		.bg-#{'' + $name},
+		.bg-hover-#{'' + $name}:hover {
 			background-color: $color;
 		}
 	}
 
 	// Text color styles
 	@if $name != lt-white {
-		.text-#{$name},
-		.text-hover-#{$name}:hover {
+		.text-#{'' + $name},
+		.text-hover-#{'' + $name}:hover {
 			color: $color;
 		}
 	}
@@ -64,21 +64,21 @@ Coming soon.
 	// Border color styles
 	@if $name != lt-white and $name != lt-black {
 		@each $suffix in top, right, bottom, left {
-			.border-#{str-slice($suffix, 1, 1)}-#{$name} {
+			.border-#{str-slice($suffix, 1, 1)}-#{'' + $name} {
 				border-#{$suffix}: rem(1) solid $color;
 			}
 		}
 
-		.border-a-#{$name} {
+		.border-a-#{'' + $name} {
 			border: rem(1) solid $color;
 		}
 
-		.border-lr-#{$name} {
+		.border-lr-#{'' + $name} {
 			border-left: rem(1) solid $color;
 			border-right: rem(1) solid $color;
 		}
 
-		.border-tb-#{$name} {
+		.border-tb-#{'' + $name} {
 			border-top: rem(1) solid $color;
 			border-bottom: rem(1) solid $color;
 		}
