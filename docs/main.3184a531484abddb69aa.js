@@ -1580,7 +1580,7 @@
 								.slice(2)
 								.join('.'));
 					};
-				})())('7.2.11'),
+				})())('7.2.12'),
 				Un = !0,
 				Ln = !1;
 			function Vn() {
@@ -6361,16 +6361,17 @@
 						(l.ngInjectableDef = gl({
 							providedIn: 'root',
 							factory: function() {
-								return new Ea(Hl(ka), window);
+								return new Ea(Hl(ka), window, Hl(vu));
 							}
 						})),
 						l
 					);
 				})(),
 				Ea = (function() {
-					function l(l, n) {
+					function l(l, n, u) {
 						(this.document = l),
 							(this.window = n),
+							(this.errorHandler = u),
 							(this.offset = function() {
 								return [0, 0];
 							});
@@ -6391,10 +6392,15 @@
 						}),
 						(l.prototype.scrollToAnchor = function(l) {
 							if (this.supportScrollRestoration()) {
-								var n = this.document.querySelector('#' + l);
-								if (n) return void this.scrollToElement(n);
-								var u = this.document.querySelector("[name='" + l + "']");
-								if (u) return void this.scrollToElement(u);
+								l = this.window.CSS && this.window.CSS.escape ? this.window.CSS.escape(l) : l.replace(/(\"|\'\ |:|\.|\[|\]|,|=)/g, '\\$1');
+								try {
+									var n = this.document.querySelector('#' + l);
+									if (n) return void this.scrollToElement(n);
+									var u = this.document.querySelector("[name='" + l + "']");
+									if (u) return void this.scrollToElement(u);
+								} catch (e) {
+									this.errorHandler.handleError(e);
+								}
 							}
 						}),
 						(l.prototype.setHistoryScrollRestoration = function(l) {
@@ -10748,16 +10754,6 @@
 								Y(function(l) {
 									return r({}, l, { extractedUrl: n.urlHandlingStrategy.extract(l.rawUrl) });
 								}),
-								Wa(function(l) {
-									n.currentNavigation = {
-										id: l.id,
-										initialUrl: l.currentRawUrl,
-										extractedUrl: l.extractedUrl,
-										trigger: l.source,
-										extras: l.extras,
-										previousNavigation: n.lastSuccessfulNavigation ? r({}, n.lastSuccessfulNavigation, { previousNavigation: null }) : null
-									};
-								}),
 								ho(function(l) {
 									var e,
 										t,
@@ -10766,6 +10762,16 @@
 										i = !1,
 										c = !1;
 									return Ta(l).pipe(
+										Wa(function(l) {
+											n.currentNavigation = {
+												id: l.id,
+												initialUrl: l.currentRawUrl,
+												extractedUrl: l.extractedUrl,
+												trigger: l.source,
+												extras: l.extras,
+												previousNavigation: n.lastSuccessfulNavigation ? r({}, n.lastSuccessfulNavigation, { previousNavigation: null }) : null
+											};
+										}),
 										ho(function(l) {
 											var e,
 												t,
@@ -20572,4 +20578,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.a4e283a49e374345ce45.js.map
+//# sourceMappingURL=main.3184a531484abddb69aa.js.map
