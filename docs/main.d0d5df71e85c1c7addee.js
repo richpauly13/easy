@@ -1580,7 +1580,7 @@
 								.slice(2)
 								.join('.'));
 					};
-				})())('7.2.12'),
+				})())('7.2.13'),
 				Un = !0,
 				Ln = !1;
 			function Vn() {
@@ -7803,8 +7803,8 @@
 				};
 			}
 			var Jo = (function() {
-					function l(l, n) {
-						(this.eventManager = l), (this.sharedStylesHost = n), (this.rendererByCompId = new Map()), (this.defaultRenderer = new $o(l));
+					function l(l, n, u) {
+						(this.eventManager = l), (this.sharedStylesHost = n), (this.appId = u), (this.rendererByCompId = new Map()), (this.defaultRenderer = new $o(l));
 					}
 					return (
 						(l.prototype.createRenderer = function(l, n) {
@@ -7812,7 +7812,7 @@
 							switch (n.encapsulation) {
 								case Al.Emulated:
 									var u = this.rendererByCompId.get(n.id);
-									return u || ((u = new ui(this.eventManager, this.sharedStylesHost, n)), this.rendererByCompId.set(n.id, u)), u.applyToHost(l), u;
+									return u || ((u = new ui(this.eventManager, this.sharedStylesHost, n, this.appId)), this.rendererByCompId.set(n.id, u)), u.applyToHost(l), u;
 								case Al.Native:
 								case Al.ShadowDom:
 									return new ei(this.eventManager, this.sharedStylesHost, l, n);
@@ -7907,11 +7907,11 @@
 			}
 			var ni,
 				ui = (function(l) {
-					function n(n, u, e) {
-						var t = l.call(this, n) || this;
-						t.component = e;
-						var r = Ko(e.id, e.styles, []);
-						return u.addStyles(r), (t.contentAttr = Wo.replace(Zo, e.id)), (t.hostAttr = Qo.replace(Zo, e.id)), t;
+					function n(n, u, e, t) {
+						var r = l.call(this, n) || this;
+						r.component = e;
+						var s = Ko(t + '-' + e.id, e.styles, []);
+						return u.addStyles(s), (r.contentAttr = Wo.replace(Zo, t + '-' + e.id)), (r.hostAttr = Qo.replace(Zo, t + '-' + e.id)), r;
 					}
 					return (
 						t(n, l),
@@ -20460,7 +20460,7 @@
 						),
 						Gt(4608, zo, zo, [Fo, Gu]),
 						Gt(135680, qo, qo, [ka]),
-						Gt(4608, Jo, Jo, [zo, qo]),
+						Gt(4608, Jo, Jo, [zo, qo, ku]),
 						Gt(6144, On, null, [Jo]),
 						Gt(6144, Bo, null, [qo]),
 						Gt(4608, Xu, Xu, [Gu]),
@@ -20578,4 +20578,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main.3184a531484abddb69aa.js.map
+//# sourceMappingURL=main.d0d5df71e85c1c7addee.js.map
