@@ -73,7 +73,7 @@
     "@types/node": "^11.13.7",
     "child_process": "^1.0.2",
     "codecov": "^4.0.0-0",
-    "codelyzer": "^5.0.0",
+    "codelyzer": "^5.0.1",
     "gulp": "^4.0.1",
     "husky": "^2.1.0",
     "jasmine-core": "^3.4.0",
