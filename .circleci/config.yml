@@ -58,10 +58,6 @@ jobs:
           command: npm i --silent
 
       - run:
-        name: Upgrade dependencies
-        command: npm run update:ng
-
-      - run:
         name: Rebuild node-sass
         command: sudo npm rebuild
       
