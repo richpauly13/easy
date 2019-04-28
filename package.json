@@ -26,7 +26,7 @@
     "ng": "ng",
     "start": "ng serve -o",
     "test": "ng test",
-    "test:easy": "ng test easy --prod=true --browsers=ChromeHeadlessCI",
+    "test:easy": "ng test easy --browsers=ChromeHeadlessCI",
     "test:docs": "ng test easy-docs --prod=true --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
     "e2e": "npm run update:webdriver && ng e2e --no-webdriver-update",
