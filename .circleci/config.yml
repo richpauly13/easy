@@ -7,7 +7,7 @@ version: 2.1
 # Workflow variables
 base_image: &base_image
 
-  # Specify the node version here
+  # Node version
   image: circleci/node:12.0.0-browsers
 
 job_common: &job_common
@@ -56,6 +56,14 @@ jobs:
       - run:
           name: Update dependencies
           command: npm i --silent
+
+      - run:
+        name: Upgrade dependencies
+        command: npm run update:ng
+
+      - run:
+        name: Rebuild node-sass
+        command: sudo npm rebuild
       
       # Cache dependencies
       - <<: *save          
