@@ -22,16 +22,12 @@
     "url": "https://github.com/richpauly13/easy.git"
   },
   "private": true,
-  "engines": {
-    "node": ">=10.0.0",
-    "npm": ">=6.0.0"
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
     "test": "ng test",
     "test:easy": "ng test easy --browsers=ChromeHeadlessCI",
-    "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
+    "test:docs": "ng test easy-docs --prod=true --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
     "e2e": "npm run update:webdriver && ng e2e --no-webdriver-update",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
@@ -66,8 +62,8 @@
     "@angular-devkit/build-angular": "^0.13.8",
     "@angular-devkit/build-ng-packagr": "^0.13.8",
     "@angular/cli": "^7.3.8",
-    "@angular/compiler-cli": "^7.2.13",
-    "@angular/language-service": "^7.2.13",
+    "@angular/compiler-cli": "^7.2.14",
+    "@angular/language-service": "^7.2.14",
     "@types/jasmine": "^3.3.12",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^12.0.0",
@@ -85,7 +81,7 @@
     "karma-firefox-launcher": "^1.1.0",
     "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-jasmine-html-reporter": "^1.4.2",
     "karma-spec-reporter": "^0.0.32",
     "markdown-styleguide-generator": "^2.0.4",
     "ng-packagr": "^5.1.0",
@@ -94,8 +90,7 @@
     "pretty-quick": "^1.10.0",
     "protractor": "^6.0.0",
     "ts-node": "^8.1.0",
-    "tsickle": "^0.34.3",
-    "tslib": "^1.9.3",
+    "tsickle": "^0.35.0",
     "tslint": "^5.16.0",
     "typescript": "^3.2.4"
   }

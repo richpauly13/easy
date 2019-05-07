@@ -7,8 +7,8 @@ version: 2.1
 # Workflow variables
 base_image: &base_image
 
-  # Specify the node version here
-  image: circleci/node:11.12.0-browsers
+  # Node version
+  image: circleci/node:11.0.0-browsers
 
 job_common: &job_common
   docker:
@@ -18,7 +18,7 @@ job_common: &job_common
 # Save dependencies to cache
 save: &save
   save_cache:
-    key: v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    key: v3-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
     paths:
       - node_modules
 
@@ -26,10 +26,10 @@ save: &save
 restore: &restore
   restore_cache:
     keys:
-      - v2-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - v3-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
       # Fallback in case checksum fails
-      - v2-easy-{{ .Branch }}-
+      - v3-easy-{{ .Branch }}-
 
 # Workflow jobs
 jobs:
