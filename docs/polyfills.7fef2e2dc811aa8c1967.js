@@ -267,13 +267,13 @@
 								}),
 								(e.prototype.runTask = function(t, e, n) {
 									if (t.zone != this) throw new Error('A task can only be run in the zone of creation! (Creation: ' + (t.zone || y).name + '; Execution: ' + this.name + ')');
-									if (t.state !== b || (t.type !== T && t.type !== E)) {
+									if (t.state !== b || (t.type !== T && t.type !== w)) {
 										var r = t.state != _;
 										r && t._transitionTo(_, k), t.runCount++;
 										var o = D;
 										(D = t), (M = { parent: M, zone: this });
 										try {
-											t.type == E && t.data && !t.data.isPeriodic && (t.cancelFn = void 0);
+											t.type == w && t.data && !t.data.isPeriodic && (t.cancelFn = void 0);
 											try {
 												return this._zoneDelegate.invokeTask(this, t, e, n);
 											} catch (i) {
@@ -307,10 +307,10 @@
 									return t._zoneDelegates === n && this._updateTaskCount(t, 1), t.state == m && t._transitionTo(k, m), t;
 								}),
 								(e.prototype.scheduleMicroTask = function(t, e, n, r) {
-									return this.scheduleTask(new s(w, t, e, n, r, void 0));
+									return this.scheduleTask(new s(E, t, e, n, r, void 0));
 								}),
 								(e.prototype.scheduleMacroTask = function(t, e, n, r, o) {
-									return this.scheduleTask(new s(E, t, e, n, r, o));
+									return this.scheduleTask(new s(w, t, e, n, r, o));
 								}),
 								(e.prototype.scheduleEventTask = function(t, e, n, r, o) {
 									return this.scheduleTask(new s(T, t, e, n, r, o));
@@ -409,7 +409,7 @@
 											(n = this._scheduleTaskZS.onScheduleTask(this._scheduleTaskDlgt, this._scheduleTaskCurrZone, t, e)) || (n = e);
 									else if (e.scheduleFn) e.scheduleFn(e);
 									else {
-										if (e.type != w) throw new Error('Task is missing scheduleFn.');
+										if (e.type != E) throw new Error('Task is missing scheduleFn.');
 										g(e);
 									}
 									return n;
@@ -553,8 +553,8 @@
 						_ = 'running',
 						S = 'canceling',
 						x = 'unknown',
-						w = 'microTask',
-						E = 'macroTask',
+						E = 'microTask',
+						w = 'macroTask',
 						T = 'eventTask',
 						O = {},
 						I = {
@@ -710,8 +710,8 @@
 						_ = 'Promise.then',
 						S = null,
 						x = !0,
-						w = !1,
-						E = 0;
+						E = !1,
+						w = 0;
 					function T(t, e) {
 						return function(n) {
 							try {
@@ -747,8 +747,8 @@
 									t
 								);
 							}
-							if (e !== w && o instanceof R && o.hasOwnProperty(d) && o.hasOwnProperty(y) && o[d] !== S) P(o), D(t, o[d], o[y]);
-							else if (e !== w && 'function' == typeof s)
+							if (e !== E && o instanceof R && o.hasOwnProperty(d) && o.hasOwnProperty(y) && o[d] !== S) P(o), D(t, o[d], o[y]);
+							else if (e !== E && 'function' == typeof s)
 								try {
 									s.call(o, u(T(t, e)), u(T(t, !1)));
 								} catch (g) {
@@ -759,13 +759,13 @@
 							else {
 								t[d] = e;
 								var l = t[y];
-								if (((t[y] = o), t[b] === b && e === x && ((t[d] = t[k]), (t[y] = t[m])), e === w && o instanceof Error)) {
+								if (((t[y] = o), t[b] === b && e === x && ((t[d] = t[k]), (t[y] = t[m])), e === E && o instanceof Error)) {
 									var p = n.currentTask && n.currentTask.data && n.currentTask.data[f];
 									p && i(o, M, { configurable: !0, enumerable: !1, writable: !0, value: p });
 								}
 								for (var h = 0; h < l.length; ) A(t, l[h++], l[h++], l[h++], l[h++]);
-								if (0 == l.length && e == w) {
-									t[d] = E;
+								if (0 == l.length && e == E) {
+									t[d] = w;
 									try {
 										throw new Error(
 											'Uncaught (in promise): ' +
@@ -787,12 +787,12 @@
 					}
 					var j = a('rejectionHandledHandler');
 					function P(t) {
-						if (t[d] === E) {
+						if (t[d] === w) {
 							try {
 								var e = n[j];
 								e && 'function' == typeof e && e.call(this, { rejection: t[y], promise: t });
 							} catch (o) {}
-							t[d] = w;
+							t[d] = E;
 							for (var r = 0; r < c.length; r++) t === c[r].promise && c.splice(r, 1);
 						}
 					}
@@ -821,7 +821,7 @@
 							if (!(this instanceof e)) throw new Error('Must be an instanceof Promise.');
 							(this[d] = S), (this[y] = []);
 							try {
-								t && t(T(this, x), T(this, w));
+								t && t(T(this, x), T(this, E));
 							} catch (n) {
 								D(this, !1, n);
 							}
@@ -834,7 +834,7 @@
 								return D(new this(null), x, t);
 							}),
 							(e.reject = function(t) {
-								return D(new this(null), w, t);
+								return D(new this(null), E, t);
 							}),
 							(e.race = function(e) {
 								var n,
@@ -1004,8 +1004,8 @@
 					return !t || (!1 !== t.writable && !('function' == typeof t.get && void 0 === t.set));
 				}
 				var x = 'undefined' != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope,
-					w = !('nw' in b) && void 0 !== b.process && '[object process]' === {}.toString.call(b.process),
-					E = !w && !x && !(!d || !y.HTMLElement),
+					E = !('nw' in b) && void 0 !== b.process && '[object process]' === {}.toString.call(b.process),
+					w = !E && !x && !(!d || !y.HTMLElement),
 					T = void 0 !== b.process && '[object process]' === {}.toString.call(b.process) && !x && !(!d || !y.HTMLElement),
 					O = {},
 					I = function(t) {
@@ -1016,7 +1016,7 @@
 								r = this || t.target || b,
 								o = r[e];
 							return (
-								E && r === y && 'error' === t.type
+								w && r === y && 'error' === t.type
 									? !0 === (n = o && o.call(this, t.message, t.filename, t.lineno, t.colno, t.error)) && t.preventDefault()
 									: null == (n = o && o.apply(this, arguments)) || n || t.preventDefault(),
 								n
@@ -1221,7 +1221,7 @@
 							}
 						});
 						window.addEventListener('test', U, U), window.removeEventListener('test', U, U);
-					} catch (xt) {
+					} catch (wt) {
 						C = !1;
 					}
 				var B = { useG: !0 },
@@ -1283,7 +1283,7 @@
 						if ((!S && e[o] && (S = e), !S)) return !1;
 						if (S[h]) return !1;
 						var x,
-							E = n && n.eventNameToString,
+							w = n && n.eventNameToString,
 							T = {},
 							O = (S[h] = S[o]),
 							I = (S[g(i)] = S[i]),
@@ -1336,7 +1336,7 @@
 											h = arguments[0],
 											v = arguments[1];
 										if (!v) return e.apply(this, arguments);
-										if (w && 'uncaughtException' === h) return e.apply(this, arguments);
+										if (E && 'uncaughtException' === h) return e.apply(this, arguments);
 										var g = !1;
 										if ('function' != typeof v) {
 											if (!v.handleEvent) return e.apply(this, arguments);
@@ -1353,8 +1353,8 @@
 												x = G[h];
 											if (x) _ = x[d ? f : l];
 											else {
-												var O = (E ? E(h) : h) + l,
-													I = (E ? E(h) : h) + f,
+												var O = (w ? w(h) : h) + l,
+													I = (w ? w(h) : h) + f,
 													M = p + O,
 													D = p + I;
 												(G[h] = {}), (G[h][l] = M), (G[h][f] = D), (_ = d ? D : M);
@@ -1368,7 +1368,7 @@
 											var z = s.constructor.name,
 												L = H[z];
 											L && (j = L[h]),
-												j || (j = z + n + (E ? E(h) : h)),
+												j || (j = z + n + (w ? w(h) : h)),
 												(T.options = y),
 												k && (T.options.once = !1),
 												(T.target = s),
@@ -1429,7 +1429,7 @@
 								}
 							}),
 							(S[u] = function() {
-								for (var e = arguments[0], n = [], r = q(this || t, E ? E(e) : e), o = 0; o < r.length; o++) {
+								for (var e = arguments[0], n = [], r = q(this || t, w ? w(e) : e), o = 0; o < r.length; o++) {
 									var i = r[o];
 									n.push(i.originalDelegate ? i.originalDelegate : i.callback);
 								}
@@ -1801,10 +1801,10 @@
 					t && D(t, yt(t, e, n), r);
 				}
 				function mt(t, e) {
-					if ((!w || T) && !Zone[t.symbol('patchEvents')]) {
+					if ((!E || T) && !Zone[t.symbol('patchEvents')]) {
 						var n = 'undefined' != typeof WebSocket,
 							o = e.__Zone_ignore_on_properties;
-						if (E) {
+						if (w) {
 							var i = window,
 								a = F ? [{ target: i, ignoreProperties: ['error'] }] : [];
 							bt(i, dt.concat(['messageerror']), o ? o.concat(a) : o, r(i)),
@@ -1822,9 +1822,10 @@
 							var u = i.Worker;
 							u && bt(u.prototype, gt, o);
 						}
-						bt(XMLHttpRequest.prototype, pt, o);
-						var s = e.XMLHttpRequestEventTarget;
-						s && bt(s && s.prototype, pt, o),
+						var s = e.XMLHttpRequest;
+						s && bt(s.prototype, pt, o);
+						var f = e.XMLHttpRequestEventTarget;
+						f && bt(f && f.prototype, pt, o),
 							'undefined' != typeof IDBIndex &&
 								(bt(IDBIndex.prototype, ht, o),
 								bt(IDBRequest.prototype, ht, o),
@@ -1836,68 +1837,158 @@
 					}
 				}
 				function kt(t, e) {
-					var n = t.getGlobalObjects();
-					if (!n.isNode || n.isMix) {
-						var r = 'undefined' != typeof WebSocket;
-						(function(t) {
-							var e = t.getGlobalObjects();
-							if ((e.isBrowser || e.isMix) && !t.ObjectGetOwnPropertyDescriptor(HTMLElement.prototype, 'onclick') && 'undefined' != typeof Element) {
-								var n = t.ObjectGetOwnPropertyDescriptor(Element.prototype, 'onclick');
-								if (n && !n.configurable) return !1;
-							}
-							var r = XMLHttpRequest.prototype,
-								o = t.ObjectGetOwnPropertyDescriptor(r, 'onreadystatechange');
-							if (o) {
-								t.ObjectDefineProperty(r, 'onreadystatechange', {
-									enumerable: !0,
-									configurable: !0,
-									get: function() {
-										return !0;
+					var n = e.getGlobalObjects(),
+						r = n.eventNames,
+						o = n.globalSources,
+						i = n.zoneSymbolEventNames,
+						a = n.TRUE_STR,
+						c = n.FALSE_STR,
+						u = n.ZONE_SYMBOL_PREFIX,
+						s =
+							'Anchor,Area,Audio,BR,Base,BaseFont,Body,Button,Canvas,Content,DList,Directory,Div,Embed,FieldSet,Font,Form,Frame,FrameSet,HR,Head,Heading,Html,IFrame,Image,Input,Keygen,LI,Label,Legend,Link,Map,Marquee,Media,Menu,Meta,Meter,Mod,OList,Object,OptGroup,Option,Output,Paragraph,Pre,Progress,Quote,Script,Select,Source,Span,Style,TableCaption,TableCell,TableCol,Table,TableRow,TableSection,TextArea,Title,Track,UList,Unknown,Video',
+						f = 'ApplicationCache,EventSource,FileReader,InputMethodContext,MediaController,MessagePort,Node,Performance,SVGElementInstance,SharedWorker,TextTrack,TextTrackCue,TextTrackList,WebKitNamedFlow,Window,Worker,WorkerGlobalScope,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload,IDBRequest,IDBOpenDBRequest,IDBDatabase,IDBTransaction,IDBCursor,DBIndex,WebSocket'.split(
+							','
+						),
+						l = [],
+						p = t.wtf,
+						h = s.split(',');
+					p
+						? (l = h
+								.map(function(t) {
+									return 'HTML' + t + 'Element';
+								})
+								.concat(f))
+						: t.EventTarget
+						? l.push('EventTarget')
+						: (l = f);
+					for (
+						var v = t.__Zone_disable_IE_check || !1,
+							g = t.__Zone_enable_cross_context_check || !1,
+							d = e.isIEOrEdge(),
+							y = 'function __BROWSERTOOLS_CONSOLE_SAFEFUNC() { [native code] }',
+							b = 0;
+						b < r.length;
+						b++
+					) {
+						var m = u + ((E = r[b]) + c),
+							k = u + (E + a);
+						(i[E] = {}), (i[E][c] = m), (i[E][a] = k);
+					}
+					for (b = 0; b < s.length; b++)
+						for (var _ = h[b], S = (o[_] = {}), x = 0; x < r.length; x++) {
+							var E;
+							S[(E = r[x])] = _ + '.addEventListener:' + E;
+						}
+					var w = [];
+					for (b = 0; b < l.length; b++) {
+						var T = t[l[b]];
+						w.push(T && T.prototype);
+					}
+					return (
+						e.patchEventTarget(t, w, {
+							vh: function(t, e, n, r) {
+								if (!v && d) {
+									if (g)
+										try {
+											var o;
+											if ('[object FunctionWrapper]' === (o = e.toString()) || o == y) return t.apply(n, r), !1;
+										} catch (i) {
+											return t.apply(n, r), !1;
+										}
+									else if ('[object FunctionWrapper]' === (o = e.toString()) || o == y) return t.apply(n, r), !1;
+								} else if (g)
+									try {
+										e.toString();
+									} catch (i) {
+										return t.apply(n, r), !1;
 									}
-								});
-								var i = !!(c = new XMLHttpRequest()).onreadystatechange;
-								return t.ObjectDefineProperty(r, 'onreadystatechange', o || {}), i;
+								return !0;
 							}
-							var a = t.symbol('fake');
-							t.ObjectDefineProperty(r, 'onreadystatechange', {
+						}),
+						(Zone[e.symbol('patchEventTarget')] = !!t.EventTarget),
+						!0
+					);
+				}
+				function _t(t, e) {
+					var n = t.getGlobalObjects();
+					if (
+						(!n.isNode || n.isMix) &&
+						!(function(t, e) {
+							var n = t.getGlobalObjects();
+							if ((n.isBrowser || n.isMix) && !t.ObjectGetOwnPropertyDescriptor(HTMLElement.prototype, 'onclick') && 'undefined' != typeof Element) {
+								var r = t.ObjectGetOwnPropertyDescriptor(Element.prototype, 'onclick');
+								if (r && !r.configurable) return !1;
+								if (r) {
+									t.ObjectDefineProperty(Element.prototype, 'onclick', {
+										enumerable: !0,
+										configurable: !0,
+										get: function() {
+											return !0;
+										}
+									});
+									var o = !!document.createElement('div').onclick;
+									return t.ObjectDefineProperty(Element.prototype, 'onclick', r), o;
+								}
+							}
+							var i = e.XMLHttpRequest;
+							if (!i) return !1;
+							var a = i.prototype,
+								c = t.ObjectGetOwnPropertyDescriptor(a, 'onreadystatechange');
+							if (c)
+								return (
+									t.ObjectDefineProperty(a, 'onreadystatechange', {
+										enumerable: !0,
+										configurable: !0,
+										get: function() {
+											return !0;
+										}
+									}),
+									(o = !!(s = new i()).onreadystatechange),
+									t.ObjectDefineProperty(a, 'onreadystatechange', c || {}),
+									o
+								);
+							var u = t.symbol('fake');
+							t.ObjectDefineProperty(a, 'onreadystatechange', {
 								enumerable: !0,
 								configurable: !0,
 								get: function() {
-									return this[a];
+									return this[u];
 								},
 								set: function(t) {
-									this[a] = t;
+									this[u] = t;
 								}
 							});
-							var c,
-								u = function() {};
-							return ((c = new XMLHttpRequest()).onreadystatechange = u), (i = c[a] === u), (c.onreadystatechange = null), i;
-						})(t) ||
-							((function(t) {
-								for (
-									var e = t.getGlobalObjects().eventNames,
-										n = t.symbol('unbound'),
-										r = function(r) {
-											var o = e[r],
-												i = 'on' + o;
-											self.addEventListener(
-												o,
-												function(e) {
-													var r,
-														o,
-														a = e.target;
-													for (o = a ? a.constructor.name + '.' + i : 'unknown.' + i; a; )
-														a[i] && !a[i][n] && (((r = t.wrapWithCurrentZone(a[i], o))[n] = a[i]), (a[i] = r)), (a = a.parentElement);
-												},
-												!0
-											);
-										},
-										o = 0;
-									o < e.length;
-									o++
-								)
-									r(o);
-							})(t),
+							var s,
+								f = function() {};
+							return ((s = new i()).onreadystatechange = f), (o = s[u] === f), (s.onreadystatechange = null), o;
+						})(t, e)
+					) {
+						var r = 'undefined' != typeof WebSocket;
+						!(function(t) {
+							for (
+								var e = t.getGlobalObjects().eventNames,
+									n = t.symbol('unbound'),
+									r = function(r) {
+										var o = e[r],
+											i = 'on' + o;
+										self.addEventListener(
+											o,
+											function(e) {
+												var r,
+													o,
+													a = e.target;
+												for (o = a ? a.constructor.name + '.' + i : 'unknown.' + i; a; )
+													a[i] && !a[i][n] && (((r = t.wrapWithCurrentZone(a[i], o))[n] = a[i]), (a[i] = r)), (a = a.parentElement);
+											},
+											!0
+										);
+									},
+									o = 0;
+								o < e.length;
+								o++
+							)
+								r(o);
+						})(t),
 							t.patchClass('XMLHttpRequest'),
 							r &&
 								(function(t, e) {
@@ -1936,7 +2027,7 @@
 									var a = e.WebSocket;
 									for (var c in i) a[c] = i[c];
 								})(t, e),
-							(Zone[t.symbol('patchEvents')] = !0));
+							(Zone[t.symbol('patchEvents')] = !0);
 					}
 				}
 				Zone.__load_patch('util', function(t, r, u) {
@@ -1963,9 +2054,9 @@
 								globalSources: H,
 								zoneSymbolEventNames: G,
 								eventNames: dt,
-								isBrowser: E,
+								isBrowser: w,
 								isMix: T,
-								isNode: w,
+								isNode: E,
 								TRUE_STR: f,
 								FALSE_STR: l,
 								ZONE_SYMBOL_PREFIX: p,
@@ -1986,79 +2077,12 @@
 								})(t, n);
 							}),
 								e.__load_patch('EventTargetLegacy', function(t, e, n) {
-									!(function(t, e) {
-										var n = e.getGlobalObjects(),
-											r = n.eventNames,
-											o = n.globalSources,
-											i = n.zoneSymbolEventNames,
-											a = n.TRUE_STR,
-											c = n.FALSE_STR,
-											u = n.ZONE_SYMBOL_PREFIX,
-											s =
-												'Anchor,Area,Audio,BR,Base,BaseFont,Body,Button,Canvas,Content,DList,Directory,Div,Embed,FieldSet,Font,Form,Frame,FrameSet,HR,Head,Heading,Html,IFrame,Image,Input,Keygen,LI,Label,Legend,Link,Map,Marquee,Media,Menu,Meta,Meter,Mod,OList,Object,OptGroup,Option,Output,Paragraph,Pre,Progress,Quote,Script,Select,Source,Span,Style,TableCaption,TableCell,TableCol,Table,TableRow,TableSection,TextArea,Title,Track,UList,Unknown,Video',
-											f = 'ApplicationCache,EventSource,FileReader,InputMethodContext,MediaController,MessagePort,Node,Performance,SVGElementInstance,SharedWorker,TextTrack,TextTrackCue,TextTrackList,WebKitNamedFlow,Window,Worker,WorkerGlobalScope,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload,IDBRequest,IDBOpenDBRequest,IDBDatabase,IDBTransaction,IDBCursor,DBIndex,WebSocket'.split(
-												','
-											),
-											l = [],
-											p = t.wtf,
-											h = s.split(',');
-										p
-											? (l = h
-													.map(function(t) {
-														return 'HTML' + t + 'Element';
-													})
-													.concat(f))
-											: t.EventTarget || (l = f);
-										for (
-											var v = t.__Zone_disable_IE_check || !1,
-												g = t.__Zone_enable_cross_context_check || !1,
-												d = e.isIEOrEdge(),
-												y = 'function __BROWSERTOOLS_CONSOLE_SAFEFUNC() { [native code] }',
-												b = 0;
-											b < r.length;
-											b++
-										) {
-											var m = u + ((w = r[b]) + c),
-												k = u + (w + a);
-											(i[w] = {}), (i[w][c] = m), (i[w][a] = k);
-										}
-										for (b = 0; b < s.length; b++)
-											for (var _ = h[b], S = (o[_] = {}), x = 0; x < r.length; x++) {
-												var w;
-												S[(w = r[x])] = _ + '.addEventListener:' + w;
-											}
-										var E = [];
-										for (b = 0; b < l.length; b++) {
-											var T = t[l[b]];
-											E.push(T && T.prototype);
-										}
-										e.patchEventTarget(t, E, {
-											vh: function(t, e, n, r) {
-												if (!v && d) {
-													if (g)
-														try {
-															var o;
-															if ('[object FunctionWrapper]' === (o = e.toString()) || o == y) return t.apply(n, r), !1;
-														} catch (i) {
-															return t.apply(n, r), !1;
-														}
-													else if ('[object FunctionWrapper]' === (o = e.toString()) || o == y) return t.apply(n, r), !1;
-												} else if (g)
-													try {
-														e.toString();
-													} catch (i) {
-														return t.apply(n, r), !1;
-													}
-												return !0;
-											}
-										});
-									})(t, n),
-										kt(n, t);
+									kt(t, n), _t(n, t);
 								});
 						};
 					})(('undefined' != typeof window && window) || ('undefined' != typeof self && self) || global);
-				var _t = g('zoneTask');
-				function St(t, e, n, r) {
+				var St = g('zoneTask');
+				function xt(t, e, n, r) {
 					var o = null,
 						i = null;
 					n += r;
@@ -2070,7 +2094,7 @@
 								try {
 									e.invoke.apply(this, arguments);
 								} finally {
-									(e.data && e.data.isPeriodic) || ('number' == typeof n.handleId ? delete a[n.handleId] : n.handleId && (n.handleId[_t] = null));
+									(e.data && e.data.isPeriodic) || ('number' == typeof n.handleId ? delete a[n.handleId] : n.handleId && (n.handleId[St] = null));
 								}
 							}),
 							(n.handleId = o.apply(t, n.args)),
@@ -2087,7 +2111,7 @@
 								if (!s) return s;
 								var f = s.data.handleId;
 								return (
-									'number' == typeof f ? (a[f] = s) : f && (f[_t] = s),
+									'number' == typeof f ? (a[f] = s) : f && (f[St] = s),
 									f && f.ref && f.unref && 'function' == typeof f.ref && 'function' == typeof f.unref && ((s.ref = f.ref.bind(f)), (s.unref = f.unref.bind(f))),
 									'number' == typeof f || f ? f : s
 								);
@@ -2099,24 +2123,36 @@
 							return function(n, r) {
 								var o,
 									i = r[0];
-								'number' == typeof i ? (o = a[i]) : (o = i && i[_t]) || (o = i),
+								'number' == typeof i ? (o = a[i]) : (o = i && i[St]) || (o = i),
 									o && 'string' == typeof o.type
 										? 'notScheduled' !== o.state &&
 										  ((o.cancelFn && o.data.isPeriodic) || 0 === o.runCount) &&
-										  ('number' == typeof i ? delete a[i] : i && (i[_t] = null), o.zone.cancelTask(o))
+										  ('number' == typeof i ? delete a[i] : i && (i[St] = null), o.zone.cancelTask(o))
 										: e.apply(t, r);
 							};
 						}));
+				}
+				function Et(t, e) {
+					if (!Zone[e.symbol('patchEventTarget')]) {
+						for (var n = e.getGlobalObjects(), r = n.eventNames, o = n.zoneSymbolEventNames, i = n.TRUE_STR, a = n.FALSE_STR, c = n.ZONE_SYMBOL_PREFIX, u = 0; u < r.length; u++) {
+							var s = r[u],
+								f = c + (s + a),
+								l = c + (s + i);
+							(o[s] = {}), (o[s][a] = f), (o[s][i] = l);
+						}
+						var p = t.EventTarget;
+						if (p && p.prototype) return e.patchEventTarget(t, [p && p.prototype]), !0;
+					}
 				}
 				Zone.__load_patch('legacy', function(t) {
 					var e = t[Zone.__symbol__('legacyPatch')];
 					e && e();
 				}),
 					Zone.__load_patch('timers', function(t) {
-						St(t, 'set', 'clear', 'Timeout'), St(t, 'set', 'clear', 'Interval'), St(t, 'set', 'clear', 'Immediate');
+						xt(t, 'set', 'clear', 'Timeout'), xt(t, 'set', 'clear', 'Interval'), xt(t, 'set', 'clear', 'Immediate');
 					}),
 					Zone.__load_patch('requestAnimationFrame', function(t) {
-						St(t, 'request', 'cancel', 'AnimationFrame'), St(t, 'mozRequest', 'mozCancel', 'AnimationFrame'), St(t, 'webkitRequest', 'webkitCancel', 'AnimationFrame');
+						xt(t, 'request', 'cancel', 'AnimationFrame'), xt(t, 'mozRequest', 'mozCancel', 'AnimationFrame'), xt(t, 'webkitRequest', 'webkitCancel', 'AnimationFrame');
 					}),
 					Zone.__load_patch('blocking', function(t, e) {
 						for (var n = ['alert', 'prompt', 'confirm'], r = 0; r < n.length; r++)
@@ -2130,16 +2166,7 @@
 						!(function(t, e) {
 							e.patchEventPrototype(t, e);
 						})(t, n),
-							(function(t, e) {
-								for (var n = e.getGlobalObjects(), r = n.eventNames, o = n.zoneSymbolEventNames, i = n.TRUE_STR, a = n.FALSE_STR, c = n.ZONE_SYMBOL_PREFIX, u = 0; u < r.length; u++) {
-									var s = r[u],
-										f = c + (s + a),
-										l = c + (s + i);
-									(o[s] = {}), (o[s][a] = f), (o[s][i] = l);
-								}
-								var p = t.EventTarget;
-								p && p.prototype && e.patchEventTarget(t, [p && p.prototype]);
-							})(t, n);
+							Et(t, n);
 						var r = t.XMLHttpRequestEventTarget;
 						r && r.prototype && n.patchEventTarget(t, [r.prototype]), P('MutationObserver'), P('WebKitMutationObserver'), P('IntersectionObserver'), P('FileReader');
 					}),
@@ -2177,76 +2204,80 @@
 						!(function(t, e) {
 							var n = e.getGlobalObjects();
 							(n.isBrowser || n.isMix) &&
+								t.customElements &&
 								'customElements' in t &&
 								e.patchCallbacks(e, t.customElements, 'customElements', 'define', ['connectedCallback', 'disconnectedCallback', 'adoptedCallback', 'attributeChangedCallback']);
 						})(t, n);
 					}),
 					Zone.__load_patch('XHR', function(t, e) {
 						!(function(f) {
-							var l = XMLHttpRequest.prototype,
-								p = l[u],
-								h = l[s];
-							if (!p) {
-								var d = t.XMLHttpRequestEventTarget;
-								if (d) {
-									var y = d.prototype;
-									(p = y[u]), (h = y[s]);
+							var l = t.XMLHttpRequest;
+							if (l) {
+								var p = l.prototype,
+									h = p[u],
+									d = p[s];
+								if (!h) {
+									var y = t.XMLHttpRequestEventTarget;
+									if (y) {
+										var b = y.prototype;
+										(h = b[u]), (d = b[s]);
+									}
 								}
+								var m = 'readystatechange',
+									k = 'scheduled',
+									_ = R(p, 'open', function() {
+										return function(t, e) {
+											return (t[r] = 0 == e[2]), (t[a] = e[1]), _.apply(t, e);
+										};
+									}),
+									S = g('fetchTaskAborting'),
+									x = g('fetchTaskScheduling'),
+									E = R(p, 'send', function() {
+										return function(t, n) {
+											if (!0 === e.current[x]) return E.apply(t, n);
+											if (t[r]) return E.apply(t, n);
+											var o = { target: t, url: t[a], isPeriodic: !1, args: n, aborted: !1 },
+												i = v('XMLHttpRequest.send', O, o, T, I);
+											t && !0 === t[c] && !o.aborted && i.state === k && i.invoke();
+										};
+									}),
+									w = R(p, 'abort', function() {
+										return function(t, r) {
+											var o = t[n];
+											if (o && 'string' == typeof o.type) {
+												if (null == o.cancelFn || (o.data && o.data.aborted)) return;
+												o.zone.cancelTask(o);
+											} else if (!0 === e.current[S]) return w.apply(t, r);
+										};
+									});
 							}
-							var b = 'readystatechange',
-								m = 'scheduled';
-							function k(t) {
+							function T(t) {
 								var e = t.data,
 									r = e.target;
 								(r[i] = !1), (r[c] = !1);
 								var a = r[o];
-								p || ((p = r[u]), (h = r[s])), a && h.call(r, b, a);
+								h || ((h = r[u]), (d = r[s])), a && d.call(r, m, a);
 								var f = (r[o] = function() {
 									if (r.readyState === r.DONE)
-										if (!e.aborted && r[i] && t.state === m) {
+										if (!e.aborted && r[i] && t.state === k) {
 											var n = r.__zone_symbol__loadfalse;
 											if (n && n.length > 0) {
 												var o = t.invoke;
 												(t.invoke = function() {
 													for (var n = r.__zone_symbol__loadfalse, i = 0; i < n.length; i++) n[i] === t && n.splice(i, 1);
-													e.aborted || t.state !== m || o.call(t);
+													e.aborted || t.state !== k || o.call(t);
 												}),
 													n.push(t);
 											} else t.invoke();
 										} else e.aborted || !1 !== r[i] || (r[c] = !0);
 								});
-								return p.call(r, b, f), r[n] || (r[n] = t), T.apply(r, e.args), (r[i] = !0), t;
+								return h.call(r, m, f), r[n] || (r[n] = t), E.apply(r, e.args), (r[i] = !0), t;
 							}
-							function _() {}
-							function S(t) {
+							function O() {}
+							function I(t) {
 								var e = t.data;
-								return (e.aborted = !0), O.apply(e.target, e.args);
+								return (e.aborted = !0), w.apply(e.target, e.args);
 							}
-							var x = R(l, 'open', function() {
-									return function(t, e) {
-										return (t[r] = 0 == e[2]), (t[a] = e[1]), x.apply(t, e);
-									};
-								}),
-								w = g('fetchTaskAborting'),
-								E = g('fetchTaskScheduling'),
-								T = R(l, 'send', function() {
-									return function(t, n) {
-										if (!0 === e.current[E]) return T.apply(t, n);
-										if (t[r]) return T.apply(t, n);
-										var o = { target: t, url: t[a], isPeriodic: !1, args: n, aborted: !1 },
-											i = v('XMLHttpRequest.send', _, o, k, S);
-										t && !0 === t[c] && !o.aborted && i.state === m && i.invoke();
-									};
-								}),
-								O = R(l, 'abort', function() {
-									return function(t, r) {
-										var o = t[n];
-										if (o && 'string' == typeof o.type) {
-											if (null == o.cancelFn || (o.data && o.data.aborted)) return;
-											o.zone.cancelTask(o);
-										} else if (!0 === e.current[w]) return O.apply(t, r);
-									};
-								});
 						})();
 						var n = g('xhrTask'),
 							r = g('xhrSync'),
@@ -3419,7 +3450,7 @@
 									if (null === x || (S = h(u(y.lastIndex + (v ? 0 : k)), p.length)) === m) k = c(p, k, d);
 									else {
 										if ((_.push(p.slice(m, k)), _.length === b)) return _;
-										for (var w = 1; w <= x.length - 1; w++) if ((_.push(x[w]), _.length === b)) return _;
+										for (var E = 1; E <= x.length - 1; E++) if ((_.push(x[E]), _.length === b)) return _;
 										k = m = S;
 									}
 								}
@@ -4380,14 +4411,14 @@
 						}
 						for (var k, _ = '', S = 0, x = 0; x < b.length; x++) {
 							m = b[x];
-							for (var w = String(m[0]), E = f(l(a(m.index), h.length), 0), T = [], O = 1; O < m.length; O++) T.push(void 0 === (k = m[O]) ? k : String(k));
+							for (var E = String(m[0]), w = f(l(a(m.index), h.length), 0), T = [], O = 1; O < m.length; O++) T.push(void 0 === (k = m[O]) ? k : String(k));
 							var I = m.groups;
 							if (v) {
-								var M = [w].concat(T, E, h);
+								var M = [E].concat(T, w, h);
 								void 0 !== I && M.push(I);
 								var D = String(o.apply(void 0, M));
-							} else D = g(w, h, E, T, I, o);
-							E >= S && ((_ += h.slice(S, E) + D), (S = E + w.length));
+							} else D = g(E, h, w, T, I, o);
+							w >= S && ((_ += h.slice(S, w) + D), (S = w + E.length));
 						}
 						return _ + h.slice(S);
 					}
@@ -4989,8 +5020,8 @@
 					(m = n.getConstructor(e, t, g, k)), (c.REQUIRED = !0);
 				else if (o(t, !0)) {
 					var x = new m(),
-						w = x[k](d ? {} : -0, 1) != x,
-						E = l(function() {
+						E = x[k](d ? {} : -0, 1) != x,
+						w = l(function() {
 							x.has(1);
 						}),
 						T = p(function(t) {
@@ -5009,8 +5040,8 @@
 							return null != n && u(n, r[k], r, g), r;
 						})).prototype = b),
 						(b.constructor = m)),
-						(E || O) && (S('delete'), S('has'), g && S('get')),
-						(O || w) && S(k),
+						(w || O) && (S('delete'), S('has'), g && S('get')),
+						(O || E) && S(k),
 						d && b.clear && delete b.clear;
 				}
 				return (_[t] = m), i({ global: !0, forced: m != y }, _), h(m, t), d || n.setStrong(m, t, g), m;
@@ -5219,19 +5250,19 @@
 							return new n(this);
 						};
 					},
-					w = e + ' Iterator',
-					E = !1,
+					E = e + ' Iterator',
+					w = !1,
 					T = t.prototype,
 					O = T[l] || T['@@iterator'] || (y && T[y]),
 					I = (!g && O) || x(y),
 					M = ('Array' == e && T.entries) || O;
 				if (
 					(M &&
-						((k = i(M.call(new t()))), v !== Object.prototype && k.next && (f || i(k) === v || (a ? a(k, v) : 'function' != typeof k[l] && u(k, l, d)), c(k, w, !0, !0), f && (p[w] = d))),
+						((k = i(M.call(new t()))), v !== Object.prototype && k.next && (f || i(k) === v || (a ? a(k, v) : 'function' != typeof k[l] && u(k, l, d)), c(k, E, !0, !0), f && (p[E] = d))),
 					'values' == y &&
 						O &&
 						'values' !== O.name &&
-						((E = !0),
+						((w = !0),
 						(I = function() {
 							return O.call(this);
 						})),
@@ -5239,8 +5270,8 @@
 					(p[e] = I),
 					y)
 				)
-					if (((_ = { values: x('values'), keys: b ? I : x('keys'), entries: x('entries') }), m)) for (S in _) (!g && !E && S in T) || s(T, S, _[S]);
-					else r({ target: e, proto: !0, forced: g || E }, _);
+					if (((_ = { values: x('values'), keys: b ? I : x('keys'), entries: x('entries') }), m)) for (S in _) (!g && !w && S in T) || s(T, S, _[S]);
+					else r({ target: e, proto: !0, forced: g || w }, _);
 				return _;
 			};
 		},
@@ -5770,8 +5801,8 @@
 				_ = n('/GqU'),
 				S = n('wE6v'),
 				x = n('XGwC'),
-				w = n('fHMY'),
-				E = n('BX/b'),
+				E = n('fHMY'),
+				w = n('BX/b'),
 				T = n('Bs8V'),
 				O = n('m/L8'),
 				I = n('0eef'),
@@ -5783,7 +5814,7 @@
 				R = P.getterFor('Symbol'),
 				N = T.f,
 				z = O.f,
-				L = E.f,
+				L = w.f,
 				Z = r.Symbol,
 				F = r.JSON,
 				W = F && F.stringify,
@@ -5802,7 +5833,7 @@
 					f(function() {
 						return (
 							7 !=
-							w(
+							E(
 								z({}, 'a', {
 									get: function() {
 										return z(this, 'a', { value: 7 }).a;
@@ -5817,7 +5848,7 @@
 						  }
 						: z,
 				J = function(t, e) {
-					var n = (G[t] = w(Z.prototype));
+					var n = (G[t] = E(Z.prototype));
 					return A(n, { type: 'Symbol', tag: t, description: e }), i || (n.description = e), n;
 				},
 				$ =
@@ -5835,7 +5866,7 @@
 						(e = S(e, !0)),
 						m(n),
 						o(G, e)
-							? (n.enumerable ? (o(t, j) && t[j][e] && (t[j][e] = !1), (n = w(n, { enumerable: x(0, !1) }))) : (o(t, j) || z(t, j, x(1, {})), (t[j][e] = !0)), Y(t, e, n))
+							? (n.enumerable ? (o(t, j) && t[j][e] && (t[j][e] = !1), (n = E(n, { enumerable: x(0, !1) }))) : (o(t, j) || z(t, j, x(1, {})), (t[j][e] = !0)), Y(t, e, n))
 							: z(t, e, n)
 					);
 				},
@@ -5881,7 +5912,7 @@
 				(I.f = nt),
 				(O.f = tt),
 				(T.f = rt),
-				(n('JBy8').f = E.f = ot),
+				(n('JBy8').f = w.f = ot),
 				(n('dBg+').f = it),
 				i &&
 					(z(Z.prototype, 'description', {
@@ -5918,7 +5949,7 @@
 					{ target: 'Object', stat: !0, forced: !q, sham: !i },
 					{
 						create: function(t, e) {
-							return void 0 === e ? w(t) : et(w(t), e);
+							return void 0 === e ? E(t) : et(E(t), e);
 						},
 						defineProperty: tt,
 						defineProperties: et,
@@ -6724,4 +6755,4 @@
 	},
 	[[1, 0]]
 ]);
-//# sourceMappingURL=polyfills.2bc500148bdb59e5b927.js.map
+//# sourceMappingURL=polyfills.7fef2e2dc811aa8c1967.js.map
