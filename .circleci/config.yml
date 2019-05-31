@@ -8,7 +8,7 @@ version: 2.1
 base_image: &base_image
 
   # Node version
-  image: circleci/node:11.0.0-browsers
+  image: circleci/node:12.3.0-browsers
 
 job_common: &job_common
   docker:
