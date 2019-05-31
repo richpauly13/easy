@@ -7,7 +7,7 @@ import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@an
 	encapsulation: ViewEncapsulation.None
 })
 export class EasyComponent implements OnInit {
-	@ViewChild('content') public content: ElementRef;
+	@ViewChild('content', { static: false }) public content: ElementRef;
 
 	public constructor(private elementRef: ElementRef) {}
 
