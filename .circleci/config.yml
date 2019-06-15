@@ -130,12 +130,12 @@ workflows:
       - build:
           requires:
             - install
-      # - test_easy:
-      #     requires:
-      #       - build
-      # - test_docs:
-          # requires:
-           #  - build
+      - test_easy:
+          requires:
+            - build
+      - test_docs:
+          requires:
+            - build
       # - e2e:
       #     requires:
       #      - build
