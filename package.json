@@ -27,7 +27,7 @@
     "start": "ng serve -o",
     "test": "ng test",
     "test:easy": "ng test easy --browsers=ChromeHeadlessCI",
-    "test:docs": "ng test easy-docs --prod=true --browsers=ChromeHeadlessCI",
+    "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
     "e2e": "npm run update:webdriver && ng e2e --no-webdriver-update",
     "docs": "node node_modules/markdown-styleguide-generator/index.js",
