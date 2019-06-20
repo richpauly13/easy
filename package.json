@@ -42,7 +42,7 @@
     "pack": "cd dist/easy && npm pack",
     "package": "run-s build:easy copy:all pack",
     "publish:easy": "cd dist/easy && npm publish easy-framework-0.0.20.tgz",
-    "update:ng": "ng update --all --force && npm i --save-dev typescript@3.4.5",
+    "update:ng": "ng update --all --force --next && npm i --save-dev typescript@3.4.5",
     "update:webdriver": "webdriver-manager update --standalone false --gecko false --versions.chrome 2.46"
   },
   "dependencies": {
