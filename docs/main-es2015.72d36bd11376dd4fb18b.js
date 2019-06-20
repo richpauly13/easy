@@ -1525,7 +1525,7 @@
 							.join('.'));
 				}
 			}
-			const ru = new su('8.0.1');
+			const ru = new su('8.0.2');
 			class au {
 				constructor() {}
 				supports(l) {
@@ -18731,4 +18731,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main-es2015.687140db7ca087eb0542.js.map
+//# sourceMappingURL=main-es2015.72d36bd11376dd4fb18b.js.map
