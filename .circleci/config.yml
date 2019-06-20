@@ -50,10 +50,6 @@ jobs:
           command: sudo npm i -g npm --silent
       
       - run:
-          name: Update node-gyp
-          command: sudo npm i -g node-gyp --silent
-
-      - run:
           name: Update dependencies
           command: npm i --silent
       
