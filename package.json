@@ -66,7 +66,7 @@
     "@angular/language-service": "^8.1.0-next.3",
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^12.0.8",
+    "@types/node": "^12.0.10",
     "child_process": "^1.0.2",
     "codecov": "^4.0.0-0",
     "codelyzer": "^5.1.0",
