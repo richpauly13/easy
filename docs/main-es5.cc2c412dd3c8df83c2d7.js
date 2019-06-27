@@ -1860,7 +1860,7 @@
 								.slice(2)
 								.join('.'));
 					};
-				})())('8.1.0-next.3'),
+				})())('8.1.0-rc.0'),
 				mu = (function() {
 					function l() {}
 					return (
@@ -20858,4 +20858,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main-es5.f8fdabc3cfb169b4f50e.js.map
+//# sourceMappingURL=main-es5.cc2c412dd3c8df83c2d7.js.map

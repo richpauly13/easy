@@ -1527,7 +1527,7 @@
 							.join('.'));
 				}
 			}
-			const hu = new cu('8.1.0-next.3');
+			const hu = new cu('8.1.0-rc.0');
 			class du {
 				constructor() {}
 				supports(l) {
@@ -18784,4 +18784,4 @@
 	},
 	[[0, 0]]
 ]);
-//# sourceMappingURL=main-es2015.bd285bd813e9748c753b.js.map
+//# sourceMappingURL=main-es2015.94717401a7a84e16a4f0.js.map
