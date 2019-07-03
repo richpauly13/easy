@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CssModule } from './components/css.module';
 
 @NgModule({
-	imports: [BrowserModule, EasyModule, AppRoutingModule, CssModule],
+	imports: [BrowserModule, EasyModule, CssModule, AppRoutingModule],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
 })

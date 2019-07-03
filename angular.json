@@ -40,7 +40,7 @@
 				"@schematics/angular:class": {
 					"export": false,
 					"flat": true,
-					"spec": false
+					"spec": true
 				}
 			},
 			"architect": {
@@ -93,8 +93,7 @@
 						"tsConfig": "projects/easy-docs/tsconfig.app.json",
 						"aot": true,
 						"assets": ["projects/easy-docs/src/favicon.ico"],
-						"styles": ["projects/easy-docs/src/styles.scss"],
-						"scripts": []
+						"styles": ["projects/easy-docs/src/styles.scss"]
 					},
 					"configurations": {
 						"production": {
@@ -151,8 +150,7 @@
 						"codeCoverage": true,
 						"progress": false,
 						"assets": ["projects/easy-docs/src/favicon.ico"],
-						"styles": ["projects/easy-docs/src/styles.scss"],
-						"scripts": []
+						"styles": ["projects/easy-docs/src/styles.scss"]
 					}
 				},
 				"lint": {
