@@ -18,7 +18,7 @@ job_common: &job_common
 # Save dependencies to cache
 save: &save
   save_cache:
-    key: v3-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    key: v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
     paths:
       - node_modules
 
@@ -26,10 +26,10 @@ save: &save
 restore: &restore
   restore_cache:
     keys:
-      - v3-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - v1-easy-{{ .Branch }}-{{ checksum "package-lock.json" }}
 
       # Fallback in case checksum fails
-      - v3-easy-{{ .Branch }}-
+      - v1-easy-{{ .Branch }}-
 
 # Workflow jobs
 jobs:
@@ -62,7 +62,7 @@ jobs:
       - <<: *restore
 
       - run:
-          name: Build easy and docs
+          name: Build easy-framework and easy-docs
           command: npm run build
 
       # Add dependencies to workspace
@@ -129,6 +129,6 @@ workflows:
       - test_docs:
           requires:
             - build
-      # - e2e:
-      #     requires:
-      #      - build
+      - e2e:
+          requires:
+            - build
