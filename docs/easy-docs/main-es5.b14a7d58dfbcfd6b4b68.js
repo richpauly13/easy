@@ -110,40 +110,41 @@
 			var g = h,
 				m = (function() {
 					function t(t) {
-						(this.closed = !1), (this._parent = null), (this._parents = null), (this._subscriptions = null), t && (this._unsubscribe = t);
+						(this.closed = !1), (this._parentOrParents = null), (this._subscriptions = null), t && (this._unsubscribe = t);
 					}
 					return (
 						(t.prototype.unsubscribe = function() {
-							var t,
-								e = !1;
+							var e;
 							if (!this.closed) {
-								var n = this._parent,
-									r = this._parents,
-									o = this._unsubscribe,
-									i = this._subscriptions;
-								(this.closed = !0), (this._parent = null), (this._parents = null), (this._subscriptions = null);
-								for (var a = -1, s = r ? r.length : 0; n; ) n.remove(this), (n = (++a < s && r[a]) || null);
-								if (d(o))
+								var n = this._parentOrParents,
+									r = this._unsubscribe,
+									o = this._subscriptions;
+								if (((this.closed = !0), (this._parentOrParents = null), (this._subscriptions = null), n instanceof t)) n.remove(this);
+								else if (null !== n) for (var i = 0; i < n.length; ++i) n[i].remove(this);
+								if (d(r))
 									try {
-										o.call(this);
-									} catch (u) {
-										(e = !0), (t = u instanceof g ? b(u.errors) : [u]);
+										r.call(this);
+									} catch (l) {
+										e = l instanceof g ? b(l.errors) : [l];
 									}
-								if (p(i))
-									for (a = -1, s = i.length; ++a < s; ) {
-										var l = i[a];
-										if (f(l))
+								if (p(o)) {
+									i = -1;
+									for (var a = o.length; ++i < a; ) {
+										var s = o[i];
+										if (f(s))
 											try {
-												l.unsubscribe();
-											} catch (u) {
-												(e = !0), (t = t || []), u instanceof g ? (t = t.concat(b(u.errors))) : t.push(u);
+												s.unsubscribe();
+											} catch (l) {
+												(e = e || []), l instanceof g ? (e = e.concat(b(l.errors))) : e.push(l);
 											}
 									}
-								if (e) throw new g(t);
+								}
+								if (e) throw new g(e);
 							}
 						}),
 						(t.prototype.add = function(e) {
 							var n = e;
+							if (!e) return t.EMPTY;
 							switch (typeof e) {
 								case 'function':
 									n = new t(e);
@@ -156,14 +157,19 @@
 									}
 									break;
 								default:
-									if (!e) return t.EMPTY;
 									throw new Error('unrecognized teardown ' + e + ' added to Subscription.');
 							}
-							if (n._addParent(this)) {
-								var o = this._subscriptions;
-								o ? o.push(n) : (this._subscriptions = [n]);
+							var o = n._parentOrParents;
+							if (null === o) n._parentOrParents = this;
+							else if (o instanceof t) {
+								if (o === this) return n;
+								n._parentOrParents = [o, this];
+							} else {
+								if (-1 !== o.indexOf(this)) return n;
+								o.push(this);
 							}
-							return n;
+							var i = this._subscriptions;
+							return null === i ? (this._subscriptions = [n]) : i.push(n), n;
 						}),
 						(t.prototype.remove = function(t) {
 							var e = this._subscriptions;
@@ -171,11 +177,6 @@
 								var n = e.indexOf(t);
 								-1 !== n && e.splice(n, 1);
 							}
-						}),
-						(t.prototype._addParent = function(t) {
-							var e = this._parent,
-								n = this._parents;
-							return e !== t && (e ? (n ? -1 === n.indexOf(t) && (n.push(t), !0) : ((this._parents = [t]), !0)) : ((this._parent = t), !0));
 						}),
 						(t.EMPTY = (function(t) {
 							return (t.closed = !0), t;
@@ -201,7 +202,7 @@
 			function w(t) {
 				setTimeout(function() {
 					throw t;
-				});
+				}, 0);
 			}
 			var _ = {
 					closed: !0,
@@ -265,9 +266,8 @@
 							this.destination.complete(), this.unsubscribe();
 						}),
 						(e.prototype._unsubscribeAndRecycle = function() {
-							var t = this._parent,
-								e = this._parents;
-							return (this._parent = null), (this._parents = null), this.unsubscribe(), (this.closed = !1), (this.isStopped = !1), (this._parent = t), (this._parents = e), this;
+							var t = this._parentOrParents;
+							return (this._parentOrParents = null), this.unsubscribe(), (this.closed = !1), (this.isStopped = !1), (this._parentOrParents = t), this;
 						}),
 						e
 					);
@@ -597,78 +597,80 @@
 				H = function(t) {
 					return function(e) {
 						for (var n = 0, r = t.length; n < r && !e.closed; n++) e.next(t[n]);
-						e.closed || e.complete();
-					};
-				},
-				z = function(t) {
-					return function(e) {
-						return (
-							t
-								.then(
-									function(t) {
-										e.closed || (e.next(t), e.complete());
-									},
-									function(t) {
-										return e.error(t);
-									}
-								)
-								.then(null, w),
-							e
-						);
+						e.complete();
 					};
 				};
-			function V() {
+			function z() {
 				return 'function' == typeof Symbol && Symbol.iterator ? Symbol.iterator : '@@iterator';
 			}
-			var F = V(),
-				B = function(t) {
-					return function(e) {
-						for (var n = t[F](); ; ) {
-							var r = n.next();
-							if (r.done) {
-								e.complete();
-								break;
-							}
-							if ((e.next(r.value), e.closed)) break;
-						}
-						return (
-							'function' == typeof n.return &&
-								e.add(function() {
-									n.return && n.return();
-								}),
-							e
-						);
-					};
-				},
-				q = function(t) {
-					return function(e) {
-						var n = t[S]();
-						if ('function' != typeof n.subscribe) throw new TypeError('Provided object does not correctly implement Symbol.observable');
-						return n.subscribe(e);
-					};
-				},
-				G = function(t) {
+			var V = z(),
+				F = function(t) {
 					return t && 'number' == typeof t.length && 'function' != typeof t;
 				};
-			function Z(t) {
+			function B(t) {
 				return !!t && 'function' != typeof t.subscribe && 'function' == typeof t.then;
 			}
-			var W = function(t) {
-				if (t instanceof I)
-					return function(e) {
-						return t._isScalar ? (e.next(t.value), void e.complete()) : t.subscribe(e);
-					};
-				if (t && 'function' == typeof t[S]) return q(t);
-				if (G(t)) return H(t);
-				if (Z(t)) return z(t);
-				if (t && 'function' == typeof t[F]) return B(t);
-				var e = f(t) ? 'an invalid object' : "'" + t + "'";
-				throw new TypeError('You provided ' + e + ' where a stream was expected. You can provide an Observable, Promise, Array, or Iterable.');
+			var q = function(t) {
+				if (t && 'function' == typeof t[S])
+					return (
+						(r = t),
+						function(t) {
+							var e = r[S]();
+							if ('function' != typeof e.subscribe) throw new TypeError('Provided object does not correctly implement Symbol.observable');
+							return e.subscribe(t);
+						}
+					);
+				if (F(t)) return H(t);
+				if (B(t))
+					return (
+						(n = t),
+						function(t) {
+							return (
+								n
+									.then(
+										function(e) {
+											t.closed || (t.next(e), t.complete());
+										},
+										function(e) {
+											return t.error(e);
+										}
+									)
+									.then(null, w),
+								t
+							);
+						}
+					);
+				if (t && 'function' == typeof t[V])
+					return (
+						(e = t),
+						function(t) {
+							for (var n = e[V](); ; ) {
+								var r = n.next();
+								if (r.done) {
+									t.complete();
+									break;
+								}
+								if ((t.next(r.value), t.closed)) break;
+							}
+							return (
+								'function' == typeof n.return &&
+									t.add(function() {
+										n.return && n.return();
+									}),
+								t
+							);
+						}
+					);
+				var e,
+					n,
+					r,
+					o = f(t) ? 'an invalid object' : "'" + t + "'";
+				throw new TypeError('You provided ' + o + ' where a stream was expected. You can provide an Observable, Promise, Array, or Iterable.');
 			};
-			function Q(t, e, n, r, o) {
-				if ((void 0 === o && (o = new L(t, n, r)), !o.closed)) return W(e)(o);
+			function G(t, e, n, r, o) {
+				if ((void 0 === o && (o = new L(t, n, r)), !o.closed)) return e instanceof I ? e.subscribe(o) : q(e)(o);
 			}
-			var Y = (function(t) {
+			var Z = (function(t) {
 				function e() {
 					return (null !== t && t.apply(this, arguments)) || this;
 				}
@@ -686,24 +688,24 @@
 					e
 				);
 			})(C);
-			function J(t, e) {
+			function W(t, e) {
 				return function(n) {
 					if ('function' != typeof t) throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
-					return n.lift(new K(t, e));
+					return n.lift(new Q(t, e));
 				};
 			}
-			var K = (function() {
+			var Q = (function() {
 					function t(t, e) {
 						(this.project = t), (this.thisArg = e);
 					}
 					return (
 						(t.prototype.call = function(t, e) {
-							return e.subscribe(new X(t, this.project, this.thisArg));
+							return e.subscribe(new Y(t, this.project, this.thisArg));
 						}),
 						t
 					);
 				})(),
-				X = (function(t) {
+				Y = (function(t) {
 					function e(e, n, r) {
 						var o = t.call(this, e) || this;
 						return (o.project = n), (o.count = 0), (o.thisArg = r || o), o;
@@ -722,36 +724,31 @@
 						e
 					);
 				})(C);
-			function $(t, e) {
-				return new I(
-					e
-						? function(n) {
-								var r = new m(),
-									o = 0;
-								return (
-									r.add(
-										e.schedule(function() {
-											o !== t.length ? (n.next(t[o++]), n.closed || r.add(this.schedule())) : n.complete();
-										})
-									),
-									r
-								);
-						  }
-						: H(t)
-				);
+			function J(t, e) {
+				return new I(function(n) {
+					var r = new m(),
+						o = 0;
+					return (
+						r.add(
+							e.schedule(function() {
+								o !== t.length ? (n.next(t[o++]), n.closed || r.add(this.schedule())) : n.complete();
+							})
+						),
+						r
+					);
+				});
 			}
-			function tt(t, e) {
-				if (!e) return t instanceof I ? t : new I(W(t));
-				if (null != t) {
-					if (
-						(function(t) {
-							return t && 'function' == typeof t[S];
-						})(t)
-					)
-						return (function(t, e) {
-							return new I(
-								e
-									? function(n) {
+			function K(t, e) {
+				return e
+					? (function(t, e) {
+							if (null != t) {
+								if (
+									(function(t) {
+										return t && 'function' == typeof t[S];
+									})(t)
+								)
+									return (function(t, e) {
+										return new I(function(n) {
 											var r = new m();
 											return (
 												r.add(
@@ -786,15 +783,11 @@
 												),
 												r
 											);
-									  }
-									: q(t)
-							);
-						})(t, e);
-					if (Z(t))
-						return (function(t, e) {
-							return new I(
-								e
-									? function(n) {
+										});
+									})(t, e);
+								if (B(t))
+									return (function(t, e) {
+										return new I(function(n) {
 											var r = new m();
 											return (
 												r.add(
@@ -824,22 +817,18 @@
 												),
 												r
 											);
-									  }
-									: z(t)
-							);
-						})(t, e);
-					if (G(t)) return $(t, e);
-					if (
-						(function(t) {
-							return t && 'function' == typeof t[F];
-						})(t) ||
-						'string' == typeof t
-					)
-						return (function(t, e) {
-							if (!t) throw new Error('Iterable cannot be null');
-							return new I(
-								e
-									? function(n) {
+										});
+									})(t, e);
+								if (F(t)) return J(t, e);
+								if (
+									(function(t) {
+										return t && 'function' == typeof t[V];
+									})(t) ||
+									'string' == typeof t
+								)
+									return (function(t, e) {
+										if (!t) throw new Error('Iterable cannot be null');
+										return new I(function(n) {
 											var r,
 												o = new m();
 											return (
@@ -848,7 +837,7 @@
 												}),
 												o.add(
 													e.schedule(function() {
-														(r = t[F]()),
+														(r = t[V]()),
 															o.add(
 																e.schedule(function() {
 																	if (!n.closed) {
@@ -867,22 +856,24 @@
 												),
 												o
 											);
-									  }
-									: B(t)
-							);
-						})(t, e);
-				}
-				throw new TypeError(((null !== t && typeof t) || t) + ' is not observable');
+										});
+									})(t, e);
+							}
+							throw new TypeError(((null !== t && typeof t) || t) + ' is not observable');
+					  })(t, e)
+					: t instanceof I
+					? t
+					: new I(q(t));
 			}
-			function et(t, e, n) {
+			function X(t, e, n) {
 				return (
 					void 0 === n && (n = Number.POSITIVE_INFINITY),
 					'function' == typeof e
 						? function(r) {
 								return r.pipe(
-									et(function(n, r) {
-										return tt(t(n, r)).pipe(
-											J(function(t, o) {
+									X(function(n, r) {
+										return K(t(n, r)).pipe(
+											W(function(t, o) {
 												return e(n, t, r, o);
 											})
 										);
@@ -891,22 +882,22 @@
 						  }
 						: ('number' == typeof e && (n = e),
 						  function(e) {
-								return e.lift(new nt(t, n));
+								return e.lift(new $(t, n));
 						  })
 				);
 			}
-			var nt = (function() {
+			var $ = (function() {
 					function t(t, e) {
 						void 0 === e && (e = Number.POSITIVE_INFINITY), (this.project = t), (this.concurrent = e);
 					}
 					return (
 						(t.prototype.call = function(t, e) {
-							return e.subscribe(new rt(t, this.project, this.concurrent));
+							return e.subscribe(new tt(t, this.project, this.concurrent));
 						}),
 						t
 					);
 				})(),
-				rt = (function(t) {
+				tt = (function(t) {
 					function e(e, n, r) {
 						void 0 === r && (r = Number.POSITIVE_INFINITY);
 						var o = t.call(this, e) || this;
@@ -929,7 +920,7 @@
 						}),
 						(e.prototype._innerSub = function(t, e, n) {
 							var r = new L(this, void 0, void 0);
-							this.destination.add(r), Q(this, t, e, n, r);
+							this.destination.add(r), G(this, t, e, n, r);
 						}),
 						(e.prototype._complete = function() {
 							(this.hasCompleted = !0), 0 === this.active && 0 === this.buffer.length && this.destination.complete(), this.unsubscribe();
@@ -943,19 +934,22 @@
 						}),
 						e
 					);
-				})(Y);
-			function ot(t) {
+				})(Z);
+			function et(t) {
 				return t;
 			}
-			function it(t) {
-				return void 0 === t && (t = Number.POSITIVE_INFINITY), et(ot, t);
+			function nt(t) {
+				return void 0 === t && (t = Number.POSITIVE_INFINITY), X(et, t);
 			}
-			function at() {
+			function rt(t, e) {
+				return e ? J(t, e) : new I(H(t));
+			}
+			function ot() {
 				return function(t) {
-					return t.lift(new st(t));
+					return t.lift(new it(t));
 				};
 			}
-			var st = (function() {
+			var it = (function() {
 					function t(t) {
 						this.connectable = t;
 					}
@@ -963,14 +957,14 @@
 						(t.prototype.call = function(t, e) {
 							var n = this.connectable;
 							n._refCount++;
-							var r = new lt(t, n),
+							var r = new at(t, n),
 								o = e.subscribe(r);
 							return r.closed || (r.connection = n.connect()), o;
 						}),
 						t
 					);
 				})(),
-				lt = (function(t) {
+				at = (function(t) {
 					function e(e, n) {
 						var r = t.call(this, e) || this;
 						return (r.connectable = n), r;
@@ -994,7 +988,7 @@
 						e
 					);
 				})(C),
-				ut = (function(t) {
+				st = (function(t) {
 					function e(e, n) {
 						var r = t.call(this) || this;
 						return (r.source = e), (r.subjectFactory = n), (r._refCount = 0), (r._isComplete = !1), r;
@@ -1013,29 +1007,29 @@
 							return (
 								t ||
 									((this._isComplete = !1),
-									(t = this._connection = new m()).add(this.source.subscribe(new pt(this.getSubject(), this))),
-									t.closed ? ((this._connection = null), (t = m.EMPTY)) : (this._connection = t)),
+									(t = this._connection = new m()).add(this.source.subscribe(new ut(this.getSubject(), this))),
+									t.closed && ((this._connection = null), (t = m.EMPTY))),
 								t
 							);
 						}),
 						(e.prototype.refCount = function() {
-							return at()(this);
+							return ot()(this);
 						}),
 						e
 					);
 				})(I).prototype,
-				ct = {
+				lt = {
 					operator: { value: null },
 					_refCount: { value: 0, writable: !0 },
 					_subject: { value: null, writable: !0 },
 					_connection: { value: null, writable: !0 },
-					_subscribe: { value: ut._subscribe },
-					_isComplete: { value: ut._isComplete, writable: !0 },
-					getSubject: { value: ut.getSubject },
-					connect: { value: ut.connect },
-					refCount: { value: ut.refCount }
+					_subscribe: { value: st._subscribe },
+					_isComplete: { value: st._isComplete, writable: !0 },
+					getSubject: { value: st.getSubject },
+					connect: { value: st.connect },
+					refCount: { value: st.refCount }
 				},
-				pt = (function(t) {
+				ut = (function(t) {
 					function e(e, n) {
 						var r = t.call(this, e) || this;
 						return (r.connectable = n), r;
@@ -1059,11 +1053,11 @@
 						e
 					);
 				})(R);
-			function ft() {
+			function ct() {
 				return new D();
 			}
-			var dt = '__parameters__';
-			function ht(t, e, n) {
+			var pt = '__parameters__';
+			function ft(t, e, n) {
 				var r = (function(t) {
 					return function() {
 						for (var e = [], n = 0; n < arguments.length; n++) e[n] = arguments[n];
@@ -1079,46 +1073,46 @@
 					var i = new ((t = o).bind.apply(t, c([void 0], e)))();
 					return (a.annotation = i), a;
 					function a(t, e, n) {
-						for (var r = t.hasOwnProperty(dt) ? t[dt] : Object.defineProperty(t, dt, { value: [] })[dt]; r.length <= n; ) r.push(null);
+						for (var r = t.hasOwnProperty(pt) ? t[pt] : Object.defineProperty(t, pt, { value: [] })[pt]; r.length <= n; ) r.push(null);
 						return (r[n] = r[n] || []).push(i), t;
 					}
 				}
 				return n && (o.prototype = Object.create(n.prototype)), (o.prototype.ngMetadataName = t), (o.annotationCls = o), o;
 			}
-			var gt = ht('Inject', function(t) {
+			var dt = ft('Inject', function(t) {
 					return { token: t };
 				}),
-				mt = ht('Optional'),
-				bt = ht('Self'),
-				vt = ht('SkipSelf'),
-				yt = (function(t) {
+				ht = ft('Optional'),
+				gt = ft('Self'),
+				mt = ft('SkipSelf'),
+				bt = (function(t) {
 					return (t[(t.Default = 0)] = 'Default'), (t[(t.Host = 1)] = 'Host'), (t[(t.Self = 2)] = 'Self'), (t[(t.SkipSelf = 4)] = 'SkipSelf'), (t[(t.Optional = 8)] = 'Optional'), t;
 				})({});
-			function wt(t) {
-				for (var e in t) if (t[e] === wt) return e;
+			function vt(t) {
+				for (var e in t) if (t[e] === vt) return e;
 				throw Error('Could not find renamed property on target object.');
 			}
-			function _t(t, e) {
+			function yt(t, e) {
 				for (var n in e) e.hasOwnProperty(n) && !t.hasOwnProperty(n) && (t[n] = e[n]);
 			}
-			function xt(t) {
+			function wt(t) {
 				return { token: t.token, providedIn: t.providedIn || null, factory: t.factory, value: void 0 };
 			}
-			function Ct(t) {
+			function _t(t) {
 				return { factory: t.factory, providers: t.providers || [], imports: t.imports || [] };
 			}
-			function kt(t) {
-				var e = t[Pt];
+			function xt(t) {
+				var e = t[kt];
 				return e && e.token === t ? e : null;
 			}
-			function St(t) {
-				return t && t.hasOwnProperty(Et) ? t[Et] : null;
+			function Ct(t) {
+				return t && t.hasOwnProperty(St) ? t[St] : null;
 			}
-			var Pt = wt({ ngInjectableDef: wt }),
-				Et = wt({ ngInjectorDef: wt });
-			function Ot(t) {
+			var kt = vt({ ngInjectableDef: vt }),
+				St = vt({ ngInjectorDef: vt });
+			function Pt(t) {
 				if ('string' == typeof t) return t;
-				if (t instanceof Array) return '[' + t.map(Ot).join(', ') + ']';
+				if (t instanceof Array) return '[' + t.map(Pt).join(', ') + ']';
 				if (null == t) return '' + t;
 				if (t.overriddenName) return '' + t.overriddenName;
 				if (t.name) return '' + t.name;
@@ -1127,32 +1121,32 @@
 				var n = e.indexOf('\n');
 				return -1 === n ? e : e.substring(0, n);
 			}
-			var It = wt({ __forward_ref__: wt });
-			function Tt(t) {
+			var Et = vt({ __forward_ref__: vt });
+			function Ot(t) {
 				return (
-					(t.__forward_ref__ = Tt),
+					(t.__forward_ref__ = Ot),
 					(t.toString = function() {
-						return Ot(this());
+						return Pt(this());
 					}),
 					t
 				);
 			}
-			function Mt(t) {
+			function It(t) {
 				var e = t;
-				return 'function' == typeof e && e.hasOwnProperty(It) && e.__forward_ref__ === Tt ? e() : t;
+				return 'function' == typeof e && e.hasOwnProperty(Et) && e.__forward_ref__ === Ot ? e() : t;
 			}
-			var At,
-				jt = 'undefined' != typeof globalThis && globalThis,
-				Rt = 'undefined' != typeof window && window,
-				Dt = 'undefined' != typeof self && 'undefined' != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope && self,
-				Nt = 'undefined' != typeof global && global,
-				Ut = jt || Nt || Rt || Dt,
-				Lt = (function() {
+			var Tt,
+				Mt = 'undefined' != typeof globalThis && globalThis,
+				At = 'undefined' != typeof window && window,
+				jt = 'undefined' != typeof self && 'undefined' != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope && self,
+				Rt = 'undefined' != typeof global && global,
+				Dt = Mt || Rt || At || jt,
+				Nt = (function() {
 					function t(t, e) {
 						(this._desc = t),
 							(this.ngMetadataName = 'InjectionToken'),
 							(this.ngInjectableDef = void 0),
-							'number' == typeof e ? (this.__NG_ELEMENT_ID__ = e) : void 0 !== e && (this.ngInjectableDef = xt({ token: this, providedIn: e.providedIn || 'root', factory: e.factory }));
+							'number' == typeof e ? (this.__NG_ELEMENT_ID__ = e) : void 0 !== e && (this.ngInjectableDef = wt({ token: this, providedIn: e.providedIn || 'root', factory: e.factory }));
 					}
 					return (
 						(t.prototype.toString = function() {
@@ -1161,66 +1155,66 @@
 						t
 					);
 				})(),
-				Ht = new Lt('INJECTOR', -1),
-				zt = new Object(),
-				Vt = 'ngTempTokenPath',
-				Ft = 'ngTokenPath',
-				Bt = /\n/gm,
-				qt = '\u0275',
-				Gt = '__source',
-				Zt = wt({ provide: String, useValue: wt }),
-				Wt = void 0;
-			function Qt(t) {
-				var e = Wt;
-				return (Wt = t), e;
+				Ut = new Nt('INJECTOR', -1),
+				Lt = new Object(),
+				Ht = 'ngTempTokenPath',
+				zt = 'ngTokenPath',
+				Vt = /\n/gm,
+				Ft = '\u0275',
+				Bt = '__source',
+				qt = vt({ provide: String, useValue: vt }),
+				Gt = void 0;
+			function Zt(t) {
+				var e = Gt;
+				return (Gt = t), e;
 			}
-			function Yt(t) {
-				var e = At;
-				return (At = t), e;
+			function Wt(t) {
+				var e = Tt;
+				return (Tt = t), e;
 			}
-			function Jt(t, e) {
+			function Qt(t, e) {
 				return (
-					void 0 === e && (e = yt.Default),
-					(At ||
+					void 0 === e && (e = bt.Default),
+					(Tt ||
 						function(t, e) {
-							if ((void 0 === e && (e = yt.Default), void 0 === Wt)) throw new Error('inject() must be called from an injection context');
-							return null === Wt ? Kt(t, void 0, e) : Wt.get(t, e & yt.Optional ? null : void 0, e);
+							if ((void 0 === e && (e = bt.Default), void 0 === Gt)) throw new Error('inject() must be called from an injection context');
+							return null === Gt ? Yt(t, void 0, e) : Gt.get(t, e & bt.Optional ? null : void 0, e);
 						})(t, e)
 				);
 			}
-			function Kt(t, e, n) {
-				var r = kt(t);
+			function Yt(t, e, n) {
+				var r = xt(t);
 				if (r && 'root' == r.providedIn) return void 0 === r.value ? (r.value = r.factory()) : r.value;
-				if (n & yt.Optional) return null;
+				if (n & bt.Optional) return null;
 				if (void 0 !== e) return e;
-				throw new Error('Injector: NOT_FOUND [' + Ot(t) + ']');
+				throw new Error('Injector: NOT_FOUND [' + Pt(t) + ']');
 			}
-			function Xt(t) {
+			function Jt(t) {
 				for (var e = [], n = 0; n < t.length; n++) {
-					var r = Mt(t[n]);
+					var r = It(t[n]);
 					if (Array.isArray(r)) {
 						if (0 === r.length) throw new Error('Arguments array must have arguments.');
-						for (var o = void 0, i = yt.Default, a = 0; a < r.length; a++) {
+						for (var o = void 0, i = bt.Default, a = 0; a < r.length; a++) {
 							var s = r[a];
-							s instanceof mt || 'Optional' === s.ngMetadataName || s === mt
-								? (i |= yt.Optional)
-								: s instanceof vt || 'SkipSelf' === s.ngMetadataName || s === vt
-								? (i |= yt.SkipSelf)
-								: s instanceof bt || 'Self' === s.ngMetadataName || s === bt
-								? (i |= yt.Self)
-								: (o = s instanceof gt || s === gt ? s.token : s);
+							s instanceof ht || 'Optional' === s.ngMetadataName || s === ht
+								? (i |= bt.Optional)
+								: s instanceof mt || 'SkipSelf' === s.ngMetadataName || s === mt
+								? (i |= bt.SkipSelf)
+								: s instanceof gt || 'Self' === s.ngMetadataName || s === gt
+								? (i |= bt.Self)
+								: (o = s instanceof dt || s === dt ? s.token : s);
 						}
-						e.push(Jt(o, i));
-					} else e.push(Jt(r));
+						e.push(Qt(o, i));
+					} else e.push(Qt(r));
 				}
 				return e;
 			}
-			var $t = (function() {
+			var Kt = (function() {
 				function t() {}
 				return (
 					(t.prototype.get = function(t, e) {
-						if ((void 0 === e && (e = zt), e === zt)) {
-							var n = new Error('NullInjectorError: No provider for ' + Ot(t) + '!');
+						if ((void 0 === e && (e = Lt), e === Lt)) {
+							var n = new Error('NullInjectorError: No provider for ' + Pt(t) + '!');
 							throw ((n.name = 'NullInjectorError'), n);
 						}
 						return e;
@@ -1228,41 +1222,41 @@
 					t
 				);
 			})();
-			function te(t) {
+			function Xt(t) {
 				throw new Error('Multiple components match node with tagname ' + t.tagName);
 			}
-			function ee() {
+			function $t() {
 				throw new Error('Cannot mix multi providers and regular providers');
 			}
-			var ne = new Lt('The presence of this token marks an injector as being the root injector.'),
-				re = {},
-				oe = {},
-				ie = [],
-				ae = void 0;
-			function se() {
-				return void 0 === ae && (ae = new $t()), ae;
+			var te = new Nt('The presence of this token marks an injector as being the root injector.'),
+				ee = {},
+				ne = {},
+				re = [],
+				oe = void 0;
+			function ie() {
+				return void 0 === oe && (oe = new Kt()), oe;
 			}
-			function le(t, e, n, r) {
-				return void 0 === e && (e = null), void 0 === n && (n = null), (e = e || se()), new ue(t, n, e, r);
+			function ae(t, e, n, r) {
+				return void 0 === e && (e = null), void 0 === n && (n = null), (e = e || ie()), new se(t, n, e, r);
 			}
-			var ue = (function() {
+			var se = (function() {
 				function t(t, e, n, r) {
 					var o = this;
 					void 0 === r && (r = null), (this.parent = n), (this.records = new Map()), (this.injectorDefTypes = new Set()), (this.onDestroy = new Set()), (this._destroyed = !1);
 					var i = [];
-					de([t], function(t) {
+					pe([t], function(t) {
 						return o.processInjectorType(t, [], i);
 					}),
 						e &&
-							de(e, function(n) {
+							pe(e, function(n) {
 								return o.processProvider(n, t, e);
 							}),
-						this.records.set(Ht, fe(void 0, this)),
-						(this.isRootInjector = this.records.has(ne)),
+						this.records.set(Ut, ce(void 0, this)),
+						(this.isRootInjector = this.records.has(te)),
 						this.injectorDefTypes.forEach(function(t) {
 							return o.get(t);
 						}),
-						(this.source = r || ('object' == typeof t ? null : Ot(t)));
+						(this.source = r || ('object' == typeof t ? null : Pt(t)));
 				}
 				return (
 					Object.defineProperty(t.prototype, 'destroyed', {
@@ -1283,55 +1277,55 @@
 						}
 					}),
 					(t.prototype.get = function(t, e, n) {
-						void 0 === e && (e = zt), void 0 === n && (n = yt.Default), this.assertNotDestroyed();
+						void 0 === e && (e = Lt), void 0 === n && (n = bt.Default), this.assertNotDestroyed();
 						var r,
-							o = Qt(this);
+							o = Zt(this);
 						try {
-							if (!(n & yt.SkipSelf)) {
+							if (!(n & bt.SkipSelf)) {
 								var i = this.records.get(t);
 								if (void 0 === i) {
-									var a = ('function' == typeof (r = t) || ('object' == typeof r && r instanceof Lt)) && kt(t);
-									a && this.injectableDefInScope(a) && ((i = fe(ce(t), re)), this.records.set(t, i));
+									var a = ('function' == typeof (r = t) || ('object' == typeof r && r instanceof Nt)) && xt(t);
+									a && this.injectableDefInScope(a) && ((i = ce(le(t), ee)), this.records.set(t, i));
 								}
 								if (void 0 !== i) return this.hydrate(t, i);
 							}
-							return (n & yt.Self ? se() : this.parent).get(t, n & yt.Optional ? null : e);
+							return (n & bt.Self ? ie() : this.parent).get(t, n & bt.Optional ? null : e);
 						} catch (s) {
 							if ('NullInjectorError' === s.name) {
-								if (((s[Vt] = s[Vt] || []).unshift(Ot(t)), o)) throw s;
+								if (((s[Ht] = s[Ht] || []).unshift(Pt(t)), o)) throw s;
 								return (function(t, e, n, r) {
-									var o = t[Vt];
-									throw (e[Gt] && o.unshift(e[Gt]),
+									var o = t[Ht];
+									throw (e[Bt] && o.unshift(e[Bt]),
 									(t.message = (function(t, e, n, r) {
-										void 0 === r && (r = null), (t = t && '\n' === t.charAt(0) && t.charAt(1) == qt ? t.substr(2) : t);
-										var o = Ot(e);
-										if (e instanceof Array) o = e.map(Ot).join(' -> ');
+										void 0 === r && (r = null), (t = t && '\n' === t.charAt(0) && t.charAt(1) == Ft ? t.substr(2) : t);
+										var o = Pt(e);
+										if (e instanceof Array) o = e.map(Pt).join(' -> ');
 										else if ('object' == typeof e) {
 											var i = [];
 											for (var a in e)
 												if (e.hasOwnProperty(a)) {
 													var s = e[a];
-													i.push(a + ':' + ('string' == typeof s ? JSON.stringify(s) : Ot(s)));
+													i.push(a + ':' + ('string' == typeof s ? JSON.stringify(s) : Pt(s)));
 												}
 											o = '{' + i.join(', ') + '}';
 										}
-										return n + (r ? '(' + r + ')' : '') + '[' + o + ']: ' + t.replace(Bt, '\n  ');
+										return n + (r ? '(' + r + ')' : '') + '[' + o + ']: ' + t.replace(Vt, '\n  ');
 									})('\n' + t.message, o, n, r)),
-									(t[Ft] = o),
-									(t[Vt] = null),
+									(t[zt] = o),
+									(t[Ht] = null),
 									t);
 								})(s, t, 'R3InjectorError', this.source);
 							}
 							throw s;
 						} finally {
-							Qt(o);
+							Zt(o);
 						}
 					}),
 					(t.prototype.toString = function() {
 						var t = [];
 						return (
 							this.records.forEach(function(e, n) {
-								return t.push(Ot(n));
+								return t.push(Pt(n));
 							}),
 							'R3Injector[' + t.join(', ') + ']'
 						);
@@ -1341,17 +1335,17 @@
 					}),
 					(t.prototype.processInjectorType = function(t, e, n) {
 						var r = this;
-						if (!(t = Mt(t))) return !1;
-						var o = St(t),
+						if (!(t = It(t))) return !1;
+						var o = Ct(t),
 							i = (null == o && t.ngModule) || void 0,
 							a = void 0 === i ? t : i,
 							s = -1 !== n.indexOf(a);
-						if ((void 0 !== i && (o = St(i)), null == o)) return !1;
-						if ((this.injectorDefTypes.add(a), this.records.set(a, fe(o.factory, re)), null != o.imports && !s)) {
+						if ((void 0 !== i && (o = Ct(i)), null == o)) return !1;
+						if ((this.injectorDefTypes.add(a), this.records.set(a, ce(o.factory, ee)), null != o.imports && !s)) {
 							var l;
 							n.push(a);
 							try {
-								de(o.imports, function(t) {
+								pe(o.imports, function(t) {
 									r.processInjectorType(t, e, n) && (void 0 === l && (l = []), l.push(t));
 								});
 							} finally {
@@ -1362,8 +1356,8 @@
 											var e = l[t],
 												n = e.ngModule,
 												o = e.providers;
-											de(o, function(t) {
-												return r.processProvider(t, n, o || ie);
+											pe(o, function(t) {
+												return r.processProvider(t, n, o || re);
 											});
 										},
 										c = 0;
@@ -1375,27 +1369,27 @@
 						var p = o.providers;
 						if (null != p && !s) {
 							var f = t;
-							de(p, function(t) {
+							pe(p, function(t) {
 								return r.processProvider(t, f, p);
 							});
 						}
 						return void 0 !== i && void 0 !== t.providers;
 					}),
 					(t.prototype.processProvider = function(t, e, n) {
-						var r = ge((t = Mt(t))) ? t : Mt(t && t.provide),
+						var r = de((t = It(t))) ? t : It(t && t.provide),
 							o = (function(t, e, n) {
-								var r = pe(t, e, n);
-								return he(t) ? fe(void 0, t.useValue) : fe(r, re);
+								var r = ue(t, e, n);
+								return fe(t) ? ce(void 0, t.useValue) : ce(r, ee);
 							})(t, e, n);
-						if (ge(t) || !0 !== t.multi) {
+						if (de(t) || !0 !== t.multi) {
 							var i = this.records.get(r);
-							i && void 0 !== i.multi && ee();
+							i && void 0 !== i.multi && $t();
 						} else {
 							var a = this.records.get(r);
 							a
-								? void 0 === a.multi && ee()
-								: (((a = fe(void 0, re, !0)).factory = function() {
-										return Xt(a.multi);
+								? void 0 === a.multi && $t()
+								: (((a = ce(void 0, ee, !0)).factory = function() {
+										return Jt(a.multi);
 								  }),
 								  this.records.set(r, a)),
 								(r = t),
@@ -1406,11 +1400,11 @@
 					(t.prototype.hydrate = function(t, e) {
 						var n;
 						return (
-							e.value === oe
+							e.value === ne
 								? (function(t) {
 										throw new Error('Cannot instantiate cyclic dependency! ' + t);
-								  })(Ot(t))
-								: e.value === re && ((e.value = oe), (e.value = e.factory())),
+								  })(Pt(t))
+								: e.value === ee && ((e.value = ne), (e.value = e.factory())),
 							'object' == typeof e.value && e.value && null !== (n = e.value) && 'object' == typeof n && 'function' == typeof n.ngOnDestroy && this.onDestroy.add(e.value),
 							e.value
 						);
@@ -1423,22 +1417,22 @@
 					t
 				);
 			})();
-			function ce(t) {
-				var e = kt(t);
+			function le(t) {
+				var e = xt(t);
 				if (null !== e) return e.factory;
-				var n = St(t);
+				var n = Ct(t);
 				if (null !== n) return n.factory;
-				if (t instanceof Lt) throw new Error('Token ' + Ot(t) + ' is missing an ngInjectableDef definition.');
+				if (t instanceof Nt) throw new Error('Token ' + Pt(t) + ' is missing an ngInjectableDef definition.');
 				if (t instanceof Function)
 					return (function(t) {
 						var e = t.length;
 						if (e > 0) {
 							var n = new Array(e).fill('?');
-							throw new Error("Can't resolve all parameters for " + Ot(t) + ': (' + n.join(', ') + ').');
+							throw new Error("Can't resolve all parameters for " + Pt(t) + ': (' + n.join(', ') + ').');
 						}
 						var r,
 							o =
-								(r = t) && r[Pt]
+								(r = t) && r[kt]
 									? (console.warn(
 											'DEPRECATED: DI is instantiating a token "' +
 												r.name +
@@ -1446,7 +1440,7 @@
 												r.name +
 												'" class.'
 									  ),
-									  r[Pt])
+									  r[kt])
 									: null;
 						return null !== o
 							? function() {
@@ -1458,24 +1452,24 @@
 					})(t);
 				throw new Error('unreachable');
 			}
-			function pe(t, e, n) {
+			function ue(t, e, n) {
 				var r,
 					o = void 0;
-				if (ge(t)) return ce(Mt(t));
-				if (he(t))
+				if (de(t)) return le(It(t));
+				if (fe(t))
 					o = function() {
-						return Mt(t.useValue);
+						return It(t.useValue);
 					};
 				else if ((r = t) && r.useExisting)
 					o = function() {
-						return Jt(Mt(t.useExisting));
+						return Qt(It(t.useExisting));
 					};
 				else if (t && t.useFactory)
 					o = function() {
-						return t.useFactory.apply(t, c(Xt(t.deps || [])));
+						return t.useFactory.apply(t, c(Jt(t.deps || [])));
 					};
 				else {
-					var i = Mt(t && (t.useClass || t.provide));
+					var i = It(t && (t.useClass || t.provide));
 					if (
 						(i ||
 							(function(t, e, n) {
@@ -1490,77 +1484,77 @@
 											})
 											.join(', ') +
 										']'),
-								new Error("Invalid provider for the NgModule '" + Ot(t) + "'" + r));
+								new Error("Invalid provider for the NgModule '" + Pt(t) + "'" + r));
 							})(e, n, t),
 						!t.deps)
 					)
-						return ce(i);
+						return le(i);
 					o = function() {
-						return new (i.bind.apply(i, c([void 0], Xt(t.deps))))();
+						return new (i.bind.apply(i, c([void 0], Jt(t.deps))))();
 					};
 				}
 				return o;
 			}
-			function fe(t, e, n) {
+			function ce(t, e, n) {
 				return void 0 === n && (n = !1), { factory: t, value: e, multi: n ? [] : void 0 };
 			}
-			function de(t, e) {
+			function pe(t, e) {
 				t.forEach(function(t) {
-					return Array.isArray(t) ? de(t, e) : e(t);
+					return Array.isArray(t) ? pe(t, e) : e(t);
 				});
 			}
-			function he(t) {
-				return null !== t && 'object' == typeof t && Zt in t;
+			function fe(t) {
+				return null !== t && 'object' == typeof t && qt in t;
 			}
-			function ge(t) {
+			function de(t) {
 				return 'function' == typeof t;
 			}
-			var me = function(t, e, n) {
-					return le({ name: n }, e, t, n);
+			var he = function(t, e, n) {
+					return ae({ name: n }, e, t, n);
 				},
-				be = (function() {
+				ge = (function() {
 					function t() {}
 					return (
 						(t.create = function(t, e) {
-							return Array.isArray(t) ? me(t, e, '') : me(t.providers, t.parent, t.name || '');
+							return Array.isArray(t) ? he(t, e, '') : he(t.providers, t.parent, t.name || '');
 						}),
-						(t.THROW_IF_NOT_FOUND = zt),
-						(t.NULL = new $t()),
-						(t.ngInjectableDef = xt({
+						(t.THROW_IF_NOT_FOUND = Lt),
+						(t.NULL = new Kt()),
+						(t.ngInjectableDef = wt({
 							token: t,
 							providedIn: 'any',
 							factory: function() {
-								return Jt(Ht);
+								return Qt(Ut);
 							}
 						})),
 						(t.__NG_ELEMENT_ID__ = -1),
 						t
 					);
 				})(),
-				ve = 'ngDebugContext',
-				ye = 'ngOriginalError',
-				we = new Lt('AnalyzeForEntryComponents'),
-				_e = (function(t) {
+				me = 'ngDebugContext',
+				be = 'ngOriginalError',
+				ve = new Nt('AnalyzeForEntryComponents'),
+				ye = (function(t) {
 					return (t[(t.OnPush = 0)] = 'OnPush'), (t[(t.Default = 1)] = 'Default'), t;
 				})({}),
-				xe = new Map(),
-				Ce = new Set();
-			function ke(t) {
+				we = new Map(),
+				_e = new Set();
+			function xe(t) {
 				return 'string' == typeof t ? t : t.text();
 			}
-			var Se = (function(t) {
+			var Ce = (function(t) {
 					return (t[(t.Emulated = 0)] = 'Emulated'), (t[(t.Native = 1)] = 'Native'), (t[(t.None = 2)] = 'None'), (t[(t.ShadowDom = 3)] = 'ShadowDom'), t;
 				})({}),
-				Pe = {},
-				Ee = [],
-				Oe = wt({ ngComponentDef: wt }),
-				Ie = wt({ ngDirectiveDef: wt }),
-				Te = wt({ ngPipeDef: wt }),
-				Me = wt({ ngModuleDef: wt }),
-				Ae = wt({ ngLocaleIdDef: wt }),
-				je = wt({ __NG_ELEMENT_ID__: wt }),
-				Re = 0;
-			function De(t) {
+				ke = {},
+				Se = [],
+				Pe = vt({ ngComponentDef: vt }),
+				Ee = vt({ ngDirectiveDef: vt }),
+				Oe = vt({ ngPipeDef: vt }),
+				Ie = vt({ ngModuleDef: vt }),
+				Te = vt({ ngLocaleIdDef: vt }),
+				Me = vt({ __NG_ELEMENT_ID__: vt }),
+				Ae = 0;
+			function je(t) {
 				var e = t.type,
 					n = e.prototype,
 					r = {},
@@ -1586,16 +1580,16 @@
 						afterViewInit: n.ngAfterViewInit || null,
 						afterViewChecked: n.ngAfterViewChecked || null,
 						onDestroy: n.ngOnDestroy || null,
-						onPush: t.changeDetection === _e.OnPush,
+						onPush: t.changeDetection === ye.OnPush,
 						directiveDefs: null,
 						pipeDefs: null,
 						selectors: t.selectors,
 						viewQuery: t.viewQuery || null,
 						features: t.features || null,
 						data: t.data || {},
-						encapsulation: t.encapsulation || Se.Emulated,
+						encapsulation: t.encapsulation || Ce.Emulated,
 						id: 'c',
-						styles: t.styles || Ee,
+						styles: t.styles || Se,
 						_: null,
 						setInput: null,
 						schemas: t.schemas || null,
@@ -1609,56 +1603,56 @@
 								var n = t.directives,
 									i = t.features,
 									a = t.pipes;
-								(o.id += Re++),
-									(o.inputs = He(t.inputs, r)),
-									(o.outputs = He(t.outputs)),
+								(o.id += Ae++),
+									(o.inputs = Ue(t.inputs, r)),
+									(o.outputs = Ue(t.outputs)),
 									i &&
 										i.forEach(function(t) {
 											return t(o);
 										}),
 									(o.directiveDefs = n
 										? function() {
-												return ('function' == typeof n ? n() : n).map(Ne);
+												return ('function' == typeof n ? n() : n).map(Re);
 										  }
 										: null),
 									(o.pipeDefs = a
 										? function() {
-												return ('function' == typeof a ? a() : a).map(Ue);
+												return ('function' == typeof a ? a() : a).map(De);
 										  }
 										: null),
-									e.hasOwnProperty(Pt) || (e[Pt] = xt({ token: e, factory: t.factory }));
+									e.hasOwnProperty(kt) || (e[kt] = wt({ token: e, factory: t.factory }));
 							}
 						}),
 					o
 				);
 			}
-			function Ne(t) {
+			function Re(t) {
 				return (
-					Ve(t) ||
+					He(t) ||
 					(function(t) {
-						return t[Ie] || null;
+						return t[Ee] || null;
 					})(t)
 				);
 			}
-			function Ue(t) {
+			function De(t) {
 				return (function(t) {
-					return t[Te] || null;
+					return t[Oe] || null;
 				})(t);
 			}
-			function Le(t) {
+			function Ne(t) {
 				return {
 					type: t.type,
-					bootstrap: t.bootstrap || Ee,
-					declarations: t.declarations || Ee,
-					imports: t.imports || Ee,
-					exports: t.exports || Ee,
+					bootstrap: t.bootstrap || Se,
+					declarations: t.declarations || Se,
+					imports: t.imports || Se,
+					exports: t.exports || Se,
 					transitiveCompileScopes: null,
 					schemas: t.schemas || null,
 					id: t.id || null
 				};
 			}
-			function He(t, e) {
-				if (null == t) return Pe;
+			function Ue(t, e) {
+				if (null == t) return ke;
 				var n = {};
 				for (var r in t)
 					if (t.hasOwnProperty(r)) {
@@ -1668,103 +1662,103 @@
 					}
 				return n;
 			}
-			var ze = De;
-			function Ve(t) {
-				return t[Oe] || null;
+			var Le = je;
+			function He(t) {
+				return t[Pe] || null;
 			}
-			function Fe(t, e) {
-				var n = t[Me] || null;
-				if (!n && !0 === e) throw new Error('Type ' + Ot(t) + " does not have 'ngModuleDef' property.");
+			function ze(t, e) {
+				var n = t[Ie] || null;
+				if (!n && !0 === e) throw new Error('Type ' + Pt(t) + " does not have 'ngModuleDef' property.");
 				return n;
 			}
-			function Be(t) {
+			function Ve(t) {
 				return 'string' == typeof t ? t : null == t ? '' : '' + t;
 			}
-			function qe(t) {
-				return 'function' == typeof t ? t.name || t.toString() : 'object' == typeof t && null != t && 'function' == typeof t.type ? t.type.name || t.type.toString() : Be(t);
+			function Fe(t) {
+				return 'function' == typeof t ? t.name || t.toString() : 'object' == typeof t && null != t && 'function' == typeof t.type ? t.type.name || t.type.toString() : Ve(t);
 			}
-			var Ge = (function() {
-					return (('undefined' != typeof requestAnimationFrame && requestAnimationFrame) || setTimeout).bind(Ut);
+			var Be = (function() {
+					return (('undefined' != typeof requestAnimationFrame && requestAnimationFrame) || setTimeout).bind(Dt);
 				})(),
-				Ze = '\ufffd';
-			function We(t) {
+				qe = '\ufffd';
+			function Ge(t) {
 				return t instanceof Function ? t() : t;
 			}
-			var Qe = 0,
-				Ye = 1,
-				Je = 2,
-				Ke = 3,
-				Xe = 4,
-				$e = 5,
-				tn = 6,
-				en = 7,
-				nn = 8,
-				rn = 9,
-				on = 10,
-				an = 11,
-				sn = 12,
-				ln = 13,
-				un = 14,
-				cn = 15,
-				pn = 17,
-				fn = 18,
-				dn = 20,
-				hn = 1,
-				gn = 2,
-				mn = 7,
-				bn = 9,
-				vn = '__ngContext__';
-			function yn(t) {
-				for (; Array.isArray(t); ) t = t[Qe];
+			var Ze = 0,
+				We = 1,
+				Qe = 2,
+				Ye = 3,
+				Je = 4,
+				Ke = 5,
+				Xe = 6,
+				$e = 7,
+				tn = 8,
+				en = 9,
+				nn = 10,
+				rn = 11,
+				on = 12,
+				an = 13,
+				sn = 14,
+				ln = 15,
+				un = 17,
+				cn = 18,
+				pn = 20,
+				fn = 1,
+				dn = 2,
+				hn = 7,
+				gn = 9,
+				mn = '__ngContext__';
+			function bn(t) {
+				for (; Array.isArray(t); ) t = t[Ze];
 				return t;
 			}
+			function vn(t) {
+				return Array.isArray(t) && 'object' == typeof t[fn];
+			}
+			function yn(t) {
+				return Array.isArray(t) && !0 === t[fn];
+			}
 			function wn(t) {
-				return Array.isArray(t) && 'object' == typeof t[hn];
+				return Array.isArray(t) && 'number' == typeof t[fn];
 			}
-			function _n(t) {
-				return Array.isArray(t) && !0 === t[hn];
+			function _n(t, e) {
+				return bn(e[t + pn]);
 			}
-			function xn(t) {
-				return Array.isArray(t) && 'number' == typeof t[hn];
+			function xn(t, e) {
+				return bn(e[t.index]);
 			}
 			function Cn(t, e) {
-				return yn(e[t + dn]);
+				return e[We].data[t + pn];
 			}
 			function kn(t, e) {
-				return yn(e[t.index]);
-			}
-			function Sn(t, e) {
-				return e[Ye].data[t + dn];
-			}
-			function Pn(t, e) {
 				var n = e[t];
-				return wn(n) ? n : n[Qe];
+				return vn(n) ? n : n[Ze];
 			}
-			function En(t) {
+			function Sn(t) {
 				return 0 != (4 & t.flags);
 			}
-			function On(t) {
+			function Pn(t) {
 				return 1 == (1 & t.flags);
 			}
-			function In(t) {
+			function En(t) {
 				return null !== t.template;
 			}
-			function Tn(t) {
-				return 0 != (512 & t[Je]);
+			function On(t) {
+				return 0 != (512 & t[Qe]);
 			}
-			function Mn(t) {
+			function In(t) {
 				var e = (function(t) {
-					return t[vn];
+					return t[mn];
 				})(t);
 				return e ? (Array.isArray(e) ? e : e.lView) : null;
 			}
-			function An(t) {
-				return _n(t[Ke]);
+			function Tn(t) {
+				return yn(t[Ye]);
 			}
-			function jn(t) {
-				t[fn] = 0;
+			function Mn(t) {
+				t[cn] = 0;
 			}
-			function Rn(t, e, n, r, o, i) {
+			function An(t, e, n, r, o, i) {
 				var a = e.onChanges,
 					s = e.onInit,
 					l = e.doCheck;
@@ -1774,7 +1768,7 @@
 					s && (n.preOrderHooks || (n.preOrderHooks = [])).push(-t, s),
 					l && ((n.preOrderHooks || (n.preOrderHooks = [])).push(t, l), (n.preOrderCheckHooks || (n.preOrderCheckHooks = [])).push(t, l));
 			}
-			function Dn(t, e) {
+			function jn(t, e) {
 				if (t.firstTemplatePass)
 					for (var n = e.directiveStart, r = e.directiveEnd; n < r; n++) {
 						var o = t.data[n];
@@ -1786,136 +1780,136 @@
 							null != o.onDestroy && (t.destroyHooks || (t.destroyHooks = [])).push(n, o.onDestroy);
 					}
 			}
-			function Nn(t, e, n, r) {
-				n || Un(t, e.preOrderHooks, e.preOrderCheckHooks, n, 0, void 0 !== r ? r : null);
+			function Rn(t, e, n, r) {
+				n || Dn(t, e.preOrderHooks, e.preOrderCheckHooks, n, 0, void 0 !== r ? r : null);
 			}
-			function Un(t, e, n, r, o, i) {
+			function Dn(t, e, n, r, o, i) {
 				if (!r) {
-					var a = (3 & t[Je]) === o ? e : n;
+					var a = (3 & t[Qe]) === o ? e : n;
 					a &&
 						(function(t, e, n, r) {
-							for (var o = null != r ? r : -1, i = 0, a = void 0 !== r ? 65535 & t[fn] : 0; a < e.length; a++)
+							for (var o = null != r ? r : -1, i = 0, a = void 0 !== r ? 65535 & t[cn] : 0; a < e.length; a++)
 								if ('number' == typeof e[a + 1]) {
 									if (((i = e[a]), null != r && i >= r)) break;
-								} else e[a] < 0 && (t[fn] += 65536), (i < o || -1 == o) && (Ln(t, n, e, a), (t[fn] = (4294901760 & t[fn]) + a + 2)), a++;
+								} else e[a] < 0 && (t[cn] += 65536), (i < o || -1 == o) && (Nn(t, n, e, a), (t[cn] = (4294901760 & t[cn]) + a + 2)), a++;
 						})(t, a, o, i),
-						null == i && (3 & t[Je]) === o && 3 !== o && ((t[Je] &= 1023), (t[Je] += 1));
+						null == i && (3 & t[Qe]) === o && 3 !== o && ((t[Qe] &= 1023), (t[Qe] += 1));
 				}
 			}
-			function Ln(t, e, n, r) {
+			function Nn(t, e, n, r) {
 				var o = n[r] < 0,
 					i = n[r + 1],
 					a = t[o ? -n[r] : n[r]];
-				o ? t[Je] >> 10 < t[fn] >> 16 && (3 & t[Je]) === e && ((t[Je] += 1024), i.call(a)) : i.call(a);
+				o ? t[Qe] >> 10 < t[cn] >> 16 && (3 & t[Qe]) === e && ((t[Qe] += 1024), i.call(a)) : i.call(a);
 			}
-			var Hn,
-				zn = null;
-			function Vn(t) {
-				zn = t;
+			var Un,
+				Ln = null;
+			function Hn(t) {
+				Ln = t;
 			}
-			var Fn,
-				Bn = null;
-			function qn(t) {
-				Bn = t;
+			var zn,
+				Vn = null;
+			function Fn(t) {
+				Vn = t;
 			}
-			function Gn() {
-				return Qn;
-			}
-			var Zn,
-				Wn,
-				Qn,
-				Yn = 1,
-				Jn = Yn,
-				Kn = 0,
-				Xn = 0;
-			function $n(t) {
-				void 0 === t && (t = null), Cr !== t && (Sr(null == t ? -1 : t), (Jn = null == t ? 0 : Yn), (Kn = 0), (Xn = 0));
-			}
-			function tr() {
-				return Jn;
-			}
-			function er() {
-				(Jn += 1 + Xn), (Kn = 0), (Xn = 0);
-			}
-			function nr(t) {
-				(Kn += t), (Xn = Math.max(Xn, Kn));
-			}
-			function rr() {
-				return Kn;
-			}
-			function or(t) {
-				pr = t;
-			}
-			function ir() {
+			function Bn() {
 				return Zn;
 			}
-			function ar(t, e) {
-				(Zn = t), (Wn = e);
+			var qn,
+				Gn,
+				Zn,
+				Wn = 1,
+				Qn = Wn,
+				Yn = 0,
+				Jn = 0;
+			function Kn(t) {
+				void 0 === t && (t = null), _r !== t && (Cr(null == t ? -1 : t), (Qn = null == t ? 0 : Wn), (Yn = 0), (Jn = 0));
 			}
-			function sr(t, e) {
-				(Zn = t), (Qn = e);
+			function Xn() {
+				return Qn;
 			}
-			function lr() {
-				return Wn;
+			function $n() {
+				(Qn += 1 + Jn), (Yn = 0), (Jn = 0);
 			}
-			function ur() {
-				Wn = !1;
+			function tr(t) {
+				(Yn += t), (Jn = Math.max(Jn, Yn));
 			}
-			function cr(t) {
-				return void 0 === t && (t = Qn), 4 == (4 & t[Je]);
+			function er() {
+				return Yn;
 			}
-			var pr = null,
-				fr = !1;
-			function dr() {
-				return fr;
+			function nr(t) {
+				ur = t;
 			}
-			function hr(t) {
-				fr = t;
+			function rr() {
+				return qn;
 			}
-			var gr = -1;
-			function mr() {
-				return gr;
+			function or(t, e) {
+				(qn = t), (Gn = e);
 			}
-			function br(t) {
-				gr = t;
+			function ir(t, e) {
+				(qn = t), (Zn = e);
 			}
-			var vr = 0;
-			function yr() {
-				return vr;
+			function ar() {
+				return Gn;
 			}
-			function wr(t) {
-				vr = t;
+			function sr() {
+				Gn = !1;
 			}
-			function _r(t, e) {
-				var n = Qn;
-				return t && (gr = t[Ye].bindingStartIndex), (Zn = e), (Wn = !0), (Qn = pr = t), n;
+			function lr(t) {
+				return void 0 === t && (t = Zn), 4 == (4 & t[Qe]);
 			}
-			function xr(t, e) {
-				var n = Qn[Ye];
-				if (cr(Qn)) Qn[Je] &= -5;
+			var ur = null,
+				cr = !1;
+			function pr() {
+				return cr;
+			}
+			function fr(t) {
+				cr = t;
+			}
+			var dr = -1;
+			function hr() {
+				return dr;
+			}
+			function gr(t) {
+				dr = t;
+			}
+			var mr = 0;
+			function br() {
+				return mr;
+			}
+			function vr(t) {
+				mr = t;
+			}
+			function yr(t, e) {
+				var n = Zn;
+				return t && (dr = t[We].bindingStartIndex), (qn = e), (Gn = !0), (Zn = ur = t), n;
+			}
+			function wr(t, e) {
+				var n = Zn[We];
+				if (lr(Zn)) Zn[Qe] &= -5;
 				else
 					try {
-						jn(Qn), e && Un(Qn, n.viewHooks, n.viewCheckHooks, fr, 2, void 0);
+						Mn(Zn), e && Dn(Zn, n.viewHooks, n.viewCheckHooks, cr, 2, void 0);
 					} finally {
-						(Qn[Je] &= -73), (Qn[en] = n.bindingStartIndex);
+						(Zn[Qe] &= -73), (Zn[$e] = n.bindingStartIndex);
 					}
-				Vn(null), _r(t, null);
+				Hn(null), yr(t, null);
 			}
-			var Cr = -1;
-			function kr() {
-				return Cr;
+			var _r = -1;
+			function xr() {
+				return _r;
 			}
-			function Sr(t) {
-				(Cr = t), Vn(null);
+			function Cr(t) {
+				(_r = t), Hn(null);
 			}
-			var Pr = null,
-				Er = '__SANITIZER_TRUSTED_BRAND__',
-				Or = !0,
-				Ir = !1;
-			function Tr() {
-				return (Ir = !0), Or;
+			var kr = null,
+				Sr = '__SANITIZER_TRUSTED_BRAND__',
+				Pr = !0,
+				Er = !1;
+			function Or() {
+				return (Er = !0), Pr;
 			}
-			var Mr = (function() {
+			var Ir = (function() {
 					function t(t) {
 						if (
 							((this.defaultDoc = t),
@@ -1981,12 +1975,12 @@
 						t
 					);
 				})(),
-				Ar = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:\/?#]*(?:[\/?#]|$))/gi,
-				jr = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+\/]+=*$/i;
-			function Rr(t) {
-				return (t = String(t)).match(Ar) || t.match(jr) ? t : (Tr() && console.warn('WARNING: sanitizing unsafe URL value ' + t + ' (see http://g.co/ng/security#xss)'), 'unsafe:' + t);
+				Tr = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:\/?#]*(?:[\/?#]|$))/gi,
+				Mr = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+\/]+=*$/i;
+			function Ar(t) {
+				return (t = String(t)).match(Tr) || t.match(Mr) ? t : (Or() && console.warn('WARNING: sanitizing unsafe URL value ' + t + ' (see http://g.co/ng/security#xss)'), 'unsafe:' + t);
 			}
-			function Dr(t) {
+			function jr(t) {
 				var e,
 					n,
 					r = {};
@@ -2003,7 +1997,7 @@
 				}
 				return r;
 			}
-			function Nr() {
+			function Rr() {
 				for (var t, e, n = [], r = 0; r < arguments.length; r++) n[r] = arguments[r];
 				var o = {};
 				try {
@@ -2022,41 +2016,41 @@
 				}
 				return o;
 			}
-			var Ur,
-				Lr = Dr('area,br,col,hr,img,wbr'),
-				Hr = Dr('colgroup,dd,dt,li,p,tbody,td,tfoot,th,thead,tr'),
-				zr = Dr('rp,rt'),
-				Vr = Nr(zr, Hr),
-				Fr = Nr(
-					Lr,
-					Nr(
-						Hr,
-						Dr(
+			var Dr,
+				Nr = jr('area,br,col,hr,img,wbr'),
+				Ur = jr('colgroup,dd,dt,li,p,tbody,td,tfoot,th,thead,tr'),
+				Lr = jr('rp,rt'),
+				Hr = Rr(Lr, Ur),
+				zr = Rr(
+					Nr,
+					Rr(
+						Ur,
+						jr(
 							'address,article,aside,blockquote,caption,center,del,details,dialog,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5,h6,header,hgroup,hr,ins,main,map,menu,nav,ol,pre,section,summary,table,ul'
 						)
 					),
-					Nr(
-						zr,
-						Dr(
+					Rr(
+						Lr,
+						jr(
 							'a,abbr,acronym,audio,b,bdi,bdo,big,br,cite,code,del,dfn,em,font,i,img,ins,kbd,label,map,mark,picture,q,ruby,rp,rt,s,samp,small,source,span,strike,strong,sub,sup,time,track,tt,u,var,video'
 						)
 					),
-					Vr
+					Hr
 				),
-				Br = Dr('background,cite,href,itemtype,longdesc,poster,src,xlink:href'),
-				qr = Dr('srcset'),
-				Gr = Nr(
-					Br,
-					qr,
-					Dr(
+				Vr = jr('background,cite,href,itemtype,longdesc,poster,src,xlink:href'),
+				Fr = jr('srcset'),
+				Br = Rr(
+					Vr,
+					Fr,
+					jr(
 						'abbr,accesskey,align,alt,autoplay,axis,bgcolor,border,cellpadding,cellspacing,class,clear,color,cols,colspan,compact,controls,coords,datetime,default,dir,download,face,headers,height,hidden,hreflang,hspace,ismap,itemscope,itemprop,kind,label,lang,language,loop,media,muted,nohref,nowrap,open,preload,rel,rev,role,rows,rowspan,rules,scope,scrolling,shape,size,sizes,span,srclang,start,summary,tabindex,target,title,translate,type,usemap,valign,value,vspace,width'
 					),
-					Dr(
+					jr(
 						'aria-activedescendant,aria-atomic,aria-autocomplete,aria-busy,aria-checked,aria-colcount,aria-colindex,aria-colspan,aria-controls,aria-current,aria-describedby,aria-details,aria-disabled,aria-dropeffect,aria-errormessage,aria-expanded,aria-flowto,aria-grabbed,aria-haspopup,aria-hidden,aria-invalid,aria-keyshortcuts,aria-label,aria-labelledby,aria-level,aria-live,aria-modal,aria-multiline,aria-multiselectable,aria-orientation,aria-owns,aria-placeholder,aria-posinset,aria-pressed,aria-readonly,aria-relevant,aria-required,aria-roledescription,aria-rowcount,aria-rowindex,aria-rowspan,aria-selected,aria-setsize,aria-sort,aria-valuemax,aria-valuemin,aria-valuenow,aria-valuetext'
 					)
 				),
-				Zr = Dr('script,style,template'),
-				Wr = (function() {
+				qr = jr('script,style,template'),
+				Gr = (function() {
 					function t() {
 						(this.sanitizedSomething = !1), (this.buf = []);
 					}
@@ -2083,34 +2077,34 @@
 						(t.prototype.startElement = function(t) {
 							var e,
 								n = t.nodeName.toLowerCase();
-							if (!Fr.hasOwnProperty(n)) return (this.sanitizedSomething = !0), !Zr.hasOwnProperty(n);
+							if (!zr.hasOwnProperty(n)) return (this.sanitizedSomething = !0), !qr.hasOwnProperty(n);
 							this.buf.push('<'), this.buf.push(n);
 							for (var r = t.attributes, o = 0; o < r.length; o++) {
 								var i = r.item(o),
 									a = i.name,
 									s = a.toLowerCase();
-								if (Gr.hasOwnProperty(s)) {
+								if (Br.hasOwnProperty(s)) {
 									var l = i.value;
-									Br[s] && (l = Rr(l)),
-										qr[s] &&
+									Vr[s] && (l = Ar(l)),
+										Fr[s] &&
 											((e = l),
 											(l = (e = String(e))
 												.split(',')
 												.map(function(t) {
-													return Rr(t.trim());
+													return Ar(t.trim());
 												})
 												.join(', '))),
-										this.buf.push(' ', a, '="', Jr(l), '"');
+										this.buf.push(' ', a, '="', Qr(l), '"');
 								} else this.sanitizedSomething = !0;
 							}
 							return this.buf.push('>'), !0;
 						}),
 						(t.prototype.endElement = function(t) {
 							var e = t.nodeName.toLowerCase();
-							Fr.hasOwnProperty(e) && !Lr.hasOwnProperty(e) && (this.buf.push('</'), this.buf.push(e), this.buf.push('>'));
+							zr.hasOwnProperty(e) && !Nr.hasOwnProperty(e) && (this.buf.push('</'), this.buf.push(e), this.buf.push('>'));
 						}),
 						(t.prototype.chars = function(t) {
-							this.buf.push(Jr(t));
+							this.buf.push(Qr(t));
 						}),
 						(t.prototype.checkClobberedElement = function(t, e) {
 							if (e && (t.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINED_BY) === Node.DOCUMENT_POSITION_CONTAINED_BY)
@@ -2120,40 +2114,40 @@
 						t
 					);
 				})(),
-				Qr = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
-				Yr = /([^\#-~ |!])/g;
-			function Jr(t) {
+				Zr = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
+				Wr = /([^\#-~ |!])/g;
+			function Qr(t) {
 				return t
 					.replace(/&/g, '&amp;')
-					.replace(Qr, function(t) {
+					.replace(Zr, function(t) {
 						return '&#' + (1024 * (t.charCodeAt(0) - 55296) + (t.charCodeAt(1) - 56320) + 65536) + ';';
 					})
-					.replace(Yr, function(t) {
+					.replace(Wr, function(t) {
 						return '&#' + t.charCodeAt(0) + ';';
 					})
 					.replace(/</g, '&lt;')
 					.replace(/>/g, '&gt;');
 			}
-			function Kr(t, e) {
+			function Yr(t, e) {
 				var n = null;
 				try {
-					Ur = Ur || new Mr(t);
+					Dr = Dr || new Ir(t);
 					var r = e ? String(e) : '';
-					n = Ur.getInertBodyElement(r);
+					n = Dr.getInertBodyElement(r);
 					var o = 5,
 						i = r;
 					do {
 						if (0 === o) throw new Error('Failed to sanitize html because the input is unstable');
-						o--, (r = i), (i = n.innerHTML), (n = Ur.getInertBodyElement(r));
+						o--, (r = i), (i = n.innerHTML), (n = Dr.getInertBodyElement(r));
 					} while (r !== i);
-					var a = new Wr(),
-						s = a.sanitizeChildren(Xr(n) || n);
-					return Tr() && a.sanitizedSomething && console.warn('WARNING: sanitizing HTML stripped some content, see http://g.co/ng/security#xss'), s;
+					var a = new Gr(),
+						s = a.sanitizeChildren(Jr(n) || n);
+					return Or() && a.sanitizedSomething && console.warn('WARNING: sanitizing HTML stripped some content, see http://g.co/ng/security#xss'), s;
 				} finally {
-					if (n) for (var l = Xr(n) || n; l.firstChild; ) l.removeChild(l.firstChild);
+					if (n) for (var l = Jr(n) || n; l.firstChild; ) l.removeChild(l.firstChild);
 				}
 			}
-			function Xr(t) {
+			function Jr(t) {
 				return 'content' in t &&
 					(function(t) {
 						return t.nodeType === Node.ELEMENT_NODE && 'TEMPLATE' === t.nodeName;
@@ -2161,7 +2155,7 @@
 					? t.content
 					: null;
 			}
-			var $r = (function(t) {
+			var Kr = (function(t) {
 					return (
 						(t[(t.NONE = 0)] = 'NONE'),
 						(t[(t.HTML = 1)] = 'HTML'),
@@ -2172,44 +2166,44 @@
 						t
 					);
 				})({}),
-				to = (function() {
+				Xr = (function() {
 					return function() {};
 				})(),
-				eo = new RegExp(
+				$r = new RegExp(
 					'^([-,."\'%_!# a-zA-Z0-9]+|(?:(?:matrix|translate|scale|rotate|skew|perspective)(?:X|Y|3d)?|(?:rgb|hsl)a?|(?:repeating-)?(?:linear|radial)-gradient|(?:calc|attr))\\([-0-9.%, #a-zA-Z]+\\))$',
 					'g'
 				),
-				no = /^url\(([^)]+)\)$/;
-			function ro(t) {
+				to = /^url\(([^)]+)\)$/;
+			function eo(t) {
 				var e,
 					n,
-					r = (e = Gn()) && e[ln];
-				return r ? r.sanitize($r.HTML, t) || '' : ('Html', (n = t) instanceof String && 'Html' === n[Er] ? t.toString() : Kr(document, Be(t)));
+					r = (e = Bn()) && e[an];
+				return r ? r.sanitize(Kr.HTML, t) || '' : ('Html', (n = t) instanceof String && 'Html' === n[Sr] ? t.toString() : Yr(document, Ve(t)));
 			}
-			var oo = 8,
-				io = 8,
-				ao = 9,
-				so = -1,
-				lo = (function() {
+			var no = 8,
+				ro = 8,
+				oo = 9,
+				io = -1,
+				ao = (function() {
 					return function(t, e, n) {
 						(this.factory = t), (this.resolving = !1), (this.canSeeViewProviders = e), (this.injectImpl = n);
 					};
 				})(),
-				uo = (function(t) {
+				so = (function(t) {
 					return (t[(t.Important = 1)] = 'Important'), (t[(t.DashCase = 2)] = 'DashCase'), t;
 				})({});
-			function co(t) {
+			function lo(t) {
 				return !!t.listen;
 			}
-			var po = {
+			var uo = {
 				createRenderer: function(t, e) {
 					return document;
 				}
 			};
-			function fo(t, e) {
-				t[vn] = e;
+			function co(t, e) {
+				t[mn] = e;
 			}
-			var ho = (function() {
+			var po = (function() {
 					function t() {
 						this._players = [];
 					}
@@ -2227,24 +2221,24 @@
 						t
 					);
 				})(),
-				go = 0,
-				mo = '@';
-			function bo(t, e, n, r) {
+				fo = 0,
+				ho = '@';
+			function go(t, e, n, r) {
 				var o = [t || null, 0, [], n || [null, null], r || [null, null], [0, 0], [0], [0], null, null];
-				return vo(o, go), o;
+				return mo(o, fo), o;
 			}
-			function vo(t, e, n, r) {
+			function mo(t, e, n, r) {
 				void 0 === n && (n = -1);
 				for (var o = t[2], i = 2 * e, a = i + 2, s = o.length; s < a; s += 2) o.push(-1, null);
 				var l = i + 0;
 				n >= 0 && -1 === o[l] && ((o[l] = n), (o[i + 1] = r || null));
 			}
-			function yo(t, e) {
-				for (var n = t, r = e[n], o = e; Array.isArray(r); ) (o = r), (r = r[Qe]);
-				if (xn(o)) return o;
-				var i = Sn(t - dn, e).stylingTemplate;
+			function bo(t, e) {
+				for (var n = t, r = e[n], o = e; Array.isArray(r); ) (o = r), (r = r[Ze]);
+				if (wn(o)) return o;
+				var i = Cn(t - pn, e).stylingTemplate;
 				return (
-					o !== e && (n = Qe),
+					o !== e && (n = Ze),
 					(o[n] = i
 						? (function(t, e) {
 								for (var n = e.slice(), r = 0; r < 10; r++) {
@@ -2253,16 +2247,16 @@
 								}
 								return (n[0] = t), (n[1] |= 16), n;
 						  })(r, i)
-						: bo(r))
+						: go(r))
 				);
 			}
-			function wo(t) {
-				return t[0] === mo;
+			function vo(t) {
+				return t[0] === ho;
 			}
-			function _o(t) {
+			function yo(t) {
 				return 0 != (8 & t.flags);
 			}
-			function xo(t, e, n, r, o, i) {
+			function wo(t, e, n, r, o, i) {
 				return (
 					(i = i || n),
 					o ? (t[o] = r) : t.push(r),
@@ -2271,198 +2265,198 @@
 							var e = t.indexOf(r);
 							e && (e < t[0] ? (t[e] = null) : t.splice(e, 1)), r.destroy();
 						}),
-						(e.playerHandler || (e.playerHandler = new ho())).queuePlayer(r, i),
+						(e.playerHandler || (e.playerHandler = new po())).queuePlayer(r, i),
 						!0)
 				);
 			}
-			function Co(t) {
+			function _o(t) {
 				return 3 === t || 4 === t || 6 === t;
 			}
-			function ko(t) {
-				return t !== so;
+			function xo(t) {
+				return t !== io;
 			}
-			function So(t) {
+			function Co(t) {
 				return 32767 & t;
 			}
-			function Po(t) {
+			function ko(t) {
 				return t >> 16;
 			}
-			function Eo(t, e) {
-				for (var n = Po(t), r = e; n > 0; ) (r = r[pn]), n--;
+			function So(t, e) {
+				for (var n = ko(t), r = e; n > 0; ) (r = r[un]), n--;
 				return r;
 			}
-			function Oo(t) {
-				var e = t[Ke];
-				return _n(e) ? e[Ke] : e;
+			function Po(t) {
+				var e = t[Ye];
+				return yn(e) ? e[Ye] : e;
 			}
-			function Io(t) {
-				for (var e = t[tn]; null !== e && 2 === e.type; ) e = (t = t[pn])[tn];
+			function Eo(t) {
+				for (var e = t[Xe]; null !== e && 2 === e.type; ) e = (t = t[un])[Xe];
 				return t;
 			}
-			function To(t) {
+			function Oo(t) {
 				return (function(t) {
-					for (var e = wn(t) ? t : Mn(t); e && !(512 & e[Je]); ) e = Oo(e);
+					for (var e = vn(t) ? t : In(t); e && !(512 & e[Qe]); ) e = Po(e);
 					return e;
-				})(t)[rn];
+				})(t)[en];
 			}
-			var Mo = !0;
-			function Ao(t) {
-				var e = Mo;
-				return (Mo = t), e;
+			var Io = !0;
+			function To(t) {
+				var e = Io;
+				return (Io = t), e;
 			}
-			var jo = 255,
-				Ro = 0;
-			function Do(t, e) {
-				var n = Uo(t, e);
+			var Mo = 255,
+				Ao = 0;
+			function jo(t, e) {
+				var n = Do(t, e);
 				if (-1 !== n) return n;
-				var r = e[Ye];
-				r.firstTemplatePass && ((t.injectorIndex = e.length), No(r.data, t), No(e, null), No(r.blueprint, null));
-				var o = Lo(t, e),
-					i = So(o),
-					a = Eo(o, e),
+				var r = e[We];
+				r.firstTemplatePass && ((t.injectorIndex = e.length), Ro(r.data, t), Ro(e, null), Ro(r.blueprint, null));
+				var o = No(t, e),
+					i = Co(o),
+					a = So(o, e),
 					s = t.injectorIndex;
-				if (ko(o)) for (var l = a[Ye].data, u = 0; u < 8; u++) e[s + u] = a[i + u] | l[i + u];
-				return (e[s + io] = o), s;
+				if (xo(o)) for (var l = a[We].data, u = 0; u < 8; u++) e[s + u] = a[i + u] | l[i + u];
+				return (e[s + ro] = o), s;
 			}
-			function No(t, e) {
+			function Ro(t, e) {
 				t.push(0, 0, 0, 0, 0, 0, 0, 0, e);
 			}
-			function Uo(t, e) {
-				return -1 === t.injectorIndex || (t.parent && t.parent.injectorIndex === t.injectorIndex) || null == e[t.injectorIndex + io] ? -1 : t.injectorIndex;
+			function Do(t, e) {
+				return -1 === t.injectorIndex || (t.parent && t.parent.injectorIndex === t.injectorIndex) || null == e[t.injectorIndex + ro] ? -1 : t.injectorIndex;
 			}
-			function Lo(t, e) {
+			function No(t, e) {
 				if (t.parent && -1 !== t.parent.injectorIndex) return t.parent.injectorIndex;
-				for (var n = e[tn], r = 1; n && -1 === n.injectorIndex; ) (n = (e = e[pn]) ? e[tn] : null), r++;
+				for (var n = e[Xe], r = 1; n && -1 === n.injectorIndex; ) (n = (e = e[un]) ? e[Xe] : null), r++;
 				return n ? n.injectorIndex | (r << 16) : -1;
 			}
-			function Ho(t, e, n) {
+			function Uo(t, e, n) {
 				!(function(t, e, n) {
-					var r = 'string' != typeof n ? n[je] : n.charCodeAt(0) || 0;
-					null == r && (r = n[je] = Ro++);
-					var o = r & jo,
+					var r = 'string' != typeof n ? n[Me] : n.charCodeAt(0) || 0;
+					null == r && (r = n[Me] = Ao++);
+					var o = r & Mo,
 						i = 1 << o,
 						a = 64 & o,
 						s = 32 & o,
 						l = e.data;
 					128 & o ? (a ? (s ? (l[t + 7] |= i) : (l[t + 6] |= i)) : s ? (l[t + 5] |= i) : (l[t + 4] |= i)) : a ? (s ? (l[t + 3] |= i) : (l[t + 2] |= i)) : s ? (l[t + 1] |= i) : (l[t] |= i);
-				})(t, e[Ye], n);
+				})(t, e[We], n);
 			}
-			function zo(t, e, n, r, o) {
-				if ((void 0 === r && (r = yt.Default), t)) {
+			function Lo(t, e, n, r, o) {
+				if ((void 0 === r && (r = bt.Default), t)) {
 					var i = (function(t) {
 						if ('string' == typeof t) return t.charCodeAt(0) || 0;
-						var e = t[je];
-						return 'number' == typeof e && e > 0 ? e & jo : e;
+						var e = t[Me];
+						return 'number' == typeof e && e > 0 ? e & Mo : e;
 					})(n);
 					if ('function' == typeof i) {
-						var a = ir(),
-							s = Gn();
-						sr(t, e);
+						var a = rr(),
+							s = Bn();
+						ir(t, e);
 						try {
 							var l = i();
-							if (null != l || r & yt.Optional) return l;
-							throw new Error('No provider for ' + qe(n) + '!');
+							if (null != l || r & bt.Optional) return l;
+							throw new Error('No provider for ' + Fe(n) + '!');
 						} finally {
-							sr(a, s);
+							ir(a, s);
 						}
 					} else if ('number' == typeof i) {
-						if (-1 === i) return new Wo(t, e);
+						if (-1 === i) return new Go(t, e);
 						var u = null,
-							c = Uo(t, e),
-							p = so,
-							f = r & yt.Host ? Io(e)[tn] : null;
-						for ((-1 === c || r & yt.SkipSelf) && ((p = -1 === c ? Lo(t, e) : e[c + io]), Zo(r, !1) ? ((u = e[Ye]), (c = So(p)), (e = Eo(p, e))) : (c = -1)); -1 !== c; ) {
-							p = e[c + io];
-							var d = e[Ye];
-							if (Go(i, c, d.data)) {
-								var h = Fo(c, e, n, u, r, f);
-								if (h !== Vo) return h;
+							c = Do(t, e),
+							p = io,
+							f = r & bt.Host ? Eo(e)[Xe] : null;
+						for ((-1 === c || r & bt.SkipSelf) && ((p = -1 === c ? No(t, e) : e[c + ro]), qo(r, !1) ? ((u = e[We]), (c = Co(p)), (e = So(p, e))) : (c = -1)); -1 !== c; ) {
+							p = e[c + ro];
+							var d = e[We];
+							if (Bo(i, c, d.data)) {
+								var h = zo(c, e, n, u, r, f);
+								if (h !== Ho) return h;
 							}
-							Zo(r, e[Ye].data[c + oo] === f) && Go(i, c, e) ? ((u = d), (c = So(p)), (e = Eo(p, e))) : (c = -1);
+							qo(r, e[We].data[c + no] === f) && Bo(i, c, e) ? ((u = d), (c = Co(p)), (e = So(p, e))) : (c = -1);
 						}
 					}
 				}
-				if ((r & yt.Optional && void 0 === o && (o = null), 0 == (r & (yt.Self | yt.Host)))) {
-					var g = e[on],
-						m = Yt(void 0);
+				if ((r & bt.Optional && void 0 === o && (o = null), 0 == (r & (bt.Self | bt.Host)))) {
+					var g = e[nn],
+						m = Wt(void 0);
 					try {
-						return g ? g.get(n, o, r & yt.Optional) : Kt(n, o, r & yt.Optional);
+						return g ? g.get(n, o, r & bt.Optional) : Yt(n, o, r & bt.Optional);
 					} finally {
-						Yt(m);
+						Wt(m);
 					}
 				}
-				if (r & yt.Optional) return o;
-				throw new Error('NodeInjector: NOT_FOUND [' + qe(n) + ']');
+				if (r & bt.Optional) return o;
+				throw new Error('NodeInjector: NOT_FOUND [' + Fe(n) + ']');
 			}
-			var Vo = {};
-			function Fo(t, e, n, r, o, i) {
-				var a = e[Ye],
-					s = a.data[t + oo],
-					l = Bo(s, a, n, null == r ? On(s) && Mo : r != a && 3 === s.type, o & yt.Host && i === s);
-				return null !== l ? qo(a.data, e, l, s) : Vo;
+			var Ho = {};
+			function zo(t, e, n, r, o, i) {
+				var a = e[We],
+					s = a.data[t + no],
+					l = Vo(s, a, n, null == r ? Pn(s) && Io : r != a && 3 === s.type, o & bt.Host && i === s);
+				return null !== l ? Fo(a.data, e, l, s) : Ho;
 			}
-			function Bo(t, e, n, r, o) {
+			function Vo(t, e, n, r, o) {
 				for (var i = t.providerIndexes, a = e.data, s = 65535 & i, l = t.directiveStart, u = i >> 16, c = o ? s + u : t.directiveEnd, p = r ? s : s + u; p < c; p++) {
 					var f = a[p];
 					if ((p < l && n === f) || (p >= l && f.type === n)) return p;
 				}
 				if (o) {
 					var d = a[l];
-					if (d && In(d) && d.type === n) return l;
+					if (d && En(d) && d.type === n) return l;
 				}
 				return null;
 			}
-			function qo(t, e, n, r) {
+			function Fo(t, e, n, r) {
 				var o,
 					i = e[n];
-				if (null !== (o = i) && 'object' == typeof o && Object.getPrototypeOf(o) == lo.prototype) {
+				if (null !== (o = i) && 'object' == typeof o && Object.getPrototypeOf(o) == ao.prototype) {
 					var a = i;
-					if (a.resolving) throw new Error('Circular dep for ' + qe(t[n]));
-					var s = Ao(a.canSeeViewProviders);
+					if (a.resolving) throw new Error('Circular dep for ' + Fe(t[n]));
+					var s = To(a.canSeeViewProviders);
 					a.resolving = !0;
 					var l = void 0;
-					a.injectImpl && (l = Yt(a.injectImpl));
-					var u = ir(),
-						c = Gn();
-					sr(r, e);
+					a.injectImpl && (l = Wt(a.injectImpl));
+					var u = rr(),
+						c = Bn();
+					ir(r, e);
 					try {
 						i = e[n] = a.factory(null, t, e, r);
 					} finally {
-						a.injectImpl && Yt(l), Ao(s), (a.resolving = !1), sr(u, c);
+						a.injectImpl && Wt(l), To(s), (a.resolving = !1), ir(u, c);
 					}
 				}
 				return i;
 			}
-			function Go(t, e, n) {
+			function Bo(t, e, n) {
 				var r = 64 & t,
 					o = 32 & t;
 				return !!((128 & t ? (r ? (o ? n[e + 7] : n[e + 6]) : o ? n[e + 5] : n[e + 4]) : r ? (o ? n[e + 3] : n[e + 2]) : o ? n[e + 1] : n[e]) & (1 << t));
 			}
-			function Zo(t, e) {
-				return !(t & yt.Self || (t & yt.Host && e));
+			function qo(t, e) {
+				return !(t & bt.Self || (t & bt.Host && e));
 			}
-			var Wo = (function() {
+			var Go = (function() {
 				function t(t, e) {
 					(this._tNode = t), (this._lView = e);
 				}
 				return (
 					(t.prototype.get = function(t, e) {
-						return zo(this._tNode, this._lView, t, void 0, e);
+						return Lo(this._tNode, this._lView, t, void 0, e);
 					}),
 					t
 				);
 			})();
+			function Zo(t) {
+				return t[me];
+			}
+			function Wo(t) {
+				return t[be];
+			}
 			function Qo(t) {
-				return t[ve];
-			}
-			function Yo(t) {
-				return t[ye];
-			}
-			function Jo(t) {
 				for (var e = [], n = 1; n < arguments.length; n++) e[n - 1] = arguments[n];
 				t.error.apply(t, c(e));
 			}
-			var Ko = (function() {
+			var Yo = (function() {
 					function t() {
 						this._console = console;
 					}
@@ -2471,57 +2465,57 @@
 							var e = this._findOriginalError(t),
 								n = this._findContext(t),
 								r = (function(t) {
-									return t.ngErrorLogger || Jo;
+									return t.ngErrorLogger || Qo;
 								})(t);
 							r(this._console, 'ERROR', t), e && r(this._console, 'ORIGINAL ERROR', e), n && r(this._console, 'ERROR CONTEXT', n);
 						}),
 						(t.prototype._findContext = function(t) {
-							return t ? (Qo(t) ? Qo(t) : this._findContext(Yo(t))) : null;
+							return t ? (Zo(t) ? Zo(t) : this._findContext(Wo(t))) : null;
 						}),
 						(t.prototype._findOriginalError = function(t) {
-							for (var e = Yo(t); e && Yo(e); ) e = Yo(e);
+							for (var e = Wo(t); e && Wo(e); ) e = Wo(e);
 							return e;
 						}),
 						t
 					);
 				})(),
-				Xo = {},
-				$o = (function() {
+				Jo = {},
+				Ko = (function() {
 					return function(t, e) {
 						(this.fn = t), (this.value = e);
 					};
 				})();
-			function ti(t, e, n, r) {
-				for (var o = 2; o < t.length; o += 3) if (t[o + 0] === e) return void (Li(t[o + 1], n, t[o + 2], r) && Bi(o, t, e, n, r));
-				Bi(null, t, e, n, r);
+			function Xo(t, e, n, r) {
+				for (var o = 2; o < t.length; o += 3) if (t[o + 0] === e) return void (Ni(t[o + 1], n, t[o + 2], r) && Vi(o, t, e, n, r));
+				Vi(null, t, e, n, r);
 			}
-			function ei(t, e, n, r) {
-				for (var o = e[4], i = r || 2; i < o.length; ) o[i + 1] && ai(t, o[i + 0], !0, n, null), (i += 3);
+			function $o(t, e, n, r) {
+				for (var o = e[4], i = r || 2; i < o.length; ) o[i + 1] && oi(t, o[i + 0], !0, n, null), (i += 3);
 				return i;
 			}
-			function ni(t, e, n, r) {
+			function ti(t, e, n, r) {
 				for (var o = e[3], i = r || 2; i < o.length; ) {
 					var a = o[i + 1];
-					a && ii(t, o[i + 0], a, n, null), (i += 3);
+					a && ri(t, o[i + 0], a, n, null), (i += 3);
 				}
 				return i;
 			}
-			function ri(t, e, n, r) {
-				for (var o = n; o < r; o += 4) if (Si(t, o) === e) return o;
+			function ei(t, e, n, r) {
+				for (var o = n; o < r; o += 4) if (Ci(t, o) === e) return o;
 				return -1;
 			}
-			function oi(t, e, n) {
+			function ni(t, e, n) {
 				void 0 === n && (n = 0),
 					(function(t, e, n, r) {
 						if (
 							(void 0 === r && (r = 0),
 							!(function(t, e, n, r) {
-								return !t[6][1 + 4 * n + 0] && (r === Xo || zi(t, !0, n) === r);
+								return !t[6][1 + 4 * n + 0] && (r === Jo || Li(t, !0, n) === r);
 							})(t, 0, r, e))
 						) {
 							var o,
 								i,
-								a = (e = e === Xo ? zi(t, !0, r) : e) instanceof $o ? new Ri(e, t[0], 1) : null,
+								a = (e = e === Jo ? Li(t, !0, r) : e) instanceof Ko ? new Ai(e, t[0], 1) : null,
 								s = a ? e.value : e,
 								l = a ? 1 : 0,
 								u = !1;
@@ -2538,23 +2532,23 @@
 								})(t, a, 1),
 								(u = !0));
 							var c = !1;
-							'string' == typeof s ? ((i = s.split(/\s+/)), (c = !0)) : (i = s ? Object.keys(s) : Ee),
-								(o = gi(t)),
+							'string' == typeof s ? ((i = s.split(/\s+/)), (c = !0)) : (i = s ? Object.keys(s) : Se),
+								(o = di(t)),
 								(function(t, e, n, r, i, a, s, l, u) {
 									for (
 										var c = !1, p = 1 + 4 * e, f = t[6], d = f[p + 1], h = f[p + 3], g = 1 === f[p + 0] || !(f[p + 2] || !l), m = 0, b = 0, v = !0 === s, y = o, w = a.length;
 										y < d;
 
 									) {
-										var _ = Si(t, y);
+										var _ = Ci(t, y);
 										if (w)
 											for (var x = 0; x < a.length; x++) {
 												if ((O = (E = a[x]) || null) && _ === O) {
-													var C = ki(t, y),
-														k = Di(t, y),
+													var C = xi(t, y),
+														k = ji(t, y),
 														S = !!v || s[O],
-														P = Ci(t, y);
-													ji(P, C, S) && Li(C, S, k, e) && (vi(t, y, S), yi(t, y, n, e), Ai(t, P, S) && (si(t, y, !0), (c = !0))), (a[x] = null), w--;
+														P = _i(t, y);
+													Mi(P, C, S) && Ni(C, S, k, e) && (mi(t, y, S), bi(t, y, n, e), Ti(t, P, S) && (ii(t, y, !0), (c = !0))), (a[x] = null), w--;
 													break;
 												}
 											}
@@ -2566,29 +2560,29 @@
 											if ((E = a[x])) {
 												S = !!v || s[E];
 												for (var O = E, I = y >= d, T = y; T < i; T += 4) {
-													if (Si(t, T) === O) {
-														var M = Di(t, T),
-															A = wi(t, T),
-															j = ki(t, T),
-															R = Ci(t, T);
-														Li(j, S, M, e) &&
-															(I && (Oi(t, y, T), m++),
-															ji(R, j, S) &&
-																((null === S || (void 0 === S && S !== j)) && (g = !0), vi(t, y, S), (null !== j || Ai(t, R, S)) && (si(t, y, !0), (c = !0))),
-															(M === e && n === A) || yi(t, y, n, e)),
+													if (Ci(t, T) === O) {
+														var M = ji(t, T),
+															A = vi(t, T),
+															j = xi(t, T),
+															R = _i(t, T);
+														Ni(j, S, M, e) &&
+															(I && (Pi(t, y, T), m++),
+															Mi(R, j, S) &&
+																((null === S || (void 0 === S && S !== j)) && (g = !0), mi(t, y, S), (null !== j || Ti(t, R, S)) && (ii(t, y, !0), (c = !0))),
+															(M === e && n === A) || bi(t, y, n, e)),
 															(y += 4);
 														continue t;
 													}
 												}
-												if (null != S) (g = !0), m++, Ii(t, I ? y : d + 4 * b, !0, O, 1 | Mi(t, O, !0, null), S, e, n), b++, (i += 4), (y += 4), (c = !0);
+												if (null != S) (g = !0), m++, Ei(t, I ? y : d + 4 * b, !0, O, 1 | Ii(t, O, !0, null), S, e, n), b++, (i += 4), (y += 4), (c = !0);
 											}
 										}
 									}
 									for (; y < i; ) {
 										g = !0;
-										var D = ki(t, y),
-											N = Ci(t, y);
-										Di(t, y), null != D && (g = !0), ji(N, D, null) && (vi(t, y, null), Ai(t, N, D) && (si(t, y, !0), (c = !0)), yi(t, y, n, e)), (y += 4);
+										var D = xi(t, y),
+											N = _i(t, y);
+										ji(t, y), null != D && (g = !0), Mi(N, D, null) && (mi(t, y, null), Ti(t, N, D) && (ii(t, y, !0), (c = !0)), bi(t, y, n, e)), (y += 4);
 									}
 									(function(t, e, n, r, o, i, a, s) {
 										var l = t[6],
@@ -2598,154 +2592,154 @@
 										for (var f = a, p = 1; p < u; p += 4) f += l[p + 3];
 										l[0] = f;
 									})(t, e, 0, l, d, 0, m, (g = g || h !== m)),
-										c && Pi(t, !0);
-								})(t, r, l, 0, t.length, i, c || s || Pe, e),
-								u && Ei(t, !0);
+										c && ki(t, !0);
+								})(t, r, l, 0, t.length, i, c || s || ke, e),
+								u && Si(t, !0);
 						}
 					})(t, e, 0, n);
 			}
-			function ii(t, e, n, r, o, i, a) {
+			function ri(t, e, n, r, o, i, a) {
 				(n = o && n ? o(e, n, 3) : n),
 					i || a
 						? (i && i.setValue(e, n), a && a.setValue(e, n))
 						: n
-						? ((n = n.toString()), co(r) ? r.setStyle(t, e, n, uo.DashCase) : t.style.setProperty(e, n))
-						: co(r)
-						? r.removeStyle(t, e, uo.DashCase)
+						? ((n = n.toString()), lo(r) ? r.setStyle(t, e, n, so.DashCase) : t.style.setProperty(e, n))
+						: lo(r)
+						? r.removeStyle(t, e, so.DashCase)
 						: t.style.removeProperty(e);
 			}
-			function ai(t, e, n, r, o, i) {
-				o || i ? (o && o.setValue(e, n), i && i.setValue(e, n)) : '' !== e && (n ? (co(r) ? r.addClass(t, e) : t.classList.add(e)) : co(r) ? r.removeClass(t, e) : t.classList.remove(e));
+			function oi(t, e, n, r, o, i) {
+				o || i ? (o && o.setValue(e, n), i && i.setValue(e, n)) : '' !== e && (n ? (lo(r) ? r.addClass(t, e) : t.classList.add(e)) : lo(r) ? r.removeClass(t, e) : t.classList.remove(e));
 			}
-			function si(t, e, n) {
+			function ii(t, e, n) {
 				var r = e >= 10 ? e + 0 : e;
 				n ? (t[r] |= 1) : (t[r] &= -2);
 			}
-			function li(t, e) {
+			function ai(t, e) {
 				return 1 == (1 & t[e >= 10 ? e + 0 : e]);
 			}
-			function ui(t, e) {
+			function si(t, e) {
 				return 2 == (2 & t[e >= 10 ? e + 0 : e]);
 			}
-			function ci(t, e) {
+			function li(t, e) {
 				return 4 == (4 & t[e >= 10 ? e + 0 : e]);
 			}
-			function pi(t, e, n) {
+			function ui(t, e, n) {
 				return (31 & t) | (e << 5) | (n << 19);
 			}
-			function fi(t, e) {
-				var n = di(e);
+			function ci(t, e) {
+				var n = pi(e);
 				return (2 & e ? t[4] : t[3])[n];
 			}
-			function di(t) {
+			function pi(t) {
 				return (t >> 5) & 16383;
 			}
-			function hi(t) {
+			function fi(t) {
 				var e = (t >> 19) & 16383;
 				return e >= 10 ? e : -1;
 			}
-			function gi(t) {
+			function di(t) {
 				return t[6][2];
 			}
-			function mi(t) {
+			function hi(t) {
 				return t[7][2];
 			}
-			function bi(t, e, n) {
+			function gi(t, e, n) {
 				t[e + 1] = n;
 			}
-			function vi(t, e, n) {
+			function mi(t, e, n) {
 				t[e + 2] = n;
 			}
-			function yi(t, e, n, r) {
+			function bi(t, e, n, r) {
 				var o = (function(t, e) {
 					return (n << 16) | t;
 				})(r);
 				t[e + 3] = o;
 			}
-			function wi(t, e) {
+			function vi(t, e) {
 				return (t[e + 3] >> 16) & 65535;
 			}
-			function _i(t, e) {
-				var n = wi(t, e);
+			function yi(t, e) {
+				var n = vi(t, e);
 				if (n) {
 					var r = t[9];
 					if (r) return r[n];
 				}
 				return null;
 			}
-			function xi(t, e, n) {
+			function wi(t, e, n) {
 				t[1 === e ? e : e + 0] = n;
 			}
-			function Ci(t, e) {
+			function _i(t, e) {
 				return t[1 === e ? e : e + 0];
 			}
-			function ki(t, e) {
+			function xi(t, e) {
 				return t[e + 2];
 			}
-			function Si(t, e) {
+			function Ci(t, e) {
 				return t[e + 1];
 			}
-			function Pi(t, e) {
-				si(t, 1, e);
+			function ki(t, e) {
+				ii(t, 1, e);
 			}
-			function Ei(t, e) {
+			function Si(t, e) {
 				e ? (t[1] |= 8) : (t[1] &= -9);
 			}
-			function Oi(t, e, n) {
+			function Pi(t, e, n) {
 				if (e !== n) {
-					var r = ki(t, e),
-						o = Si(t, e),
-						i = Ci(t, e),
-						a = wi(t, e),
-						s = Di(t, e),
+					var r = xi(t, e),
+						o = Ci(t, e),
+						i = _i(t, e),
+						a = vi(t, e),
+						s = ji(t, e),
 						l = i,
-						u = Ci(t, n),
-						c = hi(l);
-					c >= 0 && xi(t, c, pi((p = Ci(t, c)), di(p), n));
+						u = _i(t, n),
+						c = fi(l);
+					c >= 0 && wi(t, c, ui((p = _i(t, c)), pi(p), n));
 					var p,
-						f = hi(u);
-					f >= 0 && xi(t, f, pi((p = Ci(t, f)), di(p), e)),
-						vi(t, e, ki(t, n)),
-						bi(t, e, Si(t, n)),
-						xi(t, e, Ci(t, n)),
-						yi(t, e, wi(t, n), Di(t, n)),
-						vi(t, n, r),
-						bi(t, n, o),
-						xi(t, n, i),
-						yi(t, n, a, s);
+						f = fi(u);
+					f >= 0 && wi(t, f, ui((p = _i(t, f)), pi(p), e)),
+						mi(t, e, xi(t, n)),
+						gi(t, e, Ci(t, n)),
+						wi(t, e, _i(t, n)),
+						bi(t, e, vi(t, n), ji(t, n)),
+						mi(t, n, r),
+						gi(t, n, o),
+						wi(t, n, i),
+						bi(t, n, a, s);
 				}
 			}
-			function Ii(t, e, n, r, o, i, a, s) {
+			function Ei(t, e, n, r, o, i, a, s) {
 				var l = e < t.length;
 				t.splice(e, 0, 1 | o | (n ? 2 : 0), r, i, 0),
-					yi(t, e, s, a),
+					bi(t, e, s, a),
 					l &&
 						(function(t, n) {
 							for (var r = e + 4; r < t.length; r += 4) {
-								var o = hi(Ci(t, r));
+								var o = fi(_i(t, r));
 								if (o > 0) {
-									var i = di(Ci(t, o));
-									xi(t, o, pi((li(t, o) ? 1 : 0) | (ui(t, o) ? 2 : 0) | (ci(t, o) ? 4 : 0), i, r));
+									var i = pi(_i(t, o));
+									wi(t, o, ui((ai(t, o) ? 1 : 0) | (si(t, o) ? 2 : 0) | (li(t, o) ? 4 : 0), i, r));
 								}
 							}
 						})(t);
 			}
-			function Ti(t, e) {
+			function Oi(t, e) {
 				return null !== t;
 			}
-			function Mi(t, e, n, r) {
+			function Ii(t, e, n, r) {
 				var o,
 					i = r && r(e, null, 1) ? 4 : 0;
-				return n ? ((i |= 2), (o = Ni(t[4], e))) : (o = Ni(t[3], e)), pi(i, (o = o > 0 ? o + 1 : 0), 0);
+				return n ? ((i |= 2), (o = Ri(t[4], e))) : (o = Ri(t[3], e)), ui(i, (o = o > 0 ? o + 1 : 0), 0);
 			}
-			function Ai(t, e, n) {
-				var r = fi(t, e);
-				return !r || ji(e, r, n);
+			function Ti(t, e, n) {
+				var r = ci(t, e);
+				return !r || Mi(e, r, n);
 			}
-			function ji(t, e, n) {
+			function Mi(t, e, n) {
 				return !(2 & t) && e && n && 4 & t ? e.toString() !== n.toString() : e !== n;
 			}
-			var Ri = (function() {
+			var Ai = (function() {
 				function t(t, e, n) {
 					(this._element = e), (this._type = n), (this._values = {}), (this._dirty = !1), (this._factory = t);
 				}
@@ -2762,21 +2756,21 @@
 					t
 				);
 			})();
-			function Di(t, e) {
+			function ji(t, e) {
 				return 65535 & t[e + 3];
 			}
-			function Ni(t, e) {
+			function Ri(t, e) {
 				for (var n = 2; n < t.length; n += 3) if (t[n] === e) return n;
 				return -1;
 			}
-			function Ui(t, e) {
+			function Di(t, e) {
 				var n = t[2];
 				return n[2 * e + 1] || n[1] || null;
 			}
-			function Li(t, e, n, r) {
+			function Ni(t, e, n, r) {
 				return null == t || (null != e ? r <= n : n === r);
 			}
-			function Hi(t) {
+			function Ui(t) {
 				var e = t[4],
 					n = e[1];
 				if (null === n) {
@@ -2786,39 +2780,39 @@
 				}
 				return n;
 			}
-			function zi(t, e, n) {
+			function Li(t, e, n) {
 				return t[e ? 6 : 7][1 + 4 * n + 2] || null;
 			}
-			function Vi(t) {
+			function Hi(t) {
 				return t.replace(/[a-z][A-Z]/g, function(t) {
 					return t.charAt(0) + '-' + t.charAt(1).toLowerCase();
 				});
 			}
-			function Fi(t, e, n, r, o) {
+			function zi(t, e, n, r, o) {
 				void 0 === o && (o = 0);
 				var i = t[n ? 6 : 7];
 				if (e > 0) for (var a = 1 + 4 * e; i.length < a; ) i.push(0, r, null, 0);
 				i.push(0, r, null, o);
 			}
-			function Bi(t, e, n, r, o) {
+			function Vi(t, e, n, r, o) {
 				return null === t && ((t = e.length), e.push(null, null, null), (e[t + 0] = n)), (e[t + 1] = r), (e[t + 2] = o), t;
 			}
-			var qi = 'ng-template';
-			function Gi(t, e) {
+			var Fi = 'ng-template';
+			function Bi(t, e) {
 				var n = t.length,
 					r = t.indexOf(e),
 					o = r + e.length;
 				return !(-1 === r || (r > 0 && ' ' !== t[r - 1]) || (o < n && ' ' !== t[o]));
 			}
-			function Zi(t, e, n) {
-				return e === (0 !== t.type || n ? t.tagName : qi);
+			function qi(t, e, n) {
+				return e === (0 !== t.type || n ? t.tagName : Fi);
 			}
-			function Wi(t, e, n) {
+			function Gi(t, e, n) {
 				for (
 					var r = 4,
 						o = t.attrs || [],
 						i = (function(t) {
-							for (var e = 0; e < t.length; e++) if (Co(t[e])) return e;
+							for (var e = 0; e < t.length; e++) if (_o(t[e])) return e;
 							return t.length;
 						})(o),
 						a = !1,
@@ -2830,22 +2824,22 @@
 					if ('number' != typeof l) {
 						if (!a)
 							if (4 & r) {
-								if (((r = 2 | (1 & r)), ('' !== l && !Zi(t, l, n)) || ('' === l && 1 === e.length))) {
-									if (Qi(r)) return !1;
+								if (((r = 2 | (1 & r)), ('' !== l && !qi(t, l, n)) || ('' === l && 1 === e.length))) {
+									if (Zi(r)) return !1;
 									a = !0;
 								}
 							} else {
 								var u = 8 & r ? l : e[++s];
 								if (8 & r && t.stylingTemplate) {
-									if (!Gi(Yi(t), u)) {
-										if (Qi(r)) return !1;
+									if (!Bi(Wi(t), u)) {
+										if (Zi(r)) return !1;
 										a = !0;
 									}
 									continue;
 								}
-								var c = Ji(8 & r ? 'class' : l, o, 0 == t.type && t.tagName !== qi, n);
+								var c = Qi(8 & r ? 'class' : l, o, 0 == t.type && t.tagName !== Fi, n);
 								if (-1 === c) {
-									if (Qi(r)) return !1;
+									if (Zi(r)) return !1;
 									a = !0;
 									continue;
 								}
@@ -2853,27 +2847,27 @@
 									var p;
 									p = c > i ? '' : o[c + 1];
 									var f = 8 & r ? p : null;
-									if ((f && !Gi(f, u)) || (2 & r && u !== p)) {
-										if (Qi(r)) return !1;
+									if ((f && !Bi(f, u)) || (2 & r && u !== p)) {
+										if (Zi(r)) return !1;
 										a = !0;
 									}
 								}
 							}
 					} else {
-						if (!a && !Qi(r) && !Qi(l)) return !1;
-						if (a && Qi(l)) continue;
+						if (!a && !Zi(r) && !Zi(l)) return !1;
+						if (a && Zi(l)) continue;
 						(a = !1), (r = l | (1 & r));
 					}
 				}
-				return Qi(r) || a;
+				return Zi(r) || a;
 			}
-			function Qi(t) {
+			function Zi(t) {
 				return 0 == (1 & t);
 			}
-			function Yi(t) {
-				return t.stylingTemplate ? Hi(t.stylingTemplate) : '';
+			function Wi(t) {
+				return t.stylingTemplate ? Ui(t.stylingTemplate) : '';
 			}
-			function Ji(t, e, n, r) {
+			function Qi(t, e, n, r) {
 				if (null === e) return -1;
 				var o = 0;
 				if (r || !n) {
@@ -2906,12 +2900,12 @@
 					return -1;
 				})(e, t);
 			}
-			function Ki(t, e, n) {
+			function Yi(t, e, n) {
 				void 0 === n && (n = !1);
-				for (var r = 0; r < e.length; r++) if (Wi(t, e[r], n)) return !0;
+				for (var r = 0; r < e.length; r++) if (Gi(t, e[r], n)) return !0;
 				return !1;
 			}
-			function Xi(t, e) {
+			function Ji(t, e) {
 				t: for (var n = 0; n < e.length; n++) {
 					var r = e[n];
 					if (t.length === r.length) {
@@ -2921,127 +2915,127 @@
 				}
 				return !1;
 			}
-			var $i,
-				ta = 0;
+			var Ki,
+				Xi = 0;
+			function $i() {
+				return Xi > 0;
+			}
+			function ta(t) {
+				Ki = t;
+			}
 			function ea() {
-				return ta > 0;
+				return Ki;
 			}
-			function na(t) {
-				$i = t;
-			}
-			function ra() {
-				return $i;
-			}
-			var oa = '--MAP--';
-			function ia(t, e) {
+			var na = '--MAP--';
+			function ra(t, e) {
 				t[1] = e;
 			}
-			function aa(t) {
+			function oa(t) {
 				return t[0];
 			}
-			function sa(t, e) {
+			function ia(t, e) {
 				return t[e + 2];
 			}
-			function la(t, e) {
+			function aa(t, e) {
 				return 1 & t[e + 0];
 			}
-			function ua(t, e) {
-				return (1 & la(t, e)) > 0;
+			function sa(t, e) {
+				return (1 & aa(t, e)) > 0;
 			}
-			function ca(t, e) {
+			function la(t, e) {
 				return t[e + 0] >> 1;
 			}
-			function pa(t, e, n) {
-				var r = la(t, e);
+			function ua(t, e, n) {
+				var r = aa(t, e);
 				t[e + 0] = r | (n << 1);
 			}
-			function fa(t, e) {
+			function ca(t, e) {
 				return t[e + 1];
 			}
-			function da(t, e, n) {
+			function pa(t, e, n) {
 				return t[e + 3 + n];
 			}
-			function ha(t, e) {
+			function fa(t, e) {
 				return e === t[1];
 			}
-			function ga(t) {
+			function da(t) {
 				!(function(t, e) {
 					t[0] = e;
-				})(t, 1 | aa(t));
+				})(t, 1 | oa(t));
 			}
-			function ma(t) {
-				return (1 & aa(t)) > 0;
+			function ha(t) {
+				return (1 & oa(t)) > 0;
 			}
-			function ba(t) {
+			function ga(t) {
 				return 5 + t[3];
 			}
-			function va(t, e) {
+			function ma(t, e) {
 				return (Array.isArray(t) ? t[0] : t) !== (Array.isArray(e) ? e[0] : e);
 			}
-			function ya(t) {
+			function ba(t) {
 				return null != t && '' !== t;
 			}
-			function wa(t) {
-				var e = ra() || t[ln];
-				return e && 'function' != typeof e ? (na(e), _a) : e;
+			function va(t) {
+				var e = ea() || t[an];
+				return e && 'function' != typeof e ? (ta(e), ya) : e;
 			}
-			var _a = function(t, e, n) {
-					var r = ra();
-					return r ? !(2 & n) || r.sanitize($r.STYLE, e) : e;
+			var ya = function(t, e, n) {
+					var r = ea();
+					return r ? !(2 & n) || r.sanitize(Kr.STYLE, e) : e;
 				},
-				xa = null,
-				Ca = 1,
+				wa = null,
+				_a = 1,
+				xa = 1,
+				Ca = 0,
 				ka = 1,
 				Sa = 0,
-				Pa = 1,
-				Ea = 0,
-				Oa = 0,
-				Ia = [];
-			function Ta(t, e, n, r, o, i, a, s, l) {
-				ma(t) ||
+				Pa = 0,
+				Ea = [];
+			function Oa(t, e, n, r, o, i, a, s, l) {
+				ha(t) ||
 					(a
 						? (function(t, e, n, r, o) {
-								Ia.unshift(t, e, n, r, o);
+								Ea.unshift(t, e, n, r, o);
 						  })(t, n, r, o, l)
-						: (Ia.length && Ma(), Aa(t, n, r, o, l)));
-				var u = s || va(e[o], i);
+						: (Ea.length && Ia(), Ta(t, n, r, o, l)));
+				var u = s || ma(e[o], i);
 				return u && (e[o] = i), u;
 			}
-			function Ma() {
-				for (var t = 0; t < Ia.length; ) Aa(Ia[t++], Ia[t++], Ia[t++], Ia[t++], Ia[t++]);
-				Ia.length = 0;
+			function Ia() {
+				for (var t = 0; t < Ea.length; ) Ta(Ea[t++], Ea[t++], Ea[t++], Ea[t++], Ea[t++]);
+				Ea.length = 0;
 			}
-			function Aa(t, e, n, r, o) {
+			function Ta(t, e, n, r, o) {
 				if (n) {
-					for (var i = !1, a = ba(t); a < t.length; ) {
-						var s = fa(t, a),
-							l = sa(t, a);
+					for (var i = !1, a = ga(t); a < t.length; ) {
+						var s = ca(t, a),
+							l = ia(t, a);
 						if ((i = n <= l)) {
-							n < l && ja(t, a, n, o), Ra(t, !1, a, r, e);
+							n < l && Ma(t, a, n, o), Aa(t, !1, a, r, e);
 							break;
 						}
 						a += 3 + s;
 					}
-					i || (ja(t, t.length, n, o), Ra(t, !1, a, r, e));
-				} else Ra(t, !0, 2, r, e);
+					i || (Ma(t, t.length, n, o), Aa(t, !1, a, r, e));
+				} else Aa(t, !0, 2, r, e);
 			}
-			function ja(t, e, n, r) {
-				t.splice(e, 0, r ? 1 : 0, Ca, n, xa), pa(t, e, ka);
+			function Ma(t, e, n, r) {
+				t.splice(e, 0, r ? 1 : 0, _a, n, wa), ua(t, e, xa);
 			}
-			function Ra(t, e, n, r, o) {
-				var i = n + 3 + fa(t, n);
-				e || i--, 'number' == typeof r ? (t.splice(i, 0, r), t[n + 1]++, pa(t, n, ca(t, n) | (1 << o))) : 'string' == typeof r && null == t[i] && (t[i] = r);
+			function Aa(t, e, n, r, o) {
+				var i = n + 3 + ca(t, n);
+				e || i--, 'number' == typeof r ? (t.splice(i, 0, r), t[n + 1]++, ua(t, n, la(t, n) | (1 << o))) : 'string' == typeof r && null == t[i] && (t[i] = r);
 			}
-			function Da(t, e, n, r, o, i, a) {
-				Ia.length && Ma();
-				for (var s = !0 === o ? -1 : !1 === o ? 0 : o, l = Na, u = (s & ca(t, 2)) > 0 ? 1 : 0, c = ba(t); c < t.length; ) {
-					var p = fa(t, c);
-					if (s & ca(t, c)) {
-						for (var f = !1, d = sa(t, c), h = p - 1, g = da(t, c, h), m = 0; m < h; m++) {
-							var b = da(t, c, m),
+			function ja(t, e, n, r, o, i, a) {
+				Ea.length && Ia();
+				for (var s = !0 === o ? -1 : !1 === o ? 0 : o, l = Ra, u = (s & la(t, 2)) > 0 ? 1 : 0, c = ga(t); c < t.length; ) {
+					var p = ca(t, c);
+					if (s & la(t, c)) {
+						for (var f = !1, d = ia(t, c), h = p - 1, g = pa(t, c, h), m = 0; m < h; m++) {
+							var b = pa(t, c, m),
 								v = r[b];
-							if (ya(v)) {
-								i(e, n, d, a && ua(t, c) ? a(d, v, 2) : v, b), (f = !0);
+							if (ba(v)) {
+								i(e, n, d, a && sa(t, c) ? a(d, v, 2) : v, b), (f = !0);
 								break;
 							}
 						}
@@ -3055,40 +3049,40 @@
 				}
 				l && l(t, e, n, r, i, a, u);
 			}
-			var Na = null,
-				Ua = function(t, e, n, r) {
-					r ? ((r = r.toString()), t && co(t) ? t.setStyle(e, n, r, uo.DashCase) : e.style.setProperty(n, r)) : t && co(t) ? t.removeStyle(e, n, uo.DashCase) : e.style.removeProperty(n);
+			var Ra = null,
+				Da = function(t, e, n, r) {
+					r ? ((r = r.toString()), t && lo(t) ? t.setStyle(e, n, r, so.DashCase) : e.style.setProperty(n, r)) : t && lo(t) ? t.removeStyle(e, n, so.DashCase) : e.style.removeProperty(n);
 				},
-				La = function(t, e, n, r) {
-					'' !== n && (r ? (t && co(t) ? t.addClass(e, n) : e.classList.add(n)) : t && co(t) ? t.removeClass(e, n) : e.classList.remove(n));
+				Na = function(t, e, n, r) {
+					'' !== n && (r ? (t && lo(t) ? t.addClass(e, n) : e.classList.add(n)) : t && lo(t) ? t.removeClass(e, n) : e.classList.remove(n));
 				},
-				Ha = function(t, e, n, r, o, i, a, s, l) {
+				Ua = function(t, e, n, r, o, i, a, s, l) {
 					var u = !1;
-					if (fa(t, 2)) {
+					if (ca(t, 2)) {
 						var c = !0,
 							p = !s;
 						p && -2 & a && ((c = !1), (u = !0)),
 							c &&
 								(u = (function t(e, n, r, o, i, a, s, l, u, c) {
 									var p = !1;
-									if (u < fa(e, 2)) {
+									if (u < ca(e, 2)) {
 										for (
-											var f = da(e, 2, u),
+											var f = pa(e, 2, u),
 												d = o[f],
 												h = (function(t) {
-													return t >= Fa.length && Fa.push(1), Fa[t];
+													return t >= za.length && za.push(1), za[t];
 												})(u);
 											h < d.length;
 
 										) {
-											var g = Ba(d, h),
+											var g = Va(d, h),
 												m = l && g > l,
 												b = !m && g === l,
-												v = Ga(d, h),
-												y = ya(v),
-												w = t(e, n, r, o, i, a, m ? s : za(s, y, b), m ? l : g, u + 1, c);
+												v = Ba(d, h),
+												y = ba(v),
+												w = t(e, n, r, o, i, a, m ? s : La(s, y, b), m ? l : g, u + 1, c);
 											if (m) break;
-											if (!w && Va(s, b)) {
+											if (!w && Ha(s, b)) {
 												var _ = b && !y,
 													x = _ ? c : v,
 													C = _ ? f : null;
@@ -3096,191 +3090,191 @@
 											}
 											(p = w && b), (h += 2);
 										}
-										Fa[u] = h;
+										za[u] = h;
 									}
 									return p;
 								})(t, e, n, r, o, i, a, s || null, 0, l || null)),
 							p &&
 								(function() {
-									for (var t = 0; t < Fa.length; t++) Fa[t] = 1;
+									for (var t = 0; t < za.length; t++) za[t] = 1;
 								})();
 					}
 					return u;
 				};
-			function za(t, e, n) {
+			function La(t, e, n) {
 				var r = t;
 				return e || !n || 4 & t ? ((r |= 4), (r &= -3)) : ((r |= 2), (r &= -5)), r;
 			}
-			function Va(t, e) {
+			function Ha(t, e) {
 				var n = (1 & t) > 0;
 				return n ? 4 & t && e && (n = !1) : 2 & t && (n = e), n;
 			}
-			var Fa = [];
-			function Ba(t, e) {
+			var za = [];
+			function Va(t, e) {
 				return t[e + 0];
 			}
-			function qa(t, e, n) {
+			function Fa(t, e, n) {
 				t[e + 1] = n;
 			}
-			function Ga(t, e) {
+			function Ba(t, e) {
 				return t[e + 1];
 			}
-			function Za(t) {
-				Wa(Gn(), t);
+			function qa(t) {
+				Ga(Bn(), t);
 			}
-			function Wa(t, e) {
-				Nn(t, t[Ye], dr(), e), Sr(e);
+			function Ga(t, e) {
+				Rn(t, t[We], pr(), e), Cr(e);
 			}
-			var Qa = (function() {
+			var Za = (function() {
 				return Promise.resolve(null);
 			})();
-			function Ya(t) {
-				var e = t[Ye],
-					n = cr(t);
-				if (((e.firstTemplatePass = !1), (t[en] = e.bindingStartIndex), !n)) {
-					var r = dr();
-					Nn(t, e, r, void 0),
+			function Wa(t) {
+				var e = t[We],
+					n = lr(t);
+				if (((e.firstTemplatePass = !1), (t[$e] = e.bindingStartIndex), !n)) {
+					var r = pr();
+					Rn(t, e, r, void 0),
 						(function(t) {
-							for (var e = t[un]; null !== e; e = e[Xe])
-								if (-1 === e[gn] && _n(e))
-									for (var n = bn; n < e.length; n++) {
+							for (var e = t[sn]; null !== e; e = e[Je])
+								if (-1 === e[dn] && yn(e))
+									for (var n = gn; n < e.length; n++) {
 										var r = e[n];
-										es(r, r[Ye], r[rn]);
+										$a(r, r[We], r[en]);
 									}
 						})(t),
-						Ja(e, t),
-						jn(t),
-						Un(t, e.contentHooks, e.contentCheckHooks, r, 1, void 0),
+						Qa(e, t),
+						Mn(t),
+						Dn(t, e.contentHooks, e.contentCheckHooks, r, 1, void 0),
 						(function(t, e) {
-							var n = kr();
+							var n = xr();
 							try {
 								if (t.expandoInstructions) {
-									var r = (e[en] = t.expandoStartIndex);
-									br(r);
+									var r = (e[$e] = t.expandoStartIndex);
+									gr(r);
 									for (var o = -1, i = -1, a = 0; a < t.expandoInstructions.length; a++) {
 										var s = t.expandoInstructions[a];
 										if ('number' == typeof s) {
 											if (s <= 0) {
-												$n((i = -s));
+												Kn((i = -s));
 												var l = t.expandoInstructions[++a];
-												o = r += ao + l;
+												o = r += oo + l;
 											} else r += s;
-											br(r);
-										} else null !== s && ((e[en] = r), s(2, yn(e[o]), i), er()), o++;
+											gr(r);
+										} else null !== s && ((e[$e] = r), s(2, bn(e[o]), i), $n()), o++;
 									}
 								}
 							} finally {
-								$n(n);
+								Kn(n);
 							}
 						})(e, t);
 				}
-				n && e.staticContentQueries && Ja(e, t),
+				n && e.staticContentQueries && Qa(e, t),
 					(function(t) {
-						if (null != t) for (var e = 0; e < t.length; e++) _s(t[e]);
+						if (null != t) for (var e = 0; e < t.length; e++) ys(t[e]);
 					})(e.components);
 			}
-			function Ja(t, e) {
+			function Qa(t, e) {
 				if (null != t.contentQueries) {
-					wr(0);
+					vr(0);
 					for (var n = 0; n < t.contentQueries.length; n++) {
 						var r = t.contentQueries[n];
 						t.data[r].contentQueries(2, e[r], r);
 					}
 				}
 			}
-			function Ka(t, e) {
-				var n = e || Gn()[sn],
-					r = Pr;
-				return co(n) ? n.createElement(t, r) : null === r ? n.createElement(t) : n.createElementNS(r, t);
+			function Ya(t, e) {
+				var n = e || Bn()[on],
+					r = kr;
+				return lo(n) ? n.createElement(t, r) : null === r ? n.createElement(t) : n.createElementNS(r, t);
 			}
-			function Xa(t, e, n, r, o, i, a, s, l, u) {
+			function Ja(t, e, n, r, o, i, a, s, l, u) {
 				var c = e.blueprint.slice();
 				return (
-					(c[Qe] = o),
-					(c[Je] = 140 | r),
-					jn(c),
-					(c[Ke] = c[pn] = t),
-					(c[rn] = n),
-					(c[an] = a || (t && t[an])),
-					(c[sn] = s || (t && t[sn])),
-					(c[ln] = l || (t && t[ln]) || null),
-					(c[on] = u || (t && t[on]) || null),
-					(c[tn] = i),
+					(c[Ze] = o),
+					(c[Qe] = 140 | r),
+					Mn(c),
+					(c[Ye] = c[un] = t),
+					(c[en] = n),
+					(c[rn] = a || (t && t[rn])),
+					(c[on] = s || (t && t[on])),
+					(c[an] = l || (t && t[an]) || null),
+					(c[nn] = u || (t && t[nn]) || null),
+					(c[Xe] = i),
 					c
 				);
 			}
-			function $a(t, e, n, r, o, i) {
-				var a = n + dn,
+			function Ka(t, e, n, r, o, i) {
+				var a = n + pn,
 					s =
 						t.data[a] ||
 						(function(t, e, n, r, o, i, a) {
-							var s = ir(),
-								l = lr(),
+							var s = rr(),
+								l = ar(),
 								u = l ? s : s && s.parent,
-								c = (t.data[n] = ls(u && u !== e ? u : null, r, n, o, i));
+								c = (t.data[n] = as(u && u !== e ? u : null, r, n, o, i));
 							return (0 !== a && t.firstChild) || (t.firstChild = c), s && (!l || null != s.child || (null === c.parent && 2 !== s.type) ? l || (s.next = c) : (s.child = c)), c;
 						})(t, e, a, r, o, i, n);
-				return ar(s, !0), s;
+				return or(s, !0), s;
 			}
-			function ts(t, e, n, r) {
+			function Xa(t, e, n, r) {
 				var o = t.node;
-				return null == o && (t.node = o = ls(e, 2, n, null, null)), (r[tn] = o);
+				return null == o && (t.node = o = as(e, 2, n, null, null)), (r[Xe] = o);
 			}
-			function es(t, e, n) {
+			function $a(t, e, n) {
 				var r,
-					o = lr(),
-					i = ir();
-				if (512 & t[Je]) ks(To(t));
+					o = ar(),
+					i = rr();
+				if (512 & t[Qe]) xs(Oo(t));
 				else {
 					var a = !1;
 					try {
-						ar(null, !0), (r = _r(t, t[tn])), jn(t), rs(t, e.template, os(t), n), (t[Ye].firstTemplatePass = !1), Ya(t), (a = !0);
+						or(null, !0), (r = yr(t, t[Xe])), Mn(t), es(t, e.template, ns(t), n), (t[We].firstTemplatePass = !1), Wa(t), (a = !0);
 					} finally {
-						xr(r, a), ar(i, o);
+						wr(r, a), or(i, o);
 					}
 				}
 			}
-			function ns(t, e, n) {
-				var r = t[an],
-					o = _r(t, t[tn]),
-					i = !dr(),
-					a = cr(t),
+			function ts(t, e, n) {
+				var r = t[rn],
+					o = yr(t, t[Xe]),
+					i = !pr(),
+					a = lr(t),
 					s = !1;
 				try {
-					i && !a && r.begin && r.begin(), a && (n && rs(t, n, 1, e), Ya(t), (t[Je] &= -5)), jn(t), n && rs(t, n, 2, e), Ya(t), (s = !0);
+					i && !a && r.begin && r.begin(), a && (n && es(t, n, 1, e), Wa(t), (t[Qe] &= -5)), Mn(t), n && es(t, n, 2, e), Wa(t), (s = !0);
 				} finally {
-					i && !a && r.end && r.end(), xr(o, s);
+					i && !a && r.end && r.end(), wr(o, s);
 				}
+			}
+			function es(t, e, n, r) {
+				kr = null;
+				var o = xr();
+				try {
+					Kn(null), 2 & n && Ga(t, 0), e(n, r);
+				} finally {
+					Cr(o);
+				}
+			}
+			function ns(t) {
+				return lr(t) ? 1 : 2;
 			}
 			function rs(t, e, n, r) {
-				Pr = null;
-				var o = kr();
-				try {
-					$n(null), 2 & n && Wa(t, 0), e(n, r);
-				} finally {
-					Sr(o);
-				}
-			}
-			function os(t) {
-				return cr(t) ? 1 : 2;
-			}
-			function is(t, e, n, r) {
-				if ((void 0 === r && (r = kn), Fn)) {
-					var o = ir();
+				if ((void 0 === r && (r = xn), zn)) {
+					var o = rr();
 					t.firstTemplatePass &&
 						(function(t, e, n, r, o) {
 							var i = o ? { '': -1 } : null;
 							if (n) {
-								bs(r, t.data.length, n.length);
+								gs(r, t.data.length, n.length);
 								for (var a = 0; a < n.length; a++) (c = n[a]).providersResolver && c.providersResolver(c);
-								fs(t, r, n.length);
+								cs(t, r, n.length);
 								var s = (t.preOrderHooks && t.preOrderHooks.length) || 0,
 									l = (t.preOrderCheckHooks && t.preOrderCheckHooks.length) || 0,
-									u = r.index - dn;
+									u = r.index - pn;
 								for (a = 0; a < n.length; a++) {
 									var c,
 										p = t.data.length;
-									vs(t, e, (c = n[a]), c.factory), ms(t.data.length - 1, c, i), Rn(p, c, t, u, s, l);
+									ms(t, e, (c = n[a]), c.factory), hs(t.data.length - 1, c, i), An(p, c, t, u, s, l);
 								}
 							}
 							i &&
@@ -3301,7 +3295,7 @@
 								if (r)
 									for (var i = 0; i < r.length; i++) {
 										var a = r[i];
-										Ki(n, a.selectors, !1) && (o || (o = []), Ho(Do(ir(), e), e, a.type), In(a) ? (1 & n.flags && te(n), (n.flags = 1), o.unshift(a)) : o.push(a));
+										Yi(n, a.selectors, !1) && (o || (o = []), Uo(jo(rr(), e), e, a.type), En(a) ? (1 & n.flags && Xt(n), (n.flags = 1), o.unshift(a)) : o.push(a));
 									}
 								return o;
 							})(t, e, o),
@@ -3311,10 +3305,10 @@
 						(function(t, e, n) {
 							var r = n.directiveStart,
 								o = n.directiveEnd;
-							!t.firstTemplatePass && r < o && Do(n, e);
+							!t.firstTemplatePass && r < o && jo(n, e);
 							for (var i = r; i < o; i++) {
 								var a = t.data[i];
-								In(a) && ys(e, n, a), ds(e, qo(t.data, e, i, n), a, i);
+								En(a) && bs(e, n, a), ps(e, Fo(t.data, e, i, n), a, i);
 							}
 						})(t, e, o),
 						(function(t, e, n) {
@@ -3322,16 +3316,16 @@
 								o = n.directiveEnd,
 								i = t.expandoInstructions,
 								a = t.firstTemplatePass,
-								s = n.index - dn,
-								l = kr();
+								s = n.index - pn,
+								l = xr();
 							try {
-								$n(s);
+								Kn(s);
 								for (var u = r; u < o; u++) {
 									var c = t.data[u];
-									c.hostBindings ? (ps(c, i, e[u], n, a), er()) : a && i.push(null);
+									c.hostBindings ? (us(c, i, e[u], n, a), $n()) : a && i.push(null);
 								}
 							} finally {
-								$n(l);
+								Kn(l);
 							}
 						})(t, e, o),
 						(function(t, e, n) {
@@ -3343,20 +3337,20 @@
 									t[o++] = s;
 								}
 						})(e, o, r),
-						$n(null);
+						Kn(null);
 				}
 			}
-			function as(t) {
-				return t.tView || (t.tView = ss(-1, t.template, t.consts, t.vars, t.directiveDefs, t.pipeDefs, t.viewQuery, t.schemas));
+			function os(t) {
+				return t.tView || (t.tView = is(-1, t.template, t.consts, t.vars, t.directiveDefs, t.pipeDefs, t.viewQuery, t.schemas));
 			}
-			function ss(t, e, n, r, o, i, a, s) {
-				var l = dn + n,
+			function is(t, e, n, r, o, i, a, s) {
+				var l = pn + n,
 					u = l + r,
 					c = (function(t, e) {
-						var n = new Array(e).fill(null, 0, t).fill(Xo, t);
-						return (n[en] = t), n;
+						var n = new Array(e).fill(null, 0, t).fill(Jo, t);
+						return (n[$e] = t), n;
 					})(l, u);
-				return (c[Ye] = {
+				return (c[We] = {
 					id: t,
 					blueprint: c,
 					template: e,
@@ -3386,7 +3380,7 @@
 					schemas: s
 				});
 			}
-			function ls(t, e, n, r, o) {
+			function as(t, e, n, r, o) {
 				return {
 					type: e,
 					index: n,
@@ -3415,8 +3409,8 @@
 					newClasses: null
 				};
 			}
-			function us(t, e) {
-				var n = Gn()[Ye],
+			function ss(t, e) {
+				var n = Bn()[We],
 					r = null,
 					o = t.directiveStart,
 					i = t.directiveEnd;
@@ -3432,19 +3426,19 @@
 					}
 				return r;
 			}
-			var cs = { class: 'className', for: 'htmlFor', formaction: 'formAction', innerHtml: 'innerHTML', readonly: 'readOnly', tabindex: 'tabIndex' };
-			function ps(t, e, n, r, o) {
+			var ls = { class: 'className', for: 'htmlFor', formaction: 'formAction', innerHtml: 'innerHTML', readonly: 'readOnly', tabindex: 'tabIndex' };
+			function us(t, e, n, r, o) {
 				var i = e.length;
-				qn(t), t.hostBindings(1, n, r.index - dn), qn(null), i === e.length && o && e.push(t.hostBindings);
+				Fn(t), t.hostBindings(1, n, r.index - pn), Fn(null), i === e.length && o && e.push(t.hostBindings);
 			}
-			function fs(t, e, n) {
-				var r = -(e.index - dn),
+			function cs(t, e, n) {
+				var r = -(e.index - pn),
 					o = t.data.length - (65535 & e.providerIndexes);
 				(t.expandoInstructions || (t.expandoInstructions = [])).push(r, o, n);
 			}
-			function ds(t, e, n, r) {
-				var o = ir();
-				hs(t, o, e),
+			function ps(t, e, n, r) {
+				var o = rr();
+				fs(t, o, e),
 					o &&
 						o.attrs &&
 						(function(t, e, n, r) {
@@ -3474,116 +3468,116 @@
 									s ? n.setInput(e, p, u, c) : (e[c] = p);
 								}
 						})(r, e, n),
-					t[Ye].firstTemplatePass && n.contentQueries && (o.flags |= 4),
-					In(n) && (Pn(o.index, t)[rn] = e);
+					t[We].firstTemplatePass && n.contentQueries && (o.flags |= 4),
+					En(n) && (kn(o.index, t)[en] = e);
 			}
-			function hs(t, e, n) {
-				var r = kn(e, t);
-				fo(n, t), r && fo(r, t);
+			function fs(t, e, n) {
+				var r = xn(e, t);
+				co(n, t), r && co(r, t);
 			}
-			function gs(t) {
-				var e = Gn()[Ye];
+			function ds(t) {
+				var e = Bn()[We];
 				(e.components || (e.components = [])).push(t.index);
 			}
-			function ms(t, e, n) {
+			function hs(t, e, n) {
 				if (n) {
 					if (e.exportAs) for (var r = 0; r < e.exportAs.length; r++) n[e.exportAs[r]] = t;
 					e.template && (n[''] = t);
 				}
 			}
-			function bs(t, e, n) {
+			function gs(t, e, n) {
 				(t.flags = 1 & t.flags), (t.directiveStart = e), (t.directiveEnd = e + n), (t.providerIndexes = e);
 			}
-			function vs(t, e, n, r) {
+			function ms(t, e, n, r) {
 				t.data.push(n);
-				var o = new lo(r, In(n), null);
+				var o = new ao(r, En(n), null);
 				t.blueprint.push(o), e.push(o);
 			}
-			function ys(t, e, n) {
-				var r = kn(e, t),
-					o = as(n),
-					i = t[an],
-					a = xs(t, Xa(t, o, null, n.onPush ? 64 : 16, t[e.index], e, i, i.createRenderer(r, n)));
-				(a[tn] = e), (t[e.index] = a), t[Ye].firstTemplatePass && gs(e);
+			function bs(t, e, n) {
+				var r = xn(e, t),
+					o = os(n),
+					i = t[rn],
+					a = ws(t, Ja(t, o, null, n.onPush ? 64 : 16, t[e.index], e, i, i.createRenderer(r, n)));
+				(a[Xe] = e), (t[e.index] = a), t[We].firstTemplatePass && ds(e);
 			}
-			function ws(t, e, n, r, o) {
+			function vs(t, e, n, r, o) {
 				return new Array(t, !0, o ? -1 : 0, e, null, null, r, n, null);
 			}
-			function _s(t) {
-				var e = Gn(),
-					n = Pn(t, e);
-				(128 == (128 & n[Je]) || cr(e)) &&
-					80 & n[Je] &&
+			function ys(t) {
+				var e = Bn(),
+					n = kn(t, e);
+				(128 == (128 & n[Qe]) || lr(e)) &&
+					80 & n[Qe] &&
 					((function(t) {
-						for (var e = t[Ye], n = t.length; n < e.blueprint.length; n++) t[n] = e.blueprint[n];
+						for (var e = t[We], n = t.length; n < e.blueprint.length; n++) t[n] = e.blueprint[n];
 					})(n),
-					Es(n, n[rn]));
+					Ss(n, n[en]));
 			}
-			function xs(t, e) {
-				return t[un] ? (t[cn][Xe] = e) : (t[un] = e), (t[cn] = e), e;
+			function ws(t, e) {
+				return t[sn] ? (t[ln][Je] = e) : (t[sn] = e), (t[ln] = e), e;
 			}
-			function Cs(t) {
+			function _s(t) {
 				for (; t; ) {
-					t[Je] |= 64;
-					var e = Oo(t);
-					if (Tn(t) && !e) return t;
+					t[Qe] |= 64;
+					var e = Po(t);
+					if (On(t) && !e) return t;
 					t = e;
 				}
 				return null;
 			}
-			function ks(t) {
+			function xs(t) {
 				for (var e = 0; e < t.components.length; e++) {
 					var n = t.components[e];
-					ns(Mn(n), n);
+					ts(In(n), n);
 				}
 			}
-			function Ss(t, e) {
-				var n = t[an];
+			function Cs(t, e) {
+				var n = t[rn];
 				n.begin && n.begin();
 				try {
-					cr(t) && Es(t, e), Es(t, e);
+					lr(t) && Ss(t, e), Ss(t, e);
 				} catch (r) {
-					throw (js(t, r), r);
+					throw (Ms(t, r), r);
 				} finally {
 					n.end && n.end();
 				}
 			}
-			function Ps(t) {
-				ks(t[rn]);
+			function ks(t) {
+				xs(t[en]);
 			}
-			function Es(t, e) {
-				var n = t[Ye],
-					r = _r(t, t[tn]),
+			function Ss(t, e) {
+				var n = t[We],
+					r = yr(t, t[Xe]),
 					o = n.template,
-					i = cr(t),
+					i = lr(t),
 					a = !1;
 				try {
-					jn(t), i && Os(1, n, e), rs(t, o, os(t), e), Ya(t), (i && !n.staticViewQueries) || Os(2, n, e), (a = !0);
+					Mn(t), i && Ps(1, n, e), es(t, o, ns(t), e), Wa(t), (i && !n.staticViewQueries) || Ps(2, n, e), (a = !0);
 				} finally {
-					xr(r, a);
+					wr(r, a);
 				}
 			}
-			function Os(t, e, n) {
+			function Ps(t, e, n) {
 				var r = e.viewQuery;
-				r && (wr(e.viewQueryStartIndex), r(t, n));
+				r && (vr(e.viewQueryStartIndex), r(t, n));
 			}
-			var Is = Qa;
+			var Es = Za;
+			function Os(t) {
+				return void 0 === t.inputs && (t.inputs = ss(t, 0)), t.inputs;
+			}
+			function Is(t) {
+				return t[tn] || (t[tn] = []);
+			}
 			function Ts(t) {
-				return void 0 === t.inputs && (t.inputs = us(t, 0)), t.inputs;
+				return t[We].cleanup || (t[We].cleanup = []);
 			}
-			function Ms(t) {
-				return t[nn] || (t[nn] = []);
-			}
-			function As(t) {
-				return t[Ye].cleanup || (t[Ye].cleanup = []);
-			}
-			function js(t, e) {
-				var n = t[on],
-					r = n ? n.get(Ko, null) : null;
+			function Ms(t, e) {
+				var n = t[nn],
+					r = n ? n.get(Yo, null) : null;
 				r && r.handleError(e);
 			}
-			function Rs(t, e, n) {
-				for (var r = t[Ye], o = 0; o < e.length; ) {
+			function As(t, e, n) {
+				for (var r = t[We], o = 0; o < e.length; ) {
 					var i = e[o++],
 						a = e[o++],
 						s = e[o++],
@@ -3592,274 +3586,274 @@
 					u.setInput ? u.setInput(l, n, a, s) : (l[s] = n);
 				}
 			}
-			function Ds(t) {
+			function js(t) {
 				var e;
 				if ((e = t.onElementCreationFns)) {
 					for (var n = 0; n < e.length; n++) e[n]();
 					t.onElementCreationFns = null;
 				}
 			}
-			var Ns = null;
-			function Us() {
-				if (!Ns) {
-					var t = Ut.Symbol;
-					if (t && t.iterator) Ns = t.iterator;
+			var Rs = null;
+			function Ds() {
+				if (!Rs) {
+					var t = Dt.Symbol;
+					if (t && t.iterator) Rs = t.iterator;
 					else
 						for (var e = Object.getOwnPropertyNames(Map.prototype), n = 0; n < e.length; ++n) {
 							var r = e[n];
-							'entries' !== r && 'size' !== r && Map.prototype[r] === Map.prototype.entries && (Ns = r);
+							'entries' !== r && 'size' !== r && Map.prototype[r] === Map.prototype.entries && (Rs = r);
 						}
 				}
-				return Ns;
+				return Rs;
 			}
-			function Ls(t, e) {
+			function Ns(t, e) {
 				return t === e || ('number' == typeof t && 'number' == typeof e && isNaN(t) && isNaN(e));
 			}
-			function Hs(t) {
-				return !!zs(t) && (Array.isArray(t) || (!(t instanceof Map) && Us() in t));
+			function Us(t) {
+				return !!Ls(t) && (Array.isArray(t) || (!(t instanceof Map) && Ds() in t));
 			}
-			function zs(t) {
+			function Ls(t) {
 				return null !== t && ('function' == typeof t || 'object' == typeof t);
 			}
-			function Vs(t, e, n) {
+			function Hs(t, e, n) {
 				return (t[e] = n);
 			}
-			function Fs(t, e) {
+			function zs(t, e) {
 				return t[e];
 			}
-			function Bs(t, e, n) {
+			function Vs(t, e, n) {
 				var r, o;
 				return (o = n), ((r = t[e]) == r || o == o) && r !== o && ((t[e] = n), !0);
 			}
-			function qs(t, e, n, r) {
-				var o = kr(),
-					i = Gs(Gn(), e);
+			function Fs(t, e, n, r) {
+				var o = xr(),
+					i = Bs(Bn(), e);
 				return (
-					i !== Xo &&
+					i !== Jo &&
 						(function(t, e, n, r, o, i) {
 							var a,
 								s,
-								l = Gn(),
-								u = Cn(t, l),
-								c = Sn(t, l);
-							if (!o && (a = Ts(c)) && (s = a[e]))
-								Rs(l, s, n),
-									On(c) &&
+								l = Bn(),
+								u = _n(t, l),
+								c = Cn(t, l);
+							if (!o && (a = Os(c)) && (s = a[e]))
+								As(l, s, n),
+									Pn(c) &&
 										(function(e, n) {
-											var r = Pn(t + dn, e);
-											16 & r[Je] || (r[Je] |= 64);
+											var r = kn(t + pn, e);
+											16 & r[Qe] || (r[Qe] |= 64);
 										})(l);
 							else if (3 === c.type) {
 								!(function(t, e, n, r, o) {
-									var i = e[en] - 1,
+									var i = e[$e] - 1,
 										a = r[i];
-									a[0] == Ze && ((r[i] = n + a), o || (-1 == t.propertyMetadataStartIndex && (t.propertyMetadataStartIndex = i), (t.propertyMetadataEndIndex = i + 1)));
-								})(c, l, (e = cs[e] || e), l[Ye].data, o);
-								var p = l[sn];
-								(n = null != r ? r(n, c.tagName || '', e) : n), co(p) ? p.setProperty(u, e, n) : wo(e) || (u.setProperty ? u.setProperty(e, n) : (u[e] = n));
+									a[0] == qe && ((r[i] = n + a), o || (-1 == t.propertyMetadataStartIndex && (t.propertyMetadataStartIndex = i), (t.propertyMetadataEndIndex = i + 1)));
+								})(c, l, (e = ls[e] || e), l[We].data, o);
+								var p = l[on];
+								(n = null != r ? r(n, c.tagName || '', e) : n), lo(p) ? p.setProperty(u, e, n) : vo(e) || (u.setProperty ? u.setProperty(e, n) : (u[e] = n));
 							}
 						})(o, t, i, n, r),
+					Fs
+				);
+			}
+			function Bs(t, e) {
+				var n = t[$e]++;
+				return (
+					(function(t, e, n) {
+						void 0 === e && (e = ''), void 0 === n && (n = '');
+						var r = t[We].data,
+							o = t[$e] - 1;
+						null == r[o] && (r[o] = qe + e + qe + n);
+					})(t),
+					Vs(t, n, e) ? e : Jo
+				);
+			}
+			function qs(t, e, n, r) {
+				var o = xr(),
+					i = Bn(),
+					a = Bs(i, e);
+				return (
+					a !== Jo &&
+						(function(t, e, n, r, o, i) {
+							var a = _n(t, r),
+								s = r[on];
+							if (null == n) lo(s) ? s.removeAttribute(a, e, i) : a.removeAttribute(e);
+							else {
+								var l = Cn(t, r),
+									u = null == o ? Ve(n) : o(n, l.tagName || '', e);
+								lo(s) ? s.setAttribute(a, e, u, i) : i ? a.setAttributeNS(i, e, u) : a.setAttribute(e, u);
+							}
+						})(o, t, a, i, n, r),
 					qs
 				);
 			}
 			function Gs(t, e) {
-				var n = t[en]++;
-				return (
-					(function(t, e, n) {
-						void 0 === e && (e = ''), void 0 === n && (n = '');
-						var r = t[Ye].data,
-							o = t[en] - 1;
-						null == r[o] && (r[o] = Ze + e + Ze + n);
-					})(t),
-					Bs(t, n, e) ? e : Xo
-				);
+				var n = e[Ye];
+				return -1 === t.index ? (yn(n) ? n : null) : n;
 			}
-			function Zs(t, e, n, r) {
-				var o = kr(),
-					i = Gn(),
-					a = Gs(i, e);
-				return (
-					a !== Xo &&
-						(function(t, e, n, r, o, i) {
-							var a = Cn(t, r),
-								s = r[sn];
-							if (null == n) co(s) ? s.removeAttribute(a, e, i) : a.removeAttribute(e);
-							else {
-								var l = Sn(t, r),
-									u = null == o ? Be(n) : o(n, l.tagName || '', e);
-								co(s) ? s.setAttribute(a, e, u, i) : i ? a.setAttributeNS(i, e, u) : a.setAttribute(e, u);
-							}
-						})(o, t, a, i, n, r),
-					Zs
-				);
+			function Zs(t, e) {
+				var n = Gs(t, e);
+				return n ? nl(e[on], n[hn]) : null;
 			}
-			function Ws(t, e) {
-				var n = e[Ke];
-				return -1 === t.index ? (_n(n) ? n : null) : n;
-			}
-			function Qs(t, e) {
-				var n = Ws(t, e);
-				return n ? ol(e[sn], n[mn]) : null;
-			}
-			function Ys(t, e, n, r, o) {
+			function Ws(t, e, n, r, o) {
 				var i,
 					a = !1;
-				_n(r) ? (i = r) : wn(r) && ((a = !0), (r = r[Qe]));
-				var s = yn(r);
+				yn(r) ? (i = r) : vn(r) && ((a = !0), (r = r[Ze]));
+				var s = bn(r);
 				0 === t
-					? nl(e, n, s, o || null)
+					? tl(e, n, s, o || null)
 					: 1 === t
 					? (function(t, e, n) {
-							var r = ol(t, e);
+							var r = nl(t, e);
 							r &&
 								(function(t, e, n, r) {
-									co(t) ? t.removeChild(e, n, r) : e.removeChild(n);
+									lo(t) ? t.removeChild(e, n, r) : e.removeChild(n);
 								})(t, r, e, n);
 					  })(e, s, a)
 					: 2 === t && e.destroyNode(s),
 					null != i &&
 						(function(t, e, n, r, o) {
-							var i = n[mn];
-							i !== yn(n) && Ys(e, t, r, i, o);
-							for (var a = bn; a < n.length; a++) ul(t, e, n[a], r, i);
+							var i = n[hn];
+							i !== bn(n) && Ws(e, t, r, i, o);
+							for (var a = gn; a < n.length; a++) sl(t, e, n[a], r, i);
 						})(e, t, i, n, o);
 			}
-			function Js(t, e, n) {
-				var r = Qs(t[Ye].node, t);
-				r && ul(t[sn], e ? 0 : 1, t, r, n);
+			function Qs(t, e, n) {
+				var r = Zs(t[We].node, t);
+				r && sl(t[on], e ? 0 : 1, t, r, n);
 			}
-			function Ks(t, e, n) {
-				var r = bn + n,
+			function Ys(t, e, n) {
+				var r = gn + n,
 					o = e.length;
-				n > 0 && (e[r - 1][Xe] = t), n < o - bn ? ((t[Xe] = e[r]), e.splice(bn + n, 0, t)) : (e.push(t), (t[Xe] = null)), (t[Ke] = e), t[$e] && t[$e].insertView(n), (t[Je] |= 128);
+				n > 0 && (e[r - 1][Je] = t), n < o - gn ? ((t[Je] = e[r]), e.splice(gn + n, 0, t)) : (e.push(t), (t[Je] = null)), (t[Ye] = e), t[Ke] && t[Ke].insertView(n), (t[Qe] |= 128);
 			}
-			function Xs(t, e) {
-				if (!(t.length <= bn)) {
-					var n = bn + e,
+			function Js(t, e) {
+				if (!(t.length <= gn)) {
+					var n = gn + e,
 						r = t[n];
 					return (
 						r &&
-							(e > 0 && (t[n - 1][Xe] = r[Xe]),
-							t.splice(bn + e, 1),
-							Js(r, !1),
-							128 & r[Je] && !(256 & r[Je]) && r[$e] && r[$e].removeView(),
-							(r[Ke] = null),
-							(r[Xe] = null),
-							(r[Je] &= -129)),
+							(e > 0 && (t[n - 1][Je] = r[Je]),
+							t.splice(gn + e, 1),
+							Qs(r, !1),
+							128 & r[Qe] && !(256 & r[Qe]) && r[Ke] && r[Ke].removeView(),
+							(r[Ye] = null),
+							(r[Je] = null),
+							(r[Qe] &= -129)),
 						r
 					);
 				}
 			}
-			function $s(t) {
-				if (!(256 & t[Je])) {
-					var e = t[sn];
-					co(e) && e.destroyNode && ul(e, 2, t, null, null),
+			function Ks(t) {
+				if (!(256 & t[Qe])) {
+					var e = t[on];
+					lo(e) && e.destroyNode && sl(e, 2, t, null, null),
 						(function(t) {
-							var e = t[un];
-							if (!e) return el(t);
+							var e = t[sn];
+							if (!e) return $s(t);
 							for (; e; ) {
 								var n = null;
-								if (wn(e)) n = e[un];
+								if (vn(e)) n = e[sn];
 								else {
-									var r = e[bn];
+									var r = e[gn];
 									r && (n = r);
 								}
 								if (!n) {
-									for (; e && !e[Xe] && e !== t; ) el(e), (e = tl(e, t));
-									el(e || t), (n = e && e[Xe]);
+									for (; e && !e[Je] && e !== t; ) $s(e), (e = Xs(e, t));
+									$s(e || t), (n = e && e[Je]);
 								}
 								e = n;
 							}
 						})(t);
 				}
 			}
-			function tl(t, e) {
+			function Xs(t, e) {
 				var n;
-				return wn(t) && (n = t[tn]) && 2 === n.type ? Ws(n, t) : t[Ke] === e ? null : t[Ke];
+				return vn(t) && (n = t[Xe]) && 2 === n.type ? Gs(n, t) : t[Ye] === e ? null : t[Ye];
 			}
-			function el(t) {
-				if (wn(t) && !(256 & t[Je])) {
-					(t[Je] &= -129),
-						(t[Je] |= 256),
+			function $s(t) {
+				if (vn(t) && !(256 & t[Qe])) {
+					(t[Qe] &= -129),
+						(t[Qe] |= 256),
 						(function(t) {
 							var e,
-								n = t[Ye];
+								n = t[We];
 							if (null != n && null != (e = n.destroyHooks))
 								for (var r = 0; r < e.length; r += 2) {
 									var o = t[e[r]];
-									o instanceof lo || e[r + 1].call(o);
+									o instanceof ao || e[r + 1].call(o);
 								}
 						})(t),
 						(function(t) {
-							var e = t[Ye].cleanup;
+							var e = t[We].cleanup;
 							if (null !== e) {
-								for (var n = t[nn], r = 0; r < e.length - 1; r += 2)
+								for (var n = t[tn], r = 0; r < e.length - 1; r += 2)
 									if ('string' == typeof e[r]) {
 										var o = e[r + 1],
-											i = 'function' == typeof o ? o(t) : yn(t[o]),
+											i = 'function' == typeof o ? o(t) : bn(t[o]),
 											a = e[r + 3];
 										'boolean' == typeof a ? i.removeEventListener(e[r], n[e[r + 2]], a) : a >= 0 ? n[a]() : n[-a].unsubscribe(), (r += 2);
 									} else e[r].call(n[e[r + 1]]);
-								t[nn] = null;
+								t[tn] = null;
 							}
 						})(t);
-					var e = t[tn];
-					e && 3 === e.type && co(t[sn]) && t[sn].destroy(), An(t) && t[$e] && t[$e].removeView();
+					var e = t[Xe];
+					e && 3 === e.type && lo(t[on]) && t[on].destroy(), Tn(t) && t[Ke] && t[Ke].removeView();
 				}
 			}
-			function nl(t, e, n, r) {
-				co(t) ? t.insertBefore(e, n, r) : e.insertBefore(n, r, !0);
+			function tl(t, e, n, r) {
+				lo(t) ? t.insertBefore(e, n, r) : e.insertBefore(n, r, !0);
 			}
-			function rl(t, e, n, r) {
+			function el(t, e, n, r) {
 				null !== r
-					? nl(t, e, n, r)
+					? tl(t, e, n, r)
 					: (function(t, e, n) {
-							co(t) ? t.appendChild(e, n) : e.appendChild(n);
+							lo(t) ? t.appendChild(e, n) : e.appendChild(n);
 					  })(t, e, n);
 			}
-			function ol(t, e) {
-				return co(t) ? t.parentNode(e) : e.parentNode;
+			function nl(t, e) {
+				return lo(t) ? t.parentNode(e) : e.parentNode;
 			}
-			function il(t, e, n) {
+			function rl(t, e, n) {
 				var r,
 					o,
 					i = (function(t, e) {
-						if (Tn(e)) return ol(e[sn], kn(t, e));
+						if (On(e)) return nl(e[on], xn(t, e));
 						var n = (function(t) {
 								for (; null != t.parent && (4 === t.parent.type || 5 === t.parent.type); ) t = t.parent;
 								return t;
 							})(t),
 							r = n.parent;
 						if (null == r) {
-							var o = e[tn];
+							var o = e[Xe];
 							return 2 === o.type
-								? Qs(o, e)
+								? Zs(o, e)
 								: (function(t) {
-										var e = t[tn];
-										return e && 3 === e.type ? kn(e, Oo(t)) : null;
+										var e = t[Xe];
+										return e && 3 === e.type ? xn(e, Po(t)) : null;
 								  })(e);
 						}
 						var i = n && 5 === n.type;
-						if (i && 2 & n.flags) return kn(n, e).parentNode;
+						if (i && 2 & n.flags) return xn(n, e).parentNode;
 						if (1 & r.flags && !i) {
-							var a = e[Ye].data,
+							var a = e[We].data,
 								s = a[a[r.index].directiveStart].encapsulation;
-							if (s !== Se.ShadowDom && s !== Se.Native) return null;
+							if (s !== Ce.ShadowDom && s !== Ce.Native) return null;
 						}
-						return kn(r, e);
+						return xn(r, e);
 					})(e, n);
 				if (null != i) {
-					var a = n[sn],
+					var a = n[on],
 						s = (function(t, e) {
 							if (2 === t.type) {
-								var n = Ws(t, e);
-								return al(n.indexOf(e, bn) - bn, n);
+								var n = Gs(t, e);
+								return ol(n.indexOf(e, gn) - gn, n);
 							}
-							return 4 === t.type || 5 === t.type ? kn(t, e) : null;
-						})(e.parent || n[tn], n);
+							return 4 === t.type || 5 === t.type ? xn(t, e) : null;
+						})(e.parent || n[Xe], n);
 					if (Array.isArray(t))
 						try {
-							for (var u = l(t), c = u.next(); !c.done; c = u.next()) rl(a, i, c.value, s);
+							for (var u = l(t), c = u.next(); !c.done; c = u.next()) el(a, i, c.value, s);
 						} catch (p) {
 							r = { error: p };
 						} finally {
@@ -3869,105 +3863,105 @@
 								if (r) throw r.error;
 							}
 						}
-					else rl(a, i, t, s);
+					else el(a, i, t, s);
 				}
 			}
-			function al(t, e) {
-				var n = bn + t + 1;
+			function ol(t, e) {
+				var n = gn + t + 1;
 				if (n < e.length) {
 					var r = e[n],
-						o = r[tn].child;
-					return null !== o ? kn(o, r) : e[mn];
+						o = r[Xe].child;
+					return null !== o ? xn(o, r) : e[hn];
 				}
-				return e[mn];
+				return e[hn];
 			}
-			function sl(t, e, n, r) {
-				for (; t; ) ll(t, e, n, r), (t = t.next);
+			function il(t, e, n, r) {
+				for (; t; ) al(t, e, n, r), (t = t.next);
 			}
-			function ll(t, e, n, r) {
-				var o = kn(t, r);
-				il(o, e, n), fo(o, r);
+			function al(t, e, n, r) {
+				var o = xn(t, r);
+				rl(o, e, n), co(o, r);
 				var i = r[t.index];
-				if (0 === t.type) for (var a = bn; a < i.length; a++) Js(i[a], !0, i[mn]);
+				if (0 === t.type) for (var a = gn; a < i.length; a++) Qs(i[a], !0, i[hn]);
 				else if (5 === t.type) {
 					var s = t.child;
-					sl(s, s, r, r);
-				} else 4 === t.type && sl(t.child, e, n, r), _n(i) && il(i[mn], e, n);
+					il(s, s, r, r);
+				} else 4 === t.type && il(t.child, e, n, r), yn(i) && rl(i[hn], e, n);
 			}
-			function ul(t, e, n, r, o) {
-				for (var i = n[Ye].node.child; null !== i; ) cl(t, e, n, i, r, o), (i = i.next);
+			function sl(t, e, n, r, o) {
+				for (var i = n[We].node.child; null !== i; ) ll(t, e, n, i, r, o), (i = i.next);
 			}
-			function cl(t, e, n, r, o, i) {
+			function ll(t, e, n, r, o, i) {
 				var a = r.type;
 				4 === a
 					? (function(t, e, n, r, o, i) {
-							Ys(e, t, o, n[r.index], i);
-							for (var a = r.child; a; ) cl(t, e, n, a, o, i), (a = a.next);
+							Ws(e, t, o, n[r.index], i);
+							for (var a = r.child; a; ) ll(t, e, n, a, o, i), (a = a.next);
 					  })(t, e, n, r, o, i)
 					: 1 === a
 					? (function(t, e, n, r, o, i) {
-							var a = Io(n),
-								s = a[tn].projection[r.projection];
-							if (Array.isArray(s)) for (var l = 0; l < s.length; l++) Ys(e, t, o, s[l], i);
-							else for (var u = s, c = a[Ke]; null !== u; ) cl(t, e, c, u, o, i), (u = u.projectionNext);
+							var a = Eo(n),
+								s = a[Xe].projection[r.projection];
+							if (Array.isArray(s)) for (var l = 0; l < s.length; l++) Ws(e, t, o, s[l], i);
+							else for (var u = s, c = a[Ye]; null !== u; ) ll(t, e, c, u, o, i), (u = u.projectionNext);
 					  })(t, e, n, r, o, i)
-					: Ys(e, t, o, n[r.index], i);
+					: Ws(e, t, o, n[r.index], i);
 			}
-			function pl(t, e, n, r, o, i, a, s) {
-				var l = Gn(),
-					u = l[Ye],
+			function ul(t, e, n, r, o, i, a, s) {
+				var l = Bn(),
+					u = l[We],
 					c = (function(t, e, n) {
-						var r = Gn(),
-							o = t + dn,
-							i = (r[t + dn] = r[sn].createComment('')),
-							a = $a(r[Ye], r[tn], t, 0, e, n),
-							s = (r[o] = ws(r[o], r, i, a));
-						return il(i, a, r), xs(r, s), a;
+						var r = Bn(),
+							o = t + pn,
+							i = (r[t + pn] = r[on].createComment('')),
+							a = Ka(r[We], r[Xe], t, 0, e, n),
+							s = (r[o] = vs(r[o], r, i, a));
+						return rl(i, a, r), ws(r, s), a;
 					})(t, o || null, i || null);
-				u.firstTemplatePass && (c.tViews = ss(-1, e, n, r, u.directiveRegistry, u.pipeRegistry, null, null)),
-					is(u, l, a, s),
+				u.firstTemplatePass && (c.tViews = is(-1, e, n, r, u.directiveRegistry, u.pipeRegistry, null, null)),
+					rs(u, l, a, s),
 					(function(t, e) {
-						var n = t[$e];
+						var n = t[Ke];
 						if (n) {
 							var r = t[e.index];
-							r[$e] ? n.insertNodeBeforeViews(e) : (n.addNode(e), (r[$e] = n.container()));
+							r[Ke] ? n.insertNodeBeforeViews(e) : (n.addNode(e), (r[Ke] = n.container()));
 						}
 					})(l, c),
-					fo(kn(c, l), l),
-					Dn(u, c),
-					ur();
+					co(xn(c, l), l),
+					jn(u, c),
+					sr();
 			}
-			function fl(t, e) {
-				void 0 === e && (e = yt.Default), (t = Mt(t));
-				var n = Gn();
-				return null == n ? Jt(t, e) : zo(ir(), n, t, e);
+			function cl(t, e) {
+				void 0 === e && (e = bt.Default), (t = It(t));
+				var n = Bn();
+				return null == n ? Qt(t, e) : Lo(rr(), n, t, e);
 			}
-			function dl() {
-				return tr() + rr();
+			function pl() {
+				return Xn() + er();
 			}
-			function hl(t) {
-				return ml(t, !1);
+			function fl(t) {
+				return hl(t, !1);
 			}
-			function gl(t) {
-				return ml(t, !0);
+			function dl(t) {
+				return hl(t, !0);
 			}
-			function ml(t, e) {
+			function hl(t, e) {
 				var n = e ? t.newClasses : t.newStyles;
-				return n || ((n = [0, 0, 1, 0, oa]), e ? (t.newClasses = n) : (t.newStyles = n)), n;
+				return n || ((n = [0, 0, 1, 0, na]), e ? (t.newClasses = n) : (t.newStyles = n)), n;
 			}
-			function bl(t, e, n, r, o) {
+			function gl(t, e, n, r, o) {
 				!(function(t, e, n, r, o) {
 					if (
 						!(16 & t[1]) &&
 						(function(t, e, n, r) {
 							var o = t[2],
 								i = 2 * e;
-							return !((i < o.length && o[i + 0] >= 0) || (vo(t, e, t[5].length, r), 0));
+							return !((i < o.length && o[i + 0] >= 0) || (mo(t, e, t[5].length, r), 0));
 						})(t, e, 0, o)
 					) {
 						r &&
 							(r = (function(t) {
-								for (var e = [], n = 0; n < t.length; n++) e.push(Vi(t[n]));
+								for (var e = [], n = 0; n < t.length; n++) e.push(Hi(t[n]));
 								return e;
 							})(r));
 						var i = t[5],
@@ -3986,14 +3980,14 @@
 						if (r && r.length)
 							for (var b = 0; b < r.length; b++) {
 								var v = r[b];
-								-1 == (_ = ri(t, v, 10, p)) && ((_ = p + g), (g += 4), m.push(v)), i.push(_);
+								-1 == (_ = ei(t, v, 10, p)) && ((_ = p + g), (g += 4), m.push(v)), i.push(_);
 							}
 						var y = [];
 						if (n && n.length)
 							for (var w = 0; w < n.length; w++) {
 								var _,
 									x = n[w];
-								-1 == (_ = ri(t, x, p, f)) ? ((_ = f + g), (g += 4), y.push(x)) : (_ += 4 * m.length), i.push(_);
+								-1 == (_ = ei(t, x, p, f)) ? ((_ = f + g), (g += 4), y.push(x)) : (_ += 4 * m.length), i.push(_);
 							}
 						var C = 2;
 						if (m.length)
@@ -4006,10 +4000,10 @@
 						for (var O = y.length + m.length, I = 10; I < t.length; I += 4) {
 							var T = I >= f,
 								M = I >= (T ? d : p),
-								A = Ci(t, I),
-								j = di(A),
-								R = hi(A);
-							xi(t, I, pi(A, j, (R += T ? (M ? 4 * m.length : 0) : 4 * O + 4 * (M ? m.length : 0))));
+								A = _i(t, I),
+								j = pi(A),
+								R = fi(A);
+							wi(t, I, ui(A, j, (R += T ? (M ? 4 * m.length : 0) : 4 * O + 4 * (M ? m.length : 0))));
 						}
 						for (var D = 0; D < 4 * m.length; D++) t.splice(d, 0, null), t.splice(p, 0, null), p++, f++, (d += 2);
 						for (var N = 0; N < 4 * y.length; N++) t.splice(f, 0, null), t.push(null), f++, d++;
@@ -4021,37 +4015,37 @@
 								q = void 0;
 							z ? ((B = d + 4 * (a + V)), (q = p + 4 * (a + V))) : ((B = f + 4 * (s + V)), (q = 10 + 4 * (s + V)));
 							var G = z ? U : L,
-								Z = Ni(G, F);
-							-1 === Z ? (Z = Bi(null, G, F, !z && null, e) + 1) : (Z += 1);
-							var W = Mi(t, F, z, o || null);
-							xi(t, q, pi(W, Z, B)), bi(t, q, F), vi(t, q, null), yi(t, q, 0, e), xi(t, B, pi(W, Z, q)), bi(t, B, F), vi(t, B, null), yi(t, B, 0, e);
+								Z = Ri(G, F);
+							-1 === Z ? (Z = Vi(null, G, F, !z && null, e) + 1) : (Z += 1);
+							var W = Ii(t, F, z, o || null);
+							wi(t, q, ui(W, Z, B)), gi(t, q, F), mi(t, q, null), bi(t, q, 0, e), wi(t, B, ui(W, Z, q)), gi(t, B, F), mi(t, B, null), bi(t, B, 0, e);
 						}
 						(i[1] = a + y.length), (i[0] = s + m.length), (l[0] += y.length), (u[0] += m.length);
 						var Q = 4 * m.length,
 							Y = 4 * y.length,
 							J = u.length;
-						Fi(t, e, !1, f + 4 * s, m.length);
+						zi(t, e, !1, f + 4 * s, m.length);
 						for (var K = 1; K < J; K += 4) u[K + 1] += Y + Q;
 						var X = l.length;
-						Fi(t, e, !0, d + 4 * a, y.length);
+						zi(t, e, !0, d + 4 * a, y.length);
 						for (var $ = 1; $ < X; $ += 4) l[$ + 1] += 2 * Q + Y;
-						xi(t, 1, pi(0, 0, f));
+						wi(t, 1, ui(0, 0, f));
 					}
 				})(t.stylingTemplate, o, e, n, r);
 			}
-			function vl() {
-				return tr() + rr();
+			function ml() {
+				return Xn() + er();
 			}
-			function yl(t, e) {
-				var n = zn;
-				return n || Vn((n = yo(t + dn, e))), n;
+			function bl(t, e) {
+				var n = Ln;
+				return n || Hn((n = bo(t + pn, e))), n;
 			}
-			function wl(t, e, n, r) {
-				var o = Gn(),
-					i = o[Ye],
-					a = (o[t + dn] = Ka(e)),
-					s = o[sn],
-					l = $a(i, o[tn], t, 3, e, n || null),
+			function vl(t, e, n, r) {
+				var o = Bn(),
+					i = o[We],
+					a = (o[t + pn] = Ya(e)),
+					s = o[on],
+					l = Ka(i, o[Xe], t, 3, e, n || null),
 					u = 0,
 					c = 0,
 					p = -1;
@@ -4068,14 +4062,14 @@
 							o >= 0 &&
 								(e.stylingTemplate = (function(t, e, n) {
 									void 0 === n && (n = 0);
-									var r = bo();
+									var r = go();
 									return (
 										(function(t, e, n, r) {
 											if (!(16 & t[1])) {
-												vo(t, r);
+												mo(t, r);
 												for (var o = null, i = null, a = -1, s = n; s < e.length; s++) {
 													var l = e[s];
-													'number' == typeof l ? (a = l) : 1 == a ? ti((o = o || t[4]), l, !0, r) : 2 == a && ti((i = i || t[3]), l, e[++s], r);
+													'number' == typeof l ? (a = l) : 1 == a ? Xo((o = o || t[4]), l, !0, r) : 2 == a && Xo((i = i || t[3]), l, e[++s], r);
 												}
 											}
 										})(r, t, e, n),
@@ -4088,7 +4082,7 @@
 						l,
 						n,
 						(p = (function(t, e) {
-							for (var n = Gn()[sn], r = co(n), o = 0; o < e.length; ) {
+							for (var n = Bn()[on], r = lo(n), o = 0; o < e.length; ) {
 								var i = e[o];
 								if ('number' == typeof i) {
 									if (0 !== i) break;
@@ -4097,48 +4091,48 @@
 										s = e[o++],
 										l = e[o++];
 									r ? n.setAttribute(t, s, l, a) : t.setAttributeNS(a, s, l);
-								} else (l = e[++o]), wo((s = i)) ? r && n.setProperty(t, s, l) : r ? n.setAttribute(t, s, l) : t.setAttribute(s, l), o++;
+								} else (l = e[++o]), vo((s = i)) ? r && n.setProperty(t, s, l) : r ? n.setAttribute(t, s, l) : t.setAttribute(s, l), o++;
 							}
 							return o;
 						})(a, n))
 					);
 					var f = l.stylingTemplate;
-					f && ((u = ni(a, f, s)), (c = ei(a, f, s)));
+					f && ((u = ti(a, f, s)), (c = $o(a, f, s)));
 				}
-				if ((il(a, l, o), is(i, o, r), 0 === Hn && fo(a, o), Hn++, i.firstTemplatePass)) {
-					var d = Ts(l);
+				if ((rl(a, l, o), rs(i, o, r), 0 === Un && co(a, o), Un++, i.firstTemplatePass)) {
+					var d = Os(l);
 					d && d.hasOwnProperty('class') && (l.flags |= 8), d && d.hasOwnProperty('style') && (l.flags |= 16);
 				}
-				l.stylingTemplate && (ei(a, l.stylingTemplate, s, c), ni(a, l.stylingTemplate, s, u)),
-					ea() &&
+				l.stylingTemplate && ($o(a, l.stylingTemplate, s, c), ti(a, l.stylingTemplate, s, u)),
+					$i() &&
 						p >= 0 &&
 						(function(t, e, n) {
 							for (var r, o, i = -1, a = p; a < e.length; a++) {
 								var s = e[a];
-								'number' == typeof s ? (i = s) : 1 == i ? Aa((r = r || gl(t)), -1, s, !0, !1) : 2 == i && Aa((o = o || hl(t)), -1, s, e[++a], !1);
+								'number' == typeof s ? (i = s) : 1 == i ? Ta((r = r || dl(t)), -1, s, !0, !1) : 2 == i && Ta((o = o || fl(t)), -1, s, e[++a], !1);
 							}
 						})(l, n);
-				var h = o[$e];
-				h && (h.addNode(l), (o[$e] = h.clone(l))),
+				var h = o[Ke];
+				h && (h.addNode(l), (o[Ke] = h.clone(l))),
 					(function(t, e, n) {
-						if (En(e))
+						if (Sn(e))
 							for (var r = e.directiveEnd, o = e.directiveStart; o < r; o++) {
 								var i = t.data[o];
 								i.contentQueries && i.contentQueries(1, n[o], o);
 							}
 					})(i, l, o);
 			}
-			function _l() {
-				var t = ir();
-				lr() ? ur() : ar((t = t.parent), !1), t.onElementCreationFns && Ds(t);
-				var e = Gn(),
-					n = e[$e];
-				n && t.index === n.nodeIndex && (e[$e] = n.parent), Dn(e[Ye], t), Hn--;
+			function yl() {
+				var t = rr();
+				ar() ? sr() : or((t = t.parent), !1), t.onElementCreationFns && js(t);
+				var e = Bn(),
+					n = e[Ke];
+				n && t.index === n.nodeIndex && (e[Ke] = n.parent), jn(e[We], t), Un--;
 				var r = null;
-				_o(t) && ((r = yo(t.index, e)), Rs(e, t.inputs.class, Hi(r))),
+				yo(t) && ((r = bo(t.index, e)), As(e, t.inputs.class, Ui(r))),
 					0 != (16 & t.flags) &&
-						((r = r || yo(t.index, e)),
-						Rs(
+						((r = r || bo(t.index, e)),
+						As(
 							e,
 							t.inputs.style,
 							(function(t) {
@@ -4156,33 +4150,33 @@
 							})()
 						));
 			}
-			function xl(t, e, n, r) {
-				wl(t, e, n, r), _l();
+			function wl(t, e, n, r) {
+				vl(t, e, n, r), yl();
 			}
-			function Cl(t) {
+			function _l(t) {
 				return !!t && 'function' == typeof t.then;
 			}
-			function kl(t, e, n, r) {
+			function xl(t, e, n, r) {
 				void 0 === n && (n = !1),
 					(function(t, e, n, r, o) {
 						void 0 === n && (n = !1);
-						var i = Gn(),
-							a = ir(),
-							s = i[Ye],
+						var i = Bn(),
+							a = rr(),
+							s = i[We],
 							l = s.firstTemplatePass && (s.cleanup || (s.cleanup = [])),
 							u = !0;
 						if (3 === a.type) {
-							var c = kn(a, i),
-								p = r ? r(c) : Pe,
+							var c = xn(a, i),
+								p = r ? r(c) : ke,
 								f = p.target || c,
-								d = i[sn],
-								h = (_ = Ms(i)).length,
+								d = i[on],
+								h = (_ = Is(i)).length,
 								g = r
 									? function(t) {
-											return r(yn(t[a.index])).target;
+											return r(bn(t[a.index])).target;
 									  }
 									: a.index;
-							if (co(d)) {
+							if (lo(d)) {
 								var m = null;
 								if (
 									(!r &&
@@ -4190,12 +4184,12 @@
 											return t.directiveEnd > t.directiveStart;
 										})(a) &&
 										(m = (function(t, e, n) {
-											var r = t[Ye].cleanup;
+											var r = t[We].cleanup;
 											if (null != r)
 												for (var o = 0; o < r.length - 1; o += 2) {
 													var i = r[o];
 													if (i === e && r[o + 1] === n) {
-														var a = t[nn],
+														var a = t[tn],
 															s = r[o + 2];
 														return a.length > s ? a[s] : null;
 													}
@@ -4207,19 +4201,19 @@
 								)
 									(e.__ngNextListenerFn__ = m.__ngNextListenerFn__), (m.__ngNextListenerFn__ = e), (u = !1);
 								else {
-									e = Pl(a, i, e, !1);
+									e = kl(a, i, e, !1);
 									var b = d.listen(p.name || f, t, e);
 									_.push(e, b), l && l.push(t, g, h, h + 1);
 								}
-							} else (e = Pl(a, i, e, !0)), f.addEventListener(t, e, n), _.push(e), l && l.push(t, g, h, n);
+							} else (e = kl(a, i, e, !0)), f.addEventListener(t, e, n), _.push(e), l && l.push(t, g, h, n);
 						}
-						void 0 === a.outputs && (a.outputs = us(a, 1));
+						void 0 === a.outputs && (a.outputs = ss(a, 1));
 						var v,
 							y = a.outputs;
 						if (u && y && (v = y[t])) {
 							var w = v.length;
 							if (w)
-								for (var _ = Ms(i), x = 0; x < w; x += 3) {
+								for (var _ = Is(i), x = 0; x < w; x += 3) {
 									var C = i[v[x]][v[x + 2]].subscribe(e),
 										k = _.length;
 									_.push(e, C), l && l.push(t, a.index, k, -(k + 1));
@@ -4227,36 +4221,36 @@
 						}
 					})(t, e, n, r);
 			}
-			function Sl(t, e, n) {
+			function Cl(t, e, n) {
 				try {
 					return !1 !== e(n);
 				} catch (r) {
-					return js(t, r), !1;
+					return Ms(t, r), !1;
 				}
 			}
-			function Pl(t, e, n, r) {
+			function kl(t, e, n, r) {
 				return function o(i) {
-					var a = 1 & t.flags ? Pn(t.index, e) : e;
-					0 == (32 & e[Je]) && Cs(a);
-					for (var s = Sl(e, n, i), l = o.__ngNextListenerFn__; l; ) (s = Sl(e, l, i) && s), (l = l.__ngNextListenerFn__);
+					var a = 1 & t.flags ? kn(t.index, e) : e;
+					0 == (32 & e[Qe]) && _s(a);
+					for (var s = Cl(e, n, i), l = o.__ngNextListenerFn__; l; ) (s = Cl(e, l, i) && s), (l = l.__ngNextListenerFn__);
 					return r && !1 === s && (i.preventDefault(), (i.returnValue = !1)), s;
 				};
 			}
-			function El(t) {
+			function Sl(t) {
 				return (
 					void 0 === t && (t = 1),
 					(function(t) {
 						return (
 							void 0 === t && (t = 1),
-							(pr = (function(t, e) {
-								for (; t > 0; ) (e = e[pn]), t--;
+							(ur = (function(t, e) {
+								for (; t > 0; ) (e = e[un]), t--;
 								return e;
-							})(t, pr))[rn]
+							})(t, ur))[en]
 						);
 					})(t)
 				);
 			}
-			function Ol(t, e) {
+			function Pl(t, e) {
 				for (
 					var n = null,
 						r = (function(t) {
@@ -4273,51 +4267,51 @@
 				) {
 					var i = e[o];
 					if ('*' !== i) {
-						if (null === r ? Ki(t, i, !0) : Xi(r, i)) return o;
+						if (null === r ? Yi(t, i, !0) : Ji(r, i)) return o;
 					} else n = o;
 				}
 				return n;
 			}
-			function Il(t) {
-				var e = Io(Gn())[tn];
+			function El(t) {
+				var e = Eo(Bn())[Xe];
 				if (!e.projection)
 					for (var n = (e.projection = new Array(t ? t.length : 1).fill(null)), r = n.slice(), o = e.child; null !== o; ) {
-						var i = t ? Ol(o, t) : 0;
+						var i = t ? Pl(o, t) : 0;
 						null !== i && (r[i] ? (r[i].projectionNext = o) : (n[i] = o), (r[i] = o)), (o = o.next);
 					}
 			}
-			var Tl = !1;
-			function Ml(t, e, n) {
+			var Ol = !1;
+			function Il(t, e, n) {
 				void 0 === e && (e = 0);
-				var r = Gn(),
-					o = $a(r[Ye], r[tn], t, 1, null, n || null);
+				var r = Bn(),
+					o = Ka(r[We], r[Xe], t, 1, null, n || null);
 				null === o.projection && (o.projection = e),
-					ur(),
-					Tl ||
+					sr(),
+					Ol ||
 						(function t(e, n, r, o) {
-							var i = o[Ke],
-								a = o[tn].projection[r];
-							if (Array.isArray(a)) il(a, n, e);
-							else for (; a; ) 32 & a.flags || (1 === a.type ? t(e, n, a.projection, Io(i)) : ((a.flags |= 2), ll(a, n, e, i))), (a = a.projectionNext);
-						})(r, o, e, Io(r));
+							var i = o[Ye],
+								a = o[Xe].projection[r];
+							if (Array.isArray(a)) rl(a, n, e);
+							else for (; a; ) 32 & a.flags || (1 === a.type ? t(e, n, a.projection, Eo(i)) : ((a.flags |= 2), al(a, n, e, i))), (a = a.projectionNext);
+						})(r, o, e, Eo(r));
+			}
+			function Tl(t, e) {
+				var n = Bn(),
+					r = (n[t + pn] = (function(t, e) {
+						return lo(e) ? e.createText(Ve(t)) : e.createTextNode(Ve(t));
+					})(e, n[on])),
+					o = Ka(n[We], n[Xe], t, 3, null, null);
+				sr(), rl(r, o, n);
+			}
+			function Ml(t, e) {
+				return { components: [], scheduler: t || Be, clean: Es, playerHandler: e || null, flags: 0 };
 			}
 			function Al(t, e) {
-				var n = Gn(),
-					r = (n[t + dn] = (function(t, e) {
-						return co(e) ? e.createText(Be(t)) : e.createTextNode(Be(t));
-					})(e, n[sn])),
-					o = $a(n[Ye], n[tn], t, 3, null, null);
-				ur(), il(r, o, n);
-			}
-			function jl(t, e) {
-				return { components: [], scheduler: t || Ge, clean: Is, playerHandler: e || null, flags: 0 };
-			}
-			function Rl(t, e) {
-				var n = Mn(t)[Ye],
+				var n = In(t)[We],
 					r = n.data.length - 1;
-				Rn(r, e, n, -1, -1, -1), Dn(n, { directiveStart: r, directiveEnd: r + 1 });
+				An(r, e, n, -1, -1, -1), jn(n, { directiveStart: r, directiveEnd: r + 1 });
 			}
-			var Dl = (function() {
+			var jl = (function() {
 				function t(t, e, n) {
 					(this.previousValue = t), (this.currentValue = e), (this.firstChange = n);
 				}
@@ -4328,40 +4322,40 @@
 					t
 				);
 			})();
-			function Nl(t) {
+			function Rl(t) {
 				t.type.prototype.ngOnChanges &&
-					((t.setInput = Ul),
+					((t.setInput = Dl),
 					(t.onChanges = function() {
-						var t = Hl(this),
+						var t = Ul(this),
 							e = t && t.current;
 						if (e) {
 							var n = t.previous;
-							if (n === Pe) t.previous = e;
+							if (n === ke) t.previous = e;
 							else for (var r in e) n[r] = e[r];
 							(t.current = null), this.ngOnChanges(e);
 						}
 					}));
 			}
-			function Ul(t, e, n, r) {
+			function Dl(t, e, n, r) {
 				var o =
-						Hl(t) ||
+						Ul(t) ||
 						(function(t, e) {
-							return (t[Ll] = { previous: Pe, current: null });
+							return (t[Nl] = { previous: ke, current: null });
 						})(t),
 					i = o.current || (o.current = {}),
 					a = o.previous,
 					s = this.declaredInputs[n],
 					l = a[s];
-				(i[s] = new Dl(l && l.currentValue, e, a === Pe)), (t[r] = e);
+				(i[s] = new jl(l && l.currentValue, e, a === ke)), (t[r] = e);
 			}
-			var Ll = '__ngSimpleChanges__';
-			function Hl(t) {
-				return t[Ll] || null;
+			var Nl = '__ngSimpleChanges__';
+			function Ul(t) {
+				return t[Nl] || null;
 			}
-			function zl(t) {
+			function Ll(t) {
 				for (var e, n, r = Object.getPrototypeOf(t.type.prototype).constructor; r; ) {
 					var o = void 0;
-					if (In(t)) o = r.ngComponentDef || r.ngDirectiveDef;
+					if (En(t)) o = r.ngComponentDef || r.ngDirectiveDef;
 					else {
 						if (r.ngComponentDef) throw new Error('Directives cannot inherit Components');
 						o = r.ngDirectiveDef;
@@ -4369,24 +4363,24 @@
 					var i = r.ngBaseDef;
 					if (i || o) {
 						var a = t;
-						(a.inputs = Vl(t.inputs)), (a.declaredInputs = Vl(t.declaredInputs)), (a.outputs = Vl(t.outputs));
+						(a.inputs = Hl(t.inputs)), (a.declaredInputs = Hl(t.declaredInputs)), (a.outputs = Hl(t.outputs));
 					}
 					if (i) {
 						var s = i.viewQuery,
 							u = i.contentQueries,
 							c = i.hostBindings;
-						c && ql(t, c), s && Fl(t, s), u && Bl(t, u), _t(t.inputs, i.inputs), _t(t.declaredInputs, i.declaredInputs), _t(t.outputs, i.outputs);
+						c && Fl(t, c), s && zl(t, s), u && Vl(t, u), yt(t.inputs, i.inputs), yt(t.declaredInputs, i.declaredInputs), yt(t.outputs, i.outputs);
 					}
 					if (o) {
 						var p = o.hostBindings;
-						p && ql(t, p);
+						p && Fl(t, p);
 						var f = o.viewQuery,
 							d = o.contentQueries;
-						f && Fl(t, f),
-							d && Bl(t, d),
-							_t(t.inputs, o.inputs),
-							_t(t.declaredInputs, o.declaredInputs),
-							_t(t.outputs, o.outputs),
+						f && zl(t, f),
+							d && Vl(t, d),
+							yt(t.inputs, o.inputs),
+							yt(t.declaredInputs, o.declaredInputs),
+							yt(t.outputs, o.outputs),
 							(t.afterContentChecked = t.afterContentChecked || o.afterContentChecked),
 							(t.afterContentInit = t.afterContentInit || o.afterContentInit),
 							(t.afterViewChecked = t.afterViewChecked || o.afterViewChecked),
@@ -4420,15 +4414,15 @@
 							(t.doCheck = t.doCheck || v.ngDoCheck),
 							(t.onDestroy = t.onDestroy || v.ngOnDestroy),
 							(t.onInit = t.onInit || v.ngOnInit),
-							v.ngOnChanges && ((Nl.ngInherit = !0), Nl)(t));
+							v.ngOnChanges && ((Rl.ngInherit = !0), Rl)(t));
 					}
 					r = Object.getPrototypeOf(r);
 				}
 			}
-			function Vl(t) {
-				return t === Pe ? {} : t === Ee ? [] : t;
+			function Hl(t) {
+				return t === ke ? {} : t === Se ? [] : t;
 			}
-			function Fl(t, e) {
+			function zl(t, e) {
 				var n = t.viewQuery;
 				t.viewQuery = n
 					? function(t, r) {
@@ -4436,7 +4430,7 @@
 					  }
 					: e;
 			}
-			function Bl(t, e) {
+			function Vl(t, e) {
 				var n = t.contentQueries;
 				t.contentQueries = n
 					? function(t, r, o) {
@@ -4444,52 +4438,52 @@
 					  }
 					: e;
 			}
-			function ql(t, e) {
+			function Fl(t, e) {
 				var n = t.hostBindings;
 				e !== n &&
 					(t.hostBindings = n
 						? function(t, r, o) {
-								nr(1);
+								tr(1);
 								try {
 									e(t, r, o);
 								} finally {
-									nr(-1);
+									tr(-1);
 								}
 								n(t, r, o);
 						  }
 						: e);
 			}
-			function Gl(t, e, n, r, o) {
-				if (((t = Mt(t)), Array.isArray(t))) for (var i = 0; i < t.length; i++) Gl(t[i], e, n, r, o);
+			function Bl(t, e, n, r, o) {
+				if (((t = It(t)), Array.isArray(t))) for (var i = 0; i < t.length; i++) Bl(t[i], e, n, r, o);
 				else {
-					var a = Gn(),
-						s = ge(t) ? t : Mt(t.provide),
-						l = pe(t),
-						u = ir(),
+					var a = Bn(),
+						s = de(t) ? t : It(t.provide),
+						l = ue(t),
+						u = rr(),
 						c = 65535 & u.providerIndexes,
 						p = u.directiveStart,
 						f = u.providerIndexes >> 16;
-					if (t.useClass || ge(t)) {
+					if (t.useClass || de(t)) {
 						var d = (t.useClass || t).prototype.ngOnDestroy;
 						if (d) {
-							var h = a[Ye];
+							var h = a[We];
 							(h.destroyHooks || (h.destroyHooks = [])).push(e.length, d);
 						}
 					}
-					if (ge(t) || !t.multi) {
-						var g = new lo(l, o, fl),
-							m = Wl(s, e, o ? c : c + f, p);
-						-1 == m ? (Ho(Do(u, a), a, s), e.push(s), u.directiveStart++, u.directiveEnd++, o && (u.providerIndexes += 65536), n.push(g), a.push(g)) : ((n[m] = g), (a[m] = g));
+					if (de(t) || !t.multi) {
+						var g = new ao(l, o, cl),
+							m = Gl(s, e, o ? c : c + f, p);
+						-1 == m ? (Uo(jo(u, a), a, s), e.push(s), u.directiveStart++, u.directiveEnd++, o && (u.providerIndexes += 65536), n.push(g), a.push(g)) : ((n[m] = g), (a[m] = g));
 					} else {
-						var b = Wl(s, e, c + f, p),
-							v = Wl(s, e, c, c + f),
+						var b = Gl(s, e, c + f, p),
+							v = Gl(s, e, c, c + f),
 							y = v >= 0 && n[v];
 						(o && !y) || (!o && !(b >= 0 && n[b]))
-							? (Ho(Do(u, a), a, s),
+							? (Uo(jo(u, a), a, s),
 							  (g = (function(t, e, n, r, o) {
-									var i = new lo(t, n, fl);
-									return (i.multi = []), (i.index = e), (i.componentProviders = 0), Zl(i, o, r && !n), i;
-							  })(o ? Yl : Ql, n.length, o, r, l)),
+									var i = new ao(t, n, cl);
+									return (i.multi = []), (i.index = e), (i.componentProviders = 0), ql(i, o, r && !n), i;
+							  })(o ? Wl : Zl, n.length, o, r, l)),
 							  !o && y && (n[v].providerFactory = g),
 							  e.push(s),
 							  u.directiveStart++,
@@ -4497,84 +4491,84 @@
 							  o && (u.providerIndexes += 65536),
 							  n.push(g),
 							  a.push(g))
-							: Zl(n[o ? v : b], l, !o && r),
+							: ql(n[o ? v : b], l, !o && r),
 							!o && r && y && n[v].componentProviders++;
 					}
 				}
 			}
-			function Zl(t, e, n) {
+			function ql(t, e, n) {
 				t.multi.push(e), n && t.componentProviders++;
 			}
-			function Wl(t, e, n, r) {
+			function Gl(t, e, n, r) {
 				for (var o = n; o < r; o++) if (e[o] === t) return o;
 				return -1;
 			}
-			function Ql(t, e, n, r) {
-				return Jl(this.multi, []);
+			function Zl(t, e, n, r) {
+				return Ql(this.multi, []);
 			}
-			function Yl(t, e, n, r) {
+			function Wl(t, e, n, r) {
 				var o,
 					i = this.multi;
 				if (this.providerFactory) {
 					var a = this.providerFactory.componentProviders,
-						s = qo(e, n, this.providerFactory.index, r);
-					Jl(i, (o = s.slice(0, a)));
+						s = Fo(e, n, this.providerFactory.index, r);
+					Ql(i, (o = s.slice(0, a)));
 					for (var l = a; l < s.length; l++) o.push(s[l]);
-				} else Jl(i, (o = []));
+				} else Ql(i, (o = []));
 				return o;
 			}
-			function Jl(t, e) {
+			function Ql(t, e) {
 				for (var n = 0; n < t.length; n++) e.push((0, t[n])());
 				return e;
 			}
-			var Kl,
-				Xl,
-				$l,
+			var Yl,
+				Jl,
+				Kl,
+				Xl = (function() {
+					return function() {};
+				})(),
+				$l = (function() {
+					return function() {};
+				})(),
 				tu = (function() {
-					return function() {};
-				})(),
-				eu = (function() {
-					return function() {};
-				})(),
-				nu = (function() {
 					function t() {}
 					return (
 						(t.prototype.resolveComponentFactory = function(t) {
 							throw (function(t) {
-								var e = Error('No component factory found for ' + Ot(t) + '. Did you add it to @NgModule.entryComponents?');
+								var e = Error('No component factory found for ' + Pt(t) + '. Did you add it to @NgModule.entryComponents?');
 								return (e.ngComponent = t), e;
 							})(t);
 						}),
 						t
 					);
 				})(),
-				ru = (function() {
+				eu = (function() {
 					function t() {}
-					return (t.NULL = new nu()), t;
+					return (t.NULL = new tu()), t;
+				})(),
+				nu = (function() {
+					return function() {};
+				})(),
+				ru = (function() {
+					return function() {};
 				})(),
 				ou = (function() {
-					return function() {};
-				})(),
-				iu = (function() {
-					return function() {};
-				})(),
-				au = (function() {
 					function t(t, e, n) {
 						(this._context = e), (this._componentIndex = n), (this._appRef = null), (this._viewContainerRef = null), (this._tViewNode = null), (this._lView = t);
 					}
 					return (
 						Object.defineProperty(t.prototype, 'rootNodes', {
 							get: function() {
-								return null == this._lView[Qe]
+								return null == this._lView[Ze]
 									? (function t(e, n, r) {
 											for (var o = n.child; o; ) {
-												var i = kn(o, e);
+												var i = xn(o, e);
 												if ((i && r.push(i), 4 === o.type)) t(e, o, r);
-												else if (1 === o.type) for (var a = Io(e), s = a[tn], l = Oo(a), u = s.projection[o.projection]; u && l; ) r.push(kn(u, l)), (u = u.next);
+												else if (1 === o.type) for (var a = Eo(e), s = a[Xe], l = Po(a), u = s.projection[o.projection]; u && l; ) r.push(xn(u, l)), (u = u.next);
 												o = o.next;
 											}
 											return r;
-									  })(this._lView, this._lView[tn], [])
+									  })(this._lView, this._lView[Xe], [])
 									: [];
 							},
 							enumerable: !0,
@@ -4589,7 +4583,7 @@
 						}),
 						Object.defineProperty(t.prototype, 'destroyed', {
 							get: function() {
-								return 256 == (256 & this._lView[Je]);
+								return 256 == (256 & this._lView[Qe]);
 							},
 							enumerable: !0,
 							configurable: !0
@@ -4600,31 +4594,31 @@
 								var t = this._viewContainerRef.indexOf(this);
 								t > -1 && this._viewContainerRef.detach(t), (this._viewContainerRef = null);
 							}
-							$s(this._lView);
+							Ks(this._lView);
 						}),
 						(t.prototype.onDestroy = function(t) {
 							var e, n;
-							(n = t), Ms((e = this._lView)).push(n), e[Ye].firstTemplatePass && As(e).push(e[nn].length - 1, null);
+							(n = t), Is((e = this._lView)).push(n), e[We].firstTemplatePass && Ts(e).push(e[tn].length - 1, null);
 						}),
 						(t.prototype.markForCheck = function() {
-							Cs(this._lView);
+							_s(this._lView);
 						}),
 						(t.prototype.detach = function() {
-							this._lView[Je] &= -129;
+							this._lView[Qe] &= -129;
 						}),
 						(t.prototype.reattach = function() {
-							this._lView[Je] |= 128;
+							this._lView[Qe] |= 128;
 						}),
 						(t.prototype.detectChanges = function() {
-							Ss(this._lView, this.context);
+							Cs(this._lView, this.context);
 						}),
 						(t.prototype.checkNoChanges = function() {
 							!(function(t, e) {
-								hr(!0);
+								fr(!0);
 								try {
-									Ss(t, e);
+									Cs(t, e);
 								} finally {
-									hr(!1);
+									fr(!1);
 								}
 							})(this._lView, this.context);
 						}),
@@ -4634,19 +4628,19 @@
 						}),
 						(t.prototype.detachFromAppRef = function() {
 							var t;
-							(this._appRef = null), ul((t = this._lView)[sn], 1, t, null, null);
+							(this._appRef = null), sl((t = this._lView)[on], 1, t, null, null);
 						}),
 						(t.prototype.attachToAppRef = function(t) {
 							if (this._viewContainerRef) throw new Error('This view is already attached to a ViewContainer!');
 							this._appRef = t;
 						}),
 						(t.prototype._lookUpContext = function() {
-							return (this._context = Oo(this._lView)[this._componentIndex]);
+							return (this._context = Po(this._lView)[this._componentIndex]);
 						}),
 						t
 					);
 				})(),
-				su = (function(t) {
+				iu = (function(t) {
 					function e(e) {
 						var n = t.call(this, e, null, -1) || this;
 						return (n._view = e), n;
@@ -4654,15 +4648,15 @@
 					return (
 						o(e, t),
 						(e.prototype.detectChanges = function() {
-							Ps(this._view);
+							ks(this._view);
 						}),
 						(e.prototype.checkNoChanges = function() {
 							!(function(t) {
-								hr(!0);
+								fr(!0);
 								try {
-									Ps(t);
+									ks(t);
 								} finally {
-									hr(!1);
+									fr(!1);
 								}
 							})(this._view);
 						}),
@@ -4675,23 +4669,23 @@
 						}),
 						e
 					);
-				})(au);
-			function lu(t, e, n) {
+				})(ou);
+			function au(t, e, n) {
 				return (
-					Kl ||
-						(Kl = (function(t) {
+					Yl ||
+						(Yl = (function(t) {
 							function e() {
 								return (null !== t && t.apply(this, arguments)) || this;
 							}
 							return o(e, t), e;
 						})(t)),
-					new Kl(kn(e, n))
+					new Yl(xn(e, n))
 				);
 			}
-			function uu(t, e, n, r) {
+			function su(t, e, n, r) {
 				if (
-					(Xl ||
-						(Xl = (function(t) {
+					(Jl ||
+						(Jl = (function(t) {
 							function e(e, n, r, o, i) {
 								var a = t.call(this) || this;
 								return (a._declarationParentView = e), (a.elementRef = n), (a._tView = r), (a._hostLContainer = o), (a._injectorIndex = i), a;
@@ -4699,18 +4693,18 @@
 							return (
 								o(e, t),
 								(e.prototype.createEmbeddedView = function(t, e, n) {
-									var r = this._declarationParentView[$e];
-									r && null == this._hostLContainer[$e] && (this._hostLContainer[$e] = r.container());
+									var r = this._declarationParentView[Ke];
+									r && null == this._hostLContainer[Ke] && (this._hostLContainer[Ke] = r.container());
 									var o = (function(t, e, n, r, o) {
-										var i = lr(),
-											a = ir();
-										ar(null, !0);
-										var s = Xa(n, t, e, 16, null, null);
-										return (s[pn] = n), r && (s[$e] = r.createView()), ts(t, null, -1, s), t.firstTemplatePass && (t.node.injectorIndex = o), ar(a, i), s;
-									})(this._tView, t, this._declarationParentView, this._hostLContainer[$e], this._injectorIndex);
-									e && Ks(o, e, n), es(o, this._tView, t);
-									var i = new au(o, t, -1);
-									return (i._tViewNode = o[tn]), i;
+										var i = ar(),
+											a = rr();
+										or(null, !0);
+										var s = Ja(n, t, e, 16, null, null);
+										return (s[un] = n), r && (s[Ke] = r.createView()), Xa(t, null, -1, s), t.firstTemplatePass && (t.node.injectorIndex = o), or(a, i), s;
+									})(this._tView, t, this._declarationParentView, this._hostLContainer[Ke], this._injectorIndex);
+									e && Ys(o, e, n), $a(o, this._tView, t);
+									var i = new ou(o, t, -1);
+									return (i._tViewNode = o[Xe]), i;
 								}),
 								e
 							);
@@ -4718,31 +4712,31 @@
 					0 === n.type)
 				) {
 					var i = r[n.index];
-					return new Xl(r, lu(e, n, r), n.tViews, i, n.injectorIndex);
+					return new Jl(r, au(e, n, r), n.tViews, i, n.injectorIndex);
 				}
 				return null;
 			}
-			var cu = (function() {
+			var lu = (function() {
 					function t(t) {
 						this.nativeElement = t;
 					}
 					return (
 						(t.__NG_ELEMENT_ID__ = function() {
-							return pu(t);
+							return uu(t);
 						}),
 						t
 					);
 				})(),
-				pu = function(t) {
-					return lu(t, ir(), Gn());
+				uu = function(t) {
+					return au(t, rr(), Bn());
 				},
-				fu = (function() {
+				cu = (function() {
 					return function() {};
 				})(),
-				du = (function(t) {
+				pu = (function(t) {
 					return (t[(t.Important = 1)] = 'Important'), (t[(t.DashCase = 2)] = 'DashCase'), t;
 				})({}),
-				hu = new ((function() {
+				fu = new ((function() {
 					return function(t) {
 						(this.full = t),
 							(this.major = t.split('.')[0]),
@@ -4753,22 +4747,22 @@
 								.join('.'));
 					};
 				})())('8.1.0'),
-				gu = (function() {
+				du = (function() {
 					function t() {}
 					return (
 						(t.prototype.supports = function(t) {
-							return Hs(t);
+							return Us(t);
 						}),
 						(t.prototype.create = function(t) {
-							return new bu(t);
+							return new gu(t);
 						}),
 						t
 					);
 				})(),
-				mu = function(t, e) {
+				hu = function(t, e) {
 					return e;
 				},
-				bu = (function() {
+				gu = (function() {
 					function t(t) {
 						(this.length = 0),
 							(this._linkedRecords = null),
@@ -4784,7 +4778,7 @@
 							(this._removalsTail = null),
 							(this._identityChangesHead = null),
 							(this._identityChangesTail = null),
-							(this._trackByFn = t || mu);
+							(this._trackByFn = t || hu);
 					}
 					return (
 						(t.prototype.forEachItem = function(t) {
@@ -4793,8 +4787,8 @@
 						}),
 						(t.prototype.forEachOperation = function(t) {
 							for (var e = this._itHead, n = this._removalsHead, r = 0, o = null; e || n; ) {
-								var i = !n || (e && e.currentIndex < _u(n, r, o)) ? e : n,
-									a = _u(i, r, o),
+								var i = !n || (e && e.currentIndex < yu(n, r, o)) ? e : n,
+									a = yu(i, r, o),
 									s = i.currentIndex;
 								if (i === n) r--, (n = n._nextRemoved);
 								else if (((e = e._next), null == i.previousIndex)) r++;
@@ -4835,7 +4829,7 @@
 							for (e = this._identityChangesHead; null !== e; e = e._nextIdentityChange) t(e);
 						}),
 						(t.prototype.diff = function(t) {
-							if ((null == t && (t = []), !Hs(t))) throw new Error("Error trying to diff '" + Ot(t) + "'. Only arrays and iterables are allowed");
+							if ((null == t && (t = []), !Us(t))) throw new Error("Error trying to diff '" + Pt(t) + "'. Only arrays and iterables are allowed");
 							return this.check(t) ? this : null;
 						}),
 						(t.prototype.onDestroy = function() {}),
@@ -4851,19 +4845,19 @@
 								this.length = t.length;
 								for (var s = 0; s < this.length; s++)
 									(o = this._trackByFn(s, (r = t[s]))),
-										null !== i && Ls(i.trackById, o)
-											? (a && (i = this._verifyReinsertion(i, r, o, s)), Ls(i.item, r) || this._addIdentityChange(i, r))
+										null !== i && Ns(i.trackById, o)
+											? (a && (i = this._verifyReinsertion(i, r, o, s)), Ns(i.item, r) || this._addIdentityChange(i, r))
 											: ((i = this._mismatch(i, r, o, s)), (a = !0)),
 										(i = i._next);
 							} else
 								(n = 0),
 									(function(t, e) {
 										if (Array.isArray(t)) for (var n = 0; n < t.length; n++) e(t[n]);
-										else for (var r = t[Us()](), o = void 0; !(o = r.next()).done; ) e(o.value);
+										else for (var r = t[Ds()](), o = void 0; !(o = r.next()).done; ) e(o.value);
 									})(t, function(t) {
 										(o = e._trackByFn(n, t)),
-											null !== i && Ls(i.trackById, o)
-												? (a && (i = e._verifyReinsertion(i, t, o, n)), Ls(i.item, t) || e._addIdentityChange(i, t))
+											null !== i && Ns(i.trackById, o)
+												? (a && (i = e._verifyReinsertion(i, t, o, n)), Ns(i.item, t) || e._addIdentityChange(i, t))
 												: ((i = e._mismatch(i, t, o, n)), (a = !0)),
 											(i = i._next),
 											n++;
@@ -4893,10 +4887,10 @@
 							return (
 								null === t ? (o = this._itTail) : ((o = t._prev), this._remove(t)),
 								null !== (t = null === this._linkedRecords ? null : this._linkedRecords.get(n, r))
-									? (Ls(t.item, e) || this._addIdentityChange(t, e), this._moveAfter(t, o, r))
+									? (Ns(t.item, e) || this._addIdentityChange(t, e), this._moveAfter(t, o, r))
 									: null !== (t = null === this._unlinkedRecords ? null : this._unlinkedRecords.get(n, null))
-									? (Ls(t.item, e) || this._addIdentityChange(t, e), this._reinsertAfter(t, o, r))
-									: (t = this._addAfter(new vu(e, n), o, r)),
+									? (Ns(t.item, e) || this._addIdentityChange(t, e), this._reinsertAfter(t, o, r))
+									: (t = this._addAfter(new mu(e, n), o, r)),
 								t
 							);
 						}),
@@ -4941,7 +4935,7 @@
 								(t._prev = e),
 								null === r ? (this._itTail = t) : (r._prev = t),
 								null === e ? (this._itHead = t) : (e._next = t),
-								null === this._linkedRecords && (this._linkedRecords = new wu()),
+								null === this._linkedRecords && (this._linkedRecords = new vu()),
 								this._linkedRecords.put(t),
 								(t.currentIndex = n),
 								t
@@ -4961,7 +4955,7 @@
 						}),
 						(t.prototype._addToRemovals = function(t) {
 							return (
-								null === this._unlinkedRecords && (this._unlinkedRecords = new wu()),
+								null === this._unlinkedRecords && (this._unlinkedRecords = new vu()),
 								this._unlinkedRecords.put(t),
 								(t.currentIndex = null),
 								(t._nextRemoved = null),
@@ -4981,7 +4975,7 @@
 						t
 					);
 				})(),
-				vu = (function() {
+				mu = (function() {
 					return function(t, e) {
 						(this.item = t),
 							(this.trackById = e),
@@ -4999,7 +4993,7 @@
 							(this._nextIdentityChange = null);
 					};
 				})(),
-				yu = (function() {
+				bu = (function() {
 					function t() {
 						(this._head = null), (this._tail = null);
 					}
@@ -5011,7 +5005,7 @@
 						}),
 						(t.prototype.get = function(t, e) {
 							var n;
-							for (n = this._head; null !== n; n = n._nextDup) if ((null === e || e <= n.currentIndex) && Ls(n.trackById, t)) return n;
+							for (n = this._head; null !== n; n = n._nextDup) if ((null === e || e <= n.currentIndex) && Ns(n.trackById, t)) return n;
 							return null;
 						}),
 						(t.prototype.remove = function(t) {
@@ -5022,7 +5016,7 @@
 						t
 					);
 				})(),
-				wu = (function() {
+				vu = (function() {
 					function t() {
 						this.map = new Map();
 					}
@@ -5030,7 +5024,7 @@
 						(t.prototype.put = function(t) {
 							var e = t.trackById,
 								n = this.map.get(e);
-							n || ((n = new yu()), this.map.set(e, n)), n.add(t);
+							n || ((n = new bu()), this.map.set(e, n)), n.add(t);
 						}),
 						(t.prototype.get = function(t, e) {
 							var n = this.map.get(t);
@@ -5053,25 +5047,25 @@
 						t
 					);
 				})();
-			function _u(t, e, n) {
+			function yu(t, e, n) {
 				var r = t.previousIndex;
 				if (null === r) return r;
 				var o = 0;
 				return n && r < n.length && (o = n[r]), r + e + o;
 			}
-			var xu = (function() {
+			var wu = (function() {
 					function t() {}
 					return (
 						(t.prototype.supports = function(t) {
-							return t instanceof Map || zs(t);
+							return t instanceof Map || Ls(t);
 						}),
 						(t.prototype.create = function() {
-							return new Cu();
+							return new _u();
 						}),
 						t
 					);
 				})(),
-				Cu = (function() {
+				_u = (function() {
 					function t() {
 						(this._records = new Map()),
 							(this._mapHead = null),
@@ -5114,7 +5108,7 @@
 						}),
 						(t.prototype.diff = function(t) {
 							if (t) {
-								if (!(t instanceof Map || zs(t))) throw new Error("Error trying to diff '" + Ot(t) + "'. Only maps and objects are allowed");
+								if (!(t instanceof Map || Ls(t))) throw new Error("Error trying to diff '" + Pt(t) + "'. Only maps and objects are allowed");
 							} else t = new Map();
 							return this.check(t) ? this : null;
 						}),
@@ -5161,7 +5155,7 @@
 									o = n._next;
 								return r && (r._next = o), o && (o._prev = r), (n._next = null), (n._prev = null), n;
 							}
-							var i = new ku(t);
+							var i = new xu(t);
 							return this._records.set(t, i), (i.currentValue = e), this._addToAdditions(i), i;
 						}),
 						(t.prototype._reset = function() {
@@ -5174,7 +5168,7 @@
 							}
 						}),
 						(t.prototype._maybeAddToChanges = function(t, e) {
-							Ls(e, t.currentValue) || ((t.previousValue = t.currentValue), (t.currentValue = e), this._addToChanges(t));
+							Ns(e, t.currentValue) || ((t.previousValue = t.currentValue), (t.currentValue = e), this._addToChanges(t));
 						}),
 						(t.prototype._addToAdditions = function(t) {
 							null === this._additionsHead ? (this._additionsHead = this._additionsTail = t) : ((this._additionsTail._nextAdded = t), (this._additionsTail = t));
@@ -5192,7 +5186,7 @@
 						t
 					);
 				})(),
-				ku = (function() {
+				xu = (function() {
 					return function(t) {
 						(this.key = t),
 							(this.previousValue = null),
@@ -5205,7 +5199,7 @@
 							(this._nextChanged = null);
 					};
 				})(),
-				Su = (function() {
+				Cu = (function() {
 					function t(t) {
 						this.factories = t;
 					}
@@ -5224,7 +5218,7 @@
 									if (!n) throw new Error('Cannot extend IterableDiffers without a parent injector');
 									return t.create(e, n);
 								},
-								deps: [[t, new vt(), new mt()]]
+								deps: [[t, new mt(), new ht()]]
 							};
 						}),
 						(t.prototype.find = function(t) {
@@ -5235,17 +5229,17 @@
 							if (null != n) return n;
 							throw new Error("Cannot find a differ supporting object '" + t + "' of type '" + ((e = t).name || typeof e) + "'");
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							providedIn: 'root',
 							factory: function() {
-								return new t([new gu()]);
+								return new t([new du()]);
 							}
 						})),
 						t
 					);
 				})(),
-				Pu = (function() {
+				ku = (function() {
 					function t(t) {
 						this.factories = t;
 					}
@@ -5264,7 +5258,7 @@
 									if (!n) throw new Error('Cannot extend KeyValueDiffers without a parent injector');
 									return t.create(e, n);
 								},
-								deps: [[t, new vt(), new mt()]]
+								deps: [[t, new mt(), new ht()]]
 							};
 						}),
 						(t.prototype.find = function(t) {
@@ -5274,68 +5268,68 @@
 							if (e) return e;
 							throw new Error("Cannot find a differ supporting object '" + t + "'");
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							providedIn: 'root',
 							factory: function() {
-								return new t([new xu()]);
+								return new t([new wu()]);
 							}
 						})),
 						t
 					);
 				})(),
-				Eu = (function() {
+				Su = (function() {
 					function t() {}
 					return (
 						(t.__NG_ELEMENT_ID__ = function() {
-							return Ou();
+							return Pu();
 						}),
 						t
 					);
 				})(),
-				Ou = function() {
+				Pu = function() {
 					return (function(t, e, n) {
-						if (On(t)) {
+						if (Pn(t)) {
 							var r = t.directiveStart,
-								o = Pn(t.index, e);
-							return new au(o, null, r);
+								o = kn(t.index, e);
+							return new ou(o, null, r);
 						}
 						if (3 === t.type || 0 === t.type || 4 === t.type) {
-							var i = Io(e);
-							return new au(i, i[rn], -1);
+							var i = Eo(e);
+							return new ou(i, i[en], -1);
 						}
 						return null;
-					})(ir(), Gn());
+					})(rr(), Bn());
 				},
-				Iu = [new xu()],
-				Tu = new Su([new gu()]),
-				Mu = new Pu(Iu),
+				Eu = [new wu()],
+				Ou = new Cu([new du()]),
+				Iu = new ku(Eu),
+				Tu = (function() {
+					function t() {}
+					return (
+						(t.__NG_ELEMENT_ID__ = function() {
+							return Mu(t, lu);
+						}),
+						t
+					);
+				})(),
+				Mu = function(t, e) {
+					return su(t, e, rr(), Bn());
+				},
 				Au = (function() {
 					function t() {}
 					return (
 						(t.__NG_ELEMENT_ID__ = function() {
-							return ju(t, cu);
+							return ju(t, lu);
 						}),
 						t
 					);
 				})(),
 				ju = function(t, e) {
-					return uu(t, e, ir(), Gn());
-				},
-				Ru = (function() {
-					function t() {}
-					return (
-						(t.__NG_ELEMENT_ID__ = function() {
-							return Du(t, cu);
-						}),
-						t
-					);
-				})(),
-				Du = function(t, e) {
 					return (function(t, e, n, r) {
 						var i;
-						$l ||
-							($l = (function(t) {
+						Kl ||
+							(Kl = (function(t) {
 								function n(e, n, r) {
 									var o = t.call(this) || this;
 									return (o._lContainer = e), (o._hostTNode = n), (o._hostView = r), o;
@@ -5344,31 +5338,31 @@
 									o(n, t),
 									Object.defineProperty(n.prototype, 'element', {
 										get: function() {
-											return lu(e, this._hostTNode, this._hostView);
+											return au(e, this._hostTNode, this._hostView);
 										},
 										enumerable: !0,
 										configurable: !0
 									}),
 									Object.defineProperty(n.prototype, 'injector', {
 										get: function() {
-											return new Wo(this._hostTNode, this._hostView);
+											return new Go(this._hostTNode, this._hostView);
 										},
 										enumerable: !0,
 										configurable: !0
 									}),
 									Object.defineProperty(n.prototype, 'parentInjector', {
 										get: function() {
-											var t = Lo(this._hostTNode, this._hostView),
-												e = Eo(t, this._hostView),
+											var t = No(this._hostTNode, this._hostView),
+												e = So(t, this._hostView),
 												n = (function(t, e, n) {
 													if (n.parent && -1 !== n.parent.injectorIndex) {
 														for (var r = n.parent.injectorIndex, o = n.parent; null != o.parent && r == o.injectorIndex; ) o = o.parent;
 														return o;
 													}
-													for (var i = Po(t), a = e, s = e[tn]; i > 1; ) (s = (a = a[pn])[tn]), i--;
+													for (var i = ko(t), a = e, s = e[Xe]; i > 1; ) (s = (a = a[un])[Xe]), i--;
 													return s;
 												})(t, this._hostView, this._hostTNode);
-											return ko(t) && null != n ? new Wo(n, e) : new Wo(null, this._hostView);
+											return xo(t) && null != n ? new Go(n, e) : new Go(null, this._hostView);
 										},
 										enumerable: !0,
 										configurable: !0
@@ -5381,7 +5375,7 @@
 									}),
 									Object.defineProperty(n.prototype, 'length', {
 										get: function() {
-											var t = this._lContainer.length - bn;
+											var t = this._lContainer.length - gn;
 											return t > 0 ? t : 0;
 										},
 										enumerable: !0,
@@ -5395,7 +5389,7 @@
 									}),
 									(n.prototype.createComponent = function(t, e, n, r, o) {
 										var i = n || this.parentInjector;
-										!o && null == t.ngModule && i && (o = i.get(ou, null));
+										!o && null == t.ngModule && i && (o = i.get(nu, null));
 										var a = t.create(i, r, void 0, o);
 										return this.insert(a.hostView, e), a;
 									}),
@@ -5404,9 +5398,9 @@
 										this.allocateContainerIfNeeded();
 										var n = t._lView,
 											r = this._adjustIndex(e);
-										return An(n)
+										return Tn(n)
 											? this.move(t, r)
-											: (Ks(n, this._lContainer, r), Js(n, !0, al(r, this._lContainer)), t.attachToViewContainerRef(this), this._lContainer[8].splice(r, 0, t), t);
+											: (Ys(n, this._lContainer, r), Qs(n, !0, ol(r, this._lContainer)), t.attachToViewContainerRef(this), this._lContainer[8].splice(r, 0, t), t);
 									}),
 									(n.prototype.move = function(t, e) {
 										if (t.destroyed) throw new Error('Cannot move a destroyed View in a ViewContainer!');
@@ -5420,16 +5414,16 @@
 										this.allocateContainerIfNeeded();
 										var e = this._adjustIndex(t, -1);
 										(function(t, n) {
-											var r = Xs(t, e);
-											r && $s(r);
+											var r = Js(t, e);
+											r && Ks(r);
 										})(this._lContainer),
 											this._lContainer[8].splice(e, 1);
 									}),
 									(n.prototype.detach = function(t) {
 										this.allocateContainerIfNeeded();
 										var e = this._adjustIndex(t, -1),
-											n = Xs(this._lContainer, e);
-										return n && null != this._lContainer[8].splice(e, 1)[0] ? new au(n, n[rn], -1) : null;
+											n = Js(this._lContainer, e);
+										return n && null != this._lContainer[8].splice(e, 1)[0] ? new ou(n, n[en], -1) : null;
 									}),
 									(n.prototype._adjustIndex = function(t, e) {
 										return void 0 === e && (e = 0), null == t ? this.length + e : t;
@@ -5441,28 +5435,28 @@
 								);
 							})(t));
 						var a = r[n.index];
-						if (_n(a)) (i = a)[gn] = -1;
+						if (yn(a)) (i = a)[dn] = -1;
 						else {
 							var s;
-							if (((s = 4 === n.type ? yn(a) : r[sn].createComment('')), Tn(r))) {
-								var l = r[sn],
-									u = kn(n, r);
-								nl(
+							if (((s = 4 === n.type ? bn(a) : r[on].createComment('')), On(r))) {
+								var l = r[on],
+									u = xn(n, r);
+								tl(
 									l,
-									ol(l, u),
+									nl(l, u),
 									s,
 									(function(t, e) {
-										return co(t) ? t.nextSibling(e) : e.nextSibling;
+										return lo(t) ? t.nextSibling(e) : e.nextSibling;
 									})(l, u)
 								);
-							} else il(s, n, r);
-							(r[n.index] = i = ws(a, r, s, n, !0)), xs(r, i);
+							} else rl(s, n, r);
+							(r[n.index] = i = vs(a, r, s, n, !0)), ws(r, i);
 						}
-						return new $l(i, n, r);
-					})(t, e, ir(), Gn());
+						return new Kl(i, n, r);
+					})(t, e, rr(), Bn());
 				},
-				Nu = {},
-				Uu = (function(t) {
+				Ru = {},
+				Du = (function(t) {
 					function e(e) {
 						var n = t.call(this) || this;
 						return (n.ngModule = e), n;
@@ -5470,30 +5464,30 @@
 					return (
 						o(e, t),
 						(e.prototype.resolveComponentFactory = function(t) {
-							var e = Ve(t);
-							return new Vu(e, this.ngModule);
+							var e = He(t);
+							return new Hu(e, this.ngModule);
 						}),
 						e
 					);
-				})(ru);
-			function Lu(t) {
+				})(eu);
+			function Nu(t) {
 				var e = [];
 				for (var n in t) t.hasOwnProperty(n) && e.push({ propName: t[n], templateName: n });
 				return e;
 			}
-			var Hu = new Lt('ROOT_CONTEXT_TOKEN', {
+			var Uu = new Nt('ROOT_CONTEXT_TOKEN', {
 					providedIn: 'root',
 					factory: function() {
-						return jl(Jt(zu));
+						return Ml(Qt(Lu));
 					}
 				}),
-				zu = new Lt('SCHEDULER_TOKEN', {
+				Lu = new Nt('SCHEDULER_TOKEN', {
 					providedIn: 'root',
 					factory: function() {
-						return Ge;
+						return Be;
 					}
 				}),
-				Vu = (function(t) {
+				Hu = (function(t) {
 					function e(e, n) {
 						var r = t.call(this) || this;
 						return (
@@ -5510,14 +5504,14 @@
 						o(e, t),
 						Object.defineProperty(e.prototype, 'inputs', {
 							get: function() {
-								return Lu(this.componentDef.inputs);
+								return Nu(this.componentDef.inputs);
 							},
 							enumerable: !0,
 							configurable: !0
 						}),
 						Object.defineProperty(e.prototype, 'outputs', {
 							get: function() {
-								return Lu(this.componentDef.outputs);
+								return Nu(this.componentDef.outputs);
 							},
 							enumerable: !0,
 							configurable: !0
@@ -5530,81 +5524,81 @@
 									? (function(t, e) {
 											return {
 												get: function(n, r, o) {
-													var i = t.get(n, Nu, o);
-													return i !== Nu || r === Nu ? i : e.get(n, r, o);
+													var i = t.get(n, Ru, o);
+													return i !== Ru || r === Ru ? i : e.get(n, r, o);
 												}
 											};
 									  })(t, r.injector)
 									: t,
-								l = s.get(fu, po),
-								u = s.get(to, null),
+								l = s.get(cu, uo),
+								u = s.get(Xr, null),
 								c = a
-									? Ka(this.selector, l.createRenderer(null, this.componentDef))
-									: ((o = n), (i = l.createRenderer(null, null)), 'string' == typeof o ? (co(i) ? i.selectRootElement(o) : i.querySelector(o)) : o),
+									? Ya(this.selector, l.createRenderer(null, this.componentDef))
+									: ((o = n), (i = l.createRenderer(null, null)), 'string' == typeof o ? (lo(i) ? i.selectRootElement(o) : i.querySelector(o)) : o),
 								p = this.componentDef.onPush ? 576 : 528,
 								f = 'string' == typeof n && /^#root-ng-internal-isolated-\d+/.test(n),
-								d = a || f ? jl() : s.get(Hu),
+								d = a || f ? Ml() : s.get(Uu),
 								h = l.createRenderer(c, this.componentDef);
-							n && c && (co(h) ? h.setAttribute(c, 'ng-version', hu.full) : c.setAttribute('ng-version', hu.full));
+							n && c && (lo(h) ? h.setAttribute(c, 'ng-version', fu.full) : c.setAttribute('ng-version', fu.full));
 							var g,
 								m,
-								b = Xa(null, ss(-1, null, 1, 0, null, null, null, null), d, p, null, null, l, h, u, s),
-								v = _r(b, null),
+								b = Ja(null, is(-1, null, 1, 0, null, null, null, null), d, p, null, null, l, h, u, s),
+								v = yr(b, null),
 								y = !1;
 							try {
 								var w = (function(t, e, n, r, o, i) {
-									(Wn = !1), (Zn = null), (Hn = 0), (Fn = !0);
-									var a = n[Ye];
-									n[0 + dn] = c;
-									var s = $a(a, null, 0, 3, null, null),
-										l = Xa(n, as(e), null, e.onPush ? 64 : 16, n[dn], s, r, o, void 0);
-									return a.firstTemplatePass && (Ho(Do(s, n), n, e.type), (s.flags = 1), bs(s, n.length, 1), gs(s)), (n[dn] = l);
+									(Gn = !1), (qn = null), (Un = 0), (zn = !0);
+									var a = n[We];
+									n[0 + pn] = c;
+									var s = Ka(a, null, 0, 3, null, null),
+										l = Ja(n, os(e), null, e.onPush ? 64 : 16, n[pn], s, r, o, void 0);
+									return a.firstTemplatePass && (Uo(jo(s, n), n, e.type), (s.flags = 1), gs(s, n.length, 1), ds(s)), (n[pn] = l);
 								})(0, this.componentDef, b, l, h);
-								(m = Sn(0, b)),
+								(m = Cn(0, b)),
 									e &&
 										(m.projection = e.map(function(t) {
 											return Array.from(t);
 										})),
 									(g = (function(t, e, n, r, o) {
-										var i = n[Ye],
+										var i = n[We],
 											a = (function(t, e, n) {
-												var r = ir();
-												t.firstTemplatePass && (n.providersResolver && n.providersResolver(n), fs(t, r, 1), vs(t, e, n, n.factory));
-												var o = qo(t.data, e, e.length - 1, r);
-												return hs(e, r, o), o;
+												var r = rr();
+												t.firstTemplatePass && (n.providersResolver && n.providersResolver(n), cs(t, r, 1), ms(t, e, n, n.factory));
+												var o = Fo(t.data, e, e.length - 1, r);
+												return fs(e, r, o), o;
 											})(i, n, e);
 										r.components.push(a),
-											(t[rn] = a),
+											(t[en] = a),
 											o &&
 												o.forEach(function(t) {
 													return t(a, e);
 												}),
 											e.contentQueries && e.contentQueries(1, a, n.length - 1);
-										var s = ir();
+										var s = rr();
 										if (
 											(i.firstTemplatePass &&
 												e.hostBindings &&
-												($n(s.index - dn), ps(e, i.expandoInstructions, a, s, i.firstTemplatePass), s.onElementCreationFns && Ds(s), $n(null)),
+												(Kn(s.index - pn), us(e, i.expandoInstructions, a, s, i.firstTemplatePass), s.onElementCreationFns && js(s), Kn(null)),
 											s.stylingTemplate)
 										) {
-											var l = t[Qe];
-											ei(l, s.stylingTemplate, t[sn]), ni(l, s.stylingTemplate, t[sn]);
+											var l = t[Ze];
+											$o(l, s.stylingTemplate, t[on]), ti(l, s.stylingTemplate, t[on]);
 										}
 										return a;
-									})(w, this.componentDef, b, d, [Rl])),
-									xs(b, w),
-									Ya(b),
+									})(w, this.componentDef, b, d, [Al])),
+									ws(b, w),
+									Wa(b),
 									(y = !0);
 							} finally {
-								xr(v, y);
+								wr(v, y);
 							}
-							var _ = new Fu(this.componentType, g, lu(cu, m, b), b, m);
+							var _ = new zu(this.componentType, g, au(lu, m, b), b, m);
 							return a && (_.hostView._tViewNode.child = m), _;
 						}),
 						e
 					);
-				})(eu),
-				Fu = (function(t) {
+				})($l),
+				zu = (function(t) {
 					function e(e, n, r, o, i) {
 						var a = t.call(this) || this;
 						return (
@@ -5613,8 +5607,8 @@
 							(a._tNode = i),
 							(a.destroyCbs = []),
 							(a.instance = n),
-							(a.hostView = a.changeDetectorRef = new su(o)),
-							(a.hostView._tViewNode = ts(o[Ye], null, -1, o)),
+							(a.hostView = a.changeDetectorRef = new iu(o)),
+							(a.hostView._tViewNode = Xa(o[We], null, -1, o)),
 							(a.componentType = e),
 							a
 						);
@@ -5623,7 +5617,7 @@
 						o(e, t),
 						Object.defineProperty(e.prototype, 'injector', {
 							get: function() {
-								return new Wo(this._tNode, this._rootLView);
+								return new Go(this._tNode, this._rootLView);
 							},
 							enumerable: !0,
 							configurable: !0
@@ -5641,9 +5635,9 @@
 						}),
 						e
 					);
-				})(tu),
-				Bu = {},
-				qu = (function(t) {
+				})(Xl),
+				Vu = {},
+				Fu = (function(t) {
 					return (
 						(t[(t.LocaleId = 0)] = 'LocaleId'),
 						(t[(t.DayPeriodsFormat = 1)] = 'DayPeriodsFormat'),
@@ -5668,30 +5662,30 @@
 						t
 					);
 				})({}),
-				Gu = void 0,
-				Zu = [
+				Bu = void 0,
+				qu = [
 					'en',
-					[['a', 'p'], ['AM', 'PM'], Gu],
-					[['AM', 'PM'], Gu, Gu],
+					[['a', 'p'], ['AM', 'PM'], Bu],
+					[['AM', 'PM'], Bu, Bu],
 					[
 						['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 						['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 						['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 						['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 					],
-					Gu,
+					Bu,
 					[
 						['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
 						['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 						['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 					],
-					Gu,
+					Bu,
 					[['B', 'A'], ['BC', 'AD'], ['Before Christ', 'Anno Domini']],
 					0,
 					[6, 0],
 					['M/d/yy', 'MMM d, y', 'MMMM d, y', 'EEEE, MMMM d, y'],
 					['h:mm a', 'h:mm:ss a', 'h:mm:ss a z', 'h:mm:ss a zzzz'],
-					['{1}, {0}', Gu, "{1} 'at' {0}", Gu],
+					['{1}, {0}', Bu, "{1} 'at' {0}", Bu],
 					['.', ',', ';', '%', '+', '-', 'E', '\xd7', '\u2030', '\u221e', 'NaN', ':'],
 					['#,##0.###', '#,##0%', '\xa4#,##0.00', '#E0'],
 					'$',
@@ -5703,27 +5697,27 @@
 						return 1 === e && 0 === n ? 1 : 5;
 					}
 				];
-			function Wu(t) {
+			function Gu(t) {
 				t.toLowerCase().replace(/_/g, '-');
 			}
-			var Qu = new Map(),
-				Yu = { provide: ru, useClass: Uu, deps: [ou] },
-				Ju = (function(t) {
+			var Zu = new Map(),
+				Wu = { provide: eu, useClass: Du, deps: [nu] },
+				Qu = (function(t) {
 					function e(e, n) {
 						var r = t.call(this) || this;
 						(r._parent = n), (r._bootstrapComponents = []), (r.injector = r), (r.destroyCbs = []);
-						var o = Fe(e),
-							i = e[Ae] || null;
-						return i && Wu(i), (r._bootstrapComponents = We(o.bootstrap)), (r._r3Injector = le(e, n, [{ provide: ou, useValue: r }, Yu], Ot(e))), (r.instance = r.get(e)), r;
+						var o = ze(e),
+							i = e[Te] || null;
+						return i && Gu(i), (r._bootstrapComponents = Ge(o.bootstrap)), (r._r3Injector = ae(e, n, [{ provide: nu, useValue: r }, Wu], Pt(e))), (r.instance = r.get(e)), r;
 					}
 					return (
 						o(e, t),
 						(e.prototype.get = function(t, e, n) {
-							return void 0 === e && (e = be.THROW_IF_NOT_FOUND), void 0 === n && (n = yt.Default), t === be || t === ou || t === Ht ? this : this._r3Injector.get(t, e, n);
+							return void 0 === e && (e = ge.THROW_IF_NOT_FOUND), void 0 === n && (n = bt.Default), t === ge || t === nu || t === Ut ? this : this._r3Injector.get(t, e, n);
 						}),
 						Object.defineProperty(e.prototype, 'componentFactoryResolver', {
 							get: function() {
-								return this.get(ru);
+								return this.get(eu);
 							},
 							enumerable: !0,
 							configurable: !0
@@ -5741,20 +5735,20 @@
 						}),
 						e
 					);
-				})(ou),
-				Ku = (function(t) {
+				})(nu),
+				Yu = (function(t) {
 					function e(e) {
 						var n = t.call(this) || this;
 						return (
 							(n.moduleType = e),
-							null !== Fe(e) &&
+							null !== ze(e) &&
 								(function t(e) {
 									if (null !== e.ngModuleDef.id) {
 										var n = e.ngModuleDef.id;
 										(function(t, n, r) {
-											if (n && n !== e) throw new Error('Duplicate module registered for ' + t + ' - ' + Ot(n) + ' vs ' + Ot(n.name));
-										})(n, Qu.get(n)),
-											Qu.set(n, e);
+											if (n && n !== e) throw new Error('Duplicate module registered for ' + t + ' - ' + Pt(n) + ' vs ' + Pt(n.name));
+										})(n, Zu.get(n)),
+											Zu.set(n, e);
 									}
 									var r = e.ngModuleDef.imports;
 									r instanceof Function && (r = r()),
@@ -5769,27 +5763,27 @@
 					return (
 						o(e, t),
 						(e.prototype.create = function(t) {
-							return new Ju(this.moduleType, t);
+							return new Qu(this.moduleType, t);
 						}),
 						e
 					);
-				})(iu);
-			function Xu(t, e, n, r) {
-				var o = Gn(),
-					i = mr() + t;
-				return Bs(o, i, n) ? Vs(o, i + 1, r ? e.call(r, n) : e(n)) : Fs(o, i + 1);
+				})(ru);
+			function Ju(t, e, n, r) {
+				var o = Bn(),
+					i = hr() + t;
+				return Vs(o, i, n) ? Hs(o, i + 1, r ? e.call(r, n) : e(n)) : zs(o, i + 1);
 			}
-			function $u(t, e, n, r, o) {
-				var i = mr() + t,
-					a = Gn();
+			function Ku(t, e, n, r, o) {
+				var i = hr() + t,
+					a = Bn();
 				return (function(t, e, n, r) {
-					var o = Bs(t, e, n);
-					return Bs(t, e + 1, r) || o;
+					var o = Vs(t, e, n);
+					return Vs(t, e + 1, r) || o;
 				})(a, i, n, r)
-					? Vs(a, i + 2, o ? e.call(o, n, r) : e(n, r))
-					: Fs(a, i + 2);
+					? Hs(a, i + 2, o ? e.call(o, n, r) : e(n, r))
+					: zs(a, i + 2);
 			}
-			var tc = (function(t) {
+			var Xu = (function(t) {
 				function e(e) {
 					void 0 === e && (e = !1);
 					var n = t.call(this) || this;
@@ -5873,15 +5867,15 @@
 					e
 				);
 			})(D);
-			function ec() {
-				return this._results[Us()]();
+			function $u() {
+				return this._results[Ds()]();
 			}
-			var nc = (function() {
+			var tc = (function() {
 					function t() {
-						(this.dirty = !0), (this._results = []), (this.changes = new tc()), (this.length = 0);
-						var e = Us(),
+						(this.dirty = !0), (this._results = []), (this.changes = new Xu()), (this.length = 0);
+						var e = Ds(),
 							n = t.prototype;
-						n[e] || (n[e] = ec);
+						n[e] || (n[e] = $u);
 					}
 					return (
 						(t.prototype.map = function(t) {
@@ -5934,113 +5928,113 @@
 						t
 					);
 				})(),
-				rc = (function() {
+				ec = (function() {
 					return function(t, e, n, r, o) {
 						(this.next = t), (this.list = e), (this.predicate = n), (this.values = r), (this.containerValues = o);
 					};
 				})(),
-				oc = (function() {
+				nc = (function() {
 					function t(t, e, n, r) {
 						void 0 === r && (r = -1), (this.parent = t), (this.shallow = e), (this.deep = n), (this.nodeIndex = r);
 					}
 					return (
 						(t.prototype.track = function(t, e, n, r) {
-							n ? (this.deep = gc(this.deep, t, e, null != r ? r : null)) : (this.shallow = gc(this.shallow, t, e, null != r ? r : null));
+							n ? (this.deep = dc(this.deep, t, e, null != r ? r : null)) : (this.shallow = dc(this.shallow, t, e, null != r ? r : null));
 						}),
 						(t.prototype.clone = function(e) {
-							return null !== this.shallow || En(e) ? new t(this, null, this.deep, e.index) : this;
+							return null !== this.shallow || Sn(e) ? new t(this, null, this.deep, e.index) : this;
 						}),
 						(t.prototype.container = function() {
-							var e = ic(this.shallow),
-								n = ic(this.deep);
+							var e = rc(this.shallow),
+								n = rc(this.deep);
 							return e || n ? new t(this, e, n) : null;
 						}),
 						(t.prototype.createView = function() {
-							var e = ac(this.shallow),
-								n = ac(this.deep);
+							var e = oc(this.shallow),
+								n = oc(this.deep);
 							return e || n ? new t(this, e, n) : null;
 						}),
 						(t.prototype.insertView = function(t) {
-							sc(t, this.shallow), sc(t, this.deep);
+							ic(t, this.shallow), ic(t, this.deep);
 						}),
 						(t.prototype.addNode = function(t) {
-							dc(this.deep, t, !1), dc(this.shallow, t, !1);
+							pc(this.deep, t, !1), pc(this.shallow, t, !1);
 						}),
 						(t.prototype.insertNodeBeforeViews = function(t) {
-							dc(this.deep, t, !0), dc(this.shallow, t, !0);
+							pc(this.deep, t, !0), pc(this.shallow, t, !0);
 						}),
 						(t.prototype.removeView = function() {
-							lc(this.shallow), lc(this.deep);
+							ac(this.shallow), ac(this.deep);
 						}),
 						t
 					);
 				})();
-			function ic(t) {
+			function rc(t) {
 				for (var e = null; t; ) {
 					var n = [];
-					t.values.push(n), (e = new rc(e, t.list, t.predicate, n, null)), (t = t.next);
+					t.values.push(n), (e = new ec(e, t.list, t.predicate, n, null)), (t = t.next);
 				}
 				return e;
 			}
-			function ac(t) {
-				for (var e = null; t; ) (e = new rc(e, t.list, t.predicate, [], t.values)), (t = t.next);
+			function oc(t) {
+				for (var e = null; t; ) (e = new ec(e, t.list, t.predicate, [], t.values)), (t = t.next);
 				return e;
 			}
-			function sc(t, e) {
+			function ic(t, e) {
 				for (; e; ) e.containerValues.splice(t, 0, e.values), e.values.length && e.list.setDirty(), (e = e.next);
 			}
-			function lc(t) {
+			function ac(t) {
 				for (; t; ) {
 					var e = t.containerValues,
 						n = e.indexOf(t.values);
 					e.splice(n, 1)[0].length && t.list.setDirty(), (t = t.next);
 				}
 			}
-			function uc(t, e) {
+			function sc(t, e) {
 				var n = t.localNames;
 				if (n) for (var r = 0; r < n.length; r += 2) if (n[r] === e) return n[r + 1];
 				return null;
 			}
-			function cc(t, e, n) {
-				var r = t[je];
+			function lc(t, e, n) {
+				var r = t[Me];
 				if ('function' == typeof r) return r();
-				var o = n[Ye],
-					i = Bo(e, o, t, !1, !1);
-				return null !== i ? qo(o.data, n, i, e) : null;
+				var o = n[We],
+					i = Vo(e, o, t, !1, !1);
+				return null !== i ? Fo(o.data, n, i, e) : null;
 			}
-			function pc(t, e, n, r) {
-				var o = t[je]();
-				return r ? (o ? cc(r, e, n) : null) : o;
+			function uc(t, e, n, r) {
+				var o = t[Me]();
+				return r ? (o ? lc(r, e, n) : null) : o;
 			}
-			function fc(t, e, n, r) {
+			function cc(t, e, n, r) {
 				return n
-					? cc(n, t, e)
+					? lc(n, t, e)
 					: r > -1
-					? qo(e[Ye].data, e, r, t)
+					? Fo(e[We].data, e, r, t)
 					: (function(t, e) {
-							return 3 === t.type || 4 === t.type ? lu(cu, t, e) : 0 === t.type ? uu(Au, cu, t, e) : null;
+							return 3 === t.type || 4 === t.type ? au(lu, t, e) : 0 === t.type ? su(Tu, lu, t, e) : null;
 					  })(t, e);
 			}
-			function dc(t, e, n) {
-				for (var r = Gn(), o = r[Ye]; t; ) {
+			function pc(t, e, n) {
+				for (var r = Bn(), o = r[We]; t; ) {
 					var i = t.predicate,
 						a = i.type;
 					if (a) {
 						var s = null;
-						a === Au ? (s = pc(a, e, r, i.read)) : null !== (c = Bo(e, o, a, !1, !1)) && (s = fc(e, r, i.read, c)), null !== s && hc(t, s, n);
+						a === Tu ? (s = uc(a, e, r, i.read)) : null !== (c = Vo(e, o, a, !1, !1)) && (s = cc(e, r, i.read, c)), null !== s && fc(t, s, n);
 					} else
 						for (var l = i.selector, u = 0; u < l.length; u++) {
 							var c;
-							null !== (c = uc(e, l[u])) && null !== (s = fc(e, r, i.read, c)) && hc(t, s, n);
+							null !== (c = sc(e, l[u])) && null !== (s = cc(e, r, i.read, c)) && fc(t, s, n);
 						}
 					t = t.next;
 				}
 			}
-			function hc(t, e, n) {
+			function fc(t, e, n) {
 				n ? t.values.unshift(e) : t.values.push(e), t.list.setDirty();
 			}
-			function gc(t, e, n, r) {
-				return new rc(
+			function dc(t, e, n, r) {
+				return new ec(
 					t,
 					e,
 					(function(t, e) {
@@ -6051,50 +6045,50 @@
 					null
 				);
 			}
-			function mc(t) {
+			function hc(t) {
 				var e = t,
-					n = cr();
+					n = lr();
 				return !(!t.dirty || n !== e._static || (t.reset(e._valuesTree || []), t.notifyOnChanges(), 0));
 			}
-			function bc(t, e, n, r, o, i) {
+			function gc(t, e, n, r, o, i) {
 				e.firstTemplatePass && e.expandoStartIndex++;
-				var a = yr(),
+				var a = br(),
 					s = (function(t, e, n, r, o, i) {
-						var a = new nc(),
-							s = t[$e] || (t[$e] = new oc(null, null, null, -1));
+						var a = new tc(),
+							s = t[Ke] || (t[Ke] = new nc(null, null, null, -1));
 						return (
 							(a._valuesTree = []),
 							(a._static = o),
 							s.track(a, e, n, r),
 							(function(t, e, n) {
-								var r = Ms(t);
-								r.push(e), t[Ye].firstTemplatePass && As(t).push(n, r.length - 1);
+								var r = Is(t);
+								r.push(e), t[We].firstTemplatePass && Ts(t).push(n, r.length - 1);
 							})(t, a, a.destroy),
 							a
 						);
 					})(t, n, r, o, i);
 				return (
 					(function(t, e) {
-						var n = Gn(),
-							r = n[Ye],
-							o = t + dn;
+						var n = Bn(),
+							r = n[We],
+							o = t + pn;
 						o >= r.data.length && ((r.data[o] = null), (r.blueprint[o] = null)), (n[o] = e);
-					})(a - dn, s),
-					wr(a + 1),
+					})(a - pn, s),
+					vr(a + 1),
 					s
 				);
 			}
-			function vc() {
-				var t = yr();
+			function mc() {
+				var t = br();
 				return (
-					wr(t + 1),
+					vr(t + 1),
 					(function(t, e) {
-						return t[e + dn];
-					})(Gn(), t - dn)
+						return t[e + pn];
+					})(Bn(), t - pn)
 				);
 			}
-			var yc = new Lt('Application Initializer'),
-				wc = (function() {
+			var bc = new Nt('Application Initializer'),
+				vc = (function() {
 					function t(t) {
 						var e = this;
 						(this.appInits = t),
@@ -6115,7 +6109,7 @@
 								if (this.appInits)
 									for (var r = 0; r < this.appInits.length; r++) {
 										var o = this.appInits[r]();
-										Cl(o) && e.push(o);
+										_l(o) && e.push(o);
 									}
 								Promise.all(e)
 									.then(function() {
@@ -6128,33 +6122,33 @@
 									(this.initialized = !0);
 							}
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
-								return new (e || t)(Jt(yc, 8));
+								return new (e || t)(Qt(bc, 8));
 							},
 							providedIn: null
 						})),
 						t
 					);
 				})(),
-				_c = new Lt('AppId'),
-				xc = {
-					provide: _c,
+				yc = new Nt('AppId'),
+				wc = {
+					provide: yc,
 					useFactory: function() {
-						return '' + Cc() + Cc() + Cc();
+						return '' + _c() + _c() + _c();
 					},
 					deps: []
 				};
-			function Cc() {
+			function _c() {
 				return String.fromCharCode(97 + Math.floor(25 * Math.random()));
 			}
-			var kc,
-				Sc,
-				Pc = new Lt('Platform Initializer'),
-				Ec = new Lt('Platform ID'),
-				Oc = new Lt('appBootstrapListener'),
-				Ic = (function() {
+			var xc,
+				Cc,
+				kc = new Nt('Platform Initializer'),
+				Sc = new Nt('Platform ID'),
+				Pc = new Nt('appBootstrapListener'),
+				Ec = (function() {
 					function t() {}
 					return (
 						(t.prototype.log = function(t) {
@@ -6163,7 +6157,7 @@
 						(t.prototype.warn = function(t) {
 							console.warn(t);
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
 								return new (e || t)();
@@ -6173,40 +6167,40 @@
 						t
 					);
 				})(),
-				Tc = new Lt('LocaleId'),
-				Mc = (function() {
+				Oc = new Nt('LocaleId'),
+				Ic = (function() {
 					return function(t, e) {
 						(this.ngModuleFactory = t), (this.componentFactories = e);
 					};
 				})(),
+				Tc = function(t) {
+					return new Yu(t);
+				},
+				Mc = Tc,
 				Ac = function(t) {
-					return new Ku(t);
+					return Promise.resolve(Tc(t));
 				},
-				jc = Ac,
-				Rc = function(t) {
-					return Promise.resolve(Ac(t));
-				},
-				Dc = function(t) {
-					var e = Ac(t),
-						n = We(Fe(t).declarations).reduce(function(t, e) {
-							var n = Ve(e);
-							return n && t.push(new Vu(n)), t;
+				jc = function(t) {
+					var e = Tc(t),
+						n = Ge(ze(t).declarations).reduce(function(t, e) {
+							var n = He(e);
+							return n && t.push(new Hu(n)), t;
 						}, []);
-					return new Mc(e, n);
+					return new Ic(e, n);
 				},
-				Nc = Dc,
-				Uc = function(t) {
-					return Promise.resolve(Dc(t));
+				Rc = jc,
+				Dc = function(t) {
+					return Promise.resolve(jc(t));
 				},
-				Lc = (function() {
+				Nc = (function() {
 					function t() {
-						(this.compileModuleSync = jc), (this.compileModuleAsync = Rc), (this.compileModuleAndAllComponentsSync = Nc), (this.compileModuleAndAllComponentsAsync = Uc);
+						(this.compileModuleSync = Mc), (this.compileModuleAsync = Ac), (this.compileModuleAndAllComponentsSync = Rc), (this.compileModuleAndAllComponentsAsync = Dc);
 					}
 					return (
 						(t.prototype.clearCache = function() {}),
 						(t.prototype.clearCacheFor = function(t) {}),
 						(t.prototype.getModuleId = function(t) {}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
 								return new (e || t)();
@@ -6216,40 +6210,40 @@
 						t
 					);
 				})(),
-				Hc = new Lt('compilerOptions');
-			function zc() {
-				var t = Ut.wtf;
-				return !(!t || !(kc = t.trace) || ((Sc = kc.events), 0));
+				Uc = new Nt('compilerOptions');
+			function Lc() {
+				var t = Dt.wtf;
+				return !(!t || !(xc = t.trace) || ((Cc = xc.events), 0));
 			}
-			var Vc = zc();
-			function Fc(t, e) {
+			var Hc = Lc();
+			function zc(t, e) {
 				return null;
 			}
-			var Bc = Vc
+			var Vc = Hc
 					? function(t, e) {
-							return void 0 === e && (e = null), Sc.createScope(t, e);
+							return void 0 === e && (e = null), Cc.createScope(t, e);
 					  }
 					: function(t, e) {
-							return Fc;
+							return zc;
 					  },
-				qc = Vc
+				Fc = Hc
 					? function(t, e) {
-							return kc.leaveScope(t, e), e;
+							return xc.leaveScope(t, e), e;
 					  }
 					: function(t, e) {
 							return e;
 					  },
-				Gc = (function() {
+				Bc = (function() {
 					return Promise.resolve(0);
 				})();
-			function Zc(t) {
+			function qc(t) {
 				'undefined' == typeof Zone
-					? Gc.then(function() {
+					? Bc.then(function() {
 							t && t.apply(null, null);
 					  })
 					: Zone.current.scheduleMicroTask('scheduleMicrotask', t);
 			}
-			var Wc = (function() {
+			var Gc = (function() {
 				function t(t) {
 					var e,
 						n = t.enableLongStackTrace,
@@ -6258,10 +6252,10 @@
 						((this.hasPendingMicrotasks = !1),
 						(this.hasPendingMacrotasks = !1),
 						(this.isStable = !0),
-						(this.onUnstable = new tc(!1)),
-						(this.onMicrotaskEmpty = new tc(!1)),
-						(this.onStable = new tc(!1)),
-						(this.onError = new tc(!1)),
+						(this.onUnstable = new Xu(!1)),
+						(this.onMicrotaskEmpty = new Xu(!1)),
+						(this.onStable = new Xu(!1)),
+						(this.onError = new Xu(!1)),
 						'undefined' == typeof Zone)
 					)
 						throw new Error('In this configuration Angular requires Zone.js');
@@ -6276,21 +6270,21 @@
 							properties: { isAngularZone: !0 },
 							onInvokeTask: function(t, n, r, o, i, a) {
 								try {
-									return Kc(e), t.invokeTask(r, o, i, a);
+									return Yc(e), t.invokeTask(r, o, i, a);
 								} finally {
-									Xc(e);
+									Jc(e);
 								}
 							},
 							onInvoke: function(t, n, r, o, i, a, s) {
 								try {
-									return Kc(e), t.invoke(r, o, i, a, s);
+									return Yc(e), t.invoke(r, o, i, a, s);
 								} finally {
-									Xc(e);
+									Jc(e);
 								}
 							},
 							onHasTask: function(t, n, r, o) {
 								t.hasTask(r, o),
-									n === r && ('microTask' == o.change ? ((e.hasPendingMicrotasks = o.microTask), Jc(e)) : 'macroTask' == o.change && (e.hasPendingMacrotasks = o.macroTask));
+									n === r && ('microTask' == o.change ? ((e.hasPendingMicrotasks = o.microTask), Qc(e)) : 'macroTask' == o.change && (e.hasPendingMacrotasks = o.macroTask));
 							},
 							onHandleError: function(t, n, r, o) {
 								return (
@@ -6318,7 +6312,7 @@
 					}),
 					(t.prototype.runTask = function(t, e, n, r) {
 						var o = this._inner,
-							i = o.scheduleEventTask('NgZoneEvent: ' + r, t, Yc, Qc, Qc);
+							i = o.scheduleEventTask('NgZoneEvent: ' + r, t, Wc, Zc, Zc);
 						try {
 							return o.runTask(i, e, n);
 						} finally {
@@ -6334,9 +6328,9 @@
 					t
 				);
 			})();
-			function Qc() {}
-			var Yc = {};
-			function Jc(t) {
+			function Zc() {}
+			var Wc = {};
+			function Qc(t) {
 				if (0 == t._nesting && !t.hasPendingMicrotasks && !t.isStable)
 					try {
 						t._nesting++, t.onMicrotaskEmpty.emit(null);
@@ -6351,22 +6345,22 @@
 							}
 					}
 			}
-			function Kc(t) {
+			function Yc(t) {
 				t._nesting++, t.isStable && ((t.isStable = !1), t.onUnstable.emit(null));
 			}
-			function Xc(t) {
-				t._nesting--, Jc(t);
+			function Jc(t) {
+				t._nesting--, Qc(t);
 			}
-			var $c,
-				tp = (function() {
+			var Kc,
+				Xc = (function() {
 					function t() {
 						(this.hasPendingMicrotasks = !1),
 							(this.hasPendingMacrotasks = !1),
 							(this.isStable = !0),
-							(this.onUnstable = new tc()),
-							(this.onMicrotaskEmpty = new tc()),
-							(this.onStable = new tc()),
-							(this.onError = new tc());
+							(this.onUnstable = new Xu()),
+							(this.onMicrotaskEmpty = new Xu()),
+							(this.onStable = new Xu()),
+							(this.onError = new Xu());
 					}
 					return (
 						(t.prototype.run = function(t) {
@@ -6384,7 +6378,7 @@
 						t
 					);
 				})(),
-				ep = (function() {
+				$c = (function() {
 					function t(t) {
 						var e = this;
 						(this._ngZone = t),
@@ -6409,8 +6403,8 @@
 								this._ngZone.runOutsideAngular(function() {
 									t._ngZone.onStable.subscribe({
 										next: function() {
-											Wc.assertNotInAngularZone(),
-												Zc(function() {
+											Gc.assertNotInAngularZone(),
+												qc(function() {
 													(t._isZoneStable = !0), t._runCallbacksIfReady();
 												});
 										}
@@ -6430,7 +6424,7 @@
 						(t.prototype._runCallbacksIfReady = function() {
 							var t = this;
 							if (this.isStable())
-								Zc(function() {
+								qc(function() {
 									for (; 0 !== t._callbacks.length; ) {
 										var e = t._callbacks.pop();
 										clearTimeout(e.timeoutId), e.doneCb(t._didWork);
@@ -6476,19 +6470,19 @@
 						(t.prototype.findProviders = function(t, e, n) {
 							return [];
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
-								return new (e || t)(Jt(Wc));
+								return new (e || t)(Qt(Gc));
 							},
 							providedIn: null
 						})),
 						t
 					);
 				})(),
-				np = (function() {
+				tp = (function() {
 					function t() {
-						(this._applications = new Map()), rp.addToWindow(this);
+						(this._applications = new Map()), ep.addToWindow(this);
 					}
 					return (
 						(t.prototype.registerApplication = function(t, e) {
@@ -6510,9 +6504,9 @@
 							return Array.from(this._applications.keys());
 						}),
 						(t.prototype.findTestabilityInTree = function(t, e) {
-							return void 0 === e && (e = !0), rp.findTestabilityInTree(this, t, e);
+							return void 0 === e && (e = !0), ep.findTestabilityInTree(this, t, e);
 						}),
-						((t = a([s('design:paramtypes', [])], t)).ngInjectableDef = xt({
+						((t = a([s('design:paramtypes', [])], t)).ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
 								return new (e || t)();
@@ -6522,7 +6516,7 @@
 						t
 					);
 				})(),
-				rp = new ((function() {
+				ep = new ((function() {
 					function t() {}
 					return (
 						(t.prototype.addToWindow = function(t) {}),
@@ -6532,45 +6526,45 @@
 						t
 					);
 				})())(),
-				op = new Lt('AllowMultipleToken'),
-				ip = (function() {
+				np = new Nt('AllowMultipleToken'),
+				rp = (function() {
 					return function(t, e) {
 						(this.name = t), (this.token = e);
 					};
 				})();
-			function ap(t, e, n) {
+			function op(t, e, n) {
 				void 0 === n && (n = []);
 				var r = 'Platform: ' + e,
-					o = new Lt(r);
+					o = new Nt(r);
 				return function(e) {
 					void 0 === e && (e = []);
-					var i = sp();
-					if (!i || i.injector.get(op, !1))
+					var i = ip();
+					if (!i || i.injector.get(np, !1))
 						if (t) t(n.concat(e).concat({ provide: o, useValue: !0 }));
 						else {
 							var a = n.concat(e).concat({ provide: o, useValue: !0 });
 							!(function(t) {
-								if ($c && !$c.destroyed && !$c.injector.get(op, !1)) throw new Error('There can be only one platform. Destroy the previous one to create a new one.');
-								$c = t.get(lp);
-								var e = t.get(Pc, null);
+								if (Kc && !Kc.destroyed && !Kc.injector.get(np, !1)) throw new Error('There can be only one platform. Destroy the previous one to create a new one.');
+								Kc = t.get(ap);
+								var e = t.get(kc, null);
 								e &&
 									e.forEach(function(t) {
 										return t();
 									});
-							})(be.create({ providers: a, name: r }));
+							})(ge.create({ providers: a, name: r }));
 						}
 					return (function(t) {
-						var e = sp();
+						var e = ip();
 						if (!e) throw new Error('No platform exists!');
 						if (!e.injector.get(t, null)) throw new Error('A platform with a different configuration has been created. Please destroy it first.');
 						return e;
 					})(o);
 				};
 			}
-			function sp() {
-				return $c && !$c.destroyed ? $c : null;
+			function ip() {
+				return Kc && !Kc.destroyed ? Kc : null;
 			}
-			var lp = (function() {
+			var ap = (function() {
 				function t(t) {
 					(this._injector = t), (this._modules = []), (this._destroyListeners = []), (this._destroyed = !1);
 				}
@@ -6578,17 +6572,17 @@
 					(t.prototype.bootstrapModuleFactory = function(t, e) {
 						var n,
 							r = this,
-							o = 'noop' === (n = e ? e.ngZone : void 0) ? new tp() : ('zone.js' === n ? void 0 : n) || new Wc({ enableLongStackTrace: Tr() }),
-							i = [{ provide: Wc, useValue: o }];
+							o = 'noop' === (n = e ? e.ngZone : void 0) ? new Xc() : ('zone.js' === n ? void 0 : n) || new Gc({ enableLongStackTrace: Or() }),
+							i = [{ provide: Gc, useValue: o }];
 						return o.run(function() {
-							var e = be.create({ providers: i, parent: r.injector, name: t.moduleType.name }),
+							var e = ge.create({ providers: i, parent: r.injector, name: t.moduleType.name }),
 								n = t.create(e),
-								a = n.injector.get(Ko, null);
+								a = n.injector.get(Yo, null);
 							if (!a) throw new Error('No ErrorHandler. Is platform module (BrowserModule) included?');
 							return (
-								Wu(n.injector.get(Tc, 'en-US')),
+								Gu(n.injector.get(Oc, 'en-US')),
 								n.onDestroy(function() {
-									return pp(r._modules, n);
+									return up(r._modules, n);
 								}),
 								o.runOutsideAngular(function() {
 									return o.onError.subscribe({
@@ -6600,11 +6594,11 @@
 								(function(t, e, o) {
 									try {
 										var i =
-											((a = n.injector.get(wc)).runInitializers(),
+											((a = n.injector.get(vc)).runInitializers(),
 											a.donePromise.then(function() {
 												return r._moduleDoBootstrap(n), n;
 											}));
-										return Cl(i)
+										return _l(i)
 											? i.catch(function(n) {
 													throw (e.runOutsideAngular(function() {
 														return t.handleError(n);
@@ -6626,15 +6620,15 @@
 					(t.prototype.bootstrapModule = function(t, e) {
 						var n = this;
 						void 0 === e && (e = []);
-						var r = up({}, e);
+						var r = sp({}, e);
 						return (function(t, e, n) {
-							var r = new Ku(n);
-							if (0 === xe.size) return Promise.resolve(r);
+							var r = new Yu(n);
+							if (0 === we.size) return Promise.resolve(r);
 							var o,
 								i,
 								a =
 									((o = t
-										.get(Hc, [])
+										.get(Uc, [])
 										.concat(e)
 										.map(function(t) {
 											return t.providers;
@@ -6646,14 +6640,14 @@
 									i);
 							if (0 === a.length) return Promise.resolve(r);
 							var s = (function() {
-									var t = Ut.ng;
+									var t = Dt.ng;
 									if (!t || !t.ɵcompilerFacade)
 										throw new Error(
 											"Angular JIT compilation failed: '@angular/compiler' not loaded!\n  - JIT compilation is discouraged for production use-cases! Consider AOT mode instead.\n  - Did you bootstrap using '@angular/platform-browser-dynamic' or '@angular/platform-server'?\n  - Alternatively provide the compiler with 'import \"@angular/compiler\";' before bootstrapping."
 										);
 									return t.ɵcompilerFacade;
 								})(),
-								l = be.create({ providers: a }).get(s.ResourceLoader);
+								l = ge.create({ providers: a }).get(s.ResourceLoader);
 							return (function(t) {
 								var e = [],
 									n = new Map();
@@ -6661,12 +6655,12 @@
 									var r = n.get(e);
 									if (!r) {
 										var o = t(e);
-										n.set(e, (r = o.then(ke)));
+										n.set(e, (r = o.then(xe)));
 									}
 									return r;
 								}
 								return (
-									xe.forEach(function(t, n) {
+									we.forEach(function(t, n) {
 										var o = [];
 										t.templateUrl &&
 											o.push(
@@ -6688,12 +6682,12 @@
 											});
 										var l = Promise.all(o).then(function() {
 											return (function(t) {
-												Ce.delete(t);
+												_e.delete(t);
 											})(n);
 										});
 										e.push(l);
 									}),
-									(xe = new Map()),
+									(we = new Map()),
 									Promise.all(e).then(function() {})
 								);
 							})(function(t) {
@@ -6706,7 +6700,7 @@
 						});
 					}),
 					(t.prototype._moduleDoBootstrap = function(t) {
-						var e = t.injector.get(cp);
+						var e = t.injector.get(lp);
 						if (t._bootstrapComponents.length > 0)
 							t._bootstrapComponents.forEach(function(t) {
 								return e.bootstrap(t);
@@ -6715,7 +6709,7 @@
 							if (!t.instance.ngDoBootstrap)
 								throw new Error(
 									'The module ' +
-										Ot(t.instance.constructor) +
+										Pt(t.instance.constructor) +
 										' was bootstrapped, but it does not declare "@NgModule.bootstrap" components nor a "ngDoBootstrap" method. Please define one of these.'
 								);
 							t.instance.ngDoBootstrap(e);
@@ -6749,20 +6743,20 @@
 						enumerable: !0,
 						configurable: !0
 					}),
-					(t.ngInjectableDef = xt({
+					(t.ngInjectableDef = wt({
 						token: t,
 						factory: function(e) {
-							return new (e || t)(Jt(be));
+							return new (e || t)(Qt(ge));
 						},
 						providedIn: null
 					})),
 					t
 				);
 			})();
-			function up(t, e) {
-				return Array.isArray(e) ? e.reduce(up, t) : i({}, t, e);
+			function sp(t, e) {
+				return Array.isArray(e) ? e.reduce(sp, t) : i({}, t, e);
 			}
-			var cp = (function() {
+			var lp = (function() {
 				function t(t, e, n, r, o, i) {
 					var a = this;
 					(this._zone = t),
@@ -6778,7 +6772,7 @@
 						(this._stable = !0),
 						(this.componentTypes = []),
 						(this.components = []),
-						(this._enforceNoNewChanges = Tr()),
+						(this._enforceNoNewChanges = Or()),
 						this._zone.onMicrotaskEmpty.subscribe({
 							next: function() {
 								a._zone.run(function() {
@@ -6796,14 +6790,14 @@
 							var e;
 							a._zone.runOutsideAngular(function() {
 								e = a._zone.onStable.subscribe(function() {
-									Wc.assertNotInAngularZone(),
-										Zc(function() {
+									Gc.assertNotInAngularZone(),
+										qc(function() {
 											a._stable || a._zone.hasPendingMacrotasks || a._zone.hasPendingMicrotasks || ((a._stable = !0), t.next(!0));
 										});
 								});
 							});
 							var n = a._zone.onUnstable.subscribe(function() {
-								Wc.assertInAngularZone(),
+								Gc.assertInAngularZone(),
 									a._stable &&
 										((a._stable = !1),
 										a._zone.runOutsideAngular(function() {
@@ -6821,13 +6815,13 @@
 							o = t[t.length - 1];
 						return (
 							U(o) ? ((r = t.pop()), t.length > 1 && 'number' == typeof t[t.length - 1] && (n = t.pop())) : 'number' == typeof o && (n = t.pop()),
-							null === r && 1 === t.length && t[0] instanceof I ? t[0] : it(n)($(t, r))
+							null === r && 1 === t.length && t[0] instanceof I ? t[0] : nt(n)(rt(t, r))
 						);
 					})(
 						s,
 						l.pipe(function(t) {
-							return at()(
-								((e = ft),
+							return ot()(
+								((e = ct),
 								function(t) {
 									var n;
 									n =
@@ -6836,7 +6830,7 @@
 											: function() {
 													return e;
 											  };
-									var r = Object.create(t, ct);
+									var r = Object.create(t, lt);
 									return (r.source = t), (r.subjectFactory = n), r;
 								})(t)
 							);
@@ -6852,17 +6846,17 @@
 							r = this;
 						if (!this._initStatus.done)
 							throw new Error('Cannot bootstrap as there are still asynchronous initializers running. Bootstrap components in the `ngDoBootstrap` method of the root module.');
-						(n = t instanceof eu ? t : this._componentFactoryResolver.resolveComponentFactory(t)), this.componentTypes.push(n.componentType);
-						var o = n.isBoundToModule ? null : this._injector.get(ou),
-							i = n.create(be.NULL, [], e || n.selector, o);
+						(n = t instanceof $l ? t : this._componentFactoryResolver.resolveComponentFactory(t)), this.componentTypes.push(n.componentType);
+						var o = n.isBoundToModule ? null : this._injector.get(nu),
+							i = n.create(ge.NULL, [], e || n.selector, o);
 						i.onDestroy(function() {
 							r._unloadComponent(i);
 						});
-						var a = i.injector.get(ep, null);
+						var a = i.injector.get($c, null);
 						return (
-							a && i.injector.get(np).registerApplication(i.location.nativeElement, a),
+							a && i.injector.get(tp).registerApplication(i.location.nativeElement, a),
 							this._loadComponent(i),
-							Tr() && this._console.log('Angular is running in the development mode. Call enableProdMode() to enable the production mode.'),
+							Or() && this._console.log('Angular is running in the development mode. Call enableProdMode() to enable the production mode.'),
 							i
 						);
 					}),
@@ -6904,7 +6898,7 @@
 								return i._exceptionHandler.handleError(h);
 							});
 						} finally {
-							(this._runningTick = !1), qc(a);
+							(this._runningTick = !1), Fc(a);
 						}
 					}),
 					(t.prototype.attachView = function(t) {
@@ -6913,21 +6907,21 @@
 					}),
 					(t.prototype.detachView = function(t) {
 						var e = t;
-						pp(this._views, e), e.detachFromAppRef();
+						up(this._views, e), e.detachFromAppRef();
 					}),
 					(t.prototype._loadComponent = function(t) {
 						this.attachView(t.hostView),
 							this.tick(),
 							this.components.push(t),
 							this._injector
-								.get(Oc, [])
+								.get(Pc, [])
 								.concat(this._bootstrapListeners)
 								.forEach(function(e) {
 									return e(t);
 								});
 					}),
 					(t.prototype._unloadComponent = function(t) {
-						this.detachView(t.hostView), pp(this.components, t);
+						this.detachView(t.hostView), up(this.components, t);
 					}),
 					(t.prototype.ngOnDestroy = function() {
 						this._views.slice().forEach(function(t) {
@@ -6941,31 +6935,31 @@
 						enumerable: !0,
 						configurable: !0
 					}),
-					(t._tickScope = Bc('ApplicationRef#tick()')),
-					(t.ngInjectableDef = xt({
+					(t._tickScope = Vc('ApplicationRef#tick()')),
+					(t.ngInjectableDef = wt({
 						token: t,
 						factory: function(e) {
-							return new (e || t)(Jt(Wc), Jt(Ic), Jt(be), Jt(Ko), Jt(ru), Jt(wc));
+							return new (e || t)(Qt(Gc), Qt(Ec), Qt(ge), Qt(Yo), Qt(eu), Qt(vc));
 						},
 						providedIn: null
 					})),
 					t
 				);
 			})();
-			function pp(t, e) {
+			function up(t, e) {
 				var n = t.indexOf(e);
 				n > -1 && t.splice(n, 1);
 			}
-			var fp = (function() {
+			var cp = (function() {
 					return function() {};
 				})(),
+				pp = (function() {
+					return function() {};
+				})(),
+				fp = { factoryPathPrefix: '', factoryPathSuffix: '.ngfactory' },
 				dp = (function() {
-					return function() {};
-				})(),
-				hp = { factoryPathPrefix: '', factoryPathSuffix: '.ngfactory' },
-				gp = (function() {
 					function t(t, e) {
-						(this._compiler = t), (this._config = e || hp);
+						(this._compiler = t), (this._config = e || fp);
 					}
 					return (
 						(t.prototype.load = function(t) {
@@ -6983,7 +6977,7 @@
 										return t[i];
 									})
 									.then(function(t) {
-										return mp(t, o, i);
+										return hp(t, o, i);
 									})
 									.then(function(t) {
 										return e._compiler.compileModuleAsync(t);
@@ -7002,30 +6996,30 @@
 										return t[o + i];
 									})
 									.then(function(t) {
-										return mp(t, r, o);
+										return hp(t, r, o);
 									})
 							);
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
-								return new (e || t)(Jt(Lc), Jt(dp, 8));
+								return new (e || t)(Qt(Nc), Qt(pp, 8));
 							},
 							providedIn: null
 						})),
 						t
 					);
 				})();
-			function mp(t, e, n) {
+			function hp(t, e, n) {
 				if (!t) throw new Error("Cannot find '" + n + "' in '" + e + "'");
 				return t;
 			}
-			var bp = ap(null, 'core', [{ provide: Ec, useValue: 'unknown' }, { provide: lp, deps: [be] }, { provide: np, deps: [] }, { provide: Ic, deps: [] }]),
-				vp = [
-					{ provide: cp, useClass: cp, deps: [Wc, Ic, be, Ko, ru, wc] },
+			var gp = op(null, 'core', [{ provide: Sc, useValue: 'unknown' }, { provide: ap, deps: [ge] }, { provide: tp, deps: [] }, { provide: Ec, deps: [] }]),
+				mp = [
+					{ provide: lp, useClass: lp, deps: [Gc, Ec, ge, Yo, eu, vc] },
 					{
-						provide: zu,
-						deps: [Wc],
+						provide: Lu,
+						deps: [Gc],
 						useFactory: function(t) {
 							var e = [];
 							return (
@@ -7038,59 +7032,59 @@
 							);
 						}
 					},
-					{ provide: wc, useClass: wc, deps: [[new mt(), yc]] },
-					{ provide: Lc, useClass: Lc, deps: [] },
-					xc,
+					{ provide: vc, useClass: vc, deps: [[new ht(), bc]] },
+					{ provide: Nc, useClass: Nc, deps: [] },
+					wc,
 					{
-						provide: Su,
+						provide: Cu,
 						useFactory: function() {
-							return Tu;
+							return Ou;
 						},
 						deps: []
 					},
 					{
-						provide: Pu,
+						provide: ku,
 						useFactory: function() {
-							return Mu;
+							return Iu;
 						},
 						deps: []
 					},
 					{
-						provide: Tc,
+						provide: Oc,
 						useFactory: function(t) {
 							return t || 'en-US';
 						},
-						deps: [[new gt(Tc), new mt(), new vt()]]
+						deps: [[new dt(Oc), new ht(), new mt()]]
 					}
 				],
-				yp = (function() {
+				bp = (function() {
 					function t(t) {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
-								return new (e || t)(Jt(cp));
+								return new (e || t)(Qt(lp));
 							},
-							providers: vp
+							providers: mp
 						})),
 						t
 					);
 				})(),
+				vp = (function() {
+					return function() {};
+				})(),
+				yp = new Nt('Location Initialized'),
 				wp = (function() {
 					return function() {};
 				})(),
-				_p = new Lt('Location Initialized'),
+				_p = new Nt('appBaseHref'),
 				xp = (function() {
-					return function() {};
-				})(),
-				Cp = new Lt('appBaseHref'),
-				kp = (function() {
 					function t(t, n) {
 						var r = this;
-						(this._subject = new tc()), (this._urlChangeListeners = []), (this._platformStrategy = t);
+						(this._subject = new Xu()), (this._urlChangeListeners = []), (this._platformStrategy = t);
 						var o = this._platformStrategy.getBaseHref();
 						(this._platformLocation = n),
-							(this._baseHref = e.stripTrailingSlash(Sp(o))),
+							(this._baseHref = e.stripTrailingSlash(Cp(o))),
 							this._platformStrategy.onPopState(function(t) {
 								r._subject.emit({ url: r.path(!0), pop: !0, state: t.state, type: t.type });
 							});
@@ -7111,7 +7105,7 @@
 							return e.stripTrailingSlash(
 								(function(t, e) {
 									return t && e.startsWith(t) ? e.substring(t.length) : e;
-								})(this._baseHref, Sp(t))
+								})(this._baseHref, Cp(t))
 							);
 						}),
 						(t.prototype.prepareExternalUrl = function(t) {
@@ -7165,20 +7159,20 @@
 								n = (e && e.index) || t.length;
 							return t.slice(0, n - ('/' === t[n - 1] ? 1 : 0)) + t.slice(n);
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
-								return new (e || t)(Jt(xp), Jt(wp));
+								return new (e || t)(Qt(wp), Qt(vp));
 							},
 							providedIn: null
 						})),
 						t
 					);
 				})();
-			function Sp(t) {
+			function Cp(t) {
 				return t.replace(/\/index.html$/, '');
 			}
-			var Pp = (function(t) {
+			var kp = (function(t) {
 					function e(e, n) {
 						var r = t.call(this) || this;
 						return (r._platformLocation = e), (r._baseHref = ''), null != n && (r._baseHref = n), r;
@@ -7197,15 +7191,15 @@
 							return null == e && (e = '#'), e.length > 0 ? e.substring(1) : e;
 						}),
 						(e.prototype.prepareExternalUrl = function(t) {
-							var e = kp.joinWithSlash(this._baseHref, t);
+							var e = xp.joinWithSlash(this._baseHref, t);
 							return e.length > 0 ? '#' + e : e;
 						}),
 						(e.prototype.pushState = function(t, e, n, r) {
-							var o = this.prepareExternalUrl(n + kp.normalizeQueryParams(r));
+							var o = this.prepareExternalUrl(n + xp.normalizeQueryParams(r));
 							0 == o.length && (o = this._platformLocation.pathname), this._platformLocation.pushState(t, e, o);
 						}),
 						(e.prototype.replaceState = function(t, e, n, r) {
-							var o = this.prepareExternalUrl(n + kp.normalizeQueryParams(r));
+							var o = this.prepareExternalUrl(n + xp.normalizeQueryParams(r));
 							0 == o.length && (o = this._platformLocation.pathname), this._platformLocation.replaceState(t, e, o);
 						}),
 						(e.prototype.forward = function() {
@@ -7214,17 +7208,17 @@
 						(e.prototype.back = function() {
 							this._platformLocation.back();
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(wp), Jt(Cp, 8));
+								return new (t || e)(Qt(vp), Qt(_p, 8));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(xp),
-				Ep = (function(t) {
+				})(wp),
+				Sp = (function(t) {
 					function e(e, n) {
 						var r = t.call(this) || this;
 						if (((r._platformLocation = e), null == n && (n = r._platformLocation.getBaseHrefFromDOM()), null == n))
@@ -7240,20 +7234,20 @@
 							return this._baseHref;
 						}),
 						(e.prototype.prepareExternalUrl = function(t) {
-							return kp.joinWithSlash(this._baseHref, t);
+							return xp.joinWithSlash(this._baseHref, t);
 						}),
 						(e.prototype.path = function(t) {
 							void 0 === t && (t = !1);
-							var e = this._platformLocation.pathname + kp.normalizeQueryParams(this._platformLocation.search),
+							var e = this._platformLocation.pathname + xp.normalizeQueryParams(this._platformLocation.search),
 								n = this._platformLocation.hash;
 							return n && t ? '' + e + n : e;
 						}),
 						(e.prototype.pushState = function(t, e, n, r) {
-							var o = this.prepareExternalUrl(n + kp.normalizeQueryParams(r));
+							var o = this.prepareExternalUrl(n + xp.normalizeQueryParams(r));
 							this._platformLocation.pushState(t, e, o);
 						}),
 						(e.prototype.replaceState = function(t, e, n, r) {
-							var o = this.prepareExternalUrl(n + kp.normalizeQueryParams(r));
+							var o = this.prepareExternalUrl(n + xp.normalizeQueryParams(r));
 							this._platformLocation.replaceState(t, e, o);
 						}),
 						(e.prototype.forward = function() {
@@ -7262,24 +7256,24 @@
 						(e.prototype.back = function() {
 							this._platformLocation.back();
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(wp), Jt(Cp, 8));
+								return new (t || e)(Qt(vp), Qt(_p, 8));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(xp),
-				Op = (function(t) {
+				})(wp),
+				Pp = (function(t) {
 					return (t[(t.Zero = 0)] = 'Zero'), (t[(t.One = 1)] = 'One'), (t[(t.Two = 2)] = 'Two'), (t[(t.Few = 3)] = 'Few'), (t[(t.Many = 4)] = 'Many'), (t[(t.Other = 5)] = 'Other'), t;
 				})({}),
-				Ip = new Lt('UseV4Plurals'),
-				Tp = (function() {
+				Ep = new Nt('UseV4Plurals'),
+				Op = (function() {
 					return function() {};
 				})(),
-				Mp = (function(t) {
+				Ip = (function(t) {
 					function e(e, n) {
 						var r = t.call(this) || this;
 						return (r.locale = e), (r.deprecatedPluralFn = n), r;
@@ -7293,40 +7287,40 @@
 									: (function(t) {
 											return (function(t) {
 												var e = t.toLowerCase().replace(/_/g, '-'),
-													n = Bu[e];
+													n = Vu[e];
 												if (n) return n;
 												var r = e.split('-')[0];
-												if ((n = Bu[r])) return n;
-												if ('en' === r) return Zu;
+												if ((n = Vu[r])) return n;
+												if ('en' === r) return qu;
 												throw new Error('Missing locale data for the locale "' + t + '".');
-											})(t)[qu.PluralCase];
+											})(t)[Fu.PluralCase];
 									  })(e || this.locale)(t)
 							) {
-								case Op.Zero:
+								case Pp.Zero:
 									return 'zero';
-								case Op.One:
+								case Pp.One:
 									return 'one';
-								case Op.Two:
+								case Pp.Two:
 									return 'two';
-								case Op.Few:
+								case Pp.Few:
 									return 'few';
-								case Op.Many:
+								case Pp.Many:
 									return 'many';
 								default:
 									return 'other';
 							}
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(Tc), Jt(Ip, 8));
+								return new (t || e)(Qt(Oc), Qt(Ep, 8));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(Tp),
-				Ap = (function() {
+				})(Op),
+				Tp = (function() {
 					function t(t, e) {
 						(this._name = t), (this._options = e), (this.value = null), (this._lastSetValue = null), (this._lastSetValueType = 0), (this._lastSetValueIdentityChange = !1);
 					}
@@ -7367,19 +7361,19 @@
 											!this.value ||
 											(function(t, e, n) {
 												var r = t;
-												if (!Up(Object.keys(e), r)) return !0;
+												if (!Dp(Object.keys(e), r)) return !0;
 												for (var o = 0; o < r.length; o++) {
 													var i = r[o];
 													if (e[i] !== n[i]) return !0;
 												}
 												return !1;
 											})(s, this.value, a)),
-										t && (e = jp(this._name, n, r, o, a, s));
+										t && (e = Mp(this._name, n, r, o, a, s));
 									break;
 								case 4:
 								case 8:
 									var l = Array.from(this._lastSetValue);
-									t || (t = !Up(Object.keys(this.value), l)), t && (e = jp(this._name, n, r, o, l));
+									t || (t = !Dp(Object.keys(this.value), l)), t && (e = Mp(this._name, n, r, o, l));
 									break;
 								default:
 									e = null;
@@ -7389,28 +7383,28 @@
 						t
 					);
 				})();
-			function jp(t, e, n, r, o, i) {
+			function Mp(t, e, n, r, o, i) {
 				var a = {};
 				if (i)
 					for (var s = 0; s < i.length; s++) {
 						var l = i[s];
-						Dp(a, (l = e ? l.trim() : l), (u = o[l]), n, r);
+						jp(a, (l = e ? l.trim() : l), (u = o[l]), n, r);
 					}
 				else
 					for (s = 0; s < o.length; s++) {
 						var u;
-						Rp(t, (u = o[s])), Dp(a, (u = e ? u.trim() : u), !0, !1, r);
+						Ap(t, (u = o[s])), jp(a, (u = e ? u.trim() : u), !0, !1, r);
 					}
 				return a;
 			}
-			function Rp(t, e) {
+			function Ap(t, e) {
 				if ('string' != typeof e) throw new Error(t + ' can only toggle CSS classes expressed as strings, got ' + e);
 			}
-			function Dp(t, e, n, r, o) {
-				if (o && e.indexOf(' ') > 0) for (var i = e.split(/\s+/g), a = 0; a < i.length; a++) Np(t, i[a], n, r);
-				else Np(t, e, n, r);
+			function jp(t, e, n, r, o) {
+				if (o && e.indexOf(' ') > 0) for (var i = e.split(/\s+/g), a = 0; a < i.length; a++) Rp(t, i[a], n, r);
+				else Rp(t, e, n, r);
 			}
-			function Np(t, e, n, r) {
+			function Rp(t, e, n, r) {
 				if (r) {
 					var o = (function(t, e) {
 						var n = t.indexOf('.');
@@ -7424,7 +7418,7 @@
 				}
 				t[e] = n;
 			}
-			function Up(t, e) {
+			function Dp(t, e) {
 				if (t && e) {
 					if (t.length !== e.length) return !1;
 					for (var n = 0; n < t.length; n++) if (-1 === e.indexOf(t[n])) return !1;
@@ -7432,21 +7426,21 @@
 				}
 				return !1;
 			}
-			var Lp = (function() {
+			var Np = (function() {
 					return function() {};
 				})(),
-				Hp = {
-					provide: Lp,
+				Up = {
+					provide: Np,
 					useClass: (function() {
 						function t() {
-							(this._value = null), (this._ngClassDiffer = new Ap('NgClass', 23)), (this._classStringDiffer = null);
+							(this._value = null), (this._ngClassDiffer = new Tp('NgClass', 23)), (this._classStringDiffer = null);
 						}
 						return (
 							(t.prototype.getValue = function() {
 								return this._value;
 							}),
 							(t.prototype.setClass = function(t) {
-								(t || this._classStringDiffer) && ((this._classStringDiffer = this._classStringDiffer || new Ap('class', 20)), this._classStringDiffer.setValue(t));
+								(t || this._classStringDiffer) && ((this._classStringDiffer = this._classStringDiffer || new Tp('class', 20)), this._classStringDiffer.setValue(t));
 							}),
 							(t.prototype.setNgClass = function(t) {
 								this._ngClassDiffer.setValue(t);
@@ -7463,7 +7457,7 @@
 									this._value = n;
 								}
 							}),
-							(t.ngInjectableDef = xt({
+							(t.ngInjectableDef = wt({
 								token: t,
 								factory: function(e) {
 									return new (e || t)();
@@ -7474,37 +7468,37 @@
 						);
 					})()
 				},
-				zp = ze({
+				Lp = Le({
 					type: function() {},
 					selectors: null,
 					factory: function() {},
 					hostBindings: function(t, e, n) {
 						1 & t &&
 							(function(t, e, n) {
-								var r = ir();
-								r.stylingTemplate || (r.stylingTemplate = bo());
-								var o = vl();
+								var r = rr();
+								r.stylingTemplate || (r.stylingTemplate = go());
+								var o = ml();
 								o
-									? (ea() &&
+									? ($i() &&
 											(function() {
 												var t,
 													e,
-													n = Gn();
-												(t = Sn(kr(), n)), (e = dl()), ia(gl(t), e), ia(hl(t), e);
+													n = Bn();
+												(t = Cn(xr(), n)), (e = pl()), ra(dl(t), e), ra(fl(t), e);
 											})(),
-									  vo(r.stylingTemplate, o),
+									  mo(r.stylingTemplate, o),
 									  (r.onElementCreationFns = r.onElementCreationFns || []).push(function() {
 											var i, a, s;
-											bl(r, t, e, n, o), (a = o), (s = (i = r.stylingTemplate)[8]) || (s = i[8] = [go]), (s[0] = a);
+											gl(r, t, e, n, o), (a = o), (s = (i = r.stylingTemplate)[8]) || (s = i[8] = [fo]), (s[0] = a);
 									  }))
-									: bl(r, t, e, n, go);
+									: gl(r, t, e, n, fo);
 							})(),
 							2 & t &&
 								((function(t) {
-									var e = kr(),
-										n = Gn(),
-										r = yl(e, n),
-										o = vl();
+									var e = xr(),
+										n = Bn(),
+										r = bl(e, n),
+										o = ml();
 									if (o)
 										!(function(t, e, n, o) {
 											var i = r[8];
@@ -7515,36 +7509,36 @@
 												})(i, e);
 												i.splice(a, 0, e, n, o);
 											}
-										})(0, o, oi, [r, t, o]);
+										})(0, o, ni, [r, t, o]);
 									else {
-										var i = Sn(e, n);
-										if (_o(i) && t !== Xo) {
-											var a = Hi(r),
+										var i = Cn(e, n);
+										if (yo(i) && t !== Jo) {
+											var a = Ui(r),
 												s =
 													(a.length ? a + ' ' : '') +
 													(function(t) {
 														return t && 'string' != typeof t && (t = Object.keys(t).join(' ')), t || '';
 													})(t);
-											Rs(n, i.inputs.class, s), (t = Xo);
+											As(n, i.inputs.class, s), (t = Jo);
 										}
-										oi(r, t);
+										ni(r, t);
 									}
-									ea() &&
+									$i() &&
 										(function(t) {
 											!(function(t, e) {
-												Na = Ha;
-												var n = kr(),
-													r = Gn(),
-													o = r[en]++;
-												if (t !== Xo) {
-													var i = Sn(n, r),
-														a = Xn > 0,
+												Ra = Ua;
+												var n = xr(),
+													r = Bn(),
+													o = r[$e]++;
+												if (t !== Jo) {
+													var i = Cn(n, r),
+														a = Jn > 0,
 														s = r[o],
-														l = va(s, t),
+														l = ma(s, t),
 														u = (function(t, e) {
 															var n = Array.isArray(t) ? t : [null];
 															n[0] = e || null;
-															for (var r = 1; r < n.length; r += 2) qa(n, r, null);
+															for (var r = 1; r < n.length; r += 2) Fa(n, r, null);
 															var o,
 																i = null,
 																a = !1;
@@ -7553,9 +7547,9 @@
 																	var l = i[s],
 																		u = !!a || o[l];
 																	for (r = 1; r < n.length; r += 2) {
-																		var c = Ba(n, r);
+																		var c = Va(n, r);
 																		if (l <= c) {
-																			c === l ? qa(n, r, u) : n.splice(r, 0, l, u);
+																			c === l ? Fa(n, r, u) : n.splice(r, 0, l, u);
 																			continue t;
 																		}
 																	}
@@ -7565,14 +7559,14 @@
 														})(s, t);
 													e
 														? (function(t, e, n, o, i, s, l) {
-																var c = Sa;
-																(Ta(t, r, c, null, o, u, a, l, !1) || l) && (Oa |= 1 << c);
-														  })(gl(i), 0, 0, o, 0, 0, l)
-														: (wa(r),
+																var c = Ca;
+																(Oa(t, r, c, null, o, u, a, l, !1) || l) && (Pa |= 1 << c);
+														  })(dl(i), 0, 0, o, 0, 0, l)
+														: (va(r),
 														  (function(t, e, n, o, i, s, l, c) {
-																var p = Sa;
-																(Ta(t, r, p, null, o, u, a, c, !0) || c) && (Ea |= 1 << p);
-														  })(hl(i), 0, 0, o, 0, 0, 0, l));
+																var p = Ca;
+																(Oa(t, r, p, null, o, u, a, c, !0) || c) && (Sa |= 1 << p);
+														  })(fl(i), 0, 0, o, 0, 0, 0, l));
 												}
 											})(t, !0);
 										})(t);
@@ -7581,13 +7575,13 @@
 									var t,
 										e,
 										n,
-										r = kr(),
-										o = vl() || go,
-										i = Gn(),
-										a = 3 === Sn(r, i).type ? i[sn] : null,
-										s = 0 != (8 & i[Je]),
-										l = yl(r, i);
-									ta < 2 &&
+										r = xr(),
+										o = ml() || fo,
+										i = Bn(),
+										a = 3 === Cn(r, i).type ? i[on] : null,
+										s = 0 != (8 & i[Qe]),
+										l = bl(r, i);
+									Xi < 2 &&
 										(function(t, e, n, r, o, i, a) {
 											void 0 === a && (a = 0);
 											var s = 0;
@@ -7604,26 +7598,26 @@
 													}
 												})(t),
 												(function(t) {
-													return li(t, 1);
+													return ai(t, 1);
 												})(t))
 											) {
-												for (var l = t[0], u = 8 & t[1], c = mi(t), p = 10; p < t.length; p += 4)
-													if (li(t, p)) {
-														var f = Ci(t, p),
-															d = Di(t, p),
-															h = Si(t, p),
-															g = ki(t, p),
-															m = 4 & f ? Ui(t, d) : null,
-															b = _i(t, p),
+												for (var l = t[0], u = 8 & t[1], c = hi(t), p = 10; p < t.length; p += 4)
+													if (ai(t, p)) {
+														var f = _i(t, p),
+															d = ji(t, p),
+															h = Ci(t, p),
+															g = xi(t, p),
+															m = 4 & f ? Di(t, d) : null,
+															b = yi(t, p),
 															v = !!(2 & f),
 															y = g;
-														p < c && !Ti(y) && (y = ki(t, hi(f))),
-															Ti(y) || (y = fi(t, f)),
-															e && (!r || y) && (v ? ai(l, h, !!y, e, null, b) : ii(l, h, y, e, m, null, b)),
-															si(t, p, !1);
+														p < c && !Oi(y) && (y = xi(t, fi(f))),
+															Oi(y) || (y = ci(t, f)),
+															e && (!r || y) && (v ? oi(l, h, !!y, e, null, b) : ri(l, h, y, e, m, null, b)),
+															ii(t, p, !1);
 													}
 												if (u) {
-													var w = Array.isArray(n) ? To(n) : n,
+													var w = Array.isArray(n) ? Oo(n) : n,
 														_ = t[9],
 														x = _[0];
 													for (p = 1; p < x; p += 2) {
@@ -7632,57 +7626,57 @@
 															S = _[k];
 														if (C) {
 															var P = C.buildPlayer(S, r);
-															void 0 !== P && (null != P && xo(_, w, l, P, k) && s++, S && S.destroy());
+															void 0 !== P && (null != P && wo(_, w, l, P, k) && s++, S && S.destroy());
 														} else S && S.destroy();
 													}
-													Ei(t, !1);
+													Si(t, !1);
 												}
-												Pi(t, !1);
+												ki(t, !1);
 											}
 											return s;
 										})(l, a, i, s, 0, 0, o) > 0 &&
-										((n = 0 === (t = To(i)).flags),
+										((n = 0 === (t = Oo(i)).flags),
 										(t.flags |= 2),
 										n &&
-											t.clean == Qa &&
+											t.clean == Za &&
 											((t.clean = new Promise(function(t) {
 												return (e = t);
 											})),
 											t.scheduler(function() {
-												if ((1 & t.flags && ((t.flags &= -2), ks(t)), 2 & t.flags)) {
+												if ((1 & t.flags && ((t.flags &= -2), xs(t)), 2 & t.flags)) {
 													t.flags &= -3;
 													var n = t.playerHandler;
 													n && n.flushPlayers();
 												}
-												(t.clean = Qa), e(null);
+												(t.clean = Za), e(null);
 											}))),
-										Vn(null),
-										ea() &&
+										Hn(null),
+										$i() &&
 											(function() {
-												var t = kr(),
-													e = Gn(),
-													n = Sn(t, e),
+												var t = xr(),
+													e = Bn(),
+													n = Cn(t, e),
 													r = (function(t, e) {
-														return 3 === t.type ? e[sn] : null;
+														return 3 === t.type ? e[on] : null;
 													})(n, e),
 													o = (function(t, n) {
-														for (var r = e[t + dn], o = e; Array.isArray(r); ) (o = r), (r = r[Qe]);
-														return xn(o) ? o[0] : r;
+														for (var r = e[t + pn], o = e; Array.isArray(r); ) (o = r), (r = r[Ze]);
+														return wn(o) ? o[0] : r;
 													})(t),
-													i = dl();
+													i = pl();
 												!(function(t, e, n, r, o) {
-													ha(n, o) && (!ma(n) && ga(n), Oa && (Da(n, t, r, e, Oa, La, null), (Oa = 0)), Pa);
-												})(r, e, gl(n), o, i);
-												var a = wa(e);
+													fa(n, o) && (!ha(n) && da(n), Pa && (ja(n, t, r, e, Pa, Na, null), (Pa = 0)), ka);
+												})(r, e, dl(n), o, i);
+												var a = va(e);
 												!(function(t, e, n, r, o, i) {
-													ha(n, o) && (!ma(n) && ga(n), Ea && (Da(n, t, r, e, Ea, Ua, i), (Ea = 0)), Pa);
-												})(r, e, hl(n), o, i, a),
-													na(null);
+													fa(n, o) && (!ha(n) && da(n), Sa && (ja(n, t, r, e, Sa, Da, i), (Sa = 0)), ka);
+												})(r, e, fl(n), o, i, a),
+													ta(null);
 											})();
 								})());
 					}
 				}),
-				Vp = (function(t) {
+				Hp = (function(t) {
 					function e(e) {
 						return t.call(this, e) || this;
 					}
@@ -7705,28 +7699,28 @@
 						(e.prototype.ngDoCheck = function() {
 							this._delegate.applyChanges();
 						}),
-						(e.ngDirectiveDef = ze({
+						(e.ngDirectiveDef = Le({
 							type: e,
 							selectors: [['', 'ngClass', '']],
 							factory: function(t) {
-								return new (t || e)(fl(Lp));
+								return new (t || e)(cl(Np));
 							},
 							inputs: { klass: ['class', 'klass'], ngClass: 'ngClass' },
 							features: [
-								((n = [Hp]),
+								((n = [Up]),
 								void 0 === r && (r = []),
 								function(t) {
 									t.providersResolver = function(t, e) {
 										return (function(t, e, n) {
-											var r = Gn()[Ye];
+											var r = Bn()[We];
 											if (r.firstTemplatePass) {
-												var o = In(t);
-												Gl(n, r.data, r.blueprint, o, !0), Gl(e, r.data, r.blueprint, o, !1);
+												var o = En(t);
+												Bl(n, r.data, r.blueprint, o, !0), Bl(e, r.data, r.blueprint, o, !1);
 											}
 										})(t, e ? e(n) : n, r);
 									};
 								}),
-								zl
+								Ll
 							]
 						})),
 						e
@@ -7741,15 +7735,15 @@
 							(t.prototype.getValue = function() {
 								return this._delegate.getValue();
 							}),
-							(t.ngDirectiveDef = zp),
+							(t.ngDirectiveDef = Lp),
 							t
 						);
 					})()
 				),
-				Fp = (function() {
+				zp = (function() {
 					function t(t, e) {
 						(this._viewContainer = t),
-							(this._context = new Bp()),
+							(this._context = new Vp()),
 							(this._thenTemplateRef = null),
 							(this._elseTemplateRef = null),
 							(this._thenViewRef = null),
@@ -7766,14 +7760,14 @@
 						}),
 						Object.defineProperty(t.prototype, 'ngIfThen', {
 							set: function(t) {
-								qp('ngIfThen', t), (this._thenTemplateRef = t), (this._thenViewRef = null), this._updateView();
+								Fp('ngIfThen', t), (this._thenTemplateRef = t), (this._thenViewRef = null), this._updateView();
 							},
 							enumerable: !0,
 							configurable: !0
 						}),
 						Object.defineProperty(t.prototype, 'ngIfElse', {
 							set: function(t) {
-								qp('ngIfElse', t), (this._elseTemplateRef = t), (this._elseViewRef = null), this._updateView();
+								Fp('ngIfElse', t), (this._elseTemplateRef = t), (this._elseViewRef = null), this._updateView();
 							},
 							enumerable: !0,
 							configurable: !0
@@ -7789,54 +7783,54 @@
 								  (this._thenViewRef = null),
 								  this._elseTemplateRef && (this._elseViewRef = this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context)));
 						}),
-						(t.ngDirectiveDef = ze({
+						(t.ngDirectiveDef = Le({
 							type: t,
 							selectors: [['', 'ngIf', '']],
 							factory: function(e) {
-								return new (e || t)(fl(Ru), fl(Au));
+								return new (e || t)(cl(Au), cl(Tu));
 							},
 							inputs: { ngIf: 'ngIf', ngIfThen: 'ngIfThen', ngIfElse: 'ngIfElse' }
 						})),
 						t
 					);
 				})(),
-				Bp = (function() {
+				Vp = (function() {
 					return function() {
 						(this.$implicit = null), (this.ngIf = null);
 					};
 				})();
-			function qp(t, e) {
-				if (e && !e.createEmbeddedView) throw new Error(t + " must be a TemplateRef, but received '" + Ot(e) + "'.");
+			function Fp(t, e) {
+				if (e && !e.createEmbeddedView) throw new Error(t + " must be a TemplateRef, but received '" + Pt(e) + "'.");
 			}
-			var Gp = (function() {
+			var Bp = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							},
-							providers: [{ provide: Tp, useClass: Mp }]
+							providers: [{ provide: Op, useClass: Ip }]
 						})),
 						t
 					);
 				})(),
-				Zp = new Lt('DocumentToken'),
-				Wp = 'server',
-				Qp = (function() {
+				qp = new Nt('DocumentToken'),
+				Gp = 'server',
+				Zp = (function() {
 					function t() {}
 					return (
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							providedIn: 'root',
 							factory: function() {
-								return new Yp(Jt(Zp), window, Jt(Ko));
+								return new Wp(Qt(qp), window, Qt(Yo));
 							}
 						})),
 						t
 					);
 				})(),
-				Yp = (function() {
+				Wp = (function() {
 					function t(t, e, n) {
 						(this.document = t),
 							(this.window = e),
@@ -7895,12 +7889,12 @@
 						t
 					);
 				})(),
-				Jp = null;
-			function Kp() {
-				return Jp;
+				Qp = null;
+			function Yp() {
+				return Qp;
 			}
-			var Xp,
-				$p = (function(t) {
+			var Jp,
+				Kp = (function(t) {
 					function e() {
 						var e = t.call(this) || this;
 						(e._animationPrefix = null), (e._transitionEnd = null);
@@ -7967,8 +7961,8 @@
 						);
 					})()
 				),
-				tf = { class: 'className', innerHtml: 'innerHTML', readonly: 'readOnly', tabindex: 'tabIndex' },
-				ef = {
+				Xp = { class: 'className', innerHtml: 'innerHTML', readonly: 'readOnly', tabindex: 'tabIndex' },
+				$p = {
 					'\b': 'Backspace',
 					'\t': 'Tab',
 					'\x7f': 'Delete',
@@ -7983,17 +7977,17 @@
 					Scroll: 'ScrollLock',
 					Win: 'OS'
 				},
-				nf = { A: '1', B: '2', C: '3', D: '4', E: '5', F: '6', G: '7', H: '8', I: '9', J: '*', K: '+', M: '-', N: '.', O: '/', '`': '0', '\x90': 'NumLock' },
-				rf = (function() {
-					if (Ut.Node)
+				tf = { A: '1', B: '2', C: '3', D: '4', E: '5', F: '6', G: '7', H: '8', I: '9', J: '*', K: '+', M: '-', N: '.', O: '/', '`': '0', '\x90': 'NumLock' },
+				ef = (function() {
+					if (Dt.Node)
 						return (
-							Ut.Node.prototype.contains ||
+							Dt.Node.prototype.contains ||
 							function(t) {
 								return !!(16 & this.compareDocumentPosition(t));
 							}
 						);
 				})(),
-				of = (function(t) {
+				nf = (function(t) {
 					function e() {
 						return (null !== t && t.apply(this, arguments)) || this;
 					}
@@ -8004,7 +7998,7 @@
 						}),
 						(e.makeCurrent = function() {
 							var t;
-							(t = new e()), Jp || (Jp = t);
+							(t = new e()), Qp || (Qp = t);
 						}),
 						(e.prototype.hasProperty = function(t, e) {
 							return e in t;
@@ -8033,13 +8027,13 @@
 						}),
 						Object.defineProperty(e.prototype, 'attrToPropMap', {
 							get: function() {
-								return tf;
+								return Xp;
 							},
 							enumerable: !0,
 							configurable: !0
 						}),
 						(e.prototype.contains = function(t, e) {
-							return rf.call(t, e);
+							return ef.call(t, e);
 						}),
 						(e.prototype.querySelector = function(t, e) {
 							return t.querySelector(e);
@@ -8318,9 +8312,9 @@
 							var e = t.key;
 							if (null == e) {
 								if (null == (e = t.keyIdentifier)) return 'Unidentified';
-								e.startsWith('U+') && ((e = String.fromCharCode(parseInt(e.substring(2), 16))), 3 === t.location && nf.hasOwnProperty(e) && (e = nf[e]));
+								e.startsWith('U+') && ((e = String.fromCharCode(parseInt(e.substring(2), 16))), 3 === t.location && tf.hasOwnProperty(e) && (e = tf[e]));
 							}
-							return ef[e] || e;
+							return $p[e] || e;
 						}),
 						(e.prototype.getGlobalEventTarget = function(t, e) {
 							return 'window' === e ? window : 'document' === e ? t : 'body' === e ? t.body : null;
@@ -8333,11 +8327,11 @@
 						}),
 						(e.prototype.getBaseHref = function(t) {
 							var e,
-								n = af || (af = document.querySelector('base')) ? af.getAttribute('href') : null;
-							return null == n ? null : ((e = n), Xp || (Xp = document.createElement('a')), Xp.setAttribute('href', e), '/' === Xp.pathname.charAt(0) ? Xp.pathname : '/' + Xp.pathname);
+								n = rf || (rf = document.querySelector('base')) ? rf.getAttribute('href') : null;
+							return null == n ? null : ((e = n), Jp || (Jp = document.createElement('a')), Jp.setAttribute('href', e), '/' === Jp.pathname.charAt(0) ? Jp.pathname : '/' + Jp.pathname);
 						}),
 						(e.prototype.resetBaseElement = function() {
-							af = null;
+							rf = null;
 						}),
 						(e.prototype.getUserAgent = function() {
 							return window.navigator.userAgent;
@@ -8389,12 +8383,12 @@
 						}),
 						e
 					);
-				})($p),
-				af = null;
-			function sf() {
+				})(Kp),
+				rf = null;
+			function of() {
 				return !!window.history.pushState;
 			}
-			var lf = (function(t) {
+			var af = (function(t) {
 					function e(e) {
 						var n = t.call(this) || this;
 						return (n._doc = e), n._init(), n;
@@ -8403,18 +8397,18 @@
 					return (
 						o(e, t),
 						(e.prototype._init = function() {
-							(this.location = Kp().getLocation()), (this._history = Kp().getHistory());
+							(this.location = Yp().getLocation()), (this._history = Yp().getHistory());
 						}),
 						(e.prototype.getBaseHrefFromDOM = function() {
-							return Kp().getBaseHref(this._doc);
+							return Yp().getBaseHref(this._doc);
 						}),
 						(e.prototype.onPopState = function(t) {
-							Kp()
+							Yp()
 								.getGlobalEventTarget(this._doc, 'window')
 								.addEventListener('popstate', t, !1);
 						}),
 						(e.prototype.onHashChange = function(t) {
-							Kp()
+							Yp()
 								.getGlobalEventTarget(this._doc, 'window')
 								.addEventListener('hashchange', t, !1);
 						}),
@@ -8471,10 +8465,10 @@
 							configurable: !0
 						}),
 						(e.prototype.pushState = function(t, e, n) {
-							sf() ? this._history.pushState(t, e, n) : (this.location.hash = n);
+							of() ? this._history.pushState(t, e, n) : (this.location.hash = n);
 						}),
 						(e.prototype.replaceState = function(t, e, n) {
-							sf() ? this._history.replaceState(t, e, n) : (this.location.hash = n);
+							of() ? this._history.replaceState(t, e, n) : (this.location.hash = n);
 						}),
 						(e.prototype.forward = function() {
 							this._history.forward();
@@ -8487,31 +8481,31 @@
 						}),
 						((e = a(
 							[
-								((n = gt(Zp)),
+								((n = dt(qp)),
 								function(t, e) {
 									n(t, e, 0);
 								}),
 								s('design:paramtypes', [Object])
 							],
 							e
-						)).ngInjectableDef = xt({
+						)).ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(Zp));
+								return new (t || e)(Qt(qp));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(wp),
-				uf = new Lt('TRANSITION_ID'),
-				cf = [
+				})(vp),
+				sf = new Nt('TRANSITION_ID'),
+				lf = [
 					{
-						provide: yc,
+						provide: bc,
 						useFactory: function(t, e, n) {
 							return function() {
-								n.get(wc).donePromise.then(function() {
-									var n = Kp();
+								n.get(vc).donePromise.then(function() {
+									var n = Yp();
 									Array.prototype.slice
 										.apply(n.querySelectorAll(e, 'style[ng-transition]'))
 										.filter(function(e) {
@@ -8523,33 +8517,33 @@
 								});
 							};
 						},
-						deps: [uf, Zp, be],
+						deps: [sf, qp, ge],
 						multi: !0
 					}
 				],
-				pf = (function() {
+				uf = (function() {
 					function t() {}
 					return (
 						(t.init = function() {
 							var e;
-							(e = new t()), (rp = e);
+							(e = new t()), (ep = e);
 						}),
 						(t.prototype.addToWindow = function(t) {
-							(Ut.getAngularTestability = function(e, n) {
+							(Dt.getAngularTestability = function(e, n) {
 								void 0 === n && (n = !0);
 								var r = t.findTestabilityInTree(e, n);
 								if (null == r) throw new Error('Could not find testability for element.');
 								return r;
 							}),
-								(Ut.getAllAngularTestabilities = function() {
+								(Dt.getAllAngularTestabilities = function() {
 									return t.getAllTestabilities();
 								}),
-								(Ut.getAllAngularRootElements = function() {
+								(Dt.getAllAngularRootElements = function() {
 									return t.getAllRootElements();
 								}),
-								Ut.frameworkStabilizers || (Ut.frameworkStabilizers = []),
-								Ut.frameworkStabilizers.push(function(t) {
-									var e = Ut.getAllAngularTestabilities(),
+								Dt.frameworkStabilizers || (Dt.frameworkStabilizers = []),
+								Dt.frameworkStabilizers.push(function(t) {
+									var e = Dt.getAllAngularTestabilities(),
 										n = e.length,
 										r = !1,
 										o = function(e) {
@@ -8563,13 +8557,13 @@
 						(t.prototype.findTestabilityInTree = function(t, e, n) {
 							if (null == e) return null;
 							var r = t.getTestability(e);
-							return null != r ? r : n ? (Kp().isShadowRoot(e) ? this.findTestabilityInTree(t, Kp().getHost(e), !0) : this.findTestabilityInTree(t, Kp().parentElement(e), !0)) : null;
+							return null != r ? r : n ? (Yp().isShadowRoot(e) ? this.findTestabilityInTree(t, Yp().getHost(e), !0) : this.findTestabilityInTree(t, Yp().parentElement(e), !0)) : null;
 						}),
 						t
 					);
 				})(),
-				ff = new Lt('EventManagerPlugins'),
-				df = (function() {
+				cf = new Nt('EventManagerPlugins'),
+				pf = (function() {
 					function t(t, e) {
 						var n = this;
 						(this._zone = e),
@@ -8598,30 +8592,30 @@
 							}
 							throw new Error('No event manager plugin found for event ' + t);
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
-								return new (e || t)(Jt(ff), Jt(Wc));
+								return new (e || t)(Qt(cf), Qt(Gc));
 							},
 							providedIn: null
 						})),
 						t
 					);
 				})(),
-				hf = (function() {
+				ff = (function() {
 					function t(t) {
 						this._doc = t;
 					}
 					return (
 						(t.prototype.addGlobalEventListener = function(t, e, n) {
-							var r = Kp().getGlobalEventTarget(this._doc, t);
+							var r = Yp().getGlobalEventTarget(this._doc, t);
 							if (!r) throw new Error('Unsupported event target ' + r + ' for event ' + e);
 							return this.addEventListener(r, e, n);
 						}),
 						t
 					);
 				})(),
-				gf = (function() {
+				df = (function() {
 					function t() {
 						this._stylesSet = new Set();
 					}
@@ -8638,7 +8632,7 @@
 						(t.prototype.getAllStyles = function() {
 							return Array.from(this._stylesSet);
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
 								return new (e || t)();
@@ -8648,7 +8642,7 @@
 						t
 					);
 				})(),
-				mf = (function(t) {
+				hf = (function(t) {
 					function e(e) {
 						var n = t.call(this) || this;
 						return (n._doc = e), (n._hostNodes = new Set()), (n._styleNodes = new Set()), n._hostNodes.add(e.head), n;
@@ -8676,58 +8670,58 @@
 						}),
 						(e.prototype.ngOnDestroy = function() {
 							this._styleNodes.forEach(function(t) {
-								return Kp().remove(t);
+								return Yp().remove(t);
 							});
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(Zp));
+								return new (t || e)(Qt(qp));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(gf),
-				bf = {
+				})(df),
+				gf = {
 					svg: 'http://www.w3.org/2000/svg',
 					xhtml: 'http://www.w3.org/1999/xhtml',
 					xlink: 'http://www.w3.org/1999/xlink',
 					xml: 'http://www.w3.org/XML/1998/namespace',
 					xmlns: 'http://www.w3.org/2000/xmlns/'
 				},
-				vf = /%COMP%/g,
-				yf = '_nghost-%COMP%',
-				wf = '_ngcontent-%COMP%';
-			function _f(t, e, n) {
+				mf = /%COMP%/g,
+				bf = '_nghost-%COMP%',
+				vf = '_ngcontent-%COMP%';
+			function yf(t, e, n) {
 				for (var r = 0; r < e.length; r++) {
 					var o = e[r];
-					Array.isArray(o) ? _f(t, o, n) : ((o = o.replace(vf, t)), n.push(o));
+					Array.isArray(o) ? yf(t, o, n) : ((o = o.replace(mf, t)), n.push(o));
 				}
 				return n;
 			}
-			function xf(t) {
+			function wf(t) {
 				return function(e) {
 					!1 === t(e) && (e.preventDefault(), (e.returnValue = !1));
 				};
 			}
-			var Cf = (function() {
+			var _f = (function() {
 					function t(t, e, n) {
-						(this.eventManager = t), (this.sharedStylesHost = e), (this.appId = n), (this.rendererByCompId = new Map()), (this.defaultRenderer = new kf(t));
+						(this.eventManager = t), (this.sharedStylesHost = e), (this.appId = n), (this.rendererByCompId = new Map()), (this.defaultRenderer = new xf(t));
 					}
 					return (
 						(t.prototype.createRenderer = function(t, e) {
 							if (!t || !e) return this.defaultRenderer;
 							switch (e.encapsulation) {
-								case Se.Emulated:
+								case Ce.Emulated:
 									var n = this.rendererByCompId.get(e.id);
-									return n || ((n = new Ef(this.eventManager, this.sharedStylesHost, e, this.appId)), this.rendererByCompId.set(e.id, n)), n.applyToHost(t), n;
-								case Se.Native:
-								case Se.ShadowDom:
-									return new Of(this.eventManager, this.sharedStylesHost, t, e);
+									return n || ((n = new Sf(this.eventManager, this.sharedStylesHost, e, this.appId)), this.rendererByCompId.set(e.id, n)), n.applyToHost(t), n;
+								case Ce.Native:
+								case Ce.ShadowDom:
+									return new Pf(this.eventManager, this.sharedStylesHost, t, e);
 								default:
 									if (!this.rendererByCompId.has(e.id)) {
-										var r = _f(e.id, e.styles, []);
+										var r = yf(e.id, e.styles, []);
 										this.sharedStylesHost.addStyles(r), this.rendererByCompId.set(e.id, this.defaultRenderer);
 									}
 									return this.defaultRenderer;
@@ -8735,24 +8729,24 @@
 						}),
 						(t.prototype.begin = function() {}),
 						(t.prototype.end = function() {}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
-								return new (e || t)(Jt(df), Jt(mf), Jt(_c));
+								return new (e || t)(Qt(pf), Qt(hf), Qt(yc));
 							},
 							providedIn: null
 						})),
 						t
 					);
 				})(),
-				kf = (function() {
+				xf = (function() {
 					function t(t) {
 						(this.eventManager = t), (this.data = Object.create(null));
 					}
 					return (
 						(t.prototype.destroy = function() {}),
 						(t.prototype.createElement = function(t, e) {
-							return e ? document.createElementNS(bf[e] || e, t) : document.createElement(t);
+							return e ? document.createElementNS(gf[e] || e, t) : document.createElement(t);
 						}),
 						(t.prototype.createComment = function(t) {
 							return document.createComment(t);
@@ -8783,13 +8777,13 @@
 						(t.prototype.setAttribute = function(t, e, n, r) {
 							if (r) {
 								e = r + ':' + e;
-								var o = bf[r];
+								var o = gf[r];
 								o ? t.setAttributeNS(o, e, n) : t.setAttribute(e, n);
 							} else t.setAttribute(e, n);
 						}),
 						(t.prototype.removeAttribute = function(t, e, n) {
 							if (n) {
-								var r = bf[n];
+								var r = gf[n];
 								r ? t.removeAttributeNS(r, e) : t.removeAttribute(n + ':' + e);
 							} else t.removeAttribute(e);
 						}),
@@ -8800,35 +8794,35 @@
 							t.classList.remove(e);
 						}),
 						(t.prototype.setStyle = function(t, e, n, r) {
-							r & du.DashCase ? t.style.setProperty(e, n, r & du.Important ? 'important' : '') : (t.style[e] = n);
+							r & pu.DashCase ? t.style.setProperty(e, n, r & pu.Important ? 'important' : '') : (t.style[e] = n);
 						}),
 						(t.prototype.removeStyle = function(t, e, n) {
-							n & du.DashCase ? t.style.removeProperty(e) : (t.style[e] = '');
+							n & pu.DashCase ? t.style.removeProperty(e) : (t.style[e] = '');
 						}),
 						(t.prototype.setProperty = function(t, e, n) {
-							Pf(e, 'property'), (t[e] = n);
+							kf(e, 'property'), (t[e] = n);
 						}),
 						(t.prototype.setValue = function(t, e) {
 							t.nodeValue = e;
 						}),
 						(t.prototype.listen = function(t, e, n) {
-							return Pf(e, 'listener'), 'string' == typeof t ? this.eventManager.addGlobalEventListener(t, e, xf(n)) : this.eventManager.addEventListener(t, e, xf(n));
+							return kf(e, 'listener'), 'string' == typeof t ? this.eventManager.addGlobalEventListener(t, e, wf(n)) : this.eventManager.addEventListener(t, e, wf(n));
 						}),
 						t
 					);
 				})(),
-				Sf = (function() {
+				Cf = (function() {
 					return '@'.charCodeAt(0);
 				})();
-			function Pf(t, e) {
-				if (t.charCodeAt(0) === Sf) throw new Error('Found the synthetic ' + e + ' ' + t + '. Please include either "BrowserAnimationsModule" or "NoopAnimationsModule" in your application.');
+			function kf(t, e) {
+				if (t.charCodeAt(0) === Cf) throw new Error('Found the synthetic ' + e + ' ' + t + '. Please include either "BrowserAnimationsModule" or "NoopAnimationsModule" in your application.');
 			}
-			var Ef = (function(t) {
+			var Sf = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e) || this;
 						i.component = r;
-						var a = _f(o + '-' + r.id, r.styles, []);
-						return n.addStyles(a), (i.contentAttr = wf.replace(vf, o + '-' + r.id)), (i.hostAttr = yf.replace(vf, o + '-' + r.id)), i;
+						var a = yf(o + '-' + r.id, r.styles, []);
+						return n.addStyles(a), (i.contentAttr = vf.replace(mf, o + '-' + r.id)), (i.hostAttr = bf.replace(mf, o + '-' + r.id)), i;
 					}
 					return (
 						o(e, t),
@@ -8841,16 +8835,16 @@
 						}),
 						e
 					);
-				})(kf),
-				Of = (function(t) {
+				})(xf),
+				Pf = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e) || this;
 						(i.sharedStylesHost = n),
 							(i.hostEl = r),
 							(i.component = o),
-							(i.shadowRoot = o.encapsulation === Se.ShadowDom ? r.attachShadow({ mode: 'open' }) : r.createShadowRoot()),
+							(i.shadowRoot = o.encapsulation === Ce.ShadowDom ? r.attachShadow({ mode: 'open' }) : r.createShadowRoot()),
 							i.sharedStylesHost.addHost(i.shadowRoot);
-						for (var a = _f(o.id, o.styles, []), s = 0; s < a.length; s++) {
+						for (var a = yf(o.id, o.styles, []), s = 0; s < a.length; s++) {
 							var l = document.createElement('style');
 							(l.textContent = a[s]), i.shadowRoot.appendChild(l);
 						}
@@ -8878,8 +8872,8 @@
 						}),
 						e
 					);
-				})(kf),
-				If = (function() {
+				})(xf),
+				Ef = (function() {
 					return (
 						('undefined' != typeof Zone && Zone.__symbol__) ||
 						function(t) {
@@ -8887,12 +8881,12 @@
 						}
 					);
 				})(),
-				Tf = If('addEventListener'),
-				Mf = If('removeEventListener'),
-				Af = {},
-				jf = '__zone_symbol__propagationStopped',
-				Rf = (function() {
-					var t = 'undefined' != typeof Zone && Zone[If('BLACK_LISTED_EVENTS')];
+				Of = Ef('addEventListener'),
+				If = Ef('removeEventListener'),
+				Tf = {},
+				Mf = '__zone_symbol__propagationStopped',
+				Af = (function() {
+					var t = 'undefined' != typeof Zone && Zone[Ef('BLACK_LISTED_EVENTS')];
 					if (t) {
 						var e = {};
 						return (
@@ -8903,31 +8897,31 @@
 						);
 					}
 				})(),
-				Df = function(t) {
-					return !!Rf && Rf.hasOwnProperty(t);
+				jf = function(t) {
+					return !!Af && Af.hasOwnProperty(t);
 				},
-				Nf = function(t) {
-					var e = Af[t.type];
+				Rf = function(t) {
+					var e = Tf[t.type];
 					if (e) {
 						var n = this[e];
 						if (n) {
 							var r = [t];
 							if (1 === n.length) return (a = n[0]).zone !== Zone.current ? a.zone.run(a.handler, this, r) : a.handler.apply(this, r);
-							for (var o = n.slice(), i = 0; i < o.length && !0 !== t[jf]; i++) {
+							for (var o = n.slice(), i = 0; i < o.length && !0 !== t[Mf]; i++) {
 								var a;
 								(a = o[i]).zone !== Zone.current ? a.zone.run(a.handler, this, r) : a.handler.apply(this, r);
 							}
 						}
 					}
 				},
-				Uf = (function(t) {
+				Df = (function(t) {
 					function e(e, n, r) {
 						var o = t.call(this, e) || this;
 						return (
 							(o.ngZone = n),
 							(r &&
 								(function(t) {
-									return t === Wp;
+									return t === Gp;
 								})(r)) ||
 								o.patchEvent(),
 							o
@@ -8939,7 +8933,7 @@
 							if ('undefined' != typeof Event && Event && Event.prototype && !Event.prototype.__zone_symbol__stopImmediatePropagation) {
 								var t = (Event.prototype.__zone_symbol__stopImmediatePropagation = Event.prototype.stopImmediatePropagation);
 								Event.prototype.stopImmediatePropagation = function() {
-									this && (this[jf] = !0), t && t.apply(this, arguments);
+									this && (this[Mf] = !0), t && t.apply(this, arguments);
 								};
 							}
 						}),
@@ -8949,14 +8943,14 @@
 						(e.prototype.addEventListener = function(t, e, n) {
 							var r = this,
 								o = n;
-							if (!t[Tf] || (Wc.isInAngularZone() && !Df(e))) t.addEventListener(e, o, !1);
+							if (!t[Of] || (Gc.isInAngularZone() && !jf(e))) t.addEventListener(e, o, !1);
 							else {
-								var i = Af[e];
-								i || (i = Af[e] = If('ANGULAR' + e + 'FALSE'));
+								var i = Tf[e];
+								i || (i = Tf[e] = Ef('ANGULAR' + e + 'FALSE'));
 								var a = t[i],
 									s = a && a.length > 0;
 								a || (a = t[i] = []);
-								var l = Df(e) ? Zone.root : Zone.current;
+								var l = jf(e) ? Zone.root : Zone.current;
 								if (0 === a.length) a.push({ zone: l, handler: o });
 								else {
 									for (var u = !1, c = 0; c < a.length; c++)
@@ -8966,16 +8960,16 @@
 										}
 									u || a.push({ zone: l, handler: o });
 								}
-								s || t[Tf](e, Nf, !1);
+								s || t[Of](e, Rf, !1);
 							}
 							return function() {
 								return r.removeEventListener(t, e, o);
 							};
 						}),
 						(e.prototype.removeEventListener = function(t, e, n) {
-							var r = t[Mf];
+							var r = t[If];
 							if (!r) return t.removeEventListener.apply(t, [e, n, !1]);
-							var o = Af[e],
+							var o = Tf[e],
 								i = o && t[o];
 							if (!i) return t.removeEventListener.apply(t, [e, n, !1]);
 							for (var a = !1, s = 0; s < i.length; s++)
@@ -8983,19 +8977,19 @@
 									(a = !0), i.splice(s, 1);
 									break;
 								}
-							a ? 0 === i.length && r.apply(t, [e, Nf, !1]) : t.removeEventListener.apply(t, [e, n, !1]);
+							a ? 0 === i.length && r.apply(t, [e, Rf, !1]) : t.removeEventListener.apply(t, [e, n, !1]);
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(Zp), Jt(Wc), Jt(Ec, 8));
+								return new (t || e)(Qt(qp), Qt(Gc), Qt(Sc, 8));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(hf),
-				Lf = {
+				})(ff),
+				Nf = {
 					pan: !0,
 					panstart: !0,
 					panmove: !0,
@@ -9026,9 +9020,9 @@
 					swipedown: !0,
 					tap: !0
 				},
-				Hf = new Lt('HammerGestureConfig'),
-				zf = new Lt('HammerLoader'),
-				Vf = (function() {
+				Uf = new Nt('HammerGestureConfig'),
+				Lf = new Nt('HammerLoader'),
+				Hf = (function() {
 					function t() {
 						(this.events = []), (this.overrides = {});
 					}
@@ -9038,7 +9032,7 @@
 							for (var n in (e.get('pinch').set({ enable: !0 }), e.get('rotate').set({ enable: !0 }), this.overrides)) e.get(n).set(this.overrides[n]);
 							return e;
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
 								return new (e || t)();
@@ -9048,7 +9042,7 @@
 						t
 					);
 				})(),
-				Ff = (function(t) {
+				zf = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e) || this;
 						return (i._config = n), (i.console = r), (i.loader = o), i;
@@ -9057,7 +9051,7 @@
 						o(e, t),
 						(e.prototype.supports = function(t) {
 							return !(
-								(!Lf.hasOwnProperty(t.toLowerCase()) && !this.isCustomEvent(t)) ||
+								(!Nf.hasOwnProperty(t.toLowerCase()) && !this.isCustomEvent(t)) ||
 								(!window.Hammer &&
 									!this.loader &&
 									(this.console.warn('The "' + t + '" event cannot be bound because Hammer.JS is not loaded and no custom loader has been specified.'), 1))
@@ -9103,18 +9097,18 @@
 						(e.prototype.isCustomEvent = function(t) {
 							return this._config.events.indexOf(t) > -1;
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(Zp), Jt(Hf), Jt(Ic), Jt(zf, 8));
+								return new (t || e)(Qt(qp), Qt(Uf), Qt(Ec), Qt(Lf, 8));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(hf),
-				Bf = ['alt', 'control', 'meta', 'shift'],
-				qf = {
+				})(ff),
+				Vf = ['alt', 'control', 'meta', 'shift'],
+				Ff = {
 					alt: function(t) {
 						return t.altKey;
 					},
@@ -9128,7 +9122,7 @@
 						return t.shiftKey;
 					}
 				},
-				Gf = (function(t) {
+				Bf = (function(t) {
 					function e(e) {
 						return t.call(this, e) || this;
 					}
@@ -9143,7 +9137,7 @@
 							var o = n.parseEventName(e),
 								i = n.eventCallback(o.fullKey, r, this.manager.getZone());
 							return this.manager.getZone().runOutsideAngular(function() {
-								return Kp().onAndCancel(t, o.domEventName, i);
+								return Yp().onAndCancel(t, o.domEventName, i);
 							});
 						}),
 						(e.parseEventName = function(t) {
@@ -9153,7 +9147,7 @@
 							var o = n._normalizeKey(e.pop()),
 								i = '';
 							if (
-								(Bf.forEach(function(t) {
+								(Vf.forEach(function(t) {
 									var n = e.indexOf(t);
 									n > -1 && (e.splice(n, 1), (i += t + '.'));
 								}),
@@ -9166,11 +9160,11 @@
 						}),
 						(e.getEventFullKey = function(t) {
 							var e = '',
-								n = Kp().getEventKey(t);
+								n = Yp().getEventKey(t);
 							return (
 								' ' === (n = n.toLowerCase()) ? (n = 'space') : '.' === n && (n = 'dot'),
-								Bf.forEach(function(r) {
-									r != n && (0, qf[r])(t) && (e += r + '.');
+								Vf.forEach(function(r) {
+									r != n && (0, Ff[r])(t) && (e += r + '.');
 								}),
 								(e += n)
 							);
@@ -9191,20 +9185,20 @@
 									return t;
 							}
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(Zp));
+								return new (t || e)(Qt(qp));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(hf),
-				Zf = (function() {
+				})(ff),
+				qf = (function() {
 					return function() {};
 				})(),
-				Wf = (function(t) {
+				Gf = (function(t) {
 					function e(e) {
 						var n = t.call(this) || this;
 						return (n._doc = e), n;
@@ -9214,19 +9208,19 @@
 						(e.prototype.sanitize = function(t, e) {
 							if (null == e) return null;
 							switch (t) {
-								case $r.NONE:
+								case Kr.NONE:
 									return e;
-								case $r.HTML:
-									return e instanceof Yf ? e.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(e, 'HTML'), Kr(this._doc, String(e)));
-								case $r.STYLE:
-									return e instanceof Jf
+								case Kr.HTML:
+									return e instanceof Wf ? e.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(e, 'HTML'), Yr(this._doc, String(e)));
+								case Kr.STYLE:
+									return e instanceof Qf
 										? e.changingThisBreaksApplicationSecurity
 										: (this.checkNotSafeValue(e, 'Style'),
 										  (function(t) {
 												if (!(t = String(t).trim())) return '';
-												var e = t.match(no);
-												return (e && Rr(e[1]) === e[1]) ||
-													(t.match(eo) &&
+												var e = t.match(to);
+												return (e && Ar(e[1]) === e[1]) ||
+													(t.match($r) &&
 														(function(t) {
 															for (var e = !0, n = !0, r = 0; r < t.length; r++) {
 																var o = t.charAt(r);
@@ -9235,49 +9229,49 @@
 															return e && n;
 														})(t))
 													? t
-													: (Tr() && console.warn('WARNING: sanitizing unsafe style value ' + t + ' (see http://g.co/ng/security#xss).'), 'unsafe');
+													: (Or() && console.warn('WARNING: sanitizing unsafe style value ' + t + ' (see http://g.co/ng/security#xss).'), 'unsafe');
 										  })(e));
-								case $r.SCRIPT:
-									if (e instanceof Kf) return e.changingThisBreaksApplicationSecurity;
+								case Kr.SCRIPT:
+									if (e instanceof Yf) return e.changingThisBreaksApplicationSecurity;
 									throw (this.checkNotSafeValue(e, 'Script'), new Error('unsafe value used in a script context'));
-								case $r.URL:
-									return e instanceof $f || e instanceof Xf ? e.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(e, 'URL'), Rr(String(e)));
-								case $r.RESOURCE_URL:
-									if (e instanceof $f) return e.changingThisBreaksApplicationSecurity;
+								case Kr.URL:
+									return e instanceof Kf || e instanceof Jf ? e.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(e, 'URL'), Ar(String(e)));
+								case Kr.RESOURCE_URL:
+									if (e instanceof Kf) return e.changingThisBreaksApplicationSecurity;
 									throw (this.checkNotSafeValue(e, 'ResourceURL'), new Error('unsafe value used in a resource URL context (see http://g.co/ng/security#xss)'));
 								default:
 									throw new Error('Unexpected SecurityContext ' + t + ' (see http://g.co/ng/security#xss)');
 							}
 						}),
 						(e.prototype.checkNotSafeValue = function(t, e) {
-							if (t instanceof Qf) throw new Error('Required a safe ' + e + ', got a ' + t.getTypeName() + ' (see http://g.co/ng/security#xss)');
+							if (t instanceof Zf) throw new Error('Required a safe ' + e + ', got a ' + t.getTypeName() + ' (see http://g.co/ng/security#xss)');
 						}),
 						(e.prototype.bypassSecurityTrustHtml = function(t) {
-							return new Yf(t);
+							return new Wf(t);
 						}),
 						(e.prototype.bypassSecurityTrustStyle = function(t) {
-							return new Jf(t);
+							return new Qf(t);
 						}),
 						(e.prototype.bypassSecurityTrustScript = function(t) {
-							return new Kf(t);
+							return new Yf(t);
 						}),
 						(e.prototype.bypassSecurityTrustUrl = function(t) {
-							return new Xf(t);
+							return new Jf(t);
 						}),
 						(e.prototype.bypassSecurityTrustResourceUrl = function(t) {
-							return new $f(t);
+							return new Kf(t);
 						}),
-						(e.ngInjectableDef = xt({
+						(e.ngInjectableDef = wt({
 							token: e,
 							factory: function(t) {
-								return new (t || e)(Jt(Zp));
+								return new (t || e)(Qt(qp));
 							},
 							providedIn: null
 						})),
 						e
 					);
-				})(Zf),
-				Qf = (function() {
+				})(qf),
+				Zf = (function() {
 					function t(t) {
 						this.changingThisBreaksApplicationSecurity = t;
 					}
@@ -9288,7 +9282,7 @@
 						t
 					);
 				})(),
-				Yf = (function(t) {
+				Wf = (function(t) {
 					function e() {
 						return (null !== t && t.apply(this, arguments)) || this;
 					}
@@ -9299,8 +9293,8 @@
 						}),
 						e
 					);
-				})(Qf),
-				Jf = (function(t) {
+				})(Zf),
+				Qf = (function(t) {
 					function e() {
 						return (null !== t && t.apply(this, arguments)) || this;
 					}
@@ -9311,8 +9305,8 @@
 						}),
 						e
 					);
-				})(Qf),
-				Kf = (function(t) {
+				})(Zf),
+				Yf = (function(t) {
 					function e() {
 						return (null !== t && t.apply(this, arguments)) || this;
 					}
@@ -9323,8 +9317,8 @@
 						}),
 						e
 					);
-				})(Qf),
-				Xf = (function(t) {
+				})(Zf),
+				Jf = (function(t) {
 					function e() {
 						return (null !== t && t.apply(this, arguments)) || this;
 					}
@@ -9335,8 +9329,8 @@
 						}),
 						e
 					);
-				})(Qf),
-				$f = (function(t) {
+				})(Zf),
+				Kf = (function(t) {
 					function e() {
 						return (null !== t && t.apply(this, arguments)) || this;
 					}
@@ -9347,49 +9341,49 @@
 						}),
 						e
 					);
-				})(Qf),
-				td = [{ provide: to, useExisting: Zf }, { provide: Zf, useClass: Wf, deps: [Zp] }],
-				ed = ap(bp, 'browser', [
-					{ provide: Ec, useValue: 'browser' },
+				})(Zf),
+				Xf = [{ provide: Xr, useExisting: qf }, { provide: qf, useClass: Gf, deps: [qp] }],
+				$f = op(gp, 'browser', [
+					{ provide: Sc, useValue: 'browser' },
 					{
-						provide: Pc,
+						provide: kc,
 						useValue: function() {
-							of.makeCurrent(), pf.init();
+							nf.makeCurrent(), uf.init();
 						},
 						multi: !0
 					},
-					{ provide: wp, useClass: lf, deps: [Zp] },
+					{ provide: vp, useClass: af, deps: [qp] },
 					{
-						provide: Zp,
+						provide: qp,
 						useFactory: function() {
 							return document;
 						},
 						deps: []
 					}
 				]),
-				nd = [
-					td,
-					{ provide: ne, useValue: !0 },
+				td = [
+					Xf,
+					{ provide: te, useValue: !0 },
 					{
-						provide: Ko,
+						provide: Yo,
 						useFactory: function() {
-							return new Ko();
+							return new Yo();
 						},
 						deps: []
 					},
-					{ provide: ff, useClass: Uf, multi: !0, deps: [Zp, Wc, Ec] },
-					{ provide: ff, useClass: Gf, multi: !0, deps: [Zp] },
-					{ provide: ff, useClass: Ff, multi: !0, deps: [Zp, Hf, Ic, [new mt(), zf]] },
-					{ provide: Hf, useClass: Vf, deps: [] },
-					{ provide: Cf, useClass: Cf, deps: [df, mf, _c] },
-					{ provide: fu, useExisting: Cf },
-					{ provide: gf, useExisting: mf },
-					{ provide: mf, useClass: mf, deps: [Zp] },
-					{ provide: ep, useClass: ep, deps: [Wc] },
-					{ provide: df, useClass: df, deps: [ff, Wc] },
+					{ provide: cf, useClass: Df, multi: !0, deps: [qp, Gc, Sc] },
+					{ provide: cf, useClass: Bf, multi: !0, deps: [qp] },
+					{ provide: cf, useClass: zf, multi: !0, deps: [qp, Uf, Ec, [new ht(), Lf]] },
+					{ provide: Uf, useClass: Hf, deps: [] },
+					{ provide: _f, useClass: _f, deps: [pf, hf, yc] },
+					{ provide: cu, useExisting: _f },
+					{ provide: df, useExisting: hf },
+					{ provide: hf, useClass: hf, deps: [qp] },
+					{ provide: $c, useClass: $c, deps: [Gc] },
+					{ provide: pf, useClass: pf, deps: [cf, Gc] },
 					[]
 				],
-				rd = (function() {
+				ed = (function() {
 					function t(t) {
 						if (t)
 							throw new Error(
@@ -9400,43 +9394,43 @@
 					return (
 						(e = t),
 						(t.withServerTransition = function(t) {
-							return { ngModule: e, providers: [{ provide: _c, useValue: t.appId }, { provide: uf, useExisting: _c }, cf] };
+							return { ngModule: e, providers: [{ provide: yc, useValue: t.appId }, { provide: sf, useExisting: yc }, lf] };
 						}),
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(n) {
-								return new (n || t)(Jt(e, 12));
+								return new (n || t)(Qt(e, 12));
 							},
-							providers: nd,
-							imports: [Gp, yp]
+							providers: td,
+							imports: [Bp, bp]
 						})),
 						t
 					);
 				})();
 			'undefined' != typeof window && window;
-			const od = ['message'],
-				id = ['tabindex', '-1', 3, 'id'],
-				ad = ['message', ''],
-				sd = ['class', 'close', 'type', 'button', 'aria-label', 'close-alert', 'autofocus', '', 3, 'click', 'blur', 4, 'ngIf'],
-				ld = ['type', 'button', 'aria-label', 'close-alert', 'autofocus', '', 1, 'close', 3, 'click', 'blur'];
-			function ud(t, e) {
+			const nd = ['message'],
+				rd = ['tabindex', '-1', 3, 'id'],
+				od = ['message', ''],
+				id = ['class', 'close', 'type', 'button', 'aria-label', 'close-alert', 'autofocus', '', 3, 'click', 'blur', 4, 'ngIf'],
+				ad = ['type', 'button', 'aria-label', 'close-alert', 'autofocus', '', 1, 'close', 3, 'click', 'blur'];
+			function sd(t, e) {
 				if (1 & t) {
-					const t = Gn();
-					wl(0, 'button', ld),
-						kl('click', function(e) {
-							return or(t), El().closeAlert();
+					const t = Bn();
+					vl(0, 'button', ad),
+						xl('click', function(e) {
+							return nr(t), Sl().closeAlert();
 						}),
-						kl('blur', function(e) {
-							return or(t), El().trap();
+						xl('blur', function(e) {
+							return nr(t), Sl().trap();
 						}),
-						Al(1, ' X\n'),
-						_l();
+						Tl(1, ' X\n'),
+						yl();
 				}
 			}
-			const cd = ['*'],
-				pd = ['content'],
-				fd = ['href', '#', 1, 'show-focus', 3, 'click'];
-			var dd = (function() {
+			const ld = ['*'],
+				ud = ['content'],
+				cd = ['href', '#', 1, 'show-focus', 3, 'click'];
+			var pd = (function() {
 					function t(t) {
 						this.elementRef = t;
 					}
@@ -9463,38 +9457,38 @@
 						(t.prototype.trap = function() {
 							this.elementRef.nativeElement.focus();
 						}),
-						(t.ngComponentDef = De({
+						(t.ngComponentDef = je({
 							type: t,
 							selectors: [['ez-alert'], ['', 8, 'alert-bad'], ['', 8, 'alert-good'], ['', 8, 'alert-info'], ['', 8, 'alert-warn']],
 							factory: function(e) {
-								return new (e || t)(fl(cu));
+								return new (e || t)(cl(lu));
 							},
 							viewQuery: function(t, e) {
 								var n, r, o, i;
-								1 & t && ((r = od), !0, null, bc((o = Gn()), (i = o[Ye]), r, !0, null, !0), (i.staticViewQueries = !0)), 2 & t && mc((n = vc())) && (e.message = n.first);
+								1 & t && ((r = nd), !0, null, gc((o = Bn()), (i = o[We]), r, !0, null, !0), (i.staticViewQueries = !0)), 2 & t && hc((n = mc())) && (e.message = n.first);
 							},
 							hostBindings: function(t, e, n) {
 								var r, o;
 								1 & t &&
-									(o = (r = Gn())[Ye]).firstTemplatePass &&
+									(o = (r = Bn())[We]).firstTemplatePass &&
 									((function(t, e, n) {
 										var r = t.expandoInstructions,
 											o = r.length;
 										o >= 2 && r[o - 2] === e.hostBindings ? (r[o - 1] = r[o - 1] + 4) : r.push(e.hostBindings, 4);
-									})(o, Bn),
+									})(o, Vn),
 									(function(t, e, n) {
-										for (var r = 0; r < 4; r++) e.push(Xo), t.blueprint.push(Xo), t.data.push(null);
+										for (var r = 0; r < 4; r++) e.push(Jo), t.blueprint.push(Jo), t.data.push(null);
 									})(o, r)),
-									2 & t && (Zs('class', e.hostClass), Zs('tabindex', e.tabindex), Zs('aria-labelledby', e.ariaLabelledby), Zs('role', e.role));
+									2 & t && (qs('class', e.hostClass), qs('tabindex', e.tabindex), qs('aria-labelledby', e.ariaLabelledby), qs('role', e.role));
 							},
 							inputs: { class: 'class' },
-							ngContentSelectors: cd,
+							ngContentSelectors: ld,
 							consts: 4,
 							vars: 2,
 							template: function(t, e) {
-								1 & t && (Il(), wl(0, 'p', id, ad), Ml(2), _l(), pl(3, ud, 2, 0, 'button', sd)), 2 & t && (Zs('id', e.id), Za(3), qs('ngIf', e.close));
+								1 & t && (El(), vl(0, 'p', rd, od), Il(2), yl(), ul(3, sd, 2, 0, 'button', id)), 2 & t && (qs('id', e.id), qa(3), Fs('ngIf', e.close));
 							},
-							directives: [Fp],
+							directives: [zp],
 							styles: [
 								'.alert-bad[_nghost-%COMP%], .alert-good[_nghost-%COMP%], .alert-info[_nghost-%COMP%], .alert-warn[_nghost-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-align:center;align-items:center;color:#fff;-webkit-box-pack:justify;justify-content:space-between;padding:.5rem 1rem}.alert-bad[_nghost-%COMP%]{background-color:#ba000d}.alert-good[_nghost-%COMP%]{background-color:#087f23}.alert-info[_nghost-%COMP%]{background-color:#0069c0}.alert-warn[_nghost-%COMP%]{background-color:#ffeb3b;color:#191919}'
 							]
@@ -9502,47 +9496,47 @@
 						t
 					);
 				})(),
+				fd = (function() {
+					function t() {}
+					return (
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
+							factory: function(e) {
+								return new (e || t)();
+							},
+							imports: [[], Bp]
+						})),
+						t
+					);
+				})(),
+				dd = (function() {
+					function t() {}
+					return (
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
+							factory: function(e) {
+								return new (e || t)();
+							},
+							imports: [[fd]]
+						})),
+						t
+					);
+				})(),
 				hd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
-							factory: function(e) {
-								return new (e || t)();
-							},
-							imports: [[], Gp]
-						})),
-						t
-					);
-				})(),
-				gd = (function() {
-					function t() {}
-					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
-							factory: function(e) {
-								return new (e || t)();
-							},
-							imports: [[hd]]
-						})),
-						t
-					);
-				})(),
-				md = (function() {
-					function t() {}
-					return (
 						(t.prototype.ngOnInit = function() {}),
-						(t.ngComponentDef = De({
+						(t.ngComponentDef = je({
 							type: t,
 							selectors: [['ez-badge'], ['', 8, 'badge-sm'], ['', 8, 'badge-md'], ['', 8, 'badge-lg']],
 							factory: function(e) {
 								return new (e || t)();
 							},
-							ngContentSelectors: cd,
+							ngContentSelectors: ld,
 							consts: 1,
 							vars: 0,
 							template: function(t, e) {
-								1 & t && (Il(), Ml(0));
+								1 & t && (El(), Il(0));
 							},
 							styles: [
 								'.badge-lg[_nghost-%COMP%], .badge-md[_nghost-%COMP%], .badge-sm[_nghost-%COMP%]{border-radius:1rem;display:inline-block}.badge-lg[_nghost-%COMP%]:empty, .badge-md[_nghost-%COMP%]:empty, .badge-sm[_nghost-%COMP%]:empty{display:none}.badge-sm[_nghost-%COMP%]{line-height:.5rem;padding:.5rem}.badge-md[_nghost-%COMP%]{line-height:.625rem;padding:.625rem}.badge-lg[_nghost-%COMP%]{line-height:.75rem;padding:.75rem}'
@@ -9551,11 +9545,11 @@
 						t
 					);
 				})(),
-				bd = (function() {
+				gd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9563,11 +9557,11 @@
 						t
 					);
 				})(),
-				vd = (function() {
+				md = (function() {
 					function t() {}
 					return (
 						(t.prototype.ngOnInit = function() {}),
-						(t.ngComponentDef = De({
+						(t.ngComponentDef = je({
 							type: t,
 							selectors: [
 								['ez-button'],
@@ -9584,11 +9578,11 @@
 							factory: function(e) {
 								return new (e || t)();
 							},
-							ngContentSelectors: cd,
+							ngContentSelectors: ld,
 							consts: 1,
 							vars: 0,
 							template: function(t, e) {
-								1 & t && (Il(), Ml(0));
+								1 & t && (El(), Il(0));
 							},
 							styles: [
 								'.btn-full[_nghost-%COMP%], .btn-lg[_nghost-%COMP%], .btn-md[_nghost-%COMP%], .btn-sm[_nghost-%COMP%], .btn-xl[_nghost-%COMP%], .btn-xs[_nghost-%COMP%]{margin-bottom:1rem;margin-right:1rem}.btn-full.rounded[_nghost-%COMP%], .btn-lg.rounded[_nghost-%COMP%], .btn-md.rounded[_nghost-%COMP%], .btn-sm.rounded[_nghost-%COMP%], .btn-xl.rounded[_nghost-%COMP%], .btn-xs.rounded[_nghost-%COMP%]{border-radius:1.5rem}.btn-xs[_nghost-%COMP%]{padding:.5rem .625rem}.btn-sm[_nghost-%COMP%]{padding:.625rem 1.25rem}.btn-full[_nghost-%COMP%], .btn-md[_nghost-%COMP%]{padding:.75rem 1.875rem}.btn-lg[_nghost-%COMP%]{padding:.875rem 2.5rem}.btn-xl[_nghost-%COMP%]{padding:1rem 3.125rem}.btn-full[_nghost-%COMP%]{width:100%}.btn-group-col[_nghost-%COMP%], .btn-group-full[_nghost-%COMP%], .btn-group-row[_nghost-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;padding-bottom:1rem;padding-top:1rem}.btn-group-col[_nghost-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column}.btn-group-full[_nghost-%COMP%]{width:100%}.btn-group-col.btn-lg[_nghost-%COMP%], .btn-group-col   .btn-lg[_nghost-%COMP%], .btn-group-col.btn-md[_nghost-%COMP%], .btn-group-col   .btn-md[_nghost-%COMP%], .btn-group-col.btn-sm[_nghost-%COMP%], .btn-group-col   .btn-sm[_nghost-%COMP%], .btn-group-col.btn-xl[_nghost-%COMP%], .btn-group-col   .btn-xl[_nghost-%COMP%], .btn-group-col.btn-xs[_nghost-%COMP%], .btn-group-col   .btn-xs[_nghost-%COMP%], .btn-group-full.btn-lg[_nghost-%COMP%], .btn-group-full   .btn-lg[_nghost-%COMP%], .btn-group-full.btn-md[_nghost-%COMP%], .btn-group-full   .btn-md[_nghost-%COMP%], .btn-group-full.btn-sm[_nghost-%COMP%], .btn-group-full   .btn-sm[_nghost-%COMP%], .btn-group-full.btn-xl[_nghost-%COMP%], .btn-group-full   .btn-xl[_nghost-%COMP%], .btn-group-full.btn-xs[_nghost-%COMP%], .btn-group-full   .btn-xs[_nghost-%COMP%], .btn-group-row.btn-lg[_nghost-%COMP%], .btn-group-row   .btn-lg[_nghost-%COMP%], .btn-group-row.btn-md[_nghost-%COMP%], .btn-group-row   .btn-md[_nghost-%COMP%], .btn-group-row.btn-sm[_nghost-%COMP%], .btn-group-row   .btn-sm[_nghost-%COMP%], .btn-group-row.btn-xl[_nghost-%COMP%], .btn-group-row   .btn-xl[_nghost-%COMP%], .btn-group-row.btn-xs[_nghost-%COMP%], .btn-group-row   .btn-xs[_nghost-%COMP%]{border-bottom:.0625rem solid #fff;border-left:.0625rem solid #fff;margin:0}.btn-group-full.btn-lg[_nghost-%COMP%], .btn-group-full   .btn-lg[_nghost-%COMP%], .btn-group-full.btn-md[_nghost-%COMP%], .btn-group-full   .btn-md[_nghost-%COMP%], .btn-group-full.btn-sm[_nghost-%COMP%], .btn-group-full   .btn-sm[_nghost-%COMP%], .btn-group-full.btn-xl[_nghost-%COMP%], .btn-group-full   .btn-xl[_nghost-%COMP%], .btn-group-full.btn-xs[_nghost-%COMP%], .btn-group-full   .btn-xs[_nghost-%COMP%]{flex-basis:auto;-webkit-box-flex:1;flex-grow:1;flex-shrink:0}'
@@ -9597,11 +9591,35 @@
 						t
 					);
 				})(),
+				bd = (function() {
+					function t() {}
+					return (
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
+							factory: function(e) {
+								return new (e || t)();
+							}
+						})),
+						t
+					);
+				})(),
+				vd = (function() {
+					function t() {}
+					return (
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
+							factory: function(e) {
+								return new (e || t)();
+							}
+						})),
+						t
+					);
+				})(),
 				yd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9612,32 +9630,8 @@
 				wd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
-							factory: function(e) {
-								return new (e || t)();
-							}
-						})),
-						t
-					);
-				})(),
-				_d = (function() {
-					function t() {}
-					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
-							factory: function(e) {
-								return new (e || t)();
-							}
-						})),
-						t
-					);
-				})(),
-				xd = (function() {
-					function t() {}
-					return (
 						(t.prototype.ngOnInit = function() {}),
-						(t.ngComponentDef = De({
+						(t.ngComponentDef = je({
 							type: t,
 							selectors: [
 								['ez-form'],
@@ -9653,11 +9647,11 @@
 							factory: function(e) {
 								return new (e || t)();
 							},
-							ngContentSelectors: cd,
+							ngContentSelectors: ld,
 							consts: 1,
 							vars: 0,
 							template: function(t, e) {
-								1 & t && (Il(), Ml(0));
+								1 & t && (El(), Il(0));
 							},
 							styles: [
 								'@charset "UTF-8";.checkbox-group[_nghost-%COMP%], .radio-group[_nghost-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-align:center;align-items:center;-webkit-box-flex:1;flex:1 1 13.75rem;flex-wrap:wrap}.field-group[_nghost-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-align:center;align-items:center;flex-wrap:wrap;padding:.5rem}.fieldset[_nghost-%COMP%]{border:.0625rem solid #2196f3;padding:0 .625rem .75rem}.form-field[_nghost-%COMP%]{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:border,box-shadow;transition-property:border,box-shadow;-webkit-transition-timing-function:linear;transition-timing-function:linear;border:.0625rem solid #bdbdbd}.form-field[_nghost-%COMP%]:not(:disabled), .form-field[_nghost-%COMP%]:not([disabled]){background-color:#fff}.form-field[_nghost-%COMP%]:-moz-read-only:not(select), .form-field[readonly][_nghost-%COMP%]:not(select){background-color:#efefef;color:#191919}.form-field[_nghost-%COMP%]:read-only:not(select), .form-field[readonly][_nghost-%COMP%]:not(select){background-color:#efefef;color:#191919}.form-field[type=checkbox][_nghost-%COMP%], .form-field[type=radio][_nghost-%COMP%]{-webkit-appearance:none;-moz-appearance:none;appearance:none;height:1rem;position:relative;width:1rem}.form-field[type=checkbox][_nghost-%COMP%]::after, .form-field[type=radio][_nghost-%COMP%]::after{display:block;font-size:1.175rem;height:.95rem;left:0;line-height:.8rem;position:absolute;text-align:center;top:0;width:.95rem}.form-field[type=checkbox][_nghost-%COMP%]:checked::after{content:"\u2713"}.form-field[type=radio][_nghost-%COMP%]{border-radius:50%}.form-field[type=radio][_nghost-%COMP%]:checked::after{content:"\u25cf"}.form-field[_nghost-%COMP%]:hover{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:border;transition-property:border;-webkit-transition-timing-function:linear;transition-timing-function:linear;border:.0625rem solid #000}.form-field[_nghost-%COMP%]:focus{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:border,box-shadow;transition-property:border,box-shadow;-webkit-transition-timing-function:linear;transition-timing-function:linear;box-shadow:0 .09375rem .25rem rgba(33,150,243,.24),0 .09375rem .375rem rgba(33,150,243,.12);border:.0625rem solid #2196f3;outline:#2196f3 dotted 1px}.form-field[_nghost-%COMP%]:not([type=checkbox]):not([type=radio]){-webkit-box-flex:1;flex:1 0 13.75rem;padding:.5rem}.form-field[_nghost-%COMP%]::-webkit-input-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]:-ms-input-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]::-moz-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]::-ms-input-placeholder{color:#8d8d8d;opacity:1}.form-field[_nghost-%COMP%]::placeholder{color:#8d8d8d;opacity:1}.form-group-inline[_nghost-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;flex-wrap:wrap}.form-label[_nghost-%COMP%]{-webkit-box-flex:1;flex:1 0 7.5rem;font-size:1.125rem;max-width:13.75rem}select.form-field[_nghost-%COMP%]{background-color:inherit;color:#8d8d8d;height:2.25rem;padding-left:.25rem}select.form-field[_nghost-%COMP%]::-ms-value{background-color:inherit;color:#8d8d8d}select.form-field[multiple][_nghost-%COMP%]{height:6.25rem}select.form-field[_nghost-%COMP%]:not([multiple]){padding-bottom:0;padding-top:0;padding-right:0}textarea.form-field[_nghost-%COMP%]{height:6.25rem}.checkbox-group.field-group[_nghost-%COMP%], .checkbox-group   .field-group[_nghost-%COMP%], .radio-group.field-group[_nghost-%COMP%], .radio-group   .field-group[_nghost-%COMP%]{-webkit-box-flex:0;flex:0 0 7.5rem;flex-wrap:nowrap;padding:0}.checkbox-group.form-label[_nghost-%COMP%], .checkbox-group   .form-label[_nghost-%COMP%], .radio-group.form-label[_nghost-%COMP%], .radio-group   .form-label[_nghost-%COMP%]{-webkit-box-flex:0;flex:none;font-size:1rem;padding-left:.5rem}.checkbox-group.form-label[_nghost-%COMP%]:hover, .checkbox-group   .form-label[_nghost-%COMP%]:hover, .radio-group.form-label[_nghost-%COMP%]:hover, .radio-group   .form-label[_nghost-%COMP%]:hover{cursor:pointer}.form-group-inline.field-group[_nghost-%COMP%], .form-group-inline   .field-group[_nghost-%COMP%]{-webkit-box-flex:1;flex:1 0 auto}'
@@ -9666,11 +9660,35 @@
 						t
 					);
 				})(),
+				_d = (function() {
+					function t() {}
+					return (
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
+							factory: function(e) {
+								return new (e || t)();
+							}
+						})),
+						t
+					);
+				})(),
+				xd = (function() {
+					function t() {}
+					return (
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
+							factory: function(e) {
+								return new (e || t)();
+							}
+						})),
+						t
+					);
+				})(),
 				Cd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9681,8 +9699,8 @@
 				kd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9693,8 +9711,8 @@
 				Sd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9705,8 +9723,8 @@
 				Pd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9717,11 +9735,22 @@
 				Ed = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.prototype.ngOnInit = function() {}),
+						(t.ngComponentDef = je({
+							type: t,
+							selectors: [['ez-spinner'], ['', 8, 'spinner'], ['', 8, 'spinner-dotted']],
 							factory: function(e) {
 								return new (e || t)();
-							}
+							},
+							ngContentSelectors: ld,
+							consts: 1,
+							vars: 0,
+							template: function(t, e) {
+								1 & t && (El(), Il(0));
+							},
+							styles: [
+								'.spinner[_nghost-%COMP%], .spinner-dotted[_nghost-%COMP%]{-webkit-animation:2s linear infinite spinner;animation:2s linear infinite spinner;border-radius:50%;height:7.5rem;width:7.5rem}.spinner[_nghost-%COMP%]{border-color:#efefef #efefef #efefef #2196f3;border-style:solid;border-width:1rem}.spinner-dotted[_nghost-%COMP%]{border-style:dotted;border-color:#0069c0 #2196f3 #6ec6ff #39f;border-width:1.125rem .875rem .75rem .5rem}@-webkit-keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}'
+							]
 						})),
 						t
 					);
@@ -9729,8 +9758,8 @@
 				Od = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9741,22 +9770,11 @@
 				Id = (function() {
 					function t() {}
 					return (
-						(t.prototype.ngOnInit = function() {}),
-						(t.ngComponentDef = De({
-							type: t,
-							selectors: [['ez-spinner'], ['', 8, 'spinner'], ['', 8, 'spinner-dotted']],
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
-							},
-							ngContentSelectors: cd,
-							consts: 1,
-							vars: 0,
-							template: function(t, e) {
-								1 & t && (Il(), Ml(0));
-							},
-							styles: [
-								'.spinner[_nghost-%COMP%], .spinner-dotted[_nghost-%COMP%]{-webkit-animation:2s linear infinite spinner;animation:2s linear infinite spinner;border-radius:50%;height:7.5rem;width:7.5rem}.spinner[_nghost-%COMP%]{border-color:#efefef #efefef #efefef #2196f3;border-style:solid;border-width:1rem}.spinner-dotted[_nghost-%COMP%]{border-style:dotted;border-color:#0069c0 #2196f3 #6ec6ff #39f;border-width:1.125rem .875rem .75rem .5rem}@-webkit-keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spinner{from{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}'
-							]
+							}
 						})),
 						t
 					);
@@ -9764,8 +9782,8 @@
 				Td = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9776,8 +9794,8 @@
 				Md = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9788,8 +9806,8 @@
 				Ad = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							}
@@ -9798,30 +9816,6 @@
 					);
 				})(),
 				jd = (function() {
-					function t() {}
-					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
-							factory: function(e) {
-								return new (e || t)();
-							}
-						})),
-						t
-					);
-				})(),
-				Rd = (function() {
-					function t() {}
-					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
-							factory: function(e) {
-								return new (e || t)();
-							}
-						})),
-						t
-					);
-				})(),
-				Dd = (function() {
 					function t(t) {
 						this.elementRef = t;
 					}
@@ -9830,29 +9824,29 @@
 						(t.prototype.skip = function() {
 							this.content.nativeElement.focus();
 						}),
-						(t.ngComponentDef = De({
+						(t.ngComponentDef = je({
 							type: t,
 							selectors: [['ez-root']],
 							factory: function(e) {
-								return new (e || t)(fl(cu));
+								return new (e || t)(cl(lu));
 							},
 							viewQuery: function(t, e) {
 								var n, r, o;
-								1 & t && ((r = pd), !0, null, bc((o = Gn()), o[Ye], r, !0, null, !1)), 2 & t && mc((n = vc())) && (e.content = n.first);
+								1 & t && ((r = ud), !0, null, gc((o = Bn()), o[We], r, !0, null, !1)), 2 & t && hc((n = mc())) && (e.content = n.first);
 							},
-							ngContentSelectors: cd,
+							ngContentSelectors: ld,
 							consts: 3,
 							vars: 0,
 							template: function(t, e) {
 								1 & t &&
-									(Il(),
-									wl(0, 'a', fd),
-									kl('click', function(t) {
+									(El(),
+									vl(0, 'a', cd),
+									xl('click', function(t) {
 										return e.skip();
 									}),
-									Al(1, 'Skip to content'),
-									_l(),
-									Ml(2));
+									Tl(1, 'Skip to content'),
+									yl(),
+									Il(2));
 							},
 							styles: [
 								'@charset "UTF-8";/*! Easy CSS/Angular Framework v0.0.1\n * Author: Paul Chehak\n * License: MIT License\n */a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,main,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section{display:block}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:"";content:none}table{border-collapse:collapse;border-spacing:0}/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}code,kbd,pre,samp{font-family:monospace,monospace}a{background-color:transparent}b,strong{font-weight:bolder}small{font-size:80%}sub,sup{font-size:75%;line-height:0;vertical-align:baseline;bottom:0;position:static;top:0}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText dotted 1px}textarea{overflow:auto;resize:vertical}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}[hidden],template{display:none}html{-moz-osx-font-smoothing:grayscale;-ms-overflow-style:scrollbar;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;box-sizing:border-box;font-size:12px;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%}@media screen and (min-width:30em){html{font-size:13px}}@media screen and (min-width:48em){html{font-size:14px}}@media screen and (min-width:64em){html{font-size:16px}}*,::after,::before{box-sizing:inherit}body{margin:0;background-color:#fafafa;color:#191919;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1rem;line-height:1.618;overflow-x:hidden;text-rendering:optimizeLegibility}body,html{height:100%;width:100%}a,area,button,input,label,select,summary,textarea{touch-action:manipulation}button,canvas,embed,figure,img,input,label,object,progress,select,textarea,video{max-width:100%}canvas,figure,img,video{height:auto}.h1,h1{font-size:2rem}.h1{margin-bottom:.67rem}.h2,h2{font-size:1.5rem}.h2{margin-bottom:.75rem}.h3,h3{font-size:1.17rem}.h3{margin-bottom:.83rem}.h4,h4{font-size:1rem}.h4{margin-bottom:1.12rem}.h5,h5{font-size:.83rem}.h5{margin-bottom:1.5rem}.h6,h6{font-size:.75rem}.h6{margin-bottom:1.67rem}abbr[title]{-webkit-text-decoration:underline dotted;border-bottom:.0625rem dotted #191919;cursor:help}address{line-height:inherit}blockquote{padding:1rem}blockquote+footer{color:#8d8d8d;padding-bottom:1rem;padding-left:1.5rem;padding-right:1.5rem}blockquote+footer::before{content:"\u2012";color:#8d8d8d;padding-right:.5rem}blockquote,blockquote+footer{border-left:.125rem solid #efefef}caption{caption-side:bottom}dd{margin-bottom:.5rem}hr{box-sizing:content-box;height:0;overflow:visible;border-bottom:.0625rem solid #8d8d8d}mark{background-color:#ffeb3b;color:#191919}address,cite,em,i{font-style:italic}address,dl,figure,h1,ol,pre{margin:0}caption,img,input[type=checkbox],input[type=radio],label,td,th{vertical-align:middle}sub{-webkit-transform:translateY(.25rem);transform:translateY(.25rem)}sup{-webkit-transform:translateY(-.5rem);transform:translateY(-.5rem)}code,kbd,samp{font-size:1rem}code,pre{-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;-moz-tab-size:4;-o-tab-size:4;tab-size:4}pre{font-size:.5rem;white-space:pre-wrap;word-spacing:normal}fieldset{min-width:0;padding:0}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal;font-size:1.125rem}input[type=date],input[type=datetime-local],input[type=month],input[type=time]{-webkit-appearance:listbox}input[type=number]{-moz-appearance:textfield}input[type=range]{width:100%}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;margin-top:-.875rem}input[type=range]::-moz-range-track{-moz-appearance:none}input[type=range]::-ms-track{background:0 0;border-color:transparent;color:transparent}select{overflow-y:auto}optgroup{font-weight:bolder}option{color:#8d8d8d}a[role=button],abbr[title],button,html input[type=button],input,input[type=reset],input[type=submit],optgroup,select,textarea{text-decoration:none;font-family:inherit;border:0}a[role=button],button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:transparent}a[role=button]:hover,button:hover,html input[type=button]:hover,input[type=checkbox]:hover,input[type=radio]:hover,input[type=range]:hover,input[type=reset]:hover,input[type=submit]:hover,select:hover{cursor:pointer}progress{vertical-align:baseline;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:#bdbdbd;border:none;color:#0069c0}progress::-webkit-progress-bar{background-color:#bdbdbd;color:#0069c0}progress::-moz-progress-bar{background-color:#0069c0}progress::-ms-fill{border:none}[tabindex="-1"]:focus,input[type=range]:focus{outline:0}/*! Easy CSS/Angular Framework v0.0.1\n * Author: Paul Chehak\n * License: MIT License\n */.bg-hover-red:hover,.bg-red{background-color:#ba000d}.text-hover-red:hover,.text-red{color:#ba000d}.border-t-red{border-top:.0625rem solid #ba000d}.border-r-red{border-right:.0625rem solid #ba000d}.border-b-red{border-bottom:.0625rem solid #ba000d}.border-l-red{border-left:.0625rem solid #ba000d}.border-a-red{border:.0625rem solid #ba000d}.border-lr-red{border-left:.0625rem solid #ba000d;border-right:.0625rem solid #ba000d}.border-tb-red{border-top:.0625rem solid #ba000d;border-bottom:.0625rem solid #ba000d}.bg-hover-lt-purple:hover,.bg-lt-purple{background-color:#d05ce3}.text-hover-lt-purple:hover,.text-lt-purple{color:#d05ce3}.border-t-lt-purple{border-top:.0625rem solid #d05ce3}.border-r-lt-purple{border-right:.0625rem solid #d05ce3}.border-b-lt-purple{border-bottom:.0625rem solid #d05ce3}.border-l-lt-purple{border-left:.0625rem solid #d05ce3}.border-a-lt-purple{border:.0625rem solid #d05ce3}.border-lr-lt-purple{border-left:.0625rem solid #d05ce3;border-right:.0625rem solid #d05ce3}.border-tb-lt-purple{border-top:.0625rem solid #d05ce3;border-bottom:.0625rem solid #d05ce3}.bg-hover-purple:hover,.bg-purple{background-color:#9c27b0}.text-hover-purple:hover,.text-purple{color:#9c27b0}.border-t-purple{border-top:.0625rem solid #9c27b0}.border-r-purple{border-right:.0625rem solid #9c27b0}.border-b-purple{border-bottom:.0625rem solid #9c27b0}.border-l-purple{border-left:.0625rem solid #9c27b0}.border-a-purple{border:.0625rem solid #9c27b0}.border-lr-purple{border-left:.0625rem solid #9c27b0;border-right:.0625rem solid #9c27b0}.border-tb-purple{border-top:.0625rem solid #9c27b0;border-bottom:.0625rem solid #9c27b0}.bg-dk-purple,.bg-hover-dk-purple:hover{background-color:#6a0080}.text-dk-purple,.text-hover-dk-purple:hover{color:#6a0080}.border-t-dk-purple{border-top:.0625rem solid #6a0080}.border-r-dk-purple{border-right:.0625rem solid #6a0080}.border-b-dk-purple{border-bottom:.0625rem solid #6a0080}.border-l-dk-purple{border-left:.0625rem solid #6a0080}.border-a-dk-purple{border:.0625rem solid #6a0080}.border-lr-dk-purple{border-left:.0625rem solid #6a0080;border-right:.0625rem solid #6a0080}.border-tb-dk-purple{border-top:.0625rem solid #6a0080;border-bottom:.0625rem solid #6a0080}.bg-hover-yellow:hover,.bg-yellow{background-color:#ffeb3b}.text-hover-yellow:hover,.text-yellow{color:#ffeb3b}.border-t-yellow{border-top:.0625rem solid #ffeb3b}.border-r-yellow{border-right:.0625rem solid #ffeb3b}.border-b-yellow{border-bottom:.0625rem solid #ffeb3b}.border-l-yellow{border-left:.0625rem solid #ffeb3b}.border-a-yellow{border:.0625rem solid #ffeb3b}.border-lr-yellow{border-left:.0625rem solid #ffeb3b;border-right:.0625rem solid #ffeb3b}.border-tb-yellow{border-top:.0625rem solid #ffeb3b;border-bottom:.0625rem solid #ffeb3b}.bg-hover-orange:hover,.bg-orange{background-color:#ff9800}.text-hover-orange:hover,.text-orange{color:#ff9800}.border-t-orange{border-top:.0625rem solid #ff9800}.border-r-orange{border-right:.0625rem solid #ff9800}.border-b-orange{border-bottom:.0625rem solid #ff9800}.border-l-orange{border-left:.0625rem solid #ff9800}.border-a-orange{border:.0625rem solid #ff9800}.border-lr-orange{border-left:.0625rem solid #ff9800;border-right:.0625rem solid #ff9800}.border-tb-orange{border-top:.0625rem solid #ff9800;border-bottom:.0625rem solid #ff9800}.bg-hover-lt-green:hover,.bg-lt-green{background-color:#80e27e}.text-hover-lt-green:hover,.text-lt-green{color:#80e27e}.border-t-lt-green{border-top:.0625rem solid #80e27e}.border-r-lt-green{border-right:.0625rem solid #80e27e}.border-b-lt-green{border-bottom:.0625rem solid #80e27e}.border-l-lt-green{border-left:.0625rem solid #80e27e}.border-a-lt-green{border:.0625rem solid #80e27e}.border-lr-lt-green{border-left:.0625rem solid #80e27e;border-right:.0625rem solid #80e27e}.border-tb-lt-green{border-top:.0625rem solid #80e27e;border-bottom:.0625rem solid #80e27e}.bg-green,.bg-hover-green:hover{background-color:#4caf50}.text-green,.text-hover-green:hover{color:#4caf50}.border-t-green{border-top:.0625rem solid #4caf50}.border-r-green{border-right:.0625rem solid #4caf50}.border-b-green{border-bottom:.0625rem solid #4caf50}.border-l-green{border-left:.0625rem solid #4caf50}.border-a-green{border:.0625rem solid #4caf50}.border-lr-green{border-left:.0625rem solid #4caf50;border-right:.0625rem solid #4caf50}.border-tb-green{border-top:.0625rem solid #4caf50;border-bottom:.0625rem solid #4caf50}.bg-dk-green,.bg-hover-dk-green:hover{background-color:#087f23}.text-dk-green,.text-hover-dk-green:hover{color:#087f23}.border-t-dk-green{border-top:.0625rem solid #087f23}.border-r-dk-green{border-right:.0625rem solid #087f23}.border-b-dk-green{border-bottom:.0625rem solid #087f23}.border-l-dk-green{border-left:.0625rem solid #087f23}.border-a-dk-green{border:.0625rem solid #087f23}.border-lr-dk-green{border-left:.0625rem solid #087f23;border-right:.0625rem solid #087f23}.border-tb-dk-green{border-top:.0625rem solid #087f23;border-bottom:.0625rem solid #087f23}.bg-hover-lt-blue:hover,.bg-lt-blue{background-color:#6ec6ff}.text-hover-lt-blue:hover,.text-lt-blue{color:#6ec6ff}.border-t-lt-blue{border-top:.0625rem solid #6ec6ff}.border-r-lt-blue{border-right:.0625rem solid #6ec6ff}.border-b-lt-blue{border-bottom:.0625rem solid #6ec6ff}.border-l-lt-blue{border-left:.0625rem solid #6ec6ff}.border-a-lt-blue{border:.0625rem solid #6ec6ff}.border-lr-lt-blue{border-left:.0625rem solid #6ec6ff;border-right:.0625rem solid #6ec6ff}.border-tb-lt-blue{border-top:.0625rem solid #6ec6ff;border-bottom:.0625rem solid #6ec6ff}.bg-blue,.bg-hover-blue:hover{background-color:#2196f3}.text-blue,.text-hover-blue:hover{color:#2196f3}.border-t-blue{border-top:.0625rem solid #2196f3}.border-r-blue{border-right:.0625rem solid #2196f3}.border-b-blue{border-bottom:.0625rem solid #2196f3}.border-l-blue{border-left:.0625rem solid #2196f3}.border-a-blue{border:.0625rem solid #2196f3}.border-lr-blue{border-left:.0625rem solid #2196f3;border-right:.0625rem solid #2196f3}.border-tb-blue{border-top:.0625rem solid #2196f3;border-bottom:.0625rem solid #2196f3}.bg-dk-blue,.bg-hover-dk-blue:hover{background-color:#0069c0}.text-dk-blue,.text-hover-dk-blue:hover{color:#0069c0}.border-t-dk-blue{border-top:.0625rem solid #0069c0}.border-r-dk-blue{border-right:.0625rem solid #0069c0}.border-b-dk-blue{border-bottom:.0625rem solid #0069c0}.border-l-dk-blue{border-left:.0625rem solid #0069c0}.border-a-dk-blue{border:.0625rem solid #0069c0}.border-lr-dk-blue{border-left:.0625rem solid #0069c0;border-right:.0625rem solid #0069c0}.border-tb-dk-blue{border-top:.0625rem solid #0069c0;border-bottom:.0625rem solid #0069c0}.bg-hover-lt-gray:hover,.bg-lt-gray{background-color:#efefef}.text-hover-lt-gray:hover,.text-lt-gray{color:#efefef}.border-t-lt-gray{border-top:.0625rem solid #efefef}.border-r-lt-gray{border-right:.0625rem solid #efefef}.border-b-lt-gray{border-bottom:.0625rem solid #efefef}.border-l-lt-gray{border-left:.0625rem solid #efefef}.border-a-lt-gray{border:.0625rem solid #efefef}.border-lr-lt-gray{border-left:.0625rem solid #efefef;border-right:.0625rem solid #efefef}.border-tb-lt-gray{border-top:.0625rem solid #efefef;border-bottom:.0625rem solid #efefef}.bg-gray,.bg-hover-gray:hover{background-color:#bdbdbd}.text-gray,.text-hover-gray:hover{color:#bdbdbd}.border-t-gray{border-top:.0625rem solid #bdbdbd}.border-r-gray{border-right:.0625rem solid #bdbdbd}.border-b-gray{border-bottom:.0625rem solid #bdbdbd}.border-l-gray{border-left:.0625rem solid #bdbdbd}.border-a-gray{border:.0625rem solid #bdbdbd}.border-lr-gray{border-left:.0625rem solid #bdbdbd;border-right:.0625rem solid #bdbdbd}.border-tb-gray{border-top:.0625rem solid #bdbdbd;border-bottom:.0625rem solid #bdbdbd}.bg-dk-gray,.bg-hover-dk-gray:hover{background-color:#8d8d8d}.text-dk-gray,.text-hover-dk-gray:hover{color:#8d8d8d}.border-t-dk-gray{border-top:.0625rem solid #8d8d8d}.border-r-dk-gray{border-right:.0625rem solid #8d8d8d}.border-b-dk-gray{border-bottom:.0625rem solid #8d8d8d}.border-l-dk-gray{border-left:.0625rem solid #8d8d8d}.border-a-dk-gray{border:.0625rem solid #8d8d8d}.border-lr-dk-gray{border-left:.0625rem solid #8d8d8d;border-right:.0625rem solid #8d8d8d}.border-tb-dk-gray{border-top:.0625rem solid #8d8d8d;border-bottom:.0625rem solid #8d8d8d}.bg-hover-lt-white:hover,.bg-lt-white{background-color:#fafafa}.bg-hover-white:hover,.bg-white{background-color:#fff}.text-hover-white:hover,.text-white{color:#fff}.border-t-white{border-top:.0625rem solid #fff}.border-r-white{border-right:.0625rem solid #fff}.border-b-white{border-bottom:.0625rem solid #fff}.border-l-white{border-left:.0625rem solid #fff}.border-a-white{border:.0625rem solid #fff}.border-lr-white{border-left:.0625rem solid #fff;border-right:.0625rem solid #fff}.border-tb-white{border-top:.0625rem solid #fff;border-bottom:.0625rem solid #fff}.text-hover-lt-black:hover,.text-lt-black{color:#191919}.bg-black,.bg-hover-black:hover{background-color:#000}.text-black,.text-hover-black:hover{color:#000}.border-t-black{border-top:.0625rem solid #000}.border-r-black{border-right:.0625rem solid #000}.border-b-black{border-bottom:.0625rem solid #000}.border-l-black{border-left:.0625rem solid #000}.border-a-black{border:.0625rem solid #000}.border-lr-black{border-left:.0625rem solid #000;border-right:.0625rem solid #000}.border-tb-black{border-top:.0625rem solid #000;border-bottom:.0625rem solid #000}.row,.row-full{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start}.col,.col-full{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column}.row-full{width:100%}.col-full{height:100%}.align-c,.col.align-m{-webkit-box-pack:center;justify-content:center}.align-l,.col.align-t{-webkit-box-pack:start;justify-content:flex-start}.align-r,.col.align-b{-webkit-box-pack:end;justify-content:flex-end}.align-m,.col.align-c{-webkit-box-align:center;align-items:center}.align-b,.col.align-r{-webkit-box-align:end;align-items:flex-end}.align-t,.col.align-l{-webkit-box-align:start;align-items:flex-start}.align-sa{justify-content:space-around}.align-sb{-webkit-box-pack:justify;justify-content:space-between}.align-st{-webkit-box-align:stretch;align-items:stretch}.align-cm{-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center}.col.wrap-l,.wrap-t{align-content:flex-start;flex-wrap:wrap}.col.wrap-r,.wrap-b{align-content:flex-end;flex-wrap:wrap}.col.wrap-c,.wrap-m{align-content:center;flex-wrap:wrap}.wrap-sa{align-content:space-around;flex-wrap:wrap}.wrap-sb{align-content:space-between;flex-wrap:wrap}.wrap-st{align-content:stretch;flex-wrap:wrap}.wrap-n{flex-wrap:nowrap;max-width:100%}.col .item-l,.item-t{align-self:flex-start}.col .item-r,.item-b{align-self:flex-end}.col .item-c,.item-m{-ms-grid-row-align:center;align-self:center}.item-l{margin-right:auto}.col .item-t{margin-bottom:auto}.item-r{margin-left:auto}.col .item-b{margin-top:auto}.item-c{margin-left:auto;margin-right:auto}.col .item-m{margin-bottom:auto;margin-top:auto}.item-cm{-ms-grid-row-align:center;align-self:center;margin-left:auto;margin-right:auto}.col .item-cm{-ms-grid-row-align:center;align-self:center;margin-bottom:auto;margin-top:auto}.item-st{-ms-grid-row-align:stretch;align-self:stretch}.item-gs-0{-webkit-box-flex:0;flex-grow:0;flex-shrink:0}.item-g-0{-webkit-box-flex:0;flex-grow:0}.item-s-0{flex-shrink:0}.item-gs-1{-webkit-box-flex:1;flex-grow:1;flex-shrink:1}.item-g-1{-webkit-box-flex:1;flex-grow:1}.item-s-1{flex-shrink:1}.item-gs-2{-webkit-box-flex:2;flex-grow:2;flex-shrink:2}.item-g-2{-webkit-box-flex:2;flex-grow:2}.item-s-2{flex-shrink:2}.item-gs-3{-webkit-box-flex:3;flex-grow:3;flex-shrink:3}.item-g-3{-webkit-box-flex:3;flex-grow:3}.item-s-3{flex-shrink:3}.item-gs-4{-webkit-box-flex:4;flex-grow:4;flex-shrink:4}.item-g-4{-webkit-box-flex:4;flex-grow:4}.item-s-4{flex-shrink:4}.item-gs-5{-webkit-box-flex:5;flex-grow:5;flex-shrink:5}.item-g-5{-webkit-box-flex:5;flex-grow:5}.item-s-5{flex-shrink:5}.item-gs-6{-webkit-box-flex:6;flex-grow:6;flex-shrink:6}.item-g-6{-webkit-box-flex:6;flex-grow:6}.item-s-6{flex-shrink:6}.item-gs-7{-webkit-box-flex:7;flex-grow:7;flex-shrink:7}.item-g-7{-webkit-box-flex:7;flex-grow:7}.item-s-7{flex-shrink:7}.item-gs-8{-webkit-box-flex:8;flex-grow:8;flex-shrink:8}.item-g-8{-webkit-box-flex:8;flex-grow:8}.item-s-8{flex-shrink:8}.item-gs-9{-webkit-box-flex:9;flex-grow:9;flex-shrink:9}.item-g-9{-webkit-box-flex:9;flex-grow:9}.item-s-9{flex-shrink:9}.item-gs-10{-webkit-box-flex:10;flex-grow:10;flex-shrink:10}.item-g-10{-webkit-box-flex:10;flex-grow:10}.item-s-10{flex-shrink:10}.item-gs-11{-webkit-box-flex:11;flex-grow:11;flex-shrink:11}.item-g-11{-webkit-box-flex:11;flex-grow:11}.item-s-11{flex-shrink:11}.item-gs-12{-webkit-box-flex:12;flex-grow:12;flex-shrink:12}.item-g-12{-webkit-box-flex:12;flex-grow:12}.item-s-12{flex-shrink:12}[class*=flex-g]{flex-basis:auto}.item-order-1{-webkit-box-ordinal-group:2;order:1}.item-order-2{-webkit-box-ordinal-group:3;order:2}.item-order-3{-webkit-box-ordinal-group:4;order:3}.item-order-4{-webkit-box-ordinal-group:5;order:4}.item-order-5{-webkit-box-ordinal-group:6;order:5}.item-order-6{-webkit-box-ordinal-group:7;order:6}.item-order-7{-webkit-box-ordinal-group:8;order:7}.item-order-8{-webkit-box-ordinal-group:9;order:8}.item-order-9{-webkit-box-ordinal-group:10;order:9}.item-order-10{-webkit-box-ordinal-group:11;order:10}.item-order-11{-webkit-box-ordinal-group:12;order:11}.item-order-12{-webkit-box-ordinal-group:13;order:12}@media screen and (min-width:48em){.container{width:80%}}@media screen and (min-width:30em){.container-fluid{width:28rem}}@media screen and (min-width:48em){.container-fluid{width:46rem}}@media screen and (min-width:64em){.container-fluid{width:73rem}}.container,.container-fluid,.container-full{margin-left:auto;margin-right:auto;width:100%}.sticky-footer{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column;-webkit-box-align:stretch;align-items:stretch;flex-wrap:nowrap;height:100%}.sticky-footer :last-child{margin-top:auto}.fixed-b,.fixed-l,.fixed-r,.fixed-t{position:fixed;z-index:10}.fixed-b,.fixed-t{width:100%}.fixed-b{bottom:0}.fixed-l{left:0}.fixed-r{right:0}.fixed-t{top:0}.mar-t-n{margin-top:0}.pad-t-n{padding-top:0}.mar-r-n{margin-right:0}.pad-r-n{padding-right:0}.mar-b-n{margin-bottom:0}.pad-b-n{padding-bottom:0}.mar-l-n{margin-left:0}.pad-l-n{padding-left:0}.mar-a-n{margin:0}.mar-lr-n{margin-left:0;margin-right:0}.mar-tb-n{margin-top:0;margin-bottom:0}.pad-a-n{padding:0}.pad-lr-n{padding-left:0;padding-right:0}.pad-tb-n{padding-top:0;padding-bottom:0}.mar-t-xs{margin-top:.5rem}.pad-t-xs{padding-top:.5rem}.mar-r-xs{margin-right:.5rem}.pad-r-xs{padding-right:.5rem}.mar-b-xs{margin-bottom:.5rem}.pad-b-xs{padding-bottom:.5rem}.mar-l-xs{margin-left:.5rem}.pad-l-xs{padding-left:.5rem}.mar-a-xs{margin:.5rem}.mar-lr-xs{margin-left:.5rem;margin-right:.5rem}.mar-tb-xs{margin-top:.5rem;margin-bottom:.5rem}.pad-a-xs{padding:.5rem}.pad-lr-xs{padding-left:.5rem;padding-right:.5rem}.pad-tb-xs{padding-top:.5rem;padding-bottom:.5rem}.mar-t-sm{margin-top:1rem}.pad-t-sm{padding-top:1rem}.mar-r-sm{margin-right:1rem}.pad-r-sm{padding-right:1rem}.mar-b-sm{margin-bottom:1rem}.pad-b-sm{padding-bottom:1rem}.mar-l-sm{margin-left:1rem}.pad-l-sm{padding-left:1rem}.mar-a-sm{margin:1rem}.mar-lr-sm{margin-left:1rem;margin-right:1rem}.mar-tb-sm{margin-top:1rem;margin-bottom:1rem}.pad-a-sm{padding:1rem}.pad-lr-sm{padding-left:1rem;padding-right:1rem}.pad-tb-sm{padding-top:1rem;padding-bottom:1rem}.mar-t-md{margin-top:1.5rem}.pad-t-md{padding-top:1.5rem}.mar-r-md{margin-right:1.5rem}.pad-r-md{padding-right:1.5rem}.mar-b-md{margin-bottom:1.5rem}.pad-b-md{padding-bottom:1.5rem}.mar-l-md{margin-left:1.5rem}.pad-l-md{padding-left:1.5rem}.mar-a-md{margin:1.5rem}.mar-lr-md{margin-left:1.5rem;margin-right:1.5rem}.mar-tb-md{margin-top:1.5rem;margin-bottom:1.5rem}.pad-a-md{padding:1.5rem}.pad-lr-md{padding-left:1.5rem;padding-right:1.5rem}.pad-tb-md{padding-top:1.5rem;padding-bottom:1.5rem}.mar-t-lg{margin-top:2rem}.pad-t-lg{padding-top:2rem}.mar-r-lg{margin-right:2rem}.pad-r-lg{padding-right:2rem}.mar-b-lg{margin-bottom:2rem}.pad-b-lg{padding-bottom:2rem}.mar-l-lg{margin-left:2rem}.pad-l-lg{padding-left:2rem}.mar-a-lg{margin:2rem}.mar-lr-lg{margin-left:2rem;margin-right:2rem}.mar-tb-lg{margin-top:2rem;margin-bottom:2rem}.pad-a-lg{padding:2rem}.pad-lr-lg{padding-left:2rem;padding-right:2rem}.pad-tb-lg{padding-top:2rem;padding-bottom:2rem}.mar-t-xl{margin-top:2.5rem}.pad-t-xl{padding-top:2.5rem}.mar-r-xl{margin-right:2.5rem}.pad-r-xl{padding-right:2.5rem}.mar-b-xl{margin-bottom:2.5rem}.pad-b-xl{padding-bottom:2.5rem}.mar-l-xl{margin-left:2.5rem}.pad-l-xl{padding-left:2.5rem}.mar-a-xl{margin:2.5rem}.mar-lr-xl{margin-left:2.5rem;margin-right:2.5rem}.mar-tb-xl{margin-top:2.5rem;margin-bottom:2.5rem}.pad-a-xl{padding:2.5rem}.pad-lr-xl{padding-left:2.5rem;padding-right:2.5rem}.pad-tb-xl{padding-top:2.5rem;padding-bottom:2.5rem}.text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-md{font-size:1.125rem}.text-lg{font-size:1.5rem}.text-xl{font-size:2.25rem}.text-c{text-align:center}.text-l{text-align:left}.text-r{text-align:right}.text-j{text-align:justify}.text-capitalize{text-transform:capitalize}.text-uppercase{text-transform:uppercase}.text-lowercase{text-transform:lowercase}.text-small-caps{font-variant:small-caps}.text-hyphens{-webkit-hyphens:auto;-ms-hyphens:auto;hyphens:auto}:disabled,[disabled]{background-color:#efefef;color:#191919}:disabled:hover,[disabled]:hover{cursor:not-allowed}.center{display:block;margin-left:auto;margin-right:auto}.circle{border-radius:50%}.close{color:inherit}.hover:hover{cursor:pointer}.list{margin-bottom:1rem;margin-left:2.5rem}ol.list{list-style:decimal}ol.list ol.lst{list-style:lower-alpha}.rounded{border-radius:.375rem}ul.list{list-style:disc}ul.list ul.list{list-style:circle}.box-shadow-1{box-shadow:0 .09375rem .25rem rgba(0,0,0,.24),0 .09375rem .375rem rgba(0,0,0,.12)}.box-shadow-2{box-shadow:0 .1875rem .75rem rgba(0,0,0,.23),0 .1875rem .75rem rgba(0,0,0,.16)}.box-shadow-3{box-shadow:0 .375rem .75rem rgba(0,0,0,.23),0 .625rem 2.5rem rgba(0,0,0,.19)}.box-shadow-4{box-shadow:0 .625rem 1.25rem rgba(0,0,0,.22),0 .875rem 3.5rem rgba(0,0,0,.25)}.box-shadow-5{box-shadow:0 .9375rem 1.5rem rgba(0,0,0,.22),0 1.1875rem 4.75rem rgba(0,0,0,.3)}.hide,.show-lg,.show-md,.show-print,.show-sm,.show-xl{display:none}@media screen and (min-width:30em){.hide-xs{display:none}}@media screen and (min-width:30em) and (max-width:47em){.hide-sm{display:none}}@media screen and (min-width:48em) and (max-width:63em){.hide-md{display:none}}@media screen and (min-width:64em) and (max-width:74em){.hide-lg{display:none}}@media screen and (min-width:64em){.hide-xl{display:none}}@media print{.hide-print{display:none}}.show{display:block}@media screen and (min-width:30em){.show-xs{display:none}}@media screen and (min-width:30em) and (max-width:47em){.show-sm{display:block}}@media screen and (min-width:48em) and (max-width:63em){.show-md{display:block}}@media screen and (min-width:64em) and (max-width:74em){.show-lg{display:block}}@media screen and (min-width:64em){.show-xl{display:block}}@media print{.show-print{display:block}}.show-focus,.sr-only{clip:rect(0,0,0,0);height:.0625rem;position:absolute;overflow:hidden;white-space:nowrap;width:.0625rem}.show-focus:active,.show-focus:focus,.show-focus:hover{clip:auto;color:#191919;display:block;height:auto;left:.3125rem;padding:1rem;text-decoration:none;top:.3125rem;width:auto;z-index:100}'
@@ -9862,11 +9856,11 @@
 						t
 					);
 				})(),
-				Nd = (function() {
+				Rd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							},
@@ -9875,52 +9869,25 @@
 						t
 					);
 				})(),
-				Ud = (function() {
+				Dd = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							},
-							imports: [gd, bd, yd, wd, _d, Cd, kd, Sd, Pd, Ed, Od, Td, Md, Ad, jd, Rd]
+							imports: [dd, gd, bd, vd, yd, _d, xd, Cd, kd, Sd, Pd, Od, Id, Td, Md, Ad]
 						})),
 						t
 					);
-				})(),
-				Ld = new I(function(t) {
-					return t.complete();
-				});
-			function Hd(t) {
-				return t
-					? (function(t) {
-							return new I(function(e) {
-								return t.schedule(function() {
-									return e.complete();
-								});
-							});
-					  })(t)
-					: Ld;
-			}
-			function zd(t) {
-				var e = new I(function(e) {
-					e.next(t), e.complete();
-				});
-				return (e._isScalar = !0), (e.value = t), e;
-			}
-			function Vd() {
+				})();
+			function Nd() {
 				for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
 				var n = t[t.length - 1];
-				switch ((U(n) ? t.pop() : (n = void 0), t.length)) {
-					case 0:
-						return Hd(n);
-					case 1:
-						return n ? $(t, n) : zd(t[0]);
-					default:
-						return $(t, n);
-				}
+				return U(n) ? (t.pop(), J(t, n)) : rt(t);
 			}
-			var Fd = (function(t) {
+			var Ud = (function(t) {
 				function e(e) {
 					var n = t.call(this) || this;
 					return (n._value = e), n;
@@ -9949,24 +9916,24 @@
 					e
 				);
 			})(D);
-			function Bd() {
+			function Ld() {
 				return Error.call(this), (this.message = 'no elements in sequence'), (this.name = 'EmptyError'), this;
 			}
-			Bd.prototype = Object.create(Error.prototype);
-			var qd = Bd,
-				Gd = {},
-				Zd = (function() {
+			Ld.prototype = Object.create(Error.prototype);
+			var Hd = Ld,
+				zd = {},
+				Vd = (function() {
 					function t(t) {
 						this.resultSelector = t;
 					}
 					return (
 						(t.prototype.call = function(t, e) {
-							return e.subscribe(new Wd(t, this.resultSelector));
+							return e.subscribe(new Fd(t, this.resultSelector));
 						}),
 						t
 					);
 				})(),
-				Wd = (function(t) {
+				Fd = (function(t) {
 					function e(e, n) {
 						var r = t.call(this, e) || this;
 						return (r.resultSelector = n), (r.active = 0), (r.values = []), (r.observables = []), r;
@@ -9974,7 +9941,7 @@
 					return (
 						o(e, t),
 						(e.prototype._next = function(t) {
-							this.values.push(Gd), this.observables.push(t);
+							this.values.push(zd), this.observables.push(t);
 						}),
 						(e.prototype._complete = function() {
 							var t = this.observables,
@@ -9984,7 +9951,7 @@
 								(this.active = e), (this.toRespond = e);
 								for (var n = 0; n < e; n++) {
 									var r = t[n];
-									this.add(Q(this, r, r, n));
+									this.add(G(this, r, r, n));
 								}
 							}
 						}),
@@ -9993,7 +9960,7 @@
 						}),
 						(e.prototype.notifyNext = function(t, e, n, r, o) {
 							var i = this.values,
-								a = this.toRespond ? (i[n] === Gd ? --this.toRespond : this.toRespond) : 0;
+								a = this.toRespond ? (i[n] === zd ? --this.toRespond : this.toRespond) : 0;
 							(i[n] = e), 0 === a && (this.resultSelector ? this._tryResultSelector(i) : this.destination.next(i.slice()));
 						}),
 						(e.prototype._tryResultSelector = function(t) {
@@ -10007,8 +9974,22 @@
 						}),
 						e
 					);
-				})(Y);
-			function Qd(t) {
+				})(Z),
+				Bd = new I(function(t) {
+					return t.complete();
+				});
+			function qd(t) {
+				return t
+					? (function(t) {
+							return new I(function(e) {
+								return t.schedule(function() {
+									return e.complete();
+								});
+							});
+					  })(t)
+					: Bd;
+			}
+			function Gd(t) {
 				return new I(function(e) {
 					var n;
 					try {
@@ -10016,29 +9997,29 @@
 					} catch (r) {
 						return void e.error(r);
 					}
-					return (n ? tt(n) : Hd()).subscribe(e);
+					return (n ? K(n) : qd()).subscribe(e);
 				});
 			}
-			function Yd() {
-				return it(1);
+			function Zd() {
+				return nt(1);
 			}
-			function Jd(t, e) {
+			function Wd(t, e) {
 				return function(n) {
-					return n.lift(new Kd(t, e));
+					return n.lift(new Qd(t, e));
 				};
 			}
-			var Kd = (function() {
+			var Qd = (function() {
 					function t(t, e) {
 						(this.predicate = t), (this.thisArg = e);
 					}
 					return (
 						(t.prototype.call = function(t, e) {
-							return e.subscribe(new Xd(t, this.predicate, this.thisArg));
+							return e.subscribe(new Yd(t, this.predicate, this.thisArg));
 						}),
 						t
 					);
 				})(),
-				Xd = (function(t) {
+				Yd = (function(t) {
 					function e(e, n, r) {
 						var o = t.call(this, e) || this;
 						return (o.predicate = n), (o.thisArg = r), (o.count = 0), o;
@@ -10057,28 +10038,28 @@
 						e
 					);
 				})(C);
-			function $d() {
+			function Jd() {
 				return Error.call(this), (this.message = 'argument out of range'), (this.name = 'ArgumentOutOfRangeError'), this;
 			}
-			$d.prototype = Object.create(Error.prototype);
-			var th = $d;
-			function eh(t) {
+			Jd.prototype = Object.create(Error.prototype);
+			var Kd = Jd;
+			function Xd(t) {
 				return function(e) {
-					return 0 === t ? Hd() : e.lift(new nh(t));
+					return 0 === t ? qd() : e.lift(new $d(t));
 				};
 			}
-			var nh = (function() {
+			var $d = (function() {
 					function t(t) {
-						if (((this.total = t), this.total < 0)) throw new th();
+						if (((this.total = t), this.total < 0)) throw new Kd();
 					}
 					return (
 						(t.prototype.call = function(t, e) {
-							return e.subscribe(new rh(t, this.total));
+							return e.subscribe(new th(t, this.total));
 						}),
 						t
 					);
 				})(),
-				rh = (function(t) {
+				th = (function(t) {
 					function e(e, n) {
 						var r = t.call(this, e) || this;
 						return (r.total = n), (r.ring = new Array()), (r.count = 0), r;
@@ -10104,23 +10085,375 @@
 						e
 					);
 				})(C);
-			function oh(t, e, n) {
+			function eh(t) {
+				return (
+					void 0 === t && (t = oh),
+					function(e) {
+						return e.lift(new nh(t));
+					}
+				);
+			}
+			var nh = (function() {
+					function t(t) {
+						this.errorFactory = t;
+					}
+					return (
+						(t.prototype.call = function(t, e) {
+							return e.subscribe(new rh(t, this.errorFactory));
+						}),
+						t
+					);
+				})(),
+				rh = (function(t) {
+					function e(e, n) {
+						var r = t.call(this, e) || this;
+						return (r.errorFactory = n), (r.hasValue = !1), r;
+					}
+					return (
+						o(e, t),
+						(e.prototype._next = function(t) {
+							(this.hasValue = !0), this.destination.next(t);
+						}),
+						(e.prototype._complete = function() {
+							if (this.hasValue) return this.destination.complete();
+							var t = void 0;
+							try {
+								t = this.errorFactory();
+							} catch (e) {
+								t = e;
+							}
+							this.destination.error(t);
+						}),
+						e
+					);
+				})(C);
+			function oh() {
+				return new Hd();
+			}
+			function ih(t) {
+				return (
+					void 0 === t && (t = null),
+					function(e) {
+						return e.lift(new ah(t));
+					}
+				);
+			}
+			var ah = (function() {
+					function t(t) {
+						this.defaultValue = t;
+					}
+					return (
+						(t.prototype.call = function(t, e) {
+							return e.subscribe(new sh(t, this.defaultValue));
+						}),
+						t
+					);
+				})(),
+				sh = (function(t) {
+					function e(e, n) {
+						var r = t.call(this, e) || this;
+						return (r.defaultValue = n), (r.isEmpty = !0), r;
+					}
+					return (
+						o(e, t),
+						(e.prototype._next = function(t) {
+							(this.isEmpty = !1), this.destination.next(t);
+						}),
+						(e.prototype._complete = function() {
+							this.isEmpty && this.destination.next(this.defaultValue), this.destination.complete();
+						}),
+						e
+					);
+				})(C);
+			function lh(t, e) {
+				var n = arguments.length >= 2;
 				return function(r) {
-					return r.lift(new ih(t, e, n));
+					return r.pipe(
+						t
+							? Wd(function(e, n) {
+									return t(e, n, r);
+							  })
+							: et,
+						Xd(1),
+						n
+							? ih(e)
+							: eh(function() {
+									return new Hd();
+							  })
+					);
 				};
 			}
-			var ih = (function() {
+			function uh(t) {
+				return function(e) {
+					var n = new ch(t),
+						r = e.lift(n);
+					return (n.caught = r);
+				};
+			}
+			var ch = (function() {
+					function t(t) {
+						this.selector = t;
+					}
+					return (
+						(t.prototype.call = function(t, e) {
+							return e.subscribe(new ph(t, this.selector, this.caught));
+						}),
+						t
+					);
+				})(),
+				ph = (function(t) {
+					function e(e, n, r) {
+						var o = t.call(this, e) || this;
+						return (o.selector = n), (o.caught = r), o;
+					}
+					return (
+						o(e, t),
+						(e.prototype.error = function(e) {
+							if (!this.isStopped) {
+								var n = void 0;
+								try {
+									n = this.selector(e, this.caught);
+								} catch (o) {
+									return void t.prototype.error.call(this, o);
+								}
+								this._unsubscribeAndRecycle();
+								var r = new L(this, void 0, void 0);
+								this.add(r), G(this, n, void 0, void 0, r);
+							}
+						}),
+						e
+					);
+				})(Z);
+			function fh(t) {
+				return function(e) {
+					return 0 === t ? qd() : e.lift(new dh(t));
+				};
+			}
+			var dh = (function() {
+					function t(t) {
+						if (((this.total = t), this.total < 0)) throw new Kd();
+					}
+					return (
+						(t.prototype.call = function(t, e) {
+							return e.subscribe(new hh(t, this.total));
+						}),
+						t
+					);
+				})(),
+				hh = (function(t) {
+					function e(e, n) {
+						var r = t.call(this, e) || this;
+						return (r.total = n), (r.count = 0), r;
+					}
+					return (
+						o(e, t),
+						(e.prototype._next = function(t) {
+							var e = this.total,
+								n = ++this.count;
+							n <= e && (this.destination.next(t), n === e && (this.destination.complete(), this.unsubscribe()));
+						}),
+						e
+					);
+				})(C);
+			function gh(t, e) {
+				var n = arguments.length >= 2;
+				return function(r) {
+					return r.pipe(
+						t
+							? Wd(function(e, n) {
+									return t(e, n, r);
+							  })
+							: et,
+						fh(1),
+						n
+							? ih(e)
+							: eh(function() {
+									return new Hd();
+							  })
+					);
+				};
+			}
+			var mh = (function() {
+					function t(t, e, n) {
+						(this.predicate = t), (this.thisArg = e), (this.source = n);
+					}
+					return (
+						(t.prototype.call = function(t, e) {
+							return e.subscribe(new bh(t, this.predicate, this.thisArg, this.source));
+						}),
+						t
+					);
+				})(),
+				bh = (function(t) {
+					function e(e, n, r, o) {
+						var i = t.call(this, e) || this;
+						return (i.predicate = n), (i.thisArg = r), (i.source = o), (i.index = 0), (i.thisArg = r || i), i;
+					}
+					return (
+						o(e, t),
+						(e.prototype.notifyComplete = function(t) {
+							this.destination.next(t), this.destination.complete();
+						}),
+						(e.prototype._next = function(t) {
+							var e = !1;
+							try {
+								e = this.predicate.call(this.thisArg, t, this.index++, this.source);
+							} catch (n) {
+								return void this.destination.error(n);
+							}
+							e || this.notifyComplete(!1);
+						}),
+						(e.prototype._complete = function() {
+							this.notifyComplete(!0);
+						}),
+						e
+					);
+				})(C);
+			function vh(t, e) {
+				return 'function' == typeof e
+					? function(n) {
+							return n.pipe(
+								vh(function(n, r) {
+									return K(t(n, r)).pipe(
+										W(function(t, o) {
+											return e(n, t, r, o);
+										})
+									);
+								})
+							);
+					  }
+					: function(e) {
+							return e.lift(new yh(t));
+					  };
+			}
+			var yh = (function() {
+					function t(t) {
+						this.project = t;
+					}
+					return (
+						(t.prototype.call = function(t, e) {
+							return e.subscribe(new wh(t, this.project));
+						}),
+						t
+					);
+				})(),
+				wh = (function(t) {
+					function e(e, n) {
+						var r = t.call(this, e) || this;
+						return (r.project = n), (r.index = 0), r;
+					}
+					return (
+						o(e, t),
+						(e.prototype._next = function(t) {
+							var e,
+								n = this.index++;
+							try {
+								e = this.project(t, n);
+							} catch (r) {
+								return void this.destination.error(r);
+							}
+							this._innerSub(e, t, n);
+						}),
+						(e.prototype._innerSub = function(t, e, n) {
+							var r = this.innerSubscription;
+							r && r.unsubscribe();
+							var o = new L(this, void 0, void 0);
+							this.destination.add(o), (this.innerSubscription = G(this, t, e, n, o));
+						}),
+						(e.prototype._complete = function() {
+							var e = this.innerSubscription;
+							(e && !e.closed) || t.prototype._complete.call(this), this.unsubscribe();
+						}),
+						(e.prototype._unsubscribe = function() {
+							this.innerSubscription = null;
+						}),
+						(e.prototype.notifyComplete = function(e) {
+							this.destination.remove(e), (this.innerSubscription = null), this.isStopped && t.prototype._complete.call(this);
+						}),
+						(e.prototype.notifyNext = function(t, e, n, r, o) {
+							this.destination.next(e);
+						}),
+						e
+					);
+				})(Z);
+			function _h() {
+				for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
+				return Zd()(Nd.apply(void 0, t));
+			}
+			function xh(t, e) {
+				var n = !1;
+				return (
+					arguments.length >= 2 && (n = !0),
+					function(r) {
+						return r.lift(new Ch(t, e, n));
+					}
+				);
+			}
+			var Ch = (function() {
+					function t(t, e, n) {
+						void 0 === n && (n = !1), (this.accumulator = t), (this.seed = e), (this.hasSeed = n);
+					}
+					return (
+						(t.prototype.call = function(t, e) {
+							return e.subscribe(new kh(t, this.accumulator, this.seed, this.hasSeed));
+						}),
+						t
+					);
+				})(),
+				kh = (function(t) {
+					function e(e, n, r, o) {
+						var i = t.call(this, e) || this;
+						return (i.accumulator = n), (i._seed = r), (i.hasSeed = o), (i.index = 0), i;
+					}
+					return (
+						o(e, t),
+						Object.defineProperty(e.prototype, 'seed', {
+							get: function() {
+								return this._seed;
+							},
+							set: function(t) {
+								(this.hasSeed = !0), (this._seed = t);
+							},
+							enumerable: !0,
+							configurable: !0
+						}),
+						(e.prototype._next = function(t) {
+							if (this.hasSeed) return this._tryNext(t);
+							(this.seed = t), this.destination.next(t);
+						}),
+						(e.prototype._tryNext = function(t) {
+							var e,
+								n = this.index++;
+							try {
+								e = this.accumulator(this.seed, t, n);
+							} catch (r) {
+								this.destination.error(r);
+							}
+							(this.seed = e), this.destination.next(e);
+						}),
+						e
+					);
+				})(C);
+			function Sh(t, e) {
+				return X(t, e, 1);
+			}
+			function Ph(t, e, n) {
+				return function(r) {
+					return r.lift(new Eh(t, e, n));
+				};
+			}
+			var Eh = (function() {
 					function t(t, e, n) {
 						(this.nextOrObserver = t), (this.error = e), (this.complete = n);
 					}
 					return (
 						(t.prototype.call = function(t, e) {
-							return e.subscribe(new ah(t, this.nextOrObserver, this.error, this.complete));
+							return e.subscribe(new Oh(t, this.nextOrObserver, this.error, this.complete));
 						}),
 						t
 					);
 				})(),
-				ah = (function(t) {
+				Oh = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e) || this;
 						return (
@@ -10162,354 +10495,30 @@
 						e
 					);
 				})(C),
-				sh = function(t) {
-					return (
-						void 0 === t && (t = lh),
-						oh({
-							hasValue: !1,
-							next: function() {
-								this.hasValue = !0;
-							},
-							complete: function() {
-								if (!this.hasValue) throw t();
-							}
-						})
-					);
-				};
-			function lh() {
-				return new qd();
-			}
-			function uh(t) {
-				return (
-					void 0 === t && (t = null),
-					function(e) {
-						return e.lift(new ch(t));
-					}
-				);
-			}
-			var ch = (function() {
-					function t(t) {
-						this.defaultValue = t;
-					}
-					return (
-						(t.prototype.call = function(t, e) {
-							return e.subscribe(new ph(t, this.defaultValue));
-						}),
-						t
-					);
-				})(),
-				ph = (function(t) {
-					function e(e, n) {
-						var r = t.call(this, e) || this;
-						return (r.defaultValue = n), (r.isEmpty = !0), r;
-					}
-					return (
-						o(e, t),
-						(e.prototype._next = function(t) {
-							(this.isEmpty = !1), this.destination.next(t);
-						}),
-						(e.prototype._complete = function() {
-							this.isEmpty && this.destination.next(this.defaultValue), this.destination.complete();
-						}),
-						e
-					);
-				})(C);
-			function fh(t, e) {
-				var n = arguments.length >= 2;
-				return function(r) {
-					return r.pipe(
-						t
-							? Jd(function(e, n) {
-									return t(e, n, r);
-							  })
-							: ot,
-						eh(1),
-						n
-							? uh(e)
-							: sh(function() {
-									return new qd();
-							  })
-					);
-				};
-			}
-			function dh(t) {
-				return function(e) {
-					var n = new hh(t),
-						r = e.lift(n);
-					return (n.caught = r);
-				};
-			}
-			var hh = (function() {
-					function t(t) {
-						this.selector = t;
-					}
-					return (
-						(t.prototype.call = function(t, e) {
-							return e.subscribe(new gh(t, this.selector, this.caught));
-						}),
-						t
-					);
-				})(),
-				gh = (function(t) {
-					function e(e, n, r) {
-						var o = t.call(this, e) || this;
-						return (o.selector = n), (o.caught = r), o;
-					}
-					return (
-						o(e, t),
-						(e.prototype.error = function(e) {
-							if (!this.isStopped) {
-								var n = void 0;
-								try {
-									n = this.selector(e, this.caught);
-								} catch (o) {
-									return void t.prototype.error.call(this, o);
-								}
-								this._unsubscribeAndRecycle();
-								var r = new L(this, void 0, void 0);
-								this.add(r), Q(this, n, void 0, void 0, r);
-							}
-						}),
-						e
-					);
-				})(Y);
-			function mh(t) {
-				return function(e) {
-					return 0 === t ? Hd() : e.lift(new bh(t));
-				};
-			}
-			var bh = (function() {
-					function t(t) {
-						if (((this.total = t), this.total < 0)) throw new th();
-					}
-					return (
-						(t.prototype.call = function(t, e) {
-							return e.subscribe(new vh(t, this.total));
-						}),
-						t
-					);
-				})(),
-				vh = (function(t) {
-					function e(e, n) {
-						var r = t.call(this, e) || this;
-						return (r.total = n), (r.count = 0), r;
-					}
-					return (
-						o(e, t),
-						(e.prototype._next = function(t) {
-							var e = this.total,
-								n = ++this.count;
-							n <= e && (this.destination.next(t), n === e && (this.destination.complete(), this.unsubscribe()));
-						}),
-						e
-					);
-				})(C);
-			function yh(t, e) {
-				var n = arguments.length >= 2;
-				return function(r) {
-					return r.pipe(
-						t
-							? Jd(function(e, n) {
-									return t(e, n, r);
-							  })
-							: ot,
-						mh(1),
-						n
-							? uh(e)
-							: sh(function() {
-									return new qd();
-							  })
-					);
-				};
-			}
-			var wh = (function() {
-					function t(t, e, n) {
-						(this.predicate = t), (this.thisArg = e), (this.source = n);
-					}
-					return (
-						(t.prototype.call = function(t, e) {
-							return e.subscribe(new _h(t, this.predicate, this.thisArg, this.source));
-						}),
-						t
-					);
-				})(),
-				_h = (function(t) {
-					function e(e, n, r, o) {
-						var i = t.call(this, e) || this;
-						return (i.predicate = n), (i.thisArg = r), (i.source = o), (i.index = 0), (i.thisArg = r || i), i;
-					}
-					return (
-						o(e, t),
-						(e.prototype.notifyComplete = function(t) {
-							this.destination.next(t), this.destination.complete();
-						}),
-						(e.prototype._next = function(t) {
-							var e = !1;
-							try {
-								e = this.predicate.call(this.thisArg, t, this.index++, this.source);
-							} catch (n) {
-								return void this.destination.error(n);
-							}
-							e || this.notifyComplete(!1);
-						}),
-						(e.prototype._complete = function() {
-							this.notifyComplete(!0);
-						}),
-						e
-					);
-				})(C);
-			function xh(t, e) {
-				return 'function' == typeof e
-					? function(n) {
-							return n.pipe(
-								xh(function(n, r) {
-									return tt(t(n, r)).pipe(
-										J(function(t, o) {
-											return e(n, t, r, o);
-										})
-									);
-								})
-							);
-					  }
-					: function(e) {
-							return e.lift(new Ch(t));
-					  };
-			}
-			var Ch = (function() {
-					function t(t) {
-						this.project = t;
-					}
-					return (
-						(t.prototype.call = function(t, e) {
-							return e.subscribe(new kh(t, this.project));
-						}),
-						t
-					);
-				})(),
-				kh = (function(t) {
-					function e(e, n) {
-						var r = t.call(this, e) || this;
-						return (r.project = n), (r.index = 0), r;
-					}
-					return (
-						o(e, t),
-						(e.prototype._next = function(t) {
-							var e,
-								n = this.index++;
-							try {
-								e = this.project(t, n);
-							} catch (r) {
-								return void this.destination.error(r);
-							}
-							this._innerSub(e, t, n);
-						}),
-						(e.prototype._innerSub = function(t, e, n) {
-							var r = this.innerSubscription;
-							r && r.unsubscribe();
-							var o = new L(this, void 0, void 0);
-							this.destination.add(o), (this.innerSubscription = Q(this, t, e, n, o));
-						}),
-						(e.prototype._complete = function() {
-							var e = this.innerSubscription;
-							(e && !e.closed) || t.prototype._complete.call(this), this.unsubscribe();
-						}),
-						(e.prototype._unsubscribe = function() {
-							this.innerSubscription = null;
-						}),
-						(e.prototype.notifyComplete = function(e) {
-							this.destination.remove(e), (this.innerSubscription = null), this.isStopped && t.prototype._complete.call(this);
-						}),
-						(e.prototype.notifyNext = function(t, e, n, r, o) {
-							this.destination.next(e);
-						}),
-						e
-					);
-				})(Y);
-			function Sh() {
-				for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
-				return Yd()(Vd.apply(void 0, t));
-			}
-			function Ph(t, e) {
-				var n = !1;
-				return (
-					arguments.length >= 2 && (n = !0),
-					function(r) {
-						return r.lift(new Eh(t, e, n));
-					}
-				);
-			}
-			var Eh = (function() {
-					function t(t, e, n) {
-						void 0 === n && (n = !1), (this.accumulator = t), (this.seed = e), (this.hasSeed = n);
-					}
-					return (
-						(t.prototype.call = function(t, e) {
-							return e.subscribe(new Oh(t, this.accumulator, this.seed, this.hasSeed));
-						}),
-						t
-					);
-				})(),
-				Oh = (function(t) {
-					function e(e, n, r, o) {
-						var i = t.call(this, e) || this;
-						return (i.accumulator = n), (i._seed = r), (i.hasSeed = o), (i.index = 0), i;
-					}
-					return (
-						o(e, t),
-						Object.defineProperty(e.prototype, 'seed', {
-							get: function() {
-								return this._seed;
-							},
-							set: function(t) {
-								(this.hasSeed = !0), (this._seed = t);
-							},
-							enumerable: !0,
-							configurable: !0
-						}),
-						(e.prototype._next = function(t) {
-							if (this.hasSeed) return this._tryNext(t);
-							(this.seed = t), this.destination.next(t);
-						}),
-						(e.prototype._tryNext = function(t) {
-							var e,
-								n = this.index++;
-							try {
-								e = this.accumulator(this.seed, t, n);
-							} catch (r) {
-								this.destination.error(r);
-							}
-							(this.seed = e), this.destination.next(e);
-						}),
-						e
-					);
-				})(C);
-			function Ih(t, e) {
-				return et(t, e, 1);
-			}
-			var Th = (function() {
+				Ih = (function() {
 					function t(t) {
 						this.callback = t;
 					}
 					return (
 						(t.prototype.call = function(t, e) {
-							return e.subscribe(new Mh(t, this.callback));
+							return e.subscribe(new Th(t, this.callback));
 						}),
 						t
 					);
 				})(),
-				Mh = (function(t) {
+				Th = (function(t) {
 					function e(e, n) {
 						var r = t.call(this, e) || this;
 						return r.add(new m(n)), r;
 					}
 					return o(e, t), e;
 				})(C),
-				Ah = (function() {
+				Mh = (function() {
 					return function(t, e) {
 						(this.id = t), (this.url = e);
 					};
 				})(),
-				jh = (function(t) {
+				Ah = (function(t) {
 					function e(e, n, r, o) {
 						void 0 === r && (r = 'imperative'), void 0 === o && (o = null);
 						var i = t.call(this, e, n) || this;
@@ -10522,8 +10531,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Rh = (function(t) {
+				})(Mh),
+				jh = (function(t) {
 					function e(e, n, r) {
 						var o = t.call(this, e, n) || this;
 						return (o.urlAfterRedirects = r), o;
@@ -10535,8 +10544,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Dh = (function(t) {
+				})(Mh),
+				Rh = (function(t) {
 					function e(e, n, r) {
 						var o = t.call(this, e, n) || this;
 						return (o.reason = r), o;
@@ -10548,8 +10557,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Nh = (function(t) {
+				})(Mh),
+				Dh = (function(t) {
 					function e(e, n, r) {
 						var o = t.call(this, e, n) || this;
 						return (o.error = r), o;
@@ -10561,8 +10570,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Uh = (function(t) {
+				})(Mh),
+				Nh = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e, n) || this;
 						return (i.urlAfterRedirects = r), (i.state = o), i;
@@ -10574,8 +10583,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Lh = (function(t) {
+				})(Mh),
+				Uh = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e, n) || this;
 						return (i.urlAfterRedirects = r), (i.state = o), i;
@@ -10587,8 +10596,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Hh = (function(t) {
+				})(Mh),
+				Lh = (function(t) {
 					function e(e, n, r, o, i) {
 						var a = t.call(this, e, n) || this;
 						return (a.urlAfterRedirects = r), (a.state = o), (a.shouldActivate = i), a;
@@ -10612,8 +10621,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				zh = (function(t) {
+				})(Mh),
+				Hh = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e, n) || this;
 						return (i.urlAfterRedirects = r), (i.state = o), i;
@@ -10625,8 +10634,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Vh = (function(t) {
+				})(Mh),
+				zh = (function(t) {
 					function e(e, n, r, o) {
 						var i = t.call(this, e, n) || this;
 						return (i.urlAfterRedirects = r), (i.state = o), i;
@@ -10638,8 +10647,8 @@
 						}),
 						e
 					);
-				})(Ah),
-				Fh = (function() {
+				})(Mh),
+				Vh = (function() {
 					function t(t) {
 						this.route = t;
 					}
@@ -10650,7 +10659,7 @@
 						t
 					);
 				})(),
-				Bh = (function() {
+				Fh = (function() {
 					function t(t) {
 						this.route = t;
 					}
@@ -10661,7 +10670,7 @@
 						t
 					);
 				})(),
-				qh = (function() {
+				Bh = (function() {
 					function t(t) {
 						this.snapshot = t;
 					}
@@ -10672,7 +10681,7 @@
 						t
 					);
 				})(),
-				Gh = (function() {
+				qh = (function() {
 					function t(t) {
 						this.snapshot = t;
 					}
@@ -10683,7 +10692,7 @@
 						t
 					);
 				})(),
-				Zh = (function() {
+				Gh = (function() {
 					function t(t) {
 						this.snapshot = t;
 					}
@@ -10694,7 +10703,7 @@
 						t
 					);
 				})(),
-				Wh = (function() {
+				Zh = (function() {
 					function t(t) {
 						this.snapshot = t;
 					}
@@ -10705,7 +10714,7 @@
 						t
 					);
 				})(),
-				Qh = (function() {
+				Wh = (function() {
 					function t(t, e, n) {
 						(this.routerEvent = t), (this.position = e), (this.anchor = n);
 					}
@@ -10716,10 +10725,10 @@
 						t
 					);
 				})(),
-				Yh = (function() {
+				Qh = (function() {
 					function t() {}
 					return (
-						(t.ngComponentDef = De({
+						(t.ngComponentDef = je({
 							type: t,
 							selectors: [['ng-component']],
 							factory: function(e) {
@@ -10728,18 +10737,18 @@
 							consts: 1,
 							vars: 0,
 							template: function(t, e) {
-								1 & t && xl(0, 'router-outlet');
+								1 & t && wl(0, 'router-outlet');
 							},
 							directives: function() {
-								return [$m];
+								return [Xm];
 							},
 							encapsulation: 2
 						})),
 						t
 					);
 				})(),
-				Jh = 'primary',
-				Kh = (function() {
+				Yh = 'primary',
+				Jh = (function() {
 					function t(t) {
 						this.params = t || {};
 					}
@@ -10771,15 +10780,15 @@
 						t
 					);
 				})();
-			function Xh(t) {
-				return new Kh(t);
+			function Kh(t) {
+				return new Jh(t);
 			}
-			var $h = 'ngNavigationCancelingError';
-			function tg(t) {
+			var Xh = 'ngNavigationCancelingError';
+			function $h(t) {
 				var e = Error('NavigationCancelingError: ' + t);
-				return (e[$h] = !0), e;
+				return (e[Xh] = !0), e;
 			}
-			function eg(t, e, n) {
+			function tg(t, e, n) {
 				var r = n.path.split('/');
 				if (r.length > t.length) return null;
 				if ('full' === n.pathMatch && (e.hasChildren() || r.length < t.length)) return null;
@@ -10791,19 +10800,19 @@
 				}
 				return { consumed: t.slice(0, r.length), posParams: o };
 			}
-			var ng = (function() {
+			var eg = (function() {
 				return function(t, e) {
 					(this.routes = t), (this.module = e);
 				};
 			})();
-			function rg(t, e) {
+			function ng(t, e) {
 				void 0 === e && (e = '');
 				for (var n = 0; n < t.length; n++) {
 					var r = t[n];
-					og(r, ig(e, r));
+					rg(r, og(e, r));
 				}
 			}
-			function og(t, e) {
+			function rg(t, e) {
 				if (!t)
 					throw new Error(
 						"\n      Invalid configuration of route '" +
@@ -10811,7 +10820,7 @@
 							"': Encountered undefined route.\n      The reason might be an extra comma.\n\n      Example:\n      const routes: Routes = [\n        { path: '', redirectTo: '/dashboard', pathMatch: 'full' },\n        { path: 'dashboard',  component: DashboardComponent },, << two commas\n        { path: 'detail/:id', component: HeroDetailComponent }\n      ];\n    "
 					);
 				if (Array.isArray(t)) throw new Error("Invalid configuration of route '" + e + "': Array cannot be specified");
-				if (!t.component && !t.children && !t.loadChildren && t.outlet && t.outlet !== Jh)
+				if (!t.component && !t.children && !t.loadChildren && t.outlet && t.outlet !== Yh)
 					throw new Error("Invalid configuration of route '" + e + "': a componentless route without children or loadChildren cannot have a named outlet set");
 				if (t.redirectTo && t.children) throw new Error("Invalid configuration of route '" + e + "': redirectTo and children cannot be used together");
 				if (t.redirectTo && t.loadChildren) throw new Error("Invalid configuration of route '" + e + "': redirectTo and loadChildren cannot be used together");
@@ -10832,17 +10841,17 @@
 					);
 				if (void 0 !== t.pathMatch && 'full' !== t.pathMatch && 'prefix' !== t.pathMatch)
 					throw new Error("Invalid configuration of route '" + e + "': pathMatch can only be set to 'prefix' or 'full'");
-				t.children && rg(t.children, e);
+				t.children && ng(t.children, e);
 			}
-			function ig(t, e) {
+			function og(t, e) {
 				return e ? (t || e.path ? (t && !e.path ? t + '/' : !t && e.path ? e.path : t + '/' + e.path) : '') : t;
 			}
-			function ag(t) {
-				var e = t.children && t.children.map(ag),
+			function ig(t) {
+				var e = t.children && t.children.map(ig),
 					n = e ? i({}, t, { children: e }) : i({}, t);
-				return !n.component && (e || n.loadChildren) && n.outlet && n.outlet !== Jh && (n.component = Yh), n;
+				return !n.component && (e || n.loadChildren) && n.outlet && n.outlet !== Yh && (n.component = Qh), n;
 			}
-			function sg(t, e) {
+			function ag(t, e) {
 				var n,
 					r = Object.keys(t),
 					o = Object.keys(e);
@@ -10850,26 +10859,26 @@
 				for (var i = 0; i < r.length; i++) if (t[(n = r[i])] !== e[n]) return !1;
 				return !0;
 			}
-			function lg(t) {
+			function sg(t) {
 				return Array.prototype.concat.apply([], t);
 			}
-			function ug(t) {
+			function lg(t) {
 				return t.length > 0 ? t[t.length - 1] : null;
 			}
-			function cg(t, e) {
+			function ug(t, e) {
 				for (var n in t) t.hasOwnProperty(n) && e(t[n], n);
 			}
-			function pg(t) {
-				return (e = t) && 'function' == typeof e.subscribe ? t : Cl(t) ? tt(Promise.resolve(t)) : Vd(t);
+			function cg(t) {
+				return (e = t) && 'function' == typeof e.subscribe ? t : _l(t) ? K(Promise.resolve(t)) : Nd(t);
 				var e;
 			}
-			function fg(t, e, n) {
+			function pg(t, e, n) {
 				return n
 					? (function(t, e) {
-							return sg(t, e);
+							return ag(t, e);
 					  })(t.queryParams, e.queryParams) &&
 							(function t(e, n) {
-								if (!mg(e.segments, n.segments)) return !1;
+								if (!gg(e.segments, n.segments)) return !1;
 								if (e.numberOfChildren !== n.numberOfChildren) return !1;
 								for (var r in n.children) {
 									if (!e.children[r]) return !1;
@@ -10887,9 +10896,9 @@
 					  })(t.queryParams, e.queryParams) &&
 							(function t(e, n) {
 								return (function e(n, r, o) {
-									if (n.segments.length > o.length) return !!mg((a = n.segments.slice(0, o.length)), o) && !r.hasChildren();
+									if (n.segments.length > o.length) return !!gg((a = n.segments.slice(0, o.length)), o) && !r.hasChildren();
 									if (n.segments.length === o.length) {
-										if (!mg(n.segments, o)) return !1;
+										if (!gg(n.segments, o)) return !1;
 										for (var i in r.children) {
 											if (!n.children[i]) return !1;
 											if (!t(n.children[i], r.children[i])) return !1;
@@ -10898,35 +10907,35 @@
 									}
 									var a = o.slice(0, n.segments.length),
 										s = o.slice(n.segments.length);
-									return !!mg(n.segments, a) && !!n.children[Jh] && e(n.children[Jh], r, s);
+									return !!gg(n.segments, a) && !!n.children[Yh] && e(n.children[Yh], r, s);
 								})(e, n, n.segments);
 							})(t.root, e.root);
 			}
-			var dg = (function() {
+			var fg = (function() {
 					function t(t, e, n) {
 						(this.root = t), (this.queryParams = e), (this.fragment = n);
 					}
 					return (
 						Object.defineProperty(t.prototype, 'queryParamMap', {
 							get: function() {
-								return this._queryParamMap || (this._queryParamMap = Xh(this.queryParams)), this._queryParamMap;
+								return this._queryParamMap || (this._queryParamMap = Kh(this.queryParams)), this._queryParamMap;
 							},
 							enumerable: !0,
 							configurable: !0
 						}),
 						(t.prototype.toString = function() {
-							return wg.serialize(this);
+							return yg.serialize(this);
 						}),
 						t
 					);
 				})(),
-				hg = (function() {
+				dg = (function() {
 					function t(t, e) {
 						var n = this;
 						(this.segments = t),
 							(this.children = e),
 							(this.parent = null),
-							cg(e, function(t, e) {
+							ug(e, function(t, e) {
 								return (t.parent = n);
 							});
 					}
@@ -10942,30 +10951,30 @@
 							configurable: !0
 						}),
 						(t.prototype.toString = function() {
-							return _g(this);
+							return wg(this);
 						}),
 						t
 					);
 				})(),
-				gg = (function() {
+				hg = (function() {
 					function t(t, e) {
 						(this.path = t), (this.parameters = e);
 					}
 					return (
 						Object.defineProperty(t.prototype, 'parameterMap', {
 							get: function() {
-								return this._parameterMap || (this._parameterMap = Xh(this.parameters)), this._parameterMap;
+								return this._parameterMap || (this._parameterMap = Kh(this.parameters)), this._parameterMap;
 							},
 							enumerable: !0,
 							configurable: !0
 						}),
 						(t.prototype.toString = function() {
-							return Eg(this);
+							return Pg(this);
 						}),
 						t
 					);
 				})();
-			function mg(t, e) {
+			function gg(t, e) {
 				return (
 					t.length === e.length &&
 					t.every(function(t, n) {
@@ -10973,48 +10982,48 @@
 					})
 				);
 			}
-			function bg(t, e) {
+			function mg(t, e) {
 				var n = [];
 				return (
-					cg(t.children, function(t, r) {
-						r === Jh && (n = n.concat(e(t, r)));
+					ug(t.children, function(t, r) {
+						r === Yh && (n = n.concat(e(t, r)));
 					}),
-					cg(t.children, function(t, r) {
-						r !== Jh && (n = n.concat(e(t, r)));
+					ug(t.children, function(t, r) {
+						r !== Yh && (n = n.concat(e(t, r)));
 					}),
 					n
 				);
 			}
-			var vg = (function() {
+			var bg = (function() {
 					return function() {};
 				})(),
-				yg = (function() {
+				vg = (function() {
 					function t() {}
 					return (
 						(t.prototype.parse = function(t) {
-							var e = new Ag(t);
-							return new dg(e.parseRootSegment(), e.parseQueryParams(), e.parseFragment());
+							var e = new Mg(t);
+							return new fg(e.parseRootSegment(), e.parseQueryParams(), e.parseFragment());
 						}),
 						(t.prototype.serialize = function(t) {
 							var e, n;
 							return (
 								'/' +
 								(function t(e, n) {
-									if (!e.hasChildren()) return _g(e);
+									if (!e.hasChildren()) return wg(e);
 									if (n) {
-										var r = e.children[Jh] ? t(e.children[Jh], !1) : '',
+										var r = e.children[Yh] ? t(e.children[Yh], !1) : '',
 											o = [];
 										return (
-											cg(e.children, function(e, n) {
-												n !== Jh && o.push(n + ':' + t(e, !1));
+											ug(e.children, function(e, n) {
+												n !== Yh && o.push(n + ':' + t(e, !1));
 											}),
 											o.length > 0 ? r + '(' + o.join('//') + ')' : r
 										);
 									}
-									var i = bg(e, function(n, r) {
-										return r === Jh ? [t(e.children[Jh], !1)] : [r + ':' + t(n, !1)];
+									var i = mg(e, function(n, r) {
+										return r === Yh ? [t(e.children[Yh], !1)] : [r + ':' + t(n, !1)];
 									});
-									return _g(e) + '/(' + i.join('//') + ')';
+									return wg(e) + '/(' + i.join('//') + ')';
 								})(t.root, !0) +
 								((e = t.queryParams),
 								(n = Object.keys(e).map(function(t) {
@@ -11022,10 +11031,10 @@
 									return Array.isArray(n)
 										? n
 												.map(function(e) {
-													return Cg(t) + '=' + Cg(e);
+													return xg(t) + '=' + xg(e);
 												})
 												.join('&')
-										: Cg(t) + '=' + Cg(n);
+										: xg(t) + '=' + xg(n);
 								})).length
 									? '?' + n.join('&')
 									: '') +
@@ -11035,63 +11044,63 @@
 						t
 					);
 				})(),
-				wg = new yg();
-			function _g(t) {
+				yg = new vg();
+			function wg(t) {
 				return t.segments
 					.map(function(t) {
-						return Eg(t);
+						return Pg(t);
 					})
 					.join('/');
 			}
-			function xg(t) {
+			function _g(t) {
 				return encodeURIComponent(t)
 					.replace(/%40/g, '@')
 					.replace(/%3A/gi, ':')
 					.replace(/%24/g, '$')
 					.replace(/%2C/gi, ',');
 			}
-			function Cg(t) {
-				return xg(t).replace(/%3B/gi, ';');
+			function xg(t) {
+				return _g(t).replace(/%3B/gi, ';');
 			}
-			function kg(t) {
-				return xg(t)
+			function Cg(t) {
+				return _g(t)
 					.replace(/\(/g, '%28')
 					.replace(/\)/g, '%29')
 					.replace(/%26/gi, '&');
 			}
-			function Sg(t) {
+			function kg(t) {
 				return decodeURIComponent(t);
 			}
-			function Pg(t) {
-				return Sg(t.replace(/\+/g, '%20'));
+			function Sg(t) {
+				return kg(t.replace(/\+/g, '%20'));
 			}
-			function Eg(t) {
+			function Pg(t) {
 				return (
 					'' +
-					kg(t.path) +
+					Cg(t.path) +
 					((e = t.parameters),
 					Object.keys(e)
 						.map(function(t) {
-							return ';' + kg(t) + '=' + kg(e[t]);
+							return ';' + Cg(t) + '=' + Cg(e[t]);
 						})
 						.join(''))
 				);
 				var e;
 			}
-			var Og = /^[^\/()?;=#]+/;
-			function Ig(t) {
-				var e = t.match(Og);
+			var Eg = /^[^\/()?;=#]+/;
+			function Og(t) {
+				var e = t.match(Eg);
 				return e ? e[0] : '';
 			}
-			var Tg = /^[^=?&#]+/,
-				Mg = /^[^?&#]+/,
-				Ag = (function() {
+			var Ig = /^[^=?&#]+/,
+				Tg = /^[^?&#]+/,
+				Mg = (function() {
 					function t(t) {
 						(this.url = t), (this.remaining = t);
 					}
 					return (
 						(t.prototype.parseRootSegment = function() {
-							return this.consumeOptional('/'), '' === this.remaining || this.peekStartsWith('?') || this.peekStartsWith('#') ? new hg([], {}) : new hg([], this.parseChildren());
+							return this.consumeOptional('/'), '' === this.remaining || this.peekStartsWith('?') || this.peekStartsWith('#') ? new dg([], {}) : new dg([], this.parseChildren());
 						}),
 						(t.prototype.parseQueryParams = function() {
 							var t = {};
@@ -11113,44 +11122,44 @@
 							var e = {};
 							this.peekStartsWith('/(') && (this.capture('/'), (e = this.parseParens(!0)));
 							var n = {};
-							return this.peekStartsWith('(') && (n = this.parseParens(!1)), (t.length > 0 || Object.keys(e).length > 0) && (n[Jh] = new hg(t, e)), n;
+							return this.peekStartsWith('(') && (n = this.parseParens(!1)), (t.length > 0 || Object.keys(e).length > 0) && (n[Yh] = new dg(t, e)), n;
 						}),
 						(t.prototype.parseSegment = function() {
-							var t = Ig(this.remaining);
+							var t = Og(this.remaining);
 							if ('' === t && this.peekStartsWith(';')) throw new Error("Empty path url segment cannot have parameters: '" + this.remaining + "'.");
-							return this.capture(t), new gg(Sg(t), this.parseMatrixParams());
+							return this.capture(t), new hg(kg(t), this.parseMatrixParams());
 						}),
 						(t.prototype.parseMatrixParams = function() {
 							for (var t = {}; this.consumeOptional(';'); ) this.parseParam(t);
 							return t;
 						}),
 						(t.prototype.parseParam = function(t) {
-							var e = Ig(this.remaining);
+							var e = Og(this.remaining);
 							if (e) {
 								this.capture(e);
 								var n = '';
 								if (this.consumeOptional('=')) {
-									var r = Ig(this.remaining);
+									var r = Og(this.remaining);
 									r && this.capture((n = r));
 								}
-								t[Sg(e)] = Sg(n);
+								t[kg(e)] = kg(n);
 							}
 						}),
 						(t.prototype.parseQueryParam = function(t) {
 							var e,
-								n = (e = this.remaining.match(Tg)) ? e[0] : '';
+								n = (e = this.remaining.match(Ig)) ? e[0] : '';
 							if (n) {
 								this.capture(n);
 								var r = '';
 								if (this.consumeOptional('=')) {
 									var o = (function(t) {
-										var e = t.match(Mg);
+										var e = t.match(Tg);
 										return e ? e[0] : '';
 									})(this.remaining);
 									o && this.capture((r = o));
 								}
-								var i = Pg(n),
-									a = Pg(r);
+								var i = Sg(n),
+									a = Sg(r);
 								if (t.hasOwnProperty(i)) {
 									var s = t[i];
 									Array.isArray(s) || (t[i] = s = [s]), s.push(a);
@@ -11160,13 +11169,13 @@
 						(t.prototype.parseParens = function(t) {
 							var e = {};
 							for (this.capture('('); !this.consumeOptional(')') && this.remaining.length > 0; ) {
-								var n = Ig(this.remaining),
+								var n = Og(this.remaining),
 									r = this.remaining[n.length];
 								if ('/' !== r && ')' !== r && ';' !== r) throw new Error("Cannot parse url '" + this.url + "'");
 								var o = void 0;
-								n.indexOf(':') > -1 ? ((o = n.substr(0, n.indexOf(':'))), this.capture(o), this.capture(':')) : t && (o = Jh);
+								n.indexOf(':') > -1 ? ((o = n.substr(0, n.indexOf(':'))), this.capture(o), this.capture(':')) : t && (o = Yh);
 								var i = this.parseChildren();
-								(e[o] = 1 === Object.keys(i).length ? i[Jh] : new hg([], i)), this.consumeOptional('//');
+								(e[o] = 1 === Object.keys(i).length ? i[Yh] : new dg([], i)), this.consumeOptional('//');
 							}
 							return e;
 						}),
@@ -11182,7 +11191,7 @@
 						t
 					);
 				})(),
-				jg = (function() {
+				Ag = (function() {
 					function t(t) {
 						this._root = t;
 					}
@@ -11199,7 +11208,7 @@
 							return e.length > 1 ? e[e.length - 2] : null;
 						}),
 						(t.prototype.children = function(t) {
-							var e = Rg(t, this._root);
+							var e = jg(t, this._root);
 							return e
 								? e.children.map(function(t) {
 										return t.value;
@@ -11207,11 +11216,11 @@
 								: [];
 						}),
 						(t.prototype.firstChild = function(t) {
-							var e = Rg(t, this._root);
+							var e = jg(t, this._root);
 							return e && e.children.length > 0 ? e.children[0].value : null;
 						}),
 						(t.prototype.siblings = function(t) {
-							var e = Dg(t, this._root);
+							var e = Rg(t, this._root);
 							return e.length < 2
 								? []
 								: e[e.length - 2].children
@@ -11223,19 +11232,19 @@
 										});
 						}),
 						(t.prototype.pathFromRoot = function(t) {
-							return Dg(t, this._root).map(function(t) {
+							return Rg(t, this._root).map(function(t) {
 								return t.value;
 							});
 						}),
 						t
 					);
 				})();
-			function Rg(t, e) {
+			function jg(t, e) {
 				var n, r;
 				if (t === e.value) return e;
 				try {
 					for (var o = l(e.children), i = o.next(); !i.done; i = o.next()) {
-						var a = Rg(t, i.value);
+						var a = jg(t, i.value);
 						if (a) return a;
 					}
 				} catch (s) {
@@ -11249,12 +11258,12 @@
 				}
 				return null;
 			}
-			function Dg(t, e) {
+			function Rg(t, e) {
 				var n, r;
 				if (t === e.value) return [e];
 				try {
 					for (var o = l(e.children), i = o.next(); !i.done; i = o.next()) {
-						var a = Dg(t, i.value);
+						var a = Rg(t, i.value);
 						if (a.length) return a.unshift(e), a;
 					}
 				} catch (s) {
@@ -11268,7 +11277,7 @@
 				}
 				return [];
 			}
-			var Ng = (function() {
+			var Dg = (function() {
 				function t(t, e) {
 					(this.value = t), (this.children = e);
 				}
@@ -11279,7 +11288,7 @@
 					t
 				);
 			})();
-			function Ug(t) {
+			function Ng(t) {
 				var e = {};
 				return (
 					t &&
@@ -11289,10 +11298,10 @@
 					e
 				);
 			}
-			var Lg = (function(t) {
+			var Ug = (function(t) {
 				function e(e, n) {
 					var r = t.call(this, e) || this;
-					return (r.snapshot = n), qg(r, e), r;
+					return (r.snapshot = n), Bg(r, e), r;
 				}
 				return (
 					o(e, t),
@@ -11301,21 +11310,21 @@
 					}),
 					e
 				);
-			})(jg);
-			function Hg(t, e) {
+			})(Ag);
+			function Lg(t, e) {
 				var n = (function(t, e) {
-						var n = new Fg([], {}, {}, '', {}, Jh, e, null, t.root, -1, {});
-						return new Bg('', new Ng(n, []));
+						var n = new Vg([], {}, {}, '', {}, Yh, e, null, t.root, -1, {});
+						return new Fg('', new Dg(n, []));
 					})(t, e),
-					r = new Fd([new gg('', {})]),
-					o = new Fd({}),
-					i = new Fd({}),
-					a = new Fd({}),
-					s = new Fd(''),
-					l = new zg(r, o, a, s, i, Jh, e, n.root);
-				return (l.snapshot = n.root), new Lg(new Ng(l, []), n);
+					r = new Ud([new hg('', {})]),
+					o = new Ud({}),
+					i = new Ud({}),
+					a = new Ud({}),
+					s = new Ud(''),
+					l = new Hg(r, o, a, s, i, Yh, e, n.root);
+				return (l.snapshot = n.root), new Ug(new Dg(l, []), n);
 			}
-			var zg = (function() {
+			var Hg = (function() {
 				function t(t, e, n, r, o, i, a, s) {
 					(this.url = t), (this.params = e), (this.queryParams = n), (this.fragment = r), (this.data = o), (this.outlet = i), (this.component = a), (this._futureSnapshot = s);
 				}
@@ -11367,8 +11376,8 @@
 							return (
 								this._paramMap ||
 									(this._paramMap = this.params.pipe(
-										J(function(t) {
-											return Xh(t);
+										W(function(t) {
+											return Kh(t);
 										})
 									)),
 								this._paramMap
@@ -11382,8 +11391,8 @@
 							return (
 								this._queryParamMap ||
 									(this._queryParamMap = this.queryParams.pipe(
-										J(function(t) {
-											return Xh(t);
+										W(function(t) {
+											return Kh(t);
 										})
 									)),
 								this._queryParamMap
@@ -11398,7 +11407,7 @@
 					t
 				);
 			})();
-			function Vg(t, e) {
+			function zg(t, e) {
 				void 0 === e && (e = 'emptyOnly');
 				var n = t.pathFromRoot,
 					r = 0;
@@ -11421,7 +11430,7 @@
 					);
 				})(n.slice(r));
 			}
-			var Fg = (function() {
+			var Vg = (function() {
 					function t(t, e, n, r, o, i, a, s, l, u, c) {
 						(this.url = t),
 							(this.params = e),
@@ -11473,14 +11482,14 @@
 						}),
 						Object.defineProperty(t.prototype, 'paramMap', {
 							get: function() {
-								return this._paramMap || (this._paramMap = Xh(this.params)), this._paramMap;
+								return this._paramMap || (this._paramMap = Kh(this.params)), this._paramMap;
 							},
 							enumerable: !0,
 							configurable: !0
 						}),
 						Object.defineProperty(t.prototype, 'queryParamMap', {
 							get: function() {
-								return this._queryParamMap || (this._queryParamMap = Xh(this.queryParams)), this._queryParamMap;
+								return this._queryParamMap || (this._queryParamMap = Kh(this.queryParams)), this._queryParamMap;
 							},
 							enumerable: !0,
 							configurable: !0
@@ -11501,81 +11510,81 @@
 						t
 					);
 				})(),
-				Bg = (function(t) {
+				Fg = (function(t) {
 					function e(e, n) {
 						var r = t.call(this, n) || this;
-						return (r.url = e), qg(r, n), r;
+						return (r.url = e), Bg(r, n), r;
 					}
 					return (
 						o(e, t),
 						(e.prototype.toString = function() {
-							return Gg(this._root);
+							return qg(this._root);
 						}),
 						e
 					);
-				})(jg);
-			function qg(t, e) {
+				})(Ag);
+			function Bg(t, e) {
 				(e.value._routerState = t),
 					e.children.forEach(function(e) {
-						return qg(t, e);
+						return Bg(t, e);
 					});
 			}
-			function Gg(t) {
-				var e = t.children.length > 0 ? ' { ' + t.children.map(Gg).join(', ') + ' } ' : '';
+			function qg(t) {
+				var e = t.children.length > 0 ? ' { ' + t.children.map(qg).join(', ') + ' } ' : '';
 				return '' + t.value + e;
 			}
-			function Zg(t) {
+			function Gg(t) {
 				if (t.snapshot) {
 					var e = t.snapshot,
 						n = t._futureSnapshot;
 					(t.snapshot = n),
-						sg(e.queryParams, n.queryParams) || t.queryParams.next(n.queryParams),
+						ag(e.queryParams, n.queryParams) || t.queryParams.next(n.queryParams),
 						e.fragment !== n.fragment && t.fragment.next(n.fragment),
-						sg(e.params, n.params) || t.params.next(n.params),
+						ag(e.params, n.params) || t.params.next(n.params),
 						(function(t, e) {
 							if (t.length !== e.length) return !1;
-							for (var n = 0; n < t.length; ++n) if (!sg(t[n], e[n])) return !1;
+							for (var n = 0; n < t.length; ++n) if (!ag(t[n], e[n])) return !1;
 							return !0;
 						})(e.url, n.url) || t.url.next(n.url),
-						sg(e.data, n.data) || t.data.next(n.data);
+						ag(e.data, n.data) || t.data.next(n.data);
 				} else (t.snapshot = t._futureSnapshot), t.data.next(t._futureSnapshot.data);
 			}
-			function Wg(t, e) {
+			function Zg(t, e) {
 				var n, r;
 				return (
-					sg(t.params, e.params) &&
-					mg((n = t.url), (r = e.url)) &&
+					ag(t.params, e.params) &&
+					gg((n = t.url), (r = e.url)) &&
 					n.every(function(t, e) {
-						return sg(t.parameters, r[e].parameters);
+						return ag(t.parameters, r[e].parameters);
 					}) &&
 					!(!t.parent != !e.parent) &&
-					(!t.parent || Wg(t.parent, e.parent))
+					(!t.parent || Zg(t.parent, e.parent))
 				);
 			}
-			function Qg(t) {
+			function Wg(t) {
 				return 'object' == typeof t && null != t && !t.outlets && !t.segmentPath;
 			}
-			function Yg(t, e, n, r, o) {
+			function Qg(t, e, n, r, o) {
 				var i = {};
 				return (
 					r &&
-						cg(r, function(t, e) {
+						ug(r, function(t, e) {
 							i[e] = Array.isArray(t)
 								? t.map(function(t) {
 										return '' + t;
 								  })
 								: '' + t;
 						}),
-					new dg(
+					new fg(
 						n.root === t
 							? e
 							: (function t(e, n, r) {
 									var o = {};
 									return (
-										cg(e.children, function(e, i) {
+										ug(e.children, function(e, i) {
 											o[i] = e === n ? r : t(e, n, r);
 										}),
-										new hg(e.segments, o)
+										new dg(e.segments, o)
 									);
 							  })(n.root, t, e),
 						i,
@@ -11583,13 +11592,13 @@
 					)
 				);
 			}
-			var Jg = (function() {
+			var Yg = (function() {
 					function t(t, e, n) {
-						if (((this.isAbsolute = t), (this.numberOfDoubleDots = e), (this.commands = n), t && n.length > 0 && Qg(n[0]))) throw new Error('Root segment cannot have matrix parameters');
+						if (((this.isAbsolute = t), (this.numberOfDoubleDots = e), (this.commands = n), t && n.length > 0 && Wg(n[0]))) throw new Error('Root segment cannot have matrix parameters');
 						var r = n.find(function(t) {
 							return 'object' == typeof t && null != t && t.outlets;
 						});
-						if (r && r !== ug(n)) throw new Error('{outlets:{}} has to be the last command');
+						if (r && r !== lg(n)) throw new Error('{outlets:{}} has to be the last command');
 					}
 					return (
 						(t.prototype.toRoot = function() {
@@ -11598,28 +11607,28 @@
 						t
 					);
 				})(),
-				Kg = (function() {
+				Jg = (function() {
 					return function(t, e, n) {
 						(this.segmentGroup = t), (this.processChildren = e), (this.index = n);
 					};
 				})();
-			function Xg(t) {
-				return 'object' == typeof t && null != t && t.outlets ? t.outlets[Jh] : '' + t;
+			function Kg(t) {
+				return 'object' == typeof t && null != t && t.outlets ? t.outlets[Yh] : '' + t;
 			}
-			function $g(t, e, n) {
-				if ((t || (t = new hg([], {})), 0 === t.segments.length && t.hasChildren())) return tm(t, e, n);
+			function Xg(t, e, n) {
+				if ((t || (t = new dg([], {})), 0 === t.segments.length && t.hasChildren())) return $g(t, e, n);
 				var r = (function(t, e, n) {
 						for (var r = 0, o = e, i = { match: !1, pathIndex: 0, commandIndex: 0 }; o < t.segments.length; ) {
 							if (r >= n.length) return i;
 							var a = t.segments[o],
-								s = Xg(n[r]),
+								s = Kg(n[r]),
 								l = r < n.length - 1 ? n[r + 1] : null;
 							if (o > 0 && void 0 === s) break;
 							if (s && l && 'object' == typeof l && void 0 === l.outlets) {
-								if (!om(s, l, a)) return i;
+								if (!rm(s, l, a)) return i;
 								r += 2;
 							} else {
-								if (!om(s, {}, a)) return i;
+								if (!rm(s, {}, a)) return i;
 								r++;
 							}
 							o++;
@@ -11628,65 +11637,65 @@
 					})(t, e, n),
 					o = n.slice(r.commandIndex);
 				if (r.match && r.pathIndex < t.segments.length) {
-					var i = new hg(t.segments.slice(0, r.pathIndex), {});
-					return (i.children[Jh] = new hg(t.segments.slice(r.pathIndex), t.children)), tm(i, 0, o);
+					var i = new dg(t.segments.slice(0, r.pathIndex), {});
+					return (i.children[Yh] = new dg(t.segments.slice(r.pathIndex), t.children)), $g(i, 0, o);
 				}
-				return r.match && 0 === o.length ? new hg(t.segments, {}) : r.match && !t.hasChildren() ? em(t, e, n) : r.match ? tm(t, 0, o) : em(t, e, n);
+				return r.match && 0 === o.length ? new dg(t.segments, {}) : r.match && !t.hasChildren() ? tm(t, e, n) : r.match ? $g(t, 0, o) : tm(t, e, n);
 			}
-			function tm(t, e, n) {
-				if (0 === n.length) return new hg(t.segments, {});
+			function $g(t, e, n) {
+				if (0 === n.length) return new dg(t.segments, {});
 				var r = (function(t) {
 						var e, n;
-						return 'object' != typeof t[0] ? (((e = {})[Jh] = t), e) : void 0 === t[0].outlets ? (((n = {})[Jh] = t), n) : t[0].outlets;
+						return 'object' != typeof t[0] ? (((e = {})[Yh] = t), e) : void 0 === t[0].outlets ? (((n = {})[Yh] = t), n) : t[0].outlets;
 					})(n),
 					o = {};
 				return (
-					cg(r, function(n, r) {
-						null !== n && (o[r] = $g(t.children[r], e, n));
+					ug(r, function(n, r) {
+						null !== n && (o[r] = Xg(t.children[r], e, n));
 					}),
-					cg(t.children, function(t, e) {
+					ug(t.children, function(t, e) {
 						void 0 === r[e] && (o[e] = t);
 					}),
-					new hg(t.segments, o)
+					new dg(t.segments, o)
 				);
 			}
-			function em(t, e, n) {
+			function tm(t, e, n) {
 				for (var r = t.segments.slice(0, e), o = 0; o < n.length; ) {
 					if ('object' == typeof n[o] && void 0 !== n[o].outlets) {
-						var i = nm(n[o].outlets);
-						return new hg(r, i);
+						var i = em(n[o].outlets);
+						return new dg(r, i);
 					}
-					if (0 === o && Qg(n[0])) r.push(new gg(t.segments[e].path, n[0])), o++;
+					if (0 === o && Wg(n[0])) r.push(new hg(t.segments[e].path, n[0])), o++;
 					else {
-						var a = Xg(n[o]),
+						var a = Kg(n[o]),
 							s = o < n.length - 1 ? n[o + 1] : null;
-						a && s && Qg(s) ? (r.push(new gg(a, rm(s))), (o += 2)) : (r.push(new gg(a, {})), o++);
+						a && s && Wg(s) ? (r.push(new hg(a, nm(s))), (o += 2)) : (r.push(new hg(a, {})), o++);
 					}
 				}
-				return new hg(r, {});
+				return new dg(r, {});
 			}
-			function nm(t) {
+			function em(t) {
 				var e = {};
 				return (
-					cg(t, function(t, n) {
-						null !== t && (e[n] = em(new hg([], {}), 0, t));
+					ug(t, function(t, n) {
+						null !== t && (e[n] = tm(new dg([], {}), 0, t));
 					}),
 					e
 				);
 			}
-			function rm(t) {
+			function nm(t) {
 				var e = {};
 				return (
-					cg(t, function(t, n) {
+					ug(t, function(t, n) {
 						return (e[n] = '' + t);
 					}),
 					e
 				);
 			}
-			function om(t, e, n) {
-				return t == n.path && sg(e, n.parameters);
+			function rm(t, e, n) {
+				return t == n.path && ag(e, n.parameters);
 			}
-			var im = (function() {
+			var om = (function() {
 				function t(t, e, n, r) {
 					(this.routeReuseStrategy = t), (this.futureState = e), (this.currState = n), (this.forwardEvent = r);
 				}
@@ -11694,16 +11703,16 @@
 					(t.prototype.activate = function(t) {
 						var e = this.futureState._root,
 							n = this.currState ? this.currState._root : null;
-						this.deactivateChildRoutes(e, n, t), Zg(this.futureState.root), this.activateChildRoutes(e, n, t);
+						this.deactivateChildRoutes(e, n, t), Gg(this.futureState.root), this.activateChildRoutes(e, n, t);
 					}),
 					(t.prototype.deactivateChildRoutes = function(t, e, n) {
 						var r = this,
-							o = Ug(e);
+							o = Ng(e);
 						t.children.forEach(function(t) {
 							var e = t.value.outlet;
 							r.deactivateRoutes(t, o[e], n), delete o[e];
 						}),
-							cg(o, function(t, e) {
+							ug(o, function(t, e) {
 								r.deactivateRouteAndItsChildren(t, n);
 							});
 					}),
@@ -11732,9 +11741,9 @@
 						var n = this,
 							r = e.getContext(t.value.outlet);
 						if (r) {
-							var o = Ug(t),
+							var o = Ng(t),
 								i = t.value.component ? r.children : e;
-							cg(o, function(t, e) {
+							ug(o, function(t, e) {
 								return n.deactivateRouteAndItsChildren(t, i);
 							}),
 								r.outlet && (r.outlet.deactivate(), r.children.onOutletDeactivated());
@@ -11742,16 +11751,16 @@
 					}),
 					(t.prototype.activateChildRoutes = function(t, e, n) {
 						var r = this,
-							o = Ug(e);
+							o = Ng(e);
 						t.children.forEach(function(t) {
-							r.activateRoutes(t, o[t.value.outlet], n), r.forwardEvent(new Wh(t.value.snapshot));
+							r.activateRoutes(t, o[t.value.outlet], n), r.forwardEvent(new Zh(t.value.snapshot));
 						}),
-							t.children.length && this.forwardEvent(new Gh(t.value.snapshot));
+							t.children.length && this.forwardEvent(new qh(t.value.snapshot));
 					}),
 					(t.prototype.activateRoutes = function(t, e, n) {
 						var r = t.value,
 							o = e ? e.value : null;
-						if ((Zg(r), r === o))
+						if ((Gg(r), r === o))
 							if (r.component) {
 								var i = n.getOrCreateContext(r.outlet);
 								this.activateChildRoutes(t, e, i.children);
@@ -11764,7 +11773,7 @@
 									(i.attachRef = a.componentRef),
 									(i.route = a.route.value),
 									i.outlet && i.outlet.attach(a.componentRef, a.route.value),
-									am(a.route);
+									im(a.route);
 							} else {
 								var s = (function(t) {
 										for (var e = r.snapshot.parent; e; e = e.parent) {
@@ -11782,25 +11791,30 @@
 					t
 				);
 			})();
-			function am(t) {
-				Zg(t.value), t.children.forEach(am);
+			function im(t) {
+				Gg(t.value), t.children.forEach(im);
 			}
-			function sm(t) {
+			function am(t) {
 				return 'function' == typeof t;
 			}
-			function lm(t) {
-				return t instanceof dg;
+			function sm(t) {
+				return t instanceof fg;
 			}
-			var um = (function() {
+			var lm = (function() {
 					return function(t) {
 						this.segmentGroup = t || null;
 					};
 				})(),
-				cm = (function() {
+				um = (function() {
 					return function(t) {
 						this.urlTree = t;
 					};
 				})();
+			function cm(t) {
+				return new I(function(e) {
+					return e.error(new lm(t));
+				});
+			}
 			function pm(t) {
 				return new I(function(e) {
 					return e.error(new um(t));
@@ -11808,46 +11822,41 @@
 			}
 			function fm(t) {
 				return new I(function(e) {
-					return e.error(new cm(t));
-				});
-			}
-			function dm(t) {
-				return new I(function(e) {
 					return e.error(new Error("Only absolute redirects can have named outlets. redirectTo: '" + t + "'"));
 				});
 			}
-			var hm = (function() {
+			var dm = (function() {
 				function t(t, e, n, r, o) {
-					(this.configLoader = e), (this.urlSerializer = n), (this.urlTree = r), (this.config = o), (this.allowRedirects = !0), (this.ngModule = t.get(ou));
+					(this.configLoader = e), (this.urlSerializer = n), (this.urlTree = r), (this.config = o), (this.allowRedirects = !0), (this.ngModule = t.get(nu));
 				}
 				return (
 					(t.prototype.apply = function() {
 						var t = this;
-						return this.expandSegmentGroup(this.ngModule, this.config, this.urlTree.root, Jh)
+						return this.expandSegmentGroup(this.ngModule, this.config, this.urlTree.root, Yh)
 							.pipe(
-								J(function(e) {
+								W(function(e) {
 									return t.createUrlTree(e, t.urlTree.queryParams, t.urlTree.fragment);
 								})
 							)
 							.pipe(
-								dh(function(e) {
-									if (e instanceof cm) return (t.allowRedirects = !1), t.match(e.urlTree);
-									if (e instanceof um) throw t.noMatchError(e);
+								uh(function(e) {
+									if (e instanceof um) return (t.allowRedirects = !1), t.match(e.urlTree);
+									if (e instanceof lm) throw t.noMatchError(e);
 									throw e;
 								})
 							);
 					}),
 					(t.prototype.match = function(t) {
 						var e = this;
-						return this.expandSegmentGroup(this.ngModule, this.config, t.root, Jh)
+						return this.expandSegmentGroup(this.ngModule, this.config, t.root, Yh)
 							.pipe(
-								J(function(n) {
+								W(function(n) {
 									return e.createUrlTree(n, t.queryParams, t.fragment);
 								})
 							)
 							.pipe(
-								dh(function(t) {
-									if (t instanceof um) throw e.noMatchError(t);
+								uh(function(t) {
+									if (t instanceof lm) throw e.noMatchError(t);
 									throw t;
 								})
 							);
@@ -11857,14 +11866,14 @@
 					}),
 					(t.prototype.createUrlTree = function(t, e, n) {
 						var r,
-							o = t.segments.length > 0 ? new hg([], (((r = {})[Jh] = t), r)) : t;
-						return new dg(o, e, n);
+							o = t.segments.length > 0 ? new dg([], (((r = {})[Yh] = t), r)) : t;
+						return new fg(o, e, n);
 					}),
 					(t.prototype.expandSegmentGroup = function(t, e, n, r) {
 						return 0 === n.segments.length && n.hasChildren()
 							? this.expandChildren(t, e, n).pipe(
-									J(function(t) {
-										return new hg([], t);
+									W(function(t) {
+										return new dg([], t);
 									})
 							  )
 							: this.expandSegment(t, n, e, n.segments, r, !0);
@@ -11872,25 +11881,25 @@
 					(t.prototype.expandChildren = function(t, e, n) {
 						var r = this;
 						return (function(n, o) {
-							if (0 === Object.keys(n).length) return Vd({});
+							if (0 === Object.keys(n).length) return Nd({});
 							var i = [],
 								a = [],
 								s = {};
 							return (
-								cg(n, function(n, o) {
+								ug(n, function(n, o) {
 									var l,
 										u,
 										c = ((l = o), (u = n), r.expandSegmentGroup(t, e, u, l)).pipe(
-											J(function(t) {
+											W(function(t) {
 												return (s[o] = t);
 											})
 										);
-									o === Jh ? i.push(c) : a.push(c);
+									o === Yh ? i.push(c) : a.push(c);
 								}),
-								Vd.apply(null, i.concat(a)).pipe(
-									Yd(),
-									fh(),
-									J(function() {
+								Nd.apply(null, i.concat(a)).pipe(
+									Zd(),
+									lh(),
+									W(function() {
 										return s;
 									})
 								)
@@ -11899,23 +11908,23 @@
 					}),
 					(t.prototype.expandSegment = function(t, e, n, r, o, i) {
 						var a = this;
-						return Vd.apply(void 0, c(n)).pipe(
-							J(function(s) {
+						return Nd.apply(void 0, c(n)).pipe(
+							W(function(s) {
 								return a.expandSegmentAgainstRoute(t, e, n, s, r, o, i).pipe(
-									dh(function(t) {
-										if (t instanceof um) return Vd(null);
+									uh(function(t) {
+										if (t instanceof lm) return Nd(null);
 										throw t;
 									})
 								);
 							}),
-							Yd(),
-							yh(function(t) {
+							Zd(),
+							gh(function(t) {
 								return !!t;
 							}),
-							dh(function(t, n) {
-								if (t instanceof qd || 'EmptyError' === t.name) {
-									if (a.noLeftoversInUrl(e, r, o)) return Vd(new hg([], {}));
-									throw new um(e);
+							uh(function(t, n) {
+								if (t instanceof Hd || 'EmptyError' === t.name) {
+									if (a.noLeftoversInUrl(e, r, o)) return Nd(new dg([], {}));
+									throw new lm(e);
 								}
 								throw t;
 							})
@@ -11925,13 +11934,13 @@
 						return 0 === e.length && !t.children[n];
 					}),
 					(t.prototype.expandSegmentAgainstRoute = function(t, e, n, r, o, i, a) {
-						return vm(r) !== i
-							? pm(e)
+						return bm(r) !== i
+							? cm(e)
 							: void 0 === r.redirectTo
 							? this.matchSegmentAgainstRoute(t, e, r, o)
 							: a && this.allowRedirects
 							? this.expandSegmentAgainstRouteUsingRedirect(t, e, n, r, o, i)
-							: pm(e);
+							: cm(e);
 					}),
 					(t.prototype.expandSegmentAgainstRouteUsingRedirect = function(t, e, n, r, o, i) {
 						return '**' === r.path ? this.expandWildCardWithParamsAgainstRouteUsingRedirect(t, n, r, i) : this.expandRegularSegmentAgainstRouteUsingRedirect(t, e, n, r, o, i);
@@ -11940,26 +11949,26 @@
 						var o = this,
 							i = this.applyRedirectCommands([], n.redirectTo, {});
 						return n.redirectTo.startsWith('/')
-							? fm(i)
+							? pm(i)
 							: this.lineralizeSegments(n, i).pipe(
-									et(function(n) {
-										var i = new hg(n, {});
+									X(function(n) {
+										var i = new dg(n, {});
 										return o.expandSegment(t, i, e, n, r, !1);
 									})
 							  );
 					}),
 					(t.prototype.expandRegularSegmentAgainstRouteUsingRedirect = function(t, e, n, r, o, i) {
 						var a = this,
-							s = gm(e, r, o),
+							s = hm(e, r, o),
 							l = s.consumedSegments,
 							u = s.lastChild,
 							c = s.positionalParamSegments;
-						if (!s.matched) return pm(e);
+						if (!s.matched) return cm(e);
 						var p = this.applyRedirectCommands(l, r.redirectTo, c);
 						return r.redirectTo.startsWith('/')
-							? fm(p)
+							? pm(p)
 							: this.lineralizeSegments(r, p).pipe(
-									et(function(r) {
+									X(function(r) {
 										return a.expandSegment(t, e, n, r.concat(o.slice(u)), i, !1);
 									})
 							  );
@@ -11969,40 +11978,40 @@
 						if ('**' === n.path)
 							return n.loadChildren
 								? this.configLoader.load(t.injector, n).pipe(
-										J(function(t) {
-											return (n._loadedConfig = t), new hg(r, {});
+										W(function(t) {
+											return (n._loadedConfig = t), new dg(r, {});
 										})
 								  )
-								: Vd(new hg(r, {}));
-						var a = gm(e, n, r),
+								: Nd(new dg(r, {}));
+						var a = hm(e, n, r),
 							s = a.consumedSegments,
 							u = a.lastChild;
-						if (!a.matched) return pm(e);
+						if (!a.matched) return cm(e);
 						var c = r.slice(u);
 						return this.getChildConfig(t, n, r).pipe(
-							et(function(t) {
+							X(function(t) {
 								var n = t.module,
 									r = t.routes,
 									a = (function(t, e, n, r) {
 										return n.length > 0 &&
 											(function(t, e, n) {
 												return r.some(function(n) {
-													return bm(t, e, n) && vm(n) !== Jh;
+													return mm(t, e, n) && bm(n) !== Yh;
 												});
 											})(t, n)
 											? {
-													segmentGroup: mm(
-														new hg(
+													segmentGroup: gm(
+														new dg(
 															e,
 															(function(t, e) {
 																var n,
 																	r,
 																	o = {};
-																o[Jh] = e;
+																o[Yh] = e;
 																try {
 																	for (var i = l(t), a = i.next(); !a.done; a = i.next()) {
 																		var s = a.value;
-																		'' === s.path && vm(s) !== Jh && (o[vm(s)] = new hg([], {}));
+																		'' === s.path && bm(s) !== Yh && (o[bm(s)] = new dg([], {}));
 																	}
 																} catch (u) {
 																	n = { error: u };
@@ -12014,7 +12023,7 @@
 																	}
 																}
 																return o;
-															})(r, new hg(n, t.children))
+															})(r, new dg(n, t.children))
 														)
 													),
 													slicedSegments: []
@@ -12022,12 +12031,12 @@
 											: 0 === n.length &&
 											  (function(t, e, n) {
 													return r.some(function(n) {
-														return bm(t, e, n);
+														return mm(t, e, n);
 													});
 											  })(t, n)
 											? {
-													segmentGroup: mm(
-														new hg(
+													segmentGroup: gm(
+														new dg(
 															t.segments,
 															(function(t, e, n, r) {
 																var o,
@@ -12036,7 +12045,7 @@
 																try {
 																	for (var u = l(n), c = u.next(); !c.done; c = u.next()) {
 																		var p = c.value;
-																		bm(t, e, p) && !r[vm(p)] && (s[vm(p)] = new hg([], {}));
+																		mm(t, e, p) && !r[bm(p)] && (s[bm(p)] = new dg([], {}));
 																	}
 																} catch (f) {
 																	o = { error: f };
@@ -12059,15 +12068,15 @@
 									p = a.slicedSegments;
 								return 0 === p.length && u.hasChildren()
 									? o.expandChildren(n, r, u).pipe(
-											J(function(t) {
-												return new hg(s, t);
+											W(function(t) {
+												return new dg(s, t);
 											})
 									  )
 									: 0 === r.length && 0 === p.length
-									? Vd(new hg(s, {}))
-									: o.expandSegment(n, u, r, p, Jh, !0).pipe(
-											J(function(t) {
-												return new hg(s.concat(t.segments), t.children);
+									? Nd(new dg(s, {}))
+									: o.expandSegment(n, u, r, p, Yh, !0).pipe(
+											W(function(t) {
+												return new dg(s.concat(t.segments), t.children);
 											})
 									  );
 							})
@@ -12076,64 +12085,64 @@
 					(t.prototype.getChildConfig = function(t, e, n) {
 						var r = this;
 						return e.children
-							? Vd(new ng(e.children, t))
+							? Nd(new eg(e.children, t))
 							: e.loadChildren
 							? void 0 !== e._loadedConfig
-								? Vd(e._loadedConfig)
+								? Nd(e._loadedConfig)
 								: (function(t, e, n) {
 										var r,
 											o = e.canLoad;
 										return o && 0 !== o.length
-											? tt(o)
+											? K(o)
 													.pipe(
-														J(function(r) {
+														W(function(r) {
 															var o,
 																i = t.get(r);
 															if (
 																(function(t) {
-																	return t && sm(t.canLoad);
+																	return t && am(t.canLoad);
 																})(i)
 															)
 																o = i.canLoad(e, n);
 															else {
-																if (!sm(i)) throw new Error('Invalid CanLoad guard');
+																if (!am(i)) throw new Error('Invalid CanLoad guard');
 																o = i(e, n);
 															}
-															return pg(o);
+															return cg(o);
 														})
 													)
 													.pipe(
-														Yd(),
+														Zd(),
 														((r = function(t) {
 															return !0 === t;
 														}),
 														function(t) {
-															return t.lift(new wh(r, void 0, t));
+															return t.lift(new mh(r, void 0, t));
 														})
 													)
-											: Vd(!0);
+											: Nd(!0);
 								  })(t.injector, e, n).pipe(
-										et(function(n) {
+										X(function(n) {
 											return n
 												? r.configLoader.load(t.injector, e).pipe(
-														J(function(t) {
+														W(function(t) {
 															return (e._loadedConfig = t), t;
 														})
 												  )
 												: (function(t) {
 														return new I(function(e) {
-															return e.error(tg('Cannot load children because the guard of the route "path: \'' + t.path + '\'" returned false'));
+															return e.error($h('Cannot load children because the guard of the route "path: \'' + t.path + '\'" returned false'));
 														});
 												  })(e);
 										})
 								  )
-							: Vd(new ng([], t));
+							: Nd(new eg([], t));
 					}),
 					(t.prototype.lineralizeSegments = function(t, e) {
 						for (var n = [], r = e.root; ; ) {
-							if (((n = n.concat(r.segments)), 0 === r.numberOfChildren)) return Vd(n);
-							if (r.numberOfChildren > 1 || !r.children[Jh]) return dm(t.redirectTo);
-							r = r.children[Jh];
+							if (((n = n.concat(r.segments)), 0 === r.numberOfChildren)) return Nd(n);
+							if (r.numberOfChildren > 1 || !r.children[Yh]) return fm(t.redirectTo);
+							r = r.children[Yh];
 						}
 					}),
 					(t.prototype.applyRedirectCommands = function(t, e, n) {
@@ -12141,12 +12150,12 @@
 					}),
 					(t.prototype.applyRedirectCreatreUrlTree = function(t, e, n, r) {
 						var o = this.createSegmentGroup(t, e.root, n, r);
-						return new dg(o, this.createQueryParams(e.queryParams, this.urlTree.queryParams), e.fragment);
+						return new fg(o, this.createQueryParams(e.queryParams, this.urlTree.queryParams), e.fragment);
 					}),
 					(t.prototype.createQueryParams = function(t, e) {
 						var n = {};
 						return (
-							cg(t, function(t, r) {
+							ug(t, function(t, r) {
 								if ('string' == typeof t && t.startsWith(':')) {
 									var o = t.substring(1);
 									n[r] = e[o];
@@ -12160,10 +12169,10 @@
 							i = this.createSegments(t, e.segments, n, r),
 							a = {};
 						return (
-							cg(e.children, function(e, i) {
+							ug(e.children, function(e, i) {
 								a[i] = o.createSegmentGroup(t, e, n, r);
 							}),
-							new hg(i, a)
+							new dg(i, a)
 						);
 					}),
 					(t.prototype.createSegments = function(t, e, n, r) {
@@ -12201,40 +12210,40 @@
 					t
 				);
 			})();
-			function gm(t, e, n) {
+			function hm(t, e, n) {
 				if ('' === e.path)
 					return 'full' === e.pathMatch && (t.hasChildren() || n.length > 0)
 						? { matched: !1, consumedSegments: [], lastChild: 0, positionalParamSegments: {} }
 						: { matched: !0, consumedSegments: [], lastChild: 0, positionalParamSegments: {} };
-				var r = (e.matcher || eg)(n, t, e);
+				var r = (e.matcher || tg)(n, t, e);
 				return r
 					? { matched: !0, consumedSegments: r.consumed, lastChild: r.consumed.length, positionalParamSegments: r.posParams }
 					: { matched: !1, consumedSegments: [], lastChild: 0, positionalParamSegments: {} };
 			}
-			function mm(t) {
-				if (1 === t.numberOfChildren && t.children[Jh]) {
-					var e = t.children[Jh];
-					return new hg(t.segments.concat(e.segments), e.children);
+			function gm(t) {
+				if (1 === t.numberOfChildren && t.children[Yh]) {
+					var e = t.children[Yh];
+					return new dg(t.segments.concat(e.segments), e.children);
 				}
 				return t;
 			}
-			function bm(t, e, n) {
+			function mm(t, e, n) {
 				return (!(t.hasChildren() || e.length > 0) || 'full' !== n.pathMatch) && '' === n.path && void 0 !== n.redirectTo;
 			}
-			function vm(t) {
-				return t.outlet || Jh;
+			function bm(t) {
+				return t.outlet || Yh;
 			}
-			var ym = (function() {
+			var vm = (function() {
 					return function(t) {
 						(this.path = t), (this.route = this.path[this.path.length - 1]);
 					};
 				})(),
-				wm = (function() {
+				ym = (function() {
 					return function(t, e) {
 						(this.component = t), (this.route = e);
 					};
 				})();
-			function _m(t, e, n) {
+			function wm(t, e, n) {
 				var r = (function(t) {
 					if (!t) return null;
 					for (var e = t.parent; e; e = e.parent) {
@@ -12245,9 +12254,9 @@
 				})(e);
 				return (r ? r.module.injector : n).get(t);
 			}
-			function xm(t, e, n, r, o) {
+			function _m(t, e, n, r, o) {
 				void 0 === o && (o = { canDeactivateChecks: [], canActivateChecks: [] });
-				var i = Ug(e);
+				var i = Ng(e);
 				return (
 					t.children.forEach(function(t) {
 						!(function(t, e, n, r, o) {
@@ -12260,120 +12269,123 @@
 									if ('function' == typeof n) return n(t, e);
 									switch (n) {
 										case 'pathParamsChange':
-											return !mg(t.url, e.url);
+											return !gg(t.url, e.url);
 										case 'pathParamsOrQueryParamsChange':
-											return !mg(t.url, e.url) || !sg(t.queryParams, e.queryParams);
+											return !gg(t.url, e.url) || !ag(t.queryParams, e.queryParams);
 										case 'always':
 											return !0;
 										case 'paramsOrQueryParamsChange':
-											return !Wg(t, e) || !sg(t.queryParams, e.queryParams);
+											return !Zg(t, e) || !ag(t.queryParams, e.queryParams);
 										case 'paramsChange':
 										default:
-											return !Wg(t, e);
+											return !Zg(t, e);
 									}
 								})(a, i, i.routeConfig.runGuardsAndResolvers);
-								l ? o.canActivateChecks.push(new ym(r)) : ((i.data = a.data), (i._resolvedData = a._resolvedData)),
-									xm(t, e, i.component ? (s ? s.children : null) : n, r, o),
-									l && o.canDeactivateChecks.push(new wm((s && s.outlet && s.outlet.component) || null, a));
-							} else a && Cm(e, s, o), o.canActivateChecks.push(new ym(r)), xm(t, null, i.component ? (s ? s.children : null) : n, r, o);
+								l ? o.canActivateChecks.push(new vm(r)) : ((i.data = a.data), (i._resolvedData = a._resolvedData)),
+									_m(t, e, i.component ? (s ? s.children : null) : n, r, o),
+									l && o.canDeactivateChecks.push(new ym((s && s.outlet && s.outlet.component) || null, a));
+							} else a && xm(e, s, o), o.canActivateChecks.push(new vm(r)), _m(t, null, i.component ? (s ? s.children : null) : n, r, o);
 						})(t, i[t.value.outlet], n, r.concat([t.value]), o),
 							delete i[t.value.outlet];
 					}),
-					cg(i, function(t, e) {
-						return Cm(t, n.getContext(e), o);
+					ug(i, function(t, e) {
+						return xm(t, n.getContext(e), o);
 					}),
 					o
 				);
 			}
-			function Cm(t, e, n) {
-				var r = Ug(t),
+			function xm(t, e, n) {
+				var r = Ng(t),
 					o = t.value;
-				cg(r, function(t, r) {
-					Cm(t, o.component ? (e ? e.children.getContext(r) : null) : e, n);
+				ug(r, function(t, r) {
+					xm(t, o.component ? (e ? e.children.getContext(r) : null) : e, n);
 				}),
-					n.canDeactivateChecks.push(new wm(o.component && e && e.outlet && e.outlet.isActivated ? e.outlet.component : null, o));
+					n.canDeactivateChecks.push(new ym(o.component && e && e.outlet && e.outlet.isActivated ? e.outlet.component : null, o));
 			}
-			var km = Symbol('INITIAL_VALUE');
-			function Sm() {
-				return xh(function(t) {
+			var Cm = Symbol('INITIAL_VALUE');
+			function km() {
+				return vh(function(t) {
 					return function() {
 						for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
 						var n = null,
 							r = null;
-						return U(t[t.length - 1]) && (r = t.pop()), 'function' == typeof t[t.length - 1] && (n = t.pop()), 1 === t.length && p(t[0]) && (t = t[0]), $(t, r).lift(new Zd(n));
+						return U(t[t.length - 1]) && (r = t.pop()), 'function' == typeof t[t.length - 1] && (n = t.pop()), 1 === t.length && p(t[0]) && (t = t[0]), rt(t, r).lift(new Vd(n));
 					}
 						.apply(
 							void 0,
 							c(
 								t.map(function(t) {
 									return t.pipe(
-										mh(1),
+										fh(1),
 										(function() {
 											for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
-											return function(e) {
-												var n = t[t.length - 1];
-												U(n) ? t.pop() : (n = null);
-												var r = t.length;
-												return Sh(1 !== r || n ? (r > 0 ? $(t, n) : Hd(n)) : zd(t[0]), e);
-											};
-										})(km)
+											var n = t[t.length - 1];
+											return U(n)
+												? (t.pop(),
+												  function(e) {
+														return _h(t, e, n);
+												  })
+												: function(e) {
+														return _h(t, e);
+												  };
+										})(Cm)
 									);
 								})
 							)
 						)
 						.pipe(
-							Ph(function(t, e) {
+							xh(function(t, e) {
 								var n = !1;
 								return e.reduce(function(t, r, o) {
-									if (t !== km) return t;
-									if ((r === km && (n = !0), !n)) {
+									if (t !== Cm) return t;
+									if ((r === Cm && (n = !0), !n)) {
 										if (!1 === r) return r;
-										if (o === e.length - 1 || lm(r)) return r;
+										if (o === e.length - 1 || sm(r)) return r;
 									}
 									return t;
 								}, t);
-							}, km),
-							Jd(function(t) {
-								return t !== km;
+							}, Cm),
+							Wd(function(t) {
+								return t !== Cm;
 							}),
-							J(function(t) {
-								return lm(t) ? t : !0 === t;
+							W(function(t) {
+								return sm(t) ? t : !0 === t;
 							}),
-							mh(1)
+							fh(1)
 						);
 				});
 			}
+			function Sm(t, e) {
+				return null !== t && e && e(new Gh(t)), Nd(!0);
+			}
 			function Pm(t, e) {
-				return null !== t && e && e(new Zh(t)), Vd(!0);
+				return null !== t && e && e(new Bh(t)), Nd(!0);
 			}
-			function Em(t, e) {
-				return null !== t && e && e(new qh(t)), Vd(!0);
-			}
-			function Om(t, e, n) {
+			function Em(t, e, n) {
 				var r = e.routeConfig ? e.routeConfig.canActivate : null;
 				return r && 0 !== r.length
-					? Vd(
+					? Nd(
 							r.map(function(r) {
-								return Qd(function() {
+								return Gd(function() {
 									var o,
-										i = _m(r, e, n);
+										i = wm(r, e, n);
 									if (
 										(function(t) {
-											return t && sm(t.canActivate);
+											return t && am(t.canActivate);
 										})(i)
 									)
-										o = pg(i.canActivate(e, t));
+										o = cg(i.canActivate(e, t));
 									else {
-										if (!sm(i)) throw new Error('Invalid CanActivate guard');
-										o = pg(i(e, t));
+										if (!am(i)) throw new Error('Invalid CanActivate guard');
+										o = cg(i(e, t));
 									}
-									return o.pipe(yh());
+									return o.pipe(gh());
 								});
 							})
-					  ).pipe(Sm())
-					: Vd(!0);
+					  ).pipe(km())
+					: Nd(!0);
 			}
-			function Im(t, e, n) {
+			function Om(t, e, n) {
 				var r = e[e.length - 1],
 					o = e
 						.slice(0, e.length - 1)
@@ -12388,56 +12400,56 @@
 							return null !== t;
 						})
 						.map(function(e) {
-							return Qd(function() {
-								return Vd(
+							return Gd(function() {
+								return Nd(
 									e.guards.map(function(o) {
 										var i,
-											a = _m(o, e.node, n);
+											a = wm(o, e.node, n);
 										if (
 											(function(t) {
-												return t && sm(t.canActivateChild);
+												return t && am(t.canActivateChild);
 											})(a)
 										)
-											i = pg(a.canActivateChild(r, t));
+											i = cg(a.canActivateChild(r, t));
 										else {
-											if (!sm(a)) throw new Error('Invalid CanActivateChild guard');
-											i = pg(a(r, t));
+											if (!am(a)) throw new Error('Invalid CanActivateChild guard');
+											i = cg(a(r, t));
 										}
-										return i.pipe(yh());
+										return i.pipe(gh());
 									})
-								).pipe(Sm());
+								).pipe(km());
 							});
 						});
-				return Vd(o).pipe(Sm());
+				return Nd(o).pipe(km());
 			}
-			var Tm = (function() {
+			var Im = (function() {
 					return function() {};
 				})(),
-				Mm = (function() {
+				Tm = (function() {
 					function t(t, e, n, r, o, i) {
 						(this.rootComponentType = t), (this.config = e), (this.urlTree = n), (this.url = r), (this.paramsInheritanceStrategy = o), (this.relativeLinkResolution = i);
 					}
 					return (
 						(t.prototype.recognize = function() {
 							try {
-								var t = Rm(this.urlTree.root, [], [], this.config, this.relativeLinkResolution).segmentGroup,
-									e = this.processSegmentGroup(this.config, t, Jh),
-									n = new Fg(
+								var t = jm(this.urlTree.root, [], [], this.config, this.relativeLinkResolution).segmentGroup,
+									e = this.processSegmentGroup(this.config, t, Yh),
+									n = new Vg(
 										[],
 										Object.freeze({}),
 										Object.freeze(i({}, this.urlTree.queryParams)),
 										this.urlTree.fragment,
 										{},
-										Jh,
+										Yh,
 										this.rootComponentType,
 										null,
 										this.urlTree.root,
 										-1,
 										{}
 									),
-									r = new Ng(n, e),
-									o = new Bg(this.url, r);
-								return this.inheritParamsAndData(o._root), Vd(o);
+									r = new Dg(n, e),
+									o = new Fg(this.url, r);
+								return this.inheritParamsAndData(o._root), Nd(o);
 							} catch (a) {
 								return new I(function(t) {
 									return t.error(a);
@@ -12447,7 +12459,7 @@
 						(t.prototype.inheritParamsAndData = function(t) {
 							var e = this,
 								n = t.value,
-								r = Vg(n, this.paramsInheritanceStrategy);
+								r = zg(n, this.paramsInheritanceStrategy);
 							(n.params = Object.freeze(r.params)),
 								(n.data = Object.freeze(r.data)),
 								t.children.forEach(function(t) {
@@ -12460,7 +12472,7 @@
 						(t.prototype.processChildren = function(t, e) {
 							var n,
 								r = this,
-								o = bg(e, function(e, n) {
+								o = mg(e, function(e, n) {
 									return r.processSegmentGroup(t, e, n);
 								});
 							return (
@@ -12483,7 +12495,7 @@
 									n[t.value.outlet] = t.value;
 								}),
 								o.sort(function(t, e) {
-									return t.value.outlet === Jh ? -1 : e.value.outlet === Jh ? 1 : t.value.outlet.localeCompare(e.value.outlet);
+									return t.value.outlet === Yh ? -1 : e.value.outlet === Yh ? 1 : t.value.outlet.localeCompare(e.value.outlet);
 								}),
 								o
 							);
@@ -12496,7 +12508,7 @@
 									try {
 										return this.processSegmentAgainstRoute(u, e, n, r);
 									} catch (c) {
-										if (!(c instanceof Tm)) throw c;
+										if (!(c instanceof Im)) throw c;
 									}
 								}
 							} catch (p) {
@@ -12509,30 +12521,30 @@
 								}
 							}
 							if (this.noLeftoversInUrl(e, n, r)) return [];
-							throw new Tm();
+							throw new Im();
 						}),
 						(t.prototype.noLeftoversInUrl = function(t, e, n) {
 							return 0 === e.length && !t.children[n];
 						}),
 						(t.prototype.processSegmentAgainstRoute = function(t, e, n, r) {
-							if (t.redirectTo) throw new Tm();
-							if ((t.outlet || Jh) !== r) throw new Tm();
+							if (t.redirectTo) throw new Im();
+							if ((t.outlet || Yh) !== r) throw new Im();
 							var o,
 								a = [],
 								s = [];
 							if ('**' === t.path) {
-								var l = n.length > 0 ? ug(n).parameters : {};
-								o = new Fg(n, l, Object.freeze(i({}, this.urlTree.queryParams)), this.urlTree.fragment, Um(t), r, t.component, t, Am(e), jm(e) + n.length, Lm(t));
+								var l = n.length > 0 ? lg(n).parameters : {};
+								o = new Vg(n, l, Object.freeze(i({}, this.urlTree.queryParams)), this.urlTree.fragment, Nm(t), r, t.component, t, Mm(e), Am(e) + n.length, Um(t));
 							} else {
 								var u = (function(t, e, n) {
 									if ('' === e.path) {
-										if ('full' === e.pathMatch && (t.hasChildren() || n.length > 0)) throw new Tm();
+										if ('full' === e.pathMatch && (t.hasChildren() || n.length > 0)) throw new Im();
 										return { consumedSegments: [], lastChild: 0, parameters: {} };
 									}
-									var r = (e.matcher || eg)(n, t, e);
-									if (!r) throw new Tm();
+									var r = (e.matcher || tg)(n, t, e);
+									if (!r) throw new Im();
 									var o = {};
-									cg(r.posParams, function(t, e) {
+									ug(r.posParams, function(t, e) {
 										o[e] = t.path;
 									});
 									var a = r.consumed.length > 0 ? i({}, o, r.consumed[r.consumed.length - 1].parameters) : o;
@@ -12540,55 +12552,55 @@
 								})(e, t, n);
 								(a = u.consumedSegments),
 									(s = n.slice(u.lastChild)),
-									(o = new Fg(a, u.parameters, Object.freeze(i({}, this.urlTree.queryParams)), this.urlTree.fragment, Um(t), r, t.component, t, Am(e), jm(e) + a.length, Lm(t)));
+									(o = new Vg(a, u.parameters, Object.freeze(i({}, this.urlTree.queryParams)), this.urlTree.fragment, Nm(t), r, t.component, t, Mm(e), Am(e) + a.length, Um(t)));
 							}
 							var c = (function(t) {
 									return t.children ? t.children : t.loadChildren ? t._loadedConfig.routes : [];
 								})(t),
-								p = Rm(e, a, s, c, this.relativeLinkResolution),
+								p = jm(e, a, s, c, this.relativeLinkResolution),
 								f = p.segmentGroup,
 								d = p.slicedSegments;
 							if (0 === d.length && f.hasChildren()) {
 								var h = this.processChildren(c, f);
-								return [new Ng(o, h)];
+								return [new Dg(o, h)];
 							}
-							if (0 === c.length && 0 === d.length) return [new Ng(o, [])];
-							var g = this.processSegment(c, f, d, Jh);
-							return [new Ng(o, g)];
+							if (0 === c.length && 0 === d.length) return [new Dg(o, [])];
+							var g = this.processSegment(c, f, d, Yh);
+							return [new Dg(o, g)];
 						}),
 						t
 					);
 				})();
-			function Am(t) {
+			function Mm(t) {
 				for (var e = t; e._sourceSegment; ) e = e._sourceSegment;
 				return e;
 			}
-			function jm(t) {
+			function Am(t) {
 				for (var e = t, n = e._segmentIndexShift ? e._segmentIndexShift : 0; e._sourceSegment; ) n += (e = e._sourceSegment)._segmentIndexShift ? e._segmentIndexShift : 0;
 				return n - 1;
 			}
-			function Rm(t, e, n, r, o) {
+			function jm(t, e, n, r, o) {
 				if (
 					n.length > 0 &&
 					(function(t, e, n) {
 						return r.some(function(n) {
-							return Dm(t, e, n) && Nm(n) !== Jh;
+							return Rm(t, e, n) && Dm(n) !== Yh;
 						});
 					})(t, n)
 				) {
-					var a = new hg(
+					var a = new dg(
 						e,
 						(function(t, e, n, r) {
 							var o,
 								i,
 								a = {};
-							(a[Jh] = r), (r._sourceSegment = t), (r._segmentIndexShift = e.length);
+							(a[Yh] = r), (r._sourceSegment = t), (r._segmentIndexShift = e.length);
 							try {
 								for (var s = l(n), u = s.next(); !u.done; u = s.next()) {
 									var c = u.value;
-									if ('' === c.path && Nm(c) !== Jh) {
-										var p = new hg([], {});
-										(p._sourceSegment = t), (p._segmentIndexShift = e.length), (a[Nm(c)] = p);
+									if ('' === c.path && Dm(c) !== Yh) {
+										var p = new dg([], {});
+										(p._sourceSegment = t), (p._segmentIndexShift = e.length), (a[Dm(c)] = p);
 									}
 								}
 							} catch (f) {
@@ -12601,7 +12613,7 @@
 								}
 							}
 							return a;
-						})(t, e, r, new hg(n, t.children))
+						})(t, e, r, new dg(n, t.children))
 					);
 					return (a._sourceSegment = t), (a._segmentIndexShift = e.length), { segmentGroup: a, slicedSegments: [] };
 				}
@@ -12609,11 +12621,11 @@
 					0 === n.length &&
 					(function(t, e, n) {
 						return r.some(function(n) {
-							return Dm(t, e, n);
+							return Rm(t, e, n);
 						});
 					})(t, n)
 				) {
-					var s = new hg(
+					var s = new dg(
 						t.segments,
 						(function(t, e, n, r, o, a) {
 							var s,
@@ -12622,9 +12634,9 @@
 							try {
 								for (var p = l(r), f = p.next(); !f.done; f = p.next()) {
 									var d = f.value;
-									if (Dm(t, n, d) && !o[Nm(d)]) {
-										var h = new hg([], {});
-										(h._sourceSegment = t), (h._segmentIndexShift = 'legacy' === a ? t.segments.length : e.length), (c[Nm(d)] = h);
+									if (Rm(t, n, d) && !o[Dm(d)]) {
+										var h = new dg([], {});
+										(h._sourceSegment = t), (h._segmentIndexShift = 'legacy' === a ? t.segments.length : e.length), (c[Dm(d)] = h);
 									}
 								}
 							} catch (g) {
@@ -12641,45 +12653,45 @@
 					);
 					return (s._sourceSegment = t), (s._segmentIndexShift = e.length), { segmentGroup: s, slicedSegments: n };
 				}
-				var u = new hg(t.segments, t.children);
+				var u = new dg(t.segments, t.children);
 				return (u._sourceSegment = t), (u._segmentIndexShift = e.length), { segmentGroup: u, slicedSegments: n };
 			}
-			function Dm(t, e, n) {
+			function Rm(t, e, n) {
 				return (!(t.hasChildren() || e.length > 0) || 'full' !== n.pathMatch) && '' === n.path && void 0 === n.redirectTo;
 			}
-			function Nm(t) {
-				return t.outlet || Jh;
+			function Dm(t) {
+				return t.outlet || Yh;
 			}
-			function Um(t) {
+			function Nm(t) {
 				return t.data || {};
 			}
-			function Lm(t) {
+			function Um(t) {
 				return t.resolve || {};
 			}
-			function Hm(t, e, n, r) {
-				var o = _m(t, e, r);
-				return pg(o.resolve ? o.resolve(e, n) : o(e, n));
+			function Lm(t, e, n, r) {
+				var o = wm(t, e, r);
+				return cg(o.resolve ? o.resolve(e, n) : o(e, n));
 			}
-			function zm(t) {
+			function Hm(t) {
 				return function(e) {
 					return e.pipe(
-						xh(function(e) {
+						vh(function(e) {
 							var n = t(e);
 							return n
-								? tt(n).pipe(
-										J(function() {
+								? K(n).pipe(
+										W(function() {
 											return e;
 										})
 								  )
-								: tt([e]);
+								: K([e]);
 						})
 					);
 				};
 			}
-			var Vm = (function() {
+			var zm = (function() {
 					return function() {};
 				})(),
-				Fm = (function() {
+				Vm = (function() {
 					function t() {}
 					return (
 						(t.prototype.shouldDetach = function(t) {
@@ -12698,8 +12710,8 @@
 						t
 					);
 				})(),
-				Bm = new Lt('ROUTES'),
-				qm = (function() {
+				Fm = new Nt('ROUTES'),
+				Bm = (function() {
 					function t(t, e, n, r) {
 						(this.loader = t), (this.compiler = e), (this.onLoadStartListener = n), (this.onLoadEndListener = r);
 					}
@@ -12709,10 +12721,10 @@
 							return (
 								this.onLoadStartListener && this.onLoadStartListener(e),
 								this.loadModuleFactory(e.loadChildren).pipe(
-									J(function(r) {
+									W(function(r) {
 										n.onLoadEndListener && n.onLoadEndListener(e);
 										var o = r.create(t);
-										return new ng(lg(o.injector.get(Bm)).map(ag), o);
+										return new eg(sg(o.injector.get(Fm)).map(ig), o);
 									})
 								)
 							);
@@ -12720,20 +12732,20 @@
 						(t.prototype.loadModuleFactory = function(t) {
 							var e = this;
 							return 'string' == typeof t
-								? tt(this.loader.load(t))
-								: pg(t()).pipe(
-										et(function(t) {
-											return t instanceof iu ? Vd(t) : tt(e.compiler.compileModuleAsync(t));
+								? K(this.loader.load(t))
+								: cg(t()).pipe(
+										X(function(t) {
+											return t instanceof ru ? Nd(t) : K(e.compiler.compileModuleAsync(t));
 										})
 								  );
 						}),
 						t
 					);
 				})(),
-				Gm = (function() {
+				qm = (function() {
 					return function() {};
 				})(),
-				Zm = (function() {
+				Gm = (function() {
 					function t() {}
 					return (
 						(t.prototype.shouldProcessUrl = function(t) {
@@ -12748,16 +12760,16 @@
 						t
 					);
 				})();
-			function Wm(t) {
+			function Zm(t) {
 				throw t;
 			}
-			function Qm(t, e, n) {
+			function Wm(t, e, n) {
 				return e.parse('/');
 			}
-			function Ym(t, e) {
-				return Vd(null);
+			function Qm(t, e) {
+				return Nd(null);
 			}
-			var Jm = (function() {
+			var Ym = (function() {
 					function t(t, e, n, r, o, i, a, s) {
 						var l = this;
 						(this.rootComponentType = t),
@@ -12770,37 +12782,37 @@
 							(this.navigationId = 0),
 							(this.isNgZoneEnabled = !1),
 							(this.events = new D()),
-							(this.errorHandler = Wm),
-							(this.malformedUriErrorHandler = Qm),
+							(this.errorHandler = Zm),
+							(this.malformedUriErrorHandler = Wm),
 							(this.navigated = !1),
 							(this.lastSuccessfulId = -1),
-							(this.hooks = { beforePreactivation: Ym, afterPreactivation: Ym }),
-							(this.urlHandlingStrategy = new Zm()),
-							(this.routeReuseStrategy = new Fm()),
+							(this.hooks = { beforePreactivation: Qm, afterPreactivation: Qm }),
+							(this.urlHandlingStrategy = new Gm()),
+							(this.routeReuseStrategy = new Vm()),
 							(this.onSameUrlNavigation = 'ignore'),
 							(this.paramsInheritanceStrategy = 'emptyOnly'),
 							(this.urlUpdateStrategy = 'deferred'),
 							(this.relativeLinkResolution = 'legacy'),
-							(this.ngModule = o.get(ou)),
-							(this.console = o.get(Ic));
-						var u = o.get(Wc);
-						(this.isNgZoneEnabled = u instanceof Wc),
+							(this.ngModule = o.get(nu)),
+							(this.console = o.get(Ec));
+						var u = o.get(Gc);
+						(this.isNgZoneEnabled = u instanceof Gc),
 							this.resetConfig(s),
-							(this.currentUrlTree = new dg(new hg([], {}), {}, null)),
+							(this.currentUrlTree = new fg(new dg([], {}), {}, null)),
 							(this.rawUrlTree = this.currentUrlTree),
 							(this.browserUrlTree = this.currentUrlTree),
-							(this.configLoader = new qm(
+							(this.configLoader = new Bm(
 								i,
 								a,
 								function(t) {
-									return l.triggerEvent(new Fh(t));
+									return l.triggerEvent(new Vh(t));
 								},
 								function(t) {
-									return l.triggerEvent(new Bh(t));
+									return l.triggerEvent(new Fh(t));
 								}
 							)),
-							(this.routerState = Hg(this.currentUrlTree, this.rootComponentType)),
-							(this.transitions = new Fd({
+							(this.routerState = Lg(this.currentUrlTree, this.rootComponentType)),
+							(this.transitions = new Ud({
 								id: 0,
 								currentUrlTree: this.currentUrlTree,
 								currentRawUrl: this.currentUrlTree,
@@ -12828,21 +12840,21 @@
 							var e = this,
 								n = this.events;
 							return t.pipe(
-								Jd(function(t) {
+								Wd(function(t) {
 									return 0 !== t.id;
 								}),
-								J(function(t) {
+								W(function(t) {
 									return i({}, t, { extractedUrl: e.urlHandlingStrategy.extract(t.rawUrl) });
 								}),
-								xh(function(t) {
+								vh(function(t) {
 									var r,
 										o,
 										a,
 										s,
 										u = !1,
 										c = !1;
-									return Vd(t).pipe(
-										oh(function(t) {
+									return Nd(t).pipe(
+										Ph(function(t) {
 											e.currentNavigation = {
 												id: t.id,
 												initialUrl: t.currentRawUrl,
@@ -12852,19 +12864,19 @@
 												previousNavigation: e.lastSuccessfulNavigation ? i({}, e.lastSuccessfulNavigation, { previousNavigation: null }) : null
 											};
 										}),
-										xh(function(t) {
+										vh(function(t) {
 											var r,
 												o,
 												a,
 												s,
 												l = !e.navigated || t.extractedUrl.toString() !== e.browserUrlTree.toString();
 											if (('reload' === e.onSameUrlNavigation || l) && e.urlHandlingStrategy.shouldProcessUrl(t.rawUrl))
-												return Vd(t).pipe(
-													xh(function(t) {
+												return Nd(t).pipe(
+													vh(function(t) {
 														var r = e.transitions.getValue();
-														return n.next(new jh(t.id, e.serializeUrl(t.extractedUrl), t.source, t.restoredState)), r !== e.transitions.getValue() ? Ld : [t];
+														return n.next(new Ah(t.id, e.serializeUrl(t.extractedUrl), t.source, t.restoredState)), r !== e.transitions.getValue() ? Bd : [t];
 													}),
-													xh(function(t) {
+													vh(function(t) {
 														return Promise.resolve(t);
 													}),
 													((r = e.ngModule.injector),
@@ -12873,28 +12885,28 @@
 													(s = e.config),
 													function(t) {
 														return t.pipe(
-															xh(function(t) {
+															vh(function(t) {
 																return (function(e, n, r, o, i) {
-																	return new hm(e, n, r, t.extractedUrl, i).apply();
+																	return new dm(e, n, r, t.extractedUrl, i).apply();
 																})(r, o, a, 0, s).pipe(
-																	J(function(e) {
+																	W(function(e) {
 																		return i({}, t, { urlAfterRedirects: e });
 																	})
 																);
 															})
 														);
 													}),
-													oh(function(t) {
+													Ph(function(t) {
 														e.currentNavigation = i({}, e.currentNavigation, { finalUrl: t.urlAfterRedirects });
 													}),
 													(function(t, n, r, o, a) {
 														return function(r) {
 															return r.pipe(
-																et(function(r) {
+																X(function(r) {
 																	return (function(t, e, n, r, o, i) {
-																		return void 0 === o && (o = 'emptyOnly'), void 0 === i && (i = 'legacy'), new Mm(t, e, n, r, o, i).recognize();
+																		return void 0 === o && (o = 'emptyOnly'), void 0 === i && (i = 'legacy'), new Tm(t, e, n, r, o, i).recognize();
 																	})(t, n, r.urlAfterRedirects, ((s = r.urlAfterRedirects), e.serializeUrl(s)), o, a).pipe(
-																		J(function(t) {
+																		W(function(t) {
 																			return i({}, r, { targetSnapshot: t });
 																		})
 																	);
@@ -12903,13 +12915,13 @@
 															);
 														};
 													})(e.rootComponentType, e.config, 0, e.paramsInheritanceStrategy, e.relativeLinkResolution),
-													oh(function(t) {
+													Ph(function(t) {
 														'eager' === e.urlUpdateStrategy &&
 															(t.extras.skipLocationChange || e.setBrowserUrl(t.urlAfterRedirects, !!t.extras.replaceUrl, t.id, t.extras.state),
 															(e.browserUrlTree = t.urlAfterRedirects));
 													}),
-													oh(function(t) {
-														var r = new Uh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
+													Ph(function(t) {
+														var r = new Nh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
 														n.next(r);
 													})
 												);
@@ -12918,14 +12930,14 @@
 													c = t.source,
 													p = t.restoredState,
 													f = t.extras,
-													d = new jh(t.id, e.serializeUrl(u), c, p);
+													d = new Ah(t.id, e.serializeUrl(u), c, p);
 												n.next(d);
-												var h = Hg(u, e.rootComponentType).snapshot;
-												return Vd(i({}, t, { targetSnapshot: h, urlAfterRedirects: u, extras: i({}, f, { skipLocationChange: !1, replaceUrl: !1 }) }));
+												var h = Lg(u, e.rootComponentType).snapshot;
+												return Nd(i({}, t, { targetSnapshot: h, urlAfterRedirects: u, extras: i({}, f, { skipLocationChange: !1, replaceUrl: !1 }) }));
 											}
-											return (e.rawUrlTree = t.rawUrl), (e.browserUrlTree = t.urlAfterRedirects), t.resolve(null), Ld;
+											return (e.rawUrlTree = t.rawUrl), (e.browserUrlTree = t.urlAfterRedirects), t.resolve(null), Bd;
 										}),
-										zm(function(t) {
+										Hm(function(t) {
 											var n = t.extras;
 											return e.hooks.beforePreactivation(t.targetSnapshot, {
 												navigationId: t.id,
@@ -12935,78 +12947,78 @@
 												replaceUrl: !!n.replaceUrl
 											});
 										}),
-										oh(function(t) {
-											var n = new Lh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
+										Ph(function(t) {
+											var n = new Uh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
 											e.triggerEvent(n);
 										}),
-										J(function(t) {
+										W(function(t) {
 											return i({}, t, {
-												guards: ((n = t.targetSnapshot), (r = t.currentSnapshot), (o = e.rootContexts), (a = n._root), xm(a, r ? r._root : null, o, [a.value]))
+												guards: ((n = t.targetSnapshot), (r = t.currentSnapshot), (o = e.rootContexts), (a = n._root), _m(a, r ? r._root : null, o, [a.value]))
 											});
 											var n, r, o, a;
 										}),
 										(function(t, e) {
 											return function(n) {
 												return n.pipe(
-													et(function(n) {
+													X(function(n) {
 														var r = n.targetSnapshot,
 															o = n.currentSnapshot,
 															a = n.guards,
 															s = a.canActivateChecks,
 															l = a.canDeactivateChecks;
 														return 0 === l.length && 0 === s.length
-															? Vd(i({}, n, { guardsResult: !0 }))
+															? Nd(i({}, n, { guardsResult: !0 }))
 															: (function(t, e, n, r) {
-																	return tt(l).pipe(
-																		et(function(t) {
+																	return K(l).pipe(
+																		X(function(t) {
 																			return (function(t, e, n, r, o) {
 																				var i = e && e.routeConfig ? e.routeConfig.canDeactivate : null;
 																				return i && 0 !== i.length
-																					? Vd(
+																					? Nd(
 																							i.map(function(i) {
 																								var a,
-																									s = _m(i, e, o);
+																									s = wm(i, e, o);
 																								if (
 																									(function(t) {
-																										return t && sm(t.canDeactivate);
+																										return t && am(t.canDeactivate);
 																									})(s)
 																								)
-																									a = pg(s.canDeactivate(t, e, n, r));
+																									a = cg(s.canDeactivate(t, e, n, r));
 																								else {
-																									if (!sm(s)) throw new Error('Invalid CanDeactivate guard');
-																									a = pg(s(t, e, n, r));
+																									if (!am(s)) throw new Error('Invalid CanDeactivate guard');
+																									a = cg(s(t, e, n, r));
 																								}
-																								return a.pipe(yh());
+																								return a.pipe(gh());
 																							})
-																					  ).pipe(Sm())
-																					: Vd(!0);
+																					  ).pipe(km())
+																					: Nd(!0);
 																			})(t.component, t.route, n, e, r);
 																		}),
-																		yh(function(t) {
+																		gh(function(t) {
 																			return !0 !== t;
 																		}, !0)
 																	);
 															  })(0, r, o, t).pipe(
-																	et(function(n) {
+																	X(function(n) {
 																		return n && 'boolean' == typeof n
 																			? (function(t, e, n, r) {
-																					return tt(s).pipe(
-																						Ih(function(e) {
-																							return tt([Em(e.route.parent, r), Pm(e.route, r), Im(t, e.path, n), Om(t, e.route, n)]).pipe(
-																								Yd(),
-																								yh(function(t) {
+																					return K(s).pipe(
+																						Sh(function(e) {
+																							return K([Pm(e.route.parent, r), Sm(e.route, r), Om(t, e.path, n), Em(t, e.route, n)]).pipe(
+																								Zd(),
+																								gh(function(t) {
 																									return !0 !== t;
 																								}, !0)
 																							);
 																						}),
-																						yh(function(t) {
+																						gh(function(t) {
 																							return !0 !== t;
 																						}, !0)
 																					);
 																			  })(r, 0, t, e)
-																			: Vd(n);
+																			: Nd(n);
 																	}),
-																	J(function(t) {
+																	W(function(t) {
 																		return i({}, n, { guardsResult: t });
 																	})
 															  );
@@ -13016,74 +13028,74 @@
 										})(e.ngModule.injector, function(t) {
 											return e.triggerEvent(t);
 										}),
-										oh(function(t) {
-											if (lm(t.guardsResult)) {
-												var n = tg('Redirecting to "' + e.serializeUrl(t.guardsResult) + '"');
+										Ph(function(t) {
+											if (sm(t.guardsResult)) {
+												var n = $h('Redirecting to "' + e.serializeUrl(t.guardsResult) + '"');
 												throw ((n.url = t.guardsResult), n);
 											}
 										}),
-										oh(function(t) {
-											var n = new Hh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot, !!t.guardsResult);
+										Ph(function(t) {
+											var n = new Lh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot, !!t.guardsResult);
 											e.triggerEvent(n);
 										}),
-										Jd(function(t) {
+										Wd(function(t) {
 											if (!t.guardsResult) {
 												e.resetUrlToCurrentUrlTree();
-												var r = new Dh(t.id, e.serializeUrl(t.extractedUrl), '');
+												var r = new Rh(t.id, e.serializeUrl(t.extractedUrl), '');
 												return n.next(r), t.resolve(!1), !1;
 											}
 											return !0;
 										}),
-										zm(function(t) {
+										Hm(function(t) {
 											if (t.guards.canActivateChecks.length)
-												return Vd(t).pipe(
-													oh(function(t) {
-														var n = new zh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
+												return Nd(t).pipe(
+													Ph(function(t) {
+														var n = new Hh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
 														e.triggerEvent(n);
 													}),
 													((n = e.paramsInheritanceStrategy),
 													(r = e.ngModule.injector),
 													function(t) {
 														return t.pipe(
-															et(function(t) {
+															X(function(t) {
 																var e = t.targetSnapshot,
 																	o = t.guards.canActivateChecks;
 																return o.length
-																	? tt(o).pipe(
-																			Ih(function(t) {
+																	? K(o).pipe(
+																			Sh(function(t) {
 																				return (function(t, n, r, o) {
 																					return (function(t, e, n, r) {
 																						var o = Object.keys(t);
-																						if (0 === o.length) return Vd({});
+																						if (0 === o.length) return Nd({});
 																						if (1 === o.length) {
 																							var i = o[0];
-																							return Hm(t[i], e, n, r).pipe(
-																								J(function(t) {
+																							return Lm(t[i], e, n, r).pipe(
+																								W(function(t) {
 																									var e;
 																									return ((e = {})[i] = t), e;
 																								})
 																							);
 																						}
 																						var a = {};
-																						return tt(o)
+																						return K(o)
 																							.pipe(
-																								et(function(o) {
-																									return Hm(t[o], e, n, r).pipe(
-																										J(function(t) {
+																								X(function(o) {
+																									return Lm(t[o], e, n, r).pipe(
+																										W(function(t) {
 																											return (a[o] = t), t;
 																										})
 																									);
 																								})
 																							)
 																							.pipe(
-																								fh(),
-																								J(function() {
+																								lh(),
+																								W(function() {
 																									return a;
 																								})
 																							);
 																					})(t._resolve, t, e, o).pipe(
-																						J(function(e) {
-																							return (t._resolvedData = e), (t.data = i({}, t.data, Vg(t, r).resolve)), null;
+																						W(function(e) {
+																							return (t._resolvedData = e), (t.data = i({}, t.data, zg(t, r).resolve)), null;
 																						})
 																					);
 																				})(t.route, 0, n, r);
@@ -13091,35 +13103,35 @@
 																			(function(t, e) {
 																				return arguments.length >= 2
 																					? function(n) {
-																							return E(Ph(t, e), eh(1), uh(e))(n);
+																							return E(xh(t, e), Xd(1), ih(e))(n);
 																					  }
 																					: function(e) {
 																							return E(
-																								Ph(function(e, n, r) {
+																								xh(function(e, n, r) {
 																									return t(e, n, r + 1);
 																								}),
-																								eh(1)
+																								Xd(1)
 																							)(e);
 																					  };
 																			})(function(t, e) {
 																				return t;
 																			}),
-																			J(function(e) {
+																			W(function(e) {
 																				return t;
 																			})
 																	  )
-																	: Vd(t);
+																	: Nd(t);
 															})
 														);
 													}),
-													oh(function(t) {
-														var n = new Vh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
+													Ph(function(t) {
+														var n = new zh(t.id, e.serializeUrl(t.extractedUrl), e.serializeUrl(t.urlAfterRedirects), t.targetSnapshot);
 														e.triggerEvent(n);
 													})
 												);
 											var n, r;
 										}),
-										zm(function(t) {
+										Hm(function(t) {
 											var n = t.extras;
 											return e.hooks.afterPreactivation(t.targetSnapshot, {
 												navigationId: t.id,
@@ -13129,7 +13141,7 @@
 												replaceUrl: !!n.replaceUrl
 											});
 										}),
-										J(function(t) {
+										W(function(t) {
 											var n,
 												r,
 												o,
@@ -13157,7 +13169,7 @@
 																	return t(e, n);
 																});
 															})(e, n, r);
-															return new Ng(u, o);
+															return new Dg(u, o);
 														}
 														var i = e.retrieve(n.value);
 														if (i) {
@@ -13175,12 +13187,12 @@
 															);
 														}
 														var s,
-															u = new zg(
-																new Fd((s = n.value).url),
-																new Fd(s.params),
-																new Fd(s.queryParams),
-																new Fd(s.fragment),
-																new Fd(s.data),
+															u = new Hg(
+																new Ud((s = n.value).url),
+																new Ud(s.params),
+																new Ud(s.queryParams),
+																new Ud(s.fragment),
+																new Ud(s.data),
 																s.outlet,
 																s.component,
 																s
@@ -13189,13 +13201,13 @@
 															(o = n.children.map(function(n) {
 																return t(e, n);
 															})),
-															new Ng(u, o)
+															new Dg(u, o)
 														);
 													})(e.routeReuseStrategy, (n = t.targetSnapshot)._root, (r = t.currentRouterState) ? r._root : void 0)),
-													new Lg(o, n));
+													new Ug(o, n));
 											return i({}, t, { targetRouterState: a });
 										}),
-										oh(function(t) {
+										Ph(function(t) {
 											(e.currentUrlTree = t.urlAfterRedirects),
 												(e.rawUrlTree = e.urlHandlingStrategy.merge(e.currentUrlTree, t.rawUrl)),
 												(e.routerState = t.targetRouterState),
@@ -13208,10 +13220,10 @@
 										(s = function(t) {
 											return e.triggerEvent(t);
 										}),
-										J(function(t) {
-											return new im(a, t.targetRouterState, t.currentRouterState, s).activate(o), t;
+										W(function(t) {
+											return new om(a, t.targetRouterState, t.currentRouterState, s).activate(o), t;
 										})),
-										oh({
+										Ph({
 											next: function() {
 												u = !0;
 											},
@@ -13222,23 +13234,23 @@
 										((r = function() {
 											if (!u && !c) {
 												e.resetUrlToCurrentUrlTree();
-												var r = new Dh(t.id, e.serializeUrl(t.extractedUrl), 'Navigation ID ' + t.id + ' is not equal to the current navigation id ' + e.navigationId);
+												var r = new Rh(t.id, e.serializeUrl(t.extractedUrl), 'Navigation ID ' + t.id + ' is not equal to the current navigation id ' + e.navigationId);
 												n.next(r), t.resolve(!1);
 											}
 											e.currentNavigation = null;
 										}),
 										function(t) {
-											return t.lift(new Th(r));
+											return t.lift(new Ih(r));
 										}),
-										dh(function(r) {
-											if (((c = !0), (s = r) && s[$h])) {
-												var o = lm(r.url);
+										uh(function(r) {
+											if (((c = !0), (s = r) && s[Xh])) {
+												var o = sm(r.url);
 												o || ((e.navigated = !0), e.resetStateAndUrl(t.currentRouterState, t.currentUrlTree, t.rawUrl));
-												var i = new Dh(t.id, e.serializeUrl(t.extractedUrl), r.message);
+												var i = new Rh(t.id, e.serializeUrl(t.extractedUrl), r.message);
 												n.next(i), t.resolve(!1), o && e.navigateByUrl(r.url);
 											} else {
 												e.resetStateAndUrl(t.currentRouterState, t.currentUrlTree, t.rawUrl);
-												var a = new Nh(t.id, e.serializeUrl(t.extractedUrl), r);
+												var a = new Dh(t.id, e.serializeUrl(t.extractedUrl), r);
 												n.next(a);
 												try {
 													t.resolve(e.errorHandler(r));
@@ -13247,7 +13259,7 @@
 												}
 											}
 											var s;
-											return Ld;
+											return Bd;
 										})
 									);
 								})
@@ -13292,7 +13304,7 @@
 							this.events.next(t);
 						}),
 						(t.prototype.resetConfig = function(t) {
-							rg(t), (this.config = t.map(ag)), (this.navigated = !1), (this.lastSuccessfulId = -1);
+							ng(t), (this.config = t.map(ig)), (this.navigated = !1), (this.lastSuccessfulId = -1);
 						}),
 						(t.prototype.ngOnDestroy = function() {
 							this.dispose();
@@ -13308,7 +13320,7 @@
 								a = e.preserveQueryParams,
 								s = e.queryParamsHandling,
 								l = e.preserveFragment;
-							Tr() && a && console && console.warn && console.warn('preserveQueryParams is deprecated, use queryParamsHandling instead.');
+							Or() && a && console && console.warn && console.warn('preserveQueryParams is deprecated, use queryParamsHandling instead.');
 							var u = n || this.routerState.root,
 								p = l ? this.currentUrlTree.fragment : o,
 								f = null;
@@ -13327,9 +13339,9 @@
 							return (
 								null !== f && (f = this.removeEmptyProps(f)),
 								(function(t, e, n, r, o) {
-									if (0 === n.length) return Yg(e.root, e.root, e, r, o);
+									if (0 === n.length) return Qg(e.root, e.root, e, r, o);
 									var i = (function(t) {
-										if ('string' == typeof t[0] && 1 === t.length && '/' === t[0]) return new Jg(!0, 0, t);
+										if ('string' == typeof t[0] && 1 === t.length && '/' === t[0]) return new Yg(!0, 0, t);
 										var e = 0,
 											n = !1,
 											r = t.reduce(function(t, r, o) {
@@ -13337,7 +13349,7 @@
 													if (r.outlets) {
 														var i = {};
 														return (
-															cg(r.outlets, function(t, e) {
+															ug(r.outlets, function(t, e) {
 																i[e] = 'string' == typeof t ? t.split('/') : t;
 															}),
 															c(t, [{ outlets: i }])
@@ -13354,30 +13366,30 @@
 													  t)
 													: c(t, [r]);
 											}, []);
-										return new Jg(n, e, r);
+										return new Yg(n, e, r);
 									})(n);
-									if (i.toRoot()) return Yg(e.root, new hg([], {}), e, r, o);
+									if (i.toRoot()) return Qg(e.root, new dg([], {}), e, r, o);
 									var a = (function(t, n, r) {
-											if (t.isAbsolute) return new Kg(e.root, !0, 0);
-											if (-1 === r.snapshot._lastPathIndex) return new Kg(r.snapshot._urlSegment, !0, 0);
-											var o = Qg(t.commands[0]) ? 0 : 1;
+											if (t.isAbsolute) return new Jg(e.root, !0, 0);
+											if (-1 === r.snapshot._lastPathIndex) return new Jg(r.snapshot._urlSegment, !0, 0);
+											var o = Wg(t.commands[0]) ? 0 : 1;
 											return (function(e, n, i) {
 												for (var a = r.snapshot._urlSegment, s = r.snapshot._lastPathIndex + o, l = t.numberOfDoubleDots; l > s; ) {
 													if (((l -= s), !(a = a.parent))) throw new Error("Invalid number of '../'");
 													s = a.segments.length;
 												}
-												return new Kg(a, !1, s - l);
+												return new Jg(a, !1, s - l);
 											})();
 										})(i, 0, t),
-										s = a.processChildren ? tm(a.segmentGroup, a.index, i.commands) : $g(a.segmentGroup, a.index, i.commands);
-									return Yg(a.segmentGroup, s, e, r, o);
+										s = a.processChildren ? $g(a.segmentGroup, a.index, i.commands) : Xg(a.segmentGroup, a.index, i.commands);
+									return Qg(a.segmentGroup, s, e, r, o);
 								})(u, this.currentUrlTree, t, f, p)
 							);
 						}),
 						(t.prototype.navigateByUrl = function(t, e) {
 							void 0 === e && (e = { skipLocationChange: !1 }),
-								Tr() && this.isNgZoneEnabled && !Wc.isInAngularZone() && this.console.warn("Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?");
-							var n = lm(t) ? t : this.parseUrl(t),
+								Or() && this.isNgZoneEnabled && !Gc.isInAngularZone() && this.console.warn("Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?");
+							var n = sm(t) ? t : this.parseUrl(t),
 								r = this.urlHandlingStrategy.merge(n, this.rawUrlTree);
 							return this.scheduleNavigation(r, 'imperative', null, e);
 						}),
@@ -13406,9 +13418,9 @@
 							return e;
 						}),
 						(t.prototype.isActive = function(t, e) {
-							if (lm(t)) return fg(this.currentUrlTree, t, e);
+							if (sm(t)) return pg(this.currentUrlTree, t, e);
 							var n = this.parseUrl(t);
-							return fg(this.currentUrlTree, n, e);
+							return pg(this.currentUrlTree, n, e);
 						}),
 						(t.prototype.removeEmptyProps = function(t) {
 							return Object.keys(t).reduce(function(e, n) {
@@ -13422,7 +13434,7 @@
 								function(e) {
 									(t.navigated = !0),
 										(t.lastSuccessfulId = e.id),
-										t.events.next(new Rh(e.id, t.serializeUrl(e.extractedUrl), t.serializeUrl(t.currentUrlTree))),
+										t.events.next(new jh(e.id, t.serializeUrl(e.extractedUrl), t.serializeUrl(t.currentUrlTree))),
 										(t.lastSuccessfulNavigation = t.currentNavigation),
 										(t.currentNavigation = null),
 										e.resolve(!0);
@@ -13477,12 +13489,12 @@
 						t
 					);
 				})(),
-				Km = (function() {
+				Jm = (function() {
 					return function() {
-						(this.outlet = null), (this.route = null), (this.resolver = null), (this.children = new Xm()), (this.attachRef = null);
+						(this.outlet = null), (this.route = null), (this.resolver = null), (this.children = new Km()), (this.attachRef = null);
 					};
 				})(),
-				Xm = (function() {
+				Km = (function() {
 					function t() {
 						this.contexts = new Map();
 					}
@@ -13504,7 +13516,7 @@
 						}),
 						(t.prototype.getOrCreateContext = function(t) {
 							var e = this.getContext(t);
-							return e || ((e = new Km()), this.contexts.set(t, e)), e;
+							return e || ((e = new Jm()), this.contexts.set(t, e)), e;
 						}),
 						(t.prototype.getContext = function(t) {
 							return this.contexts.get(t) || null;
@@ -13512,7 +13524,7 @@
 						t
 					);
 				})(),
-				$m = (function() {
+				Xm = (function() {
 					function t(t, e, n, r, o) {
 						(this.parentContexts = t),
 							(this.location = e),
@@ -13520,9 +13532,9 @@
 							(this.changeDetector = o),
 							(this.activated = null),
 							(this._activatedRoute = null),
-							(this.activateEvents = new tc()),
-							(this.deactivateEvents = new tc()),
-							(this.name = r || Jh),
+							(this.activateEvents = new Xu()),
+							(this.deactivateEvents = new Xu()),
+							(this.name = r || Yh),
 							t.onChildOutletCreated(this.name, this);
 					}
 					return (
@@ -13585,24 +13597,24 @@
 							this._activatedRoute = t;
 							var n = (e = e || this.resolver).resolveComponentFactory(t._futureSnapshot.routeConfig.component),
 								r = this.parentContexts.getOrCreateContext(this.name).children,
-								o = new tb(t, r, this.location.injector);
+								o = new $m(t, r, this.location.injector);
 							(this.activated = this.location.createComponent(n, this.location.length, o)), this.changeDetector.markForCheck(), this.activateEvents.emit(this.activated.instance);
 						}),
-						(t.ngDirectiveDef = ze({
+						(t.ngDirectiveDef = Le({
 							type: t,
 							selectors: [['router-outlet']],
 							factory: function(e) {
 								return new (e || t)(
-									fl(Xm),
-									fl(Ru),
-									fl(ru),
+									cl(Km),
+									cl(Au),
+									cl(eu),
 									('name',
 									(function(t, e) {
 										var n = t.attrs;
 										if (n)
 											for (var r = n.length, o = 0; o < r; ) {
 												var i = n[o];
-												if (Co(i)) break;
+												if (_o(i)) break;
 												if (0 === i) o += 2;
 												else if ('number' == typeof i) {
 													for (o++; o < r && 'string' == typeof n[o]; ) o++;
@@ -13612,8 +13624,8 @@
 												}
 											}
 										return null;
-									})(ir())),
-									fl(Eu)
+									})(rr())),
+									cl(Su)
 								);
 							},
 							outputs: { activateEvents: 'activate', deactivateEvents: 'deactivate' },
@@ -13622,55 +13634,55 @@
 						t
 					);
 				})(),
-				tb = (function() {
+				$m = (function() {
 					function t(t, e, n) {
 						(this.route = t), (this.childContexts = e), (this.parent = n);
 					}
 					return (
 						(t.prototype.get = function(t, e) {
-							return t === zg ? this.route : t === Xm ? this.childContexts : this.parent.get(t, e);
+							return t === Hg ? this.route : t === Km ? this.childContexts : this.parent.get(t, e);
 						}),
 						t
 					);
 				})(),
-				eb = (function() {
+				tb = (function() {
 					return function() {};
 				})(),
-				nb = (function() {
+				eb = (function() {
 					function t() {}
 					return (
 						(t.prototype.preload = function(t, e) {
 							return e().pipe(
-								dh(function() {
-									return Vd(null);
+								uh(function() {
+									return Nd(null);
 								})
 							);
 						}),
 						t
 					);
 				})(),
-				rb = (function() {
+				nb = (function() {
 					function t() {}
 					return (
 						(t.prototype.preload = function(t, e) {
-							return Vd(null);
+							return Nd(null);
 						}),
 						t
 					);
 				})(),
-				ob = (function() {
+				rb = (function() {
 					function t(t, e, n, r, o) {
 						(this.router = t),
 							(this.injector = r),
 							(this.preloadingStrategy = o),
-							(this.loader = new qm(
+							(this.loader = new Bm(
 								e,
 								n,
 								function(e) {
-									return t.triggerEvent(new Fh(e));
+									return t.triggerEvent(new Vh(e));
 								},
 								function(e) {
-									return t.triggerEvent(new Bh(e));
+									return t.triggerEvent(new Fh(e));
 								}
 							));
 					}
@@ -13679,17 +13691,17 @@
 							var t = this;
 							this.subscription = this.router.events
 								.pipe(
-									Jd(function(t) {
-										return t instanceof Rh;
+									Wd(function(t) {
+										return t instanceof jh;
 									}),
-									Ih(function() {
+									Sh(function() {
 										return t.preload();
 									})
 								)
 								.subscribe(function() {});
 						}),
 						(t.prototype.preload = function() {
-							var t = this.injector.get(ou);
+							var t = this.injector.get(nu);
 							return this.processRoutes(t, this.router.config);
 						}),
 						(t.prototype.ngOnDestroy = function() {
@@ -13716,32 +13728,32 @@
 									if (n) throw n.error;
 								}
 							}
-							return tt(o).pipe(
-								it(),
-								J(function(t) {})
+							return K(o).pipe(
+								nt(),
+								W(function(t) {})
 							);
 						}),
 						(t.prototype.preloadConfig = function(t, e) {
 							var n = this;
 							return this.preloadingStrategy.preload(e, function() {
 								return n.loader.load(t.injector, e).pipe(
-									et(function(t) {
+									X(function(t) {
 										return (e._loadedConfig = t), n.processRoutes(t.module, t.routes);
 									})
 								);
 							});
 						}),
-						(t.ngInjectableDef = xt({
+						(t.ngInjectableDef = wt({
 							token: t,
 							factory: function(e) {
-								return new (e || t)(Jt(Jm), Jt(fp), Jt(Lc), Jt(be), Jt(eb));
+								return new (e || t)(Qt(Ym), Qt(cp), Qt(Nc), Qt(ge), Qt(tb));
 							},
 							providedIn: null
 						})),
 						t
 					);
 				})(),
-				ib = (function() {
+				ob = (function() {
 					function t(t, e, n) {
 						void 0 === n && (n = {}),
 							(this.router = t),
@@ -13763,17 +13775,17 @@
 						(t.prototype.createScrollEvents = function() {
 							var t = this;
 							return this.router.events.subscribe(function(e) {
-								e instanceof jh
+								e instanceof Ah
 									? ((t.store[t.lastId] = t.viewportScroller.getScrollPosition()),
 									  (t.lastSource = e.navigationTrigger),
 									  (t.restoredId = e.restoredState ? e.restoredState.navigationId : 0))
-									: e instanceof Rh && ((t.lastId = e.id), t.scheduleScrollEvent(e, t.router.parseUrl(e.urlAfterRedirects).fragment));
+									: e instanceof jh && ((t.lastId = e.id), t.scheduleScrollEvent(e, t.router.parseUrl(e.urlAfterRedirects).fragment));
 							});
 						}),
 						(t.prototype.consumeScrollEvents = function() {
 							var t = this;
 							return this.router.events.subscribe(function(e) {
-								e instanceof Qh &&
+								e instanceof Wh &&
 									(e.position
 										? 'top' === t.options.scrollPositionRestoration
 											? t.viewportScroller.scrollToPosition([0, 0])
@@ -13784,7 +13796,7 @@
 							});
 						}),
 						(t.prototype.scheduleScrollEvent = function(t, e) {
-							this.router.triggerEvent(new Qh(t, 'popstate' === this.lastSource ? this.store[this.restoredId] : null, e));
+							this.router.triggerEvent(new Wh(t, 'popstate' === this.lastSource ? this.store[this.restoredId] : null, e));
 						}),
 						(t.prototype.ngOnDestroy = function() {
 							this.routerEventsSubscription && this.routerEventsSubscription.unsubscribe(), this.scrollEventsSubscription && this.scrollEventsSubscription.unsubscribe();
@@ -13792,16 +13804,16 @@
 						t
 					);
 				})(),
-				ab = new Lt('ROUTER_CONFIGURATION'),
-				sb = new Lt('ROUTER_FORROOT_GUARD'),
-				lb = [
-					kp,
-					{ provide: vg, useClass: yg },
+				ib = new Nt('ROUTER_CONFIGURATION'),
+				ab = new Nt('ROUTER_FORROOT_GUARD'),
+				sb = [
+					xp,
+					{ provide: bg, useClass: vg },
 					{
-						provide: Jm,
+						provide: Ym,
 						useFactory: function(t, e, n, r, o, i, a, s, l, u, c) {
 							void 0 === l && (l = {});
-							var p = new Jm(null, e, n, r, o, i, a, lg(s));
+							var p = new Ym(null, e, n, r, o, i, a, sg(s));
 							if (
 								(u && (p.urlHandlingStrategy = u),
 								c && (p.routeReuseStrategy = c),
@@ -13809,7 +13821,7 @@
 								l.malformedUriErrorHandler && (p.malformedUriErrorHandler = l.malformedUriErrorHandler),
 								l.enableTracing)
 							) {
-								var f = Kp();
+								var f = Yp();
 								p.events.subscribe(function(t) {
 									f.logGroup('Router Event: ' + t.constructor.name), f.log(t.toString()), f.log(t), f.logGroupEnd();
 								});
@@ -13822,26 +13834,26 @@
 								p
 							);
 						},
-						deps: [cp, vg, Xm, kp, be, fp, Lc, Bm, ab, [Gm, new mt()], [Vm, new mt()]]
+						deps: [lp, bg, Km, xp, ge, cp, Nc, Fm, ib, [qm, new ht()], [zm, new ht()]]
 					},
-					Xm,
+					Km,
 					{
-						provide: zg,
+						provide: Hg,
 						useFactory: function(t) {
 							return t.routerState.root;
 						},
-						deps: [Jm]
+						deps: [Ym]
 					},
-					{ provide: fp, useClass: gp },
-					ob,
+					{ provide: cp, useClass: dp },
 					rb,
 					nb,
-					{ provide: ab, useValue: { enableTracing: !1 } }
+					eb,
+					{ provide: ib, useValue: { enableTracing: !1 } }
 				];
-			function ub() {
-				return new ip('Router', Jm);
+			function lb() {
+				return new rp('Router', Ym);
 			}
-			var cb = (function() {
+			var ub = (function() {
 				function t(t, e) {}
 				var e;
 				return (
@@ -13850,63 +13862,63 @@
 						return {
 							ngModule: e,
 							providers: [
-								lb,
-								hb(t),
-								{ provide: sb, useFactory: db, deps: [[Jm, new mt(), new vt()]] },
-								{ provide: ab, useValue: n || {} },
-								{ provide: xp, useFactory: fb, deps: [wp, [new gt(Cp), new mt()], ab] },
-								{ provide: ib, useFactory: pb, deps: [Jm, Qp, ab] },
-								{ provide: eb, useExisting: n && n.preloadingStrategy ? n.preloadingStrategy : rb },
-								{ provide: ip, multi: !0, useFactory: ub },
-								[gb, { provide: yc, multi: !0, useFactory: mb, deps: [gb] }, { provide: vb, useFactory: bb, deps: [gb] }, { provide: Oc, multi: !0, useExisting: vb }]
+								sb,
+								db(t),
+								{ provide: ab, useFactory: fb, deps: [[Ym, new ht(), new mt()]] },
+								{ provide: ib, useValue: n || {} },
+								{ provide: wp, useFactory: pb, deps: [vp, [new dt(_p), new ht()], ib] },
+								{ provide: ob, useFactory: cb, deps: [Ym, Zp, ib] },
+								{ provide: tb, useExisting: n && n.preloadingStrategy ? n.preloadingStrategy : nb },
+								{ provide: rp, multi: !0, useFactory: lb },
+								[hb, { provide: bc, multi: !0, useFactory: gb, deps: [hb] }, { provide: bb, useFactory: mb, deps: [hb] }, { provide: Pc, multi: !0, useExisting: bb }]
 							]
 						};
 					}),
 					(t.forChild = function(t) {
-						return { ngModule: e, providers: [hb(t)] };
+						return { ngModule: e, providers: [db(t)] };
 					}),
-					(t.ngModuleDef = Le({ type: t })),
-					(t.ngInjectorDef = Ct({
+					(t.ngModuleDef = Ne({ type: t })),
+					(t.ngInjectorDef = _t({
 						factory: function(e) {
-							return new (e || t)(Jt(sb, 8), Jt(Jm, 8));
+							return new (e || t)(Qt(ab, 8), Qt(Ym, 8));
 						}
 					})),
 					t
 				);
 			})();
+			function cb(t, e, n) {
+				return n.scrollOffset && e.setOffset(n.scrollOffset), new ob(t, e, n);
+			}
 			function pb(t, e, n) {
-				return n.scrollOffset && e.setOffset(n.scrollOffset), new ib(t, e, n);
+				return void 0 === n && (n = {}), n.useHash ? new kp(t, e) : new Sp(t, e);
 			}
-			function fb(t, e, n) {
-				return void 0 === n && (n = {}), n.useHash ? new Pp(t, e) : new Ep(t, e);
-			}
-			function db(t) {
+			function fb(t) {
 				if (t) throw new Error('RouterModule.forRoot() called twice. Lazy loaded modules should use RouterModule.forChild() instead.');
 				return 'guarded';
 			}
-			function hb(t) {
-				return [{ provide: we, multi: !0, useValue: t }, { provide: Bm, multi: !0, useValue: t }];
+			function db(t) {
+				return [{ provide: ve, multi: !0, useValue: t }, { provide: Fm, multi: !0, useValue: t }];
 			}
-			var gb = (function() {
+			var hb = (function() {
 				function t(t) {
 					(this.injector = t), (this.initNavigation = !1), (this.resultOfPreactivationDone = new D());
 				}
 				return (
 					(t.prototype.appInitializer = function() {
 						var t = this;
-						return this.injector.get(_p, Promise.resolve(null)).then(function() {
+						return this.injector.get(yp, Promise.resolve(null)).then(function() {
 							var e = null,
 								n = new Promise(function(t) {
 									return (e = t);
 								}),
-								r = t.injector.get(Jm),
-								o = t.injector.get(ab);
+								r = t.injector.get(Ym),
+								o = t.injector.get(ib);
 							if (t.isLegacyDisabled(o) || t.isLegacyEnabled(o)) e(!0);
 							else if ('disabled' === o.initialNavigation) r.setUpLocationChangeListener(), e(!0);
 							else {
 								if ('enabled' !== o.initialNavigation) throw new Error("Invalid initialNavigation options: '" + o.initialNavigation + "'");
 								(r.hooks.afterPreactivation = function() {
-									return t.initNavigation ? Vd(null) : ((t.initNavigation = !0), e(!0), t.resultOfPreactivationDone);
+									return t.initNavigation ? Nd(null) : ((t.initNavigation = !0), e(!0), t.resultOfPreactivationDone);
 								}),
 									r.initialNavigation();
 							}
@@ -13914,11 +13926,11 @@
 						});
 					}),
 					(t.prototype.bootstrapListener = function(t) {
-						var e = this.injector.get(ab),
-							n = this.injector.get(ob),
-							r = this.injector.get(ib),
-							o = this.injector.get(Jm),
-							i = this.injector.get(cp);
+						var e = this.injector.get(ib),
+							n = this.injector.get(rb),
+							r = this.injector.get(ob),
+							o = this.injector.get(Ym),
+							i = this.injector.get(lp);
 						t === i.components[0] &&
 							(this.isLegacyEnabled(e) ? o.initialNavigation() : this.isLegacyDisabled(e) && o.setUpLocationChangeListener(),
 							n.setUpPreloading(),
@@ -13933,27 +13945,27 @@
 					(t.prototype.isLegacyDisabled = function(t) {
 						return 'legacy_disabled' === t.initialNavigation || !1 === t.initialNavigation;
 					}),
-					(t.ngInjectableDef = xt({
+					(t.ngInjectableDef = wt({
 						token: t,
 						factory: function(e) {
-							return new (e || t)(Jt(be));
+							return new (e || t)(Qt(ge));
 						},
 						providedIn: null
 					})),
 					t
 				);
 			})();
-			function mb(t) {
+			function gb(t) {
 				return t.appInitializer.bind(t);
 			}
-			function bb(t) {
+			function mb(t) {
 				return t.bootstrapListener.bind(t);
 			}
-			var vb = new Lt('Router Initializer'),
-				yb = (function() {
+			var bb = new Nt('Router Initializer'),
+				vb = (function() {
 					function t() {}
 					return (
-						(t.ngComponentDef = De({
+						(t.ngComponentDef = je({
 							type: t,
 							selectors: [['docs-root']],
 							factory: function(e) {
@@ -13962,8964 +13974,8964 @@
 							consts: 2,
 							vars: 0,
 							template: function(t, e) {
-								1 & t && (wl(0, 'ez-root'), xl(1, 'router-outlet'), _l());
+								1 & t && (vl(0, 'ez-root'), wl(1, 'router-outlet'), yl());
 							},
-							directives: [Dd, $m],
+							directives: [jd, Xm],
 							styles: ['']
 						})),
 						t
 					);
 				})(),
-				wb = [1, 'pad-a-sm', 'border-a-gray', 'box-shadow-1', 'fixed-l', 'styleguide-menu'],
-				_b = ['href', '#', 1, 'hover', 'bg-hover-lt-gray', 'pad-a-xs', 3, 'ngClass', 'click'],
-				xb = ['class', 'pad-l-sm submenu', 4, 'ngIf'],
-				Cb = ['tabindex', '-1', 1, 'pad-a-xl', 'styleguide'],
-				kb = ['content', ''],
-				Sb = [1, 'pad-t-xl', 3, 'innerHTML'],
-				Pb = ['class', 'mar-b-lg box-shadow-1 border-lr-gray section', 4, 'ngIf'],
-				Eb = [1, 'pad-l-sm', 'submenu'];
+				yb = [1, 'pad-a-sm', 'border-a-gray', 'box-shadow-1', 'fixed-l', 'styleguide-menu'],
+				wb = ['href', '#', 1, 'hover', 'bg-hover-lt-gray', 'pad-a-xs', 3, 'ngClass', 'click'],
+				_b = ['class', 'pad-l-sm submenu', 4, 'ngIf'],
+				xb = ['tabindex', '-1', 1, 'pad-a-xl', 'styleguide'],
+				Cb = ['content', ''],
+				kb = [1, 'pad-t-xl', 3, 'innerHTML'],
+				Sb = ['class', 'mar-b-lg box-shadow-1 border-lr-gray section', 4, 'ngIf'],
+				Pb = [1, 'pad-l-sm', 'submenu'];
+			function Eb(t, e) {
+				1 & t && (vl(0, 'ul', Pb), vl(1, 'li'), vl(2, 'a'), Tl(3, 'Close'), yl(), yl(), yl());
+			}
 			function Ob(t, e) {
-				1 & t && (wl(0, 'ul', Eb), wl(1, 'li'), wl(2, 'a'), Al(3, 'Close'), _l(), _l(), _l());
+				1 & t && (vl(0, 'ul', Pb), vl(1, 'li'), vl(2, 'a'), Tl(3, 'Empty'), yl(), yl(), yl());
 			}
 			function Ib(t, e) {
-				1 & t && (wl(0, 'ul', Eb), wl(1, 'li'), wl(2, 'a'), Al(3, 'Empty'), _l(), _l(), _l());
+				1 & t &&
+					(vl(0, 'ul', Pb),
+					vl(1, 'li'),
+					vl(2, 'a'),
+					Tl(3, 'Group'),
+					yl(),
+					yl(),
+					vl(4, 'li'),
+					vl(5, 'a'),
+					Tl(6, 'Rounded'),
+					yl(),
+					yl(),
+					vl(7, 'li'),
+					vl(8, 'a'),
+					Tl(9, 'State'),
+					yl(),
+					yl(),
+					yl());
 			}
 			function Tb(t, e) {
-				1 & t &&
-					(wl(0, 'ul', Eb),
-					wl(1, 'li'),
-					wl(2, 'a'),
-					Al(3, 'Group'),
-					_l(),
-					_l(),
-					wl(4, 'li'),
-					wl(5, 'a'),
-					Al(6, 'Rounded'),
-					_l(),
-					_l(),
-					wl(7, 'li'),
-					wl(8, 'a'),
-					Al(9, 'State'),
-					_l(),
-					_l(),
-					_l());
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Mb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && (vl(0, 'ul', Pb), vl(1, 'li'), vl(2, 'a'), Tl(3, 'Accordion'), yl(), yl(), vl(4, 'li'), vl(5, 'a'), Tl(6, 'Expand'), yl(), yl(), yl());
 			}
 			function Ab(t, e) {
-				1 & t && (wl(0, 'ul', Eb), wl(1, 'li'), wl(2, 'a'), Al(3, 'Accordion'), _l(), _l(), wl(4, 'li'), wl(5, 'a'), Al(6, 'Expand'), _l(), _l(), _l());
+				1 & t &&
+					(vl(0, 'ul', Pb),
+					vl(1, 'li'),
+					vl(2, 'a'),
+					Tl(3, 'Background'),
+					yl(),
+					yl(),
+					vl(4, 'li'),
+					vl(5, 'a'),
+					Tl(6, 'Border'),
+					yl(),
+					yl(),
+					vl(7, 'li'),
+					vl(8, 'a'),
+					Tl(9, 'Hover'),
+					yl(),
+					yl(),
+					vl(10, 'li'),
+					vl(11, 'a'),
+					Tl(12, 'Text'),
+					yl(),
+					yl(),
+					yl());
 			}
 			function jb(t, e) {
 				1 & t &&
-					(wl(0, 'ul', Eb),
-					wl(1, 'li'),
-					wl(2, 'a'),
-					Al(3, 'Background'),
-					_l(),
-					_l(),
-					wl(4, 'li'),
-					wl(5, 'a'),
-					Al(6, 'Border'),
-					_l(),
-					_l(),
-					wl(7, 'li'),
-					wl(8, 'a'),
-					Al(9, 'Hover'),
-					_l(),
-					_l(),
-					wl(10, 'li'),
-					wl(11, 'a'),
-					Al(12, 'Text'),
-					_l(),
-					_l(),
-					_l());
+					(vl(0, 'ul', Pb),
+					vl(1, 'li'),
+					vl(2, 'a'),
+					Tl(3, 'Container Column'),
+					yl(),
+					yl(),
+					vl(4, 'li'),
+					vl(5, 'a'),
+					Tl(6, 'Container Row'),
+					yl(),
+					yl(),
+					vl(7, 'li'),
+					vl(8, 'a'),
+					Tl(9, 'Item Column'),
+					yl(),
+					yl(),
+					vl(10, 'li'),
+					vl(11, 'a'),
+					Tl(12, 'Item Order'),
+					yl(),
+					yl(),
+					vl(13, 'li'),
+					vl(14, 'a'),
+					Tl(15, 'Item Row'),
+					yl(),
+					yl(),
+					vl(16, 'li'),
+					vl(17, 'a'),
+					Tl(18, 'Item Size'),
+					yl(),
+					yl(),
+					vl(19, 'li'),
+					vl(20, 'a'),
+					Tl(21, 'Wrap Column'),
+					yl(),
+					yl(),
+					vl(22, 'li'),
+					vl(23, 'a'),
+					Tl(24, 'Wrap Row'),
+					yl(),
+					yl(),
+					yl());
 			}
 			function Rb(t, e) {
 				1 & t &&
-					(wl(0, 'ul', Eb),
-					wl(1, 'li'),
-					wl(2, 'a'),
-					Al(3, 'Container Column'),
-					_l(),
-					_l(),
-					wl(4, 'li'),
-					wl(5, 'a'),
-					Al(6, 'Container Row'),
-					_l(),
-					_l(),
-					wl(7, 'li'),
-					wl(8, 'a'),
-					Al(9, 'Item Column'),
-					_l(),
-					_l(),
-					wl(10, 'li'),
-					wl(11, 'a'),
-					Al(12, 'Item Order'),
-					_l(),
-					_l(),
-					wl(13, 'li'),
-					wl(14, 'a'),
-					Al(15, 'Item Row'),
-					_l(),
-					_l(),
-					wl(16, 'li'),
-					wl(17, 'a'),
-					Al(18, 'Item Size'),
-					_l(),
-					_l(),
-					wl(19, 'li'),
-					wl(20, 'a'),
-					Al(21, 'Wrap Column'),
-					_l(),
-					_l(),
-					wl(22, 'li'),
-					wl(23, 'a'),
-					Al(24, 'Wrap Row'),
-					_l(),
-					_l(),
-					_l());
+					(vl(0, 'ul', Pb),
+					vl(1, 'li'),
+					vl(2, 'a'),
+					Tl(3, 'Checkbox'),
+					yl(),
+					yl(),
+					vl(4, 'li'),
+					vl(5, 'a'),
+					Tl(6, 'Field'),
+					yl(),
+					yl(),
+					vl(7, 'li'),
+					vl(8, 'a'),
+					Tl(9, 'Field Group'),
+					yl(),
+					yl(),
+					vl(10, 'li'),
+					vl(11, 'a'),
+					Tl(12, 'Fieldset'),
+					yl(),
+					yl(),
+					vl(13, 'li'),
+					vl(14, 'a'),
+					Tl(15, 'Form Group'),
+					yl(),
+					yl(),
+					vl(16, 'li'),
+					vl(17, 'a'),
+					Tl(18, 'Label'),
+					yl(),
+					yl(),
+					vl(19, 'li'),
+					vl(20, 'a'),
+					Tl(21, 'State'),
+					yl(),
+					yl(),
+					yl());
 			}
 			function Db(t, e) {
 				1 & t &&
-					(wl(0, 'ul', Eb),
-					wl(1, 'li'),
-					wl(2, 'a'),
-					Al(3, 'Checkbox'),
-					_l(),
-					_l(),
-					wl(4, 'li'),
-					wl(5, 'a'),
-					Al(6, 'Field'),
-					_l(),
-					_l(),
-					wl(7, 'li'),
-					wl(8, 'a'),
-					Al(9, 'Field Group'),
-					_l(),
-					_l(),
-					wl(10, 'li'),
-					wl(11, 'a'),
-					Al(12, 'Fieldset'),
-					_l(),
-					_l(),
-					wl(13, 'li'),
-					wl(14, 'a'),
-					Al(15, 'Form Group'),
-					_l(),
-					_l(),
-					wl(16, 'li'),
-					wl(17, 'a'),
-					Al(18, 'Label'),
-					_l(),
-					_l(),
-					wl(19, 'li'),
-					wl(20, 'a'),
-					Al(21, 'State'),
-					_l(),
-					_l(),
-					_l());
+					(vl(0, 'ul', Pb),
+					vl(1, 'li'),
+					vl(2, 'a'),
+					Tl(3, 'Area'),
+					yl(),
+					yl(),
+					vl(4, 'li'),
+					vl(5, 'a'),
+					Tl(6, 'Container'),
+					yl(),
+					yl(),
+					vl(7, 'li'),
+					vl(8, 'a'),
+					Tl(9, 'Item'),
+					yl(),
+					yl(),
+					yl());
 			}
 			function Nb(t, e) {
-				1 & t &&
-					(wl(0, 'ul', Eb),
-					wl(1, 'li'),
-					wl(2, 'a'),
-					Al(3, 'Area'),
-					_l(),
-					_l(),
-					wl(4, 'li'),
-					wl(5, 'a'),
-					Al(6, 'Container'),
-					_l(),
-					_l(),
-					wl(7, 'li'),
-					wl(8, 'a'),
-					Al(9, 'Item'),
-					_l(),
-					_l(),
-					_l());
+				1 & t && (vl(0, 'ul', Pb), vl(1, 'li'), vl(2, 'a'), Tl(3, 'Container'), yl(), yl(), vl(4, 'li'), vl(5, 'a'), Tl(6, 'Sticky Footer'), yl(), yl(), yl());
 			}
 			function Ub(t, e) {
-				1 & t && (wl(0, 'ul', Eb), wl(1, 'li'), wl(2, 'a'), Al(3, 'Container'), _l(), _l(), wl(4, 'li'), wl(5, 'a'), Al(6, 'Sticky Footer'), _l(), _l(), _l());
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Lb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t &&
+					(vl(0, 'ul', Pb),
+					vl(1, 'li'),
+					vl(2, 'a'),
+					Tl(3, 'Items'),
+					yl(),
+					yl(),
+					vl(4, 'li'),
+					vl(5, 'a'),
+					Tl(6, 'Links'),
+					yl(),
+					yl(),
+					vl(7, 'li'),
+					vl(8, 'a'),
+					Tl(9, 'Placement'),
+					yl(),
+					yl(),
+					yl());
 			}
 			function Hb(t, e) {
-				1 & t &&
-					(wl(0, 'ul', Eb),
-					wl(1, 'li'),
-					wl(2, 'a'),
-					Al(3, 'Items'),
-					_l(),
-					_l(),
-					wl(4, 'li'),
-					wl(5, 'a'),
-					Al(6, 'Links'),
-					_l(),
-					_l(),
-					wl(7, 'li'),
-					wl(8, 'a'),
-					Al(9, 'Placement'),
-					_l(),
-					_l(),
-					_l());
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function zb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Vb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Fb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && (vl(0, 'ul', Pb), vl(1, 'li'), vl(2, 'a'), Tl(3, 'Margin'), yl(), yl(), vl(4, 'li'), vl(5, 'a'), Tl(6, 'Padding'), yl(), yl(), yl());
 			}
 			function Bb(t, e) {
-				1 & t && (wl(0, 'ul', Eb), wl(1, 'li'), wl(2, 'a'), Al(3, 'Margin'), _l(), _l(), wl(4, 'li'), wl(5, 'a'), Al(6, 'Padding'), _l(), _l(), _l());
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function qb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Gb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Zb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t &&
+					(vl(0, 'ul', Pb),
+					vl(1, 'li'),
+					vl(2, 'a'),
+					Tl(3, 'Border'),
+					yl(),
+					yl(),
+					vl(4, 'li'),
+					vl(5, 'a'),
+					Tl(6, 'Hover'),
+					yl(),
+					yl(),
+					vl(7, 'li'),
+					vl(8, 'a'),
+					Tl(9, 'Striped'),
+					yl(),
+					yl(),
+					vl(10, 'li'),
+					vl(11, 'a'),
+					Tl(12, 'Table Cell'),
+					yl(),
+					yl(),
+					vl(13, 'li'),
+					vl(14, 'a'),
+					Tl(15, 'Table Row'),
+					yl(),
+					yl(),
+					yl());
 			}
 			function Wb(t, e) {
-				1 & t &&
-					(wl(0, 'ul', Eb),
-					wl(1, 'li'),
-					wl(2, 'a'),
-					Al(3, 'Border'),
-					_l(),
-					_l(),
-					wl(4, 'li'),
-					wl(5, 'a'),
-					Al(6, 'Hover'),
-					_l(),
-					_l(),
-					wl(7, 'li'),
-					wl(8, 'a'),
-					Al(9, 'Striped'),
-					_l(),
-					_l(),
-					wl(10, 'li'),
-					wl(11, 'a'),
-					Al(12, 'Table Cell'),
-					_l(),
-					_l(),
-					wl(13, 'li'),
-					wl(14, 'a'),
-					Al(15, 'Table Row'),
-					_l(),
-					_l(),
-					_l());
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Qb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && (vl(0, 'ul', Pb), vl(1, 'li'), vl(2, 'a'), Tl(3, 'Font'), yl(), yl(), vl(4, 'li'), vl(5, 'a'), Tl(6, 'Text'), yl(), yl(), yl());
 			}
 			function Yb(t, e) {
-				1 & t && (wl(0, 'ul', Eb), wl(1, 'li'), wl(2, 'a'), Al(3, 'Font'), _l(), _l(), wl(4, 'li'), wl(5, 'a'), Al(6, 'Text'), _l(), _l(), _l());
+				1 & t && wl(0, 'ul', Pb);
 			}
 			function Jb(t, e) {
-				1 & t && xl(0, 'ul', Eb);
+				1 & t && (vl(0, 'ul', Pb), vl(1, 'li'), vl(2, 'a'), Tl(3, 'Hide'), yl(), yl(), vl(4, 'li'), vl(5, 'a'), Tl(6, 'Show'), yl(), yl(), yl());
 			}
-			function Kb(t, e) {
-				1 & t && (wl(0, 'ul', Eb), wl(1, 'li'), wl(2, 'a'), Al(3, 'Hide'), _l(), _l(), wl(4, 'li'), wl(5, 'a'), Al(6, 'Show'), _l(), _l(), _l());
-			}
-			var Xb = [1, 'mar-b-lg', 'box-shadow-1', 'border-lr-gray', 'section'],
-				$b = [1, 'pad-a-sm', 'bg-lt-gray', 'border-tb-gray'],
-				tv = [1, 'pad-a-sm', 3, 'ngClass'],
-				ev = [1, 'alert-bad'],
-				nv = [1, 'alert-good'],
-				rv = [1, 'alert-info'],
-				ov = [1, 'alert-warn'],
-				iv = [1, 'pad-a-sm', 'border-tb-gray'],
-				av = [1, 'hljs-tag'],
-				sv = [1, 'hljs-title'],
-				lv = [1, 'hljs-attribute'],
-				uv = [1, 'hljs-value'],
-				cv = function(t, e) {
+			var Kb = [1, 'mar-b-lg', 'box-shadow-1', 'border-lr-gray', 'section'],
+				Xb = [1, 'pad-a-sm', 'bg-lt-gray', 'border-tb-gray'],
+				$b = [1, 'pad-a-sm', 3, 'ngClass'],
+				tv = [1, 'alert-bad'],
+				ev = [1, 'alert-good'],
+				nv = [1, 'alert-info'],
+				rv = [1, 'alert-warn'],
+				ov = [1, 'pad-a-sm', 'border-tb-gray'],
+				iv = [1, 'hljs-tag'],
+				av = [1, 'hljs-title'],
+				sv = [1, 'hljs-attribute'],
+				lv = [1, 'hljs-value'],
+				uv = function(t, e) {
 					return { flexbox: t, box: e };
 				};
-			function pv(t, e) {
+			function cv(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'p'),
-						Al(3, 'Alerts are styled with an '),
-						wl(4, 'code'),
-						Al(5, '.alert-[bad || good || info || warn]'),
-						_l(),
-						Al(6, ' class.'),
-						_l(),
-						_l(),
-						wl(7, 'section', tv),
-						wl(8, 'aside', ev),
-						Al(9, 'bad'),
-						_l(),
-						wl(10, 'aside', nv),
-						Al(11, 'good'),
-						_l(),
-						wl(12, 'aside', rv),
-						Al(13, 'info'),
-						_l(),
-						wl(14, 'aside', ov),
-						Al(15, 'warn'),
-						_l(),
-						wl(16, 'ez-alert', nv),
-						Al(17, 'good'),
-						_l(),
-						_l(),
-						wl(18, 'figure'),
-						wl(19, 'pre', iv),
-						wl(20, 'span', av),
-						Al(21, '<'),
-						wl(22, 'span', sv),
-						Al(23, 'aside'),
-						_l(),
-						Al(24, ' '),
-						wl(25, 'span', lv),
-						Al(26, 'class'),
-						_l(),
-						Al(27, '='),
-						wl(28, 'span', uv),
-						Al(29, '"alert-bad"'),
-						_l(),
-						Al(30, '>'),
-						_l(),
-						Al(31, 'bad'),
-						wl(32, 'span', av),
-						Al(33, '</'),
-						wl(34, 'span', sv),
-						Al(35, 'aside'),
-						_l(),
-						Al(36, '>'),
-						_l(),
-						Al(37, '\n'),
-						wl(38, 'span', av),
-						Al(39, '<'),
-						wl(40, 'span', sv),
-						Al(41, 'aside'),
-						_l(),
-						Al(42, ' '),
-						wl(43, 'span', lv),
-						Al(44, 'class'),
-						_l(),
-						Al(45, '='),
-						wl(46, 'span', uv),
-						Al(47, '"alert-good"'),
-						_l(),
-						Al(48, '>'),
-						_l(),
-						Al(49, 'good'),
-						wl(50, 'span', av),
-						Al(51, '</'),
-						wl(52, 'span', sv),
-						Al(53, 'aside'),
-						_l(),
-						Al(54, '>'),
-						_l(),
-						Al(55, '\n'),
-						wl(56, 'span', av),
-						Al(57, '<'),
-						wl(58, 'span', sv),
-						Al(59, 'aside'),
-						_l(),
-						Al(60, ' '),
-						wl(61, 'span', lv),
-						Al(62, 'class'),
-						_l(),
-						Al(63, '='),
-						wl(64, 'span', uv),
-						Al(65, '"alert-info"'),
-						_l(),
-						Al(66, '>'),
-						_l(),
-						Al(67, 'info'),
-						wl(68, 'span', av),
-						Al(69, '</'),
-						wl(70, 'span', sv),
-						Al(71, 'aside'),
-						_l(),
-						Al(72, '>'),
-						_l(),
-						Al(73, '\n'),
-						wl(74, 'span', av),
-						Al(75, '<'),
-						wl(76, 'span', sv),
-						Al(77, 'aside'),
-						_l(),
-						Al(78, ' '),
-						wl(79, 'span', lv),
-						Al(80, 'class'),
-						_l(),
-						Al(81, '='),
-						wl(82, 'span', uv),
-						Al(83, '"alert-warn"'),
-						_l(),
-						Al(84, '>'),
-						_l(),
-						Al(85, 'warn'),
-						wl(86, 'span', av),
-						Al(87, '</'),
-						wl(88, 'span', sv),
-						Al(89, 'aside'),
-						_l(),
-						Al(90, '>'),
-						_l(),
-						Al(91, '\n'),
-						wl(92, 'span', av),
-						Al(93, '<'),
-						wl(94, 'span', sv),
-						Al(95, 'ez-alert'),
-						_l(),
-						Al(96, ' '),
-						wl(97, 'span', lv),
-						Al(98, 'class'),
-						_l(),
-						Al(99, '='),
-						wl(100, 'span', uv),
-						Al(101, '"alert-good"'),
-						_l(),
-						Al(102, '>'),
-						_l(),
-						Al(103, 'good'),
-						wl(104, 'span', av),
-						Al(105, '</'),
-						wl(106, 'span', sv),
-						Al(107, 'ez-alert'),
-						_l(),
-						Al(108, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'p'),
+						Tl(3, 'Alerts are styled with an '),
+						vl(4, 'code'),
+						Tl(5, '.alert-[bad || good || info || warn]'),
+						yl(),
+						Tl(6, ' class.'),
+						yl(),
+						yl(),
+						vl(7, 'section', $b),
+						vl(8, 'aside', tv),
+						Tl(9, 'bad'),
+						yl(),
+						vl(10, 'aside', ev),
+						Tl(11, 'good'),
+						yl(),
+						vl(12, 'aside', nv),
+						Tl(13, 'info'),
+						yl(),
+						vl(14, 'aside', rv),
+						Tl(15, 'warn'),
+						yl(),
+						vl(16, 'ez-alert', ev),
+						Tl(17, 'good'),
+						yl(),
+						yl(),
+						vl(18, 'figure'),
+						vl(19, 'pre', ov),
+						vl(20, 'span', iv),
+						Tl(21, '<'),
+						vl(22, 'span', av),
+						Tl(23, 'aside'),
+						yl(),
+						Tl(24, ' '),
+						vl(25, 'span', sv),
+						Tl(26, 'class'),
+						yl(),
+						Tl(27, '='),
+						vl(28, 'span', lv),
+						Tl(29, '"alert-bad"'),
+						yl(),
+						Tl(30, '>'),
+						yl(),
+						Tl(31, 'bad'),
+						vl(32, 'span', iv),
+						Tl(33, '</'),
+						vl(34, 'span', av),
+						Tl(35, 'aside'),
+						yl(),
+						Tl(36, '>'),
+						yl(),
+						Tl(37, '\n'),
+						vl(38, 'span', iv),
+						Tl(39, '<'),
+						vl(40, 'span', av),
+						Tl(41, 'aside'),
+						yl(),
+						Tl(42, ' '),
+						vl(43, 'span', sv),
+						Tl(44, 'class'),
+						yl(),
+						Tl(45, '='),
+						vl(46, 'span', lv),
+						Tl(47, '"alert-good"'),
+						yl(),
+						Tl(48, '>'),
+						yl(),
+						Tl(49, 'good'),
+						vl(50, 'span', iv),
+						Tl(51, '</'),
+						vl(52, 'span', av),
+						Tl(53, 'aside'),
+						yl(),
+						Tl(54, '>'),
+						yl(),
+						Tl(55, '\n'),
+						vl(56, 'span', iv),
+						Tl(57, '<'),
+						vl(58, 'span', av),
+						Tl(59, 'aside'),
+						yl(),
+						Tl(60, ' '),
+						vl(61, 'span', sv),
+						Tl(62, 'class'),
+						yl(),
+						Tl(63, '='),
+						vl(64, 'span', lv),
+						Tl(65, '"alert-info"'),
+						yl(),
+						Tl(66, '>'),
+						yl(),
+						Tl(67, 'info'),
+						vl(68, 'span', iv),
+						Tl(69, '</'),
+						vl(70, 'span', av),
+						Tl(71, 'aside'),
+						yl(),
+						Tl(72, '>'),
+						yl(),
+						Tl(73, '\n'),
+						vl(74, 'span', iv),
+						Tl(75, '<'),
+						vl(76, 'span', av),
+						Tl(77, 'aside'),
+						yl(),
+						Tl(78, ' '),
+						vl(79, 'span', sv),
+						Tl(80, 'class'),
+						yl(),
+						Tl(81, '='),
+						vl(82, 'span', lv),
+						Tl(83, '"alert-warn"'),
+						yl(),
+						Tl(84, '>'),
+						yl(),
+						Tl(85, 'warn'),
+						vl(86, 'span', iv),
+						Tl(87, '</'),
+						vl(88, 'span', av),
+						Tl(89, 'aside'),
+						yl(),
+						Tl(90, '>'),
+						yl(),
+						Tl(91, '\n'),
+						vl(92, 'span', iv),
+						Tl(93, '<'),
+						vl(94, 'span', av),
+						Tl(95, 'ez-alert'),
+						yl(),
+						Tl(96, ' '),
+						vl(97, 'span', sv),
+						Tl(98, 'class'),
+						yl(),
+						Tl(99, '='),
+						vl(100, 'span', lv),
+						Tl(101, '"alert-good"'),
+						yl(),
+						Tl(102, '>'),
+						yl(),
+						Tl(103, 'good'),
+						vl(104, 'span', iv),
+						Tl(105, '</'),
+						vl(106, 'span', av),
+						Tl(107, 'ez-alert'),
+						yl(),
+						Tl(108, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(7), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(7), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var fv = [1, 'alert-good', 'close'],
-				dv = [1, 'close', 'alert-good'];
-			function hv(t, e) {
+			var pv = [1, 'alert-good', 'close'],
+				fv = [1, 'close', 'alert-good'];
+			function dv(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Close'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Alerts are closed by adding a '),
-						wl(6, 'code'),
-						Al(7, '.close'),
-						_l(),
-						Al(8, ' class.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'aside', fv),
-						Al(11, 'close'),
-						_l(),
-						wl(12, 'ez-alert', dv),
-						Al(13, 'close'),
-						_l(),
-						_l(),
-						wl(14, 'figure'),
-						wl(15, 'pre', iv),
-						wl(16, 'span', av),
-						Al(17, '<'),
-						wl(18, 'span', sv),
-						Al(19, 'aside'),
-						_l(),
-						Al(20, ' '),
-						wl(21, 'span', lv),
-						Al(22, 'class'),
-						_l(),
-						Al(23, '='),
-						wl(24, 'span', uv),
-						Al(25, '"alert-good close"'),
-						_l(),
-						Al(26, '>'),
-						_l(),
-						Al(27, 'close'),
-						wl(28, 'span', av),
-						Al(29, '</'),
-						wl(30, 'span', sv),
-						Al(31, 'aside'),
-						_l(),
-						Al(32, '>'),
-						_l(),
-						Al(33, '\n'),
-						wl(34, 'span', av),
-						Al(35, '<'),
-						wl(36, 'span', sv),
-						Al(37, 'ez-alert'),
-						_l(),
-						Al(38, ' '),
-						wl(39, 'span', lv),
-						Al(40, 'class'),
-						_l(),
-						Al(41, '='),
-						wl(42, 'span', uv),
-						Al(43, '"close alert-good"'),
-						_l(),
-						Al(44, '>'),
-						_l(),
-						Al(45, 'close'),
-						wl(46, 'span', av),
-						Al(47, '</'),
-						wl(48, 'span', sv),
-						Al(49, 'ez-alert'),
-						_l(),
-						Al(50, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Close'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Alerts are closed by adding a '),
+						vl(6, 'code'),
+						Tl(7, '.close'),
+						yl(),
+						Tl(8, ' class.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'aside', pv),
+						Tl(11, 'close'),
+						yl(),
+						vl(12, 'ez-alert', fv),
+						Tl(13, 'close'),
+						yl(),
+						yl(),
+						vl(14, 'figure'),
+						vl(15, 'pre', ov),
+						vl(16, 'span', iv),
+						Tl(17, '<'),
+						vl(18, 'span', av),
+						Tl(19, 'aside'),
+						yl(),
+						Tl(20, ' '),
+						vl(21, 'span', sv),
+						Tl(22, 'class'),
+						yl(),
+						Tl(23, '='),
+						vl(24, 'span', lv),
+						Tl(25, '"alert-good close"'),
+						yl(),
+						Tl(26, '>'),
+						yl(),
+						Tl(27, 'close'),
+						vl(28, 'span', iv),
+						Tl(29, '</'),
+						vl(30, 'span', av),
+						Tl(31, 'aside'),
+						yl(),
+						Tl(32, '>'),
+						yl(),
+						Tl(33, '\n'),
+						vl(34, 'span', iv),
+						Tl(35, '<'),
+						vl(36, 'span', av),
+						Tl(37, 'ez-alert'),
+						yl(),
+						Tl(38, ' '),
+						vl(39, 'span', sv),
+						Tl(40, 'class'),
+						yl(),
+						Tl(41, '='),
+						vl(42, 'span', lv),
+						Tl(43, '"close alert-good"'),
+						yl(),
+						Tl(44, '>'),
+						yl(),
+						Tl(45, 'close'),
+						vl(46, 'span', iv),
+						Tl(47, '</'),
+						vl(48, 'span', av),
+						Tl(49, 'ez-alert'),
+						yl(),
+						Tl(50, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var gv = [1, 'badge-sm', 'bg-dk-blue', 'text-white'],
-				mv = [1, 'badge-md', 'bg-dk-blue', 'text-white'],
-				bv = [1, 'badge-lg', 'bg-dk-blue', 'text-white'];
+			var hv = [1, 'badge-sm', 'bg-dk-blue', 'text-white'],
+				gv = [1, 'badge-md', 'bg-dk-blue', 'text-white'],
+				mv = [1, 'badge-lg', 'bg-dk-blue', 'text-white'];
+			function bv(t, e) {
+				if (
+					(1 & t &&
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'p'),
+						Tl(3, 'Badges are styled with a '),
+						vl(4, 'code'),
+						Tl(5, '.badge-[sm || md || lg]'),
+						yl(),
+						Tl(6, ' class.'),
+						yl(),
+						yl(),
+						vl(7, 'section', $b),
+						vl(8, 'p', hv),
+						Tl(9, '1'),
+						yl(),
+						vl(10, 'p', gv),
+						Tl(11, '20'),
+						yl(),
+						vl(12, 'p', mv),
+						Tl(13, '300'),
+						yl(),
+						vl(14, 'ez-badge', hv),
+						Tl(15, '10'),
+						yl(),
+						yl(),
+						vl(16, 'figure'),
+						vl(17, 'pre', ov),
+						vl(18, 'span', iv),
+						Tl(19, '<'),
+						vl(20, 'span', av),
+						Tl(21, 'p'),
+						yl(),
+						Tl(22, ' '),
+						vl(23, 'span', sv),
+						Tl(24, 'class'),
+						yl(),
+						Tl(25, '='),
+						vl(26, 'span', lv),
+						Tl(27, '"badge-sm bg-dk-blue text-white"'),
+						yl(),
+						Tl(28, '>'),
+						yl(),
+						Tl(29, '1'),
+						vl(30, 'span', iv),
+						Tl(31, '</'),
+						vl(32, 'span', av),
+						Tl(33, 'p'),
+						yl(),
+						Tl(34, '>'),
+						yl(),
+						Tl(35, '\n'),
+						vl(36, 'span', iv),
+						Tl(37, '<'),
+						vl(38, 'span', av),
+						Tl(39, 'p'),
+						yl(),
+						Tl(40, ' '),
+						vl(41, 'span', sv),
+						Tl(42, 'class'),
+						yl(),
+						Tl(43, '='),
+						vl(44, 'span', lv),
+						Tl(45, '"badge-md bg-dk-blue text-white"'),
+						yl(),
+						Tl(46, '>'),
+						yl(),
+						Tl(47, '20'),
+						vl(48, 'span', iv),
+						Tl(49, '</'),
+						vl(50, 'span', av),
+						Tl(51, 'p'),
+						yl(),
+						Tl(52, '>'),
+						yl(),
+						Tl(53, '\n'),
+						vl(54, 'span', iv),
+						Tl(55, '<'),
+						vl(56, 'span', av),
+						Tl(57, 'p'),
+						yl(),
+						Tl(58, ' '),
+						vl(59, 'span', sv),
+						Tl(60, 'class'),
+						yl(),
+						Tl(61, '='),
+						vl(62, 'span', lv),
+						Tl(63, '"badge-lg bg-dk-blue text-white"'),
+						yl(),
+						Tl(64, '>'),
+						yl(),
+						Tl(65, '300'),
+						vl(66, 'span', iv),
+						Tl(67, '</'),
+						vl(68, 'span', av),
+						Tl(69, 'p'),
+						yl(),
+						Tl(70, '>'),
+						yl(),
+						Tl(71, '\n'),
+						vl(72, 'span', iv),
+						Tl(73, '<'),
+						vl(74, 'span', av),
+						Tl(75, 'ez-badge'),
+						yl(),
+						Tl(76, ' '),
+						vl(77, 'span', sv),
+						Tl(78, 'class'),
+						yl(),
+						Tl(79, '='),
+						vl(80, 'span', lv),
+						Tl(81, '"badge-sm bg-dk-blue text-white"'),
+						yl(),
+						Tl(82, '>'),
+						yl(),
+						Tl(83, '10'),
+						vl(84, 'span', iv),
+						Tl(85, '</'),
+						vl(86, 'span', av),
+						Tl(87, 'ez-badge'),
+						yl(),
+						Tl(88, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
+					2 & t)
+				) {
+					var n = Sl();
+					qa(7), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
+				}
+			}
 			function vv(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'p'),
-						Al(3, 'Badges are styled with a '),
-						wl(4, 'code'),
-						Al(5, '.badge-[sm || md || lg]'),
-						_l(),
-						Al(6, ' class.'),
-						_l(),
-						_l(),
-						wl(7, 'section', tv),
-						wl(8, 'p', gv),
-						Al(9, '1'),
-						_l(),
-						wl(10, 'p', mv),
-						Al(11, '20'),
-						_l(),
-						wl(12, 'p', bv),
-						Al(13, '300'),
-						_l(),
-						wl(14, 'ez-badge', gv),
-						Al(15, '10'),
-						_l(),
-						_l(),
-						wl(16, 'figure'),
-						wl(17, 'pre', iv),
-						wl(18, 'span', av),
-						Al(19, '<'),
-						wl(20, 'span', sv),
-						Al(21, 'p'),
-						_l(),
-						Al(22, ' '),
-						wl(23, 'span', lv),
-						Al(24, 'class'),
-						_l(),
-						Al(25, '='),
-						wl(26, 'span', uv),
-						Al(27, '"badge-sm bg-dk-blue text-white"'),
-						_l(),
-						Al(28, '>'),
-						_l(),
-						Al(29, '1'),
-						wl(30, 'span', av),
-						Al(31, '</'),
-						wl(32, 'span', sv),
-						Al(33, 'p'),
-						_l(),
-						Al(34, '>'),
-						_l(),
-						Al(35, '\n'),
-						wl(36, 'span', av),
-						Al(37, '<'),
-						wl(38, 'span', sv),
-						Al(39, 'p'),
-						_l(),
-						Al(40, ' '),
-						wl(41, 'span', lv),
-						Al(42, 'class'),
-						_l(),
-						Al(43, '='),
-						wl(44, 'span', uv),
-						Al(45, '"badge-md bg-dk-blue text-white"'),
-						_l(),
-						Al(46, '>'),
-						_l(),
-						Al(47, '20'),
-						wl(48, 'span', av),
-						Al(49, '</'),
-						wl(50, 'span', sv),
-						Al(51, 'p'),
-						_l(),
-						Al(52, '>'),
-						_l(),
-						Al(53, '\n'),
-						wl(54, 'span', av),
-						Al(55, '<'),
-						wl(56, 'span', sv),
-						Al(57, 'p'),
-						_l(),
-						Al(58, ' '),
-						wl(59, 'span', lv),
-						Al(60, 'class'),
-						_l(),
-						Al(61, '='),
-						wl(62, 'span', uv),
-						Al(63, '"badge-lg bg-dk-blue text-white"'),
-						_l(),
-						Al(64, '>'),
-						_l(),
-						Al(65, '300'),
-						wl(66, 'span', av),
-						Al(67, '</'),
-						wl(68, 'span', sv),
-						Al(69, 'p'),
-						_l(),
-						Al(70, '>'),
-						_l(),
-						Al(71, '\n'),
-						wl(72, 'span', av),
-						Al(73, '<'),
-						wl(74, 'span', sv),
-						Al(75, 'ez-badge'),
-						_l(),
-						Al(76, ' '),
-						wl(77, 'span', lv),
-						Al(78, 'class'),
-						_l(),
-						Al(79, '='),
-						wl(80, 'span', uv),
-						Al(81, '"badge-sm bg-dk-blue text-white"'),
-						_l(),
-						Al(82, '>'),
-						_l(),
-						Al(83, '10'),
-						wl(84, 'span', av),
-						Al(85, '</'),
-						wl(86, 'span', sv),
-						Al(87, 'ez-badge'),
-						_l(),
-						Al(88, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Empty'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'If a badge does not contain text, it is not rendered.'),
+						yl(),
+						yl(),
+						vl(6, 'section', $b),
+						vl(7, 'p', hv),
+						Tl(8, '1'),
+						yl(),
+						wl(9, 'p', gv),
+						yl(),
+						vl(10, 'figure'),
+						vl(11, 'pre', ov),
+						vl(12, 'span', iv),
+						Tl(13, '<'),
+						vl(14, 'span', av),
+						Tl(15, 'p'),
+						yl(),
+						Tl(16, ' '),
+						vl(17, 'span', sv),
+						Tl(18, 'class'),
+						yl(),
+						Tl(19, '='),
+						vl(20, 'span', lv),
+						Tl(21, '"badge-sm bg-dk-blue text-white"'),
+						yl(),
+						Tl(22, '>'),
+						yl(),
+						Tl(23, '1'),
+						vl(24, 'span', iv),
+						Tl(25, '</'),
+						vl(26, 'span', av),
+						Tl(27, 'p'),
+						yl(),
+						Tl(28, '>'),
+						yl(),
+						Tl(29, '\n'),
+						vl(30, 'span', iv),
+						Tl(31, '<'),
+						vl(32, 'span', av),
+						Tl(33, 'p'),
+						yl(),
+						Tl(34, ' '),
+						vl(35, 'span', sv),
+						Tl(36, 'class'),
+						yl(),
+						Tl(37, '='),
+						vl(38, 'span', lv),
+						Tl(39, '"badge-md bg-dk-blue text-white"'),
+						yl(),
+						Tl(40, '>'),
+						yl(),
+						vl(41, 'span', iv),
+						Tl(42, '</'),
+						vl(43, 'span', av),
+						Tl(44, 'p'),
+						yl(),
+						Tl(45, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(7), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(6), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			function yv(t, e) {
+			var yv = ['type', 'button', 1, 'btn-xs', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				wv = ['type', 'button', 1, 'btn-sm', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				_v = ['type', 'button', 1, 'btn-md', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				xv = ['type', 'button', 1, 'btn-lg', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				Cv = ['type', 'button', 1, 'btn-xl', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				kv = ['type', 'button', 1, 'btn-full', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				Sv = [1, 'hljs-class'],
+				Pv = [1, 'hljs-keyword'],
+				Ev = [1, 'hljs-string'];
+			function Ov(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Empty'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'If a badge does not contain text, it is not rendered.'),
-						_l(),
-						_l(),
-						wl(6, 'section', tv),
-						wl(7, 'p', gv),
-						Al(8, '1'),
-						_l(),
-						xl(9, 'p', mv),
-						_l(),
-						wl(10, 'figure'),
-						wl(11, 'pre', iv),
-						wl(12, 'span', av),
-						Al(13, '<'),
-						wl(14, 'span', sv),
-						Al(15, 'p'),
-						_l(),
-						Al(16, ' '),
-						wl(17, 'span', lv),
-						Al(18, 'class'),
-						_l(),
-						Al(19, '='),
-						wl(20, 'span', uv),
-						Al(21, '"badge-sm bg-dk-blue text-white"'),
-						_l(),
-						Al(22, '>'),
-						_l(),
-						Al(23, '1'),
-						wl(24, 'span', av),
-						Al(25, '</'),
-						wl(26, 'span', sv),
-						Al(27, 'p'),
-						_l(),
-						Al(28, '>'),
-						_l(),
-						Al(29, '\n'),
-						wl(30, 'span', av),
-						Al(31, '<'),
-						wl(32, 'span', sv),
-						Al(33, 'p'),
-						_l(),
-						Al(34, ' '),
-						wl(35, 'span', lv),
-						Al(36, 'class'),
-						_l(),
-						Al(37, '='),
-						wl(38, 'span', uv),
-						Al(39, '"badge-md bg-dk-blue text-white"'),
-						_l(),
-						Al(40, '>'),
-						_l(),
-						wl(41, 'span', av),
-						Al(42, '</'),
-						wl(43, 'span', sv),
-						Al(44, 'p'),
-						_l(),
-						Al(45, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'p'),
+						Tl(3, 'Buttons are styled with a '),
+						vl(4, 'code'),
+						Tl(5, '.btn-[xs || sm || md || lg || xl || full]'),
+						yl(),
+						Tl(6, ' class.'),
+						yl(),
+						yl(),
+						vl(7, 'section', $b),
+						vl(8, 'button', yv),
+						Tl(9, 'xs'),
+						yl(),
+						vl(10, 'button', wv),
+						Tl(11, 'sm'),
+						yl(),
+						vl(12, 'button', _v),
+						Tl(13, 'md'),
+						yl(),
+						vl(14, 'button', xv),
+						Tl(15, 'lg'),
+						yl(),
+						vl(16, 'button', Cv),
+						Tl(17, 'xl'),
+						yl(),
+						vl(18, 'button', kv),
+						Tl(19, 'full'),
+						yl(),
+						yl(),
+						vl(20, 'figure'),
+						vl(21, 'pre', ov),
+						Tl(22, '<button '),
+						vl(23, 'span', Sv),
+						vl(24, 'span', Pv),
+						Tl(25, 'class'),
+						yl(),
+						Tl(26, '='),
+						yl(),
+						vl(27, 'span', Ev),
+						Tl(28, '"btn-xs bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(29, ' '),
+						vl(30, 'span', Sv),
+						vl(31, 'span', Pv),
+						Tl(32, 'type'),
+						yl(),
+						Tl(33, '='),
+						yl(),
+						vl(34, 'span', Ev),
+						Tl(35, '"button"'),
+						yl(),
+						Tl(36, '>xs</button>\n<button '),
+						vl(37, 'span', Sv),
+						vl(38, 'span', Pv),
+						Tl(39, 'class'),
+						yl(),
+						Tl(40, '='),
+						yl(),
+						vl(41, 'span', Ev),
+						Tl(42, '"btn-sm bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(43, ' '),
+						vl(44, 'span', Sv),
+						vl(45, 'span', Pv),
+						Tl(46, 'type'),
+						yl(),
+						Tl(47, '='),
+						yl(),
+						vl(48, 'span', Ev),
+						Tl(49, '"button"'),
+						yl(),
+						Tl(50, '>sm</button>\n<button '),
+						vl(51, 'span', Sv),
+						vl(52, 'span', Pv),
+						Tl(53, 'class'),
+						yl(),
+						Tl(54, '='),
+						yl(),
+						vl(55, 'span', Ev),
+						Tl(56, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(57, ' '),
+						vl(58, 'span', Sv),
+						vl(59, 'span', Pv),
+						Tl(60, 'type'),
+						yl(),
+						Tl(61, '='),
+						yl(),
+						vl(62, 'span', Ev),
+						Tl(63, '"button"'),
+						yl(),
+						Tl(64, '>md</button>\n<button '),
+						vl(65, 'span', Sv),
+						vl(66, 'span', Pv),
+						Tl(67, 'class'),
+						yl(),
+						Tl(68, '='),
+						yl(),
+						vl(69, 'span', Ev),
+						Tl(70, '"btn-lg bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(71, ' '),
+						vl(72, 'span', Sv),
+						vl(73, 'span', Pv),
+						Tl(74, 'type'),
+						yl(),
+						Tl(75, '='),
+						yl(),
+						vl(76, 'span', Ev),
+						Tl(77, '"button"'),
+						yl(),
+						Tl(78, '>lg</button>\n<button '),
+						vl(79, 'span', Sv),
+						vl(80, 'span', Pv),
+						Tl(81, 'class'),
+						yl(),
+						Tl(82, '='),
+						yl(),
+						vl(83, 'span', Ev),
+						Tl(84, '"btn-xl bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(85, ' '),
+						vl(86, 'span', Sv),
+						vl(87, 'span', Pv),
+						Tl(88, 'type'),
+						yl(),
+						Tl(89, '='),
+						yl(),
+						vl(90, 'span', Ev),
+						Tl(91, '"button"'),
+						yl(),
+						Tl(92, '>xl</button>\n<button '),
+						vl(93, 'span', Sv),
+						vl(94, 'span', Pv),
+						Tl(95, 'class'),
+						yl(),
+						Tl(96, '='),
+						yl(),
+						vl(97, 'span', Ev),
+						Tl(98, '"btn-full bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(99, ' '),
+						vl(100, 'span', Sv),
+						vl(101, 'span', Pv),
+						Tl(102, 'type'),
+						yl(),
+						Tl(103, '='),
+						yl(),
+						vl(104, 'span', Ev),
+						Tl(105, '"button"'),
+						yl(),
+						Tl(106, '>full</button>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(6), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(7), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var wv = ['type', 'button', 1, 'btn-xs', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				_v = ['type', 'button', 1, 'btn-sm', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				xv = ['type', 'button', 1, 'btn-md', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Cv = ['type', 'button', 1, 'btn-lg', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				kv = ['type', 'button', 1, 'btn-xl', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Sv = ['type', 'button', 1, 'btn-full', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Pv = [1, 'hljs-class'],
-				Ev = [1, 'hljs-keyword'],
-				Ov = [1, 'hljs-string'];
-			function Iv(t, e) {
+			var Iv = ['role', 'group', 'aria-label', 'button row group', 1, 'btn-group-row'],
+				Tv = ['role', 'group', 'aria-label', 'button column group', 1, 'btn-group-col'],
+				Mv = ['role', 'group', 'aria-label', 'button full row group', 1, 'btn-group-full'];
+			function Av(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'p'),
-						Al(3, 'Buttons are styled with a '),
-						wl(4, 'code'),
-						Al(5, '.btn-[xs || sm || md || lg || xl || full]'),
-						_l(),
-						Al(6, ' class.'),
-						_l(),
-						_l(),
-						wl(7, 'section', tv),
-						wl(8, 'button', wv),
-						Al(9, 'xs'),
-						_l(),
-						wl(10, 'button', _v),
-						Al(11, 'sm'),
-						_l(),
-						wl(12, 'button', xv),
-						Al(13, 'md'),
-						_l(),
-						wl(14, 'button', Cv),
-						Al(15, 'lg'),
-						_l(),
-						wl(16, 'button', kv),
-						Al(17, 'xl'),
-						_l(),
-						wl(18, 'button', Sv),
-						Al(19, 'full'),
-						_l(),
-						_l(),
-						wl(20, 'figure'),
-						wl(21, 'pre', iv),
-						Al(22, '<button '),
-						wl(23, 'span', Pv),
-						wl(24, 'span', Ev),
-						Al(25, 'class'),
-						_l(),
-						Al(26, '='),
-						_l(),
-						wl(27, 'span', Ov),
-						Al(28, '"btn-xs bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(29, ' '),
-						wl(30, 'span', Pv),
-						wl(31, 'span', Ev),
-						Al(32, 'type'),
-						_l(),
-						Al(33, '='),
-						_l(),
-						wl(34, 'span', Ov),
-						Al(35, '"button"'),
-						_l(),
-						Al(36, '>xs</button>\n<button '),
-						wl(37, 'span', Pv),
-						wl(38, 'span', Ev),
-						Al(39, 'class'),
-						_l(),
-						Al(40, '='),
-						_l(),
-						wl(41, 'span', Ov),
-						Al(42, '"btn-sm bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(43, ' '),
-						wl(44, 'span', Pv),
-						wl(45, 'span', Ev),
-						Al(46, 'type'),
-						_l(),
-						Al(47, '='),
-						_l(),
-						wl(48, 'span', Ov),
-						Al(49, '"button"'),
-						_l(),
-						Al(50, '>sm</button>\n<button '),
-						wl(51, 'span', Pv),
-						wl(52, 'span', Ev),
-						Al(53, 'class'),
-						_l(),
-						Al(54, '='),
-						_l(),
-						wl(55, 'span', Ov),
-						Al(56, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(57, ' '),
-						wl(58, 'span', Pv),
-						wl(59, 'span', Ev),
-						Al(60, 'type'),
-						_l(),
-						Al(61, '='),
-						_l(),
-						wl(62, 'span', Ov),
-						Al(63, '"button"'),
-						_l(),
-						Al(64, '>md</button>\n<button '),
-						wl(65, 'span', Pv),
-						wl(66, 'span', Ev),
-						Al(67, 'class'),
-						_l(),
-						Al(68, '='),
-						_l(),
-						wl(69, 'span', Ov),
-						Al(70, '"btn-lg bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(71, ' '),
-						wl(72, 'span', Pv),
-						wl(73, 'span', Ev),
-						Al(74, 'type'),
-						_l(),
-						Al(75, '='),
-						_l(),
-						wl(76, 'span', Ov),
-						Al(77, '"button"'),
-						_l(),
-						Al(78, '>lg</button>\n<button '),
-						wl(79, 'span', Pv),
-						wl(80, 'span', Ev),
-						Al(81, 'class'),
-						_l(),
-						Al(82, '='),
-						_l(),
-						wl(83, 'span', Ov),
-						Al(84, '"btn-xl bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(85, ' '),
-						wl(86, 'span', Pv),
-						wl(87, 'span', Ev),
-						Al(88, 'type'),
-						_l(),
-						Al(89, '='),
-						_l(),
-						wl(90, 'span', Ov),
-						Al(91, '"button"'),
-						_l(),
-						Al(92, '>xl</button>\n<button '),
-						wl(93, 'span', Pv),
-						wl(94, 'span', Ev),
-						Al(95, 'class'),
-						_l(),
-						Al(96, '='),
-						_l(),
-						wl(97, 'span', Ov),
-						Al(98, '"btn-full bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(99, ' '),
-						wl(100, 'span', Pv),
-						wl(101, 'span', Ev),
-						Al(102, 'type'),
-						_l(),
-						Al(103, '='),
-						_l(),
-						wl(104, 'span', Ov),
-						Al(105, '"button"'),
-						_l(),
-						Al(106, '>full</button>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Group'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Buttons are grouped with a '),
+						vl(6, 'code'),
+						Tl(7, '.btn-group-[row || col || full]'),
+						yl(),
+						Tl(8, ' class on a parent container.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'section', Iv),
+						vl(11, 'button', _v),
+						Tl(12, 'md'),
+						yl(),
+						vl(13, 'button', _v),
+						Tl(14, 'md'),
+						yl(),
+						vl(15, 'button', _v),
+						Tl(16, 'md'),
+						yl(),
+						vl(17, 'button', _v),
+						Tl(18, 'md'),
+						yl(),
+						vl(19, 'button', _v),
+						Tl(20, 'md'),
+						yl(),
+						yl(),
+						vl(21, 'section', Tv),
+						vl(22, 'button', _v),
+						Tl(23, 'md'),
+						yl(),
+						vl(24, 'button', _v),
+						Tl(25, 'md'),
+						yl(),
+						vl(26, 'button', _v),
+						Tl(27, 'md'),
+						yl(),
+						vl(28, 'button', _v),
+						Tl(29, 'md'),
+						yl(),
+						vl(30, 'button', _v),
+						Tl(31, 'md'),
+						yl(),
+						yl(),
+						vl(32, 'section', Mv),
+						vl(33, 'button', _v),
+						Tl(34, 'md'),
+						yl(),
+						vl(35, 'button', _v),
+						Tl(36, 'md'),
+						yl(),
+						vl(37, 'button', _v),
+						Tl(38, 'md'),
+						yl(),
+						vl(39, 'button', _v),
+						Tl(40, 'md'),
+						yl(),
+						vl(41, 'button', _v),
+						Tl(42, 'md'),
+						yl(),
+						yl(),
+						yl(),
+						vl(43, 'figure'),
+						vl(44, 'pre', ov),
+						Tl(45, '<section '),
+						vl(46, 'span', Sv),
+						vl(47, 'span', Pv),
+						Tl(48, 'class'),
+						yl(),
+						Tl(49, '='),
+						yl(),
+						vl(50, 'span', Ev),
+						Tl(51, '"btn-group-row"'),
+						yl(),
+						Tl(52, ' role='),
+						vl(53, 'span', Ev),
+						Tl(54, '"group"'),
+						yl(),
+						Tl(55, ' aria-label='),
+						vl(56, 'span', Ev),
+						Tl(57, '"button row group"'),
+						yl(),
+						Tl(58, '>\n    <button '),
+						vl(59, 'span', Sv),
+						vl(60, 'span', Pv),
+						Tl(61, 'class'),
+						yl(),
+						Tl(62, '='),
+						yl(),
+						vl(63, 'span', Ev),
+						Tl(64, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(65, ' '),
+						vl(66, 'span', Sv),
+						vl(67, 'span', Pv),
+						Tl(68, 'type'),
+						yl(),
+						Tl(69, '='),
+						yl(),
+						vl(70, 'span', Ev),
+						Tl(71, '"button"'),
+						yl(),
+						Tl(72, '>md</button>\n    <button '),
+						vl(73, 'span', Sv),
+						vl(74, 'span', Pv),
+						Tl(75, 'class'),
+						yl(),
+						Tl(76, '='),
+						yl(),
+						vl(77, 'span', Ev),
+						Tl(78, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(79, ' '),
+						vl(80, 'span', Sv),
+						vl(81, 'span', Pv),
+						Tl(82, 'type'),
+						yl(),
+						Tl(83, '='),
+						yl(),
+						vl(84, 'span', Ev),
+						Tl(85, '"button"'),
+						yl(),
+						Tl(86, '>md</button>\n    <button '),
+						vl(87, 'span', Sv),
+						vl(88, 'span', Pv),
+						Tl(89, 'class'),
+						yl(),
+						Tl(90, '='),
+						yl(),
+						vl(91, 'span', Ev),
+						Tl(92, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(93, ' '),
+						vl(94, 'span', Sv),
+						vl(95, 'span', Pv),
+						Tl(96, 'type'),
+						yl(),
+						Tl(97, '='),
+						yl(),
+						vl(98, 'span', Ev),
+						Tl(99, '"button"'),
+						yl(),
+						Tl(100, '>md</button>\n    <button '),
+						vl(101, 'span', Sv),
+						vl(102, 'span', Pv),
+						Tl(103, 'class'),
+						yl(),
+						Tl(104, '='),
+						yl(),
+						vl(105, 'span', Ev),
+						Tl(106, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(107, ' '),
+						vl(108, 'span', Sv),
+						vl(109, 'span', Pv),
+						Tl(110, 'type'),
+						yl(),
+						Tl(111, '='),
+						yl(),
+						vl(112, 'span', Ev),
+						Tl(113, '"button"'),
+						yl(),
+						Tl(114, '>md</button>\n    <button '),
+						vl(115, 'span', Sv),
+						vl(116, 'span', Pv),
+						Tl(117, 'class'),
+						yl(),
+						Tl(118, '='),
+						yl(),
+						vl(119, 'span', Ev),
+						Tl(120, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(121, ' '),
+						vl(122, 'span', Sv),
+						vl(123, 'span', Pv),
+						Tl(124, 'type'),
+						yl(),
+						Tl(125, '='),
+						yl(),
+						vl(126, 'span', Ev),
+						Tl(127, '"button"'),
+						yl(),
+						Tl(128, '>md</button>\n</section>\n<section '),
+						vl(129, 'span', Sv),
+						vl(130, 'span', Pv),
+						Tl(131, 'class'),
+						yl(),
+						Tl(132, '='),
+						yl(),
+						vl(133, 'span', Ev),
+						Tl(134, '"btn-group-col"'),
+						yl(),
+						Tl(135, ' role='),
+						vl(136, 'span', Ev),
+						Tl(137, '"group"'),
+						yl(),
+						Tl(138, ' aria-label='),
+						vl(139, 'span', Ev),
+						Tl(140, '"button column group"'),
+						yl(),
+						Tl(141, '>\n    <button '),
+						vl(142, 'span', Sv),
+						vl(143, 'span', Pv),
+						Tl(144, 'class'),
+						yl(),
+						Tl(145, '='),
+						yl(),
+						vl(146, 'span', Ev),
+						Tl(147, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(148, ' '),
+						vl(149, 'span', Sv),
+						vl(150, 'span', Pv),
+						Tl(151, 'type'),
+						yl(),
+						Tl(152, '='),
+						yl(),
+						vl(153, 'span', Ev),
+						Tl(154, '"button"'),
+						yl(),
+						Tl(155, '>md</button>\n    <button '),
+						vl(156, 'span', Sv),
+						vl(157, 'span', Pv),
+						Tl(158, 'class'),
+						yl(),
+						Tl(159, '='),
+						yl(),
+						vl(160, 'span', Ev),
+						Tl(161, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(162, ' '),
+						vl(163, 'span', Sv),
+						vl(164, 'span', Pv),
+						Tl(165, 'type'),
+						yl(),
+						Tl(166, '='),
+						yl(),
+						vl(167, 'span', Ev),
+						Tl(168, '"button"'),
+						yl(),
+						Tl(169, '>md</button>\n    <button '),
+						vl(170, 'span', Sv),
+						vl(171, 'span', Pv),
+						Tl(172, 'class'),
+						yl(),
+						Tl(173, '='),
+						yl(),
+						vl(174, 'span', Ev),
+						Tl(175, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(176, ' '),
+						vl(177, 'span', Sv),
+						vl(178, 'span', Pv),
+						Tl(179, 'type'),
+						yl(),
+						Tl(180, '='),
+						yl(),
+						vl(181, 'span', Ev),
+						Tl(182, '"button"'),
+						yl(),
+						Tl(183, '>md</button>\n    <button '),
+						vl(184, 'span', Sv),
+						vl(185, 'span', Pv),
+						Tl(186, 'class'),
+						yl(),
+						Tl(187, '='),
+						yl(),
+						vl(188, 'span', Ev),
+						Tl(189, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(190, ' '),
+						vl(191, 'span', Sv),
+						vl(192, 'span', Pv),
+						Tl(193, 'type'),
+						yl(),
+						Tl(194, '='),
+						yl(),
+						vl(195, 'span', Ev),
+						Tl(196, '"button"'),
+						yl(),
+						Tl(197, '>md</button>\n    <button '),
+						vl(198, 'span', Sv),
+						vl(199, 'span', Pv),
+						Tl(200, 'class'),
+						yl(),
+						Tl(201, '='),
+						yl(),
+						vl(202, 'span', Ev),
+						Tl(203, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(204, ' '),
+						vl(205, 'span', Sv),
+						vl(206, 'span', Pv),
+						Tl(207, 'type'),
+						yl(),
+						Tl(208, '='),
+						yl(),
+						vl(209, 'span', Ev),
+						Tl(210, '"button"'),
+						yl(),
+						Tl(211, '>md</button>\n</section>\n<section '),
+						vl(212, 'span', Sv),
+						vl(213, 'span', Pv),
+						Tl(214, 'class'),
+						yl(),
+						Tl(215, '='),
+						yl(),
+						vl(216, 'span', Ev),
+						Tl(217, '"btn-group-full"'),
+						yl(),
+						Tl(218, ' role='),
+						vl(219, 'span', Ev),
+						Tl(220, '"group"'),
+						yl(),
+						Tl(221, ' aria-label='),
+						vl(222, 'span', Ev),
+						Tl(223, '"button full row group"'),
+						yl(),
+						Tl(224, '>\n    <button '),
+						vl(225, 'span', Sv),
+						vl(226, 'span', Pv),
+						Tl(227, 'class'),
+						yl(),
+						Tl(228, '='),
+						yl(),
+						vl(229, 'span', Ev),
+						Tl(230, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(231, ' '),
+						vl(232, 'span', Sv),
+						vl(233, 'span', Pv),
+						Tl(234, 'type'),
+						yl(),
+						Tl(235, '='),
+						yl(),
+						vl(236, 'span', Ev),
+						Tl(237, '"button"'),
+						yl(),
+						Tl(238, '>md</button>\n    <button '),
+						vl(239, 'span', Sv),
+						vl(240, 'span', Pv),
+						Tl(241, 'class'),
+						yl(),
+						Tl(242, '='),
+						yl(),
+						vl(243, 'span', Ev),
+						Tl(244, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(245, ' '),
+						vl(246, 'span', Sv),
+						vl(247, 'span', Pv),
+						Tl(248, 'type'),
+						yl(),
+						Tl(249, '='),
+						yl(),
+						vl(250, 'span', Ev),
+						Tl(251, '"button"'),
+						yl(),
+						Tl(252, '>md</button>\n    <button '),
+						vl(253, 'span', Sv),
+						vl(254, 'span', Pv),
+						Tl(255, 'class'),
+						yl(),
+						Tl(256, '='),
+						yl(),
+						vl(257, 'span', Ev),
+						Tl(258, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(259, ' '),
+						vl(260, 'span', Sv),
+						vl(261, 'span', Pv),
+						Tl(262, 'type'),
+						yl(),
+						Tl(263, '='),
+						yl(),
+						vl(264, 'span', Ev),
+						Tl(265, '"button"'),
+						yl(),
+						Tl(266, '>md</button>\n    <button '),
+						vl(267, 'span', Sv),
+						vl(268, 'span', Pv),
+						Tl(269, 'class'),
+						yl(),
+						Tl(270, '='),
+						yl(),
+						vl(271, 'span', Ev),
+						Tl(272, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(273, ' '),
+						vl(274, 'span', Sv),
+						vl(275, 'span', Pv),
+						Tl(276, 'type'),
+						yl(),
+						Tl(277, '='),
+						yl(),
+						vl(278, 'span', Ev),
+						Tl(279, '"button"'),
+						yl(),
+						Tl(280, '>md</button>\n    <button '),
+						vl(281, 'span', Sv),
+						vl(282, 'span', Pv),
+						Tl(283, 'class'),
+						yl(),
+						Tl(284, '='),
+						yl(),
+						vl(285, 'span', Ev),
+						Tl(286, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(287, ' '),
+						vl(288, 'span', Sv),
+						vl(289, 'span', Pv),
+						Tl(290, 'type'),
+						yl(),
+						Tl(291, '='),
+						yl(),
+						vl(292, 'span', Ev),
+						Tl(293, '"button"'),
+						yl(),
+						Tl(294, '>md</button>\n</section>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(7), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Tv = ['role', 'group', 'aria-label', 'button row group', 1, 'btn-group-row'],
-				Mv = ['role', 'group', 'aria-label', 'button column group', 1, 'btn-group-col'],
-				Av = ['role', 'group', 'aria-label', 'button full row group', 1, 'btn-group-full'];
-			function jv(t, e) {
+			var jv = ['type', 'button', 1, 'btn-xs', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				Rv = ['type', 'button', 1, 'btn-sm', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				Dv = ['type', 'button', 1, 'btn-md', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				Nv = ['type', 'button', 1, 'btn-lg', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				Uv = ['type', 'button', 1, 'btn-xl', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
+				Lv = ['type', 'button', 1, 'btn-full', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'];
+			function Hv(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Group'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Buttons are grouped with a '),
-						wl(6, 'code'),
-						Al(7, '.btn-group-[row || col || full]'),
-						_l(),
-						Al(8, ' class on a parent container.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'section', Tv),
-						wl(11, 'button', xv),
-						Al(12, 'md'),
-						_l(),
-						wl(13, 'button', xv),
-						Al(14, 'md'),
-						_l(),
-						wl(15, 'button', xv),
-						Al(16, 'md'),
-						_l(),
-						wl(17, 'button', xv),
-						Al(18, 'md'),
-						_l(),
-						wl(19, 'button', xv),
-						Al(20, 'md'),
-						_l(),
-						_l(),
-						wl(21, 'section', Mv),
-						wl(22, 'button', xv),
-						Al(23, 'md'),
-						_l(),
-						wl(24, 'button', xv),
-						Al(25, 'md'),
-						_l(),
-						wl(26, 'button', xv),
-						Al(27, 'md'),
-						_l(),
-						wl(28, 'button', xv),
-						Al(29, 'md'),
-						_l(),
-						wl(30, 'button', xv),
-						Al(31, 'md'),
-						_l(),
-						_l(),
-						wl(32, 'section', Av),
-						wl(33, 'button', xv),
-						Al(34, 'md'),
-						_l(),
-						wl(35, 'button', xv),
-						Al(36, 'md'),
-						_l(),
-						wl(37, 'button', xv),
-						Al(38, 'md'),
-						_l(),
-						wl(39, 'button', xv),
-						Al(40, 'md'),
-						_l(),
-						wl(41, 'button', xv),
-						Al(42, 'md'),
-						_l(),
-						_l(),
-						_l(),
-						wl(43, 'figure'),
-						wl(44, 'pre', iv),
-						Al(45, '<section '),
-						wl(46, 'span', Pv),
-						wl(47, 'span', Ev),
-						Al(48, 'class'),
-						_l(),
-						Al(49, '='),
-						_l(),
-						wl(50, 'span', Ov),
-						Al(51, '"btn-group-row"'),
-						_l(),
-						Al(52, ' role='),
-						wl(53, 'span', Ov),
-						Al(54, '"group"'),
-						_l(),
-						Al(55, ' aria-label='),
-						wl(56, 'span', Ov),
-						Al(57, '"button row group"'),
-						_l(),
-						Al(58, '>\n    <button '),
-						wl(59, 'span', Pv),
-						wl(60, 'span', Ev),
-						Al(61, 'class'),
-						_l(),
-						Al(62, '='),
-						_l(),
-						wl(63, 'span', Ov),
-						Al(64, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(65, ' '),
-						wl(66, 'span', Pv),
-						wl(67, 'span', Ev),
-						Al(68, 'type'),
-						_l(),
-						Al(69, '='),
-						_l(),
-						wl(70, 'span', Ov),
-						Al(71, '"button"'),
-						_l(),
-						Al(72, '>md</button>\n    <button '),
-						wl(73, 'span', Pv),
-						wl(74, 'span', Ev),
-						Al(75, 'class'),
-						_l(),
-						Al(76, '='),
-						_l(),
-						wl(77, 'span', Ov),
-						Al(78, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(79, ' '),
-						wl(80, 'span', Pv),
-						wl(81, 'span', Ev),
-						Al(82, 'type'),
-						_l(),
-						Al(83, '='),
-						_l(),
-						wl(84, 'span', Ov),
-						Al(85, '"button"'),
-						_l(),
-						Al(86, '>md</button>\n    <button '),
-						wl(87, 'span', Pv),
-						wl(88, 'span', Ev),
-						Al(89, 'class'),
-						_l(),
-						Al(90, '='),
-						_l(),
-						wl(91, 'span', Ov),
-						Al(92, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(93, ' '),
-						wl(94, 'span', Pv),
-						wl(95, 'span', Ev),
-						Al(96, 'type'),
-						_l(),
-						Al(97, '='),
-						_l(),
-						wl(98, 'span', Ov),
-						Al(99, '"button"'),
-						_l(),
-						Al(100, '>md</button>\n    <button '),
-						wl(101, 'span', Pv),
-						wl(102, 'span', Ev),
-						Al(103, 'class'),
-						_l(),
-						Al(104, '='),
-						_l(),
-						wl(105, 'span', Ov),
-						Al(106, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(107, ' '),
-						wl(108, 'span', Pv),
-						wl(109, 'span', Ev),
-						Al(110, 'type'),
-						_l(),
-						Al(111, '='),
-						_l(),
-						wl(112, 'span', Ov),
-						Al(113, '"button"'),
-						_l(),
-						Al(114, '>md</button>\n    <button '),
-						wl(115, 'span', Pv),
-						wl(116, 'span', Ev),
-						Al(117, 'class'),
-						_l(),
-						Al(118, '='),
-						_l(),
-						wl(119, 'span', Ov),
-						Al(120, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(121, ' '),
-						wl(122, 'span', Pv),
-						wl(123, 'span', Ev),
-						Al(124, 'type'),
-						_l(),
-						Al(125, '='),
-						_l(),
-						wl(126, 'span', Ov),
-						Al(127, '"button"'),
-						_l(),
-						Al(128, '>md</button>\n</section>\n<section '),
-						wl(129, 'span', Pv),
-						wl(130, 'span', Ev),
-						Al(131, 'class'),
-						_l(),
-						Al(132, '='),
-						_l(),
-						wl(133, 'span', Ov),
-						Al(134, '"btn-group-col"'),
-						_l(),
-						Al(135, ' role='),
-						wl(136, 'span', Ov),
-						Al(137, '"group"'),
-						_l(),
-						Al(138, ' aria-label='),
-						wl(139, 'span', Ov),
-						Al(140, '"button column group"'),
-						_l(),
-						Al(141, '>\n    <button '),
-						wl(142, 'span', Pv),
-						wl(143, 'span', Ev),
-						Al(144, 'class'),
-						_l(),
-						Al(145, '='),
-						_l(),
-						wl(146, 'span', Ov),
-						Al(147, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(148, ' '),
-						wl(149, 'span', Pv),
-						wl(150, 'span', Ev),
-						Al(151, 'type'),
-						_l(),
-						Al(152, '='),
-						_l(),
-						wl(153, 'span', Ov),
-						Al(154, '"button"'),
-						_l(),
-						Al(155, '>md</button>\n    <button '),
-						wl(156, 'span', Pv),
-						wl(157, 'span', Ev),
-						Al(158, 'class'),
-						_l(),
-						Al(159, '='),
-						_l(),
-						wl(160, 'span', Ov),
-						Al(161, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(162, ' '),
-						wl(163, 'span', Pv),
-						wl(164, 'span', Ev),
-						Al(165, 'type'),
-						_l(),
-						Al(166, '='),
-						_l(),
-						wl(167, 'span', Ov),
-						Al(168, '"button"'),
-						_l(),
-						Al(169, '>md</button>\n    <button '),
-						wl(170, 'span', Pv),
-						wl(171, 'span', Ev),
-						Al(172, 'class'),
-						_l(),
-						Al(173, '='),
-						_l(),
-						wl(174, 'span', Ov),
-						Al(175, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(176, ' '),
-						wl(177, 'span', Pv),
-						wl(178, 'span', Ev),
-						Al(179, 'type'),
-						_l(),
-						Al(180, '='),
-						_l(),
-						wl(181, 'span', Ov),
-						Al(182, '"button"'),
-						_l(),
-						Al(183, '>md</button>\n    <button '),
-						wl(184, 'span', Pv),
-						wl(185, 'span', Ev),
-						Al(186, 'class'),
-						_l(),
-						Al(187, '='),
-						_l(),
-						wl(188, 'span', Ov),
-						Al(189, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(190, ' '),
-						wl(191, 'span', Pv),
-						wl(192, 'span', Ev),
-						Al(193, 'type'),
-						_l(),
-						Al(194, '='),
-						_l(),
-						wl(195, 'span', Ov),
-						Al(196, '"button"'),
-						_l(),
-						Al(197, '>md</button>\n    <button '),
-						wl(198, 'span', Pv),
-						wl(199, 'span', Ev),
-						Al(200, 'class'),
-						_l(),
-						Al(201, '='),
-						_l(),
-						wl(202, 'span', Ov),
-						Al(203, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(204, ' '),
-						wl(205, 'span', Pv),
-						wl(206, 'span', Ev),
-						Al(207, 'type'),
-						_l(),
-						Al(208, '='),
-						_l(),
-						wl(209, 'span', Ov),
-						Al(210, '"button"'),
-						_l(),
-						Al(211, '>md</button>\n</section>\n<section '),
-						wl(212, 'span', Pv),
-						wl(213, 'span', Ev),
-						Al(214, 'class'),
-						_l(),
-						Al(215, '='),
-						_l(),
-						wl(216, 'span', Ov),
-						Al(217, '"btn-group-full"'),
-						_l(),
-						Al(218, ' role='),
-						wl(219, 'span', Ov),
-						Al(220, '"group"'),
-						_l(),
-						Al(221, ' aria-label='),
-						wl(222, 'span', Ov),
-						Al(223, '"button full row group"'),
-						_l(),
-						Al(224, '>\n    <button '),
-						wl(225, 'span', Pv),
-						wl(226, 'span', Ev),
-						Al(227, 'class'),
-						_l(),
-						Al(228, '='),
-						_l(),
-						wl(229, 'span', Ov),
-						Al(230, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(231, ' '),
-						wl(232, 'span', Pv),
-						wl(233, 'span', Ev),
-						Al(234, 'type'),
-						_l(),
-						Al(235, '='),
-						_l(),
-						wl(236, 'span', Ov),
-						Al(237, '"button"'),
-						_l(),
-						Al(238, '>md</button>\n    <button '),
-						wl(239, 'span', Pv),
-						wl(240, 'span', Ev),
-						Al(241, 'class'),
-						_l(),
-						Al(242, '='),
-						_l(),
-						wl(243, 'span', Ov),
-						Al(244, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(245, ' '),
-						wl(246, 'span', Pv),
-						wl(247, 'span', Ev),
-						Al(248, 'type'),
-						_l(),
-						Al(249, '='),
-						_l(),
-						wl(250, 'span', Ov),
-						Al(251, '"button"'),
-						_l(),
-						Al(252, '>md</button>\n    <button '),
-						wl(253, 'span', Pv),
-						wl(254, 'span', Ev),
-						Al(255, 'class'),
-						_l(),
-						Al(256, '='),
-						_l(),
-						wl(257, 'span', Ov),
-						Al(258, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(259, ' '),
-						wl(260, 'span', Pv),
-						wl(261, 'span', Ev),
-						Al(262, 'type'),
-						_l(),
-						Al(263, '='),
-						_l(),
-						wl(264, 'span', Ov),
-						Al(265, '"button"'),
-						_l(),
-						Al(266, '>md</button>\n    <button '),
-						wl(267, 'span', Pv),
-						wl(268, 'span', Ev),
-						Al(269, 'class'),
-						_l(),
-						Al(270, '='),
-						_l(),
-						wl(271, 'span', Ov),
-						Al(272, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(273, ' '),
-						wl(274, 'span', Pv),
-						wl(275, 'span', Ev),
-						Al(276, 'type'),
-						_l(),
-						Al(277, '='),
-						_l(),
-						wl(278, 'span', Ov),
-						Al(279, '"button"'),
-						_l(),
-						Al(280, '>md</button>\n    <button '),
-						wl(281, 'span', Pv),
-						wl(282, 'span', Ev),
-						Al(283, 'class'),
-						_l(),
-						Al(284, '='),
-						_l(),
-						wl(285, 'span', Ov),
-						Al(286, '"btn-md bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(287, ' '),
-						wl(288, 'span', Pv),
-						wl(289, 'span', Ev),
-						Al(290, 'type'),
-						_l(),
-						Al(291, '='),
-						_l(),
-						wl(292, 'span', Ov),
-						Al(293, '"button"'),
-						_l(),
-						Al(294, '>md</button>\n</section>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Rounded'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Buttons are rounded by adding a '),
+						vl(6, 'code'),
+						Tl(7, '.rounded'),
+						yl(),
+						Tl(8, ' class.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'button', jv),
+						Tl(11, 'xs'),
+						yl(),
+						vl(12, 'button', Rv),
+						Tl(13, 'sm'),
+						yl(),
+						vl(14, 'button', Dv),
+						Tl(15, 'md'),
+						yl(),
+						vl(16, 'button', Nv),
+						Tl(17, 'lg'),
+						yl(),
+						vl(18, 'button', Uv),
+						Tl(19, 'xl'),
+						yl(),
+						vl(20, 'button', Lv),
+						Tl(21, 'full'),
+						yl(),
+						yl(),
+						vl(22, 'figure'),
+						vl(23, 'pre', ov),
+						Tl(24, '<button '),
+						vl(25, 'span', Sv),
+						vl(26, 'span', Pv),
+						Tl(27, 'class'),
+						yl(),
+						Tl(28, '='),
+						yl(),
+						vl(29, 'span', Ev),
+						Tl(30, '"btn-xs rounded bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(31, ' '),
+						vl(32, 'span', Sv),
+						vl(33, 'span', Pv),
+						Tl(34, 'type'),
+						yl(),
+						Tl(35, '='),
+						yl(),
+						vl(36, 'span', Ev),
+						Tl(37, '"button"'),
+						yl(),
+						Tl(38, '>xs</button>\n<button '),
+						vl(39, 'span', Sv),
+						vl(40, 'span', Pv),
+						Tl(41, 'class'),
+						yl(),
+						Tl(42, '='),
+						yl(),
+						vl(43, 'span', Ev),
+						Tl(44, '"btn-sm rounded bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(45, ' '),
+						vl(46, 'span', Sv),
+						vl(47, 'span', Pv),
+						Tl(48, 'type'),
+						yl(),
+						Tl(49, '='),
+						yl(),
+						vl(50, 'span', Ev),
+						Tl(51, '"button"'),
+						yl(),
+						Tl(52, '>sm</button>\n<button '),
+						vl(53, 'span', Sv),
+						vl(54, 'span', Pv),
+						Tl(55, 'class'),
+						yl(),
+						Tl(56, '='),
+						yl(),
+						vl(57, 'span', Ev),
+						Tl(58, '"btn-md rounded bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(59, ' '),
+						vl(60, 'span', Sv),
+						vl(61, 'span', Pv),
+						Tl(62, 'type'),
+						yl(),
+						Tl(63, '='),
+						yl(),
+						vl(64, 'span', Ev),
+						Tl(65, '"button"'),
+						yl(),
+						Tl(66, '>md</button>\n<button '),
+						vl(67, 'span', Sv),
+						vl(68, 'span', Pv),
+						Tl(69, 'class'),
+						yl(),
+						Tl(70, '='),
+						yl(),
+						vl(71, 'span', Ev),
+						Tl(72, '"btn-lg rounded bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(73, ' '),
+						vl(74, 'span', Sv),
+						vl(75, 'span', Pv),
+						Tl(76, 'type'),
+						yl(),
+						Tl(77, '='),
+						yl(),
+						vl(78, 'span', Ev),
+						Tl(79, '"button"'),
+						yl(),
+						Tl(80, '>lg</button>\n<button '),
+						vl(81, 'span', Sv),
+						vl(82, 'span', Pv),
+						Tl(83, 'class'),
+						yl(),
+						Tl(84, '='),
+						yl(),
+						vl(85, 'span', Ev),
+						Tl(86, '"btn-xl rounded bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(87, ' '),
+						vl(88, 'span', Sv),
+						vl(89, 'span', Pv),
+						Tl(90, 'type'),
+						yl(),
+						Tl(91, '='),
+						yl(),
+						vl(92, 'span', Ev),
+						Tl(93, '"button"'),
+						yl(),
+						Tl(94, '>xl</button>\n<button '),
+						vl(95, 'span', Sv),
+						vl(96, 'span', Pv),
+						Tl(97, 'class'),
+						yl(),
+						Tl(98, '='),
+						yl(),
+						vl(99, 'span', Ev),
+						Tl(100, '"btn-full rounded bg-dk-blue text-white bg-hover-blue"'),
+						yl(),
+						Tl(101, ' '),
+						vl(102, 'span', Sv),
+						vl(103, 'span', Pv),
+						Tl(104, 'type'),
+						yl(),
+						Tl(105, '='),
+						yl(),
+						vl(106, 'span', Ev),
+						Tl(107, '"button"'),
+						yl(),
+						Tl(108, '>full</button>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Rv = ['type', 'button', 1, 'btn-xs', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Dv = ['type', 'button', 1, 'btn-sm', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Nv = ['type', 'button', 1, 'btn-md', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Uv = ['type', 'button', 1, 'btn-lg', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Lv = ['type', 'button', 1, 'btn-xl', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'],
-				Hv = ['type', 'button', 1, 'btn-full', 'rounded', 'bg-dk-blue', 'text-white', 'bg-hover-blue'];
-			function zv(t, e) {
+			var zv = ['type', 'button', 'disabled', '', 1, 'btn-md'];
+			function Vv(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Rounded'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Buttons are rounded by adding a '),
-						wl(6, 'code'),
-						Al(7, '.rounded'),
-						_l(),
-						Al(8, ' class.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'button', Rv),
-						Al(11, 'xs'),
-						_l(),
-						wl(12, 'button', Dv),
-						Al(13, 'sm'),
-						_l(),
-						wl(14, 'button', Nv),
-						Al(15, 'md'),
-						_l(),
-						wl(16, 'button', Uv),
-						Al(17, 'lg'),
-						_l(),
-						wl(18, 'button', Lv),
-						Al(19, 'xl'),
-						_l(),
-						wl(20, 'button', Hv),
-						Al(21, 'full'),
-						_l(),
-						_l(),
-						wl(22, 'figure'),
-						wl(23, 'pre', iv),
-						Al(24, '<button '),
-						wl(25, 'span', Pv),
-						wl(26, 'span', Ev),
-						Al(27, 'class'),
-						_l(),
-						Al(28, '='),
-						_l(),
-						wl(29, 'span', Ov),
-						Al(30, '"btn-xs rounded bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(31, ' '),
-						wl(32, 'span', Pv),
-						wl(33, 'span', Ev),
-						Al(34, 'type'),
-						_l(),
-						Al(35, '='),
-						_l(),
-						wl(36, 'span', Ov),
-						Al(37, '"button"'),
-						_l(),
-						Al(38, '>xs</button>\n<button '),
-						wl(39, 'span', Pv),
-						wl(40, 'span', Ev),
-						Al(41, 'class'),
-						_l(),
-						Al(42, '='),
-						_l(),
-						wl(43, 'span', Ov),
-						Al(44, '"btn-sm rounded bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(45, ' '),
-						wl(46, 'span', Pv),
-						wl(47, 'span', Ev),
-						Al(48, 'type'),
-						_l(),
-						Al(49, '='),
-						_l(),
-						wl(50, 'span', Ov),
-						Al(51, '"button"'),
-						_l(),
-						Al(52, '>sm</button>\n<button '),
-						wl(53, 'span', Pv),
-						wl(54, 'span', Ev),
-						Al(55, 'class'),
-						_l(),
-						Al(56, '='),
-						_l(),
-						wl(57, 'span', Ov),
-						Al(58, '"btn-md rounded bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(59, ' '),
-						wl(60, 'span', Pv),
-						wl(61, 'span', Ev),
-						Al(62, 'type'),
-						_l(),
-						Al(63, '='),
-						_l(),
-						wl(64, 'span', Ov),
-						Al(65, '"button"'),
-						_l(),
-						Al(66, '>md</button>\n<button '),
-						wl(67, 'span', Pv),
-						wl(68, 'span', Ev),
-						Al(69, 'class'),
-						_l(),
-						Al(70, '='),
-						_l(),
-						wl(71, 'span', Ov),
-						Al(72, '"btn-lg rounded bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(73, ' '),
-						wl(74, 'span', Pv),
-						wl(75, 'span', Ev),
-						Al(76, 'type'),
-						_l(),
-						Al(77, '='),
-						_l(),
-						wl(78, 'span', Ov),
-						Al(79, '"button"'),
-						_l(),
-						Al(80, '>lg</button>\n<button '),
-						wl(81, 'span', Pv),
-						wl(82, 'span', Ev),
-						Al(83, 'class'),
-						_l(),
-						Al(84, '='),
-						_l(),
-						wl(85, 'span', Ov),
-						Al(86, '"btn-xl rounded bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(87, ' '),
-						wl(88, 'span', Pv),
-						wl(89, 'span', Ev),
-						Al(90, 'type'),
-						_l(),
-						Al(91, '='),
-						_l(),
-						wl(92, 'span', Ov),
-						Al(93, '"button"'),
-						_l(),
-						Al(94, '>xl</button>\n<button '),
-						wl(95, 'span', Pv),
-						wl(96, 'span', Ev),
-						Al(97, 'class'),
-						_l(),
-						Al(98, '='),
-						_l(),
-						wl(99, 'span', Ov),
-						Al(100, '"btn-full rounded bg-dk-blue text-white bg-hover-blue"'),
-						_l(),
-						Al(101, ' '),
-						wl(102, 'span', Pv),
-						wl(103, 'span', Ev),
-						Al(104, 'type'),
-						_l(),
-						Al(105, '='),
-						_l(),
-						wl(106, 'span', Ov),
-						Al(107, '"button"'),
-						_l(),
-						Al(108, '>full</button>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'State'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Buttons are disabled by adding a '),
+						vl(6, 'code'),
+						Tl(7, 'disabled'),
+						yl(),
+						Tl(8, ' attribute.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'button', zv),
+						Tl(11, 'disabled'),
+						yl(),
+						yl(),
+						vl(12, 'figure'),
+						vl(13, 'pre', ov),
+						Tl(14, '<button '),
+						vl(15, 'span', Sv),
+						vl(16, 'span', Pv),
+						Tl(17, 'class'),
+						yl(),
+						Tl(18, '='),
+						yl(),
+						vl(19, 'span', Ev),
+						Tl(20, '"btn-md"'),
+						yl(),
+						Tl(21, ' '),
+						vl(22, 'span', Sv),
+						vl(23, 'span', Pv),
+						Tl(24, 'type'),
+						yl(),
+						Tl(25, '='),
+						yl(),
+						vl(26, 'span', Ev),
+						Tl(27, '"button"'),
+						yl(),
+						Tl(28, ' disabled>disabled</button>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Vv = ['type', 'button', 'disabled', '', 1, 'btn-md'];
 			function Fv(t, e) {
-				if (
-					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'State'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Buttons are disabled by adding a '),
-						wl(6, 'code'),
-						Al(7, 'disabled'),
-						_l(),
-						Al(8, ' attribute.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'button', Vv),
-						Al(11, 'disabled'),
-						_l(),
-						_l(),
-						wl(12, 'figure'),
-						wl(13, 'pre', iv),
-						Al(14, '<button '),
-						wl(15, 'span', Pv),
-						wl(16, 'span', Ev),
-						Al(17, 'class'),
-						_l(),
-						Al(18, '='),
-						_l(),
-						wl(19, 'span', Ov),
-						Al(20, '"btn-md"'),
-						_l(),
-						Al(21, ' '),
-						wl(22, 'span', Pv),
-						wl(23, 'span', Ev),
-						Al(24, 'type'),
-						_l(),
-						Al(25, '='),
-						_l(),
-						wl(26, 'span', Ov),
-						Al(27, '"button"'),
-						_l(),
-						Al(28, ' disabled>disabled</button>'),
-						_l(),
-						_l(),
-						_l()),
-					2 & t)
-				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
-				}
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Bv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function qv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Accordion'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Gv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Accordion'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Expand'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Zv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Expand'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Wv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Background'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Qv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Background'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Border'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Yv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Border'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Hover'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Jv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Hover'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Text'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
-			function Kv(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Text'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
-			}
-			var Xv = [1, 'row'],
-				$v = [1, 'row-full'],
-				ty = [1, 'col'],
-				ey = [1, 'col-full'];
-			function ny(t, e) {
+			var Kv = [1, 'row'],
+				Xv = [1, 'row-full'],
+				$v = [1, 'col'],
+				ty = [1, 'col-full'];
+			function ey(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'p'),
-						Al(3, 'In order for flexbox to work, a parent container must have a '),
-						wl(4, 'code'),
-						Al(5, '.row[-full]'),
-						_l(),
-						Al(6, ' or '),
-						wl(7, 'code'),
-						Al(8, '.col[-full]'),
-						_l(),
-						Al(9, ' class.'),
-						_l(),
-						_l(),
-						wl(10, 'section', tv),
-						wl(11, 'ul', Xv),
-						wl(12, 'li'),
-						Al(13, 'row'),
-						_l(),
-						wl(14, 'li'),
-						Al(15, 'row'),
-						_l(),
-						_l(),
-						wl(16, 'ul', $v),
-						wl(17, 'li'),
-						Al(18, 'full row'),
-						_l(),
-						wl(19, 'li'),
-						Al(20, 'full row'),
-						_l(),
-						_l(),
-						wl(21, 'ul', ty),
-						wl(22, 'li'),
-						Al(23, 'column'),
-						_l(),
-						wl(24, 'li'),
-						Al(25, 'column'),
-						_l(),
-						_l(),
-						wl(26, 'ul', ey),
-						wl(27, 'li'),
-						Al(28, 'full column'),
-						_l(),
-						wl(29, 'li'),
-						Al(30, 'full column'),
-						_l(),
-						_l(),
-						_l(),
-						wl(31, 'figure'),
-						wl(32, 'pre', iv),
-						wl(33, 'span', av),
-						Al(34, '<'),
-						wl(35, 'span', sv),
-						Al(36, 'ul'),
-						_l(),
-						Al(37, ' '),
-						wl(38, 'span', lv),
-						Al(39, 'class'),
-						_l(),
-						Al(40, '='),
-						wl(41, 'span', uv),
-						Al(42, '"row"'),
-						_l(),
-						Al(43, '>'),
-						_l(),
-						Al(44, '\n    '),
-						wl(45, 'span', av),
-						Al(46, '<'),
-						wl(47, 'span', sv),
-						Al(48, 'li'),
-						_l(),
-						Al(49, '>'),
-						_l(),
-						Al(50, 'row'),
-						wl(51, 'span', av),
-						Al(52, '</'),
-						wl(53, 'span', sv),
-						Al(54, 'li'),
-						_l(),
-						Al(55, '>'),
-						_l(),
-						Al(56, '\n    '),
-						wl(57, 'span', av),
-						Al(58, '<'),
-						wl(59, 'span', sv),
-						Al(60, 'li'),
-						_l(),
-						Al(61, '>'),
-						_l(),
-						Al(62, 'row'),
-						wl(63, 'span', av),
-						Al(64, '</'),
-						wl(65, 'span', sv),
-						Al(66, 'li'),
-						_l(),
-						Al(67, '>'),
-						_l(),
-						Al(68, '\n'),
-						wl(69, 'span', av),
-						Al(70, '</'),
-						wl(71, 'span', sv),
-						Al(72, 'ul'),
-						_l(),
-						Al(73, '>'),
-						_l(),
-						Al(74, '\n'),
-						wl(75, 'span', av),
-						Al(76, '<'),
-						wl(77, 'span', sv),
-						Al(78, 'ul'),
-						_l(),
-						Al(79, ' '),
-						wl(80, 'span', lv),
-						Al(81, 'class'),
-						_l(),
-						Al(82, '='),
-						wl(83, 'span', uv),
-						Al(84, '"row-full"'),
-						_l(),
-						Al(85, '>'),
-						_l(),
-						Al(86, '\n    '),
-						wl(87, 'span', av),
-						Al(88, '<'),
-						wl(89, 'span', sv),
-						Al(90, 'li'),
-						_l(),
-						Al(91, '>'),
-						_l(),
-						Al(92, 'full row'),
-						wl(93, 'span', av),
-						Al(94, '</'),
-						wl(95, 'span', sv),
-						Al(96, 'li'),
-						_l(),
-						Al(97, '>'),
-						_l(),
-						Al(98, '\n    '),
-						wl(99, 'span', av),
-						Al(100, '<'),
-						wl(101, 'span', sv),
-						Al(102, 'li'),
-						_l(),
-						Al(103, '>'),
-						_l(),
-						Al(104, 'full row'),
-						wl(105, 'span', av),
-						Al(106, '</'),
-						wl(107, 'span', sv),
-						Al(108, 'li'),
-						_l(),
-						Al(109, '>'),
-						_l(),
-						Al(110, '\n'),
-						wl(111, 'span', av),
-						Al(112, '</'),
-						wl(113, 'span', sv),
-						Al(114, 'ul'),
-						_l(),
-						Al(115, '>'),
-						_l(),
-						Al(116, '\n'),
-						wl(117, 'span', av),
-						Al(118, '<'),
-						wl(119, 'span', sv),
-						Al(120, 'ul'),
-						_l(),
-						Al(121, ' '),
-						wl(122, 'span', lv),
-						Al(123, 'class'),
-						_l(),
-						Al(124, '='),
-						wl(125, 'span', uv),
-						Al(126, '"col"'),
-						_l(),
-						Al(127, '>'),
-						_l(),
-						Al(128, '\n    '),
-						wl(129, 'span', av),
-						Al(130, '<'),
-						wl(131, 'span', sv),
-						Al(132, 'li'),
-						_l(),
-						Al(133, '>'),
-						_l(),
-						Al(134, 'column'),
-						wl(135, 'span', av),
-						Al(136, '</'),
-						wl(137, 'span', sv),
-						Al(138, 'li'),
-						_l(),
-						Al(139, '>'),
-						_l(),
-						Al(140, '\n    '),
-						wl(141, 'span', av),
-						Al(142, '<'),
-						wl(143, 'span', sv),
-						Al(144, 'li'),
-						_l(),
-						Al(145, '>'),
-						_l(),
-						Al(146, 'column'),
-						wl(147, 'span', av),
-						Al(148, '</'),
-						wl(149, 'span', sv),
-						Al(150, 'li'),
-						_l(),
-						Al(151, '>'),
-						_l(),
-						Al(152, '\n'),
-						wl(153, 'span', av),
-						Al(154, '</'),
-						wl(155, 'span', sv),
-						Al(156, 'ul'),
-						_l(),
-						Al(157, '>'),
-						_l(),
-						Al(158, '\n'),
-						wl(159, 'span', av),
-						Al(160, '<'),
-						wl(161, 'span', sv),
-						Al(162, 'ul'),
-						_l(),
-						Al(163, ' '),
-						wl(164, 'span', lv),
-						Al(165, 'class'),
-						_l(),
-						Al(166, '='),
-						wl(167, 'span', uv),
-						Al(168, '"col-full"'),
-						_l(),
-						Al(169, '>'),
-						_l(),
-						Al(170, '\n    '),
-						wl(171, 'span', av),
-						Al(172, '<'),
-						wl(173, 'span', sv),
-						Al(174, 'li'),
-						_l(),
-						Al(175, '>'),
-						_l(),
-						Al(176, 'full column'),
-						wl(177, 'span', av),
-						Al(178, '</'),
-						wl(179, 'span', sv),
-						Al(180, 'li'),
-						_l(),
-						Al(181, '>'),
-						_l(),
-						Al(182, '\n    '),
-						wl(183, 'span', av),
-						Al(184, '<'),
-						wl(185, 'span', sv),
-						Al(186, 'li'),
-						_l(),
-						Al(187, '>'),
-						_l(),
-						Al(188, 'full column'),
-						wl(189, 'span', av),
-						Al(190, '</'),
-						wl(191, 'span', sv),
-						Al(192, 'li'),
-						_l(),
-						Al(193, '>'),
-						_l(),
-						Al(194, '\n'),
-						wl(195, 'span', av),
-						Al(196, '</'),
-						wl(197, 'span', sv),
-						Al(198, 'ul'),
-						_l(),
-						Al(199, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'p'),
+						Tl(3, 'In order for flexbox to work, a parent container must have a '),
+						vl(4, 'code'),
+						Tl(5, '.row[-full]'),
+						yl(),
+						Tl(6, ' or '),
+						vl(7, 'code'),
+						Tl(8, '.col[-full]'),
+						yl(),
+						Tl(9, ' class.'),
+						yl(),
+						yl(),
+						vl(10, 'section', $b),
+						vl(11, 'ul', Kv),
+						vl(12, 'li'),
+						Tl(13, 'row'),
+						yl(),
+						vl(14, 'li'),
+						Tl(15, 'row'),
+						yl(),
+						yl(),
+						vl(16, 'ul', Xv),
+						vl(17, 'li'),
+						Tl(18, 'full row'),
+						yl(),
+						vl(19, 'li'),
+						Tl(20, 'full row'),
+						yl(),
+						yl(),
+						vl(21, 'ul', $v),
+						vl(22, 'li'),
+						Tl(23, 'column'),
+						yl(),
+						vl(24, 'li'),
+						Tl(25, 'column'),
+						yl(),
+						yl(),
+						vl(26, 'ul', ty),
+						vl(27, 'li'),
+						Tl(28, 'full column'),
+						yl(),
+						vl(29, 'li'),
+						Tl(30, 'full column'),
+						yl(),
+						yl(),
+						yl(),
+						vl(31, 'figure'),
+						vl(32, 'pre', ov),
+						vl(33, 'span', iv),
+						Tl(34, '<'),
+						vl(35, 'span', av),
+						Tl(36, 'ul'),
+						yl(),
+						Tl(37, ' '),
+						vl(38, 'span', sv),
+						Tl(39, 'class'),
+						yl(),
+						Tl(40, '='),
+						vl(41, 'span', lv),
+						Tl(42, '"row"'),
+						yl(),
+						Tl(43, '>'),
+						yl(),
+						Tl(44, '\n    '),
+						vl(45, 'span', iv),
+						Tl(46, '<'),
+						vl(47, 'span', av),
+						Tl(48, 'li'),
+						yl(),
+						Tl(49, '>'),
+						yl(),
+						Tl(50, 'row'),
+						vl(51, 'span', iv),
+						Tl(52, '</'),
+						vl(53, 'span', av),
+						Tl(54, 'li'),
+						yl(),
+						Tl(55, '>'),
+						yl(),
+						Tl(56, '\n    '),
+						vl(57, 'span', iv),
+						Tl(58, '<'),
+						vl(59, 'span', av),
+						Tl(60, 'li'),
+						yl(),
+						Tl(61, '>'),
+						yl(),
+						Tl(62, 'row'),
+						vl(63, 'span', iv),
+						Tl(64, '</'),
+						vl(65, 'span', av),
+						Tl(66, 'li'),
+						yl(),
+						Tl(67, '>'),
+						yl(),
+						Tl(68, '\n'),
+						vl(69, 'span', iv),
+						Tl(70, '</'),
+						vl(71, 'span', av),
+						Tl(72, 'ul'),
+						yl(),
+						Tl(73, '>'),
+						yl(),
+						Tl(74, '\n'),
+						vl(75, 'span', iv),
+						Tl(76, '<'),
+						vl(77, 'span', av),
+						Tl(78, 'ul'),
+						yl(),
+						Tl(79, ' '),
+						vl(80, 'span', sv),
+						Tl(81, 'class'),
+						yl(),
+						Tl(82, '='),
+						vl(83, 'span', lv),
+						Tl(84, '"row-full"'),
+						yl(),
+						Tl(85, '>'),
+						yl(),
+						Tl(86, '\n    '),
+						vl(87, 'span', iv),
+						Tl(88, '<'),
+						vl(89, 'span', av),
+						Tl(90, 'li'),
+						yl(),
+						Tl(91, '>'),
+						yl(),
+						Tl(92, 'full row'),
+						vl(93, 'span', iv),
+						Tl(94, '</'),
+						vl(95, 'span', av),
+						Tl(96, 'li'),
+						yl(),
+						Tl(97, '>'),
+						yl(),
+						Tl(98, '\n    '),
+						vl(99, 'span', iv),
+						Tl(100, '<'),
+						vl(101, 'span', av),
+						Tl(102, 'li'),
+						yl(),
+						Tl(103, '>'),
+						yl(),
+						Tl(104, 'full row'),
+						vl(105, 'span', iv),
+						Tl(106, '</'),
+						vl(107, 'span', av),
+						Tl(108, 'li'),
+						yl(),
+						Tl(109, '>'),
+						yl(),
+						Tl(110, '\n'),
+						vl(111, 'span', iv),
+						Tl(112, '</'),
+						vl(113, 'span', av),
+						Tl(114, 'ul'),
+						yl(),
+						Tl(115, '>'),
+						yl(),
+						Tl(116, '\n'),
+						vl(117, 'span', iv),
+						Tl(118, '<'),
+						vl(119, 'span', av),
+						Tl(120, 'ul'),
+						yl(),
+						Tl(121, ' '),
+						vl(122, 'span', sv),
+						Tl(123, 'class'),
+						yl(),
+						Tl(124, '='),
+						vl(125, 'span', lv),
+						Tl(126, '"col"'),
+						yl(),
+						Tl(127, '>'),
+						yl(),
+						Tl(128, '\n    '),
+						vl(129, 'span', iv),
+						Tl(130, '<'),
+						vl(131, 'span', av),
+						Tl(132, 'li'),
+						yl(),
+						Tl(133, '>'),
+						yl(),
+						Tl(134, 'column'),
+						vl(135, 'span', iv),
+						Tl(136, '</'),
+						vl(137, 'span', av),
+						Tl(138, 'li'),
+						yl(),
+						Tl(139, '>'),
+						yl(),
+						Tl(140, '\n    '),
+						vl(141, 'span', iv),
+						Tl(142, '<'),
+						vl(143, 'span', av),
+						Tl(144, 'li'),
+						yl(),
+						Tl(145, '>'),
+						yl(),
+						Tl(146, 'column'),
+						vl(147, 'span', iv),
+						Tl(148, '</'),
+						vl(149, 'span', av),
+						Tl(150, 'li'),
+						yl(),
+						Tl(151, '>'),
+						yl(),
+						Tl(152, '\n'),
+						vl(153, 'span', iv),
+						Tl(154, '</'),
+						vl(155, 'span', av),
+						Tl(156, 'ul'),
+						yl(),
+						Tl(157, '>'),
+						yl(),
+						Tl(158, '\n'),
+						vl(159, 'span', iv),
+						Tl(160, '<'),
+						vl(161, 'span', av),
+						Tl(162, 'ul'),
+						yl(),
+						Tl(163, ' '),
+						vl(164, 'span', sv),
+						Tl(165, 'class'),
+						yl(),
+						Tl(166, '='),
+						vl(167, 'span', lv),
+						Tl(168, '"col-full"'),
+						yl(),
+						Tl(169, '>'),
+						yl(),
+						Tl(170, '\n    '),
+						vl(171, 'span', iv),
+						Tl(172, '<'),
+						vl(173, 'span', av),
+						Tl(174, 'li'),
+						yl(),
+						Tl(175, '>'),
+						yl(),
+						Tl(176, 'full column'),
+						vl(177, 'span', iv),
+						Tl(178, '</'),
+						vl(179, 'span', av),
+						Tl(180, 'li'),
+						yl(),
+						Tl(181, '>'),
+						yl(),
+						Tl(182, '\n    '),
+						vl(183, 'span', iv),
+						Tl(184, '<'),
+						vl(185, 'span', av),
+						Tl(186, 'li'),
+						yl(),
+						Tl(187, '>'),
+						yl(),
+						Tl(188, 'full column'),
+						vl(189, 'span', iv),
+						Tl(190, '</'),
+						vl(191, 'span', av),
+						Tl(192, 'li'),
+						yl(),
+						Tl(193, '>'),
+						yl(),
+						Tl(194, '\n'),
+						vl(195, 'span', iv),
+						Tl(196, '</'),
+						vl(197, 'span', av),
+						Tl(198, 'ul'),
+						yl(),
+						Tl(199, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(10), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(10), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var ry = [1, 'col', 'align-l'],
-				oy = [1, 'col', 'align-c'],
-				iy = [1, 'col', 'align-r'],
-				ay = [1, 'col', 'align-t'],
-				sy = [1, 'col', 'align-m'],
-				ly = [1, 'col', 'align-b'],
-				uy = [1, 'col', 'align-cm'],
-				cy = [1, 'col', 'align-sa'],
-				py = [1, 'col', 'align-sb'],
-				fy = [1, 'col', 'align-st'];
-			function dy(t, e) {
+			var ny = [1, 'col', 'align-l'],
+				ry = [1, 'col', 'align-c'],
+				oy = [1, 'col', 'align-r'],
+				iy = [1, 'col', 'align-t'],
+				ay = [1, 'col', 'align-m'],
+				sy = [1, 'col', 'align-b'],
+				ly = [1, 'col', 'align-cm'],
+				uy = [1, 'col', 'align-sa'],
+				cy = [1, 'col', 'align-sb'],
+				py = [1, 'col', 'align-st'];
+			function fy(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Container Column'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use an '),
-						wl(6, 'code'),
-						Al(7, '.align-[l || c || r || t || m || b || cm || sa || sb || st]'),
-						_l(),
-						Al(8, ' class to align ALL items in a '),
-						wl(9, 'code'),
-						Al(10, '.col'),
-						_l(),
-						Al(11, ' flex container.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'ul', ry),
-						wl(14, 'li'),
-						Al(15, 'left (default)'),
-						_l(),
-						wl(16, 'li'),
-						Al(17, 'left (default)'),
-						_l(),
-						_l(),
-						wl(18, 'ul', oy),
-						wl(19, 'li'),
-						Al(20, 'center'),
-						_l(),
-						wl(21, 'li'),
-						Al(22, 'center'),
-						_l(),
-						_l(),
-						wl(23, 'ul', iy),
-						wl(24, 'li'),
-						Al(25, 'right'),
-						_l(),
-						wl(26, 'li'),
-						Al(27, 'right'),
-						_l(),
-						_l(),
-						wl(28, 'ul', ay),
-						wl(29, 'li'),
-						Al(30, 'top (default)'),
-						_l(),
-						wl(31, 'li'),
-						Al(32, 'top (default)'),
-						_l(),
-						_l(),
-						wl(33, 'ul', sy),
-						wl(34, 'li'),
-						Al(35, 'middle'),
-						_l(),
-						wl(36, 'li'),
-						Al(37, 'middle'),
-						_l(),
-						_l(),
-						wl(38, 'ul', ly),
-						wl(39, 'li'),
-						Al(40, 'bottom'),
-						_l(),
-						wl(41, 'li'),
-						Al(42, 'bottom'),
-						_l(),
-						_l(),
-						wl(43, 'ul', uy),
-						wl(44, 'li'),
-						Al(45, 'center middle'),
-						_l(),
-						wl(46, 'li'),
-						Al(47, 'center middle'),
-						_l(),
-						_l(),
-						wl(48, 'ul', cy),
-						wl(49, 'li'),
-						Al(50, 'space around'),
-						_l(),
-						wl(51, 'li'),
-						Al(52, 'space around'),
-						_l(),
-						_l(),
-						wl(53, 'ul', py),
-						wl(54, 'li'),
-						Al(55, 'space between'),
-						_l(),
-						wl(56, 'li'),
-						Al(57, 'space between'),
-						_l(),
-						_l(),
-						wl(58, 'ul', fy),
-						wl(59, 'li'),
-						Al(60, 'stretch'),
-						_l(),
-						wl(61, 'li'),
-						Al(62, 'stretch'),
-						_l(),
-						_l(),
-						_l(),
-						wl(63, 'figure'),
-						wl(64, 'pre', iv),
-						wl(65, 'span', av),
-						Al(66, '<'),
-						wl(67, 'span', sv),
-						Al(68, 'ul'),
-						_l(),
-						Al(69, ' '),
-						wl(70, 'span', lv),
-						Al(71, 'class'),
-						_l(),
-						Al(72, '='),
-						wl(73, 'span', uv),
-						Al(74, '"col align-l"'),
-						_l(),
-						Al(75, '>'),
-						_l(),
-						Al(76, '\n    '),
-						wl(77, 'span', av),
-						Al(78, '<'),
-						wl(79, 'span', sv),
-						Al(80, 'li'),
-						_l(),
-						Al(81, '>'),
-						_l(),
-						Al(82, 'left (default)'),
-						wl(83, 'span', av),
-						Al(84, '</'),
-						wl(85, 'span', sv),
-						Al(86, 'li'),
-						_l(),
-						Al(87, '>'),
-						_l(),
-						Al(88, '\n    '),
-						wl(89, 'span', av),
-						Al(90, '<'),
-						wl(91, 'span', sv),
-						Al(92, 'li'),
-						_l(),
-						Al(93, '>'),
-						_l(),
-						Al(94, 'left (default)'),
-						wl(95, 'span', av),
-						Al(96, '</'),
-						wl(97, 'span', sv),
-						Al(98, 'li'),
-						_l(),
-						Al(99, '>'),
-						_l(),
-						Al(100, '\n'),
-						wl(101, 'span', av),
-						Al(102, '</'),
-						wl(103, 'span', sv),
-						Al(104, 'ul'),
-						_l(),
-						Al(105, '>'),
-						_l(),
-						Al(106, '\n'),
-						wl(107, 'span', av),
-						Al(108, '<'),
-						wl(109, 'span', sv),
-						Al(110, 'ul'),
-						_l(),
-						Al(111, ' '),
-						wl(112, 'span', lv),
-						Al(113, 'class'),
-						_l(),
-						Al(114, '='),
-						wl(115, 'span', uv),
-						Al(116, '"col align-c"'),
-						_l(),
-						Al(117, '>'),
-						_l(),
-						Al(118, '\n    '),
-						wl(119, 'span', av),
-						Al(120, '<'),
-						wl(121, 'span', sv),
-						Al(122, 'li'),
-						_l(),
-						Al(123, '>'),
-						_l(),
-						Al(124, 'center'),
-						wl(125, 'span', av),
-						Al(126, '</'),
-						wl(127, 'span', sv),
-						Al(128, 'li'),
-						_l(),
-						Al(129, '>'),
-						_l(),
-						Al(130, '\n    '),
-						wl(131, 'span', av),
-						Al(132, '<'),
-						wl(133, 'span', sv),
-						Al(134, 'li'),
-						_l(),
-						Al(135, '>'),
-						_l(),
-						Al(136, 'center'),
-						wl(137, 'span', av),
-						Al(138, '</'),
-						wl(139, 'span', sv),
-						Al(140, 'li'),
-						_l(),
-						Al(141, '>'),
-						_l(),
-						Al(142, '\n'),
-						wl(143, 'span', av),
-						Al(144, '</'),
-						wl(145, 'span', sv),
-						Al(146, 'ul'),
-						_l(),
-						Al(147, '>'),
-						_l(),
-						Al(148, '\n'),
-						wl(149, 'span', av),
-						Al(150, '<'),
-						wl(151, 'span', sv),
-						Al(152, 'ul'),
-						_l(),
-						Al(153, ' '),
-						wl(154, 'span', lv),
-						Al(155, 'class'),
-						_l(),
-						Al(156, '='),
-						wl(157, 'span', uv),
-						Al(158, '"col align-r"'),
-						_l(),
-						Al(159, '>'),
-						_l(),
-						Al(160, '\n    '),
-						wl(161, 'span', av),
-						Al(162, '<'),
-						wl(163, 'span', sv),
-						Al(164, 'li'),
-						_l(),
-						Al(165, '>'),
-						_l(),
-						Al(166, 'right'),
-						wl(167, 'span', av),
-						Al(168, '</'),
-						wl(169, 'span', sv),
-						Al(170, 'li'),
-						_l(),
-						Al(171, '>'),
-						_l(),
-						Al(172, '\n    '),
-						wl(173, 'span', av),
-						Al(174, '<'),
-						wl(175, 'span', sv),
-						Al(176, 'li'),
-						_l(),
-						Al(177, '>'),
-						_l(),
-						Al(178, 'right'),
-						wl(179, 'span', av),
-						Al(180, '</'),
-						wl(181, 'span', sv),
-						Al(182, 'li'),
-						_l(),
-						Al(183, '>'),
-						_l(),
-						Al(184, '\n'),
-						wl(185, 'span', av),
-						Al(186, '</'),
-						wl(187, 'span', sv),
-						Al(188, 'ul'),
-						_l(),
-						Al(189, '>'),
-						_l(),
-						Al(190, '\n'),
-						wl(191, 'span', av),
-						Al(192, '<'),
-						wl(193, 'span', sv),
-						Al(194, 'ul'),
-						_l(),
-						Al(195, ' '),
-						wl(196, 'span', lv),
-						Al(197, 'class'),
-						_l(),
-						Al(198, '='),
-						wl(199, 'span', uv),
-						Al(200, '"col align-t"'),
-						_l(),
-						Al(201, '>'),
-						_l(),
-						Al(202, '\n    '),
-						wl(203, 'span', av),
-						Al(204, '<'),
-						wl(205, 'span', sv),
-						Al(206, 'li'),
-						_l(),
-						Al(207, '>'),
-						_l(),
-						Al(208, 'top (default)'),
-						wl(209, 'span', av),
-						Al(210, '</'),
-						wl(211, 'span', sv),
-						Al(212, 'li'),
-						_l(),
-						Al(213, '>'),
-						_l(),
-						Al(214, '\n    '),
-						wl(215, 'span', av),
-						Al(216, '<'),
-						wl(217, 'span', sv),
-						Al(218, 'li'),
-						_l(),
-						Al(219, '>'),
-						_l(),
-						Al(220, 'top (default)'),
-						wl(221, 'span', av),
-						Al(222, '</'),
-						wl(223, 'span', sv),
-						Al(224, 'li'),
-						_l(),
-						Al(225, '>'),
-						_l(),
-						Al(226, '\n'),
-						wl(227, 'span', av),
-						Al(228, '</'),
-						wl(229, 'span', sv),
-						Al(230, 'ul'),
-						_l(),
-						Al(231, '>'),
-						_l(),
-						Al(232, '\n'),
-						wl(233, 'span', av),
-						Al(234, '<'),
-						wl(235, 'span', sv),
-						Al(236, 'ul'),
-						_l(),
-						Al(237, ' '),
-						wl(238, 'span', lv),
-						Al(239, 'class'),
-						_l(),
-						Al(240, '='),
-						wl(241, 'span', uv),
-						Al(242, '"col align-m"'),
-						_l(),
-						Al(243, '>'),
-						_l(),
-						Al(244, '\n    '),
-						wl(245, 'span', av),
-						Al(246, '<'),
-						wl(247, 'span', sv),
-						Al(248, 'li'),
-						_l(),
-						Al(249, '>'),
-						_l(),
-						Al(250, 'middle'),
-						wl(251, 'span', av),
-						Al(252, '</'),
-						wl(253, 'span', sv),
-						Al(254, 'li'),
-						_l(),
-						Al(255, '>'),
-						_l(),
-						Al(256, '\n    '),
-						wl(257, 'span', av),
-						Al(258, '<'),
-						wl(259, 'span', sv),
-						Al(260, 'li'),
-						_l(),
-						Al(261, '>'),
-						_l(),
-						Al(262, 'middle'),
-						wl(263, 'span', av),
-						Al(264, '</'),
-						wl(265, 'span', sv),
-						Al(266, 'li'),
-						_l(),
-						Al(267, '>'),
-						_l(),
-						Al(268, '\n'),
-						wl(269, 'span', av),
-						Al(270, '</'),
-						wl(271, 'span', sv),
-						Al(272, 'ul'),
-						_l(),
-						Al(273, '>'),
-						_l(),
-						Al(274, '\n'),
-						wl(275, 'span', av),
-						Al(276, '<'),
-						wl(277, 'span', sv),
-						Al(278, 'ul'),
-						_l(),
-						Al(279, ' '),
-						wl(280, 'span', lv),
-						Al(281, 'class'),
-						_l(),
-						Al(282, '='),
-						wl(283, 'span', uv),
-						Al(284, '"col align-b"'),
-						_l(),
-						Al(285, '>'),
-						_l(),
-						Al(286, '\n    '),
-						wl(287, 'span', av),
-						Al(288, '<'),
-						wl(289, 'span', sv),
-						Al(290, 'li'),
-						_l(),
-						Al(291, '>'),
-						_l(),
-						Al(292, 'bottom'),
-						wl(293, 'span', av),
-						Al(294, '</'),
-						wl(295, 'span', sv),
-						Al(296, 'li'),
-						_l(),
-						Al(297, '>'),
-						_l(),
-						Al(298, '\n    '),
-						wl(299, 'span', av),
-						Al(300, '<'),
-						wl(301, 'span', sv),
-						Al(302, 'li'),
-						_l(),
-						Al(303, '>'),
-						_l(),
-						Al(304, 'bottom'),
-						wl(305, 'span', av),
-						Al(306, '</'),
-						wl(307, 'span', sv),
-						Al(308, 'li'),
-						_l(),
-						Al(309, '>'),
-						_l(),
-						Al(310, '\n'),
-						wl(311, 'span', av),
-						Al(312, '</'),
-						wl(313, 'span', sv),
-						Al(314, 'ul'),
-						_l(),
-						Al(315, '>'),
-						_l(),
-						Al(316, '\n'),
-						wl(317, 'span', av),
-						Al(318, '<'),
-						wl(319, 'span', sv),
-						Al(320, 'ul'),
-						_l(),
-						Al(321, ' '),
-						wl(322, 'span', lv),
-						Al(323, 'class'),
-						_l(),
-						Al(324, '='),
-						wl(325, 'span', uv),
-						Al(326, '"col align-cm"'),
-						_l(),
-						Al(327, '>'),
-						_l(),
-						Al(328, '\n    '),
-						wl(329, 'span', av),
-						Al(330, '<'),
-						wl(331, 'span', sv),
-						Al(332, 'li'),
-						_l(),
-						Al(333, '>'),
-						_l(),
-						Al(334, 'center middle'),
-						wl(335, 'span', av),
-						Al(336, '</'),
-						wl(337, 'span', sv),
-						Al(338, 'li'),
-						_l(),
-						Al(339, '>'),
-						_l(),
-						Al(340, '\n    '),
-						wl(341, 'span', av),
-						Al(342, '<'),
-						wl(343, 'span', sv),
-						Al(344, 'li'),
-						_l(),
-						Al(345, '>'),
-						_l(),
-						Al(346, 'center middle'),
-						wl(347, 'span', av),
-						Al(348, '</'),
-						wl(349, 'span', sv),
-						Al(350, 'li'),
-						_l(),
-						Al(351, '>'),
-						_l(),
-						Al(352, '\n'),
-						wl(353, 'span', av),
-						Al(354, '</'),
-						wl(355, 'span', sv),
-						Al(356, 'ul'),
-						_l(),
-						Al(357, '>'),
-						_l(),
-						Al(358, '\n'),
-						wl(359, 'span', av),
-						Al(360, '<'),
-						wl(361, 'span', sv),
-						Al(362, 'ul'),
-						_l(),
-						Al(363, ' '),
-						wl(364, 'span', lv),
-						Al(365, 'class'),
-						_l(),
-						Al(366, '='),
-						wl(367, 'span', uv),
-						Al(368, '"col align-sa"'),
-						_l(),
-						Al(369, '>'),
-						_l(),
-						Al(370, '\n    '),
-						wl(371, 'span', av),
-						Al(372, '<'),
-						wl(373, 'span', sv),
-						Al(374, 'li'),
-						_l(),
-						Al(375, '>'),
-						_l(),
-						Al(376, 'space around'),
-						wl(377, 'span', av),
-						Al(378, '</'),
-						wl(379, 'span', sv),
-						Al(380, 'li'),
-						_l(),
-						Al(381, '>'),
-						_l(),
-						Al(382, '\n    '),
-						wl(383, 'span', av),
-						Al(384, '<'),
-						wl(385, 'span', sv),
-						Al(386, 'li'),
-						_l(),
-						Al(387, '>'),
-						_l(),
-						Al(388, 'space around'),
-						wl(389, 'span', av),
-						Al(390, '</'),
-						wl(391, 'span', sv),
-						Al(392, 'li'),
-						_l(),
-						Al(393, '>'),
-						_l(),
-						Al(394, '\n'),
-						wl(395, 'span', av),
-						Al(396, '</'),
-						wl(397, 'span', sv),
-						Al(398, 'ul'),
-						_l(),
-						Al(399, '>'),
-						_l(),
-						Al(400, '\n'),
-						wl(401, 'span', av),
-						Al(402, '<'),
-						wl(403, 'span', sv),
-						Al(404, 'ul'),
-						_l(),
-						Al(405, ' '),
-						wl(406, 'span', lv),
-						Al(407, 'class'),
-						_l(),
-						Al(408, '='),
-						wl(409, 'span', uv),
-						Al(410, '"col align-sb"'),
-						_l(),
-						Al(411, '>'),
-						_l(),
-						Al(412, '\n    '),
-						wl(413, 'span', av),
-						Al(414, '<'),
-						wl(415, 'span', sv),
-						Al(416, 'li'),
-						_l(),
-						Al(417, '>'),
-						_l(),
-						Al(418, 'space between'),
-						wl(419, 'span', av),
-						Al(420, '</'),
-						wl(421, 'span', sv),
-						Al(422, 'li'),
-						_l(),
-						Al(423, '>'),
-						_l(),
-						Al(424, '\n    '),
-						wl(425, 'span', av),
-						Al(426, '<'),
-						wl(427, 'span', sv),
-						Al(428, 'li'),
-						_l(),
-						Al(429, '>'),
-						_l(),
-						Al(430, 'space between'),
-						wl(431, 'span', av),
-						Al(432, '</'),
-						wl(433, 'span', sv),
-						Al(434, 'li'),
-						_l(),
-						Al(435, '>'),
-						_l(),
-						Al(436, '\n'),
-						wl(437, 'span', av),
-						Al(438, '</'),
-						wl(439, 'span', sv),
-						Al(440, 'ul'),
-						_l(),
-						Al(441, '>'),
-						_l(),
-						Al(442, '\n'),
-						wl(443, 'span', av),
-						Al(444, '<'),
-						wl(445, 'span', sv),
-						Al(446, 'ul'),
-						_l(),
-						Al(447, ' '),
-						wl(448, 'span', lv),
-						Al(449, 'class'),
-						_l(),
-						Al(450, '='),
-						wl(451, 'span', uv),
-						Al(452, '"col align-st"'),
-						_l(),
-						Al(453, '>'),
-						_l(),
-						Al(454, '\n    '),
-						wl(455, 'span', av),
-						Al(456, '<'),
-						wl(457, 'span', sv),
-						Al(458, 'li'),
-						_l(),
-						Al(459, '>'),
-						_l(),
-						Al(460, 'stretch'),
-						wl(461, 'span', av),
-						Al(462, '</'),
-						wl(463, 'span', sv),
-						Al(464, 'li'),
-						_l(),
-						Al(465, '>'),
-						_l(),
-						Al(466, '\n    '),
-						wl(467, 'span', av),
-						Al(468, '<'),
-						wl(469, 'span', sv),
-						Al(470, 'li'),
-						_l(),
-						Al(471, '>'),
-						_l(),
-						Al(472, 'stretch'),
-						wl(473, 'span', av),
-						Al(474, '</'),
-						wl(475, 'span', sv),
-						Al(476, 'li'),
-						_l(),
-						Al(477, '>'),
-						_l(),
-						Al(478, '\n'),
-						wl(479, 'span', av),
-						Al(480, '</'),
-						wl(481, 'span', sv),
-						Al(482, 'ul'),
-						_l(),
-						Al(483, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Container Column'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use an '),
+						vl(6, 'code'),
+						Tl(7, '.align-[l || c || r || t || m || b || cm || sa || sb || st]'),
+						yl(),
+						Tl(8, ' class to align ALL items in a '),
+						vl(9, 'code'),
+						Tl(10, '.col'),
+						yl(),
+						Tl(11, ' flex container.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'ul', ny),
+						vl(14, 'li'),
+						Tl(15, 'left (default)'),
+						yl(),
+						vl(16, 'li'),
+						Tl(17, 'left (default)'),
+						yl(),
+						yl(),
+						vl(18, 'ul', ry),
+						vl(19, 'li'),
+						Tl(20, 'center'),
+						yl(),
+						vl(21, 'li'),
+						Tl(22, 'center'),
+						yl(),
+						yl(),
+						vl(23, 'ul', oy),
+						vl(24, 'li'),
+						Tl(25, 'right'),
+						yl(),
+						vl(26, 'li'),
+						Tl(27, 'right'),
+						yl(),
+						yl(),
+						vl(28, 'ul', iy),
+						vl(29, 'li'),
+						Tl(30, 'top (default)'),
+						yl(),
+						vl(31, 'li'),
+						Tl(32, 'top (default)'),
+						yl(),
+						yl(),
+						vl(33, 'ul', ay),
+						vl(34, 'li'),
+						Tl(35, 'middle'),
+						yl(),
+						vl(36, 'li'),
+						Tl(37, 'middle'),
+						yl(),
+						yl(),
+						vl(38, 'ul', sy),
+						vl(39, 'li'),
+						Tl(40, 'bottom'),
+						yl(),
+						vl(41, 'li'),
+						Tl(42, 'bottom'),
+						yl(),
+						yl(),
+						vl(43, 'ul', ly),
+						vl(44, 'li'),
+						Tl(45, 'center middle'),
+						yl(),
+						vl(46, 'li'),
+						Tl(47, 'center middle'),
+						yl(),
+						yl(),
+						vl(48, 'ul', uy),
+						vl(49, 'li'),
+						Tl(50, 'space around'),
+						yl(),
+						vl(51, 'li'),
+						Tl(52, 'space around'),
+						yl(),
+						yl(),
+						vl(53, 'ul', cy),
+						vl(54, 'li'),
+						Tl(55, 'space between'),
+						yl(),
+						vl(56, 'li'),
+						Tl(57, 'space between'),
+						yl(),
+						yl(),
+						vl(58, 'ul', py),
+						vl(59, 'li'),
+						Tl(60, 'stretch'),
+						yl(),
+						vl(61, 'li'),
+						Tl(62, 'stretch'),
+						yl(),
+						yl(),
+						yl(),
+						vl(63, 'figure'),
+						vl(64, 'pre', ov),
+						vl(65, 'span', iv),
+						Tl(66, '<'),
+						vl(67, 'span', av),
+						Tl(68, 'ul'),
+						yl(),
+						Tl(69, ' '),
+						vl(70, 'span', sv),
+						Tl(71, 'class'),
+						yl(),
+						Tl(72, '='),
+						vl(73, 'span', lv),
+						Tl(74, '"col align-l"'),
+						yl(),
+						Tl(75, '>'),
+						yl(),
+						Tl(76, '\n    '),
+						vl(77, 'span', iv),
+						Tl(78, '<'),
+						vl(79, 'span', av),
+						Tl(80, 'li'),
+						yl(),
+						Tl(81, '>'),
+						yl(),
+						Tl(82, 'left (default)'),
+						vl(83, 'span', iv),
+						Tl(84, '</'),
+						vl(85, 'span', av),
+						Tl(86, 'li'),
+						yl(),
+						Tl(87, '>'),
+						yl(),
+						Tl(88, '\n    '),
+						vl(89, 'span', iv),
+						Tl(90, '<'),
+						vl(91, 'span', av),
+						Tl(92, 'li'),
+						yl(),
+						Tl(93, '>'),
+						yl(),
+						Tl(94, 'left (default)'),
+						vl(95, 'span', iv),
+						Tl(96, '</'),
+						vl(97, 'span', av),
+						Tl(98, 'li'),
+						yl(),
+						Tl(99, '>'),
+						yl(),
+						Tl(100, '\n'),
+						vl(101, 'span', iv),
+						Tl(102, '</'),
+						vl(103, 'span', av),
+						Tl(104, 'ul'),
+						yl(),
+						Tl(105, '>'),
+						yl(),
+						Tl(106, '\n'),
+						vl(107, 'span', iv),
+						Tl(108, '<'),
+						vl(109, 'span', av),
+						Tl(110, 'ul'),
+						yl(),
+						Tl(111, ' '),
+						vl(112, 'span', sv),
+						Tl(113, 'class'),
+						yl(),
+						Tl(114, '='),
+						vl(115, 'span', lv),
+						Tl(116, '"col align-c"'),
+						yl(),
+						Tl(117, '>'),
+						yl(),
+						Tl(118, '\n    '),
+						vl(119, 'span', iv),
+						Tl(120, '<'),
+						vl(121, 'span', av),
+						Tl(122, 'li'),
+						yl(),
+						Tl(123, '>'),
+						yl(),
+						Tl(124, 'center'),
+						vl(125, 'span', iv),
+						Tl(126, '</'),
+						vl(127, 'span', av),
+						Tl(128, 'li'),
+						yl(),
+						Tl(129, '>'),
+						yl(),
+						Tl(130, '\n    '),
+						vl(131, 'span', iv),
+						Tl(132, '<'),
+						vl(133, 'span', av),
+						Tl(134, 'li'),
+						yl(),
+						Tl(135, '>'),
+						yl(),
+						Tl(136, 'center'),
+						vl(137, 'span', iv),
+						Tl(138, '</'),
+						vl(139, 'span', av),
+						Tl(140, 'li'),
+						yl(),
+						Tl(141, '>'),
+						yl(),
+						Tl(142, '\n'),
+						vl(143, 'span', iv),
+						Tl(144, '</'),
+						vl(145, 'span', av),
+						Tl(146, 'ul'),
+						yl(),
+						Tl(147, '>'),
+						yl(),
+						Tl(148, '\n'),
+						vl(149, 'span', iv),
+						Tl(150, '<'),
+						vl(151, 'span', av),
+						Tl(152, 'ul'),
+						yl(),
+						Tl(153, ' '),
+						vl(154, 'span', sv),
+						Tl(155, 'class'),
+						yl(),
+						Tl(156, '='),
+						vl(157, 'span', lv),
+						Tl(158, '"col align-r"'),
+						yl(),
+						Tl(159, '>'),
+						yl(),
+						Tl(160, '\n    '),
+						vl(161, 'span', iv),
+						Tl(162, '<'),
+						vl(163, 'span', av),
+						Tl(164, 'li'),
+						yl(),
+						Tl(165, '>'),
+						yl(),
+						Tl(166, 'right'),
+						vl(167, 'span', iv),
+						Tl(168, '</'),
+						vl(169, 'span', av),
+						Tl(170, 'li'),
+						yl(),
+						Tl(171, '>'),
+						yl(),
+						Tl(172, '\n    '),
+						vl(173, 'span', iv),
+						Tl(174, '<'),
+						vl(175, 'span', av),
+						Tl(176, 'li'),
+						yl(),
+						Tl(177, '>'),
+						yl(),
+						Tl(178, 'right'),
+						vl(179, 'span', iv),
+						Tl(180, '</'),
+						vl(181, 'span', av),
+						Tl(182, 'li'),
+						yl(),
+						Tl(183, '>'),
+						yl(),
+						Tl(184, '\n'),
+						vl(185, 'span', iv),
+						Tl(186, '</'),
+						vl(187, 'span', av),
+						Tl(188, 'ul'),
+						yl(),
+						Tl(189, '>'),
+						yl(),
+						Tl(190, '\n'),
+						vl(191, 'span', iv),
+						Tl(192, '<'),
+						vl(193, 'span', av),
+						Tl(194, 'ul'),
+						yl(),
+						Tl(195, ' '),
+						vl(196, 'span', sv),
+						Tl(197, 'class'),
+						yl(),
+						Tl(198, '='),
+						vl(199, 'span', lv),
+						Tl(200, '"col align-t"'),
+						yl(),
+						Tl(201, '>'),
+						yl(),
+						Tl(202, '\n    '),
+						vl(203, 'span', iv),
+						Tl(204, '<'),
+						vl(205, 'span', av),
+						Tl(206, 'li'),
+						yl(),
+						Tl(207, '>'),
+						yl(),
+						Tl(208, 'top (default)'),
+						vl(209, 'span', iv),
+						Tl(210, '</'),
+						vl(211, 'span', av),
+						Tl(212, 'li'),
+						yl(),
+						Tl(213, '>'),
+						yl(),
+						Tl(214, '\n    '),
+						vl(215, 'span', iv),
+						Tl(216, '<'),
+						vl(217, 'span', av),
+						Tl(218, 'li'),
+						yl(),
+						Tl(219, '>'),
+						yl(),
+						Tl(220, 'top (default)'),
+						vl(221, 'span', iv),
+						Tl(222, '</'),
+						vl(223, 'span', av),
+						Tl(224, 'li'),
+						yl(),
+						Tl(225, '>'),
+						yl(),
+						Tl(226, '\n'),
+						vl(227, 'span', iv),
+						Tl(228, '</'),
+						vl(229, 'span', av),
+						Tl(230, 'ul'),
+						yl(),
+						Tl(231, '>'),
+						yl(),
+						Tl(232, '\n'),
+						vl(233, 'span', iv),
+						Tl(234, '<'),
+						vl(235, 'span', av),
+						Tl(236, 'ul'),
+						yl(),
+						Tl(237, ' '),
+						vl(238, 'span', sv),
+						Tl(239, 'class'),
+						yl(),
+						Tl(240, '='),
+						vl(241, 'span', lv),
+						Tl(242, '"col align-m"'),
+						yl(),
+						Tl(243, '>'),
+						yl(),
+						Tl(244, '\n    '),
+						vl(245, 'span', iv),
+						Tl(246, '<'),
+						vl(247, 'span', av),
+						Tl(248, 'li'),
+						yl(),
+						Tl(249, '>'),
+						yl(),
+						Tl(250, 'middle'),
+						vl(251, 'span', iv),
+						Tl(252, '</'),
+						vl(253, 'span', av),
+						Tl(254, 'li'),
+						yl(),
+						Tl(255, '>'),
+						yl(),
+						Tl(256, '\n    '),
+						vl(257, 'span', iv),
+						Tl(258, '<'),
+						vl(259, 'span', av),
+						Tl(260, 'li'),
+						yl(),
+						Tl(261, '>'),
+						yl(),
+						Tl(262, 'middle'),
+						vl(263, 'span', iv),
+						Tl(264, '</'),
+						vl(265, 'span', av),
+						Tl(266, 'li'),
+						yl(),
+						Tl(267, '>'),
+						yl(),
+						Tl(268, '\n'),
+						vl(269, 'span', iv),
+						Tl(270, '</'),
+						vl(271, 'span', av),
+						Tl(272, 'ul'),
+						yl(),
+						Tl(273, '>'),
+						yl(),
+						Tl(274, '\n'),
+						vl(275, 'span', iv),
+						Tl(276, '<'),
+						vl(277, 'span', av),
+						Tl(278, 'ul'),
+						yl(),
+						Tl(279, ' '),
+						vl(280, 'span', sv),
+						Tl(281, 'class'),
+						yl(),
+						Tl(282, '='),
+						vl(283, 'span', lv),
+						Tl(284, '"col align-b"'),
+						yl(),
+						Tl(285, '>'),
+						yl(),
+						Tl(286, '\n    '),
+						vl(287, 'span', iv),
+						Tl(288, '<'),
+						vl(289, 'span', av),
+						Tl(290, 'li'),
+						yl(),
+						Tl(291, '>'),
+						yl(),
+						Tl(292, 'bottom'),
+						vl(293, 'span', iv),
+						Tl(294, '</'),
+						vl(295, 'span', av),
+						Tl(296, 'li'),
+						yl(),
+						Tl(297, '>'),
+						yl(),
+						Tl(298, '\n    '),
+						vl(299, 'span', iv),
+						Tl(300, '<'),
+						vl(301, 'span', av),
+						Tl(302, 'li'),
+						yl(),
+						Tl(303, '>'),
+						yl(),
+						Tl(304, 'bottom'),
+						vl(305, 'span', iv),
+						Tl(306, '</'),
+						vl(307, 'span', av),
+						Tl(308, 'li'),
+						yl(),
+						Tl(309, '>'),
+						yl(),
+						Tl(310, '\n'),
+						vl(311, 'span', iv),
+						Tl(312, '</'),
+						vl(313, 'span', av),
+						Tl(314, 'ul'),
+						yl(),
+						Tl(315, '>'),
+						yl(),
+						Tl(316, '\n'),
+						vl(317, 'span', iv),
+						Tl(318, '<'),
+						vl(319, 'span', av),
+						Tl(320, 'ul'),
+						yl(),
+						Tl(321, ' '),
+						vl(322, 'span', sv),
+						Tl(323, 'class'),
+						yl(),
+						Tl(324, '='),
+						vl(325, 'span', lv),
+						Tl(326, '"col align-cm"'),
+						yl(),
+						Tl(327, '>'),
+						yl(),
+						Tl(328, '\n    '),
+						vl(329, 'span', iv),
+						Tl(330, '<'),
+						vl(331, 'span', av),
+						Tl(332, 'li'),
+						yl(),
+						Tl(333, '>'),
+						yl(),
+						Tl(334, 'center middle'),
+						vl(335, 'span', iv),
+						Tl(336, '</'),
+						vl(337, 'span', av),
+						Tl(338, 'li'),
+						yl(),
+						Tl(339, '>'),
+						yl(),
+						Tl(340, '\n    '),
+						vl(341, 'span', iv),
+						Tl(342, '<'),
+						vl(343, 'span', av),
+						Tl(344, 'li'),
+						yl(),
+						Tl(345, '>'),
+						yl(),
+						Tl(346, 'center middle'),
+						vl(347, 'span', iv),
+						Tl(348, '</'),
+						vl(349, 'span', av),
+						Tl(350, 'li'),
+						yl(),
+						Tl(351, '>'),
+						yl(),
+						Tl(352, '\n'),
+						vl(353, 'span', iv),
+						Tl(354, '</'),
+						vl(355, 'span', av),
+						Tl(356, 'ul'),
+						yl(),
+						Tl(357, '>'),
+						yl(),
+						Tl(358, '\n'),
+						vl(359, 'span', iv),
+						Tl(360, '<'),
+						vl(361, 'span', av),
+						Tl(362, 'ul'),
+						yl(),
+						Tl(363, ' '),
+						vl(364, 'span', sv),
+						Tl(365, 'class'),
+						yl(),
+						Tl(366, '='),
+						vl(367, 'span', lv),
+						Tl(368, '"col align-sa"'),
+						yl(),
+						Tl(369, '>'),
+						yl(),
+						Tl(370, '\n    '),
+						vl(371, 'span', iv),
+						Tl(372, '<'),
+						vl(373, 'span', av),
+						Tl(374, 'li'),
+						yl(),
+						Tl(375, '>'),
+						yl(),
+						Tl(376, 'space around'),
+						vl(377, 'span', iv),
+						Tl(378, '</'),
+						vl(379, 'span', av),
+						Tl(380, 'li'),
+						yl(),
+						Tl(381, '>'),
+						yl(),
+						Tl(382, '\n    '),
+						vl(383, 'span', iv),
+						Tl(384, '<'),
+						vl(385, 'span', av),
+						Tl(386, 'li'),
+						yl(),
+						Tl(387, '>'),
+						yl(),
+						Tl(388, 'space around'),
+						vl(389, 'span', iv),
+						Tl(390, '</'),
+						vl(391, 'span', av),
+						Tl(392, 'li'),
+						yl(),
+						Tl(393, '>'),
+						yl(),
+						Tl(394, '\n'),
+						vl(395, 'span', iv),
+						Tl(396, '</'),
+						vl(397, 'span', av),
+						Tl(398, 'ul'),
+						yl(),
+						Tl(399, '>'),
+						yl(),
+						Tl(400, '\n'),
+						vl(401, 'span', iv),
+						Tl(402, '<'),
+						vl(403, 'span', av),
+						Tl(404, 'ul'),
+						yl(),
+						Tl(405, ' '),
+						vl(406, 'span', sv),
+						Tl(407, 'class'),
+						yl(),
+						Tl(408, '='),
+						vl(409, 'span', lv),
+						Tl(410, '"col align-sb"'),
+						yl(),
+						Tl(411, '>'),
+						yl(),
+						Tl(412, '\n    '),
+						vl(413, 'span', iv),
+						Tl(414, '<'),
+						vl(415, 'span', av),
+						Tl(416, 'li'),
+						yl(),
+						Tl(417, '>'),
+						yl(),
+						Tl(418, 'space between'),
+						vl(419, 'span', iv),
+						Tl(420, '</'),
+						vl(421, 'span', av),
+						Tl(422, 'li'),
+						yl(),
+						Tl(423, '>'),
+						yl(),
+						Tl(424, '\n    '),
+						vl(425, 'span', iv),
+						Tl(426, '<'),
+						vl(427, 'span', av),
+						Tl(428, 'li'),
+						yl(),
+						Tl(429, '>'),
+						yl(),
+						Tl(430, 'space between'),
+						vl(431, 'span', iv),
+						Tl(432, '</'),
+						vl(433, 'span', av),
+						Tl(434, 'li'),
+						yl(),
+						Tl(435, '>'),
+						yl(),
+						Tl(436, '\n'),
+						vl(437, 'span', iv),
+						Tl(438, '</'),
+						vl(439, 'span', av),
+						Tl(440, 'ul'),
+						yl(),
+						Tl(441, '>'),
+						yl(),
+						Tl(442, '\n'),
+						vl(443, 'span', iv),
+						Tl(444, '<'),
+						vl(445, 'span', av),
+						Tl(446, 'ul'),
+						yl(),
+						Tl(447, ' '),
+						vl(448, 'span', sv),
+						Tl(449, 'class'),
+						yl(),
+						Tl(450, '='),
+						vl(451, 'span', lv),
+						Tl(452, '"col align-st"'),
+						yl(),
+						Tl(453, '>'),
+						yl(),
+						Tl(454, '\n    '),
+						vl(455, 'span', iv),
+						Tl(456, '<'),
+						vl(457, 'span', av),
+						Tl(458, 'li'),
+						yl(),
+						Tl(459, '>'),
+						yl(),
+						Tl(460, 'stretch'),
+						vl(461, 'span', iv),
+						Tl(462, '</'),
+						vl(463, 'span', av),
+						Tl(464, 'li'),
+						yl(),
+						Tl(465, '>'),
+						yl(),
+						Tl(466, '\n    '),
+						vl(467, 'span', iv),
+						Tl(468, '<'),
+						vl(469, 'span', av),
+						Tl(470, 'li'),
+						yl(),
+						Tl(471, '>'),
+						yl(),
+						Tl(472, 'stretch'),
+						vl(473, 'span', iv),
+						Tl(474, '</'),
+						vl(475, 'span', av),
+						Tl(476, 'li'),
+						yl(),
+						Tl(477, '>'),
+						yl(),
+						Tl(478, '\n'),
+						vl(479, 'span', iv),
+						Tl(480, '</'),
+						vl(481, 'span', av),
+						Tl(482, 'ul'),
+						yl(),
+						Tl(483, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var hy = [1, 'row', 'align-l'],
-				gy = [1, 'row', 'align-c'],
-				my = [1, 'row', 'align-r'],
-				by = [1, 'row', 'align-t'],
-				vy = [1, 'row', 'align-m'],
-				yy = [1, 'row', 'align-b'],
-				wy = [1, 'row', 'align-cm'],
-				_y = [1, 'row', 'align-sa'],
-				xy = [1, 'row', 'align-sb'],
-				Cy = [1, 'row', 'align-st'];
-			function ky(t, e) {
+			var dy = [1, 'row', 'align-l'],
+				hy = [1, 'row', 'align-c'],
+				gy = [1, 'row', 'align-r'],
+				my = [1, 'row', 'align-t'],
+				by = [1, 'row', 'align-m'],
+				vy = [1, 'row', 'align-b'],
+				yy = [1, 'row', 'align-cm'],
+				wy = [1, 'row', 'align-sa'],
+				_y = [1, 'row', 'align-sb'],
+				xy = [1, 'row', 'align-st'];
+			function Cy(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Container Row'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use an '),
-						wl(6, 'code'),
-						Al(7, '.align-[l || c || r || t || m || b || cm || sa || sb || st]'),
-						_l(),
-						Al(8, ' class to align ALL items in a '),
-						wl(9, 'code'),
-						Al(10, '.row'),
-						_l(),
-						Al(11, ' flex container.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'ul', hy),
-						wl(14, 'li'),
-						Al(15, 'left (default)'),
-						_l(),
-						wl(16, 'li'),
-						Al(17, 'left (default)'),
-						_l(),
-						_l(),
-						wl(18, 'ul', gy),
-						wl(19, 'li'),
-						Al(20, 'center'),
-						_l(),
-						wl(21, 'li'),
-						Al(22, 'center'),
-						_l(),
-						_l(),
-						wl(23, 'ul', my),
-						wl(24, 'li'),
-						Al(25, 'right'),
-						_l(),
-						wl(26, 'li'),
-						Al(27, 'right'),
-						_l(),
-						_l(),
-						wl(28, 'ul', by),
-						wl(29, 'li'),
-						Al(30, 'top (default)'),
-						_l(),
-						wl(31, 'li'),
-						Al(32, 'top (default)'),
-						_l(),
-						_l(),
-						wl(33, 'ul', vy),
-						wl(34, 'li'),
-						Al(35, 'middle'),
-						_l(),
-						wl(36, 'li'),
-						Al(37, 'middle'),
-						_l(),
-						_l(),
-						wl(38, 'ul', yy),
-						wl(39, 'li'),
-						Al(40, 'bottom'),
-						_l(),
-						wl(41, 'li'),
-						Al(42, 'bottom'),
-						_l(),
-						_l(),
-						wl(43, 'ul', wy),
-						wl(44, 'li'),
-						Al(45, 'center middle'),
-						_l(),
-						wl(46, 'li'),
-						Al(47, 'center middle'),
-						_l(),
-						_l(),
-						wl(48, 'ul', _y),
-						wl(49, 'li'),
-						Al(50, 'space around'),
-						_l(),
-						wl(51, 'li'),
-						Al(52, 'space around'),
-						_l(),
-						_l(),
-						wl(53, 'ul', xy),
-						wl(54, 'li'),
-						Al(55, 'space between'),
-						_l(),
-						wl(56, 'li'),
-						Al(57, 'space between'),
-						_l(),
-						_l(),
-						wl(58, 'ul', Cy),
-						wl(59, 'li'),
-						Al(60, 'stretch'),
-						_l(),
-						wl(61, 'li'),
-						Al(62, 'stretch'),
-						_l(),
-						_l(),
-						_l(),
-						wl(63, 'figure'),
-						wl(64, 'pre', iv),
-						wl(65, 'span', av),
-						Al(66, '<'),
-						wl(67, 'span', sv),
-						Al(68, 'ul'),
-						_l(),
-						Al(69, ' '),
-						wl(70, 'span', lv),
-						Al(71, 'class'),
-						_l(),
-						Al(72, '='),
-						wl(73, 'span', uv),
-						Al(74, '"row align-l"'),
-						_l(),
-						Al(75, '>'),
-						_l(),
-						Al(76, '\n    '),
-						wl(77, 'span', av),
-						Al(78, '<'),
-						wl(79, 'span', sv),
-						Al(80, 'li'),
-						_l(),
-						Al(81, '>'),
-						_l(),
-						Al(82, 'left (default)'),
-						wl(83, 'span', av),
-						Al(84, '</'),
-						wl(85, 'span', sv),
-						Al(86, 'li'),
-						_l(),
-						Al(87, '>'),
-						_l(),
-						Al(88, '\n    '),
-						wl(89, 'span', av),
-						Al(90, '<'),
-						wl(91, 'span', sv),
-						Al(92, 'li'),
-						_l(),
-						Al(93, '>'),
-						_l(),
-						Al(94, 'left (default)'),
-						wl(95, 'span', av),
-						Al(96, '</'),
-						wl(97, 'span', sv),
-						Al(98, 'li'),
-						_l(),
-						Al(99, '>'),
-						_l(),
-						Al(100, '\n'),
-						wl(101, 'span', av),
-						Al(102, '</'),
-						wl(103, 'span', sv),
-						Al(104, 'ul'),
-						_l(),
-						Al(105, '>'),
-						_l(),
-						Al(106, '\n'),
-						wl(107, 'span', av),
-						Al(108, '<'),
-						wl(109, 'span', sv),
-						Al(110, 'ul'),
-						_l(),
-						Al(111, ' '),
-						wl(112, 'span', lv),
-						Al(113, 'class'),
-						_l(),
-						Al(114, '='),
-						wl(115, 'span', uv),
-						Al(116, '"row align-c"'),
-						_l(),
-						Al(117, '>'),
-						_l(),
-						Al(118, '\n    '),
-						wl(119, 'span', av),
-						Al(120, '<'),
-						wl(121, 'span', sv),
-						Al(122, 'li'),
-						_l(),
-						Al(123, '>'),
-						_l(),
-						Al(124, 'center'),
-						wl(125, 'span', av),
-						Al(126, '</'),
-						wl(127, 'span', sv),
-						Al(128, 'li'),
-						_l(),
-						Al(129, '>'),
-						_l(),
-						Al(130, '\n    '),
-						wl(131, 'span', av),
-						Al(132, '<'),
-						wl(133, 'span', sv),
-						Al(134, 'li'),
-						_l(),
-						Al(135, '>'),
-						_l(),
-						Al(136, 'center'),
-						wl(137, 'span', av),
-						Al(138, '</'),
-						wl(139, 'span', sv),
-						Al(140, 'li'),
-						_l(),
-						Al(141, '>'),
-						_l(),
-						Al(142, '\n'),
-						wl(143, 'span', av),
-						Al(144, '</'),
-						wl(145, 'span', sv),
-						Al(146, 'ul'),
-						_l(),
-						Al(147, '>'),
-						_l(),
-						Al(148, '\n'),
-						wl(149, 'span', av),
-						Al(150, '<'),
-						wl(151, 'span', sv),
-						Al(152, 'ul'),
-						_l(),
-						Al(153, ' '),
-						wl(154, 'span', lv),
-						Al(155, 'class'),
-						_l(),
-						Al(156, '='),
-						wl(157, 'span', uv),
-						Al(158, '"row align-r"'),
-						_l(),
-						Al(159, '>'),
-						_l(),
-						Al(160, '\n    '),
-						wl(161, 'span', av),
-						Al(162, '<'),
-						wl(163, 'span', sv),
-						Al(164, 'li'),
-						_l(),
-						Al(165, '>'),
-						_l(),
-						Al(166, 'right'),
-						wl(167, 'span', av),
-						Al(168, '</'),
-						wl(169, 'span', sv),
-						Al(170, 'li'),
-						_l(),
-						Al(171, '>'),
-						_l(),
-						Al(172, '\n    '),
-						wl(173, 'span', av),
-						Al(174, '<'),
-						wl(175, 'span', sv),
-						Al(176, 'li'),
-						_l(),
-						Al(177, '>'),
-						_l(),
-						Al(178, 'right'),
-						wl(179, 'span', av),
-						Al(180, '</'),
-						wl(181, 'span', sv),
-						Al(182, 'li'),
-						_l(),
-						Al(183, '>'),
-						_l(),
-						Al(184, '\n'),
-						wl(185, 'span', av),
-						Al(186, '</'),
-						wl(187, 'span', sv),
-						Al(188, 'ul'),
-						_l(),
-						Al(189, '>'),
-						_l(),
-						Al(190, '\n'),
-						wl(191, 'span', av),
-						Al(192, '<'),
-						wl(193, 'span', sv),
-						Al(194, 'ul'),
-						_l(),
-						Al(195, ' '),
-						wl(196, 'span', lv),
-						Al(197, 'class'),
-						_l(),
-						Al(198, '='),
-						wl(199, 'span', uv),
-						Al(200, '"row align-t"'),
-						_l(),
-						Al(201, '>'),
-						_l(),
-						Al(202, '\n    '),
-						wl(203, 'span', av),
-						Al(204, '<'),
-						wl(205, 'span', sv),
-						Al(206, 'li'),
-						_l(),
-						Al(207, '>'),
-						_l(),
-						Al(208, 'top (default)'),
-						wl(209, 'span', av),
-						Al(210, '</'),
-						wl(211, 'span', sv),
-						Al(212, 'li'),
-						_l(),
-						Al(213, '>'),
-						_l(),
-						Al(214, '\n    '),
-						wl(215, 'span', av),
-						Al(216, '<'),
-						wl(217, 'span', sv),
-						Al(218, 'li'),
-						_l(),
-						Al(219, '>'),
-						_l(),
-						Al(220, 'top (default)'),
-						wl(221, 'span', av),
-						Al(222, '</'),
-						wl(223, 'span', sv),
-						Al(224, 'li'),
-						_l(),
-						Al(225, '>'),
-						_l(),
-						Al(226, '\n'),
-						wl(227, 'span', av),
-						Al(228, '</'),
-						wl(229, 'span', sv),
-						Al(230, 'ul'),
-						_l(),
-						Al(231, '>'),
-						_l(),
-						Al(232, '\n'),
-						wl(233, 'span', av),
-						Al(234, '<'),
-						wl(235, 'span', sv),
-						Al(236, 'ul'),
-						_l(),
-						Al(237, ' '),
-						wl(238, 'span', lv),
-						Al(239, 'class'),
-						_l(),
-						Al(240, '='),
-						wl(241, 'span', uv),
-						Al(242, '"row align-m"'),
-						_l(),
-						Al(243, '>'),
-						_l(),
-						Al(244, '\n    '),
-						wl(245, 'span', av),
-						Al(246, '<'),
-						wl(247, 'span', sv),
-						Al(248, 'li'),
-						_l(),
-						Al(249, '>'),
-						_l(),
-						Al(250, 'middle'),
-						wl(251, 'span', av),
-						Al(252, '</'),
-						wl(253, 'span', sv),
-						Al(254, 'li'),
-						_l(),
-						Al(255, '>'),
-						_l(),
-						Al(256, '\n    '),
-						wl(257, 'span', av),
-						Al(258, '<'),
-						wl(259, 'span', sv),
-						Al(260, 'li'),
-						_l(),
-						Al(261, '>'),
-						_l(),
-						Al(262, 'middle'),
-						wl(263, 'span', av),
-						Al(264, '</'),
-						wl(265, 'span', sv),
-						Al(266, 'li'),
-						_l(),
-						Al(267, '>'),
-						_l(),
-						Al(268, '\n'),
-						wl(269, 'span', av),
-						Al(270, '</'),
-						wl(271, 'span', sv),
-						Al(272, 'ul'),
-						_l(),
-						Al(273, '>'),
-						_l(),
-						Al(274, '\n'),
-						wl(275, 'span', av),
-						Al(276, '<'),
-						wl(277, 'span', sv),
-						Al(278, 'ul'),
-						_l(),
-						Al(279, ' '),
-						wl(280, 'span', lv),
-						Al(281, 'class'),
-						_l(),
-						Al(282, '='),
-						wl(283, 'span', uv),
-						Al(284, '"row align-b"'),
-						_l(),
-						Al(285, '>'),
-						_l(),
-						Al(286, '\n    '),
-						wl(287, 'span', av),
-						Al(288, '<'),
-						wl(289, 'span', sv),
-						Al(290, 'li'),
-						_l(),
-						Al(291, '>'),
-						_l(),
-						Al(292, 'bottom'),
-						wl(293, 'span', av),
-						Al(294, '</'),
-						wl(295, 'span', sv),
-						Al(296, 'li'),
-						_l(),
-						Al(297, '>'),
-						_l(),
-						Al(298, '\n    '),
-						wl(299, 'span', av),
-						Al(300, '<'),
-						wl(301, 'span', sv),
-						Al(302, 'li'),
-						_l(),
-						Al(303, '>'),
-						_l(),
-						Al(304, 'bottom'),
-						wl(305, 'span', av),
-						Al(306, '</'),
-						wl(307, 'span', sv),
-						Al(308, 'li'),
-						_l(),
-						Al(309, '>'),
-						_l(),
-						Al(310, '\n'),
-						wl(311, 'span', av),
-						Al(312, '</'),
-						wl(313, 'span', sv),
-						Al(314, 'ul'),
-						_l(),
-						Al(315, '>'),
-						_l(),
-						Al(316, '\n'),
-						wl(317, 'span', av),
-						Al(318, '<'),
-						wl(319, 'span', sv),
-						Al(320, 'ul'),
-						_l(),
-						Al(321, ' '),
-						wl(322, 'span', lv),
-						Al(323, 'class'),
-						_l(),
-						Al(324, '='),
-						wl(325, 'span', uv),
-						Al(326, '"row align-cm"'),
-						_l(),
-						Al(327, '>'),
-						_l(),
-						Al(328, '\n    '),
-						wl(329, 'span', av),
-						Al(330, '<'),
-						wl(331, 'span', sv),
-						Al(332, 'li'),
-						_l(),
-						Al(333, '>'),
-						_l(),
-						Al(334, 'center middle'),
-						wl(335, 'span', av),
-						Al(336, '</'),
-						wl(337, 'span', sv),
-						Al(338, 'li'),
-						_l(),
-						Al(339, '>'),
-						_l(),
-						Al(340, '\n    '),
-						wl(341, 'span', av),
-						Al(342, '<'),
-						wl(343, 'span', sv),
-						Al(344, 'li'),
-						_l(),
-						Al(345, '>'),
-						_l(),
-						Al(346, 'center middle'),
-						wl(347, 'span', av),
-						Al(348, '</'),
-						wl(349, 'span', sv),
-						Al(350, 'li'),
-						_l(),
-						Al(351, '>'),
-						_l(),
-						Al(352, '\n'),
-						wl(353, 'span', av),
-						Al(354, '</'),
-						wl(355, 'span', sv),
-						Al(356, 'ul'),
-						_l(),
-						Al(357, '>'),
-						_l(),
-						Al(358, '\n'),
-						wl(359, 'span', av),
-						Al(360, '<'),
-						wl(361, 'span', sv),
-						Al(362, 'ul'),
-						_l(),
-						Al(363, ' '),
-						wl(364, 'span', lv),
-						Al(365, 'class'),
-						_l(),
-						Al(366, '='),
-						wl(367, 'span', uv),
-						Al(368, '"row align-sa"'),
-						_l(),
-						Al(369, '>'),
-						_l(),
-						Al(370, '\n    '),
-						wl(371, 'span', av),
-						Al(372, '<'),
-						wl(373, 'span', sv),
-						Al(374, 'li'),
-						_l(),
-						Al(375, '>'),
-						_l(),
-						Al(376, 'space around'),
-						wl(377, 'span', av),
-						Al(378, '</'),
-						wl(379, 'span', sv),
-						Al(380, 'li'),
-						_l(),
-						Al(381, '>'),
-						_l(),
-						Al(382, '\n    '),
-						wl(383, 'span', av),
-						Al(384, '<'),
-						wl(385, 'span', sv),
-						Al(386, 'li'),
-						_l(),
-						Al(387, '>'),
-						_l(),
-						Al(388, 'space around'),
-						wl(389, 'span', av),
-						Al(390, '</'),
-						wl(391, 'span', sv),
-						Al(392, 'li'),
-						_l(),
-						Al(393, '>'),
-						_l(),
-						Al(394, '\n'),
-						wl(395, 'span', av),
-						Al(396, '</'),
-						wl(397, 'span', sv),
-						Al(398, 'ul'),
-						_l(),
-						Al(399, '>'),
-						_l(),
-						Al(400, '\n'),
-						wl(401, 'span', av),
-						Al(402, '<'),
-						wl(403, 'span', sv),
-						Al(404, 'ul'),
-						_l(),
-						Al(405, ' '),
-						wl(406, 'span', lv),
-						Al(407, 'class'),
-						_l(),
-						Al(408, '='),
-						wl(409, 'span', uv),
-						Al(410, '"row align-sb"'),
-						_l(),
-						Al(411, '>'),
-						_l(),
-						Al(412, '\n    '),
-						wl(413, 'span', av),
-						Al(414, '<'),
-						wl(415, 'span', sv),
-						Al(416, 'li'),
-						_l(),
-						Al(417, '>'),
-						_l(),
-						Al(418, 'space between'),
-						wl(419, 'span', av),
-						Al(420, '</'),
-						wl(421, 'span', sv),
-						Al(422, 'li'),
-						_l(),
-						Al(423, '>'),
-						_l(),
-						Al(424, '\n    '),
-						wl(425, 'span', av),
-						Al(426, '<'),
-						wl(427, 'span', sv),
-						Al(428, 'li'),
-						_l(),
-						Al(429, '>'),
-						_l(),
-						Al(430, 'space between'),
-						wl(431, 'span', av),
-						Al(432, '</'),
-						wl(433, 'span', sv),
-						Al(434, 'li'),
-						_l(),
-						Al(435, '>'),
-						_l(),
-						Al(436, '\n'),
-						wl(437, 'span', av),
-						Al(438, '</'),
-						wl(439, 'span', sv),
-						Al(440, 'ul'),
-						_l(),
-						Al(441, '>'),
-						_l(),
-						Al(442, '\n'),
-						wl(443, 'span', av),
-						Al(444, '<'),
-						wl(445, 'span', sv),
-						Al(446, 'ul'),
-						_l(),
-						Al(447, ' '),
-						wl(448, 'span', lv),
-						Al(449, 'class'),
-						_l(),
-						Al(450, '='),
-						wl(451, 'span', uv),
-						Al(452, '"row align-st"'),
-						_l(),
-						Al(453, '>'),
-						_l(),
-						Al(454, '\n    '),
-						wl(455, 'span', av),
-						Al(456, '<'),
-						wl(457, 'span', sv),
-						Al(458, 'li'),
-						_l(),
-						Al(459, '>'),
-						_l(),
-						Al(460, 'stretch'),
-						wl(461, 'span', av),
-						Al(462, '</'),
-						wl(463, 'span', sv),
-						Al(464, 'li'),
-						_l(),
-						Al(465, '>'),
-						_l(),
-						Al(466, '\n    '),
-						wl(467, 'span', av),
-						Al(468, '<'),
-						wl(469, 'span', sv),
-						Al(470, 'li'),
-						_l(),
-						Al(471, '>'),
-						_l(),
-						Al(472, 'stretch'),
-						wl(473, 'span', av),
-						Al(474, '</'),
-						wl(475, 'span', sv),
-						Al(476, 'li'),
-						_l(),
-						Al(477, '>'),
-						_l(),
-						Al(478, '\n'),
-						wl(479, 'span', av),
-						Al(480, '</'),
-						wl(481, 'span', sv),
-						Al(482, 'ul'),
-						_l(),
-						Al(483, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Container Row'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use an '),
+						vl(6, 'code'),
+						Tl(7, '.align-[l || c || r || t || m || b || cm || sa || sb || st]'),
+						yl(),
+						Tl(8, ' class to align ALL items in a '),
+						vl(9, 'code'),
+						Tl(10, '.row'),
+						yl(),
+						Tl(11, ' flex container.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'ul', dy),
+						vl(14, 'li'),
+						Tl(15, 'left (default)'),
+						yl(),
+						vl(16, 'li'),
+						Tl(17, 'left (default)'),
+						yl(),
+						yl(),
+						vl(18, 'ul', hy),
+						vl(19, 'li'),
+						Tl(20, 'center'),
+						yl(),
+						vl(21, 'li'),
+						Tl(22, 'center'),
+						yl(),
+						yl(),
+						vl(23, 'ul', gy),
+						vl(24, 'li'),
+						Tl(25, 'right'),
+						yl(),
+						vl(26, 'li'),
+						Tl(27, 'right'),
+						yl(),
+						yl(),
+						vl(28, 'ul', my),
+						vl(29, 'li'),
+						Tl(30, 'top (default)'),
+						yl(),
+						vl(31, 'li'),
+						Tl(32, 'top (default)'),
+						yl(),
+						yl(),
+						vl(33, 'ul', by),
+						vl(34, 'li'),
+						Tl(35, 'middle'),
+						yl(),
+						vl(36, 'li'),
+						Tl(37, 'middle'),
+						yl(),
+						yl(),
+						vl(38, 'ul', vy),
+						vl(39, 'li'),
+						Tl(40, 'bottom'),
+						yl(),
+						vl(41, 'li'),
+						Tl(42, 'bottom'),
+						yl(),
+						yl(),
+						vl(43, 'ul', yy),
+						vl(44, 'li'),
+						Tl(45, 'center middle'),
+						yl(),
+						vl(46, 'li'),
+						Tl(47, 'center middle'),
+						yl(),
+						yl(),
+						vl(48, 'ul', wy),
+						vl(49, 'li'),
+						Tl(50, 'space around'),
+						yl(),
+						vl(51, 'li'),
+						Tl(52, 'space around'),
+						yl(),
+						yl(),
+						vl(53, 'ul', _y),
+						vl(54, 'li'),
+						Tl(55, 'space between'),
+						yl(),
+						vl(56, 'li'),
+						Tl(57, 'space between'),
+						yl(),
+						yl(),
+						vl(58, 'ul', xy),
+						vl(59, 'li'),
+						Tl(60, 'stretch'),
+						yl(),
+						vl(61, 'li'),
+						Tl(62, 'stretch'),
+						yl(),
+						yl(),
+						yl(),
+						vl(63, 'figure'),
+						vl(64, 'pre', ov),
+						vl(65, 'span', iv),
+						Tl(66, '<'),
+						vl(67, 'span', av),
+						Tl(68, 'ul'),
+						yl(),
+						Tl(69, ' '),
+						vl(70, 'span', sv),
+						Tl(71, 'class'),
+						yl(),
+						Tl(72, '='),
+						vl(73, 'span', lv),
+						Tl(74, '"row align-l"'),
+						yl(),
+						Tl(75, '>'),
+						yl(),
+						Tl(76, '\n    '),
+						vl(77, 'span', iv),
+						Tl(78, '<'),
+						vl(79, 'span', av),
+						Tl(80, 'li'),
+						yl(),
+						Tl(81, '>'),
+						yl(),
+						Tl(82, 'left (default)'),
+						vl(83, 'span', iv),
+						Tl(84, '</'),
+						vl(85, 'span', av),
+						Tl(86, 'li'),
+						yl(),
+						Tl(87, '>'),
+						yl(),
+						Tl(88, '\n    '),
+						vl(89, 'span', iv),
+						Tl(90, '<'),
+						vl(91, 'span', av),
+						Tl(92, 'li'),
+						yl(),
+						Tl(93, '>'),
+						yl(),
+						Tl(94, 'left (default)'),
+						vl(95, 'span', iv),
+						Tl(96, '</'),
+						vl(97, 'span', av),
+						Tl(98, 'li'),
+						yl(),
+						Tl(99, '>'),
+						yl(),
+						Tl(100, '\n'),
+						vl(101, 'span', iv),
+						Tl(102, '</'),
+						vl(103, 'span', av),
+						Tl(104, 'ul'),
+						yl(),
+						Tl(105, '>'),
+						yl(),
+						Tl(106, '\n'),
+						vl(107, 'span', iv),
+						Tl(108, '<'),
+						vl(109, 'span', av),
+						Tl(110, 'ul'),
+						yl(),
+						Tl(111, ' '),
+						vl(112, 'span', sv),
+						Tl(113, 'class'),
+						yl(),
+						Tl(114, '='),
+						vl(115, 'span', lv),
+						Tl(116, '"row align-c"'),
+						yl(),
+						Tl(117, '>'),
+						yl(),
+						Tl(118, '\n    '),
+						vl(119, 'span', iv),
+						Tl(120, '<'),
+						vl(121, 'span', av),
+						Tl(122, 'li'),
+						yl(),
+						Tl(123, '>'),
+						yl(),
+						Tl(124, 'center'),
+						vl(125, 'span', iv),
+						Tl(126, '</'),
+						vl(127, 'span', av),
+						Tl(128, 'li'),
+						yl(),
+						Tl(129, '>'),
+						yl(),
+						Tl(130, '\n    '),
+						vl(131, 'span', iv),
+						Tl(132, '<'),
+						vl(133, 'span', av),
+						Tl(134, 'li'),
+						yl(),
+						Tl(135, '>'),
+						yl(),
+						Tl(136, 'center'),
+						vl(137, 'span', iv),
+						Tl(138, '</'),
+						vl(139, 'span', av),
+						Tl(140, 'li'),
+						yl(),
+						Tl(141, '>'),
+						yl(),
+						Tl(142, '\n'),
+						vl(143, 'span', iv),
+						Tl(144, '</'),
+						vl(145, 'span', av),
+						Tl(146, 'ul'),
+						yl(),
+						Tl(147, '>'),
+						yl(),
+						Tl(148, '\n'),
+						vl(149, 'span', iv),
+						Tl(150, '<'),
+						vl(151, 'span', av),
+						Tl(152, 'ul'),
+						yl(),
+						Tl(153, ' '),
+						vl(154, 'span', sv),
+						Tl(155, 'class'),
+						yl(),
+						Tl(156, '='),
+						vl(157, 'span', lv),
+						Tl(158, '"row align-r"'),
+						yl(),
+						Tl(159, '>'),
+						yl(),
+						Tl(160, '\n    '),
+						vl(161, 'span', iv),
+						Tl(162, '<'),
+						vl(163, 'span', av),
+						Tl(164, 'li'),
+						yl(),
+						Tl(165, '>'),
+						yl(),
+						Tl(166, 'right'),
+						vl(167, 'span', iv),
+						Tl(168, '</'),
+						vl(169, 'span', av),
+						Tl(170, 'li'),
+						yl(),
+						Tl(171, '>'),
+						yl(),
+						Tl(172, '\n    '),
+						vl(173, 'span', iv),
+						Tl(174, '<'),
+						vl(175, 'span', av),
+						Tl(176, 'li'),
+						yl(),
+						Tl(177, '>'),
+						yl(),
+						Tl(178, 'right'),
+						vl(179, 'span', iv),
+						Tl(180, '</'),
+						vl(181, 'span', av),
+						Tl(182, 'li'),
+						yl(),
+						Tl(183, '>'),
+						yl(),
+						Tl(184, '\n'),
+						vl(185, 'span', iv),
+						Tl(186, '</'),
+						vl(187, 'span', av),
+						Tl(188, 'ul'),
+						yl(),
+						Tl(189, '>'),
+						yl(),
+						Tl(190, '\n'),
+						vl(191, 'span', iv),
+						Tl(192, '<'),
+						vl(193, 'span', av),
+						Tl(194, 'ul'),
+						yl(),
+						Tl(195, ' '),
+						vl(196, 'span', sv),
+						Tl(197, 'class'),
+						yl(),
+						Tl(198, '='),
+						vl(199, 'span', lv),
+						Tl(200, '"row align-t"'),
+						yl(),
+						Tl(201, '>'),
+						yl(),
+						Tl(202, '\n    '),
+						vl(203, 'span', iv),
+						Tl(204, '<'),
+						vl(205, 'span', av),
+						Tl(206, 'li'),
+						yl(),
+						Tl(207, '>'),
+						yl(),
+						Tl(208, 'top (default)'),
+						vl(209, 'span', iv),
+						Tl(210, '</'),
+						vl(211, 'span', av),
+						Tl(212, 'li'),
+						yl(),
+						Tl(213, '>'),
+						yl(),
+						Tl(214, '\n    '),
+						vl(215, 'span', iv),
+						Tl(216, '<'),
+						vl(217, 'span', av),
+						Tl(218, 'li'),
+						yl(),
+						Tl(219, '>'),
+						yl(),
+						Tl(220, 'top (default)'),
+						vl(221, 'span', iv),
+						Tl(222, '</'),
+						vl(223, 'span', av),
+						Tl(224, 'li'),
+						yl(),
+						Tl(225, '>'),
+						yl(),
+						Tl(226, '\n'),
+						vl(227, 'span', iv),
+						Tl(228, '</'),
+						vl(229, 'span', av),
+						Tl(230, 'ul'),
+						yl(),
+						Tl(231, '>'),
+						yl(),
+						Tl(232, '\n'),
+						vl(233, 'span', iv),
+						Tl(234, '<'),
+						vl(235, 'span', av),
+						Tl(236, 'ul'),
+						yl(),
+						Tl(237, ' '),
+						vl(238, 'span', sv),
+						Tl(239, 'class'),
+						yl(),
+						Tl(240, '='),
+						vl(241, 'span', lv),
+						Tl(242, '"row align-m"'),
+						yl(),
+						Tl(243, '>'),
+						yl(),
+						Tl(244, '\n    '),
+						vl(245, 'span', iv),
+						Tl(246, '<'),
+						vl(247, 'span', av),
+						Tl(248, 'li'),
+						yl(),
+						Tl(249, '>'),
+						yl(),
+						Tl(250, 'middle'),
+						vl(251, 'span', iv),
+						Tl(252, '</'),
+						vl(253, 'span', av),
+						Tl(254, 'li'),
+						yl(),
+						Tl(255, '>'),
+						yl(),
+						Tl(256, '\n    '),
+						vl(257, 'span', iv),
+						Tl(258, '<'),
+						vl(259, 'span', av),
+						Tl(260, 'li'),
+						yl(),
+						Tl(261, '>'),
+						yl(),
+						Tl(262, 'middle'),
+						vl(263, 'span', iv),
+						Tl(264, '</'),
+						vl(265, 'span', av),
+						Tl(266, 'li'),
+						yl(),
+						Tl(267, '>'),
+						yl(),
+						Tl(268, '\n'),
+						vl(269, 'span', iv),
+						Tl(270, '</'),
+						vl(271, 'span', av),
+						Tl(272, 'ul'),
+						yl(),
+						Tl(273, '>'),
+						yl(),
+						Tl(274, '\n'),
+						vl(275, 'span', iv),
+						Tl(276, '<'),
+						vl(277, 'span', av),
+						Tl(278, 'ul'),
+						yl(),
+						Tl(279, ' '),
+						vl(280, 'span', sv),
+						Tl(281, 'class'),
+						yl(),
+						Tl(282, '='),
+						vl(283, 'span', lv),
+						Tl(284, '"row align-b"'),
+						yl(),
+						Tl(285, '>'),
+						yl(),
+						Tl(286, '\n    '),
+						vl(287, 'span', iv),
+						Tl(288, '<'),
+						vl(289, 'span', av),
+						Tl(290, 'li'),
+						yl(),
+						Tl(291, '>'),
+						yl(),
+						Tl(292, 'bottom'),
+						vl(293, 'span', iv),
+						Tl(294, '</'),
+						vl(295, 'span', av),
+						Tl(296, 'li'),
+						yl(),
+						Tl(297, '>'),
+						yl(),
+						Tl(298, '\n    '),
+						vl(299, 'span', iv),
+						Tl(300, '<'),
+						vl(301, 'span', av),
+						Tl(302, 'li'),
+						yl(),
+						Tl(303, '>'),
+						yl(),
+						Tl(304, 'bottom'),
+						vl(305, 'span', iv),
+						Tl(306, '</'),
+						vl(307, 'span', av),
+						Tl(308, 'li'),
+						yl(),
+						Tl(309, '>'),
+						yl(),
+						Tl(310, '\n'),
+						vl(311, 'span', iv),
+						Tl(312, '</'),
+						vl(313, 'span', av),
+						Tl(314, 'ul'),
+						yl(),
+						Tl(315, '>'),
+						yl(),
+						Tl(316, '\n'),
+						vl(317, 'span', iv),
+						Tl(318, '<'),
+						vl(319, 'span', av),
+						Tl(320, 'ul'),
+						yl(),
+						Tl(321, ' '),
+						vl(322, 'span', sv),
+						Tl(323, 'class'),
+						yl(),
+						Tl(324, '='),
+						vl(325, 'span', lv),
+						Tl(326, '"row align-cm"'),
+						yl(),
+						Tl(327, '>'),
+						yl(),
+						Tl(328, '\n    '),
+						vl(329, 'span', iv),
+						Tl(330, '<'),
+						vl(331, 'span', av),
+						Tl(332, 'li'),
+						yl(),
+						Tl(333, '>'),
+						yl(),
+						Tl(334, 'center middle'),
+						vl(335, 'span', iv),
+						Tl(336, '</'),
+						vl(337, 'span', av),
+						Tl(338, 'li'),
+						yl(),
+						Tl(339, '>'),
+						yl(),
+						Tl(340, '\n    '),
+						vl(341, 'span', iv),
+						Tl(342, '<'),
+						vl(343, 'span', av),
+						Tl(344, 'li'),
+						yl(),
+						Tl(345, '>'),
+						yl(),
+						Tl(346, 'center middle'),
+						vl(347, 'span', iv),
+						Tl(348, '</'),
+						vl(349, 'span', av),
+						Tl(350, 'li'),
+						yl(),
+						Tl(351, '>'),
+						yl(),
+						Tl(352, '\n'),
+						vl(353, 'span', iv),
+						Tl(354, '</'),
+						vl(355, 'span', av),
+						Tl(356, 'ul'),
+						yl(),
+						Tl(357, '>'),
+						yl(),
+						Tl(358, '\n'),
+						vl(359, 'span', iv),
+						Tl(360, '<'),
+						vl(361, 'span', av),
+						Tl(362, 'ul'),
+						yl(),
+						Tl(363, ' '),
+						vl(364, 'span', sv),
+						Tl(365, 'class'),
+						yl(),
+						Tl(366, '='),
+						vl(367, 'span', lv),
+						Tl(368, '"row align-sa"'),
+						yl(),
+						Tl(369, '>'),
+						yl(),
+						Tl(370, '\n    '),
+						vl(371, 'span', iv),
+						Tl(372, '<'),
+						vl(373, 'span', av),
+						Tl(374, 'li'),
+						yl(),
+						Tl(375, '>'),
+						yl(),
+						Tl(376, 'space around'),
+						vl(377, 'span', iv),
+						Tl(378, '</'),
+						vl(379, 'span', av),
+						Tl(380, 'li'),
+						yl(),
+						Tl(381, '>'),
+						yl(),
+						Tl(382, '\n    '),
+						vl(383, 'span', iv),
+						Tl(384, '<'),
+						vl(385, 'span', av),
+						Tl(386, 'li'),
+						yl(),
+						Tl(387, '>'),
+						yl(),
+						Tl(388, 'space around'),
+						vl(389, 'span', iv),
+						Tl(390, '</'),
+						vl(391, 'span', av),
+						Tl(392, 'li'),
+						yl(),
+						Tl(393, '>'),
+						yl(),
+						Tl(394, '\n'),
+						vl(395, 'span', iv),
+						Tl(396, '</'),
+						vl(397, 'span', av),
+						Tl(398, 'ul'),
+						yl(),
+						Tl(399, '>'),
+						yl(),
+						Tl(400, '\n'),
+						vl(401, 'span', iv),
+						Tl(402, '<'),
+						vl(403, 'span', av),
+						Tl(404, 'ul'),
+						yl(),
+						Tl(405, ' '),
+						vl(406, 'span', sv),
+						Tl(407, 'class'),
+						yl(),
+						Tl(408, '='),
+						vl(409, 'span', lv),
+						Tl(410, '"row align-sb"'),
+						yl(),
+						Tl(411, '>'),
+						yl(),
+						Tl(412, '\n    '),
+						vl(413, 'span', iv),
+						Tl(414, '<'),
+						vl(415, 'span', av),
+						Tl(416, 'li'),
+						yl(),
+						Tl(417, '>'),
+						yl(),
+						Tl(418, 'space between'),
+						vl(419, 'span', iv),
+						Tl(420, '</'),
+						vl(421, 'span', av),
+						Tl(422, 'li'),
+						yl(),
+						Tl(423, '>'),
+						yl(),
+						Tl(424, '\n    '),
+						vl(425, 'span', iv),
+						Tl(426, '<'),
+						vl(427, 'span', av),
+						Tl(428, 'li'),
+						yl(),
+						Tl(429, '>'),
+						yl(),
+						Tl(430, 'space between'),
+						vl(431, 'span', iv),
+						Tl(432, '</'),
+						vl(433, 'span', av),
+						Tl(434, 'li'),
+						yl(),
+						Tl(435, '>'),
+						yl(),
+						Tl(436, '\n'),
+						vl(437, 'span', iv),
+						Tl(438, '</'),
+						vl(439, 'span', av),
+						Tl(440, 'ul'),
+						yl(),
+						Tl(441, '>'),
+						yl(),
+						Tl(442, '\n'),
+						vl(443, 'span', iv),
+						Tl(444, '<'),
+						vl(445, 'span', av),
+						Tl(446, 'ul'),
+						yl(),
+						Tl(447, ' '),
+						vl(448, 'span', sv),
+						Tl(449, 'class'),
+						yl(),
+						Tl(450, '='),
+						vl(451, 'span', lv),
+						Tl(452, '"row align-st"'),
+						yl(),
+						Tl(453, '>'),
+						yl(),
+						Tl(454, '\n    '),
+						vl(455, 'span', iv),
+						Tl(456, '<'),
+						vl(457, 'span', av),
+						Tl(458, 'li'),
+						yl(),
+						Tl(459, '>'),
+						yl(),
+						Tl(460, 'stretch'),
+						vl(461, 'span', iv),
+						Tl(462, '</'),
+						vl(463, 'span', av),
+						Tl(464, 'li'),
+						yl(),
+						Tl(465, '>'),
+						yl(),
+						Tl(466, '\n    '),
+						vl(467, 'span', iv),
+						Tl(468, '<'),
+						vl(469, 'span', av),
+						Tl(470, 'li'),
+						yl(),
+						Tl(471, '>'),
+						yl(),
+						Tl(472, 'stretch'),
+						vl(473, 'span', iv),
+						Tl(474, '</'),
+						vl(475, 'span', av),
+						Tl(476, 'li'),
+						yl(),
+						Tl(477, '>'),
+						yl(),
+						Tl(478, '\n'),
+						vl(479, 'span', iv),
+						Tl(480, '</'),
+						vl(481, 'span', av),
+						Tl(482, 'ul'),
+						yl(),
+						Tl(483, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Sy = [1, 'item-l'],
-				Py = [1, 'item-c'],
-				Ey = [1, 'item-r'],
-				Oy = [1, 'item-t'],
-				Iy = [1, 'item-m'],
-				Ty = [1, 'item-b'],
-				My = [1, 'item-cm'],
-				Ay = [1, 'item-st'];
-			function jy(t, e) {
+			var ky = [1, 'item-l'],
+				Sy = [1, 'item-c'],
+				Py = [1, 'item-r'],
+				Ey = [1, 'item-t'],
+				Oy = [1, 'item-m'],
+				Iy = [1, 'item-b'],
+				Ty = [1, 'item-cm'],
+				My = [1, 'item-st'];
+			function Ay(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Item Column'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use '),
-						wl(6, 'code'),
-						Al(7, '.item-[l || c || r || t || m || b || cm || st]'),
-						_l(),
-						Al(8, ' classes to align ONE child in a '),
-						wl(9, 'code'),
-						Al(10, '.col'),
-						_l(),
-						Al(11, ' flex container.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'ul', ty),
-						wl(14, 'li'),
-						Al(15, 'default'),
-						_l(),
-						wl(16, 'li', Sy),
-						Al(17, 'left (default)'),
-						_l(),
-						_l(),
-						wl(18, 'ul', ty),
-						wl(19, 'li'),
-						Al(20, 'default'),
-						_l(),
-						wl(21, 'li', Py),
-						Al(22, 'center'),
-						_l(),
-						_l(),
-						wl(23, 'ul', ty),
-						wl(24, 'li'),
-						Al(25, 'default'),
-						_l(),
-						wl(26, 'li', Ey),
-						Al(27, 'right'),
-						_l(),
-						_l(),
-						wl(28, 'ul', ty),
-						wl(29, 'li'),
-						Al(30, 'default'),
-						_l(),
-						wl(31, 'li', Oy),
-						Al(32, 'top (default)'),
-						_l(),
-						_l(),
-						wl(33, 'ul', ty),
-						wl(34, 'li'),
-						Al(35, 'default'),
-						_l(),
-						wl(36, 'li', Iy),
-						Al(37, 'middle'),
-						_l(),
-						_l(),
-						wl(38, 'ul', ty),
-						wl(39, 'li'),
-						Al(40, 'default'),
-						_l(),
-						wl(41, 'li', Ty),
-						Al(42, 'bottom'),
-						_l(),
-						_l(),
-						wl(43, 'ul', ty),
-						wl(44, 'li'),
-						Al(45, 'default'),
-						_l(),
-						wl(46, 'li', My),
-						Al(47, 'center middle'),
-						_l(),
-						_l(),
-						wl(48, 'ul', ty),
-						wl(49, 'li'),
-						Al(50, 'default'),
-						_l(),
-						wl(51, 'li', Ay),
-						Al(52, 'stretch'),
-						_l(),
-						_l(),
-						_l(),
-						wl(53, 'figure'),
-						wl(54, 'pre', iv),
-						wl(55, 'span', av),
-						Al(56, '<'),
-						wl(57, 'span', sv),
-						Al(58, 'ul'),
-						_l(),
-						Al(59, ' '),
-						wl(60, 'span', lv),
-						Al(61, 'class'),
-						_l(),
-						Al(62, '='),
-						wl(63, 'span', uv),
-						Al(64, '"col"'),
-						_l(),
-						Al(65, '>'),
-						_l(),
-						Al(66, '\n    '),
-						wl(67, 'span', av),
-						Al(68, '<'),
-						wl(69, 'span', sv),
-						Al(70, 'li'),
-						_l(),
-						Al(71, '>'),
-						_l(),
-						Al(72, 'default'),
-						wl(73, 'span', av),
-						Al(74, '</'),
-						wl(75, 'span', sv),
-						Al(76, 'li'),
-						_l(),
-						Al(77, '>'),
-						_l(),
-						Al(78, '\n    '),
-						wl(79, 'span', av),
-						Al(80, '<'),
-						wl(81, 'span', sv),
-						Al(82, 'li'),
-						_l(),
-						Al(83, ' '),
-						wl(84, 'span', lv),
-						Al(85, 'class'),
-						_l(),
-						Al(86, '='),
-						wl(87, 'span', uv),
-						Al(88, '"item-l"'),
-						_l(),
-						Al(89, '>'),
-						_l(),
-						Al(90, 'left (default)'),
-						wl(91, 'span', av),
-						Al(92, '</'),
-						wl(93, 'span', sv),
-						Al(94, 'li'),
-						_l(),
-						Al(95, '>'),
-						_l(),
-						Al(96, '\n'),
-						wl(97, 'span', av),
-						Al(98, '</'),
-						wl(99, 'span', sv),
-						Al(100, 'ul'),
-						_l(),
-						Al(101, '>'),
-						_l(),
-						Al(102, '\n'),
-						wl(103, 'span', av),
-						Al(104, '<'),
-						wl(105, 'span', sv),
-						Al(106, 'ul'),
-						_l(),
-						Al(107, ' '),
-						wl(108, 'span', lv),
-						Al(109, 'class'),
-						_l(),
-						Al(110, '='),
-						wl(111, 'span', uv),
-						Al(112, '"col"'),
-						_l(),
-						Al(113, '>'),
-						_l(),
-						Al(114, '\n    '),
-						wl(115, 'span', av),
-						Al(116, '<'),
-						wl(117, 'span', sv),
-						Al(118, 'li'),
-						_l(),
-						Al(119, '>'),
-						_l(),
-						Al(120, 'default'),
-						wl(121, 'span', av),
-						Al(122, '</'),
-						wl(123, 'span', sv),
-						Al(124, 'li'),
-						_l(),
-						Al(125, '>'),
-						_l(),
-						Al(126, '\n    '),
-						wl(127, 'span', av),
-						Al(128, '<'),
-						wl(129, 'span', sv),
-						Al(130, 'li'),
-						_l(),
-						Al(131, ' '),
-						wl(132, 'span', lv),
-						Al(133, 'class'),
-						_l(),
-						Al(134, '='),
-						wl(135, 'span', uv),
-						Al(136, '"item-c"'),
-						_l(),
-						Al(137, '>'),
-						_l(),
-						Al(138, 'center'),
-						wl(139, 'span', av),
-						Al(140, '</'),
-						wl(141, 'span', sv),
-						Al(142, 'li'),
-						_l(),
-						Al(143, '>'),
-						_l(),
-						Al(144, '\n'),
-						wl(145, 'span', av),
-						Al(146, '</'),
-						wl(147, 'span', sv),
-						Al(148, 'ul'),
-						_l(),
-						Al(149, '>'),
-						_l(),
-						Al(150, '\n'),
-						wl(151, 'span', av),
-						Al(152, '<'),
-						wl(153, 'span', sv),
-						Al(154, 'ul'),
-						_l(),
-						Al(155, ' '),
-						wl(156, 'span', lv),
-						Al(157, 'class'),
-						_l(),
-						Al(158, '='),
-						wl(159, 'span', uv),
-						Al(160, '"col"'),
-						_l(),
-						Al(161, '>'),
-						_l(),
-						Al(162, '\n    '),
-						wl(163, 'span', av),
-						Al(164, '<'),
-						wl(165, 'span', sv),
-						Al(166, 'li'),
-						_l(),
-						Al(167, '>'),
-						_l(),
-						Al(168, 'default'),
-						wl(169, 'span', av),
-						Al(170, '</'),
-						wl(171, 'span', sv),
-						Al(172, 'li'),
-						_l(),
-						Al(173, '>'),
-						_l(),
-						Al(174, '\n    '),
-						wl(175, 'span', av),
-						Al(176, '<'),
-						wl(177, 'span', sv),
-						Al(178, 'li'),
-						_l(),
-						Al(179, ' '),
-						wl(180, 'span', lv),
-						Al(181, 'class'),
-						_l(),
-						Al(182, '='),
-						wl(183, 'span', uv),
-						Al(184, '"item-r"'),
-						_l(),
-						Al(185, '>'),
-						_l(),
-						Al(186, 'right'),
-						wl(187, 'span', av),
-						Al(188, '</'),
-						wl(189, 'span', sv),
-						Al(190, 'li'),
-						_l(),
-						Al(191, '>'),
-						_l(),
-						Al(192, '\n'),
-						wl(193, 'span', av),
-						Al(194, '</'),
-						wl(195, 'span', sv),
-						Al(196, 'ul'),
-						_l(),
-						Al(197, '>'),
-						_l(),
-						Al(198, '\n'),
-						wl(199, 'span', av),
-						Al(200, '<'),
-						wl(201, 'span', sv),
-						Al(202, 'ul'),
-						_l(),
-						Al(203, ' '),
-						wl(204, 'span', lv),
-						Al(205, 'class'),
-						_l(),
-						Al(206, '='),
-						wl(207, 'span', uv),
-						Al(208, '"col"'),
-						_l(),
-						Al(209, '>'),
-						_l(),
-						Al(210, '\n    '),
-						wl(211, 'span', av),
-						Al(212, '<'),
-						wl(213, 'span', sv),
-						Al(214, 'li'),
-						_l(),
-						Al(215, '>'),
-						_l(),
-						Al(216, 'default'),
-						wl(217, 'span', av),
-						Al(218, '</'),
-						wl(219, 'span', sv),
-						Al(220, 'li'),
-						_l(),
-						Al(221, '>'),
-						_l(),
-						Al(222, '\n    '),
-						wl(223, 'span', av),
-						Al(224, '<'),
-						wl(225, 'span', sv),
-						Al(226, 'li'),
-						_l(),
-						Al(227, ' '),
-						wl(228, 'span', lv),
-						Al(229, 'class'),
-						_l(),
-						Al(230, '='),
-						wl(231, 'span', uv),
-						Al(232, '"item-t"'),
-						_l(),
-						Al(233, '>'),
-						_l(),
-						Al(234, 'top (default)'),
-						wl(235, 'span', av),
-						Al(236, '</'),
-						wl(237, 'span', sv),
-						Al(238, 'li'),
-						_l(),
-						Al(239, '>'),
-						_l(),
-						Al(240, '\n'),
-						wl(241, 'span', av),
-						Al(242, '</'),
-						wl(243, 'span', sv),
-						Al(244, 'ul'),
-						_l(),
-						Al(245, '>'),
-						_l(),
-						Al(246, '\n'),
-						wl(247, 'span', av),
-						Al(248, '<'),
-						wl(249, 'span', sv),
-						Al(250, 'ul'),
-						_l(),
-						Al(251, ' '),
-						wl(252, 'span', lv),
-						Al(253, 'class'),
-						_l(),
-						Al(254, '='),
-						wl(255, 'span', uv),
-						Al(256, '"col"'),
-						_l(),
-						Al(257, '>'),
-						_l(),
-						Al(258, '\n    '),
-						wl(259, 'span', av),
-						Al(260, '<'),
-						wl(261, 'span', sv),
-						Al(262, 'li'),
-						_l(),
-						Al(263, '>'),
-						_l(),
-						Al(264, 'default'),
-						wl(265, 'span', av),
-						Al(266, '</'),
-						wl(267, 'span', sv),
-						Al(268, 'li'),
-						_l(),
-						Al(269, '>'),
-						_l(),
-						Al(270, '\n    '),
-						wl(271, 'span', av),
-						Al(272, '<'),
-						wl(273, 'span', sv),
-						Al(274, 'li'),
-						_l(),
-						Al(275, ' '),
-						wl(276, 'span', lv),
-						Al(277, 'class'),
-						_l(),
-						Al(278, '='),
-						wl(279, 'span', uv),
-						Al(280, '"item-m"'),
-						_l(),
-						Al(281, '>'),
-						_l(),
-						Al(282, 'middle'),
-						wl(283, 'span', av),
-						Al(284, '</'),
-						wl(285, 'span', sv),
-						Al(286, 'li'),
-						_l(),
-						Al(287, '>'),
-						_l(),
-						Al(288, '\n'),
-						wl(289, 'span', av),
-						Al(290, '</'),
-						wl(291, 'span', sv),
-						Al(292, 'ul'),
-						_l(),
-						Al(293, '>'),
-						_l(),
-						Al(294, '\n'),
-						wl(295, 'span', av),
-						Al(296, '<'),
-						wl(297, 'span', sv),
-						Al(298, 'ul'),
-						_l(),
-						Al(299, ' '),
-						wl(300, 'span', lv),
-						Al(301, 'class'),
-						_l(),
-						Al(302, '='),
-						wl(303, 'span', uv),
-						Al(304, '"col"'),
-						_l(),
-						Al(305, '>'),
-						_l(),
-						Al(306, '\n    '),
-						wl(307, 'span', av),
-						Al(308, '<'),
-						wl(309, 'span', sv),
-						Al(310, 'li'),
-						_l(),
-						Al(311, '>'),
-						_l(),
-						Al(312, 'default'),
-						wl(313, 'span', av),
-						Al(314, '</'),
-						wl(315, 'span', sv),
-						Al(316, 'li'),
-						_l(),
-						Al(317, '>'),
-						_l(),
-						Al(318, '\n    '),
-						wl(319, 'span', av),
-						Al(320, '<'),
-						wl(321, 'span', sv),
-						Al(322, 'li'),
-						_l(),
-						Al(323, ' '),
-						wl(324, 'span', lv),
-						Al(325, 'class'),
-						_l(),
-						Al(326, '='),
-						wl(327, 'span', uv),
-						Al(328, '"item-b"'),
-						_l(),
-						Al(329, '>'),
-						_l(),
-						Al(330, 'bottom'),
-						wl(331, 'span', av),
-						Al(332, '</'),
-						wl(333, 'span', sv),
-						Al(334, 'li'),
-						_l(),
-						Al(335, '>'),
-						_l(),
-						Al(336, '\n'),
-						wl(337, 'span', av),
-						Al(338, '</'),
-						wl(339, 'span', sv),
-						Al(340, 'ul'),
-						_l(),
-						Al(341, '>'),
-						_l(),
-						Al(342, '\n'),
-						wl(343, 'span', av),
-						Al(344, '<'),
-						wl(345, 'span', sv),
-						Al(346, 'ul'),
-						_l(),
-						Al(347, ' '),
-						wl(348, 'span', lv),
-						Al(349, 'class'),
-						_l(),
-						Al(350, '='),
-						wl(351, 'span', uv),
-						Al(352, '"col"'),
-						_l(),
-						Al(353, '>'),
-						_l(),
-						Al(354, '\n    '),
-						wl(355, 'span', av),
-						Al(356, '<'),
-						wl(357, 'span', sv),
-						Al(358, 'li'),
-						_l(),
-						Al(359, '>'),
-						_l(),
-						Al(360, 'default'),
-						wl(361, 'span', av),
-						Al(362, '</'),
-						wl(363, 'span', sv),
-						Al(364, 'li'),
-						_l(),
-						Al(365, '>'),
-						_l(),
-						Al(366, '\n    '),
-						wl(367, 'span', av),
-						Al(368, '<'),
-						wl(369, 'span', sv),
-						Al(370, 'li'),
-						_l(),
-						Al(371, ' '),
-						wl(372, 'span', lv),
-						Al(373, 'class'),
-						_l(),
-						Al(374, '='),
-						wl(375, 'span', uv),
-						Al(376, '"item-cm"'),
-						_l(),
-						Al(377, '>'),
-						_l(),
-						Al(378, 'center middle'),
-						wl(379, 'span', av),
-						Al(380, '</'),
-						wl(381, 'span', sv),
-						Al(382, 'li'),
-						_l(),
-						Al(383, '>'),
-						_l(),
-						Al(384, '\n'),
-						wl(385, 'span', av),
-						Al(386, '</'),
-						wl(387, 'span', sv),
-						Al(388, 'ul'),
-						_l(),
-						Al(389, '>'),
-						_l(),
-						Al(390, '\n'),
-						wl(391, 'span', av),
-						Al(392, '<'),
-						wl(393, 'span', sv),
-						Al(394, 'ul'),
-						_l(),
-						Al(395, ' '),
-						wl(396, 'span', lv),
-						Al(397, 'class'),
-						_l(),
-						Al(398, '='),
-						wl(399, 'span', uv),
-						Al(400, '"col"'),
-						_l(),
-						Al(401, '>'),
-						_l(),
-						Al(402, '\n    '),
-						wl(403, 'span', av),
-						Al(404, '<'),
-						wl(405, 'span', sv),
-						Al(406, 'li'),
-						_l(),
-						Al(407, '>'),
-						_l(),
-						Al(408, 'default'),
-						wl(409, 'span', av),
-						Al(410, '</'),
-						wl(411, 'span', sv),
-						Al(412, 'li'),
-						_l(),
-						Al(413, '>'),
-						_l(),
-						Al(414, '\n    '),
-						wl(415, 'span', av),
-						Al(416, '<'),
-						wl(417, 'span', sv),
-						Al(418, 'li'),
-						_l(),
-						Al(419, ' '),
-						wl(420, 'span', lv),
-						Al(421, 'class'),
-						_l(),
-						Al(422, '='),
-						wl(423, 'span', uv),
-						Al(424, '"item-st"'),
-						_l(),
-						Al(425, '>'),
-						_l(),
-						Al(426, 'stretch'),
-						wl(427, 'span', av),
-						Al(428, '</'),
-						wl(429, 'span', sv),
-						Al(430, 'li'),
-						_l(),
-						Al(431, '>'),
-						_l(),
-						Al(432, '\n'),
-						wl(433, 'span', av),
-						Al(434, '</'),
-						wl(435, 'span', sv),
-						Al(436, 'ul'),
-						_l(),
-						Al(437, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Item Column'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use '),
+						vl(6, 'code'),
+						Tl(7, '.item-[l || c || r || t || m || b || cm || st]'),
+						yl(),
+						Tl(8, ' classes to align ONE child in a '),
+						vl(9, 'code'),
+						Tl(10, '.col'),
+						yl(),
+						Tl(11, ' flex container.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'ul', $v),
+						vl(14, 'li'),
+						Tl(15, 'default'),
+						yl(),
+						vl(16, 'li', ky),
+						Tl(17, 'left (default)'),
+						yl(),
+						yl(),
+						vl(18, 'ul', $v),
+						vl(19, 'li'),
+						Tl(20, 'default'),
+						yl(),
+						vl(21, 'li', Sy),
+						Tl(22, 'center'),
+						yl(),
+						yl(),
+						vl(23, 'ul', $v),
+						vl(24, 'li'),
+						Tl(25, 'default'),
+						yl(),
+						vl(26, 'li', Py),
+						Tl(27, 'right'),
+						yl(),
+						yl(),
+						vl(28, 'ul', $v),
+						vl(29, 'li'),
+						Tl(30, 'default'),
+						yl(),
+						vl(31, 'li', Ey),
+						Tl(32, 'top (default)'),
+						yl(),
+						yl(),
+						vl(33, 'ul', $v),
+						vl(34, 'li'),
+						Tl(35, 'default'),
+						yl(),
+						vl(36, 'li', Oy),
+						Tl(37, 'middle'),
+						yl(),
+						yl(),
+						vl(38, 'ul', $v),
+						vl(39, 'li'),
+						Tl(40, 'default'),
+						yl(),
+						vl(41, 'li', Iy),
+						Tl(42, 'bottom'),
+						yl(),
+						yl(),
+						vl(43, 'ul', $v),
+						vl(44, 'li'),
+						Tl(45, 'default'),
+						yl(),
+						vl(46, 'li', Ty),
+						Tl(47, 'center middle'),
+						yl(),
+						yl(),
+						vl(48, 'ul', $v),
+						vl(49, 'li'),
+						Tl(50, 'default'),
+						yl(),
+						vl(51, 'li', My),
+						Tl(52, 'stretch'),
+						yl(),
+						yl(),
+						yl(),
+						vl(53, 'figure'),
+						vl(54, 'pre', ov),
+						vl(55, 'span', iv),
+						Tl(56, '<'),
+						vl(57, 'span', av),
+						Tl(58, 'ul'),
+						yl(),
+						Tl(59, ' '),
+						vl(60, 'span', sv),
+						Tl(61, 'class'),
+						yl(),
+						Tl(62, '='),
+						vl(63, 'span', lv),
+						Tl(64, '"col"'),
+						yl(),
+						Tl(65, '>'),
+						yl(),
+						Tl(66, '\n    '),
+						vl(67, 'span', iv),
+						Tl(68, '<'),
+						vl(69, 'span', av),
+						Tl(70, 'li'),
+						yl(),
+						Tl(71, '>'),
+						yl(),
+						Tl(72, 'default'),
+						vl(73, 'span', iv),
+						Tl(74, '</'),
+						vl(75, 'span', av),
+						Tl(76, 'li'),
+						yl(),
+						Tl(77, '>'),
+						yl(),
+						Tl(78, '\n    '),
+						vl(79, 'span', iv),
+						Tl(80, '<'),
+						vl(81, 'span', av),
+						Tl(82, 'li'),
+						yl(),
+						Tl(83, ' '),
+						vl(84, 'span', sv),
+						Tl(85, 'class'),
+						yl(),
+						Tl(86, '='),
+						vl(87, 'span', lv),
+						Tl(88, '"item-l"'),
+						yl(),
+						Tl(89, '>'),
+						yl(),
+						Tl(90, 'left (default)'),
+						vl(91, 'span', iv),
+						Tl(92, '</'),
+						vl(93, 'span', av),
+						Tl(94, 'li'),
+						yl(),
+						Tl(95, '>'),
+						yl(),
+						Tl(96, '\n'),
+						vl(97, 'span', iv),
+						Tl(98, '</'),
+						vl(99, 'span', av),
+						Tl(100, 'ul'),
+						yl(),
+						Tl(101, '>'),
+						yl(),
+						Tl(102, '\n'),
+						vl(103, 'span', iv),
+						Tl(104, '<'),
+						vl(105, 'span', av),
+						Tl(106, 'ul'),
+						yl(),
+						Tl(107, ' '),
+						vl(108, 'span', sv),
+						Tl(109, 'class'),
+						yl(),
+						Tl(110, '='),
+						vl(111, 'span', lv),
+						Tl(112, '"col"'),
+						yl(),
+						Tl(113, '>'),
+						yl(),
+						Tl(114, '\n    '),
+						vl(115, 'span', iv),
+						Tl(116, '<'),
+						vl(117, 'span', av),
+						Tl(118, 'li'),
+						yl(),
+						Tl(119, '>'),
+						yl(),
+						Tl(120, 'default'),
+						vl(121, 'span', iv),
+						Tl(122, '</'),
+						vl(123, 'span', av),
+						Tl(124, 'li'),
+						yl(),
+						Tl(125, '>'),
+						yl(),
+						Tl(126, '\n    '),
+						vl(127, 'span', iv),
+						Tl(128, '<'),
+						vl(129, 'span', av),
+						Tl(130, 'li'),
+						yl(),
+						Tl(131, ' '),
+						vl(132, 'span', sv),
+						Tl(133, 'class'),
+						yl(),
+						Tl(134, '='),
+						vl(135, 'span', lv),
+						Tl(136, '"item-c"'),
+						yl(),
+						Tl(137, '>'),
+						yl(),
+						Tl(138, 'center'),
+						vl(139, 'span', iv),
+						Tl(140, '</'),
+						vl(141, 'span', av),
+						Tl(142, 'li'),
+						yl(),
+						Tl(143, '>'),
+						yl(),
+						Tl(144, '\n'),
+						vl(145, 'span', iv),
+						Tl(146, '</'),
+						vl(147, 'span', av),
+						Tl(148, 'ul'),
+						yl(),
+						Tl(149, '>'),
+						yl(),
+						Tl(150, '\n'),
+						vl(151, 'span', iv),
+						Tl(152, '<'),
+						vl(153, 'span', av),
+						Tl(154, 'ul'),
+						yl(),
+						Tl(155, ' '),
+						vl(156, 'span', sv),
+						Tl(157, 'class'),
+						yl(),
+						Tl(158, '='),
+						vl(159, 'span', lv),
+						Tl(160, '"col"'),
+						yl(),
+						Tl(161, '>'),
+						yl(),
+						Tl(162, '\n    '),
+						vl(163, 'span', iv),
+						Tl(164, '<'),
+						vl(165, 'span', av),
+						Tl(166, 'li'),
+						yl(),
+						Tl(167, '>'),
+						yl(),
+						Tl(168, 'default'),
+						vl(169, 'span', iv),
+						Tl(170, '</'),
+						vl(171, 'span', av),
+						Tl(172, 'li'),
+						yl(),
+						Tl(173, '>'),
+						yl(),
+						Tl(174, '\n    '),
+						vl(175, 'span', iv),
+						Tl(176, '<'),
+						vl(177, 'span', av),
+						Tl(178, 'li'),
+						yl(),
+						Tl(179, ' '),
+						vl(180, 'span', sv),
+						Tl(181, 'class'),
+						yl(),
+						Tl(182, '='),
+						vl(183, 'span', lv),
+						Tl(184, '"item-r"'),
+						yl(),
+						Tl(185, '>'),
+						yl(),
+						Tl(186, 'right'),
+						vl(187, 'span', iv),
+						Tl(188, '</'),
+						vl(189, 'span', av),
+						Tl(190, 'li'),
+						yl(),
+						Tl(191, '>'),
+						yl(),
+						Tl(192, '\n'),
+						vl(193, 'span', iv),
+						Tl(194, '</'),
+						vl(195, 'span', av),
+						Tl(196, 'ul'),
+						yl(),
+						Tl(197, '>'),
+						yl(),
+						Tl(198, '\n'),
+						vl(199, 'span', iv),
+						Tl(200, '<'),
+						vl(201, 'span', av),
+						Tl(202, 'ul'),
+						yl(),
+						Tl(203, ' '),
+						vl(204, 'span', sv),
+						Tl(205, 'class'),
+						yl(),
+						Tl(206, '='),
+						vl(207, 'span', lv),
+						Tl(208, '"col"'),
+						yl(),
+						Tl(209, '>'),
+						yl(),
+						Tl(210, '\n    '),
+						vl(211, 'span', iv),
+						Tl(212, '<'),
+						vl(213, 'span', av),
+						Tl(214, 'li'),
+						yl(),
+						Tl(215, '>'),
+						yl(),
+						Tl(216, 'default'),
+						vl(217, 'span', iv),
+						Tl(218, '</'),
+						vl(219, 'span', av),
+						Tl(220, 'li'),
+						yl(),
+						Tl(221, '>'),
+						yl(),
+						Tl(222, '\n    '),
+						vl(223, 'span', iv),
+						Tl(224, '<'),
+						vl(225, 'span', av),
+						Tl(226, 'li'),
+						yl(),
+						Tl(227, ' '),
+						vl(228, 'span', sv),
+						Tl(229, 'class'),
+						yl(),
+						Tl(230, '='),
+						vl(231, 'span', lv),
+						Tl(232, '"item-t"'),
+						yl(),
+						Tl(233, '>'),
+						yl(),
+						Tl(234, 'top (default)'),
+						vl(235, 'span', iv),
+						Tl(236, '</'),
+						vl(237, 'span', av),
+						Tl(238, 'li'),
+						yl(),
+						Tl(239, '>'),
+						yl(),
+						Tl(240, '\n'),
+						vl(241, 'span', iv),
+						Tl(242, '</'),
+						vl(243, 'span', av),
+						Tl(244, 'ul'),
+						yl(),
+						Tl(245, '>'),
+						yl(),
+						Tl(246, '\n'),
+						vl(247, 'span', iv),
+						Tl(248, '<'),
+						vl(249, 'span', av),
+						Tl(250, 'ul'),
+						yl(),
+						Tl(251, ' '),
+						vl(252, 'span', sv),
+						Tl(253, 'class'),
+						yl(),
+						Tl(254, '='),
+						vl(255, 'span', lv),
+						Tl(256, '"col"'),
+						yl(),
+						Tl(257, '>'),
+						yl(),
+						Tl(258, '\n    '),
+						vl(259, 'span', iv),
+						Tl(260, '<'),
+						vl(261, 'span', av),
+						Tl(262, 'li'),
+						yl(),
+						Tl(263, '>'),
+						yl(),
+						Tl(264, 'default'),
+						vl(265, 'span', iv),
+						Tl(266, '</'),
+						vl(267, 'span', av),
+						Tl(268, 'li'),
+						yl(),
+						Tl(269, '>'),
+						yl(),
+						Tl(270, '\n    '),
+						vl(271, 'span', iv),
+						Tl(272, '<'),
+						vl(273, 'span', av),
+						Tl(274, 'li'),
+						yl(),
+						Tl(275, ' '),
+						vl(276, 'span', sv),
+						Tl(277, 'class'),
+						yl(),
+						Tl(278, '='),
+						vl(279, 'span', lv),
+						Tl(280, '"item-m"'),
+						yl(),
+						Tl(281, '>'),
+						yl(),
+						Tl(282, 'middle'),
+						vl(283, 'span', iv),
+						Tl(284, '</'),
+						vl(285, 'span', av),
+						Tl(286, 'li'),
+						yl(),
+						Tl(287, '>'),
+						yl(),
+						Tl(288, '\n'),
+						vl(289, 'span', iv),
+						Tl(290, '</'),
+						vl(291, 'span', av),
+						Tl(292, 'ul'),
+						yl(),
+						Tl(293, '>'),
+						yl(),
+						Tl(294, '\n'),
+						vl(295, 'span', iv),
+						Tl(296, '<'),
+						vl(297, 'span', av),
+						Tl(298, 'ul'),
+						yl(),
+						Tl(299, ' '),
+						vl(300, 'span', sv),
+						Tl(301, 'class'),
+						yl(),
+						Tl(302, '='),
+						vl(303, 'span', lv),
+						Tl(304, '"col"'),
+						yl(),
+						Tl(305, '>'),
+						yl(),
+						Tl(306, '\n    '),
+						vl(307, 'span', iv),
+						Tl(308, '<'),
+						vl(309, 'span', av),
+						Tl(310, 'li'),
+						yl(),
+						Tl(311, '>'),
+						yl(),
+						Tl(312, 'default'),
+						vl(313, 'span', iv),
+						Tl(314, '</'),
+						vl(315, 'span', av),
+						Tl(316, 'li'),
+						yl(),
+						Tl(317, '>'),
+						yl(),
+						Tl(318, '\n    '),
+						vl(319, 'span', iv),
+						Tl(320, '<'),
+						vl(321, 'span', av),
+						Tl(322, 'li'),
+						yl(),
+						Tl(323, ' '),
+						vl(324, 'span', sv),
+						Tl(325, 'class'),
+						yl(),
+						Tl(326, '='),
+						vl(327, 'span', lv),
+						Tl(328, '"item-b"'),
+						yl(),
+						Tl(329, '>'),
+						yl(),
+						Tl(330, 'bottom'),
+						vl(331, 'span', iv),
+						Tl(332, '</'),
+						vl(333, 'span', av),
+						Tl(334, 'li'),
+						yl(),
+						Tl(335, '>'),
+						yl(),
+						Tl(336, '\n'),
+						vl(337, 'span', iv),
+						Tl(338, '</'),
+						vl(339, 'span', av),
+						Tl(340, 'ul'),
+						yl(),
+						Tl(341, '>'),
+						yl(),
+						Tl(342, '\n'),
+						vl(343, 'span', iv),
+						Tl(344, '<'),
+						vl(345, 'span', av),
+						Tl(346, 'ul'),
+						yl(),
+						Tl(347, ' '),
+						vl(348, 'span', sv),
+						Tl(349, 'class'),
+						yl(),
+						Tl(350, '='),
+						vl(351, 'span', lv),
+						Tl(352, '"col"'),
+						yl(),
+						Tl(353, '>'),
+						yl(),
+						Tl(354, '\n    '),
+						vl(355, 'span', iv),
+						Tl(356, '<'),
+						vl(357, 'span', av),
+						Tl(358, 'li'),
+						yl(),
+						Tl(359, '>'),
+						yl(),
+						Tl(360, 'default'),
+						vl(361, 'span', iv),
+						Tl(362, '</'),
+						vl(363, 'span', av),
+						Tl(364, 'li'),
+						yl(),
+						Tl(365, '>'),
+						yl(),
+						Tl(366, '\n    '),
+						vl(367, 'span', iv),
+						Tl(368, '<'),
+						vl(369, 'span', av),
+						Tl(370, 'li'),
+						yl(),
+						Tl(371, ' '),
+						vl(372, 'span', sv),
+						Tl(373, 'class'),
+						yl(),
+						Tl(374, '='),
+						vl(375, 'span', lv),
+						Tl(376, '"item-cm"'),
+						yl(),
+						Tl(377, '>'),
+						yl(),
+						Tl(378, 'center middle'),
+						vl(379, 'span', iv),
+						Tl(380, '</'),
+						vl(381, 'span', av),
+						Tl(382, 'li'),
+						yl(),
+						Tl(383, '>'),
+						yl(),
+						Tl(384, '\n'),
+						vl(385, 'span', iv),
+						Tl(386, '</'),
+						vl(387, 'span', av),
+						Tl(388, 'ul'),
+						yl(),
+						Tl(389, '>'),
+						yl(),
+						Tl(390, '\n'),
+						vl(391, 'span', iv),
+						Tl(392, '<'),
+						vl(393, 'span', av),
+						Tl(394, 'ul'),
+						yl(),
+						Tl(395, ' '),
+						vl(396, 'span', sv),
+						Tl(397, 'class'),
+						yl(),
+						Tl(398, '='),
+						vl(399, 'span', lv),
+						Tl(400, '"col"'),
+						yl(),
+						Tl(401, '>'),
+						yl(),
+						Tl(402, '\n    '),
+						vl(403, 'span', iv),
+						Tl(404, '<'),
+						vl(405, 'span', av),
+						Tl(406, 'li'),
+						yl(),
+						Tl(407, '>'),
+						yl(),
+						Tl(408, 'default'),
+						vl(409, 'span', iv),
+						Tl(410, '</'),
+						vl(411, 'span', av),
+						Tl(412, 'li'),
+						yl(),
+						Tl(413, '>'),
+						yl(),
+						Tl(414, '\n    '),
+						vl(415, 'span', iv),
+						Tl(416, '<'),
+						vl(417, 'span', av),
+						Tl(418, 'li'),
+						yl(),
+						Tl(419, ' '),
+						vl(420, 'span', sv),
+						Tl(421, 'class'),
+						yl(),
+						Tl(422, '='),
+						vl(423, 'span', lv),
+						Tl(424, '"item-st"'),
+						yl(),
+						Tl(425, '>'),
+						yl(),
+						Tl(426, 'stretch'),
+						vl(427, 'span', iv),
+						Tl(428, '</'),
+						vl(429, 'span', av),
+						Tl(430, 'li'),
+						yl(),
+						Tl(431, '>'),
+						yl(),
+						Tl(432, '\n'),
+						vl(433, 'span', iv),
+						Tl(434, '</'),
+						vl(435, 'span', av),
+						Tl(436, 'ul'),
+						yl(),
+						Tl(437, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Ry = [1, 'item-order-2'],
-				Dy = [1, 'item-order-1'];
+			var jy = [1, 'item-order-2'],
+				Ry = [1, 'item-order-1'];
+			function Dy(t, e) {
+				if (
+					(1 & t &&
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Item Order'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use '),
+						vl(6, 'code'),
+						Tl(7, '.item-order-[1 - 12]'),
+						yl(),
+						Tl(8, ' classes to align children in a flex container.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'ul', Kv),
+						vl(11, 'li', jy),
+						Tl(12, '1'),
+						yl(),
+						vl(13, 'li', Ry),
+						Tl(14, '2'),
+						yl(),
+						yl(),
+						vl(15, 'ul', $v),
+						vl(16, 'li', jy),
+						Tl(17, '1'),
+						yl(),
+						vl(18, 'li', Ry),
+						Tl(19, '2'),
+						yl(),
+						yl(),
+						yl(),
+						vl(20, 'figure'),
+						vl(21, 'pre', ov),
+						Tl(22, '<ul '),
+						vl(23, 'span', Pv),
+						Tl(24, 'class'),
+						yl(),
+						Tl(25, '='),
+						vl(26, 'span', Ev),
+						Tl(27, '"row"'),
+						yl(),
+						Tl(28, '>\n    <'),
+						vl(29, 'span', Pv),
+						Tl(30, 'li'),
+						yl(),
+						Tl(31, ' '),
+						vl(32, 'span', Pv),
+						Tl(33, 'class'),
+						yl(),
+						Tl(34, '='),
+						vl(35, 'span', Ev),
+						Tl(36, '"item-order-2"'),
+						yl(),
+						Tl(37, '>1</'),
+						vl(38, 'span', Pv),
+						Tl(39, 'li'),
+						yl(),
+						Tl(40, '>\n    <'),
+						vl(41, 'span', Pv),
+						Tl(42, 'li'),
+						yl(),
+						Tl(43, ' '),
+						vl(44, 'span', Pv),
+						Tl(45, 'class'),
+						yl(),
+						Tl(46, '='),
+						vl(47, 'span', Ev),
+						Tl(48, '"item-order-1"'),
+						yl(),
+						Tl(49, '>2</'),
+						vl(50, 'span', Pv),
+						Tl(51, 'li'),
+						yl(),
+						Tl(52, '>\n</ul>\n<ul '),
+						vl(53, 'span', Pv),
+						Tl(54, 'class'),
+						yl(),
+						Tl(55, '='),
+						vl(56, 'span', Ev),
+						Tl(57, '"col"'),
+						yl(),
+						Tl(58, '>\n    <'),
+						vl(59, 'span', Pv),
+						Tl(60, 'li'),
+						yl(),
+						Tl(61, ' '),
+						vl(62, 'span', Pv),
+						Tl(63, 'class'),
+						yl(),
+						Tl(64, '='),
+						vl(65, 'span', Ev),
+						Tl(66, '"item-order-2"'),
+						yl(),
+						Tl(67, '>1</'),
+						vl(68, 'span', Pv),
+						Tl(69, 'li'),
+						yl(),
+						Tl(70, '>\n    <'),
+						vl(71, 'span', Pv),
+						Tl(72, 'li'),
+						yl(),
+						Tl(73, ' '),
+						vl(74, 'span', Pv),
+						Tl(75, 'class'),
+						yl(),
+						Tl(76, '='),
+						vl(77, 'span', Ev),
+						Tl(78, '"item-order-1"'),
+						yl(),
+						Tl(79, '>2</'),
+						vl(80, 'span', Pv),
+						Tl(81, 'li'),
+						yl(),
+						Tl(82, '>\n</ul>'),
+						yl(),
+						yl(),
+						yl()),
+					2 & t)
+				) {
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
+				}
+			}
 			function Ny(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Item Order'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use '),
-						wl(6, 'code'),
-						Al(7, '.item-order-[1 - 12]'),
-						_l(),
-						Al(8, ' classes to align children in a flex container.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'ul', Xv),
-						wl(11, 'li', Ry),
-						Al(12, '1'),
-						_l(),
-						wl(13, 'li', Dy),
-						Al(14, '2'),
-						_l(),
-						_l(),
-						wl(15, 'ul', ty),
-						wl(16, 'li', Ry),
-						Al(17, '1'),
-						_l(),
-						wl(18, 'li', Dy),
-						Al(19, '2'),
-						_l(),
-						_l(),
-						_l(),
-						wl(20, 'figure'),
-						wl(21, 'pre', iv),
-						Al(22, '<ul '),
-						wl(23, 'span', Ev),
-						Al(24, 'class'),
-						_l(),
-						Al(25, '='),
-						wl(26, 'span', Ov),
-						Al(27, '"row"'),
-						_l(),
-						Al(28, '>\n    <'),
-						wl(29, 'span', Ev),
-						Al(30, 'li'),
-						_l(),
-						Al(31, ' '),
-						wl(32, 'span', Ev),
-						Al(33, 'class'),
-						_l(),
-						Al(34, '='),
-						wl(35, 'span', Ov),
-						Al(36, '"item-order-2"'),
-						_l(),
-						Al(37, '>1</'),
-						wl(38, 'span', Ev),
-						Al(39, 'li'),
-						_l(),
-						Al(40, '>\n    <'),
-						wl(41, 'span', Ev),
-						Al(42, 'li'),
-						_l(),
-						Al(43, ' '),
-						wl(44, 'span', Ev),
-						Al(45, 'class'),
-						_l(),
-						Al(46, '='),
-						wl(47, 'span', Ov),
-						Al(48, '"item-order-1"'),
-						_l(),
-						Al(49, '>2</'),
-						wl(50, 'span', Ev),
-						Al(51, 'li'),
-						_l(),
-						Al(52, '>\n</ul>\n<ul '),
-						wl(53, 'span', Ev),
-						Al(54, 'class'),
-						_l(),
-						Al(55, '='),
-						wl(56, 'span', Ov),
-						Al(57, '"col"'),
-						_l(),
-						Al(58, '>\n    <'),
-						wl(59, 'span', Ev),
-						Al(60, 'li'),
-						_l(),
-						Al(61, ' '),
-						wl(62, 'span', Ev),
-						Al(63, 'class'),
-						_l(),
-						Al(64, '='),
-						wl(65, 'span', Ov),
-						Al(66, '"item-order-2"'),
-						_l(),
-						Al(67, '>1</'),
-						wl(68, 'span', Ev),
-						Al(69, 'li'),
-						_l(),
-						Al(70, '>\n    <'),
-						wl(71, 'span', Ev),
-						Al(72, 'li'),
-						_l(),
-						Al(73, ' '),
-						wl(74, 'span', Ev),
-						Al(75, 'class'),
-						_l(),
-						Al(76, '='),
-						wl(77, 'span', Ov),
-						Al(78, '"item-order-1"'),
-						_l(),
-						Al(79, '>2</'),
-						wl(80, 'span', Ev),
-						Al(81, 'li'),
-						_l(),
-						Al(82, '>\n</ul>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Item Row'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use an '),
+						vl(6, 'code'),
+						Tl(7, '.item-[l || c || r || t || m || b || cm || st]'),
+						yl(),
+						Tl(8, ' class to align ONE child in a '),
+						vl(9, 'code'),
+						Tl(10, '.row'),
+						yl(),
+						Tl(11, ' flex container.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'ul', Kv),
+						vl(14, 'li'),
+						Tl(15, 'default'),
+						yl(),
+						vl(16, 'li', ky),
+						Tl(17, 'left (default)'),
+						yl(),
+						yl(),
+						vl(18, 'ul', Kv),
+						vl(19, 'li'),
+						Tl(20, 'default'),
+						yl(),
+						vl(21, 'li', Sy),
+						Tl(22, 'center'),
+						yl(),
+						yl(),
+						vl(23, 'ul', Kv),
+						vl(24, 'li'),
+						Tl(25, 'default'),
+						yl(),
+						vl(26, 'li', Py),
+						Tl(27, 'right'),
+						yl(),
+						yl(),
+						vl(28, 'ul', Kv),
+						vl(29, 'li'),
+						Tl(30, 'default'),
+						yl(),
+						vl(31, 'li', Ey),
+						Tl(32, 'top (default)'),
+						yl(),
+						yl(),
+						vl(33, 'ul', Kv),
+						vl(34, 'li'),
+						Tl(35, 'default'),
+						yl(),
+						vl(36, 'li', Oy),
+						Tl(37, 'middle'),
+						yl(),
+						yl(),
+						vl(38, 'ul', Kv),
+						vl(39, 'li'),
+						Tl(40, 'default'),
+						yl(),
+						vl(41, 'li', Iy),
+						Tl(42, 'bottom'),
+						yl(),
+						yl(),
+						vl(43, 'ul', Kv),
+						vl(44, 'li'),
+						Tl(45, 'default'),
+						yl(),
+						vl(46, 'li', Ty),
+						Tl(47, 'center middle'),
+						yl(),
+						yl(),
+						vl(48, 'ul', Kv),
+						vl(49, 'li'),
+						Tl(50, 'default'),
+						yl(),
+						vl(51, 'li', My),
+						Tl(52, 'stretch'),
+						yl(),
+						yl(),
+						yl(),
+						vl(53, 'figure'),
+						vl(54, 'pre', ov),
+						vl(55, 'span', iv),
+						Tl(56, '<'),
+						vl(57, 'span', av),
+						Tl(58, 'ul'),
+						yl(),
+						Tl(59, ' '),
+						vl(60, 'span', sv),
+						Tl(61, 'class'),
+						yl(),
+						Tl(62, '='),
+						vl(63, 'span', lv),
+						Tl(64, '"row"'),
+						yl(),
+						Tl(65, '>'),
+						yl(),
+						Tl(66, '\n    '),
+						vl(67, 'span', iv),
+						Tl(68, '<'),
+						vl(69, 'span', av),
+						Tl(70, 'li'),
+						yl(),
+						Tl(71, '>'),
+						yl(),
+						Tl(72, 'default'),
+						vl(73, 'span', iv),
+						Tl(74, '</'),
+						vl(75, 'span', av),
+						Tl(76, 'li'),
+						yl(),
+						Tl(77, '>'),
+						yl(),
+						Tl(78, '\n    '),
+						vl(79, 'span', iv),
+						Tl(80, '<'),
+						vl(81, 'span', av),
+						Tl(82, 'li'),
+						yl(),
+						Tl(83, ' '),
+						vl(84, 'span', sv),
+						Tl(85, 'class'),
+						yl(),
+						Tl(86, '='),
+						vl(87, 'span', lv),
+						Tl(88, '"item-l"'),
+						yl(),
+						Tl(89, '>'),
+						yl(),
+						Tl(90, 'left (default)'),
+						vl(91, 'span', iv),
+						Tl(92, '</'),
+						vl(93, 'span', av),
+						Tl(94, 'li'),
+						yl(),
+						Tl(95, '>'),
+						yl(),
+						Tl(96, '\n'),
+						vl(97, 'span', iv),
+						Tl(98, '</'),
+						vl(99, 'span', av),
+						Tl(100, 'ul'),
+						yl(),
+						Tl(101, '>'),
+						yl(),
+						Tl(102, '\n'),
+						vl(103, 'span', iv),
+						Tl(104, '<'),
+						vl(105, 'span', av),
+						Tl(106, 'ul'),
+						yl(),
+						Tl(107, ' '),
+						vl(108, 'span', sv),
+						Tl(109, 'class'),
+						yl(),
+						Tl(110, '='),
+						vl(111, 'span', lv),
+						Tl(112, '"row"'),
+						yl(),
+						Tl(113, '>'),
+						yl(),
+						Tl(114, '\n    '),
+						vl(115, 'span', iv),
+						Tl(116, '<'),
+						vl(117, 'span', av),
+						Tl(118, 'li'),
+						yl(),
+						Tl(119, '>'),
+						yl(),
+						Tl(120, 'default'),
+						vl(121, 'span', iv),
+						Tl(122, '</'),
+						vl(123, 'span', av),
+						Tl(124, 'li'),
+						yl(),
+						Tl(125, '>'),
+						yl(),
+						Tl(126, '\n    '),
+						vl(127, 'span', iv),
+						Tl(128, '<'),
+						vl(129, 'span', av),
+						Tl(130, 'li'),
+						yl(),
+						Tl(131, ' '),
+						vl(132, 'span', sv),
+						Tl(133, 'class'),
+						yl(),
+						Tl(134, '='),
+						vl(135, 'span', lv),
+						Tl(136, '"item-c"'),
+						yl(),
+						Tl(137, '>'),
+						yl(),
+						Tl(138, 'center'),
+						vl(139, 'span', iv),
+						Tl(140, '</'),
+						vl(141, 'span', av),
+						Tl(142, 'li'),
+						yl(),
+						Tl(143, '>'),
+						yl(),
+						Tl(144, '\n'),
+						vl(145, 'span', iv),
+						Tl(146, '</'),
+						vl(147, 'span', av),
+						Tl(148, 'ul'),
+						yl(),
+						Tl(149, '>'),
+						yl(),
+						Tl(150, '\n'),
+						vl(151, 'span', iv),
+						Tl(152, '<'),
+						vl(153, 'span', av),
+						Tl(154, 'ul'),
+						yl(),
+						Tl(155, ' '),
+						vl(156, 'span', sv),
+						Tl(157, 'class'),
+						yl(),
+						Tl(158, '='),
+						vl(159, 'span', lv),
+						Tl(160, '"row"'),
+						yl(),
+						Tl(161, '>'),
+						yl(),
+						Tl(162, '\n    '),
+						vl(163, 'span', iv),
+						Tl(164, '<'),
+						vl(165, 'span', av),
+						Tl(166, 'li'),
+						yl(),
+						Tl(167, '>'),
+						yl(),
+						Tl(168, 'default'),
+						vl(169, 'span', iv),
+						Tl(170, '</'),
+						vl(171, 'span', av),
+						Tl(172, 'li'),
+						yl(),
+						Tl(173, '>'),
+						yl(),
+						Tl(174, '\n    '),
+						vl(175, 'span', iv),
+						Tl(176, '<'),
+						vl(177, 'span', av),
+						Tl(178, 'li'),
+						yl(),
+						Tl(179, ' '),
+						vl(180, 'span', sv),
+						Tl(181, 'class'),
+						yl(),
+						Tl(182, '='),
+						vl(183, 'span', lv),
+						Tl(184, '"item-r"'),
+						yl(),
+						Tl(185, '>'),
+						yl(),
+						Tl(186, 'right'),
+						vl(187, 'span', iv),
+						Tl(188, '</'),
+						vl(189, 'span', av),
+						Tl(190, 'li'),
+						yl(),
+						Tl(191, '>'),
+						yl(),
+						Tl(192, '\n'),
+						vl(193, 'span', iv),
+						Tl(194, '</'),
+						vl(195, 'span', av),
+						Tl(196, 'ul'),
+						yl(),
+						Tl(197, '>'),
+						yl(),
+						Tl(198, '\n'),
+						vl(199, 'span', iv),
+						Tl(200, '<'),
+						vl(201, 'span', av),
+						Tl(202, 'ul'),
+						yl(),
+						Tl(203, ' '),
+						vl(204, 'span', sv),
+						Tl(205, 'class'),
+						yl(),
+						Tl(206, '='),
+						vl(207, 'span', lv),
+						Tl(208, '"row"'),
+						yl(),
+						Tl(209, '>'),
+						yl(),
+						Tl(210, '\n    '),
+						vl(211, 'span', iv),
+						Tl(212, '<'),
+						vl(213, 'span', av),
+						Tl(214, 'li'),
+						yl(),
+						Tl(215, '>'),
+						yl(),
+						Tl(216, 'default'),
+						vl(217, 'span', iv),
+						Tl(218, '</'),
+						vl(219, 'span', av),
+						Tl(220, 'li'),
+						yl(),
+						Tl(221, '>'),
+						yl(),
+						Tl(222, '\n    '),
+						vl(223, 'span', iv),
+						Tl(224, '<'),
+						vl(225, 'span', av),
+						Tl(226, 'li'),
+						yl(),
+						Tl(227, ' '),
+						vl(228, 'span', sv),
+						Tl(229, 'class'),
+						yl(),
+						Tl(230, '='),
+						vl(231, 'span', lv),
+						Tl(232, '"item-t"'),
+						yl(),
+						Tl(233, '>'),
+						yl(),
+						Tl(234, 'top (default)'),
+						vl(235, 'span', iv),
+						Tl(236, '</'),
+						vl(237, 'span', av),
+						Tl(238, 'li'),
+						yl(),
+						Tl(239, '>'),
+						yl(),
+						Tl(240, '\n'),
+						vl(241, 'span', iv),
+						Tl(242, '</'),
+						vl(243, 'span', av),
+						Tl(244, 'ul'),
+						yl(),
+						Tl(245, '>'),
+						yl(),
+						Tl(246, '\n'),
+						vl(247, 'span', iv),
+						Tl(248, '<'),
+						vl(249, 'span', av),
+						Tl(250, 'ul'),
+						yl(),
+						Tl(251, ' '),
+						vl(252, 'span', sv),
+						Tl(253, 'class'),
+						yl(),
+						Tl(254, '='),
+						vl(255, 'span', lv),
+						Tl(256, '"row"'),
+						yl(),
+						Tl(257, '>'),
+						yl(),
+						Tl(258, '\n    '),
+						vl(259, 'span', iv),
+						Tl(260, '<'),
+						vl(261, 'span', av),
+						Tl(262, 'li'),
+						yl(),
+						Tl(263, '>'),
+						yl(),
+						Tl(264, 'default'),
+						vl(265, 'span', iv),
+						Tl(266, '</'),
+						vl(267, 'span', av),
+						Tl(268, 'li'),
+						yl(),
+						Tl(269, '>'),
+						yl(),
+						Tl(270, '\n    '),
+						vl(271, 'span', iv),
+						Tl(272, '<'),
+						vl(273, 'span', av),
+						Tl(274, 'li'),
+						yl(),
+						Tl(275, ' '),
+						vl(276, 'span', sv),
+						Tl(277, 'class'),
+						yl(),
+						Tl(278, '='),
+						vl(279, 'span', lv),
+						Tl(280, '"item-m"'),
+						yl(),
+						Tl(281, '>'),
+						yl(),
+						Tl(282, 'middle'),
+						vl(283, 'span', iv),
+						Tl(284, '</'),
+						vl(285, 'span', av),
+						Tl(286, 'li'),
+						yl(),
+						Tl(287, '>'),
+						yl(),
+						Tl(288, '\n'),
+						vl(289, 'span', iv),
+						Tl(290, '</'),
+						vl(291, 'span', av),
+						Tl(292, 'ul'),
+						yl(),
+						Tl(293, '>'),
+						yl(),
+						Tl(294, '\n'),
+						vl(295, 'span', iv),
+						Tl(296, '<'),
+						vl(297, 'span', av),
+						Tl(298, 'ul'),
+						yl(),
+						Tl(299, ' '),
+						vl(300, 'span', sv),
+						Tl(301, 'class'),
+						yl(),
+						Tl(302, '='),
+						vl(303, 'span', lv),
+						Tl(304, '"row"'),
+						yl(),
+						Tl(305, '>'),
+						yl(),
+						Tl(306, '\n    '),
+						vl(307, 'span', iv),
+						Tl(308, '<'),
+						vl(309, 'span', av),
+						Tl(310, 'li'),
+						yl(),
+						Tl(311, '>'),
+						yl(),
+						Tl(312, 'default'),
+						vl(313, 'span', iv),
+						Tl(314, '</'),
+						vl(315, 'span', av),
+						Tl(316, 'li'),
+						yl(),
+						Tl(317, '>'),
+						yl(),
+						Tl(318, '\n    '),
+						vl(319, 'span', iv),
+						Tl(320, '<'),
+						vl(321, 'span', av),
+						Tl(322, 'li'),
+						yl(),
+						Tl(323, ' '),
+						vl(324, 'span', sv),
+						Tl(325, 'class'),
+						yl(),
+						Tl(326, '='),
+						vl(327, 'span', lv),
+						Tl(328, '"item-b"'),
+						yl(),
+						Tl(329, '>'),
+						yl(),
+						Tl(330, 'bottom'),
+						vl(331, 'span', iv),
+						Tl(332, '</'),
+						vl(333, 'span', av),
+						Tl(334, 'li'),
+						yl(),
+						Tl(335, '>'),
+						yl(),
+						Tl(336, '\n'),
+						vl(337, 'span', iv),
+						Tl(338, '</'),
+						vl(339, 'span', av),
+						Tl(340, 'ul'),
+						yl(),
+						Tl(341, '>'),
+						yl(),
+						Tl(342, '\n'),
+						vl(343, 'span', iv),
+						Tl(344, '<'),
+						vl(345, 'span', av),
+						Tl(346, 'ul'),
+						yl(),
+						Tl(347, ' '),
+						vl(348, 'span', sv),
+						Tl(349, 'class'),
+						yl(),
+						Tl(350, '='),
+						vl(351, 'span', lv),
+						Tl(352, '"row"'),
+						yl(),
+						Tl(353, '>'),
+						yl(),
+						Tl(354, '\n    '),
+						vl(355, 'span', iv),
+						Tl(356, '<'),
+						vl(357, 'span', av),
+						Tl(358, 'li'),
+						yl(),
+						Tl(359, '>'),
+						yl(),
+						Tl(360, 'default'),
+						vl(361, 'span', iv),
+						Tl(362, '</'),
+						vl(363, 'span', av),
+						Tl(364, 'li'),
+						yl(),
+						Tl(365, '>'),
+						yl(),
+						Tl(366, '\n    '),
+						vl(367, 'span', iv),
+						Tl(368, '<'),
+						vl(369, 'span', av),
+						Tl(370, 'li'),
+						yl(),
+						Tl(371, ' '),
+						vl(372, 'span', sv),
+						Tl(373, 'class'),
+						yl(),
+						Tl(374, '='),
+						vl(375, 'span', lv),
+						Tl(376, '"item-cm"'),
+						yl(),
+						Tl(377, '>'),
+						yl(),
+						Tl(378, 'center middle'),
+						vl(379, 'span', iv),
+						Tl(380, '</'),
+						vl(381, 'span', av),
+						Tl(382, 'li'),
+						yl(),
+						Tl(383, '>'),
+						yl(),
+						Tl(384, '\n'),
+						vl(385, 'span', iv),
+						Tl(386, '</'),
+						vl(387, 'span', av),
+						Tl(388, 'ul'),
+						yl(),
+						Tl(389, '>'),
+						yl(),
+						Tl(390, '\n'),
+						vl(391, 'span', iv),
+						Tl(392, '<'),
+						vl(393, 'span', av),
+						Tl(394, 'ul'),
+						yl(),
+						Tl(395, ' '),
+						vl(396, 'span', sv),
+						Tl(397, 'class'),
+						yl(),
+						Tl(398, '='),
+						vl(399, 'span', lv),
+						Tl(400, '"row"'),
+						yl(),
+						Tl(401, '>'),
+						yl(),
+						Tl(402, '\n    '),
+						vl(403, 'span', iv),
+						Tl(404, '<'),
+						vl(405, 'span', av),
+						Tl(406, 'li'),
+						yl(),
+						Tl(407, '>'),
+						yl(),
+						Tl(408, 'default'),
+						vl(409, 'span', iv),
+						Tl(410, '</'),
+						vl(411, 'span', av),
+						Tl(412, 'li'),
+						yl(),
+						Tl(413, '>'),
+						yl(),
+						Tl(414, '\n    '),
+						vl(415, 'span', iv),
+						Tl(416, '<'),
+						vl(417, 'span', av),
+						Tl(418, 'li'),
+						yl(),
+						Tl(419, ' '),
+						vl(420, 'span', sv),
+						Tl(421, 'class'),
+						yl(),
+						Tl(422, '='),
+						vl(423, 'span', lv),
+						Tl(424, '"item-st"'),
+						yl(),
+						Tl(425, '>'),
+						yl(),
+						Tl(426, 'stretch'),
+						vl(427, 'span', iv),
+						Tl(428, '</'),
+						vl(429, 'span', av),
+						Tl(430, 'li'),
+						yl(),
+						Tl(431, '>'),
+						yl(),
+						Tl(432, '\n'),
+						vl(433, 'span', iv),
+						Tl(434, '</'),
+						vl(435, 'span', av),
+						Tl(436, 'ul'),
+						yl(),
+						Tl(437, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			function Uy(t, e) {
+			var Uy = [1, 'item-g-1'],
+				Ly = [1, 'item-s-1'],
+				Hy = [1, 'item-gs-1'];
+			function zy(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Item Row'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use an '),
-						wl(6, 'code'),
-						Al(7, '.item-[l || c || r || t || m || b || cm || st]'),
-						_l(),
-						Al(8, ' class to align ONE child in a '),
-						wl(9, 'code'),
-						Al(10, '.row'),
-						_l(),
-						Al(11, ' flex container.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'ul', Xv),
-						wl(14, 'li'),
-						Al(15, 'default'),
-						_l(),
-						wl(16, 'li', Sy),
-						Al(17, 'left (default)'),
-						_l(),
-						_l(),
-						wl(18, 'ul', Xv),
-						wl(19, 'li'),
-						Al(20, 'default'),
-						_l(),
-						wl(21, 'li', Py),
-						Al(22, 'center'),
-						_l(),
-						_l(),
-						wl(23, 'ul', Xv),
-						wl(24, 'li'),
-						Al(25, 'default'),
-						_l(),
-						wl(26, 'li', Ey),
-						Al(27, 'right'),
-						_l(),
-						_l(),
-						wl(28, 'ul', Xv),
-						wl(29, 'li'),
-						Al(30, 'default'),
-						_l(),
-						wl(31, 'li', Oy),
-						Al(32, 'top (default)'),
-						_l(),
-						_l(),
-						wl(33, 'ul', Xv),
-						wl(34, 'li'),
-						Al(35, 'default'),
-						_l(),
-						wl(36, 'li', Iy),
-						Al(37, 'middle'),
-						_l(),
-						_l(),
-						wl(38, 'ul', Xv),
-						wl(39, 'li'),
-						Al(40, 'default'),
-						_l(),
-						wl(41, 'li', Ty),
-						Al(42, 'bottom'),
-						_l(),
-						_l(),
-						wl(43, 'ul', Xv),
-						wl(44, 'li'),
-						Al(45, 'default'),
-						_l(),
-						wl(46, 'li', My),
-						Al(47, 'center middle'),
-						_l(),
-						_l(),
-						wl(48, 'ul', Xv),
-						wl(49, 'li'),
-						Al(50, 'default'),
-						_l(),
-						wl(51, 'li', Ay),
-						Al(52, 'stretch'),
-						_l(),
-						_l(),
-						_l(),
-						wl(53, 'figure'),
-						wl(54, 'pre', iv),
-						wl(55, 'span', av),
-						Al(56, '<'),
-						wl(57, 'span', sv),
-						Al(58, 'ul'),
-						_l(),
-						Al(59, ' '),
-						wl(60, 'span', lv),
-						Al(61, 'class'),
-						_l(),
-						Al(62, '='),
-						wl(63, 'span', uv),
-						Al(64, '"row"'),
-						_l(),
-						Al(65, '>'),
-						_l(),
-						Al(66, '\n    '),
-						wl(67, 'span', av),
-						Al(68, '<'),
-						wl(69, 'span', sv),
-						Al(70, 'li'),
-						_l(),
-						Al(71, '>'),
-						_l(),
-						Al(72, 'default'),
-						wl(73, 'span', av),
-						Al(74, '</'),
-						wl(75, 'span', sv),
-						Al(76, 'li'),
-						_l(),
-						Al(77, '>'),
-						_l(),
-						Al(78, '\n    '),
-						wl(79, 'span', av),
-						Al(80, '<'),
-						wl(81, 'span', sv),
-						Al(82, 'li'),
-						_l(),
-						Al(83, ' '),
-						wl(84, 'span', lv),
-						Al(85, 'class'),
-						_l(),
-						Al(86, '='),
-						wl(87, 'span', uv),
-						Al(88, '"item-l"'),
-						_l(),
-						Al(89, '>'),
-						_l(),
-						Al(90, 'left (default)'),
-						wl(91, 'span', av),
-						Al(92, '</'),
-						wl(93, 'span', sv),
-						Al(94, 'li'),
-						_l(),
-						Al(95, '>'),
-						_l(),
-						Al(96, '\n'),
-						wl(97, 'span', av),
-						Al(98, '</'),
-						wl(99, 'span', sv),
-						Al(100, 'ul'),
-						_l(),
-						Al(101, '>'),
-						_l(),
-						Al(102, '\n'),
-						wl(103, 'span', av),
-						Al(104, '<'),
-						wl(105, 'span', sv),
-						Al(106, 'ul'),
-						_l(),
-						Al(107, ' '),
-						wl(108, 'span', lv),
-						Al(109, 'class'),
-						_l(),
-						Al(110, '='),
-						wl(111, 'span', uv),
-						Al(112, '"row"'),
-						_l(),
-						Al(113, '>'),
-						_l(),
-						Al(114, '\n    '),
-						wl(115, 'span', av),
-						Al(116, '<'),
-						wl(117, 'span', sv),
-						Al(118, 'li'),
-						_l(),
-						Al(119, '>'),
-						_l(),
-						Al(120, 'default'),
-						wl(121, 'span', av),
-						Al(122, '</'),
-						wl(123, 'span', sv),
-						Al(124, 'li'),
-						_l(),
-						Al(125, '>'),
-						_l(),
-						Al(126, '\n    '),
-						wl(127, 'span', av),
-						Al(128, '<'),
-						wl(129, 'span', sv),
-						Al(130, 'li'),
-						_l(),
-						Al(131, ' '),
-						wl(132, 'span', lv),
-						Al(133, 'class'),
-						_l(),
-						Al(134, '='),
-						wl(135, 'span', uv),
-						Al(136, '"item-c"'),
-						_l(),
-						Al(137, '>'),
-						_l(),
-						Al(138, 'center'),
-						wl(139, 'span', av),
-						Al(140, '</'),
-						wl(141, 'span', sv),
-						Al(142, 'li'),
-						_l(),
-						Al(143, '>'),
-						_l(),
-						Al(144, '\n'),
-						wl(145, 'span', av),
-						Al(146, '</'),
-						wl(147, 'span', sv),
-						Al(148, 'ul'),
-						_l(),
-						Al(149, '>'),
-						_l(),
-						Al(150, '\n'),
-						wl(151, 'span', av),
-						Al(152, '<'),
-						wl(153, 'span', sv),
-						Al(154, 'ul'),
-						_l(),
-						Al(155, ' '),
-						wl(156, 'span', lv),
-						Al(157, 'class'),
-						_l(),
-						Al(158, '='),
-						wl(159, 'span', uv),
-						Al(160, '"row"'),
-						_l(),
-						Al(161, '>'),
-						_l(),
-						Al(162, '\n    '),
-						wl(163, 'span', av),
-						Al(164, '<'),
-						wl(165, 'span', sv),
-						Al(166, 'li'),
-						_l(),
-						Al(167, '>'),
-						_l(),
-						Al(168, 'default'),
-						wl(169, 'span', av),
-						Al(170, '</'),
-						wl(171, 'span', sv),
-						Al(172, 'li'),
-						_l(),
-						Al(173, '>'),
-						_l(),
-						Al(174, '\n    '),
-						wl(175, 'span', av),
-						Al(176, '<'),
-						wl(177, 'span', sv),
-						Al(178, 'li'),
-						_l(),
-						Al(179, ' '),
-						wl(180, 'span', lv),
-						Al(181, 'class'),
-						_l(),
-						Al(182, '='),
-						wl(183, 'span', uv),
-						Al(184, '"item-r"'),
-						_l(),
-						Al(185, '>'),
-						_l(),
-						Al(186, 'right'),
-						wl(187, 'span', av),
-						Al(188, '</'),
-						wl(189, 'span', sv),
-						Al(190, 'li'),
-						_l(),
-						Al(191, '>'),
-						_l(),
-						Al(192, '\n'),
-						wl(193, 'span', av),
-						Al(194, '</'),
-						wl(195, 'span', sv),
-						Al(196, 'ul'),
-						_l(),
-						Al(197, '>'),
-						_l(),
-						Al(198, '\n'),
-						wl(199, 'span', av),
-						Al(200, '<'),
-						wl(201, 'span', sv),
-						Al(202, 'ul'),
-						_l(),
-						Al(203, ' '),
-						wl(204, 'span', lv),
-						Al(205, 'class'),
-						_l(),
-						Al(206, '='),
-						wl(207, 'span', uv),
-						Al(208, '"row"'),
-						_l(),
-						Al(209, '>'),
-						_l(),
-						Al(210, '\n    '),
-						wl(211, 'span', av),
-						Al(212, '<'),
-						wl(213, 'span', sv),
-						Al(214, 'li'),
-						_l(),
-						Al(215, '>'),
-						_l(),
-						Al(216, 'default'),
-						wl(217, 'span', av),
-						Al(218, '</'),
-						wl(219, 'span', sv),
-						Al(220, 'li'),
-						_l(),
-						Al(221, '>'),
-						_l(),
-						Al(222, '\n    '),
-						wl(223, 'span', av),
-						Al(224, '<'),
-						wl(225, 'span', sv),
-						Al(226, 'li'),
-						_l(),
-						Al(227, ' '),
-						wl(228, 'span', lv),
-						Al(229, 'class'),
-						_l(),
-						Al(230, '='),
-						wl(231, 'span', uv),
-						Al(232, '"item-t"'),
-						_l(),
-						Al(233, '>'),
-						_l(),
-						Al(234, 'top (default)'),
-						wl(235, 'span', av),
-						Al(236, '</'),
-						wl(237, 'span', sv),
-						Al(238, 'li'),
-						_l(),
-						Al(239, '>'),
-						_l(),
-						Al(240, '\n'),
-						wl(241, 'span', av),
-						Al(242, '</'),
-						wl(243, 'span', sv),
-						Al(244, 'ul'),
-						_l(),
-						Al(245, '>'),
-						_l(),
-						Al(246, '\n'),
-						wl(247, 'span', av),
-						Al(248, '<'),
-						wl(249, 'span', sv),
-						Al(250, 'ul'),
-						_l(),
-						Al(251, ' '),
-						wl(252, 'span', lv),
-						Al(253, 'class'),
-						_l(),
-						Al(254, '='),
-						wl(255, 'span', uv),
-						Al(256, '"row"'),
-						_l(),
-						Al(257, '>'),
-						_l(),
-						Al(258, '\n    '),
-						wl(259, 'span', av),
-						Al(260, '<'),
-						wl(261, 'span', sv),
-						Al(262, 'li'),
-						_l(),
-						Al(263, '>'),
-						_l(),
-						Al(264, 'default'),
-						wl(265, 'span', av),
-						Al(266, '</'),
-						wl(267, 'span', sv),
-						Al(268, 'li'),
-						_l(),
-						Al(269, '>'),
-						_l(),
-						Al(270, '\n    '),
-						wl(271, 'span', av),
-						Al(272, '<'),
-						wl(273, 'span', sv),
-						Al(274, 'li'),
-						_l(),
-						Al(275, ' '),
-						wl(276, 'span', lv),
-						Al(277, 'class'),
-						_l(),
-						Al(278, '='),
-						wl(279, 'span', uv),
-						Al(280, '"item-m"'),
-						_l(),
-						Al(281, '>'),
-						_l(),
-						Al(282, 'middle'),
-						wl(283, 'span', av),
-						Al(284, '</'),
-						wl(285, 'span', sv),
-						Al(286, 'li'),
-						_l(),
-						Al(287, '>'),
-						_l(),
-						Al(288, '\n'),
-						wl(289, 'span', av),
-						Al(290, '</'),
-						wl(291, 'span', sv),
-						Al(292, 'ul'),
-						_l(),
-						Al(293, '>'),
-						_l(),
-						Al(294, '\n'),
-						wl(295, 'span', av),
-						Al(296, '<'),
-						wl(297, 'span', sv),
-						Al(298, 'ul'),
-						_l(),
-						Al(299, ' '),
-						wl(300, 'span', lv),
-						Al(301, 'class'),
-						_l(),
-						Al(302, '='),
-						wl(303, 'span', uv),
-						Al(304, '"row"'),
-						_l(),
-						Al(305, '>'),
-						_l(),
-						Al(306, '\n    '),
-						wl(307, 'span', av),
-						Al(308, '<'),
-						wl(309, 'span', sv),
-						Al(310, 'li'),
-						_l(),
-						Al(311, '>'),
-						_l(),
-						Al(312, 'default'),
-						wl(313, 'span', av),
-						Al(314, '</'),
-						wl(315, 'span', sv),
-						Al(316, 'li'),
-						_l(),
-						Al(317, '>'),
-						_l(),
-						Al(318, '\n    '),
-						wl(319, 'span', av),
-						Al(320, '<'),
-						wl(321, 'span', sv),
-						Al(322, 'li'),
-						_l(),
-						Al(323, ' '),
-						wl(324, 'span', lv),
-						Al(325, 'class'),
-						_l(),
-						Al(326, '='),
-						wl(327, 'span', uv),
-						Al(328, '"item-b"'),
-						_l(),
-						Al(329, '>'),
-						_l(),
-						Al(330, 'bottom'),
-						wl(331, 'span', av),
-						Al(332, '</'),
-						wl(333, 'span', sv),
-						Al(334, 'li'),
-						_l(),
-						Al(335, '>'),
-						_l(),
-						Al(336, '\n'),
-						wl(337, 'span', av),
-						Al(338, '</'),
-						wl(339, 'span', sv),
-						Al(340, 'ul'),
-						_l(),
-						Al(341, '>'),
-						_l(),
-						Al(342, '\n'),
-						wl(343, 'span', av),
-						Al(344, '<'),
-						wl(345, 'span', sv),
-						Al(346, 'ul'),
-						_l(),
-						Al(347, ' '),
-						wl(348, 'span', lv),
-						Al(349, 'class'),
-						_l(),
-						Al(350, '='),
-						wl(351, 'span', uv),
-						Al(352, '"row"'),
-						_l(),
-						Al(353, '>'),
-						_l(),
-						Al(354, '\n    '),
-						wl(355, 'span', av),
-						Al(356, '<'),
-						wl(357, 'span', sv),
-						Al(358, 'li'),
-						_l(),
-						Al(359, '>'),
-						_l(),
-						Al(360, 'default'),
-						wl(361, 'span', av),
-						Al(362, '</'),
-						wl(363, 'span', sv),
-						Al(364, 'li'),
-						_l(),
-						Al(365, '>'),
-						_l(),
-						Al(366, '\n    '),
-						wl(367, 'span', av),
-						Al(368, '<'),
-						wl(369, 'span', sv),
-						Al(370, 'li'),
-						_l(),
-						Al(371, ' '),
-						wl(372, 'span', lv),
-						Al(373, 'class'),
-						_l(),
-						Al(374, '='),
-						wl(375, 'span', uv),
-						Al(376, '"item-cm"'),
-						_l(),
-						Al(377, '>'),
-						_l(),
-						Al(378, 'center middle'),
-						wl(379, 'span', av),
-						Al(380, '</'),
-						wl(381, 'span', sv),
-						Al(382, 'li'),
-						_l(),
-						Al(383, '>'),
-						_l(),
-						Al(384, '\n'),
-						wl(385, 'span', av),
-						Al(386, '</'),
-						wl(387, 'span', sv),
-						Al(388, 'ul'),
-						_l(),
-						Al(389, '>'),
-						_l(),
-						Al(390, '\n'),
-						wl(391, 'span', av),
-						Al(392, '<'),
-						wl(393, 'span', sv),
-						Al(394, 'ul'),
-						_l(),
-						Al(395, ' '),
-						wl(396, 'span', lv),
-						Al(397, 'class'),
-						_l(),
-						Al(398, '='),
-						wl(399, 'span', uv),
-						Al(400, '"row"'),
-						_l(),
-						Al(401, '>'),
-						_l(),
-						Al(402, '\n    '),
-						wl(403, 'span', av),
-						Al(404, '<'),
-						wl(405, 'span', sv),
-						Al(406, 'li'),
-						_l(),
-						Al(407, '>'),
-						_l(),
-						Al(408, 'default'),
-						wl(409, 'span', av),
-						Al(410, '</'),
-						wl(411, 'span', sv),
-						Al(412, 'li'),
-						_l(),
-						Al(413, '>'),
-						_l(),
-						Al(414, '\n    '),
-						wl(415, 'span', av),
-						Al(416, '<'),
-						wl(417, 'span', sv),
-						Al(418, 'li'),
-						_l(),
-						Al(419, ' '),
-						wl(420, 'span', lv),
-						Al(421, 'class'),
-						_l(),
-						Al(422, '='),
-						wl(423, 'span', uv),
-						Al(424, '"item-st"'),
-						_l(),
-						Al(425, '>'),
-						_l(),
-						Al(426, 'stretch'),
-						wl(427, 'span', av),
-						Al(428, '</'),
-						wl(429, 'span', sv),
-						Al(430, 'li'),
-						_l(),
-						Al(431, '>'),
-						_l(),
-						Al(432, '\n'),
-						wl(433, 'span', av),
-						Al(434, '</'),
-						wl(435, 'span', sv),
-						Al(436, 'ul'),
-						_l(),
-						Al(437, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Item Size'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use '),
+						vl(6, 'code'),
+						Tl(7, '.item-[g || s || gs]-[1 - 12]'),
+						yl(),
+						Tl(8, ' classes to grow and/or shrink children in a flex container.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'ul', Kv),
+						vl(11, 'li'),
+						Tl(12, 'default'),
+						yl(),
+						vl(13, 'li', Uy),
+						Tl(14, 'grow'),
+						yl(),
+						yl(),
+						vl(15, 'ul', Kv),
+						vl(16, 'li'),
+						Tl(17, 'default'),
+						yl(),
+						vl(18, 'li', Ly),
+						Tl(19, 'shrink'),
+						yl(),
+						yl(),
+						vl(20, 'ul', Kv),
+						vl(21, 'li'),
+						Tl(22, 'default'),
+						yl(),
+						vl(23, 'li', Hy),
+						Tl(24, 'grow & shrink'),
+						yl(),
+						yl(),
+						vl(25, 'ul', $v),
+						vl(26, 'li'),
+						Tl(27, 'default'),
+						yl(),
+						vl(28, 'li', Uy),
+						Tl(29, 'grow'),
+						yl(),
+						yl(),
+						vl(30, 'ul', $v),
+						vl(31, 'li'),
+						Tl(32, 'default'),
+						yl(),
+						vl(33, 'li', Ly),
+						Tl(34, 'shrink'),
+						yl(),
+						yl(),
+						vl(35, 'ul', $v),
+						vl(36, 'li'),
+						Tl(37, 'default'),
+						yl(),
+						vl(38, 'li', Hy),
+						Tl(39, 'grow & shrink'),
+						yl(),
+						yl(),
+						yl(),
+						vl(40, 'figure'),
+						vl(41, 'pre', ov),
+						vl(42, 'span', iv),
+						Tl(43, '<'),
+						vl(44, 'span', av),
+						Tl(45, 'ul'),
+						yl(),
+						Tl(46, ' '),
+						vl(47, 'span', sv),
+						Tl(48, 'class'),
+						yl(),
+						Tl(49, '='),
+						vl(50, 'span', lv),
+						Tl(51, '"row"'),
+						yl(),
+						Tl(52, '>'),
+						yl(),
+						Tl(53, '\n    '),
+						vl(54, 'span', iv),
+						Tl(55, '<'),
+						vl(56, 'span', av),
+						Tl(57, 'li'),
+						yl(),
+						Tl(58, '>'),
+						yl(),
+						Tl(59, 'default'),
+						vl(60, 'span', iv),
+						Tl(61, '</'),
+						vl(62, 'span', av),
+						Tl(63, 'li'),
+						yl(),
+						Tl(64, '>'),
+						yl(),
+						Tl(65, '\n    '),
+						vl(66, 'span', iv),
+						Tl(67, '<'),
+						vl(68, 'span', av),
+						Tl(69, 'li'),
+						yl(),
+						Tl(70, ' '),
+						vl(71, 'span', sv),
+						Tl(72, 'class'),
+						yl(),
+						Tl(73, '='),
+						vl(74, 'span', lv),
+						Tl(75, '"item-g-1"'),
+						yl(),
+						Tl(76, '>'),
+						yl(),
+						Tl(77, 'grow'),
+						vl(78, 'span', iv),
+						Tl(79, '</'),
+						vl(80, 'span', av),
+						Tl(81, 'li'),
+						yl(),
+						Tl(82, '>'),
+						yl(),
+						Tl(83, '\n'),
+						vl(84, 'span', iv),
+						Tl(85, '</'),
+						vl(86, 'span', av),
+						Tl(87, 'ul'),
+						yl(),
+						Tl(88, '>'),
+						yl(),
+						Tl(89, '\n'),
+						vl(90, 'span', iv),
+						Tl(91, '<'),
+						vl(92, 'span', av),
+						Tl(93, 'ul'),
+						yl(),
+						Tl(94, ' '),
+						vl(95, 'span', sv),
+						Tl(96, 'class'),
+						yl(),
+						Tl(97, '='),
+						vl(98, 'span', lv),
+						Tl(99, '"row"'),
+						yl(),
+						Tl(100, '>'),
+						yl(),
+						Tl(101, '\n    '),
+						vl(102, 'span', iv),
+						Tl(103, '<'),
+						vl(104, 'span', av),
+						Tl(105, 'li'),
+						yl(),
+						Tl(106, '>'),
+						yl(),
+						Tl(107, 'default'),
+						vl(108, 'span', iv),
+						Tl(109, '</'),
+						vl(110, 'span', av),
+						Tl(111, 'li'),
+						yl(),
+						Tl(112, '>'),
+						yl(),
+						Tl(113, '\n    '),
+						vl(114, 'span', iv),
+						Tl(115, '<'),
+						vl(116, 'span', av),
+						Tl(117, 'li'),
+						yl(),
+						Tl(118, ' '),
+						vl(119, 'span', sv),
+						Tl(120, 'class'),
+						yl(),
+						Tl(121, '='),
+						vl(122, 'span', lv),
+						Tl(123, '"item-s-1"'),
+						yl(),
+						Tl(124, '>'),
+						yl(),
+						Tl(125, 'shrink'),
+						vl(126, 'span', iv),
+						Tl(127, '</'),
+						vl(128, 'span', av),
+						Tl(129, 'li'),
+						yl(),
+						Tl(130, '>'),
+						yl(),
+						Tl(131, '\n'),
+						vl(132, 'span', iv),
+						Tl(133, '</'),
+						vl(134, 'span', av),
+						Tl(135, 'ul'),
+						yl(),
+						Tl(136, '>'),
+						yl(),
+						Tl(137, '\n'),
+						vl(138, 'span', iv),
+						Tl(139, '<'),
+						vl(140, 'span', av),
+						Tl(141, 'ul'),
+						yl(),
+						Tl(142, ' '),
+						vl(143, 'span', sv),
+						Tl(144, 'class'),
+						yl(),
+						Tl(145, '='),
+						vl(146, 'span', lv),
+						Tl(147, '"row"'),
+						yl(),
+						Tl(148, '>'),
+						yl(),
+						Tl(149, '\n    '),
+						vl(150, 'span', iv),
+						Tl(151, '<'),
+						vl(152, 'span', av),
+						Tl(153, 'li'),
+						yl(),
+						Tl(154, '>'),
+						yl(),
+						Tl(155, 'default'),
+						vl(156, 'span', iv),
+						Tl(157, '</'),
+						vl(158, 'span', av),
+						Tl(159, 'li'),
+						yl(),
+						Tl(160, '>'),
+						yl(),
+						Tl(161, '\n    '),
+						vl(162, 'span', iv),
+						Tl(163, '<'),
+						vl(164, 'span', av),
+						Tl(165, 'li'),
+						yl(),
+						Tl(166, ' '),
+						vl(167, 'span', sv),
+						Tl(168, 'class'),
+						yl(),
+						Tl(169, '='),
+						vl(170, 'span', lv),
+						Tl(171, '"item-gs-1"'),
+						yl(),
+						Tl(172, '>'),
+						yl(),
+						Tl(173, 'grow &amp; shrink'),
+						vl(174, 'span', iv),
+						Tl(175, '</'),
+						vl(176, 'span', av),
+						Tl(177, 'li'),
+						yl(),
+						Tl(178, '>'),
+						yl(),
+						Tl(179, '\n'),
+						vl(180, 'span', iv),
+						Tl(181, '</'),
+						vl(182, 'span', av),
+						Tl(183, 'ul'),
+						yl(),
+						Tl(184, '>'),
+						yl(),
+						Tl(185, '\n'),
+						vl(186, 'span', iv),
+						Tl(187, '<'),
+						vl(188, 'span', av),
+						Tl(189, 'ul'),
+						yl(),
+						Tl(190, ' '),
+						vl(191, 'span', sv),
+						Tl(192, 'class'),
+						yl(),
+						Tl(193, '='),
+						vl(194, 'span', lv),
+						Tl(195, '"col"'),
+						yl(),
+						Tl(196, '>'),
+						yl(),
+						Tl(197, '\n    '),
+						vl(198, 'span', iv),
+						Tl(199, '<'),
+						vl(200, 'span', av),
+						Tl(201, 'li'),
+						yl(),
+						Tl(202, '>'),
+						yl(),
+						Tl(203, 'default'),
+						vl(204, 'span', iv),
+						Tl(205, '</'),
+						vl(206, 'span', av),
+						Tl(207, 'li'),
+						yl(),
+						Tl(208, '>'),
+						yl(),
+						Tl(209, '\n    '),
+						vl(210, 'span', iv),
+						Tl(211, '<'),
+						vl(212, 'span', av),
+						Tl(213, 'li'),
+						yl(),
+						Tl(214, ' '),
+						vl(215, 'span', sv),
+						Tl(216, 'class'),
+						yl(),
+						Tl(217, '='),
+						vl(218, 'span', lv),
+						Tl(219, '"item-g-1"'),
+						yl(),
+						Tl(220, '>'),
+						yl(),
+						Tl(221, 'grow'),
+						vl(222, 'span', iv),
+						Tl(223, '</'),
+						vl(224, 'span', av),
+						Tl(225, 'li'),
+						yl(),
+						Tl(226, '>'),
+						yl(),
+						Tl(227, '\n'),
+						vl(228, 'span', iv),
+						Tl(229, '</'),
+						vl(230, 'span', av),
+						Tl(231, 'ul'),
+						yl(),
+						Tl(232, '>'),
+						yl(),
+						Tl(233, '\n'),
+						vl(234, 'span', iv),
+						Tl(235, '<'),
+						vl(236, 'span', av),
+						Tl(237, 'ul'),
+						yl(),
+						Tl(238, ' '),
+						vl(239, 'span', sv),
+						Tl(240, 'class'),
+						yl(),
+						Tl(241, '='),
+						vl(242, 'span', lv),
+						Tl(243, '"col"'),
+						yl(),
+						Tl(244, '>'),
+						yl(),
+						Tl(245, '\n    '),
+						vl(246, 'span', iv),
+						Tl(247, '<'),
+						vl(248, 'span', av),
+						Tl(249, 'li'),
+						yl(),
+						Tl(250, '>'),
+						yl(),
+						Tl(251, 'default'),
+						vl(252, 'span', iv),
+						Tl(253, '</'),
+						vl(254, 'span', av),
+						Tl(255, 'li'),
+						yl(),
+						Tl(256, '>'),
+						yl(),
+						Tl(257, '\n    '),
+						vl(258, 'span', iv),
+						Tl(259, '<'),
+						vl(260, 'span', av),
+						Tl(261, 'li'),
+						yl(),
+						Tl(262, ' '),
+						vl(263, 'span', sv),
+						Tl(264, 'class'),
+						yl(),
+						Tl(265, '='),
+						vl(266, 'span', lv),
+						Tl(267, '"item-s-1"'),
+						yl(),
+						Tl(268, '>'),
+						yl(),
+						Tl(269, 'shrink'),
+						vl(270, 'span', iv),
+						Tl(271, '</'),
+						vl(272, 'span', av),
+						Tl(273, 'li'),
+						yl(),
+						Tl(274, '>'),
+						yl(),
+						Tl(275, '\n'),
+						vl(276, 'span', iv),
+						Tl(277, '</'),
+						vl(278, 'span', av),
+						Tl(279, 'ul'),
+						yl(),
+						Tl(280, '>'),
+						yl(),
+						Tl(281, '\n'),
+						vl(282, 'span', iv),
+						Tl(283, '<'),
+						vl(284, 'span', av),
+						Tl(285, 'ul'),
+						yl(),
+						Tl(286, ' '),
+						vl(287, 'span', sv),
+						Tl(288, 'class'),
+						yl(),
+						Tl(289, '='),
+						vl(290, 'span', lv),
+						Tl(291, '"col"'),
+						yl(),
+						Tl(292, '>'),
+						yl(),
+						Tl(293, '\n    '),
+						vl(294, 'span', iv),
+						Tl(295, '<'),
+						vl(296, 'span', av),
+						Tl(297, 'li'),
+						yl(),
+						Tl(298, '>'),
+						yl(),
+						Tl(299, 'default'),
+						vl(300, 'span', iv),
+						Tl(301, '</'),
+						vl(302, 'span', av),
+						Tl(303, 'li'),
+						yl(),
+						Tl(304, '>'),
+						yl(),
+						Tl(305, '\n    '),
+						vl(306, 'span', iv),
+						Tl(307, '<'),
+						vl(308, 'span', av),
+						Tl(309, 'li'),
+						yl(),
+						Tl(310, ' '),
+						vl(311, 'span', sv),
+						Tl(312, 'class'),
+						yl(),
+						Tl(313, '='),
+						vl(314, 'span', lv),
+						Tl(315, '"item-gs-1"'),
+						yl(),
+						Tl(316, '>'),
+						yl(),
+						Tl(317, 'grow &amp; shrink'),
+						vl(318, 'span', iv),
+						Tl(319, '</'),
+						vl(320, 'span', av),
+						Tl(321, 'li'),
+						yl(),
+						Tl(322, '>'),
+						yl(),
+						Tl(323, '\n'),
+						vl(324, 'span', iv),
+						Tl(325, '</'),
+						vl(326, 'span', av),
+						Tl(327, 'ul'),
+						yl(),
+						Tl(328, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Ly = [1, 'item-g-1'],
-				Hy = [1, 'item-s-1'],
-				zy = [1, 'item-gs-1'];
-			function Vy(t, e) {
+			var Vy = [1, 'col', 'wrap-c'],
+				Fy = [1, 'col', 'wrap-l'],
+				By = [1, 'col', 'wrap-r'],
+				qy = [1, 'col', 'wrap-sa'],
+				Gy = [1, 'col', 'wrap-sb'],
+				Zy = [1, 'col', 'wrap-st'];
+			function Wy(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Item Size'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use '),
-						wl(6, 'code'),
-						Al(7, '.item-[g || s || gs]-[1 - 12]'),
-						_l(),
-						Al(8, ' classes to grow and/or shrink children in a flex container.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'ul', Xv),
-						wl(11, 'li'),
-						Al(12, 'default'),
-						_l(),
-						wl(13, 'li', Ly),
-						Al(14, 'grow'),
-						_l(),
-						_l(),
-						wl(15, 'ul', Xv),
-						wl(16, 'li'),
-						Al(17, 'default'),
-						_l(),
-						wl(18, 'li', Hy),
-						Al(19, 'shrink'),
-						_l(),
-						_l(),
-						wl(20, 'ul', Xv),
-						wl(21, 'li'),
-						Al(22, 'default'),
-						_l(),
-						wl(23, 'li', zy),
-						Al(24, 'grow & shrink'),
-						_l(),
-						_l(),
-						wl(25, 'ul', ty),
-						wl(26, 'li'),
-						Al(27, 'default'),
-						_l(),
-						wl(28, 'li', Ly),
-						Al(29, 'grow'),
-						_l(),
-						_l(),
-						wl(30, 'ul', ty),
-						wl(31, 'li'),
-						Al(32, 'default'),
-						_l(),
-						wl(33, 'li', Hy),
-						Al(34, 'shrink'),
-						_l(),
-						_l(),
-						wl(35, 'ul', ty),
-						wl(36, 'li'),
-						Al(37, 'default'),
-						_l(),
-						wl(38, 'li', zy),
-						Al(39, 'grow & shrink'),
-						_l(),
-						_l(),
-						_l(),
-						wl(40, 'figure'),
-						wl(41, 'pre', iv),
-						wl(42, 'span', av),
-						Al(43, '<'),
-						wl(44, 'span', sv),
-						Al(45, 'ul'),
-						_l(),
-						Al(46, ' '),
-						wl(47, 'span', lv),
-						Al(48, 'class'),
-						_l(),
-						Al(49, '='),
-						wl(50, 'span', uv),
-						Al(51, '"row"'),
-						_l(),
-						Al(52, '>'),
-						_l(),
-						Al(53, '\n    '),
-						wl(54, 'span', av),
-						Al(55, '<'),
-						wl(56, 'span', sv),
-						Al(57, 'li'),
-						_l(),
-						Al(58, '>'),
-						_l(),
-						Al(59, 'default'),
-						wl(60, 'span', av),
-						Al(61, '</'),
-						wl(62, 'span', sv),
-						Al(63, 'li'),
-						_l(),
-						Al(64, '>'),
-						_l(),
-						Al(65, '\n    '),
-						wl(66, 'span', av),
-						Al(67, '<'),
-						wl(68, 'span', sv),
-						Al(69, 'li'),
-						_l(),
-						Al(70, ' '),
-						wl(71, 'span', lv),
-						Al(72, 'class'),
-						_l(),
-						Al(73, '='),
-						wl(74, 'span', uv),
-						Al(75, '"item-g-1"'),
-						_l(),
-						Al(76, '>'),
-						_l(),
-						Al(77, 'grow'),
-						wl(78, 'span', av),
-						Al(79, '</'),
-						wl(80, 'span', sv),
-						Al(81, 'li'),
-						_l(),
-						Al(82, '>'),
-						_l(),
-						Al(83, '\n'),
-						wl(84, 'span', av),
-						Al(85, '</'),
-						wl(86, 'span', sv),
-						Al(87, 'ul'),
-						_l(),
-						Al(88, '>'),
-						_l(),
-						Al(89, '\n'),
-						wl(90, 'span', av),
-						Al(91, '<'),
-						wl(92, 'span', sv),
-						Al(93, 'ul'),
-						_l(),
-						Al(94, ' '),
-						wl(95, 'span', lv),
-						Al(96, 'class'),
-						_l(),
-						Al(97, '='),
-						wl(98, 'span', uv),
-						Al(99, '"row"'),
-						_l(),
-						Al(100, '>'),
-						_l(),
-						Al(101, '\n    '),
-						wl(102, 'span', av),
-						Al(103, '<'),
-						wl(104, 'span', sv),
-						Al(105, 'li'),
-						_l(),
-						Al(106, '>'),
-						_l(),
-						Al(107, 'default'),
-						wl(108, 'span', av),
-						Al(109, '</'),
-						wl(110, 'span', sv),
-						Al(111, 'li'),
-						_l(),
-						Al(112, '>'),
-						_l(),
-						Al(113, '\n    '),
-						wl(114, 'span', av),
-						Al(115, '<'),
-						wl(116, 'span', sv),
-						Al(117, 'li'),
-						_l(),
-						Al(118, ' '),
-						wl(119, 'span', lv),
-						Al(120, 'class'),
-						_l(),
-						Al(121, '='),
-						wl(122, 'span', uv),
-						Al(123, '"item-s-1"'),
-						_l(),
-						Al(124, '>'),
-						_l(),
-						Al(125, 'shrink'),
-						wl(126, 'span', av),
-						Al(127, '</'),
-						wl(128, 'span', sv),
-						Al(129, 'li'),
-						_l(),
-						Al(130, '>'),
-						_l(),
-						Al(131, '\n'),
-						wl(132, 'span', av),
-						Al(133, '</'),
-						wl(134, 'span', sv),
-						Al(135, 'ul'),
-						_l(),
-						Al(136, '>'),
-						_l(),
-						Al(137, '\n'),
-						wl(138, 'span', av),
-						Al(139, '<'),
-						wl(140, 'span', sv),
-						Al(141, 'ul'),
-						_l(),
-						Al(142, ' '),
-						wl(143, 'span', lv),
-						Al(144, 'class'),
-						_l(),
-						Al(145, '='),
-						wl(146, 'span', uv),
-						Al(147, '"row"'),
-						_l(),
-						Al(148, '>'),
-						_l(),
-						Al(149, '\n    '),
-						wl(150, 'span', av),
-						Al(151, '<'),
-						wl(152, 'span', sv),
-						Al(153, 'li'),
-						_l(),
-						Al(154, '>'),
-						_l(),
-						Al(155, 'default'),
-						wl(156, 'span', av),
-						Al(157, '</'),
-						wl(158, 'span', sv),
-						Al(159, 'li'),
-						_l(),
-						Al(160, '>'),
-						_l(),
-						Al(161, '\n    '),
-						wl(162, 'span', av),
-						Al(163, '<'),
-						wl(164, 'span', sv),
-						Al(165, 'li'),
-						_l(),
-						Al(166, ' '),
-						wl(167, 'span', lv),
-						Al(168, 'class'),
-						_l(),
-						Al(169, '='),
-						wl(170, 'span', uv),
-						Al(171, '"item-gs-1"'),
-						_l(),
-						Al(172, '>'),
-						_l(),
-						Al(173, 'grow &amp; shrink'),
-						wl(174, 'span', av),
-						Al(175, '</'),
-						wl(176, 'span', sv),
-						Al(177, 'li'),
-						_l(),
-						Al(178, '>'),
-						_l(),
-						Al(179, '\n'),
-						wl(180, 'span', av),
-						Al(181, '</'),
-						wl(182, 'span', sv),
-						Al(183, 'ul'),
-						_l(),
-						Al(184, '>'),
-						_l(),
-						Al(185, '\n'),
-						wl(186, 'span', av),
-						Al(187, '<'),
-						wl(188, 'span', sv),
-						Al(189, 'ul'),
-						_l(),
-						Al(190, ' '),
-						wl(191, 'span', lv),
-						Al(192, 'class'),
-						_l(),
-						Al(193, '='),
-						wl(194, 'span', uv),
-						Al(195, '"col"'),
-						_l(),
-						Al(196, '>'),
-						_l(),
-						Al(197, '\n    '),
-						wl(198, 'span', av),
-						Al(199, '<'),
-						wl(200, 'span', sv),
-						Al(201, 'li'),
-						_l(),
-						Al(202, '>'),
-						_l(),
-						Al(203, 'default'),
-						wl(204, 'span', av),
-						Al(205, '</'),
-						wl(206, 'span', sv),
-						Al(207, 'li'),
-						_l(),
-						Al(208, '>'),
-						_l(),
-						Al(209, '\n    '),
-						wl(210, 'span', av),
-						Al(211, '<'),
-						wl(212, 'span', sv),
-						Al(213, 'li'),
-						_l(),
-						Al(214, ' '),
-						wl(215, 'span', lv),
-						Al(216, 'class'),
-						_l(),
-						Al(217, '='),
-						wl(218, 'span', uv),
-						Al(219, '"item-g-1"'),
-						_l(),
-						Al(220, '>'),
-						_l(),
-						Al(221, 'grow'),
-						wl(222, 'span', av),
-						Al(223, '</'),
-						wl(224, 'span', sv),
-						Al(225, 'li'),
-						_l(),
-						Al(226, '>'),
-						_l(),
-						Al(227, '\n'),
-						wl(228, 'span', av),
-						Al(229, '</'),
-						wl(230, 'span', sv),
-						Al(231, 'ul'),
-						_l(),
-						Al(232, '>'),
-						_l(),
-						Al(233, '\n'),
-						wl(234, 'span', av),
-						Al(235, '<'),
-						wl(236, 'span', sv),
-						Al(237, 'ul'),
-						_l(),
-						Al(238, ' '),
-						wl(239, 'span', lv),
-						Al(240, 'class'),
-						_l(),
-						Al(241, '='),
-						wl(242, 'span', uv),
-						Al(243, '"col"'),
-						_l(),
-						Al(244, '>'),
-						_l(),
-						Al(245, '\n    '),
-						wl(246, 'span', av),
-						Al(247, '<'),
-						wl(248, 'span', sv),
-						Al(249, 'li'),
-						_l(),
-						Al(250, '>'),
-						_l(),
-						Al(251, 'default'),
-						wl(252, 'span', av),
-						Al(253, '</'),
-						wl(254, 'span', sv),
-						Al(255, 'li'),
-						_l(),
-						Al(256, '>'),
-						_l(),
-						Al(257, '\n    '),
-						wl(258, 'span', av),
-						Al(259, '<'),
-						wl(260, 'span', sv),
-						Al(261, 'li'),
-						_l(),
-						Al(262, ' '),
-						wl(263, 'span', lv),
-						Al(264, 'class'),
-						_l(),
-						Al(265, '='),
-						wl(266, 'span', uv),
-						Al(267, '"item-s-1"'),
-						_l(),
-						Al(268, '>'),
-						_l(),
-						Al(269, 'shrink'),
-						wl(270, 'span', av),
-						Al(271, '</'),
-						wl(272, 'span', sv),
-						Al(273, 'li'),
-						_l(),
-						Al(274, '>'),
-						_l(),
-						Al(275, '\n'),
-						wl(276, 'span', av),
-						Al(277, '</'),
-						wl(278, 'span', sv),
-						Al(279, 'ul'),
-						_l(),
-						Al(280, '>'),
-						_l(),
-						Al(281, '\n'),
-						wl(282, 'span', av),
-						Al(283, '<'),
-						wl(284, 'span', sv),
-						Al(285, 'ul'),
-						_l(),
-						Al(286, ' '),
-						wl(287, 'span', lv),
-						Al(288, 'class'),
-						_l(),
-						Al(289, '='),
-						wl(290, 'span', uv),
-						Al(291, '"col"'),
-						_l(),
-						Al(292, '>'),
-						_l(),
-						Al(293, '\n    '),
-						wl(294, 'span', av),
-						Al(295, '<'),
-						wl(296, 'span', sv),
-						Al(297, 'li'),
-						_l(),
-						Al(298, '>'),
-						_l(),
-						Al(299, 'default'),
-						wl(300, 'span', av),
-						Al(301, '</'),
-						wl(302, 'span', sv),
-						Al(303, 'li'),
-						_l(),
-						Al(304, '>'),
-						_l(),
-						Al(305, '\n    '),
-						wl(306, 'span', av),
-						Al(307, '<'),
-						wl(308, 'span', sv),
-						Al(309, 'li'),
-						_l(),
-						Al(310, ' '),
-						wl(311, 'span', lv),
-						Al(312, 'class'),
-						_l(),
-						Al(313, '='),
-						wl(314, 'span', uv),
-						Al(315, '"item-gs-1"'),
-						_l(),
-						Al(316, '>'),
-						_l(),
-						Al(317, 'grow &amp; shrink'),
-						wl(318, 'span', av),
-						Al(319, '</'),
-						wl(320, 'span', sv),
-						Al(321, 'li'),
-						_l(),
-						Al(322, '>'),
-						_l(),
-						Al(323, '\n'),
-						wl(324, 'span', av),
-						Al(325, '</'),
-						wl(326, 'span', sv),
-						Al(327, 'ul'),
-						_l(),
-						Al(328, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Wrap Column'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use a '),
+						vl(6, 'code'),
+						Tl(7, '.wrap-[c || l || r || sa || sb || st]'),
+						yl(),
+						Tl(8, ' class to align multi-column items in a '),
+						vl(9, 'code'),
+						Tl(10, '.col'),
+						yl(),
+						Tl(11, ' flex container.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'ul', Vy),
+						vl(14, 'li'),
+						Tl(15, 'center'),
+						yl(),
+						vl(16, 'li'),
+						Tl(17, 'center'),
+						yl(),
+						vl(18, 'li'),
+						Tl(19, 'center'),
+						yl(),
+						yl(),
+						vl(20, 'ul', Fy),
+						vl(21, 'li'),
+						Tl(22, 'left (default)'),
+						yl(),
+						vl(23, 'li'),
+						Tl(24, 'left (default)'),
+						yl(),
+						vl(25, 'li'),
+						Tl(26, 'left (default)'),
+						yl(),
+						yl(),
+						vl(27, 'ul', By),
+						vl(28, 'li'),
+						Tl(29, 'right'),
+						yl(),
+						vl(30, 'li'),
+						Tl(31, 'right'),
+						yl(),
+						vl(32, 'li'),
+						Tl(33, 'right'),
+						yl(),
+						yl(),
+						vl(34, 'ul', qy),
+						vl(35, 'li'),
+						Tl(36, 'space around'),
+						yl(),
+						vl(37, 'li'),
+						Tl(38, 'space around'),
+						yl(),
+						vl(39, 'li'),
+						Tl(40, 'space around'),
+						yl(),
+						yl(),
+						vl(41, 'ul', Gy),
+						vl(42, 'li'),
+						Tl(43, 'space between'),
+						yl(),
+						vl(44, 'li'),
+						Tl(45, 'space between'),
+						yl(),
+						vl(46, 'li'),
+						Tl(47, 'space between'),
+						yl(),
+						yl(),
+						vl(48, 'ul', Zy),
+						vl(49, 'li'),
+						Tl(50, 'stretch'),
+						yl(),
+						vl(51, 'li'),
+						Tl(52, 'stretch'),
+						yl(),
+						vl(53, 'li'),
+						Tl(54, 'stretch'),
+						yl(),
+						yl(),
+						yl(),
+						vl(55, 'figure'),
+						vl(56, 'pre', ov),
+						vl(57, 'span', iv),
+						Tl(58, '<'),
+						vl(59, 'span', av),
+						Tl(60, 'ul'),
+						yl(),
+						Tl(61, ' '),
+						vl(62, 'span', sv),
+						Tl(63, 'class'),
+						yl(),
+						Tl(64, '='),
+						vl(65, 'span', lv),
+						Tl(66, '"col wrap-c"'),
+						yl(),
+						Tl(67, '>'),
+						yl(),
+						Tl(68, '\n    '),
+						vl(69, 'span', iv),
+						Tl(70, '<'),
+						vl(71, 'span', av),
+						Tl(72, 'li'),
+						yl(),
+						Tl(73, '>'),
+						yl(),
+						Tl(74, 'center'),
+						vl(75, 'span', iv),
+						Tl(76, '</'),
+						vl(77, 'span', av),
+						Tl(78, 'li'),
+						yl(),
+						Tl(79, '>'),
+						yl(),
+						Tl(80, '\n    '),
+						vl(81, 'span', iv),
+						Tl(82, '<'),
+						vl(83, 'span', av),
+						Tl(84, 'li'),
+						yl(),
+						Tl(85, '>'),
+						yl(),
+						Tl(86, 'center'),
+						vl(87, 'span', iv),
+						Tl(88, '</'),
+						vl(89, 'span', av),
+						Tl(90, 'li'),
+						yl(),
+						Tl(91, '>'),
+						yl(),
+						Tl(92, '\n    '),
+						vl(93, 'span', iv),
+						Tl(94, '<'),
+						vl(95, 'span', av),
+						Tl(96, 'li'),
+						yl(),
+						Tl(97, '>'),
+						yl(),
+						Tl(98, 'center'),
+						vl(99, 'span', iv),
+						Tl(100, '</'),
+						vl(101, 'span', av),
+						Tl(102, 'li'),
+						yl(),
+						Tl(103, '>'),
+						yl(),
+						Tl(104, '\n'),
+						vl(105, 'span', iv),
+						Tl(106, '</'),
+						vl(107, 'span', av),
+						Tl(108, 'ul'),
+						yl(),
+						Tl(109, '>'),
+						yl(),
+						Tl(110, '\n'),
+						vl(111, 'span', iv),
+						Tl(112, '<'),
+						vl(113, 'span', av),
+						Tl(114, 'ul'),
+						yl(),
+						Tl(115, ' '),
+						vl(116, 'span', sv),
+						Tl(117, 'class'),
+						yl(),
+						Tl(118, '='),
+						vl(119, 'span', lv),
+						Tl(120, '"col wrap-l"'),
+						yl(),
+						Tl(121, '>'),
+						yl(),
+						Tl(122, '\n    '),
+						vl(123, 'span', iv),
+						Tl(124, '<'),
+						vl(125, 'span', av),
+						Tl(126, 'li'),
+						yl(),
+						Tl(127, '>'),
+						yl(),
+						Tl(128, 'left (default)'),
+						vl(129, 'span', iv),
+						Tl(130, '</'),
+						vl(131, 'span', av),
+						Tl(132, 'li'),
+						yl(),
+						Tl(133, '>'),
+						yl(),
+						Tl(134, '\n    '),
+						vl(135, 'span', iv),
+						Tl(136, '<'),
+						vl(137, 'span', av),
+						Tl(138, 'li'),
+						yl(),
+						Tl(139, '>'),
+						yl(),
+						Tl(140, 'left (default)'),
+						vl(141, 'span', iv),
+						Tl(142, '</'),
+						vl(143, 'span', av),
+						Tl(144, 'li'),
+						yl(),
+						Tl(145, '>'),
+						yl(),
+						Tl(146, '\n    '),
+						vl(147, 'span', iv),
+						Tl(148, '<'),
+						vl(149, 'span', av),
+						Tl(150, 'li'),
+						yl(),
+						Tl(151, '>'),
+						yl(),
+						Tl(152, 'left (default)'),
+						vl(153, 'span', iv),
+						Tl(154, '</'),
+						vl(155, 'span', av),
+						Tl(156, 'li'),
+						yl(),
+						Tl(157, '>'),
+						yl(),
+						Tl(158, '\n'),
+						vl(159, 'span', iv),
+						Tl(160, '</'),
+						vl(161, 'span', av),
+						Tl(162, 'ul'),
+						yl(),
+						Tl(163, '>'),
+						yl(),
+						Tl(164, '\n'),
+						vl(165, 'span', iv),
+						Tl(166, '<'),
+						vl(167, 'span', av),
+						Tl(168, 'ul'),
+						yl(),
+						Tl(169, ' '),
+						vl(170, 'span', sv),
+						Tl(171, 'class'),
+						yl(),
+						Tl(172, '='),
+						vl(173, 'span', lv),
+						Tl(174, '"col wrap-r"'),
+						yl(),
+						Tl(175, '>'),
+						yl(),
+						Tl(176, '\n    '),
+						vl(177, 'span', iv),
+						Tl(178, '<'),
+						vl(179, 'span', av),
+						Tl(180, 'li'),
+						yl(),
+						Tl(181, '>'),
+						yl(),
+						Tl(182, 'right'),
+						vl(183, 'span', iv),
+						Tl(184, '</'),
+						vl(185, 'span', av),
+						Tl(186, 'li'),
+						yl(),
+						Tl(187, '>'),
+						yl(),
+						Tl(188, '\n    '),
+						vl(189, 'span', iv),
+						Tl(190, '<'),
+						vl(191, 'span', av),
+						Tl(192, 'li'),
+						yl(),
+						Tl(193, '>'),
+						yl(),
+						Tl(194, 'right'),
+						vl(195, 'span', iv),
+						Tl(196, '</'),
+						vl(197, 'span', av),
+						Tl(198, 'li'),
+						yl(),
+						Tl(199, '>'),
+						yl(),
+						Tl(200, '\n    '),
+						vl(201, 'span', iv),
+						Tl(202, '<'),
+						vl(203, 'span', av),
+						Tl(204, 'li'),
+						yl(),
+						Tl(205, '>'),
+						yl(),
+						Tl(206, 'right'),
+						vl(207, 'span', iv),
+						Tl(208, '</'),
+						vl(209, 'span', av),
+						Tl(210, 'li'),
+						yl(),
+						Tl(211, '>'),
+						yl(),
+						Tl(212, '\n'),
+						vl(213, 'span', iv),
+						Tl(214, '</'),
+						vl(215, 'span', av),
+						Tl(216, 'ul'),
+						yl(),
+						Tl(217, '>'),
+						yl(),
+						Tl(218, '\n'),
+						vl(219, 'span', iv),
+						Tl(220, '<'),
+						vl(221, 'span', av),
+						Tl(222, 'ul'),
+						yl(),
+						Tl(223, ' '),
+						vl(224, 'span', sv),
+						Tl(225, 'class'),
+						yl(),
+						Tl(226, '='),
+						vl(227, 'span', lv),
+						Tl(228, '"col wrap-sa"'),
+						yl(),
+						Tl(229, '>'),
+						yl(),
+						Tl(230, '\n    '),
+						vl(231, 'span', iv),
+						Tl(232, '<'),
+						vl(233, 'span', av),
+						Tl(234, 'li'),
+						yl(),
+						Tl(235, '>'),
+						yl(),
+						Tl(236, 'space around'),
+						vl(237, 'span', iv),
+						Tl(238, '</'),
+						vl(239, 'span', av),
+						Tl(240, 'li'),
+						yl(),
+						Tl(241, '>'),
+						yl(),
+						Tl(242, '\n    '),
+						vl(243, 'span', iv),
+						Tl(244, '<'),
+						vl(245, 'span', av),
+						Tl(246, 'li'),
+						yl(),
+						Tl(247, '>'),
+						yl(),
+						Tl(248, 'space around'),
+						vl(249, 'span', iv),
+						Tl(250, '</'),
+						vl(251, 'span', av),
+						Tl(252, 'li'),
+						yl(),
+						Tl(253, '>'),
+						yl(),
+						Tl(254, '\n    '),
+						vl(255, 'span', iv),
+						Tl(256, '<'),
+						vl(257, 'span', av),
+						Tl(258, 'li'),
+						yl(),
+						Tl(259, '>'),
+						yl(),
+						Tl(260, 'space around'),
+						vl(261, 'span', iv),
+						Tl(262, '</'),
+						vl(263, 'span', av),
+						Tl(264, 'li'),
+						yl(),
+						Tl(265, '>'),
+						yl(),
+						Tl(266, '\n'),
+						vl(267, 'span', iv),
+						Tl(268, '</'),
+						vl(269, 'span', av),
+						Tl(270, 'ul'),
+						yl(),
+						Tl(271, '>'),
+						yl(),
+						Tl(272, '\n'),
+						vl(273, 'span', iv),
+						Tl(274, '<'),
+						vl(275, 'span', av),
+						Tl(276, 'ul'),
+						yl(),
+						Tl(277, ' '),
+						vl(278, 'span', sv),
+						Tl(279, 'class'),
+						yl(),
+						Tl(280, '='),
+						vl(281, 'span', lv),
+						Tl(282, '"col wrap-sb"'),
+						yl(),
+						Tl(283, '>'),
+						yl(),
+						Tl(284, '\n    '),
+						vl(285, 'span', iv),
+						Tl(286, '<'),
+						vl(287, 'span', av),
+						Tl(288, 'li'),
+						yl(),
+						Tl(289, '>'),
+						yl(),
+						Tl(290, 'space between'),
+						vl(291, 'span', iv),
+						Tl(292, '</'),
+						vl(293, 'span', av),
+						Tl(294, 'li'),
+						yl(),
+						Tl(295, '>'),
+						yl(),
+						Tl(296, '\n    '),
+						vl(297, 'span', iv),
+						Tl(298, '<'),
+						vl(299, 'span', av),
+						Tl(300, 'li'),
+						yl(),
+						Tl(301, '>'),
+						yl(),
+						Tl(302, 'space between'),
+						vl(303, 'span', iv),
+						Tl(304, '</'),
+						vl(305, 'span', av),
+						Tl(306, 'li'),
+						yl(),
+						Tl(307, '>'),
+						yl(),
+						Tl(308, '\n    '),
+						vl(309, 'span', iv),
+						Tl(310, '<'),
+						vl(311, 'span', av),
+						Tl(312, 'li'),
+						yl(),
+						Tl(313, '>'),
+						yl(),
+						Tl(314, 'space between'),
+						vl(315, 'span', iv),
+						Tl(316, '</'),
+						vl(317, 'span', av),
+						Tl(318, 'li'),
+						yl(),
+						Tl(319, '>'),
+						yl(),
+						Tl(320, '\n'),
+						vl(321, 'span', iv),
+						Tl(322, '</'),
+						vl(323, 'span', av),
+						Tl(324, 'ul'),
+						yl(),
+						Tl(325, '>'),
+						yl(),
+						Tl(326, '\n'),
+						vl(327, 'span', iv),
+						Tl(328, '<'),
+						vl(329, 'span', av),
+						Tl(330, 'ul'),
+						yl(),
+						Tl(331, ' '),
+						vl(332, 'span', sv),
+						Tl(333, 'class'),
+						yl(),
+						Tl(334, '='),
+						vl(335, 'span', lv),
+						Tl(336, '"col wrap-st"'),
+						yl(),
+						Tl(337, '>'),
+						yl(),
+						Tl(338, '\n    '),
+						vl(339, 'span', iv),
+						Tl(340, '<'),
+						vl(341, 'span', av),
+						Tl(342, 'li'),
+						yl(),
+						Tl(343, '>'),
+						yl(),
+						Tl(344, 'stretch'),
+						vl(345, 'span', iv),
+						Tl(346, '</'),
+						vl(347, 'span', av),
+						Tl(348, 'li'),
+						yl(),
+						Tl(349, '>'),
+						yl(),
+						Tl(350, '\n    '),
+						vl(351, 'span', iv),
+						Tl(352, '<'),
+						vl(353, 'span', av),
+						Tl(354, 'li'),
+						yl(),
+						Tl(355, '>'),
+						yl(),
+						Tl(356, 'stretch'),
+						vl(357, 'span', iv),
+						Tl(358, '</'),
+						vl(359, 'span', av),
+						Tl(360, 'li'),
+						yl(),
+						Tl(361, '>'),
+						yl(),
+						Tl(362, '\n    '),
+						vl(363, 'span', iv),
+						Tl(364, '<'),
+						vl(365, 'span', av),
+						Tl(366, 'li'),
+						yl(),
+						Tl(367, '>'),
+						yl(),
+						Tl(368, 'stretch'),
+						vl(369, 'span', iv),
+						Tl(370, '</'),
+						vl(371, 'span', av),
+						Tl(372, 'li'),
+						yl(),
+						Tl(373, '>'),
+						yl(),
+						Tl(374, '\n'),
+						vl(375, 'span', iv),
+						Tl(376, '</'),
+						vl(377, 'span', av),
+						Tl(378, 'ul'),
+						yl(),
+						Tl(379, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Fy = [1, 'col', 'wrap-c'],
-				By = [1, 'col', 'wrap-l'],
-				qy = [1, 'col', 'wrap-r'],
-				Gy = [1, 'col', 'wrap-sa'],
-				Zy = [1, 'col', 'wrap-sb'],
-				Wy = [1, 'col', 'wrap-st'];
-			function Qy(t, e) {
+			var Qy = [1, 'row', 'wrap-m'],
+				Yy = [1, 'row', 'wrap-t'],
+				Jy = [1, 'row', 'wrap-b'],
+				Ky = [1, 'row', 'wrap-sa'],
+				Xy = [1, 'row', 'wrap-sb'],
+				$y = [1, 'row', 'wrap-st'];
+			function tw(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Wrap Column'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use a '),
-						wl(6, 'code'),
-						Al(7, '.wrap-[c || l || r || sa || sb || st]'),
-						_l(),
-						Al(8, ' class to align multi-column items in a '),
-						wl(9, 'code'),
-						Al(10, '.col'),
-						_l(),
-						Al(11, ' flex container.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'ul', Fy),
-						wl(14, 'li'),
-						Al(15, 'center'),
-						_l(),
-						wl(16, 'li'),
-						Al(17, 'center'),
-						_l(),
-						wl(18, 'li'),
-						Al(19, 'center'),
-						_l(),
-						_l(),
-						wl(20, 'ul', By),
-						wl(21, 'li'),
-						Al(22, 'left (default)'),
-						_l(),
-						wl(23, 'li'),
-						Al(24, 'left (default)'),
-						_l(),
-						wl(25, 'li'),
-						Al(26, 'left (default)'),
-						_l(),
-						_l(),
-						wl(27, 'ul', qy),
-						wl(28, 'li'),
-						Al(29, 'right'),
-						_l(),
-						wl(30, 'li'),
-						Al(31, 'right'),
-						_l(),
-						wl(32, 'li'),
-						Al(33, 'right'),
-						_l(),
-						_l(),
-						wl(34, 'ul', Gy),
-						wl(35, 'li'),
-						Al(36, 'space around'),
-						_l(),
-						wl(37, 'li'),
-						Al(38, 'space around'),
-						_l(),
-						wl(39, 'li'),
-						Al(40, 'space around'),
-						_l(),
-						_l(),
-						wl(41, 'ul', Zy),
-						wl(42, 'li'),
-						Al(43, 'space between'),
-						_l(),
-						wl(44, 'li'),
-						Al(45, 'space between'),
-						_l(),
-						wl(46, 'li'),
-						Al(47, 'space between'),
-						_l(),
-						_l(),
-						wl(48, 'ul', Wy),
-						wl(49, 'li'),
-						Al(50, 'stretch'),
-						_l(),
-						wl(51, 'li'),
-						Al(52, 'stretch'),
-						_l(),
-						wl(53, 'li'),
-						Al(54, 'stretch'),
-						_l(),
-						_l(),
-						_l(),
-						wl(55, 'figure'),
-						wl(56, 'pre', iv),
-						wl(57, 'span', av),
-						Al(58, '<'),
-						wl(59, 'span', sv),
-						Al(60, 'ul'),
-						_l(),
-						Al(61, ' '),
-						wl(62, 'span', lv),
-						Al(63, 'class'),
-						_l(),
-						Al(64, '='),
-						wl(65, 'span', uv),
-						Al(66, '"col wrap-c"'),
-						_l(),
-						Al(67, '>'),
-						_l(),
-						Al(68, '\n    '),
-						wl(69, 'span', av),
-						Al(70, '<'),
-						wl(71, 'span', sv),
-						Al(72, 'li'),
-						_l(),
-						Al(73, '>'),
-						_l(),
-						Al(74, 'center'),
-						wl(75, 'span', av),
-						Al(76, '</'),
-						wl(77, 'span', sv),
-						Al(78, 'li'),
-						_l(),
-						Al(79, '>'),
-						_l(),
-						Al(80, '\n    '),
-						wl(81, 'span', av),
-						Al(82, '<'),
-						wl(83, 'span', sv),
-						Al(84, 'li'),
-						_l(),
-						Al(85, '>'),
-						_l(),
-						Al(86, 'center'),
-						wl(87, 'span', av),
-						Al(88, '</'),
-						wl(89, 'span', sv),
-						Al(90, 'li'),
-						_l(),
-						Al(91, '>'),
-						_l(),
-						Al(92, '\n    '),
-						wl(93, 'span', av),
-						Al(94, '<'),
-						wl(95, 'span', sv),
-						Al(96, 'li'),
-						_l(),
-						Al(97, '>'),
-						_l(),
-						Al(98, 'center'),
-						wl(99, 'span', av),
-						Al(100, '</'),
-						wl(101, 'span', sv),
-						Al(102, 'li'),
-						_l(),
-						Al(103, '>'),
-						_l(),
-						Al(104, '\n'),
-						wl(105, 'span', av),
-						Al(106, '</'),
-						wl(107, 'span', sv),
-						Al(108, 'ul'),
-						_l(),
-						Al(109, '>'),
-						_l(),
-						Al(110, '\n'),
-						wl(111, 'span', av),
-						Al(112, '<'),
-						wl(113, 'span', sv),
-						Al(114, 'ul'),
-						_l(),
-						Al(115, ' '),
-						wl(116, 'span', lv),
-						Al(117, 'class'),
-						_l(),
-						Al(118, '='),
-						wl(119, 'span', uv),
-						Al(120, '"col wrap-l"'),
-						_l(),
-						Al(121, '>'),
-						_l(),
-						Al(122, '\n    '),
-						wl(123, 'span', av),
-						Al(124, '<'),
-						wl(125, 'span', sv),
-						Al(126, 'li'),
-						_l(),
-						Al(127, '>'),
-						_l(),
-						Al(128, 'left (default)'),
-						wl(129, 'span', av),
-						Al(130, '</'),
-						wl(131, 'span', sv),
-						Al(132, 'li'),
-						_l(),
-						Al(133, '>'),
-						_l(),
-						Al(134, '\n    '),
-						wl(135, 'span', av),
-						Al(136, '<'),
-						wl(137, 'span', sv),
-						Al(138, 'li'),
-						_l(),
-						Al(139, '>'),
-						_l(),
-						Al(140, 'left (default)'),
-						wl(141, 'span', av),
-						Al(142, '</'),
-						wl(143, 'span', sv),
-						Al(144, 'li'),
-						_l(),
-						Al(145, '>'),
-						_l(),
-						Al(146, '\n    '),
-						wl(147, 'span', av),
-						Al(148, '<'),
-						wl(149, 'span', sv),
-						Al(150, 'li'),
-						_l(),
-						Al(151, '>'),
-						_l(),
-						Al(152, 'left (default)'),
-						wl(153, 'span', av),
-						Al(154, '</'),
-						wl(155, 'span', sv),
-						Al(156, 'li'),
-						_l(),
-						Al(157, '>'),
-						_l(),
-						Al(158, '\n'),
-						wl(159, 'span', av),
-						Al(160, '</'),
-						wl(161, 'span', sv),
-						Al(162, 'ul'),
-						_l(),
-						Al(163, '>'),
-						_l(),
-						Al(164, '\n'),
-						wl(165, 'span', av),
-						Al(166, '<'),
-						wl(167, 'span', sv),
-						Al(168, 'ul'),
-						_l(),
-						Al(169, ' '),
-						wl(170, 'span', lv),
-						Al(171, 'class'),
-						_l(),
-						Al(172, '='),
-						wl(173, 'span', uv),
-						Al(174, '"col wrap-r"'),
-						_l(),
-						Al(175, '>'),
-						_l(),
-						Al(176, '\n    '),
-						wl(177, 'span', av),
-						Al(178, '<'),
-						wl(179, 'span', sv),
-						Al(180, 'li'),
-						_l(),
-						Al(181, '>'),
-						_l(),
-						Al(182, 'right'),
-						wl(183, 'span', av),
-						Al(184, '</'),
-						wl(185, 'span', sv),
-						Al(186, 'li'),
-						_l(),
-						Al(187, '>'),
-						_l(),
-						Al(188, '\n    '),
-						wl(189, 'span', av),
-						Al(190, '<'),
-						wl(191, 'span', sv),
-						Al(192, 'li'),
-						_l(),
-						Al(193, '>'),
-						_l(),
-						Al(194, 'right'),
-						wl(195, 'span', av),
-						Al(196, '</'),
-						wl(197, 'span', sv),
-						Al(198, 'li'),
-						_l(),
-						Al(199, '>'),
-						_l(),
-						Al(200, '\n    '),
-						wl(201, 'span', av),
-						Al(202, '<'),
-						wl(203, 'span', sv),
-						Al(204, 'li'),
-						_l(),
-						Al(205, '>'),
-						_l(),
-						Al(206, 'right'),
-						wl(207, 'span', av),
-						Al(208, '</'),
-						wl(209, 'span', sv),
-						Al(210, 'li'),
-						_l(),
-						Al(211, '>'),
-						_l(),
-						Al(212, '\n'),
-						wl(213, 'span', av),
-						Al(214, '</'),
-						wl(215, 'span', sv),
-						Al(216, 'ul'),
-						_l(),
-						Al(217, '>'),
-						_l(),
-						Al(218, '\n'),
-						wl(219, 'span', av),
-						Al(220, '<'),
-						wl(221, 'span', sv),
-						Al(222, 'ul'),
-						_l(),
-						Al(223, ' '),
-						wl(224, 'span', lv),
-						Al(225, 'class'),
-						_l(),
-						Al(226, '='),
-						wl(227, 'span', uv),
-						Al(228, '"col wrap-sa"'),
-						_l(),
-						Al(229, '>'),
-						_l(),
-						Al(230, '\n    '),
-						wl(231, 'span', av),
-						Al(232, '<'),
-						wl(233, 'span', sv),
-						Al(234, 'li'),
-						_l(),
-						Al(235, '>'),
-						_l(),
-						Al(236, 'space around'),
-						wl(237, 'span', av),
-						Al(238, '</'),
-						wl(239, 'span', sv),
-						Al(240, 'li'),
-						_l(),
-						Al(241, '>'),
-						_l(),
-						Al(242, '\n    '),
-						wl(243, 'span', av),
-						Al(244, '<'),
-						wl(245, 'span', sv),
-						Al(246, 'li'),
-						_l(),
-						Al(247, '>'),
-						_l(),
-						Al(248, 'space around'),
-						wl(249, 'span', av),
-						Al(250, '</'),
-						wl(251, 'span', sv),
-						Al(252, 'li'),
-						_l(),
-						Al(253, '>'),
-						_l(),
-						Al(254, '\n    '),
-						wl(255, 'span', av),
-						Al(256, '<'),
-						wl(257, 'span', sv),
-						Al(258, 'li'),
-						_l(),
-						Al(259, '>'),
-						_l(),
-						Al(260, 'space around'),
-						wl(261, 'span', av),
-						Al(262, '</'),
-						wl(263, 'span', sv),
-						Al(264, 'li'),
-						_l(),
-						Al(265, '>'),
-						_l(),
-						Al(266, '\n'),
-						wl(267, 'span', av),
-						Al(268, '</'),
-						wl(269, 'span', sv),
-						Al(270, 'ul'),
-						_l(),
-						Al(271, '>'),
-						_l(),
-						Al(272, '\n'),
-						wl(273, 'span', av),
-						Al(274, '<'),
-						wl(275, 'span', sv),
-						Al(276, 'ul'),
-						_l(),
-						Al(277, ' '),
-						wl(278, 'span', lv),
-						Al(279, 'class'),
-						_l(),
-						Al(280, '='),
-						wl(281, 'span', uv),
-						Al(282, '"col wrap-sb"'),
-						_l(),
-						Al(283, '>'),
-						_l(),
-						Al(284, '\n    '),
-						wl(285, 'span', av),
-						Al(286, '<'),
-						wl(287, 'span', sv),
-						Al(288, 'li'),
-						_l(),
-						Al(289, '>'),
-						_l(),
-						Al(290, 'space between'),
-						wl(291, 'span', av),
-						Al(292, '</'),
-						wl(293, 'span', sv),
-						Al(294, 'li'),
-						_l(),
-						Al(295, '>'),
-						_l(),
-						Al(296, '\n    '),
-						wl(297, 'span', av),
-						Al(298, '<'),
-						wl(299, 'span', sv),
-						Al(300, 'li'),
-						_l(),
-						Al(301, '>'),
-						_l(),
-						Al(302, 'space between'),
-						wl(303, 'span', av),
-						Al(304, '</'),
-						wl(305, 'span', sv),
-						Al(306, 'li'),
-						_l(),
-						Al(307, '>'),
-						_l(),
-						Al(308, '\n    '),
-						wl(309, 'span', av),
-						Al(310, '<'),
-						wl(311, 'span', sv),
-						Al(312, 'li'),
-						_l(),
-						Al(313, '>'),
-						_l(),
-						Al(314, 'space between'),
-						wl(315, 'span', av),
-						Al(316, '</'),
-						wl(317, 'span', sv),
-						Al(318, 'li'),
-						_l(),
-						Al(319, '>'),
-						_l(),
-						Al(320, '\n'),
-						wl(321, 'span', av),
-						Al(322, '</'),
-						wl(323, 'span', sv),
-						Al(324, 'ul'),
-						_l(),
-						Al(325, '>'),
-						_l(),
-						Al(326, '\n'),
-						wl(327, 'span', av),
-						Al(328, '<'),
-						wl(329, 'span', sv),
-						Al(330, 'ul'),
-						_l(),
-						Al(331, ' '),
-						wl(332, 'span', lv),
-						Al(333, 'class'),
-						_l(),
-						Al(334, '='),
-						wl(335, 'span', uv),
-						Al(336, '"col wrap-st"'),
-						_l(),
-						Al(337, '>'),
-						_l(),
-						Al(338, '\n    '),
-						wl(339, 'span', av),
-						Al(340, '<'),
-						wl(341, 'span', sv),
-						Al(342, 'li'),
-						_l(),
-						Al(343, '>'),
-						_l(),
-						Al(344, 'stretch'),
-						wl(345, 'span', av),
-						Al(346, '</'),
-						wl(347, 'span', sv),
-						Al(348, 'li'),
-						_l(),
-						Al(349, '>'),
-						_l(),
-						Al(350, '\n    '),
-						wl(351, 'span', av),
-						Al(352, '<'),
-						wl(353, 'span', sv),
-						Al(354, 'li'),
-						_l(),
-						Al(355, '>'),
-						_l(),
-						Al(356, 'stretch'),
-						wl(357, 'span', av),
-						Al(358, '</'),
-						wl(359, 'span', sv),
-						Al(360, 'li'),
-						_l(),
-						Al(361, '>'),
-						_l(),
-						Al(362, '\n    '),
-						wl(363, 'span', av),
-						Al(364, '<'),
-						wl(365, 'span', sv),
-						Al(366, 'li'),
-						_l(),
-						Al(367, '>'),
-						_l(),
-						Al(368, 'stretch'),
-						wl(369, 'span', av),
-						Al(370, '</'),
-						wl(371, 'span', sv),
-						Al(372, 'li'),
-						_l(),
-						Al(373, '>'),
-						_l(),
-						Al(374, '\n'),
-						wl(375, 'span', av),
-						Al(376, '</'),
-						wl(377, 'span', sv),
-						Al(378, 'ul'),
-						_l(),
-						Al(379, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Wrap Row'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use a '),
+						vl(6, 'code'),
+						Tl(7, '.wrap-[m || t || b || sa || sb || st]'),
+						yl(),
+						Tl(8, ' class to align multi-row items in a '),
+						vl(9, 'code'),
+						Tl(10, '.row'),
+						yl(),
+						Tl(11, ' flex container.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'ul', Qy),
+						vl(14, 'li'),
+						Tl(15, 'middle'),
+						yl(),
+						vl(16, 'li'),
+						Tl(17, 'middle'),
+						yl(),
+						vl(18, 'li'),
+						Tl(19, 'middle'),
+						yl(),
+						yl(),
+						vl(20, 'ul', Yy),
+						vl(21, 'li'),
+						Tl(22, 'top (default)'),
+						yl(),
+						vl(23, 'li'),
+						Tl(24, 'top (default)'),
+						yl(),
+						vl(25, 'li'),
+						Tl(26, 'top (default)'),
+						yl(),
+						yl(),
+						vl(27, 'ul', Jy),
+						vl(28, 'li'),
+						Tl(29, 'bottom'),
+						yl(),
+						vl(30, 'li'),
+						Tl(31, 'bottom'),
+						yl(),
+						vl(32, 'li'),
+						Tl(33, 'bottom'),
+						yl(),
+						yl(),
+						vl(34, 'ul', Ky),
+						vl(35, 'li'),
+						Tl(36, 'space around'),
+						yl(),
+						vl(37, 'li'),
+						Tl(38, 'space around'),
+						yl(),
+						vl(39, 'li'),
+						Tl(40, 'space around'),
+						yl(),
+						yl(),
+						vl(41, 'ul', Xy),
+						vl(42, 'li'),
+						Tl(43, 'space between'),
+						yl(),
+						vl(44, 'li'),
+						Tl(45, 'space between'),
+						yl(),
+						vl(46, 'li'),
+						Tl(47, 'space between'),
+						yl(),
+						yl(),
+						vl(48, 'ul', $y),
+						vl(49, 'li'),
+						Tl(50, 'stretch'),
+						yl(),
+						vl(51, 'li'),
+						Tl(52, 'stretch'),
+						yl(),
+						vl(53, 'li'),
+						Tl(54, 'stretch'),
+						yl(),
+						yl(),
+						yl(),
+						vl(55, 'figure'),
+						vl(56, 'pre', ov),
+						vl(57, 'span', iv),
+						Tl(58, '<'),
+						vl(59, 'span', av),
+						Tl(60, 'ul'),
+						yl(),
+						Tl(61, ' '),
+						vl(62, 'span', sv),
+						Tl(63, 'class'),
+						yl(),
+						Tl(64, '='),
+						vl(65, 'span', lv),
+						Tl(66, '"row wrap-m"'),
+						yl(),
+						Tl(67, '>'),
+						yl(),
+						Tl(68, '\n    '),
+						vl(69, 'span', iv),
+						Tl(70, '<'),
+						vl(71, 'span', av),
+						Tl(72, 'li'),
+						yl(),
+						Tl(73, '>'),
+						yl(),
+						Tl(74, 'middle'),
+						vl(75, 'span', iv),
+						Tl(76, '</'),
+						vl(77, 'span', av),
+						Tl(78, 'li'),
+						yl(),
+						Tl(79, '>'),
+						yl(),
+						Tl(80, '\n    '),
+						vl(81, 'span', iv),
+						Tl(82, '<'),
+						vl(83, 'span', av),
+						Tl(84, 'li'),
+						yl(),
+						Tl(85, '>'),
+						yl(),
+						Tl(86, 'middle'),
+						vl(87, 'span', iv),
+						Tl(88, '</'),
+						vl(89, 'span', av),
+						Tl(90, 'li'),
+						yl(),
+						Tl(91, '>'),
+						yl(),
+						Tl(92, '\n    '),
+						vl(93, 'span', iv),
+						Tl(94, '<'),
+						vl(95, 'span', av),
+						Tl(96, 'li'),
+						yl(),
+						Tl(97, '>'),
+						yl(),
+						Tl(98, 'middle'),
+						vl(99, 'span', iv),
+						Tl(100, '</'),
+						vl(101, 'span', av),
+						Tl(102, 'li'),
+						yl(),
+						Tl(103, '>'),
+						yl(),
+						Tl(104, '\n'),
+						vl(105, 'span', iv),
+						Tl(106, '</'),
+						vl(107, 'span', av),
+						Tl(108, 'ul'),
+						yl(),
+						Tl(109, '>'),
+						yl(),
+						Tl(110, '\n'),
+						vl(111, 'span', iv),
+						Tl(112, '<'),
+						vl(113, 'span', av),
+						Tl(114, 'ul'),
+						yl(),
+						Tl(115, ' '),
+						vl(116, 'span', sv),
+						Tl(117, 'class'),
+						yl(),
+						Tl(118, '='),
+						vl(119, 'span', lv),
+						Tl(120, '"row wrap-t"'),
+						yl(),
+						Tl(121, '>'),
+						yl(),
+						Tl(122, '\n    '),
+						vl(123, 'span', iv),
+						Tl(124, '<'),
+						vl(125, 'span', av),
+						Tl(126, 'li'),
+						yl(),
+						Tl(127, '>'),
+						yl(),
+						Tl(128, 'top (default)'),
+						vl(129, 'span', iv),
+						Tl(130, '</'),
+						vl(131, 'span', av),
+						Tl(132, 'li'),
+						yl(),
+						Tl(133, '>'),
+						yl(),
+						Tl(134, '\n    '),
+						vl(135, 'span', iv),
+						Tl(136, '<'),
+						vl(137, 'span', av),
+						Tl(138, 'li'),
+						yl(),
+						Tl(139, '>'),
+						yl(),
+						Tl(140, 'top (default)'),
+						vl(141, 'span', iv),
+						Tl(142, '</'),
+						vl(143, 'span', av),
+						Tl(144, 'li'),
+						yl(),
+						Tl(145, '>'),
+						yl(),
+						Tl(146, '\n    '),
+						vl(147, 'span', iv),
+						Tl(148, '<'),
+						vl(149, 'span', av),
+						Tl(150, 'li'),
+						yl(),
+						Tl(151, '>'),
+						yl(),
+						Tl(152, 'top (default)'),
+						vl(153, 'span', iv),
+						Tl(154, '</'),
+						vl(155, 'span', av),
+						Tl(156, 'li'),
+						yl(),
+						Tl(157, '>'),
+						yl(),
+						Tl(158, '\n'),
+						vl(159, 'span', iv),
+						Tl(160, '</'),
+						vl(161, 'span', av),
+						Tl(162, 'ul'),
+						yl(),
+						Tl(163, '>'),
+						yl(),
+						Tl(164, '\n'),
+						vl(165, 'span', iv),
+						Tl(166, '<'),
+						vl(167, 'span', av),
+						Tl(168, 'ul'),
+						yl(),
+						Tl(169, ' '),
+						vl(170, 'span', sv),
+						Tl(171, 'class'),
+						yl(),
+						Tl(172, '='),
+						vl(173, 'span', lv),
+						Tl(174, '"row wrap-b"'),
+						yl(),
+						Tl(175, '>'),
+						yl(),
+						Tl(176, '\n    '),
+						vl(177, 'span', iv),
+						Tl(178, '<'),
+						vl(179, 'span', av),
+						Tl(180, 'li'),
+						yl(),
+						Tl(181, '>'),
+						yl(),
+						Tl(182, 'bottom'),
+						vl(183, 'span', iv),
+						Tl(184, '</'),
+						vl(185, 'span', av),
+						Tl(186, 'li'),
+						yl(),
+						Tl(187, '>'),
+						yl(),
+						Tl(188, '\n    '),
+						vl(189, 'span', iv),
+						Tl(190, '<'),
+						vl(191, 'span', av),
+						Tl(192, 'li'),
+						yl(),
+						Tl(193, '>'),
+						yl(),
+						Tl(194, 'bottom'),
+						vl(195, 'span', iv),
+						Tl(196, '</'),
+						vl(197, 'span', av),
+						Tl(198, 'li'),
+						yl(),
+						Tl(199, '>'),
+						yl(),
+						Tl(200, '\n    '),
+						vl(201, 'span', iv),
+						Tl(202, '<'),
+						vl(203, 'span', av),
+						Tl(204, 'li'),
+						yl(),
+						Tl(205, '>'),
+						yl(),
+						Tl(206, 'bottom'),
+						vl(207, 'span', iv),
+						Tl(208, '</'),
+						vl(209, 'span', av),
+						Tl(210, 'li'),
+						yl(),
+						Tl(211, '>'),
+						yl(),
+						Tl(212, '\n'),
+						vl(213, 'span', iv),
+						Tl(214, '</'),
+						vl(215, 'span', av),
+						Tl(216, 'ul'),
+						yl(),
+						Tl(217, '>'),
+						yl(),
+						Tl(218, '\n'),
+						vl(219, 'span', iv),
+						Tl(220, '<'),
+						vl(221, 'span', av),
+						Tl(222, 'ul'),
+						yl(),
+						Tl(223, ' '),
+						vl(224, 'span', sv),
+						Tl(225, 'class'),
+						yl(),
+						Tl(226, '='),
+						vl(227, 'span', lv),
+						Tl(228, '"row wrap-sa"'),
+						yl(),
+						Tl(229, '>'),
+						yl(),
+						Tl(230, '\n    '),
+						vl(231, 'span', iv),
+						Tl(232, '<'),
+						vl(233, 'span', av),
+						Tl(234, 'li'),
+						yl(),
+						Tl(235, '>'),
+						yl(),
+						Tl(236, 'space around'),
+						vl(237, 'span', iv),
+						Tl(238, '</'),
+						vl(239, 'span', av),
+						Tl(240, 'li'),
+						yl(),
+						Tl(241, '>'),
+						yl(),
+						Tl(242, '\n    '),
+						vl(243, 'span', iv),
+						Tl(244, '<'),
+						vl(245, 'span', av),
+						Tl(246, 'li'),
+						yl(),
+						Tl(247, '>'),
+						yl(),
+						Tl(248, 'space around'),
+						vl(249, 'span', iv),
+						Tl(250, '</'),
+						vl(251, 'span', av),
+						Tl(252, 'li'),
+						yl(),
+						Tl(253, '>'),
+						yl(),
+						Tl(254, '\n    '),
+						vl(255, 'span', iv),
+						Tl(256, '<'),
+						vl(257, 'span', av),
+						Tl(258, 'li'),
+						yl(),
+						Tl(259, '>'),
+						yl(),
+						Tl(260, 'space around'),
+						vl(261, 'span', iv),
+						Tl(262, '</'),
+						vl(263, 'span', av),
+						Tl(264, 'li'),
+						yl(),
+						Tl(265, '>'),
+						yl(),
+						Tl(266, '\n'),
+						vl(267, 'span', iv),
+						Tl(268, '</'),
+						vl(269, 'span', av),
+						Tl(270, 'ul'),
+						yl(),
+						Tl(271, '>'),
+						yl(),
+						Tl(272, '\n'),
+						vl(273, 'span', iv),
+						Tl(274, '<'),
+						vl(275, 'span', av),
+						Tl(276, 'ul'),
+						yl(),
+						Tl(277, ' '),
+						vl(278, 'span', sv),
+						Tl(279, 'class'),
+						yl(),
+						Tl(280, '='),
+						vl(281, 'span', lv),
+						Tl(282, '"row wrap-sb"'),
+						yl(),
+						Tl(283, '>'),
+						yl(),
+						Tl(284, '\n    '),
+						vl(285, 'span', iv),
+						Tl(286, '<'),
+						vl(287, 'span', av),
+						Tl(288, 'li'),
+						yl(),
+						Tl(289, '>'),
+						yl(),
+						Tl(290, 'space between'),
+						vl(291, 'span', iv),
+						Tl(292, '</'),
+						vl(293, 'span', av),
+						Tl(294, 'li'),
+						yl(),
+						Tl(295, '>'),
+						yl(),
+						Tl(296, '\n    '),
+						vl(297, 'span', iv),
+						Tl(298, '<'),
+						vl(299, 'span', av),
+						Tl(300, 'li'),
+						yl(),
+						Tl(301, '>'),
+						yl(),
+						Tl(302, 'space between'),
+						vl(303, 'span', iv),
+						Tl(304, '</'),
+						vl(305, 'span', av),
+						Tl(306, 'li'),
+						yl(),
+						Tl(307, '>'),
+						yl(),
+						Tl(308, '\n    '),
+						vl(309, 'span', iv),
+						Tl(310, '<'),
+						vl(311, 'span', av),
+						Tl(312, 'li'),
+						yl(),
+						Tl(313, '>'),
+						yl(),
+						Tl(314, 'space between'),
+						vl(315, 'span', iv),
+						Tl(316, '</'),
+						vl(317, 'span', av),
+						Tl(318, 'li'),
+						yl(),
+						Tl(319, '>'),
+						yl(),
+						Tl(320, '\n'),
+						vl(321, 'span', iv),
+						Tl(322, '</'),
+						vl(323, 'span', av),
+						Tl(324, 'ul'),
+						yl(),
+						Tl(325, '>'),
+						yl(),
+						Tl(326, '\n'),
+						vl(327, 'span', iv),
+						Tl(328, '<'),
+						vl(329, 'span', av),
+						Tl(330, 'ul'),
+						yl(),
+						Tl(331, ' '),
+						vl(332, 'span', sv),
+						Tl(333, 'class'),
+						yl(),
+						Tl(334, '='),
+						vl(335, 'span', lv),
+						Tl(336, '"row wrap-st"'),
+						yl(),
+						Tl(337, '>'),
+						yl(),
+						Tl(338, '\n    '),
+						vl(339, 'span', iv),
+						Tl(340, '<'),
+						vl(341, 'span', av),
+						Tl(342, 'li'),
+						yl(),
+						Tl(343, '>'),
+						yl(),
+						Tl(344, 'stretch'),
+						vl(345, 'span', iv),
+						Tl(346, '</'),
+						vl(347, 'span', av),
+						Tl(348, 'li'),
+						yl(),
+						Tl(349, '>'),
+						yl(),
+						Tl(350, '\n    '),
+						vl(351, 'span', iv),
+						Tl(352, '<'),
+						vl(353, 'span', av),
+						Tl(354, 'li'),
+						yl(),
+						Tl(355, '>'),
+						yl(),
+						Tl(356, 'stretch'),
+						vl(357, 'span', iv),
+						Tl(358, '</'),
+						vl(359, 'span', av),
+						Tl(360, 'li'),
+						yl(),
+						Tl(361, '>'),
+						yl(),
+						Tl(362, '\n    '),
+						vl(363, 'span', iv),
+						Tl(364, '<'),
+						vl(365, 'span', av),
+						Tl(366, 'li'),
+						yl(),
+						Tl(367, '>'),
+						yl(),
+						Tl(368, 'stretch'),
+						vl(369, 'span', iv),
+						Tl(370, '</'),
+						vl(371, 'span', av),
+						Tl(372, 'li'),
+						yl(),
+						Tl(373, '>'),
+						yl(),
+						Tl(374, '\n'),
+						vl(375, 'span', iv),
+						Tl(376, '</'),
+						vl(377, 'span', av),
+						Tl(378, 'ul'),
+						yl(),
+						Tl(379, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Yy = [1, 'row', 'wrap-m'],
-				Jy = [1, 'row', 'wrap-t'],
-				Ky = [1, 'row', 'wrap-b'],
-				Xy = [1, 'row', 'wrap-sa'],
-				$y = [1, 'row', 'wrap-sb'],
-				tw = [1, 'row', 'wrap-st'];
 			function ew(t, e) {
-				if (
-					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Wrap Row'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use a '),
-						wl(6, 'code'),
-						Al(7, '.wrap-[m || t || b || sa || sb || st]'),
-						_l(),
-						Al(8, ' class to align multi-row items in a '),
-						wl(9, 'code'),
-						Al(10, '.row'),
-						_l(),
-						Al(11, ' flex container.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'ul', Yy),
-						wl(14, 'li'),
-						Al(15, 'middle'),
-						_l(),
-						wl(16, 'li'),
-						Al(17, 'middle'),
-						_l(),
-						wl(18, 'li'),
-						Al(19, 'middle'),
-						_l(),
-						_l(),
-						wl(20, 'ul', Jy),
-						wl(21, 'li'),
-						Al(22, 'top (default)'),
-						_l(),
-						wl(23, 'li'),
-						Al(24, 'top (default)'),
-						_l(),
-						wl(25, 'li'),
-						Al(26, 'top (default)'),
-						_l(),
-						_l(),
-						wl(27, 'ul', Ky),
-						wl(28, 'li'),
-						Al(29, 'bottom'),
-						_l(),
-						wl(30, 'li'),
-						Al(31, 'bottom'),
-						_l(),
-						wl(32, 'li'),
-						Al(33, 'bottom'),
-						_l(),
-						_l(),
-						wl(34, 'ul', Xy),
-						wl(35, 'li'),
-						Al(36, 'space around'),
-						_l(),
-						wl(37, 'li'),
-						Al(38, 'space around'),
-						_l(),
-						wl(39, 'li'),
-						Al(40, 'space around'),
-						_l(),
-						_l(),
-						wl(41, 'ul', $y),
-						wl(42, 'li'),
-						Al(43, 'space between'),
-						_l(),
-						wl(44, 'li'),
-						Al(45, 'space between'),
-						_l(),
-						wl(46, 'li'),
-						Al(47, 'space between'),
-						_l(),
-						_l(),
-						wl(48, 'ul', tw),
-						wl(49, 'li'),
-						Al(50, 'stretch'),
-						_l(),
-						wl(51, 'li'),
-						Al(52, 'stretch'),
-						_l(),
-						wl(53, 'li'),
-						Al(54, 'stretch'),
-						_l(),
-						_l(),
-						_l(),
-						wl(55, 'figure'),
-						wl(56, 'pre', iv),
-						wl(57, 'span', av),
-						Al(58, '<'),
-						wl(59, 'span', sv),
-						Al(60, 'ul'),
-						_l(),
-						Al(61, ' '),
-						wl(62, 'span', lv),
-						Al(63, 'class'),
-						_l(),
-						Al(64, '='),
-						wl(65, 'span', uv),
-						Al(66, '"row wrap-m"'),
-						_l(),
-						Al(67, '>'),
-						_l(),
-						Al(68, '\n    '),
-						wl(69, 'span', av),
-						Al(70, '<'),
-						wl(71, 'span', sv),
-						Al(72, 'li'),
-						_l(),
-						Al(73, '>'),
-						_l(),
-						Al(74, 'middle'),
-						wl(75, 'span', av),
-						Al(76, '</'),
-						wl(77, 'span', sv),
-						Al(78, 'li'),
-						_l(),
-						Al(79, '>'),
-						_l(),
-						Al(80, '\n    '),
-						wl(81, 'span', av),
-						Al(82, '<'),
-						wl(83, 'span', sv),
-						Al(84, 'li'),
-						_l(),
-						Al(85, '>'),
-						_l(),
-						Al(86, 'middle'),
-						wl(87, 'span', av),
-						Al(88, '</'),
-						wl(89, 'span', sv),
-						Al(90, 'li'),
-						_l(),
-						Al(91, '>'),
-						_l(),
-						Al(92, '\n    '),
-						wl(93, 'span', av),
-						Al(94, '<'),
-						wl(95, 'span', sv),
-						Al(96, 'li'),
-						_l(),
-						Al(97, '>'),
-						_l(),
-						Al(98, 'middle'),
-						wl(99, 'span', av),
-						Al(100, '</'),
-						wl(101, 'span', sv),
-						Al(102, 'li'),
-						_l(),
-						Al(103, '>'),
-						_l(),
-						Al(104, '\n'),
-						wl(105, 'span', av),
-						Al(106, '</'),
-						wl(107, 'span', sv),
-						Al(108, 'ul'),
-						_l(),
-						Al(109, '>'),
-						_l(),
-						Al(110, '\n'),
-						wl(111, 'span', av),
-						Al(112, '<'),
-						wl(113, 'span', sv),
-						Al(114, 'ul'),
-						_l(),
-						Al(115, ' '),
-						wl(116, 'span', lv),
-						Al(117, 'class'),
-						_l(),
-						Al(118, '='),
-						wl(119, 'span', uv),
-						Al(120, '"row wrap-t"'),
-						_l(),
-						Al(121, '>'),
-						_l(),
-						Al(122, '\n    '),
-						wl(123, 'span', av),
-						Al(124, '<'),
-						wl(125, 'span', sv),
-						Al(126, 'li'),
-						_l(),
-						Al(127, '>'),
-						_l(),
-						Al(128, 'top (default)'),
-						wl(129, 'span', av),
-						Al(130, '</'),
-						wl(131, 'span', sv),
-						Al(132, 'li'),
-						_l(),
-						Al(133, '>'),
-						_l(),
-						Al(134, '\n    '),
-						wl(135, 'span', av),
-						Al(136, '<'),
-						wl(137, 'span', sv),
-						Al(138, 'li'),
-						_l(),
-						Al(139, '>'),
-						_l(),
-						Al(140, 'top (default)'),
-						wl(141, 'span', av),
-						Al(142, '</'),
-						wl(143, 'span', sv),
-						Al(144, 'li'),
-						_l(),
-						Al(145, '>'),
-						_l(),
-						Al(146, '\n    '),
-						wl(147, 'span', av),
-						Al(148, '<'),
-						wl(149, 'span', sv),
-						Al(150, 'li'),
-						_l(),
-						Al(151, '>'),
-						_l(),
-						Al(152, 'top (default)'),
-						wl(153, 'span', av),
-						Al(154, '</'),
-						wl(155, 'span', sv),
-						Al(156, 'li'),
-						_l(),
-						Al(157, '>'),
-						_l(),
-						Al(158, '\n'),
-						wl(159, 'span', av),
-						Al(160, '</'),
-						wl(161, 'span', sv),
-						Al(162, 'ul'),
-						_l(),
-						Al(163, '>'),
-						_l(),
-						Al(164, '\n'),
-						wl(165, 'span', av),
-						Al(166, '<'),
-						wl(167, 'span', sv),
-						Al(168, 'ul'),
-						_l(),
-						Al(169, ' '),
-						wl(170, 'span', lv),
-						Al(171, 'class'),
-						_l(),
-						Al(172, '='),
-						wl(173, 'span', uv),
-						Al(174, '"row wrap-b"'),
-						_l(),
-						Al(175, '>'),
-						_l(),
-						Al(176, '\n    '),
-						wl(177, 'span', av),
-						Al(178, '<'),
-						wl(179, 'span', sv),
-						Al(180, 'li'),
-						_l(),
-						Al(181, '>'),
-						_l(),
-						Al(182, 'bottom'),
-						wl(183, 'span', av),
-						Al(184, '</'),
-						wl(185, 'span', sv),
-						Al(186, 'li'),
-						_l(),
-						Al(187, '>'),
-						_l(),
-						Al(188, '\n    '),
-						wl(189, 'span', av),
-						Al(190, '<'),
-						wl(191, 'span', sv),
-						Al(192, 'li'),
-						_l(),
-						Al(193, '>'),
-						_l(),
-						Al(194, 'bottom'),
-						wl(195, 'span', av),
-						Al(196, '</'),
-						wl(197, 'span', sv),
-						Al(198, 'li'),
-						_l(),
-						Al(199, '>'),
-						_l(),
-						Al(200, '\n    '),
-						wl(201, 'span', av),
-						Al(202, '<'),
-						wl(203, 'span', sv),
-						Al(204, 'li'),
-						_l(),
-						Al(205, '>'),
-						_l(),
-						Al(206, 'bottom'),
-						wl(207, 'span', av),
-						Al(208, '</'),
-						wl(209, 'span', sv),
-						Al(210, 'li'),
-						_l(),
-						Al(211, '>'),
-						_l(),
-						Al(212, '\n'),
-						wl(213, 'span', av),
-						Al(214, '</'),
-						wl(215, 'span', sv),
-						Al(216, 'ul'),
-						_l(),
-						Al(217, '>'),
-						_l(),
-						Al(218, '\n'),
-						wl(219, 'span', av),
-						Al(220, '<'),
-						wl(221, 'span', sv),
-						Al(222, 'ul'),
-						_l(),
-						Al(223, ' '),
-						wl(224, 'span', lv),
-						Al(225, 'class'),
-						_l(),
-						Al(226, '='),
-						wl(227, 'span', uv),
-						Al(228, '"row wrap-sa"'),
-						_l(),
-						Al(229, '>'),
-						_l(),
-						Al(230, '\n    '),
-						wl(231, 'span', av),
-						Al(232, '<'),
-						wl(233, 'span', sv),
-						Al(234, 'li'),
-						_l(),
-						Al(235, '>'),
-						_l(),
-						Al(236, 'space around'),
-						wl(237, 'span', av),
-						Al(238, '</'),
-						wl(239, 'span', sv),
-						Al(240, 'li'),
-						_l(),
-						Al(241, '>'),
-						_l(),
-						Al(242, '\n    '),
-						wl(243, 'span', av),
-						Al(244, '<'),
-						wl(245, 'span', sv),
-						Al(246, 'li'),
-						_l(),
-						Al(247, '>'),
-						_l(),
-						Al(248, 'space around'),
-						wl(249, 'span', av),
-						Al(250, '</'),
-						wl(251, 'span', sv),
-						Al(252, 'li'),
-						_l(),
-						Al(253, '>'),
-						_l(),
-						Al(254, '\n    '),
-						wl(255, 'span', av),
-						Al(256, '<'),
-						wl(257, 'span', sv),
-						Al(258, 'li'),
-						_l(),
-						Al(259, '>'),
-						_l(),
-						Al(260, 'space around'),
-						wl(261, 'span', av),
-						Al(262, '</'),
-						wl(263, 'span', sv),
-						Al(264, 'li'),
-						_l(),
-						Al(265, '>'),
-						_l(),
-						Al(266, '\n'),
-						wl(267, 'span', av),
-						Al(268, '</'),
-						wl(269, 'span', sv),
-						Al(270, 'ul'),
-						_l(),
-						Al(271, '>'),
-						_l(),
-						Al(272, '\n'),
-						wl(273, 'span', av),
-						Al(274, '<'),
-						wl(275, 'span', sv),
-						Al(276, 'ul'),
-						_l(),
-						Al(277, ' '),
-						wl(278, 'span', lv),
-						Al(279, 'class'),
-						_l(),
-						Al(280, '='),
-						wl(281, 'span', uv),
-						Al(282, '"row wrap-sb"'),
-						_l(),
-						Al(283, '>'),
-						_l(),
-						Al(284, '\n    '),
-						wl(285, 'span', av),
-						Al(286, '<'),
-						wl(287, 'span', sv),
-						Al(288, 'li'),
-						_l(),
-						Al(289, '>'),
-						_l(),
-						Al(290, 'space between'),
-						wl(291, 'span', av),
-						Al(292, '</'),
-						wl(293, 'span', sv),
-						Al(294, 'li'),
-						_l(),
-						Al(295, '>'),
-						_l(),
-						Al(296, '\n    '),
-						wl(297, 'span', av),
-						Al(298, '<'),
-						wl(299, 'span', sv),
-						Al(300, 'li'),
-						_l(),
-						Al(301, '>'),
-						_l(),
-						Al(302, 'space between'),
-						wl(303, 'span', av),
-						Al(304, '</'),
-						wl(305, 'span', sv),
-						Al(306, 'li'),
-						_l(),
-						Al(307, '>'),
-						_l(),
-						Al(308, '\n    '),
-						wl(309, 'span', av),
-						Al(310, '<'),
-						wl(311, 'span', sv),
-						Al(312, 'li'),
-						_l(),
-						Al(313, '>'),
-						_l(),
-						Al(314, 'space between'),
-						wl(315, 'span', av),
-						Al(316, '</'),
-						wl(317, 'span', sv),
-						Al(318, 'li'),
-						_l(),
-						Al(319, '>'),
-						_l(),
-						Al(320, '\n'),
-						wl(321, 'span', av),
-						Al(322, '</'),
-						wl(323, 'span', sv),
-						Al(324, 'ul'),
-						_l(),
-						Al(325, '>'),
-						_l(),
-						Al(326, '\n'),
-						wl(327, 'span', av),
-						Al(328, '<'),
-						wl(329, 'span', sv),
-						Al(330, 'ul'),
-						_l(),
-						Al(331, ' '),
-						wl(332, 'span', lv),
-						Al(333, 'class'),
-						_l(),
-						Al(334, '='),
-						wl(335, 'span', uv),
-						Al(336, '"row wrap-st"'),
-						_l(),
-						Al(337, '>'),
-						_l(),
-						Al(338, '\n    '),
-						wl(339, 'span', av),
-						Al(340, '<'),
-						wl(341, 'span', sv),
-						Al(342, 'li'),
-						_l(),
-						Al(343, '>'),
-						_l(),
-						Al(344, 'stretch'),
-						wl(345, 'span', av),
-						Al(346, '</'),
-						wl(347, 'span', sv),
-						Al(348, 'li'),
-						_l(),
-						Al(349, '>'),
-						_l(),
-						Al(350, '\n    '),
-						wl(351, 'span', av),
-						Al(352, '<'),
-						wl(353, 'span', sv),
-						Al(354, 'li'),
-						_l(),
-						Al(355, '>'),
-						_l(),
-						Al(356, 'stretch'),
-						wl(357, 'span', av),
-						Al(358, '</'),
-						wl(359, 'span', sv),
-						Al(360, 'li'),
-						_l(),
-						Al(361, '>'),
-						_l(),
-						Al(362, '\n    '),
-						wl(363, 'span', av),
-						Al(364, '<'),
-						wl(365, 'span', sv),
-						Al(366, 'li'),
-						_l(),
-						Al(367, '>'),
-						_l(),
-						Al(368, 'stretch'),
-						wl(369, 'span', av),
-						Al(370, '</'),
-						wl(371, 'span', sv),
-						Al(372, 'li'),
-						_l(),
-						Al(373, '>'),
-						_l(),
-						Al(374, '\n'),
-						wl(375, 'span', av),
-						Al(376, '</'),
-						wl(377, 'span', sv),
-						Al(378, 'ul'),
-						_l(),
-						Al(379, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
-					2 & t)
-				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
-				}
-			}
-			function nw(t, e) {
 				1 & t &&
-					(wl(0, 'article', Xb),
-					wl(1, 'section', $b),
-					wl(2, 'p'),
-					Al(3, 'Forms are styled with '),
-					wl(4, 'code'),
-					Al(5, '.form-group'),
-					_l(),
-					Al(6, ', '),
-					wl(7, 'code'),
-					Al(8, '.field-group'),
-					_l(),
-					Al(9, ', '),
-					wl(10, 'code'),
-					Al(11, '.form-label'),
-					_l(),
-					Al(12, ', and '),
-					wl(13, 'code'),
-					Al(14, '.form-field'),
-					_l(),
-					Al(15, ' classes.'),
-					_l(),
-					_l(),
-					_l());
+					(vl(0, 'article', Kb),
+					vl(1, 'section', Xb),
+					vl(2, 'p'),
+					Tl(3, 'Forms are styled with '),
+					vl(4, 'code'),
+					Tl(5, '.form-group'),
+					yl(),
+					Tl(6, ', '),
+					vl(7, 'code'),
+					Tl(8, '.field-group'),
+					yl(),
+					Tl(9, ', '),
+					vl(10, 'code'),
+					Tl(11, '.form-label'),
+					yl(),
+					Tl(12, ', and '),
+					vl(13, 'code'),
+					Tl(14, '.form-field'),
+					yl(),
+					Tl(15, ' classes.'),
+					yl(),
+					yl(),
+					yl());
 			}
-			var rw = [1, 'form-group'],
-				ow = [1, 'field-group'],
-				iw = ['for', 'name', 1, 'form-label'],
-				aw = ['type', 'text', 'id', 'name', 'name', 'name', 'placeholder', 'Enter name', 1, 'form-field'],
-				sw = [1, 'form-label'],
-				lw = [1, 'radio-group'],
-				uw = ['type', 'radio', 'name', 'agree', 'id', 'yes', 1, 'form-field'],
-				cw = ['for', 'yes', 1, 'form-label'],
-				pw = ['type', 'radio', 'name', 'agree', 'id', 'no', 1, 'form-field'],
-				fw = ['for', 'no', 1, 'form-label'],
-				dw = [1, 'checkbox-group'],
-				hw = ['type', 'checkbox', 'name', 'color', 'id', 'blue', 1, 'form-field'],
-				gw = ['for', 'blue', 1, 'form-label'],
-				mw = ['type', 'checkbox', 'name', 'color', 'id', 'green', 1, 'form-field'],
-				bw = ['for', 'green', 1, 'form-label'],
-				vw = ['type', 'checkbox', 'name', 'color', 'id', 'red', 1, 'form-field'],
-				yw = ['for', 'red', 1, 'form-label'],
-				ww = ['type', 'checkbox', 'name', 'color', 'id', 'yellow', 1, 'form-field'],
-				_w = ['for', 'yellow', 1, 'form-label'];
-			function xw(t, e) {
+			var nw = [1, 'form-group'],
+				rw = [1, 'field-group'],
+				ow = ['for', 'name', 1, 'form-label'],
+				iw = ['type', 'text', 'id', 'name', 'name', 'name', 'placeholder', 'Enter name', 1, 'form-field'],
+				aw = [1, 'form-label'],
+				sw = [1, 'radio-group'],
+				lw = ['type', 'radio', 'name', 'agree', 'id', 'yes', 1, 'form-field'],
+				uw = ['for', 'yes', 1, 'form-label'],
+				cw = ['type', 'radio', 'name', 'agree', 'id', 'no', 1, 'form-field'],
+				pw = ['for', 'no', 1, 'form-label'],
+				fw = [1, 'checkbox-group'],
+				dw = ['type', 'checkbox', 'name', 'color', 'id', 'blue', 1, 'form-field'],
+				hw = ['for', 'blue', 1, 'form-label'],
+				gw = ['type', 'checkbox', 'name', 'color', 'id', 'green', 1, 'form-field'],
+				mw = ['for', 'green', 1, 'form-label'],
+				bw = ['type', 'checkbox', 'name', 'color', 'id', 'red', 1, 'form-field'],
+				vw = ['for', 'red', 1, 'form-label'],
+				yw = ['type', 'checkbox', 'name', 'color', 'id', 'yellow', 1, 'form-field'],
+				ww = ['for', 'yellow', 1, 'form-label'];
+			function _w(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Checkbox'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Checkboxes and radio buttons are grouped with a '),
-						wl(6, 'code'),
-						Al(7, '.*-group'),
-						_l(),
-						Al(8, ' class on a parent container.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'form'),
-						wl(11, 'ul', rw),
-						wl(12, 'li', ow),
-						wl(13, 'label', iw),
-						Al(14, 'Name'),
-						_l(),
-						xl(15, 'input', aw),
-						_l(),
-						wl(16, 'li', ow),
-						wl(17, 'p', sw),
-						Al(18, 'Agree'),
-						_l(),
-						wl(19, 'ul', lw),
-						wl(20, 'li', ow),
-						xl(21, 'input', uw),
-						wl(22, 'label', cw),
-						Al(23, 'Yes'),
-						_l(),
-						_l(),
-						wl(24, 'li', ow),
-						xl(25, 'input', pw),
-						wl(26, 'label', fw),
-						Al(27, 'No'),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(28, 'li', ow),
-						wl(29, 'p', sw),
-						Al(30, 'Color'),
-						_l(),
-						wl(31, 'ul', dw),
-						wl(32, 'li', ow),
-						xl(33, 'input', hw),
-						wl(34, 'label', gw),
-						Al(35, 'Blue'),
-						_l(),
-						_l(),
-						wl(36, 'li', ow),
-						xl(37, 'input', mw),
-						wl(38, 'label', bw),
-						Al(39, 'Green'),
-						_l(),
-						_l(),
-						wl(40, 'li', ow),
-						xl(41, 'input', vw),
-						wl(42, 'label', yw),
-						Al(43, 'Red'),
-						_l(),
-						_l(),
-						wl(44, 'li', ow),
-						xl(45, 'input', ww),
-						wl(46, 'label', _w),
-						Al(47, 'Yellow'),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(48, 'figure'),
-						wl(49, 'pre', iv),
-						Al(50, '<'),
-						wl(51, 'span', Ev),
-						Al(52, 'form'),
-						_l(),
-						Al(53, '>\n    <ul '),
-						wl(54, 'span', Ev),
-						Al(55, 'class'),
-						_l(),
-						Al(56, '='),
-						wl(57, 'span', Ov),
-						Al(58, '"form-group"'),
-						_l(),
-						Al(59, '>\n        <'),
-						wl(60, 'span', Ev),
-						Al(61, 'li'),
-						_l(),
-						Al(62, ' '),
-						wl(63, 'span', Ev),
-						Al(64, 'class'),
-						_l(),
-						Al(65, '='),
-						wl(66, 'span', Ov),
-						Al(67, '"field-group"'),
-						_l(),
-						Al(68, '>\n            <'),
-						wl(69, 'span', Ev),
-						Al(70, 'label'),
-						_l(),
-						Al(71, ' '),
-						wl(72, 'span', Ev),
-						Al(73, 'class'),
-						_l(),
-						Al(74, '='),
-						wl(75, 'span', Ov),
-						Al(76, '"form-label"'),
-						_l(),
-						Al(77, ' '),
-						wl(78, 'span', Ev),
-						Al(79, 'for'),
-						_l(),
-						Al(80, '='),
-						wl(81, 'span', Ov),
-						Al(82, '"name"'),
-						_l(),
-						Al(83, '>Name</'),
-						wl(84, 'span', Ev),
-						Al(85, 'label'),
-						_l(),
-						Al(86, '>\n            <'),
-						wl(87, 'span', Ev),
-						Al(88, 'input'),
-						_l(),
-						Al(89, ' '),
-						wl(90, 'span', Ev),
-						Al(91, 'class'),
-						_l(),
-						Al(92, '='),
-						wl(93, 'span', Ov),
-						Al(94, '"form-field"'),
-						_l(),
-						Al(95, ' '),
-						wl(96, 'span', Ev),
-						Al(97, 'type'),
-						_l(),
-						Al(98, '='),
-						wl(99, 'span', Ov),
-						Al(100, '"text"'),
-						_l(),
-						Al(101, ' id='),
-						wl(102, 'span', Ov),
-						Al(103, '"name"'),
-						_l(),
-						Al(104, ' name='),
-						wl(105, 'span', Ov),
-						Al(106, '"name"'),
-						_l(),
-						Al(107, ' placeholder='),
-						wl(108, 'span', Ov),
-						Al(109, '"Enter name"'),
-						_l(),
-						Al(110, '>\n        </'),
-						wl(111, 'span', Ev),
-						Al(112, 'li'),
-						_l(),
-						Al(113, '>\n        <'),
-						wl(114, 'span', Ev),
-						Al(115, 'li'),
-						_l(),
-						Al(116, ' '),
-						wl(117, 'span', Ev),
-						Al(118, 'class'),
-						_l(),
-						Al(119, '='),
-						wl(120, 'span', Ov),
-						Al(121, '"field-group"'),
-						_l(),
-						Al(122, '>\n            <p '),
-						wl(123, 'span', Ev),
-						Al(124, 'class'),
-						_l(),
-						Al(125, '='),
-						wl(126, 'span', Ov),
-						Al(127, '"form-label"'),
-						_l(),
-						Al(128, '>Agree</p>\n            <ul '),
-						wl(129, 'span', Ev),
-						Al(130, 'class'),
-						_l(),
-						Al(131, '='),
-						wl(132, 'span', Ov),
-						Al(133, '"radio-group"'),
-						_l(),
-						Al(134, '>\n                <'),
-						wl(135, 'span', Ev),
-						Al(136, 'li'),
-						_l(),
-						Al(137, ' '),
-						wl(138, 'span', Ev),
-						Al(139, 'class'),
-						_l(),
-						Al(140, '='),
-						wl(141, 'span', Ov),
-						Al(142, '"field-group"'),
-						_l(),
-						Al(143, '>\n                    <'),
-						wl(144, 'span', Ev),
-						Al(145, 'input'),
-						_l(),
-						Al(146, ' '),
-						wl(147, 'span', Ev),
-						Al(148, 'class'),
-						_l(),
-						Al(149, '='),
-						wl(150, 'span', Ov),
-						Al(151, '"form-field"'),
-						_l(),
-						Al(152, ' '),
-						wl(153, 'span', Ev),
-						Al(154, 'type'),
-						_l(),
-						Al(155, '='),
-						wl(156, 'span', Ov),
-						Al(157, '"radio"'),
-						_l(),
-						Al(158, ' name='),
-						wl(159, 'span', Ov),
-						Al(160, '"agree"'),
-						_l(),
-						Al(161, ' id='),
-						wl(162, 'span', Ov),
-						Al(163, '"yes"'),
-						_l(),
-						Al(164, '>\n                    <'),
-						wl(165, 'span', Ev),
-						Al(166, 'label'),
-						_l(),
-						Al(167, ' '),
-						wl(168, 'span', Ev),
-						Al(169, 'class'),
-						_l(),
-						Al(170, '='),
-						wl(171, 'span', Ov),
-						Al(172, '"form-label"'),
-						_l(),
-						Al(173, ' '),
-						wl(174, 'span', Ev),
-						Al(175, 'for'),
-						_l(),
-						Al(176, '='),
-						wl(177, 'span', Ov),
-						Al(178, '"yes"'),
-						_l(),
-						Al(179, '>Yes</'),
-						wl(180, 'span', Ev),
-						Al(181, 'label'),
-						_l(),
-						Al(182, '>\n                </'),
-						wl(183, 'span', Ev),
-						Al(184, 'li'),
-						_l(),
-						Al(185, '>\n                <'),
-						wl(186, 'span', Ev),
-						Al(187, 'li'),
-						_l(),
-						Al(188, ' '),
-						wl(189, 'span', Ev),
-						Al(190, 'class'),
-						_l(),
-						Al(191, '='),
-						wl(192, 'span', Ov),
-						Al(193, '"field-group"'),
-						_l(),
-						Al(194, '>\n                    <'),
-						wl(195, 'span', Ev),
-						Al(196, 'input'),
-						_l(),
-						Al(197, ' '),
-						wl(198, 'span', Ev),
-						Al(199, 'class'),
-						_l(),
-						Al(200, '='),
-						wl(201, 'span', Ov),
-						Al(202, '"form-field"'),
-						_l(),
-						Al(203, ' '),
-						wl(204, 'span', Ev),
-						Al(205, 'type'),
-						_l(),
-						Al(206, '='),
-						wl(207, 'span', Ov),
-						Al(208, '"radio"'),
-						_l(),
-						Al(209, ' name='),
-						wl(210, 'span', Ov),
-						Al(211, '"agree"'),
-						_l(),
-						Al(212, ' id='),
-						wl(213, 'span', Ov),
-						Al(214, '"no"'),
-						_l(),
-						Al(215, '>\n                    <'),
-						wl(216, 'span', Ev),
-						Al(217, 'label'),
-						_l(),
-						Al(218, ' '),
-						wl(219, 'span', Ev),
-						Al(220, 'class'),
-						_l(),
-						Al(221, '='),
-						wl(222, 'span', Ov),
-						Al(223, '"form-label"'),
-						_l(),
-						Al(224, ' '),
-						wl(225, 'span', Ev),
-						Al(226, 'for'),
-						_l(),
-						Al(227, '='),
-						wl(228, 'span', Ov),
-						Al(229, '"no"'),
-						_l(),
-						Al(230, '>'),
-						wl(231, 'span', Ev),
-						Al(232, 'No'),
-						_l(),
-						Al(233, '</'),
-						wl(234, 'span', Ev),
-						Al(235, 'label'),
-						_l(),
-						Al(236, '>\n                </'),
-						wl(237, 'span', Ev),
-						Al(238, 'li'),
-						_l(),
-						Al(239, '>\n            </ul>\n        </'),
-						wl(240, 'span', Ev),
-						Al(241, 'li'),
-						_l(),
-						Al(242, '>\n        <'),
-						wl(243, 'span', Ev),
-						Al(244, 'li'),
-						_l(),
-						Al(245, ' '),
-						wl(246, 'span', Ev),
-						Al(247, 'class'),
-						_l(),
-						Al(248, '='),
-						wl(249, 'span', Ov),
-						Al(250, '"field-group"'),
-						_l(),
-						Al(251, '>\n            <p '),
-						wl(252, 'span', Ev),
-						Al(253, 'class'),
-						_l(),
-						Al(254, '='),
-						wl(255, 'span', Ov),
-						Al(256, '"form-label"'),
-						_l(),
-						Al(257, '>Color</p>\n            <ul '),
-						wl(258, 'span', Ev),
-						Al(259, 'class'),
-						_l(),
-						Al(260, '='),
-						wl(261, 'span', Ov),
-						Al(262, '"checkbox-group"'),
-						_l(),
-						Al(263, '>\n                <'),
-						wl(264, 'span', Ev),
-						Al(265, 'li'),
-						_l(),
-						Al(266, ' '),
-						wl(267, 'span', Ev),
-						Al(268, 'class'),
-						_l(),
-						Al(269, '='),
-						wl(270, 'span', Ov),
-						Al(271, '"field-group"'),
-						_l(),
-						Al(272, '>\n                    <'),
-						wl(273, 'span', Ev),
-						Al(274, 'input'),
-						_l(),
-						Al(275, ' '),
-						wl(276, 'span', Ev),
-						Al(277, 'class'),
-						_l(),
-						Al(278, '='),
-						wl(279, 'span', Ov),
-						Al(280, '"form-field"'),
-						_l(),
-						Al(281, ' '),
-						wl(282, 'span', Ev),
-						Al(283, 'type'),
-						_l(),
-						Al(284, '='),
-						wl(285, 'span', Ov),
-						Al(286, '"checkbox"'),
-						_l(),
-						Al(287, ' name='),
-						wl(288, 'span', Ov),
-						Al(289, '"color"'),
-						_l(),
-						Al(290, ' id='),
-						wl(291, 'span', Ov),
-						Al(292, '"blue"'),
-						_l(),
-						Al(293, '>\n                    <'),
-						wl(294, 'span', Ev),
-						Al(295, 'label'),
-						_l(),
-						Al(296, ' '),
-						wl(297, 'span', Ev),
-						Al(298, 'class'),
-						_l(),
-						Al(299, '='),
-						wl(300, 'span', Ov),
-						Al(301, '"form-label"'),
-						_l(),
-						Al(302, ' '),
-						wl(303, 'span', Ev),
-						Al(304, 'for'),
-						_l(),
-						Al(305, '='),
-						wl(306, 'span', Ov),
-						Al(307, '"blue"'),
-						_l(),
-						Al(308, '>Blue</'),
-						wl(309, 'span', Ev),
-						Al(310, 'label'),
-						_l(),
-						Al(311, '>\n                </'),
-						wl(312, 'span', Ev),
-						Al(313, 'li'),
-						_l(),
-						Al(314, '>\n                <'),
-						wl(315, 'span', Ev),
-						Al(316, 'li'),
-						_l(),
-						Al(317, ' '),
-						wl(318, 'span', Ev),
-						Al(319, 'class'),
-						_l(),
-						Al(320, '='),
-						wl(321, 'span', Ov),
-						Al(322, '"field-group"'),
-						_l(),
-						Al(323, '>\n                    <'),
-						wl(324, 'span', Ev),
-						Al(325, 'input'),
-						_l(),
-						Al(326, ' '),
-						wl(327, 'span', Ev),
-						Al(328, 'class'),
-						_l(),
-						Al(329, '='),
-						wl(330, 'span', Ov),
-						Al(331, '"form-field"'),
-						_l(),
-						Al(332, ' '),
-						wl(333, 'span', Ev),
-						Al(334, 'type'),
-						_l(),
-						Al(335, '='),
-						wl(336, 'span', Ov),
-						Al(337, '"checkbox"'),
-						_l(),
-						Al(338, ' name='),
-						wl(339, 'span', Ov),
-						Al(340, '"color"'),
-						_l(),
-						Al(341, ' id='),
-						wl(342, 'span', Ov),
-						Al(343, '"green"'),
-						_l(),
-						Al(344, '>\n                    <'),
-						wl(345, 'span', Ev),
-						Al(346, 'label'),
-						_l(),
-						Al(347, ' '),
-						wl(348, 'span', Ev),
-						Al(349, 'class'),
-						_l(),
-						Al(350, '='),
-						wl(351, 'span', Ov),
-						Al(352, '"form-label"'),
-						_l(),
-						Al(353, ' '),
-						wl(354, 'span', Ev),
-						Al(355, 'for'),
-						_l(),
-						Al(356, '='),
-						wl(357, 'span', Ov),
-						Al(358, '"green"'),
-						_l(),
-						Al(359, '>Green</'),
-						wl(360, 'span', Ev),
-						Al(361, 'label'),
-						_l(),
-						Al(362, '>\n                </'),
-						wl(363, 'span', Ev),
-						Al(364, 'li'),
-						_l(),
-						Al(365, '>\n                <'),
-						wl(366, 'span', Ev),
-						Al(367, 'li'),
-						_l(),
-						Al(368, ' '),
-						wl(369, 'span', Ev),
-						Al(370, 'class'),
-						_l(),
-						Al(371, '='),
-						wl(372, 'span', Ov),
-						Al(373, '"field-group"'),
-						_l(),
-						Al(374, '>\n                    <'),
-						wl(375, 'span', Ev),
-						Al(376, 'input'),
-						_l(),
-						Al(377, ' '),
-						wl(378, 'span', Ev),
-						Al(379, 'class'),
-						_l(),
-						Al(380, '='),
-						wl(381, 'span', Ov),
-						Al(382, '"form-field"'),
-						_l(),
-						Al(383, ' '),
-						wl(384, 'span', Ev),
-						Al(385, 'type'),
-						_l(),
-						Al(386, '='),
-						wl(387, 'span', Ov),
-						Al(388, '"checkbox"'),
-						_l(),
-						Al(389, ' name='),
-						wl(390, 'span', Ov),
-						Al(391, '"color"'),
-						_l(),
-						Al(392, ' id='),
-						wl(393, 'span', Ov),
-						Al(394, '"red"'),
-						_l(),
-						Al(395, '>\n                    <'),
-						wl(396, 'span', Ev),
-						Al(397, 'label'),
-						_l(),
-						Al(398, ' '),
-						wl(399, 'span', Ev),
-						Al(400, 'class'),
-						_l(),
-						Al(401, '='),
-						wl(402, 'span', Ov),
-						Al(403, '"form-label"'),
-						_l(),
-						Al(404, ' '),
-						wl(405, 'span', Ev),
-						Al(406, 'for'),
-						_l(),
-						Al(407, '='),
-						wl(408, 'span', Ov),
-						Al(409, '"red"'),
-						_l(),
-						Al(410, '>Red</'),
-						wl(411, 'span', Ev),
-						Al(412, 'label'),
-						_l(),
-						Al(413, '>\n                </'),
-						wl(414, 'span', Ev),
-						Al(415, 'li'),
-						_l(),
-						Al(416, '>\n                <'),
-						wl(417, 'span', Ev),
-						Al(418, 'li'),
-						_l(),
-						Al(419, ' '),
-						wl(420, 'span', Ev),
-						Al(421, 'class'),
-						_l(),
-						Al(422, '='),
-						wl(423, 'span', Ov),
-						Al(424, '"field-group"'),
-						_l(),
-						Al(425, '>\n                    <'),
-						wl(426, 'span', Ev),
-						Al(427, 'input'),
-						_l(),
-						Al(428, ' '),
-						wl(429, 'span', Ev),
-						Al(430, 'class'),
-						_l(),
-						Al(431, '='),
-						wl(432, 'span', Ov),
-						Al(433, '"form-field"'),
-						_l(),
-						Al(434, ' '),
-						wl(435, 'span', Ev),
-						Al(436, 'type'),
-						_l(),
-						Al(437, '='),
-						wl(438, 'span', Ov),
-						Al(439, '"checkbox"'),
-						_l(),
-						Al(440, ' name='),
-						wl(441, 'span', Ov),
-						Al(442, '"color"'),
-						_l(),
-						Al(443, ' id='),
-						wl(444, 'span', Ov),
-						Al(445, '"yellow"'),
-						_l(),
-						Al(446, '>\n                    <'),
-						wl(447, 'span', Ev),
-						Al(448, 'label'),
-						_l(),
-						Al(449, ' '),
-						wl(450, 'span', Ev),
-						Al(451, 'class'),
-						_l(),
-						Al(452, '='),
-						wl(453, 'span', Ov),
-						Al(454, '"form-label"'),
-						_l(),
-						Al(455, ' '),
-						wl(456, 'span', Ev),
-						Al(457, 'for'),
-						_l(),
-						Al(458, '='),
-						wl(459, 'span', Ov),
-						Al(460, '"yellow"'),
-						_l(),
-						Al(461, '>Yellow</'),
-						wl(462, 'span', Ev),
-						Al(463, 'label'),
-						_l(),
-						Al(464, '>\n                </'),
-						wl(465, 'span', Ev),
-						Al(466, 'li'),
-						_l(),
-						Al(467, '>\n            </ul>\n        </'),
-						wl(468, 'span', Ev),
-						Al(469, 'li'),
-						_l(),
-						Al(470, '>\n    </ul>    \n</'),
-						wl(471, 'span', Ev),
-						Al(472, 'form'),
-						_l(),
-						Al(473, '>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Checkbox'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Checkboxes and radio buttons are grouped with a '),
+						vl(6, 'code'),
+						Tl(7, '.*-group'),
+						yl(),
+						Tl(8, ' class on a parent container.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'form'),
+						vl(11, 'ul', nw),
+						vl(12, 'li', rw),
+						vl(13, 'label', ow),
+						Tl(14, 'Name'),
+						yl(),
+						wl(15, 'input', iw),
+						yl(),
+						vl(16, 'li', rw),
+						vl(17, 'p', aw),
+						Tl(18, 'Agree'),
+						yl(),
+						vl(19, 'ul', sw),
+						vl(20, 'li', rw),
+						wl(21, 'input', lw),
+						vl(22, 'label', uw),
+						Tl(23, 'Yes'),
+						yl(),
+						yl(),
+						vl(24, 'li', rw),
+						wl(25, 'input', cw),
+						vl(26, 'label', pw),
+						Tl(27, 'No'),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(28, 'li', rw),
+						vl(29, 'p', aw),
+						Tl(30, 'Color'),
+						yl(),
+						vl(31, 'ul', fw),
+						vl(32, 'li', rw),
+						wl(33, 'input', dw),
+						vl(34, 'label', hw),
+						Tl(35, 'Blue'),
+						yl(),
+						yl(),
+						vl(36, 'li', rw),
+						wl(37, 'input', gw),
+						vl(38, 'label', mw),
+						Tl(39, 'Green'),
+						yl(),
+						yl(),
+						vl(40, 'li', rw),
+						wl(41, 'input', bw),
+						vl(42, 'label', vw),
+						Tl(43, 'Red'),
+						yl(),
+						yl(),
+						vl(44, 'li', rw),
+						wl(45, 'input', yw),
+						vl(46, 'label', ww),
+						Tl(47, 'Yellow'),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(48, 'figure'),
+						vl(49, 'pre', ov),
+						Tl(50, '<'),
+						vl(51, 'span', Pv),
+						Tl(52, 'form'),
+						yl(),
+						Tl(53, '>\n    <ul '),
+						vl(54, 'span', Pv),
+						Tl(55, 'class'),
+						yl(),
+						Tl(56, '='),
+						vl(57, 'span', Ev),
+						Tl(58, '"form-group"'),
+						yl(),
+						Tl(59, '>\n        <'),
+						vl(60, 'span', Pv),
+						Tl(61, 'li'),
+						yl(),
+						Tl(62, ' '),
+						vl(63, 'span', Pv),
+						Tl(64, 'class'),
+						yl(),
+						Tl(65, '='),
+						vl(66, 'span', Ev),
+						Tl(67, '"field-group"'),
+						yl(),
+						Tl(68, '>\n            <'),
+						vl(69, 'span', Pv),
+						Tl(70, 'label'),
+						yl(),
+						Tl(71, ' '),
+						vl(72, 'span', Pv),
+						Tl(73, 'class'),
+						yl(),
+						Tl(74, '='),
+						vl(75, 'span', Ev),
+						Tl(76, '"form-label"'),
+						yl(),
+						Tl(77, ' '),
+						vl(78, 'span', Pv),
+						Tl(79, 'for'),
+						yl(),
+						Tl(80, '='),
+						vl(81, 'span', Ev),
+						Tl(82, '"name"'),
+						yl(),
+						Tl(83, '>Name</'),
+						vl(84, 'span', Pv),
+						Tl(85, 'label'),
+						yl(),
+						Tl(86, '>\n            <'),
+						vl(87, 'span', Pv),
+						Tl(88, 'input'),
+						yl(),
+						Tl(89, ' '),
+						vl(90, 'span', Pv),
+						Tl(91, 'class'),
+						yl(),
+						Tl(92, '='),
+						vl(93, 'span', Ev),
+						Tl(94, '"form-field"'),
+						yl(),
+						Tl(95, ' '),
+						vl(96, 'span', Pv),
+						Tl(97, 'type'),
+						yl(),
+						Tl(98, '='),
+						vl(99, 'span', Ev),
+						Tl(100, '"text"'),
+						yl(),
+						Tl(101, ' id='),
+						vl(102, 'span', Ev),
+						Tl(103, '"name"'),
+						yl(),
+						Tl(104, ' name='),
+						vl(105, 'span', Ev),
+						Tl(106, '"name"'),
+						yl(),
+						Tl(107, ' placeholder='),
+						vl(108, 'span', Ev),
+						Tl(109, '"Enter name"'),
+						yl(),
+						Tl(110, '>\n        </'),
+						vl(111, 'span', Pv),
+						Tl(112, 'li'),
+						yl(),
+						Tl(113, '>\n        <'),
+						vl(114, 'span', Pv),
+						Tl(115, 'li'),
+						yl(),
+						Tl(116, ' '),
+						vl(117, 'span', Pv),
+						Tl(118, 'class'),
+						yl(),
+						Tl(119, '='),
+						vl(120, 'span', Ev),
+						Tl(121, '"field-group"'),
+						yl(),
+						Tl(122, '>\n            <p '),
+						vl(123, 'span', Pv),
+						Tl(124, 'class'),
+						yl(),
+						Tl(125, '='),
+						vl(126, 'span', Ev),
+						Tl(127, '"form-label"'),
+						yl(),
+						Tl(128, '>Agree</p>\n            <ul '),
+						vl(129, 'span', Pv),
+						Tl(130, 'class'),
+						yl(),
+						Tl(131, '='),
+						vl(132, 'span', Ev),
+						Tl(133, '"radio-group"'),
+						yl(),
+						Tl(134, '>\n                <'),
+						vl(135, 'span', Pv),
+						Tl(136, 'li'),
+						yl(),
+						Tl(137, ' '),
+						vl(138, 'span', Pv),
+						Tl(139, 'class'),
+						yl(),
+						Tl(140, '='),
+						vl(141, 'span', Ev),
+						Tl(142, '"field-group"'),
+						yl(),
+						Tl(143, '>\n                    <'),
+						vl(144, 'span', Pv),
+						Tl(145, 'input'),
+						yl(),
+						Tl(146, ' '),
+						vl(147, 'span', Pv),
+						Tl(148, 'class'),
+						yl(),
+						Tl(149, '='),
+						vl(150, 'span', Ev),
+						Tl(151, '"form-field"'),
+						yl(),
+						Tl(152, ' '),
+						vl(153, 'span', Pv),
+						Tl(154, 'type'),
+						yl(),
+						Tl(155, '='),
+						vl(156, 'span', Ev),
+						Tl(157, '"radio"'),
+						yl(),
+						Tl(158, ' name='),
+						vl(159, 'span', Ev),
+						Tl(160, '"agree"'),
+						yl(),
+						Tl(161, ' id='),
+						vl(162, 'span', Ev),
+						Tl(163, '"yes"'),
+						yl(),
+						Tl(164, '>\n                    <'),
+						vl(165, 'span', Pv),
+						Tl(166, 'label'),
+						yl(),
+						Tl(167, ' '),
+						vl(168, 'span', Pv),
+						Tl(169, 'class'),
+						yl(),
+						Tl(170, '='),
+						vl(171, 'span', Ev),
+						Tl(172, '"form-label"'),
+						yl(),
+						Tl(173, ' '),
+						vl(174, 'span', Pv),
+						Tl(175, 'for'),
+						yl(),
+						Tl(176, '='),
+						vl(177, 'span', Ev),
+						Tl(178, '"yes"'),
+						yl(),
+						Tl(179, '>Yes</'),
+						vl(180, 'span', Pv),
+						Tl(181, 'label'),
+						yl(),
+						Tl(182, '>\n                </'),
+						vl(183, 'span', Pv),
+						Tl(184, 'li'),
+						yl(),
+						Tl(185, '>\n                <'),
+						vl(186, 'span', Pv),
+						Tl(187, 'li'),
+						yl(),
+						Tl(188, ' '),
+						vl(189, 'span', Pv),
+						Tl(190, 'class'),
+						yl(),
+						Tl(191, '='),
+						vl(192, 'span', Ev),
+						Tl(193, '"field-group"'),
+						yl(),
+						Tl(194, '>\n                    <'),
+						vl(195, 'span', Pv),
+						Tl(196, 'input'),
+						yl(),
+						Tl(197, ' '),
+						vl(198, 'span', Pv),
+						Tl(199, 'class'),
+						yl(),
+						Tl(200, '='),
+						vl(201, 'span', Ev),
+						Tl(202, '"form-field"'),
+						yl(),
+						Tl(203, ' '),
+						vl(204, 'span', Pv),
+						Tl(205, 'type'),
+						yl(),
+						Tl(206, '='),
+						vl(207, 'span', Ev),
+						Tl(208, '"radio"'),
+						yl(),
+						Tl(209, ' name='),
+						vl(210, 'span', Ev),
+						Tl(211, '"agree"'),
+						yl(),
+						Tl(212, ' id='),
+						vl(213, 'span', Ev),
+						Tl(214, '"no"'),
+						yl(),
+						Tl(215, '>\n                    <'),
+						vl(216, 'span', Pv),
+						Tl(217, 'label'),
+						yl(),
+						Tl(218, ' '),
+						vl(219, 'span', Pv),
+						Tl(220, 'class'),
+						yl(),
+						Tl(221, '='),
+						vl(222, 'span', Ev),
+						Tl(223, '"form-label"'),
+						yl(),
+						Tl(224, ' '),
+						vl(225, 'span', Pv),
+						Tl(226, 'for'),
+						yl(),
+						Tl(227, '='),
+						vl(228, 'span', Ev),
+						Tl(229, '"no"'),
+						yl(),
+						Tl(230, '>'),
+						vl(231, 'span', Pv),
+						Tl(232, 'No'),
+						yl(),
+						Tl(233, '</'),
+						vl(234, 'span', Pv),
+						Tl(235, 'label'),
+						yl(),
+						Tl(236, '>\n                </'),
+						vl(237, 'span', Pv),
+						Tl(238, 'li'),
+						yl(),
+						Tl(239, '>\n            </ul>\n        </'),
+						vl(240, 'span', Pv),
+						Tl(241, 'li'),
+						yl(),
+						Tl(242, '>\n        <'),
+						vl(243, 'span', Pv),
+						Tl(244, 'li'),
+						yl(),
+						Tl(245, ' '),
+						vl(246, 'span', Pv),
+						Tl(247, 'class'),
+						yl(),
+						Tl(248, '='),
+						vl(249, 'span', Ev),
+						Tl(250, '"field-group"'),
+						yl(),
+						Tl(251, '>\n            <p '),
+						vl(252, 'span', Pv),
+						Tl(253, 'class'),
+						yl(),
+						Tl(254, '='),
+						vl(255, 'span', Ev),
+						Tl(256, '"form-label"'),
+						yl(),
+						Tl(257, '>Color</p>\n            <ul '),
+						vl(258, 'span', Pv),
+						Tl(259, 'class'),
+						yl(),
+						Tl(260, '='),
+						vl(261, 'span', Ev),
+						Tl(262, '"checkbox-group"'),
+						yl(),
+						Tl(263, '>\n                <'),
+						vl(264, 'span', Pv),
+						Tl(265, 'li'),
+						yl(),
+						Tl(266, ' '),
+						vl(267, 'span', Pv),
+						Tl(268, 'class'),
+						yl(),
+						Tl(269, '='),
+						vl(270, 'span', Ev),
+						Tl(271, '"field-group"'),
+						yl(),
+						Tl(272, '>\n                    <'),
+						vl(273, 'span', Pv),
+						Tl(274, 'input'),
+						yl(),
+						Tl(275, ' '),
+						vl(276, 'span', Pv),
+						Tl(277, 'class'),
+						yl(),
+						Tl(278, '='),
+						vl(279, 'span', Ev),
+						Tl(280, '"form-field"'),
+						yl(),
+						Tl(281, ' '),
+						vl(282, 'span', Pv),
+						Tl(283, 'type'),
+						yl(),
+						Tl(284, '='),
+						vl(285, 'span', Ev),
+						Tl(286, '"checkbox"'),
+						yl(),
+						Tl(287, ' name='),
+						vl(288, 'span', Ev),
+						Tl(289, '"color"'),
+						yl(),
+						Tl(290, ' id='),
+						vl(291, 'span', Ev),
+						Tl(292, '"blue"'),
+						yl(),
+						Tl(293, '>\n                    <'),
+						vl(294, 'span', Pv),
+						Tl(295, 'label'),
+						yl(),
+						Tl(296, ' '),
+						vl(297, 'span', Pv),
+						Tl(298, 'class'),
+						yl(),
+						Tl(299, '='),
+						vl(300, 'span', Ev),
+						Tl(301, '"form-label"'),
+						yl(),
+						Tl(302, ' '),
+						vl(303, 'span', Pv),
+						Tl(304, 'for'),
+						yl(),
+						Tl(305, '='),
+						vl(306, 'span', Ev),
+						Tl(307, '"blue"'),
+						yl(),
+						Tl(308, '>Blue</'),
+						vl(309, 'span', Pv),
+						Tl(310, 'label'),
+						yl(),
+						Tl(311, '>\n                </'),
+						vl(312, 'span', Pv),
+						Tl(313, 'li'),
+						yl(),
+						Tl(314, '>\n                <'),
+						vl(315, 'span', Pv),
+						Tl(316, 'li'),
+						yl(),
+						Tl(317, ' '),
+						vl(318, 'span', Pv),
+						Tl(319, 'class'),
+						yl(),
+						Tl(320, '='),
+						vl(321, 'span', Ev),
+						Tl(322, '"field-group"'),
+						yl(),
+						Tl(323, '>\n                    <'),
+						vl(324, 'span', Pv),
+						Tl(325, 'input'),
+						yl(),
+						Tl(326, ' '),
+						vl(327, 'span', Pv),
+						Tl(328, 'class'),
+						yl(),
+						Tl(329, '='),
+						vl(330, 'span', Ev),
+						Tl(331, '"form-field"'),
+						yl(),
+						Tl(332, ' '),
+						vl(333, 'span', Pv),
+						Tl(334, 'type'),
+						yl(),
+						Tl(335, '='),
+						vl(336, 'span', Ev),
+						Tl(337, '"checkbox"'),
+						yl(),
+						Tl(338, ' name='),
+						vl(339, 'span', Ev),
+						Tl(340, '"color"'),
+						yl(),
+						Tl(341, ' id='),
+						vl(342, 'span', Ev),
+						Tl(343, '"green"'),
+						yl(),
+						Tl(344, '>\n                    <'),
+						vl(345, 'span', Pv),
+						Tl(346, 'label'),
+						yl(),
+						Tl(347, ' '),
+						vl(348, 'span', Pv),
+						Tl(349, 'class'),
+						yl(),
+						Tl(350, '='),
+						vl(351, 'span', Ev),
+						Tl(352, '"form-label"'),
+						yl(),
+						Tl(353, ' '),
+						vl(354, 'span', Pv),
+						Tl(355, 'for'),
+						yl(),
+						Tl(356, '='),
+						vl(357, 'span', Ev),
+						Tl(358, '"green"'),
+						yl(),
+						Tl(359, '>Green</'),
+						vl(360, 'span', Pv),
+						Tl(361, 'label'),
+						yl(),
+						Tl(362, '>\n                </'),
+						vl(363, 'span', Pv),
+						Tl(364, 'li'),
+						yl(),
+						Tl(365, '>\n                <'),
+						vl(366, 'span', Pv),
+						Tl(367, 'li'),
+						yl(),
+						Tl(368, ' '),
+						vl(369, 'span', Pv),
+						Tl(370, 'class'),
+						yl(),
+						Tl(371, '='),
+						vl(372, 'span', Ev),
+						Tl(373, '"field-group"'),
+						yl(),
+						Tl(374, '>\n                    <'),
+						vl(375, 'span', Pv),
+						Tl(376, 'input'),
+						yl(),
+						Tl(377, ' '),
+						vl(378, 'span', Pv),
+						Tl(379, 'class'),
+						yl(),
+						Tl(380, '='),
+						vl(381, 'span', Ev),
+						Tl(382, '"form-field"'),
+						yl(),
+						Tl(383, ' '),
+						vl(384, 'span', Pv),
+						Tl(385, 'type'),
+						yl(),
+						Tl(386, '='),
+						vl(387, 'span', Ev),
+						Tl(388, '"checkbox"'),
+						yl(),
+						Tl(389, ' name='),
+						vl(390, 'span', Ev),
+						Tl(391, '"color"'),
+						yl(),
+						Tl(392, ' id='),
+						vl(393, 'span', Ev),
+						Tl(394, '"red"'),
+						yl(),
+						Tl(395, '>\n                    <'),
+						vl(396, 'span', Pv),
+						Tl(397, 'label'),
+						yl(),
+						Tl(398, ' '),
+						vl(399, 'span', Pv),
+						Tl(400, 'class'),
+						yl(),
+						Tl(401, '='),
+						vl(402, 'span', Ev),
+						Tl(403, '"form-label"'),
+						yl(),
+						Tl(404, ' '),
+						vl(405, 'span', Pv),
+						Tl(406, 'for'),
+						yl(),
+						Tl(407, '='),
+						vl(408, 'span', Ev),
+						Tl(409, '"red"'),
+						yl(),
+						Tl(410, '>Red</'),
+						vl(411, 'span', Pv),
+						Tl(412, 'label'),
+						yl(),
+						Tl(413, '>\n                </'),
+						vl(414, 'span', Pv),
+						Tl(415, 'li'),
+						yl(),
+						Tl(416, '>\n                <'),
+						vl(417, 'span', Pv),
+						Tl(418, 'li'),
+						yl(),
+						Tl(419, ' '),
+						vl(420, 'span', Pv),
+						Tl(421, 'class'),
+						yl(),
+						Tl(422, '='),
+						vl(423, 'span', Ev),
+						Tl(424, '"field-group"'),
+						yl(),
+						Tl(425, '>\n                    <'),
+						vl(426, 'span', Pv),
+						Tl(427, 'input'),
+						yl(),
+						Tl(428, ' '),
+						vl(429, 'span', Pv),
+						Tl(430, 'class'),
+						yl(),
+						Tl(431, '='),
+						vl(432, 'span', Ev),
+						Tl(433, '"form-field"'),
+						yl(),
+						Tl(434, ' '),
+						vl(435, 'span', Pv),
+						Tl(436, 'type'),
+						yl(),
+						Tl(437, '='),
+						vl(438, 'span', Ev),
+						Tl(439, '"checkbox"'),
+						yl(),
+						Tl(440, ' name='),
+						vl(441, 'span', Ev),
+						Tl(442, '"color"'),
+						yl(),
+						Tl(443, ' id='),
+						vl(444, 'span', Ev),
+						Tl(445, '"yellow"'),
+						yl(),
+						Tl(446, '>\n                    <'),
+						vl(447, 'span', Pv),
+						Tl(448, 'label'),
+						yl(),
+						Tl(449, ' '),
+						vl(450, 'span', Pv),
+						Tl(451, 'class'),
+						yl(),
+						Tl(452, '='),
+						vl(453, 'span', Ev),
+						Tl(454, '"form-label"'),
+						yl(),
+						Tl(455, ' '),
+						vl(456, 'span', Pv),
+						Tl(457, 'for'),
+						yl(),
+						Tl(458, '='),
+						vl(459, 'span', Ev),
+						Tl(460, '"yellow"'),
+						yl(),
+						Tl(461, '>Yellow</'),
+						vl(462, 'span', Pv),
+						Tl(463, 'label'),
+						yl(),
+						Tl(464, '>\n                </'),
+						vl(465, 'span', Pv),
+						Tl(466, 'li'),
+						yl(),
+						Tl(467, '>\n            </ul>\n        </'),
+						vl(468, 'span', Pv),
+						Tl(469, 'li'),
+						yl(),
+						Tl(470, '>\n    </ul>    \n</'),
+						vl(471, 'span', Pv),
+						Tl(472, 'form'),
+						yl(),
+						Tl(473, '>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Cw = ['for', 'gender', 1, 'form-label'],
-				kw = ['name', 'gender', 'id', 'gender', 1, 'form-field'],
-				Sw = ['value', '1'],
-				Pw = ['value', '2'],
-				Ew = ['value', '3'],
-				Ow = ['for', 'language', 1, 'form-label'],
-				Iw = ['name', 'language', 'id', 'language', 'multiple', '', 1, 'form-field'],
-				Tw = ['for', 'notes', 1, 'form-label'],
-				Mw = ['name', 'notes', 'id', 'notes', 'placeholder', 'Enter notes', 1, 'form-field'];
+			var xw = ['for', 'gender', 1, 'form-label'],
+				Cw = ['name', 'gender', 'id', 'gender', 1, 'form-field'],
+				kw = ['value', '1'],
+				Sw = ['value', '2'],
+				Pw = ['value', '3'],
+				Ew = ['for', 'language', 1, 'form-label'],
+				Ow = ['name', 'language', 'id', 'language', 'multiple', '', 1, 'form-field'],
+				Iw = ['for', 'notes', 1, 'form-label'],
+				Tw = ['name', 'notes', 'id', 'notes', 'placeholder', 'Enter notes', 1, 'form-field'];
+			function Mw(t, e) {
+				if (
+					(1 & t &&
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Field'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Form fields are styled with a '),
+						vl(6, 'code'),
+						Tl(7, '.form-field'),
+						yl(),
+						Tl(8, ' class. Different styles are applied based on the form field.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'form'),
+						vl(11, 'ul', nw),
+						vl(12, 'li', rw),
+						vl(13, 'label', ow),
+						Tl(14, 'Name'),
+						yl(),
+						wl(15, 'input', iw),
+						yl(),
+						vl(16, 'li', rw),
+						vl(17, 'label', xw),
+						Tl(18, 'Gender'),
+						yl(),
+						vl(19, 'select', Cw),
+						vl(20, 'option', kw),
+						Tl(21, 'Select'),
+						yl(),
+						vl(22, 'option', Sw),
+						Tl(23, 'Female'),
+						yl(),
+						vl(24, 'option', Pw),
+						Tl(25, 'Male'),
+						yl(),
+						yl(),
+						yl(),
+						vl(26, 'li', rw),
+						vl(27, 'label', Ew),
+						Tl(28, 'Language'),
+						yl(),
+						vl(29, 'select', Ow),
+						vl(30, 'option'),
+						Tl(31, 'English'),
+						yl(),
+						vl(32, 'option'),
+						Tl(33, 'French'),
+						yl(),
+						vl(34, 'option'),
+						Tl(35, 'Spanish'),
+						yl(),
+						yl(),
+						yl(),
+						vl(36, 'li', rw),
+						vl(37, 'label', Iw),
+						Tl(38, 'Notes'),
+						yl(),
+						wl(39, 'textarea', Tw),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(40, 'figure'),
+						vl(41, 'pre', ov),
+						vl(42, 'span', iv),
+						Tl(43, '<'),
+						vl(44, 'span', av),
+						Tl(45, 'form'),
+						yl(),
+						Tl(46, '>'),
+						yl(),
+						Tl(47, '\n    '),
+						vl(48, 'span', iv),
+						Tl(49, '<'),
+						vl(50, 'span', av),
+						Tl(51, 'ul'),
+						yl(),
+						Tl(52, ' '),
+						vl(53, 'span', sv),
+						Tl(54, 'class'),
+						yl(),
+						Tl(55, '='),
+						vl(56, 'span', lv),
+						Tl(57, '"form-group"'),
+						yl(),
+						Tl(58, '>'),
+						yl(),
+						Tl(59, '\n        '),
+						vl(60, 'span', iv),
+						Tl(61, '<'),
+						vl(62, 'span', av),
+						Tl(63, 'li'),
+						yl(),
+						Tl(64, ' '),
+						vl(65, 'span', sv),
+						Tl(66, 'class'),
+						yl(),
+						Tl(67, '='),
+						vl(68, 'span', lv),
+						Tl(69, '"field-group"'),
+						yl(),
+						Tl(70, '>'),
+						yl(),
+						Tl(71, '\n            '),
+						vl(72, 'span', iv),
+						Tl(73, '<'),
+						vl(74, 'span', av),
+						Tl(75, 'label'),
+						yl(),
+						Tl(76, ' '),
+						vl(77, 'span', sv),
+						Tl(78, 'class'),
+						yl(),
+						Tl(79, '='),
+						vl(80, 'span', lv),
+						Tl(81, '"form-label"'),
+						yl(),
+						Tl(82, ' '),
+						vl(83, 'span', sv),
+						Tl(84, 'for'),
+						yl(),
+						Tl(85, '='),
+						vl(86, 'span', lv),
+						Tl(87, '"name"'),
+						yl(),
+						Tl(88, '>'),
+						yl(),
+						Tl(89, 'Name'),
+						vl(90, 'span', iv),
+						Tl(91, '</'),
+						vl(92, 'span', av),
+						Tl(93, 'label'),
+						yl(),
+						Tl(94, '>'),
+						yl(),
+						Tl(95, '\n            '),
+						vl(96, 'span', iv),
+						Tl(97, '<'),
+						vl(98, 'span', av),
+						Tl(99, 'input'),
+						yl(),
+						Tl(100, ' '),
+						vl(101, 'span', sv),
+						Tl(102, 'class'),
+						yl(),
+						Tl(103, '='),
+						vl(104, 'span', lv),
+						Tl(105, '"form-field"'),
+						yl(),
+						Tl(106, ' '),
+						vl(107, 'span', sv),
+						Tl(108, 'type'),
+						yl(),
+						Tl(109, '='),
+						vl(110, 'span', lv),
+						Tl(111, '"text"'),
+						yl(),
+						Tl(112, ' '),
+						vl(113, 'span', sv),
+						Tl(114, 'id'),
+						yl(),
+						Tl(115, '='),
+						vl(116, 'span', lv),
+						Tl(117, '"name"'),
+						yl(),
+						Tl(118, ' '),
+						vl(119, 'span', sv),
+						Tl(120, 'name'),
+						yl(),
+						Tl(121, '='),
+						vl(122, 'span', lv),
+						Tl(123, '"name"'),
+						yl(),
+						Tl(124, ' '),
+						vl(125, 'span', sv),
+						Tl(126, 'placeholder'),
+						yl(),
+						Tl(127, '='),
+						vl(128, 'span', lv),
+						Tl(129, '"Enter name"'),
+						yl(),
+						Tl(130, '>'),
+						yl(),
+						Tl(131, '\n        '),
+						vl(132, 'span', iv),
+						Tl(133, '</'),
+						vl(134, 'span', av),
+						Tl(135, 'li'),
+						yl(),
+						Tl(136, '>'),
+						yl(),
+						Tl(137, '\n        '),
+						vl(138, 'span', iv),
+						Tl(139, '<'),
+						vl(140, 'span', av),
+						Tl(141, 'li'),
+						yl(),
+						Tl(142, ' '),
+						vl(143, 'span', sv),
+						Tl(144, 'class'),
+						yl(),
+						Tl(145, '='),
+						vl(146, 'span', lv),
+						Tl(147, '"field-group"'),
+						yl(),
+						Tl(148, '>'),
+						yl(),
+						Tl(149, '\n            '),
+						vl(150, 'span', iv),
+						Tl(151, '<'),
+						vl(152, 'span', av),
+						Tl(153, 'label'),
+						yl(),
+						Tl(154, ' '),
+						vl(155, 'span', sv),
+						Tl(156, 'class'),
+						yl(),
+						Tl(157, '='),
+						vl(158, 'span', lv),
+						Tl(159, '"form-label"'),
+						yl(),
+						Tl(160, ' '),
+						vl(161, 'span', sv),
+						Tl(162, 'for'),
+						yl(),
+						Tl(163, '='),
+						vl(164, 'span', lv),
+						Tl(165, '"gender"'),
+						yl(),
+						Tl(166, '>'),
+						yl(),
+						Tl(167, 'Gender'),
+						vl(168, 'span', iv),
+						Tl(169, '</'),
+						vl(170, 'span', av),
+						Tl(171, 'label'),
+						yl(),
+						Tl(172, '>'),
+						yl(),
+						Tl(173, '\n            '),
+						vl(174, 'span', iv),
+						Tl(175, '<'),
+						vl(176, 'span', av),
+						Tl(177, 'select'),
+						yl(),
+						Tl(178, ' '),
+						vl(179, 'span', sv),
+						Tl(180, 'class'),
+						yl(),
+						Tl(181, '='),
+						vl(182, 'span', lv),
+						Tl(183, '"form-field"'),
+						yl(),
+						Tl(184, ' '),
+						vl(185, 'span', sv),
+						Tl(186, 'name'),
+						yl(),
+						Tl(187, '='),
+						vl(188, 'span', lv),
+						Tl(189, '"gender"'),
+						yl(),
+						Tl(190, ' '),
+						vl(191, 'span', sv),
+						Tl(192, 'id'),
+						yl(),
+						Tl(193, '='),
+						vl(194, 'span', lv),
+						Tl(195, '"gender"'),
+						yl(),
+						Tl(196, '>'),
+						yl(),
+						Tl(197, '\n                '),
+						vl(198, 'span', iv),
+						Tl(199, '<'),
+						vl(200, 'span', av),
+						Tl(201, 'option'),
+						yl(),
+						Tl(202, ' '),
+						vl(203, 'span', sv),
+						Tl(204, 'value'),
+						yl(),
+						Tl(205, '='),
+						vl(206, 'span', lv),
+						Tl(207, '"1"'),
+						yl(),
+						Tl(208, '>'),
+						yl(),
+						Tl(209, 'Select'),
+						vl(210, 'span', iv),
+						Tl(211, '</'),
+						vl(212, 'span', av),
+						Tl(213, 'option'),
+						yl(),
+						Tl(214, '>'),
+						yl(),
+						Tl(215, '\n                '),
+						vl(216, 'span', iv),
+						Tl(217, '<'),
+						vl(218, 'span', av),
+						Tl(219, 'option'),
+						yl(),
+						Tl(220, ' '),
+						vl(221, 'span', sv),
+						Tl(222, 'value'),
+						yl(),
+						Tl(223, '='),
+						vl(224, 'span', lv),
+						Tl(225, '"2"'),
+						yl(),
+						Tl(226, '>'),
+						yl(),
+						Tl(227, 'Female'),
+						vl(228, 'span', iv),
+						Tl(229, '</'),
+						vl(230, 'span', av),
+						Tl(231, 'option'),
+						yl(),
+						Tl(232, '>'),
+						yl(),
+						Tl(233, '\n                '),
+						vl(234, 'span', iv),
+						Tl(235, '<'),
+						vl(236, 'span', av),
+						Tl(237, 'option'),
+						yl(),
+						Tl(238, ' '),
+						vl(239, 'span', sv),
+						Tl(240, 'value'),
+						yl(),
+						Tl(241, '='),
+						vl(242, 'span', lv),
+						Tl(243, '"3"'),
+						yl(),
+						Tl(244, '>'),
+						yl(),
+						Tl(245, 'Male'),
+						vl(246, 'span', iv),
+						Tl(247, '</'),
+						vl(248, 'span', av),
+						Tl(249, 'option'),
+						yl(),
+						Tl(250, '>'),
+						yl(),
+						Tl(251, '\n            '),
+						vl(252, 'span', iv),
+						Tl(253, '</'),
+						vl(254, 'span', av),
+						Tl(255, 'select'),
+						yl(),
+						Tl(256, '>'),
+						yl(),
+						Tl(257, '\n        '),
+						vl(258, 'span', iv),
+						Tl(259, '</'),
+						vl(260, 'span', av),
+						Tl(261, 'li'),
+						yl(),
+						Tl(262, '>'),
+						yl(),
+						Tl(263, '\n        '),
+						vl(264, 'span', iv),
+						Tl(265, '<'),
+						vl(266, 'span', av),
+						Tl(267, 'li'),
+						yl(),
+						Tl(268, ' '),
+						vl(269, 'span', sv),
+						Tl(270, 'class'),
+						yl(),
+						Tl(271, '='),
+						vl(272, 'span', lv),
+						Tl(273, '"field-group"'),
+						yl(),
+						Tl(274, '>'),
+						yl(),
+						Tl(275, '\n            '),
+						vl(276, 'span', iv),
+						Tl(277, '<'),
+						vl(278, 'span', av),
+						Tl(279, 'label'),
+						yl(),
+						Tl(280, ' '),
+						vl(281, 'span', sv),
+						Tl(282, 'class'),
+						yl(),
+						Tl(283, '='),
+						vl(284, 'span', lv),
+						Tl(285, '"form-label"'),
+						yl(),
+						Tl(286, ' '),
+						vl(287, 'span', sv),
+						Tl(288, 'for'),
+						yl(),
+						Tl(289, '='),
+						vl(290, 'span', lv),
+						Tl(291, '"language"'),
+						yl(),
+						Tl(292, '>'),
+						yl(),
+						Tl(293, 'Language'),
+						vl(294, 'span', iv),
+						Tl(295, '</'),
+						vl(296, 'span', av),
+						Tl(297, 'label'),
+						yl(),
+						Tl(298, '>'),
+						yl(),
+						Tl(299, '\n            '),
+						vl(300, 'span', iv),
+						Tl(301, '<'),
+						vl(302, 'span', av),
+						Tl(303, 'select'),
+						yl(),
+						Tl(304, ' '),
+						vl(305, 'span', sv),
+						Tl(306, 'class'),
+						yl(),
+						Tl(307, '='),
+						vl(308, 'span', lv),
+						Tl(309, '"form-field"'),
+						yl(),
+						Tl(310, ' '),
+						vl(311, 'span', sv),
+						Tl(312, 'name'),
+						yl(),
+						Tl(313, '='),
+						vl(314, 'span', lv),
+						Tl(315, '"language"'),
+						yl(),
+						Tl(316, ' '),
+						vl(317, 'span', sv),
+						Tl(318, 'id'),
+						yl(),
+						Tl(319, '='),
+						vl(320, 'span', lv),
+						Tl(321, '"language"'),
+						yl(),
+						Tl(322, ' '),
+						vl(323, 'span', sv),
+						Tl(324, 'multiple'),
+						yl(),
+						Tl(325, '>'),
+						yl(),
+						Tl(326, '\n                '),
+						vl(327, 'span', iv),
+						Tl(328, '<'),
+						vl(329, 'span', av),
+						Tl(330, 'option'),
+						yl(),
+						Tl(331, '>'),
+						yl(),
+						Tl(332, 'English'),
+						vl(333, 'span', iv),
+						Tl(334, '</'),
+						vl(335, 'span', av),
+						Tl(336, 'option'),
+						yl(),
+						Tl(337, '>'),
+						yl(),
+						Tl(338, '\n                '),
+						vl(339, 'span', iv),
+						Tl(340, '<'),
+						vl(341, 'span', av),
+						Tl(342, 'option'),
+						yl(),
+						Tl(343, '>'),
+						yl(),
+						Tl(344, 'French'),
+						vl(345, 'span', iv),
+						Tl(346, '</'),
+						vl(347, 'span', av),
+						Tl(348, 'option'),
+						yl(),
+						Tl(349, '>'),
+						yl(),
+						Tl(350, '\n                '),
+						vl(351, 'span', iv),
+						Tl(352, '<'),
+						vl(353, 'span', av),
+						Tl(354, 'option'),
+						yl(),
+						Tl(355, '>'),
+						yl(),
+						Tl(356, 'Spanish'),
+						vl(357, 'span', iv),
+						Tl(358, '</'),
+						vl(359, 'span', av),
+						Tl(360, 'option'),
+						yl(),
+						Tl(361, '>'),
+						yl(),
+						Tl(362, '\n            '),
+						vl(363, 'span', iv),
+						Tl(364, '</'),
+						vl(365, 'span', av),
+						Tl(366, 'select'),
+						yl(),
+						Tl(367, '>'),
+						yl(),
+						Tl(368, '\n        '),
+						vl(369, 'span', iv),
+						Tl(370, '</'),
+						vl(371, 'span', av),
+						Tl(372, 'li'),
+						yl(),
+						Tl(373, '>'),
+						yl(),
+						Tl(374, '\n        '),
+						vl(375, 'span', iv),
+						Tl(376, '<'),
+						vl(377, 'span', av),
+						Tl(378, 'li'),
+						yl(),
+						Tl(379, ' '),
+						vl(380, 'span', sv),
+						Tl(381, 'class'),
+						yl(),
+						Tl(382, '='),
+						vl(383, 'span', lv),
+						Tl(384, '"field-group"'),
+						yl(),
+						Tl(385, '>'),
+						yl(),
+						Tl(386, '\n            '),
+						vl(387, 'span', iv),
+						Tl(388, '<'),
+						vl(389, 'span', av),
+						Tl(390, 'label'),
+						yl(),
+						Tl(391, ' '),
+						vl(392, 'span', sv),
+						Tl(393, 'class'),
+						yl(),
+						Tl(394, '='),
+						vl(395, 'span', lv),
+						Tl(396, '"form-label"'),
+						yl(),
+						Tl(397, ' '),
+						vl(398, 'span', sv),
+						Tl(399, 'for'),
+						yl(),
+						Tl(400, '='),
+						vl(401, 'span', lv),
+						Tl(402, '"notes"'),
+						yl(),
+						Tl(403, '>'),
+						yl(),
+						Tl(404, 'Notes'),
+						vl(405, 'span', iv),
+						Tl(406, '</'),
+						vl(407, 'span', av),
+						Tl(408, 'label'),
+						yl(),
+						Tl(409, '>'),
+						yl(),
+						Tl(410, '\n            '),
+						vl(411, 'span', iv),
+						Tl(412, '<'),
+						vl(413, 'span', av),
+						Tl(414, 'textarea'),
+						yl(),
+						Tl(415, ' '),
+						vl(416, 'span', sv),
+						Tl(417, 'class'),
+						yl(),
+						Tl(418, '='),
+						vl(419, 'span', lv),
+						Tl(420, '"form-field"'),
+						yl(),
+						Tl(421, ' '),
+						vl(422, 'span', sv),
+						Tl(423, 'name'),
+						yl(),
+						Tl(424, '='),
+						vl(425, 'span', lv),
+						Tl(426, '"notes"'),
+						yl(),
+						Tl(427, ' '),
+						vl(428, 'span', sv),
+						Tl(429, 'id'),
+						yl(),
+						Tl(430, '='),
+						vl(431, 'span', lv),
+						Tl(432, '"notes"'),
+						yl(),
+						Tl(433, ' '),
+						vl(434, 'span', sv),
+						Tl(435, 'placeholder'),
+						yl(),
+						Tl(436, '='),
+						vl(437, 'span', lv),
+						Tl(438, '"Enter notes"'),
+						yl(),
+						Tl(439, '>'),
+						yl(),
+						vl(440, 'span', iv),
+						Tl(441, '</'),
+						vl(442, 'span', av),
+						Tl(443, 'textarea'),
+						yl(),
+						Tl(444, '>'),
+						yl(),
+						Tl(445, '\n        '),
+						vl(446, 'span', iv),
+						Tl(447, '</'),
+						vl(448, 'span', av),
+						Tl(449, 'li'),
+						yl(),
+						Tl(450, '>'),
+						yl(),
+						Tl(451, '\n    '),
+						vl(452, 'span', iv),
+						Tl(453, '</'),
+						vl(454, 'span', av),
+						Tl(455, 'ul'),
+						yl(),
+						Tl(456, '>'),
+						yl(),
+						Tl(457, '    \n'),
+						vl(458, 'span', iv),
+						Tl(459, '</'),
+						vl(460, 'span', av),
+						Tl(461, 'form'),
+						yl(),
+						Tl(462, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
+					2 & t)
+				) {
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
+				}
+			}
 			function Aw(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Field'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Form fields are styled with a '),
-						wl(6, 'code'),
-						Al(7, '.form-field'),
-						_l(),
-						Al(8, ' class. Different styles are applied based on the form field.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'form'),
-						wl(11, 'ul', rw),
-						wl(12, 'li', ow),
-						wl(13, 'label', iw),
-						Al(14, 'Name'),
-						_l(),
-						xl(15, 'input', aw),
-						_l(),
-						wl(16, 'li', ow),
-						wl(17, 'label', Cw),
-						Al(18, 'Gender'),
-						_l(),
-						wl(19, 'select', kw),
-						wl(20, 'option', Sw),
-						Al(21, 'Select'),
-						_l(),
-						wl(22, 'option', Pw),
-						Al(23, 'Female'),
-						_l(),
-						wl(24, 'option', Ew),
-						Al(25, 'Male'),
-						_l(),
-						_l(),
-						_l(),
-						wl(26, 'li', ow),
-						wl(27, 'label', Ow),
-						Al(28, 'Language'),
-						_l(),
-						wl(29, 'select', Iw),
-						wl(30, 'option'),
-						Al(31, 'English'),
-						_l(),
-						wl(32, 'option'),
-						Al(33, 'French'),
-						_l(),
-						wl(34, 'option'),
-						Al(35, 'Spanish'),
-						_l(),
-						_l(),
-						_l(),
-						wl(36, 'li', ow),
-						wl(37, 'label', Tw),
-						Al(38, 'Notes'),
-						_l(),
-						xl(39, 'textarea', Mw),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(40, 'figure'),
-						wl(41, 'pre', iv),
-						wl(42, 'span', av),
-						Al(43, '<'),
-						wl(44, 'span', sv),
-						Al(45, 'form'),
-						_l(),
-						Al(46, '>'),
-						_l(),
-						Al(47, '\n    '),
-						wl(48, 'span', av),
-						Al(49, '<'),
-						wl(50, 'span', sv),
-						Al(51, 'ul'),
-						_l(),
-						Al(52, ' '),
-						wl(53, 'span', lv),
-						Al(54, 'class'),
-						_l(),
-						Al(55, '='),
-						wl(56, 'span', uv),
-						Al(57, '"form-group"'),
-						_l(),
-						Al(58, '>'),
-						_l(),
-						Al(59, '\n        '),
-						wl(60, 'span', av),
-						Al(61, '<'),
-						wl(62, 'span', sv),
-						Al(63, 'li'),
-						_l(),
-						Al(64, ' '),
-						wl(65, 'span', lv),
-						Al(66, 'class'),
-						_l(),
-						Al(67, '='),
-						wl(68, 'span', uv),
-						Al(69, '"field-group"'),
-						_l(),
-						Al(70, '>'),
-						_l(),
-						Al(71, '\n            '),
-						wl(72, 'span', av),
-						Al(73, '<'),
-						wl(74, 'span', sv),
-						Al(75, 'label'),
-						_l(),
-						Al(76, ' '),
-						wl(77, 'span', lv),
-						Al(78, 'class'),
-						_l(),
-						Al(79, '='),
-						wl(80, 'span', uv),
-						Al(81, '"form-label"'),
-						_l(),
-						Al(82, ' '),
-						wl(83, 'span', lv),
-						Al(84, 'for'),
-						_l(),
-						Al(85, '='),
-						wl(86, 'span', uv),
-						Al(87, '"name"'),
-						_l(),
-						Al(88, '>'),
-						_l(),
-						Al(89, 'Name'),
-						wl(90, 'span', av),
-						Al(91, '</'),
-						wl(92, 'span', sv),
-						Al(93, 'label'),
-						_l(),
-						Al(94, '>'),
-						_l(),
-						Al(95, '\n            '),
-						wl(96, 'span', av),
-						Al(97, '<'),
-						wl(98, 'span', sv),
-						Al(99, 'input'),
-						_l(),
-						Al(100, ' '),
-						wl(101, 'span', lv),
-						Al(102, 'class'),
-						_l(),
-						Al(103, '='),
-						wl(104, 'span', uv),
-						Al(105, '"form-field"'),
-						_l(),
-						Al(106, ' '),
-						wl(107, 'span', lv),
-						Al(108, 'type'),
-						_l(),
-						Al(109, '='),
-						wl(110, 'span', uv),
-						Al(111, '"text"'),
-						_l(),
-						Al(112, ' '),
-						wl(113, 'span', lv),
-						Al(114, 'id'),
-						_l(),
-						Al(115, '='),
-						wl(116, 'span', uv),
-						Al(117, '"name"'),
-						_l(),
-						Al(118, ' '),
-						wl(119, 'span', lv),
-						Al(120, 'name'),
-						_l(),
-						Al(121, '='),
-						wl(122, 'span', uv),
-						Al(123, '"name"'),
-						_l(),
-						Al(124, ' '),
-						wl(125, 'span', lv),
-						Al(126, 'placeholder'),
-						_l(),
-						Al(127, '='),
-						wl(128, 'span', uv),
-						Al(129, '"Enter name"'),
-						_l(),
-						Al(130, '>'),
-						_l(),
-						Al(131, '\n        '),
-						wl(132, 'span', av),
-						Al(133, '</'),
-						wl(134, 'span', sv),
-						Al(135, 'li'),
-						_l(),
-						Al(136, '>'),
-						_l(),
-						Al(137, '\n        '),
-						wl(138, 'span', av),
-						Al(139, '<'),
-						wl(140, 'span', sv),
-						Al(141, 'li'),
-						_l(),
-						Al(142, ' '),
-						wl(143, 'span', lv),
-						Al(144, 'class'),
-						_l(),
-						Al(145, '='),
-						wl(146, 'span', uv),
-						Al(147, '"field-group"'),
-						_l(),
-						Al(148, '>'),
-						_l(),
-						Al(149, '\n            '),
-						wl(150, 'span', av),
-						Al(151, '<'),
-						wl(152, 'span', sv),
-						Al(153, 'label'),
-						_l(),
-						Al(154, ' '),
-						wl(155, 'span', lv),
-						Al(156, 'class'),
-						_l(),
-						Al(157, '='),
-						wl(158, 'span', uv),
-						Al(159, '"form-label"'),
-						_l(),
-						Al(160, ' '),
-						wl(161, 'span', lv),
-						Al(162, 'for'),
-						_l(),
-						Al(163, '='),
-						wl(164, 'span', uv),
-						Al(165, '"gender"'),
-						_l(),
-						Al(166, '>'),
-						_l(),
-						Al(167, 'Gender'),
-						wl(168, 'span', av),
-						Al(169, '</'),
-						wl(170, 'span', sv),
-						Al(171, 'label'),
-						_l(),
-						Al(172, '>'),
-						_l(),
-						Al(173, '\n            '),
-						wl(174, 'span', av),
-						Al(175, '<'),
-						wl(176, 'span', sv),
-						Al(177, 'select'),
-						_l(),
-						Al(178, ' '),
-						wl(179, 'span', lv),
-						Al(180, 'class'),
-						_l(),
-						Al(181, '='),
-						wl(182, 'span', uv),
-						Al(183, '"form-field"'),
-						_l(),
-						Al(184, ' '),
-						wl(185, 'span', lv),
-						Al(186, 'name'),
-						_l(),
-						Al(187, '='),
-						wl(188, 'span', uv),
-						Al(189, '"gender"'),
-						_l(),
-						Al(190, ' '),
-						wl(191, 'span', lv),
-						Al(192, 'id'),
-						_l(),
-						Al(193, '='),
-						wl(194, 'span', uv),
-						Al(195, '"gender"'),
-						_l(),
-						Al(196, '>'),
-						_l(),
-						Al(197, '\n                '),
-						wl(198, 'span', av),
-						Al(199, '<'),
-						wl(200, 'span', sv),
-						Al(201, 'option'),
-						_l(),
-						Al(202, ' '),
-						wl(203, 'span', lv),
-						Al(204, 'value'),
-						_l(),
-						Al(205, '='),
-						wl(206, 'span', uv),
-						Al(207, '"1"'),
-						_l(),
-						Al(208, '>'),
-						_l(),
-						Al(209, 'Select'),
-						wl(210, 'span', av),
-						Al(211, '</'),
-						wl(212, 'span', sv),
-						Al(213, 'option'),
-						_l(),
-						Al(214, '>'),
-						_l(),
-						Al(215, '\n                '),
-						wl(216, 'span', av),
-						Al(217, '<'),
-						wl(218, 'span', sv),
-						Al(219, 'option'),
-						_l(),
-						Al(220, ' '),
-						wl(221, 'span', lv),
-						Al(222, 'value'),
-						_l(),
-						Al(223, '='),
-						wl(224, 'span', uv),
-						Al(225, '"2"'),
-						_l(),
-						Al(226, '>'),
-						_l(),
-						Al(227, 'Female'),
-						wl(228, 'span', av),
-						Al(229, '</'),
-						wl(230, 'span', sv),
-						Al(231, 'option'),
-						_l(),
-						Al(232, '>'),
-						_l(),
-						Al(233, '\n                '),
-						wl(234, 'span', av),
-						Al(235, '<'),
-						wl(236, 'span', sv),
-						Al(237, 'option'),
-						_l(),
-						Al(238, ' '),
-						wl(239, 'span', lv),
-						Al(240, 'value'),
-						_l(),
-						Al(241, '='),
-						wl(242, 'span', uv),
-						Al(243, '"3"'),
-						_l(),
-						Al(244, '>'),
-						_l(),
-						Al(245, 'Male'),
-						wl(246, 'span', av),
-						Al(247, '</'),
-						wl(248, 'span', sv),
-						Al(249, 'option'),
-						_l(),
-						Al(250, '>'),
-						_l(),
-						Al(251, '\n            '),
-						wl(252, 'span', av),
-						Al(253, '</'),
-						wl(254, 'span', sv),
-						Al(255, 'select'),
-						_l(),
-						Al(256, '>'),
-						_l(),
-						Al(257, '\n        '),
-						wl(258, 'span', av),
-						Al(259, '</'),
-						wl(260, 'span', sv),
-						Al(261, 'li'),
-						_l(),
-						Al(262, '>'),
-						_l(),
-						Al(263, '\n        '),
-						wl(264, 'span', av),
-						Al(265, '<'),
-						wl(266, 'span', sv),
-						Al(267, 'li'),
-						_l(),
-						Al(268, ' '),
-						wl(269, 'span', lv),
-						Al(270, 'class'),
-						_l(),
-						Al(271, '='),
-						wl(272, 'span', uv),
-						Al(273, '"field-group"'),
-						_l(),
-						Al(274, '>'),
-						_l(),
-						Al(275, '\n            '),
-						wl(276, 'span', av),
-						Al(277, '<'),
-						wl(278, 'span', sv),
-						Al(279, 'label'),
-						_l(),
-						Al(280, ' '),
-						wl(281, 'span', lv),
-						Al(282, 'class'),
-						_l(),
-						Al(283, '='),
-						wl(284, 'span', uv),
-						Al(285, '"form-label"'),
-						_l(),
-						Al(286, ' '),
-						wl(287, 'span', lv),
-						Al(288, 'for'),
-						_l(),
-						Al(289, '='),
-						wl(290, 'span', uv),
-						Al(291, '"language"'),
-						_l(),
-						Al(292, '>'),
-						_l(),
-						Al(293, 'Language'),
-						wl(294, 'span', av),
-						Al(295, '</'),
-						wl(296, 'span', sv),
-						Al(297, 'label'),
-						_l(),
-						Al(298, '>'),
-						_l(),
-						Al(299, '\n            '),
-						wl(300, 'span', av),
-						Al(301, '<'),
-						wl(302, 'span', sv),
-						Al(303, 'select'),
-						_l(),
-						Al(304, ' '),
-						wl(305, 'span', lv),
-						Al(306, 'class'),
-						_l(),
-						Al(307, '='),
-						wl(308, 'span', uv),
-						Al(309, '"form-field"'),
-						_l(),
-						Al(310, ' '),
-						wl(311, 'span', lv),
-						Al(312, 'name'),
-						_l(),
-						Al(313, '='),
-						wl(314, 'span', uv),
-						Al(315, '"language"'),
-						_l(),
-						Al(316, ' '),
-						wl(317, 'span', lv),
-						Al(318, 'id'),
-						_l(),
-						Al(319, '='),
-						wl(320, 'span', uv),
-						Al(321, '"language"'),
-						_l(),
-						Al(322, ' '),
-						wl(323, 'span', lv),
-						Al(324, 'multiple'),
-						_l(),
-						Al(325, '>'),
-						_l(),
-						Al(326, '\n                '),
-						wl(327, 'span', av),
-						Al(328, '<'),
-						wl(329, 'span', sv),
-						Al(330, 'option'),
-						_l(),
-						Al(331, '>'),
-						_l(),
-						Al(332, 'English'),
-						wl(333, 'span', av),
-						Al(334, '</'),
-						wl(335, 'span', sv),
-						Al(336, 'option'),
-						_l(),
-						Al(337, '>'),
-						_l(),
-						Al(338, '\n                '),
-						wl(339, 'span', av),
-						Al(340, '<'),
-						wl(341, 'span', sv),
-						Al(342, 'option'),
-						_l(),
-						Al(343, '>'),
-						_l(),
-						Al(344, 'French'),
-						wl(345, 'span', av),
-						Al(346, '</'),
-						wl(347, 'span', sv),
-						Al(348, 'option'),
-						_l(),
-						Al(349, '>'),
-						_l(),
-						Al(350, '\n                '),
-						wl(351, 'span', av),
-						Al(352, '<'),
-						wl(353, 'span', sv),
-						Al(354, 'option'),
-						_l(),
-						Al(355, '>'),
-						_l(),
-						Al(356, 'Spanish'),
-						wl(357, 'span', av),
-						Al(358, '</'),
-						wl(359, 'span', sv),
-						Al(360, 'option'),
-						_l(),
-						Al(361, '>'),
-						_l(),
-						Al(362, '\n            '),
-						wl(363, 'span', av),
-						Al(364, '</'),
-						wl(365, 'span', sv),
-						Al(366, 'select'),
-						_l(),
-						Al(367, '>'),
-						_l(),
-						Al(368, '\n        '),
-						wl(369, 'span', av),
-						Al(370, '</'),
-						wl(371, 'span', sv),
-						Al(372, 'li'),
-						_l(),
-						Al(373, '>'),
-						_l(),
-						Al(374, '\n        '),
-						wl(375, 'span', av),
-						Al(376, '<'),
-						wl(377, 'span', sv),
-						Al(378, 'li'),
-						_l(),
-						Al(379, ' '),
-						wl(380, 'span', lv),
-						Al(381, 'class'),
-						_l(),
-						Al(382, '='),
-						wl(383, 'span', uv),
-						Al(384, '"field-group"'),
-						_l(),
-						Al(385, '>'),
-						_l(),
-						Al(386, '\n            '),
-						wl(387, 'span', av),
-						Al(388, '<'),
-						wl(389, 'span', sv),
-						Al(390, 'label'),
-						_l(),
-						Al(391, ' '),
-						wl(392, 'span', lv),
-						Al(393, 'class'),
-						_l(),
-						Al(394, '='),
-						wl(395, 'span', uv),
-						Al(396, '"form-label"'),
-						_l(),
-						Al(397, ' '),
-						wl(398, 'span', lv),
-						Al(399, 'for'),
-						_l(),
-						Al(400, '='),
-						wl(401, 'span', uv),
-						Al(402, '"notes"'),
-						_l(),
-						Al(403, '>'),
-						_l(),
-						Al(404, 'Notes'),
-						wl(405, 'span', av),
-						Al(406, '</'),
-						wl(407, 'span', sv),
-						Al(408, 'label'),
-						_l(),
-						Al(409, '>'),
-						_l(),
-						Al(410, '\n            '),
-						wl(411, 'span', av),
-						Al(412, '<'),
-						wl(413, 'span', sv),
-						Al(414, 'textarea'),
-						_l(),
-						Al(415, ' '),
-						wl(416, 'span', lv),
-						Al(417, 'class'),
-						_l(),
-						Al(418, '='),
-						wl(419, 'span', uv),
-						Al(420, '"form-field"'),
-						_l(),
-						Al(421, ' '),
-						wl(422, 'span', lv),
-						Al(423, 'name'),
-						_l(),
-						Al(424, '='),
-						wl(425, 'span', uv),
-						Al(426, '"notes"'),
-						_l(),
-						Al(427, ' '),
-						wl(428, 'span', lv),
-						Al(429, 'id'),
-						_l(),
-						Al(430, '='),
-						wl(431, 'span', uv),
-						Al(432, '"notes"'),
-						_l(),
-						Al(433, ' '),
-						wl(434, 'span', lv),
-						Al(435, 'placeholder'),
-						_l(),
-						Al(436, '='),
-						wl(437, 'span', uv),
-						Al(438, '"Enter notes"'),
-						_l(),
-						Al(439, '>'),
-						_l(),
-						wl(440, 'span', av),
-						Al(441, '</'),
-						wl(442, 'span', sv),
-						Al(443, 'textarea'),
-						_l(),
-						Al(444, '>'),
-						_l(),
-						Al(445, '\n        '),
-						wl(446, 'span', av),
-						Al(447, '</'),
-						wl(448, 'span', sv),
-						Al(449, 'li'),
-						_l(),
-						Al(450, '>'),
-						_l(),
-						Al(451, '\n    '),
-						wl(452, 'span', av),
-						Al(453, '</'),
-						wl(454, 'span', sv),
-						Al(455, 'ul'),
-						_l(),
-						Al(456, '>'),
-						_l(),
-						Al(457, '    \n'),
-						wl(458, 'span', av),
-						Al(459, '</'),
-						wl(460, 'span', sv),
-						Al(461, 'form'),
-						_l(),
-						Al(462, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Field Group'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Field groups are styled with a '),
+						vl(6, 'code'),
+						Tl(7, '.field-group'),
+						yl(),
+						Tl(8, ' class.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'form'),
+						vl(11, 'ul', nw),
+						vl(12, 'li', rw),
+						vl(13, 'label', ow),
+						Tl(14, 'Name'),
+						yl(),
+						wl(15, 'input', iw),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(16, 'figure'),
+						vl(17, 'pre', ov),
+						Tl(18, '<'),
+						vl(19, 'span', Pv),
+						Tl(20, 'form'),
+						yl(),
+						Tl(21, '>\n    <ul '),
+						vl(22, 'span', Pv),
+						Tl(23, 'class'),
+						yl(),
+						Tl(24, '='),
+						vl(25, 'span', Ev),
+						Tl(26, '"form-group"'),
+						yl(),
+						Tl(27, '>\n        <'),
+						vl(28, 'span', Pv),
+						Tl(29, 'li'),
+						yl(),
+						Tl(30, ' '),
+						vl(31, 'span', Pv),
+						Tl(32, 'class'),
+						yl(),
+						Tl(33, '='),
+						vl(34, 'span', Ev),
+						Tl(35, '"field-group"'),
+						yl(),
+						Tl(36, '>\n            <'),
+						vl(37, 'span', Pv),
+						Tl(38, 'label'),
+						yl(),
+						Tl(39, ' '),
+						vl(40, 'span', Pv),
+						Tl(41, 'class'),
+						yl(),
+						Tl(42, '='),
+						vl(43, 'span', Ev),
+						Tl(44, '"form-label"'),
+						yl(),
+						Tl(45, ' '),
+						vl(46, 'span', Pv),
+						Tl(47, 'for'),
+						yl(),
+						Tl(48, '='),
+						vl(49, 'span', Ev),
+						Tl(50, '"name"'),
+						yl(),
+						Tl(51, '>Name</'),
+						vl(52, 'span', Pv),
+						Tl(53, 'label'),
+						yl(),
+						Tl(54, '>\n            <'),
+						vl(55, 'span', Pv),
+						Tl(56, 'input'),
+						yl(),
+						Tl(57, ' '),
+						vl(58, 'span', Pv),
+						Tl(59, 'class'),
+						yl(),
+						Tl(60, '='),
+						vl(61, 'span', Ev),
+						Tl(62, '"form-field"'),
+						yl(),
+						Tl(63, ' '),
+						vl(64, 'span', Pv),
+						Tl(65, 'type'),
+						yl(),
+						Tl(66, '='),
+						vl(67, 'span', Ev),
+						Tl(68, '"text"'),
+						yl(),
+						Tl(69, ' id='),
+						vl(70, 'span', Ev),
+						Tl(71, '"name"'),
+						yl(),
+						Tl(72, ' name='),
+						vl(73, 'span', Ev),
+						Tl(74, '"name"'),
+						yl(),
+						Tl(75, ' placeholder='),
+						vl(76, 'span', Ev),
+						Tl(77, '"Enter name"'),
+						yl(),
+						Tl(78, '>\n        </'),
+						vl(79, 'span', Pv),
+						Tl(80, 'li'),
+						yl(),
+						Tl(81, '>\n    </ul>    \n</'),
+						vl(82, 'span', Pv),
+						Tl(83, 'form'),
+						yl(),
+						Tl(84, '>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			function jw(t, e) {
+			var jw = [1, 'fieldset'];
+			function Rw(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Field Group'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Field groups are styled with a '),
-						wl(6, 'code'),
-						Al(7, '.field-group'),
-						_l(),
-						Al(8, ' class.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'form'),
-						wl(11, 'ul', rw),
-						wl(12, 'li', ow),
-						wl(13, 'label', iw),
-						Al(14, 'Name'),
-						_l(),
-						xl(15, 'input', aw),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(16, 'figure'),
-						wl(17, 'pre', iv),
-						Al(18, '<'),
-						wl(19, 'span', Ev),
-						Al(20, 'form'),
-						_l(),
-						Al(21, '>\n    <ul '),
-						wl(22, 'span', Ev),
-						Al(23, 'class'),
-						_l(),
-						Al(24, '='),
-						wl(25, 'span', Ov),
-						Al(26, '"form-group"'),
-						_l(),
-						Al(27, '>\n        <'),
-						wl(28, 'span', Ev),
-						Al(29, 'li'),
-						_l(),
-						Al(30, ' '),
-						wl(31, 'span', Ev),
-						Al(32, 'class'),
-						_l(),
-						Al(33, '='),
-						wl(34, 'span', Ov),
-						Al(35, '"field-group"'),
-						_l(),
-						Al(36, '>\n            <'),
-						wl(37, 'span', Ev),
-						Al(38, 'label'),
-						_l(),
-						Al(39, ' '),
-						wl(40, 'span', Ev),
-						Al(41, 'class'),
-						_l(),
-						Al(42, '='),
-						wl(43, 'span', Ov),
-						Al(44, '"form-label"'),
-						_l(),
-						Al(45, ' '),
-						wl(46, 'span', Ev),
-						Al(47, 'for'),
-						_l(),
-						Al(48, '='),
-						wl(49, 'span', Ov),
-						Al(50, '"name"'),
-						_l(),
-						Al(51, '>Name</'),
-						wl(52, 'span', Ev),
-						Al(53, 'label'),
-						_l(),
-						Al(54, '>\n            <'),
-						wl(55, 'span', Ev),
-						Al(56, 'input'),
-						_l(),
-						Al(57, ' '),
-						wl(58, 'span', Ev),
-						Al(59, 'class'),
-						_l(),
-						Al(60, '='),
-						wl(61, 'span', Ov),
-						Al(62, '"form-field"'),
-						_l(),
-						Al(63, ' '),
-						wl(64, 'span', Ev),
-						Al(65, 'type'),
-						_l(),
-						Al(66, '='),
-						wl(67, 'span', Ov),
-						Al(68, '"text"'),
-						_l(),
-						Al(69, ' id='),
-						wl(70, 'span', Ov),
-						Al(71, '"name"'),
-						_l(),
-						Al(72, ' name='),
-						wl(73, 'span', Ov),
-						Al(74, '"name"'),
-						_l(),
-						Al(75, ' placeholder='),
-						wl(76, 'span', Ov),
-						Al(77, '"Enter name"'),
-						_l(),
-						Al(78, '>\n        </'),
-						wl(79, 'span', Ev),
-						Al(80, 'li'),
-						_l(),
-						Al(81, '>\n    </ul>    \n</'),
-						wl(82, 'span', Ev),
-						Al(83, 'form'),
-						_l(),
-						Al(84, '>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Fieldset'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Fieldsets are styled with a '),
+						vl(6, 'code'),
+						Tl(7, '.fieldset'),
+						yl(),
+						Tl(8, ' class and have a '),
+						vl(9, 'code'),
+						Tl(10, '<legend>'),
+						yl(),
+						Tl(11, ' tag as the first child.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'form'),
+						vl(14, 'fieldset', jw),
+						vl(15, 'legend'),
+						Tl(16, 'Contact'),
+						yl(),
+						vl(17, 'ul', nw),
+						vl(18, 'li', rw),
+						vl(19, 'label', ow),
+						Tl(20, 'Name'),
+						yl(),
+						wl(21, 'input', iw),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(22, 'figure'),
+						vl(23, 'pre', ov),
+						Tl(24, '<'),
+						vl(25, 'span', Pv),
+						Tl(26, 'form'),
+						yl(),
+						Tl(27, '>\n    <fieldset '),
+						vl(28, 'span', Pv),
+						Tl(29, 'class'),
+						yl(),
+						Tl(30, '='),
+						vl(31, 'span', Ev),
+						Tl(32, '"fieldset"'),
+						yl(),
+						Tl(33, '>\n        <legend>Contact</legend>\n        <ul '),
+						vl(34, 'span', Pv),
+						Tl(35, 'class'),
+						yl(),
+						Tl(36, '='),
+						vl(37, 'span', Ev),
+						Tl(38, '"form-group"'),
+						yl(),
+						Tl(39, '>\n            <'),
+						vl(40, 'span', Pv),
+						Tl(41, 'li'),
+						yl(),
+						Tl(42, ' '),
+						vl(43, 'span', Pv),
+						Tl(44, 'class'),
+						yl(),
+						Tl(45, '='),
+						vl(46, 'span', Ev),
+						Tl(47, '"field-group"'),
+						yl(),
+						Tl(48, '>\n                <'),
+						vl(49, 'span', Pv),
+						Tl(50, 'label'),
+						yl(),
+						Tl(51, ' '),
+						vl(52, 'span', Pv),
+						Tl(53, 'class'),
+						yl(),
+						Tl(54, '='),
+						vl(55, 'span', Ev),
+						Tl(56, '"form-label"'),
+						yl(),
+						Tl(57, ' '),
+						vl(58, 'span', Pv),
+						Tl(59, 'for'),
+						yl(),
+						Tl(60, '='),
+						vl(61, 'span', Ev),
+						Tl(62, '"name"'),
+						yl(),
+						Tl(63, '>Name</'),
+						vl(64, 'span', Pv),
+						Tl(65, 'label'),
+						yl(),
+						Tl(66, '>\n                <'),
+						vl(67, 'span', Pv),
+						Tl(68, 'input'),
+						yl(),
+						Tl(69, ' '),
+						vl(70, 'span', Pv),
+						Tl(71, 'class'),
+						yl(),
+						Tl(72, '='),
+						vl(73, 'span', Ev),
+						Tl(74, '"form-field"'),
+						yl(),
+						Tl(75, ' '),
+						vl(76, 'span', Pv),
+						Tl(77, 'type'),
+						yl(),
+						Tl(78, '='),
+						vl(79, 'span', Ev),
+						Tl(80, '"text"'),
+						yl(),
+						Tl(81, ' id='),
+						vl(82, 'span', Ev),
+						Tl(83, '"name"'),
+						yl(),
+						Tl(84, ' name='),
+						vl(85, 'span', Ev),
+						Tl(86, '"name"'),
+						yl(),
+						Tl(87, ' placeholder='),
+						vl(88, 'span', Ev),
+						Tl(89, '"Enter name"'),
+						yl(),
+						Tl(90, '>\n            </'),
+						vl(91, 'span', Pv),
+						Tl(92, 'li'),
+						yl(),
+						Tl(93, '>\n        </ul>\n    </fieldset>    \n</'),
+						vl(94, 'span', Pv),
+						Tl(95, 'form'),
+						yl(),
+						Tl(96, '>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Rw = [1, 'fieldset'];
-			function Dw(t, e) {
+			var Dw = [1, 'form-group-inline'],
+				Nw = ['for', 'email', 1, 'form-label'],
+				Uw = ['type', 'text', 'id', 'email', 'name', 'email', 'placeholder', 'Enter email', 1, 'form-field'];
+			function Lw(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Fieldset'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Fieldsets are styled with a '),
-						wl(6, 'code'),
-						Al(7, '.fieldset'),
-						_l(),
-						Al(8, ' class and have a '),
-						wl(9, 'code'),
-						Al(10, '<legend>'),
-						_l(),
-						Al(11, ' tag as the first child.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'form'),
-						wl(14, 'fieldset', Rw),
-						wl(15, 'legend'),
-						Al(16, 'Contact'),
-						_l(),
-						wl(17, 'ul', rw),
-						wl(18, 'li', ow),
-						wl(19, 'label', iw),
-						Al(20, 'Name'),
-						_l(),
-						xl(21, 'input', aw),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(22, 'figure'),
-						wl(23, 'pre', iv),
-						Al(24, '<'),
-						wl(25, 'span', Ev),
-						Al(26, 'form'),
-						_l(),
-						Al(27, '>\n    <fieldset '),
-						wl(28, 'span', Ev),
-						Al(29, 'class'),
-						_l(),
-						Al(30, '='),
-						wl(31, 'span', Ov),
-						Al(32, '"fieldset"'),
-						_l(),
-						Al(33, '>\n        <legend>Contact</legend>\n        <ul '),
-						wl(34, 'span', Ev),
-						Al(35, 'class'),
-						_l(),
-						Al(36, '='),
-						wl(37, 'span', Ov),
-						Al(38, '"form-group"'),
-						_l(),
-						Al(39, '>\n            <'),
-						wl(40, 'span', Ev),
-						Al(41, 'li'),
-						_l(),
-						Al(42, ' '),
-						wl(43, 'span', Ev),
-						Al(44, 'class'),
-						_l(),
-						Al(45, '='),
-						wl(46, 'span', Ov),
-						Al(47, '"field-group"'),
-						_l(),
-						Al(48, '>\n                <'),
-						wl(49, 'span', Ev),
-						Al(50, 'label'),
-						_l(),
-						Al(51, ' '),
-						wl(52, 'span', Ev),
-						Al(53, 'class'),
-						_l(),
-						Al(54, '='),
-						wl(55, 'span', Ov),
-						Al(56, '"form-label"'),
-						_l(),
-						Al(57, ' '),
-						wl(58, 'span', Ev),
-						Al(59, 'for'),
-						_l(),
-						Al(60, '='),
-						wl(61, 'span', Ov),
-						Al(62, '"name"'),
-						_l(),
-						Al(63, '>Name</'),
-						wl(64, 'span', Ev),
-						Al(65, 'label'),
-						_l(),
-						Al(66, '>\n                <'),
-						wl(67, 'span', Ev),
-						Al(68, 'input'),
-						_l(),
-						Al(69, ' '),
-						wl(70, 'span', Ev),
-						Al(71, 'class'),
-						_l(),
-						Al(72, '='),
-						wl(73, 'span', Ov),
-						Al(74, '"form-field"'),
-						_l(),
-						Al(75, ' '),
-						wl(76, 'span', Ev),
-						Al(77, 'type'),
-						_l(),
-						Al(78, '='),
-						wl(79, 'span', Ov),
-						Al(80, '"text"'),
-						_l(),
-						Al(81, ' id='),
-						wl(82, 'span', Ov),
-						Al(83, '"name"'),
-						_l(),
-						Al(84, ' name='),
-						wl(85, 'span', Ov),
-						Al(86, '"name"'),
-						_l(),
-						Al(87, ' placeholder='),
-						wl(88, 'span', Ov),
-						Al(89, '"Enter name"'),
-						_l(),
-						Al(90, '>\n            </'),
-						wl(91, 'span', Ev),
-						Al(92, 'li'),
-						_l(),
-						Al(93, '>\n        </ul>\n    </fieldset>    \n</'),
-						wl(94, 'span', Ev),
-						Al(95, 'form'),
-						_l(),
-						Al(96, '>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Form Group'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Form groups are styled with a '),
+						vl(6, 'code'),
+						Tl(7, '.form-group'),
+						yl(),
+						Tl(8, ' class for vertical fields and '),
+						vl(9, 'code'),
+						Tl(10, '.form-group-inline'),
+						yl(),
+						Tl(11, ' for horizontal fields.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'form'),
+						vl(14, 'ul', Dw),
+						vl(15, 'li', rw),
+						vl(16, 'label', ow),
+						Tl(17, 'Name'),
+						yl(),
+						wl(18, 'input', iw),
+						yl(),
+						vl(19, 'li', rw),
+						vl(20, 'label', Nw),
+						Tl(21, 'Email'),
+						yl(),
+						wl(22, 'input', Uw),
+						yl(),
+						yl(),
+						vl(23, 'ul', nw),
+						vl(24, 'li', rw),
+						vl(25, 'label', ow),
+						Tl(26, 'Name'),
+						yl(),
+						wl(27, 'input', iw),
+						yl(),
+						vl(28, 'li', rw),
+						vl(29, 'label', Nw),
+						Tl(30, 'Email'),
+						yl(),
+						wl(31, 'input', Uw),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(32, 'figure'),
+						vl(33, 'pre', ov),
+						Tl(34, '<'),
+						vl(35, 'span', Pv),
+						Tl(36, 'form'),
+						yl(),
+						Tl(37, '>\n    <ul '),
+						vl(38, 'span', Pv),
+						Tl(39, 'class'),
+						yl(),
+						Tl(40, '='),
+						vl(41, 'span', Ev),
+						Tl(42, '"form-group-inline"'),
+						yl(),
+						Tl(43, '>\n        <'),
+						vl(44, 'span', Pv),
+						Tl(45, 'li'),
+						yl(),
+						Tl(46, ' '),
+						vl(47, 'span', Pv),
+						Tl(48, 'class'),
+						yl(),
+						Tl(49, '='),
+						vl(50, 'span', Ev),
+						Tl(51, '"field-group"'),
+						yl(),
+						Tl(52, '>\n            <'),
+						vl(53, 'span', Pv),
+						Tl(54, 'label'),
+						yl(),
+						Tl(55, ' '),
+						vl(56, 'span', Pv),
+						Tl(57, 'class'),
+						yl(),
+						Tl(58, '='),
+						vl(59, 'span', Ev),
+						Tl(60, '"form-label"'),
+						yl(),
+						Tl(61, ' '),
+						vl(62, 'span', Pv),
+						Tl(63, 'for'),
+						yl(),
+						Tl(64, '='),
+						vl(65, 'span', Ev),
+						Tl(66, '"name"'),
+						yl(),
+						Tl(67, '>Name</'),
+						vl(68, 'span', Pv),
+						Tl(69, 'label'),
+						yl(),
+						Tl(70, '>\n            <'),
+						vl(71, 'span', Pv),
+						Tl(72, 'input'),
+						yl(),
+						Tl(73, ' '),
+						vl(74, 'span', Pv),
+						Tl(75, 'class'),
+						yl(),
+						Tl(76, '='),
+						vl(77, 'span', Ev),
+						Tl(78, '"form-field"'),
+						yl(),
+						Tl(79, ' '),
+						vl(80, 'span', Pv),
+						Tl(81, 'type'),
+						yl(),
+						Tl(82, '='),
+						vl(83, 'span', Ev),
+						Tl(84, '"text"'),
+						yl(),
+						Tl(85, ' id='),
+						vl(86, 'span', Ev),
+						Tl(87, '"name"'),
+						yl(),
+						Tl(88, ' name='),
+						vl(89, 'span', Ev),
+						Tl(90, '"name"'),
+						yl(),
+						Tl(91, ' placeholder='),
+						vl(92, 'span', Ev),
+						Tl(93, '"Enter name"'),
+						yl(),
+						Tl(94, '>\n        </'),
+						vl(95, 'span', Pv),
+						Tl(96, 'li'),
+						yl(),
+						Tl(97, '>\n        <'),
+						vl(98, 'span', Pv),
+						Tl(99, 'li'),
+						yl(),
+						Tl(100, ' '),
+						vl(101, 'span', Pv),
+						Tl(102, 'class'),
+						yl(),
+						Tl(103, '='),
+						vl(104, 'span', Ev),
+						Tl(105, '"field-group"'),
+						yl(),
+						Tl(106, '>\n            <'),
+						vl(107, 'span', Pv),
+						Tl(108, 'label'),
+						yl(),
+						Tl(109, ' '),
+						vl(110, 'span', Pv),
+						Tl(111, 'class'),
+						yl(),
+						Tl(112, '='),
+						vl(113, 'span', Ev),
+						Tl(114, '"form-label"'),
+						yl(),
+						Tl(115, ' '),
+						vl(116, 'span', Pv),
+						Tl(117, 'for'),
+						yl(),
+						Tl(118, '='),
+						vl(119, 'span', Ev),
+						Tl(120, '"email"'),
+						yl(),
+						Tl(121, '>Email</'),
+						vl(122, 'span', Pv),
+						Tl(123, 'label'),
+						yl(),
+						Tl(124, '>\n            <'),
+						vl(125, 'span', Pv),
+						Tl(126, 'input'),
+						yl(),
+						Tl(127, ' '),
+						vl(128, 'span', Pv),
+						Tl(129, 'class'),
+						yl(),
+						Tl(130, '='),
+						vl(131, 'span', Ev),
+						Tl(132, '"form-field"'),
+						yl(),
+						Tl(133, ' '),
+						vl(134, 'span', Pv),
+						Tl(135, 'type'),
+						yl(),
+						Tl(136, '='),
+						vl(137, 'span', Ev),
+						Tl(138, '"text"'),
+						yl(),
+						Tl(139, ' id='),
+						vl(140, 'span', Ev),
+						Tl(141, '"email"'),
+						yl(),
+						Tl(142, ' name='),
+						vl(143, 'span', Ev),
+						Tl(144, '"email"'),
+						yl(),
+						Tl(145, ' placeholder='),
+						vl(146, 'span', Ev),
+						Tl(147, '"Enter email"'),
+						yl(),
+						Tl(148, '>\n        </'),
+						vl(149, 'span', Pv),
+						Tl(150, 'li'),
+						yl(),
+						Tl(151, '>\n    </ul>    \n    <ul '),
+						vl(152, 'span', Pv),
+						Tl(153, 'class'),
+						yl(),
+						Tl(154, '='),
+						vl(155, 'span', Ev),
+						Tl(156, '"form-group"'),
+						yl(),
+						Tl(157, '>\n        <'),
+						vl(158, 'span', Pv),
+						Tl(159, 'li'),
+						yl(),
+						Tl(160, ' '),
+						vl(161, 'span', Pv),
+						Tl(162, 'class'),
+						yl(),
+						Tl(163, '='),
+						vl(164, 'span', Ev),
+						Tl(165, '"field-group"'),
+						yl(),
+						Tl(166, '>\n            <'),
+						vl(167, 'span', Pv),
+						Tl(168, 'label'),
+						yl(),
+						Tl(169, ' '),
+						vl(170, 'span', Pv),
+						Tl(171, 'class'),
+						yl(),
+						Tl(172, '='),
+						vl(173, 'span', Ev),
+						Tl(174, '"form-label"'),
+						yl(),
+						Tl(175, ' '),
+						vl(176, 'span', Pv),
+						Tl(177, 'for'),
+						yl(),
+						Tl(178, '='),
+						vl(179, 'span', Ev),
+						Tl(180, '"name"'),
+						yl(),
+						Tl(181, '>Name</'),
+						vl(182, 'span', Pv),
+						Tl(183, 'label'),
+						yl(),
+						Tl(184, '>\n            <'),
+						vl(185, 'span', Pv),
+						Tl(186, 'input'),
+						yl(),
+						Tl(187, ' '),
+						vl(188, 'span', Pv),
+						Tl(189, 'class'),
+						yl(),
+						Tl(190, '='),
+						vl(191, 'span', Ev),
+						Tl(192, '"form-field"'),
+						yl(),
+						Tl(193, ' '),
+						vl(194, 'span', Pv),
+						Tl(195, 'type'),
+						yl(),
+						Tl(196, '='),
+						vl(197, 'span', Ev),
+						Tl(198, '"text"'),
+						yl(),
+						Tl(199, ' id='),
+						vl(200, 'span', Ev),
+						Tl(201, '"name"'),
+						yl(),
+						Tl(202, ' name='),
+						vl(203, 'span', Ev),
+						Tl(204, '"name"'),
+						yl(),
+						Tl(205, ' placeholder='),
+						vl(206, 'span', Ev),
+						Tl(207, '"Enter name"'),
+						yl(),
+						Tl(208, '>\n        </'),
+						vl(209, 'span', Pv),
+						Tl(210, 'li'),
+						yl(),
+						Tl(211, '>\n        <'),
+						vl(212, 'span', Pv),
+						Tl(213, 'li'),
+						yl(),
+						Tl(214, ' '),
+						vl(215, 'span', Pv),
+						Tl(216, 'class'),
+						yl(),
+						Tl(217, '='),
+						vl(218, 'span', Ev),
+						Tl(219, '"field-group"'),
+						yl(),
+						Tl(220, '>\n            <'),
+						vl(221, 'span', Pv),
+						Tl(222, 'label'),
+						yl(),
+						Tl(223, ' '),
+						vl(224, 'span', Pv),
+						Tl(225, 'class'),
+						yl(),
+						Tl(226, '='),
+						vl(227, 'span', Ev),
+						Tl(228, '"form-label"'),
+						yl(),
+						Tl(229, ' '),
+						vl(230, 'span', Pv),
+						Tl(231, 'for'),
+						yl(),
+						Tl(232, '='),
+						vl(233, 'span', Ev),
+						Tl(234, '"email"'),
+						yl(),
+						Tl(235, '>Email</'),
+						vl(236, 'span', Pv),
+						Tl(237, 'label'),
+						yl(),
+						Tl(238, '>\n            <'),
+						vl(239, 'span', Pv),
+						Tl(240, 'input'),
+						yl(),
+						Tl(241, ' '),
+						vl(242, 'span', Pv),
+						Tl(243, 'class'),
+						yl(),
+						Tl(244, '='),
+						vl(245, 'span', Ev),
+						Tl(246, '"form-field"'),
+						yl(),
+						Tl(247, ' '),
+						vl(248, 'span', Pv),
+						Tl(249, 'type'),
+						yl(),
+						Tl(250, '='),
+						vl(251, 'span', Ev),
+						Tl(252, '"text"'),
+						yl(),
+						Tl(253, ' id='),
+						vl(254, 'span', Ev),
+						Tl(255, '"email"'),
+						yl(),
+						Tl(256, ' name='),
+						vl(257, 'span', Ev),
+						Tl(258, '"email"'),
+						yl(),
+						Tl(259, ' placeholder='),
+						vl(260, 'span', Ev),
+						Tl(261, '"Enter email"'),
+						yl(),
+						Tl(262, '>\n        </'),
+						vl(263, 'span', Pv),
+						Tl(264, 'li'),
+						yl(),
+						Tl(265, '>\n    </ul>    \n</'),
+						vl(266, 'span', Pv),
+						Tl(267, 'form'),
+						yl(),
+						Tl(268, '>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Nw = [1, 'form-group-inline'],
-				Uw = ['for', 'email', 1, 'form-label'],
-				Lw = ['type', 'text', 'id', 'email', 'name', 'email', 'placeholder', 'Enter email', 1, 'form-field'];
 			function Hw(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Form Group'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Form groups are styled with a '),
-						wl(6, 'code'),
-						Al(7, '.form-group'),
-						_l(),
-						Al(8, ' class for vertical fields and '),
-						wl(9, 'code'),
-						Al(10, '.form-group-inline'),
-						_l(),
-						Al(11, ' for horizontal fields.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'form'),
-						wl(14, 'ul', Nw),
-						wl(15, 'li', ow),
-						wl(16, 'label', iw),
-						Al(17, 'Name'),
-						_l(),
-						xl(18, 'input', aw),
-						_l(),
-						wl(19, 'li', ow),
-						wl(20, 'label', Uw),
-						Al(21, 'Email'),
-						_l(),
-						xl(22, 'input', Lw),
-						_l(),
-						_l(),
-						wl(23, 'ul', rw),
-						wl(24, 'li', ow),
-						wl(25, 'label', iw),
-						Al(26, 'Name'),
-						_l(),
-						xl(27, 'input', aw),
-						_l(),
-						wl(28, 'li', ow),
-						wl(29, 'label', Uw),
-						Al(30, 'Email'),
-						_l(),
-						xl(31, 'input', Lw),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(32, 'figure'),
-						wl(33, 'pre', iv),
-						Al(34, '<'),
-						wl(35, 'span', Ev),
-						Al(36, 'form'),
-						_l(),
-						Al(37, '>\n    <ul '),
-						wl(38, 'span', Ev),
-						Al(39, 'class'),
-						_l(),
-						Al(40, '='),
-						wl(41, 'span', Ov),
-						Al(42, '"form-group-inline"'),
-						_l(),
-						Al(43, '>\n        <'),
-						wl(44, 'span', Ev),
-						Al(45, 'li'),
-						_l(),
-						Al(46, ' '),
-						wl(47, 'span', Ev),
-						Al(48, 'class'),
-						_l(),
-						Al(49, '='),
-						wl(50, 'span', Ov),
-						Al(51, '"field-group"'),
-						_l(),
-						Al(52, '>\n            <'),
-						wl(53, 'span', Ev),
-						Al(54, 'label'),
-						_l(),
-						Al(55, ' '),
-						wl(56, 'span', Ev),
-						Al(57, 'class'),
-						_l(),
-						Al(58, '='),
-						wl(59, 'span', Ov),
-						Al(60, '"form-label"'),
-						_l(),
-						Al(61, ' '),
-						wl(62, 'span', Ev),
-						Al(63, 'for'),
-						_l(),
-						Al(64, '='),
-						wl(65, 'span', Ov),
-						Al(66, '"name"'),
-						_l(),
-						Al(67, '>Name</'),
-						wl(68, 'span', Ev),
-						Al(69, 'label'),
-						_l(),
-						Al(70, '>\n            <'),
-						wl(71, 'span', Ev),
-						Al(72, 'input'),
-						_l(),
-						Al(73, ' '),
-						wl(74, 'span', Ev),
-						Al(75, 'class'),
-						_l(),
-						Al(76, '='),
-						wl(77, 'span', Ov),
-						Al(78, '"form-field"'),
-						_l(),
-						Al(79, ' '),
-						wl(80, 'span', Ev),
-						Al(81, 'type'),
-						_l(),
-						Al(82, '='),
-						wl(83, 'span', Ov),
-						Al(84, '"text"'),
-						_l(),
-						Al(85, ' id='),
-						wl(86, 'span', Ov),
-						Al(87, '"name"'),
-						_l(),
-						Al(88, ' name='),
-						wl(89, 'span', Ov),
-						Al(90, '"name"'),
-						_l(),
-						Al(91, ' placeholder='),
-						wl(92, 'span', Ov),
-						Al(93, '"Enter name"'),
-						_l(),
-						Al(94, '>\n        </'),
-						wl(95, 'span', Ev),
-						Al(96, 'li'),
-						_l(),
-						Al(97, '>\n        <'),
-						wl(98, 'span', Ev),
-						Al(99, 'li'),
-						_l(),
-						Al(100, ' '),
-						wl(101, 'span', Ev),
-						Al(102, 'class'),
-						_l(),
-						Al(103, '='),
-						wl(104, 'span', Ov),
-						Al(105, '"field-group"'),
-						_l(),
-						Al(106, '>\n            <'),
-						wl(107, 'span', Ev),
-						Al(108, 'label'),
-						_l(),
-						Al(109, ' '),
-						wl(110, 'span', Ev),
-						Al(111, 'class'),
-						_l(),
-						Al(112, '='),
-						wl(113, 'span', Ov),
-						Al(114, '"form-label"'),
-						_l(),
-						Al(115, ' '),
-						wl(116, 'span', Ev),
-						Al(117, 'for'),
-						_l(),
-						Al(118, '='),
-						wl(119, 'span', Ov),
-						Al(120, '"email"'),
-						_l(),
-						Al(121, '>Email</'),
-						wl(122, 'span', Ev),
-						Al(123, 'label'),
-						_l(),
-						Al(124, '>\n            <'),
-						wl(125, 'span', Ev),
-						Al(126, 'input'),
-						_l(),
-						Al(127, ' '),
-						wl(128, 'span', Ev),
-						Al(129, 'class'),
-						_l(),
-						Al(130, '='),
-						wl(131, 'span', Ov),
-						Al(132, '"form-field"'),
-						_l(),
-						Al(133, ' '),
-						wl(134, 'span', Ev),
-						Al(135, 'type'),
-						_l(),
-						Al(136, '='),
-						wl(137, 'span', Ov),
-						Al(138, '"text"'),
-						_l(),
-						Al(139, ' id='),
-						wl(140, 'span', Ov),
-						Al(141, '"email"'),
-						_l(),
-						Al(142, ' name='),
-						wl(143, 'span', Ov),
-						Al(144, '"email"'),
-						_l(),
-						Al(145, ' placeholder='),
-						wl(146, 'span', Ov),
-						Al(147, '"Enter email"'),
-						_l(),
-						Al(148, '>\n        </'),
-						wl(149, 'span', Ev),
-						Al(150, 'li'),
-						_l(),
-						Al(151, '>\n    </ul>    \n    <ul '),
-						wl(152, 'span', Ev),
-						Al(153, 'class'),
-						_l(),
-						Al(154, '='),
-						wl(155, 'span', Ov),
-						Al(156, '"form-group"'),
-						_l(),
-						Al(157, '>\n        <'),
-						wl(158, 'span', Ev),
-						Al(159, 'li'),
-						_l(),
-						Al(160, ' '),
-						wl(161, 'span', Ev),
-						Al(162, 'class'),
-						_l(),
-						Al(163, '='),
-						wl(164, 'span', Ov),
-						Al(165, '"field-group"'),
-						_l(),
-						Al(166, '>\n            <'),
-						wl(167, 'span', Ev),
-						Al(168, 'label'),
-						_l(),
-						Al(169, ' '),
-						wl(170, 'span', Ev),
-						Al(171, 'class'),
-						_l(),
-						Al(172, '='),
-						wl(173, 'span', Ov),
-						Al(174, '"form-label"'),
-						_l(),
-						Al(175, ' '),
-						wl(176, 'span', Ev),
-						Al(177, 'for'),
-						_l(),
-						Al(178, '='),
-						wl(179, 'span', Ov),
-						Al(180, '"name"'),
-						_l(),
-						Al(181, '>Name</'),
-						wl(182, 'span', Ev),
-						Al(183, 'label'),
-						_l(),
-						Al(184, '>\n            <'),
-						wl(185, 'span', Ev),
-						Al(186, 'input'),
-						_l(),
-						Al(187, ' '),
-						wl(188, 'span', Ev),
-						Al(189, 'class'),
-						_l(),
-						Al(190, '='),
-						wl(191, 'span', Ov),
-						Al(192, '"form-field"'),
-						_l(),
-						Al(193, ' '),
-						wl(194, 'span', Ev),
-						Al(195, 'type'),
-						_l(),
-						Al(196, '='),
-						wl(197, 'span', Ov),
-						Al(198, '"text"'),
-						_l(),
-						Al(199, ' id='),
-						wl(200, 'span', Ov),
-						Al(201, '"name"'),
-						_l(),
-						Al(202, ' name='),
-						wl(203, 'span', Ov),
-						Al(204, '"name"'),
-						_l(),
-						Al(205, ' placeholder='),
-						wl(206, 'span', Ov),
-						Al(207, '"Enter name"'),
-						_l(),
-						Al(208, '>\n        </'),
-						wl(209, 'span', Ev),
-						Al(210, 'li'),
-						_l(),
-						Al(211, '>\n        <'),
-						wl(212, 'span', Ev),
-						Al(213, 'li'),
-						_l(),
-						Al(214, ' '),
-						wl(215, 'span', Ev),
-						Al(216, 'class'),
-						_l(),
-						Al(217, '='),
-						wl(218, 'span', Ov),
-						Al(219, '"field-group"'),
-						_l(),
-						Al(220, '>\n            <'),
-						wl(221, 'span', Ev),
-						Al(222, 'label'),
-						_l(),
-						Al(223, ' '),
-						wl(224, 'span', Ev),
-						Al(225, 'class'),
-						_l(),
-						Al(226, '='),
-						wl(227, 'span', Ov),
-						Al(228, '"form-label"'),
-						_l(),
-						Al(229, ' '),
-						wl(230, 'span', Ev),
-						Al(231, 'for'),
-						_l(),
-						Al(232, '='),
-						wl(233, 'span', Ov),
-						Al(234, '"email"'),
-						_l(),
-						Al(235, '>Email</'),
-						wl(236, 'span', Ev),
-						Al(237, 'label'),
-						_l(),
-						Al(238, '>\n            <'),
-						wl(239, 'span', Ev),
-						Al(240, 'input'),
-						_l(),
-						Al(241, ' '),
-						wl(242, 'span', Ev),
-						Al(243, 'class'),
-						_l(),
-						Al(244, '='),
-						wl(245, 'span', Ov),
-						Al(246, '"form-field"'),
-						_l(),
-						Al(247, ' '),
-						wl(248, 'span', Ev),
-						Al(249, 'type'),
-						_l(),
-						Al(250, '='),
-						wl(251, 'span', Ov),
-						Al(252, '"text"'),
-						_l(),
-						Al(253, ' id='),
-						wl(254, 'span', Ov),
-						Al(255, '"email"'),
-						_l(),
-						Al(256, ' name='),
-						wl(257, 'span', Ov),
-						Al(258, '"email"'),
-						_l(),
-						Al(259, ' placeholder='),
-						wl(260, 'span', Ov),
-						Al(261, '"Enter email"'),
-						_l(),
-						Al(262, '>\n        </'),
-						wl(263, 'span', Ev),
-						Al(264, 'li'),
-						_l(),
-						Al(265, '>\n    </ul>    \n</'),
-						wl(266, 'span', Ev),
-						Al(267, 'form'),
-						_l(),
-						Al(268, '>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Label'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Form labels are styled with a '),
+						vl(6, 'code'),
+						Tl(7, '.form-label'),
+						yl(),
+						Tl(8, ' class.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'form'),
+						vl(11, 'ul', nw),
+						vl(12, 'li', rw),
+						vl(13, 'label', ow),
+						Tl(14, 'Name'),
+						yl(),
+						wl(15, 'input', iw),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(16, 'figure'),
+						vl(17, 'pre', ov),
+						Tl(18, '<'),
+						vl(19, 'span', Pv),
+						Tl(20, 'form'),
+						yl(),
+						Tl(21, '>\n    <ul '),
+						vl(22, 'span', Pv),
+						Tl(23, 'class'),
+						yl(),
+						Tl(24, '='),
+						vl(25, 'span', Ev),
+						Tl(26, '"form-group"'),
+						yl(),
+						Tl(27, '>\n        <'),
+						vl(28, 'span', Pv),
+						Tl(29, 'li'),
+						yl(),
+						Tl(30, ' '),
+						vl(31, 'span', Pv),
+						Tl(32, 'class'),
+						yl(),
+						Tl(33, '='),
+						vl(34, 'span', Ev),
+						Tl(35, '"field-group"'),
+						yl(),
+						Tl(36, '>\n            <'),
+						vl(37, 'span', Pv),
+						Tl(38, 'label'),
+						yl(),
+						Tl(39, ' '),
+						vl(40, 'span', Pv),
+						Tl(41, 'class'),
+						yl(),
+						Tl(42, '='),
+						vl(43, 'span', Ev),
+						Tl(44, '"form-label"'),
+						yl(),
+						Tl(45, ' '),
+						vl(46, 'span', Pv),
+						Tl(47, 'for'),
+						yl(),
+						Tl(48, '='),
+						vl(49, 'span', Ev),
+						Tl(50, '"name"'),
+						yl(),
+						Tl(51, '>Name</'),
+						vl(52, 'span', Pv),
+						Tl(53, 'label'),
+						yl(),
+						Tl(54, '>\n            <'),
+						vl(55, 'span', Pv),
+						Tl(56, 'input'),
+						yl(),
+						Tl(57, ' '),
+						vl(58, 'span', Pv),
+						Tl(59, 'class'),
+						yl(),
+						Tl(60, '='),
+						vl(61, 'span', Ev),
+						Tl(62, '"form-field"'),
+						yl(),
+						Tl(63, ' '),
+						vl(64, 'span', Pv),
+						Tl(65, 'type'),
+						yl(),
+						Tl(66, '='),
+						vl(67, 'span', Ev),
+						Tl(68, '"text"'),
+						yl(),
+						Tl(69, ' id='),
+						vl(70, 'span', Ev),
+						Tl(71, '"name"'),
+						yl(),
+						Tl(72, ' name='),
+						vl(73, 'span', Ev),
+						Tl(74, '"name"'),
+						yl(),
+						Tl(75, ' placeholder='),
+						vl(76, 'span', Ev),
+						Tl(77, '"Enter name"'),
+						yl(),
+						Tl(78, '>\n        </'),
+						vl(79, 'span', Pv),
+						Tl(80, 'li'),
+						yl(),
+						Tl(81, '>\n    </ul>    \n</'),
+						vl(82, 'span', Pv),
+						Tl(83, 'form'),
+						yl(),
+						Tl(84, '>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			function zw(t, e) {
+			var zw = ['type', 'text', 'id', 'name', 'name', 'name', 'placeholder', 'Enter name', 'disabled', '', 1, 'form-field'],
+				Vw = ['type', 'text', 'id', 'name', 'name', 'name', 'placeholder', 'Enter name', 'readonly', '', 1, 'form-field'];
+			function Fw(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Label'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Form labels are styled with a '),
-						wl(6, 'code'),
-						Al(7, '.form-label'),
-						_l(),
-						Al(8, ' class.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'form'),
-						wl(11, 'ul', rw),
-						wl(12, 'li', ow),
-						wl(13, 'label', iw),
-						Al(14, 'Name'),
-						_l(),
-						xl(15, 'input', aw),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(16, 'figure'),
-						wl(17, 'pre', iv),
-						Al(18, '<'),
-						wl(19, 'span', Ev),
-						Al(20, 'form'),
-						_l(),
-						Al(21, '>\n    <ul '),
-						wl(22, 'span', Ev),
-						Al(23, 'class'),
-						_l(),
-						Al(24, '='),
-						wl(25, 'span', Ov),
-						Al(26, '"form-group"'),
-						_l(),
-						Al(27, '>\n        <'),
-						wl(28, 'span', Ev),
-						Al(29, 'li'),
-						_l(),
-						Al(30, ' '),
-						wl(31, 'span', Ev),
-						Al(32, 'class'),
-						_l(),
-						Al(33, '='),
-						wl(34, 'span', Ov),
-						Al(35, '"field-group"'),
-						_l(),
-						Al(36, '>\n            <'),
-						wl(37, 'span', Ev),
-						Al(38, 'label'),
-						_l(),
-						Al(39, ' '),
-						wl(40, 'span', Ev),
-						Al(41, 'class'),
-						_l(),
-						Al(42, '='),
-						wl(43, 'span', Ov),
-						Al(44, '"form-label"'),
-						_l(),
-						Al(45, ' '),
-						wl(46, 'span', Ev),
-						Al(47, 'for'),
-						_l(),
-						Al(48, '='),
-						wl(49, 'span', Ov),
-						Al(50, '"name"'),
-						_l(),
-						Al(51, '>Name</'),
-						wl(52, 'span', Ev),
-						Al(53, 'label'),
-						_l(),
-						Al(54, '>\n            <'),
-						wl(55, 'span', Ev),
-						Al(56, 'input'),
-						_l(),
-						Al(57, ' '),
-						wl(58, 'span', Ev),
-						Al(59, 'class'),
-						_l(),
-						Al(60, '='),
-						wl(61, 'span', Ov),
-						Al(62, '"form-field"'),
-						_l(),
-						Al(63, ' '),
-						wl(64, 'span', Ev),
-						Al(65, 'type'),
-						_l(),
-						Al(66, '='),
-						wl(67, 'span', Ov),
-						Al(68, '"text"'),
-						_l(),
-						Al(69, ' id='),
-						wl(70, 'span', Ov),
-						Al(71, '"name"'),
-						_l(),
-						Al(72, ' name='),
-						wl(73, 'span', Ov),
-						Al(74, '"name"'),
-						_l(),
-						Al(75, ' placeholder='),
-						wl(76, 'span', Ov),
-						Al(77, '"Enter name"'),
-						_l(),
-						Al(78, '>\n        </'),
-						wl(79, 'span', Ev),
-						Al(80, 'li'),
-						_l(),
-						Al(81, '>\n    </ul>    \n</'),
-						wl(82, 'span', Ev),
-						Al(83, 'form'),
-						_l(),
-						Al(84, '>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'State'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Form fields can be disabled by adding a '),
+						vl(6, 'code'),
+						Tl(7, 'disabled'),
+						yl(),
+						Tl(8, ' attribute or readonly by adding a '),
+						vl(9, 'code'),
+						Tl(10, 'readonly'),
+						yl(),
+						Tl(11, ' attribute.'),
+						yl(),
+						yl(),
+						vl(12, 'section', $b),
+						vl(13, 'form'),
+						vl(14, 'ul', nw),
+						vl(15, 'li', rw),
+						vl(16, 'label', ow),
+						Tl(17, 'Disabled'),
+						yl(),
+						wl(18, 'input', zw),
+						yl(),
+						vl(19, 'li', rw),
+						vl(20, 'label', ow),
+						Tl(21, 'Readonly'),
+						yl(),
+						wl(22, 'input', Vw),
+						yl(),
+						yl(),
+						yl(),
+						yl(),
+						vl(23, 'figure'),
+						vl(24, 'pre', ov),
+						Tl(25, '<'),
+						vl(26, 'span', Pv),
+						Tl(27, 'form'),
+						yl(),
+						Tl(28, '>\n    <ul '),
+						vl(29, 'span', Pv),
+						Tl(30, 'class'),
+						yl(),
+						Tl(31, '='),
+						vl(32, 'span', Ev),
+						Tl(33, '"form-group"'),
+						yl(),
+						Tl(34, '>\n        <'),
+						vl(35, 'span', Pv),
+						Tl(36, 'li'),
+						yl(),
+						Tl(37, ' '),
+						vl(38, 'span', Pv),
+						Tl(39, 'class'),
+						yl(),
+						Tl(40, '='),
+						vl(41, 'span', Ev),
+						Tl(42, '"field-group"'),
+						yl(),
+						Tl(43, '>\n            <'),
+						vl(44, 'span', Pv),
+						Tl(45, 'label'),
+						yl(),
+						Tl(46, ' '),
+						vl(47, 'span', Pv),
+						Tl(48, 'class'),
+						yl(),
+						Tl(49, '='),
+						vl(50, 'span', Ev),
+						Tl(51, '"form-label"'),
+						yl(),
+						Tl(52, ' '),
+						vl(53, 'span', Pv),
+						Tl(54, 'for'),
+						yl(),
+						Tl(55, '='),
+						vl(56, 'span', Ev),
+						Tl(57, '"name"'),
+						yl(),
+						Tl(58, '>Disabled</'),
+						vl(59, 'span', Pv),
+						Tl(60, 'label'),
+						yl(),
+						Tl(61, '>\n            <'),
+						vl(62, 'span', Pv),
+						Tl(63, 'input'),
+						yl(),
+						Tl(64, ' '),
+						vl(65, 'span', Pv),
+						Tl(66, 'class'),
+						yl(),
+						Tl(67, '='),
+						vl(68, 'span', Ev),
+						Tl(69, '"form-field"'),
+						yl(),
+						Tl(70, ' '),
+						vl(71, 'span', Pv),
+						Tl(72, 'type'),
+						yl(),
+						Tl(73, '='),
+						vl(74, 'span', Ev),
+						Tl(75, '"text"'),
+						yl(),
+						Tl(76, ' id='),
+						vl(77, 'span', Ev),
+						Tl(78, '"name"'),
+						yl(),
+						Tl(79, ' name='),
+						vl(80, 'span', Ev),
+						Tl(81, '"name"'),
+						yl(),
+						Tl(82, ' placeholder='),
+						vl(83, 'span', Ev),
+						Tl(84, '"Enter name"'),
+						yl(),
+						Tl(85, ' disabled>\n        </'),
+						vl(86, 'span', Pv),
+						Tl(87, 'li'),
+						yl(),
+						Tl(88, '>\n        <'),
+						vl(89, 'span', Pv),
+						Tl(90, 'li'),
+						yl(),
+						Tl(91, ' '),
+						vl(92, 'span', Pv),
+						Tl(93, 'class'),
+						yl(),
+						Tl(94, '='),
+						vl(95, 'span', Ev),
+						Tl(96, '"field-group"'),
+						yl(),
+						Tl(97, '>\n            <'),
+						vl(98, 'span', Pv),
+						Tl(99, 'label'),
+						yl(),
+						Tl(100, ' '),
+						vl(101, 'span', Pv),
+						Tl(102, 'class'),
+						yl(),
+						Tl(103, '='),
+						vl(104, 'span', Ev),
+						Tl(105, '"form-label"'),
+						yl(),
+						Tl(106, ' '),
+						vl(107, 'span', Pv),
+						Tl(108, 'for'),
+						yl(),
+						Tl(109, '='),
+						vl(110, 'span', Ev),
+						Tl(111, '"name"'),
+						yl(),
+						Tl(112, '>Readonly</'),
+						vl(113, 'span', Pv),
+						Tl(114, 'label'),
+						yl(),
+						Tl(115, '>\n            <'),
+						vl(116, 'span', Pv),
+						Tl(117, 'input'),
+						yl(),
+						Tl(118, ' '),
+						vl(119, 'span', Pv),
+						Tl(120, 'class'),
+						yl(),
+						Tl(121, '='),
+						vl(122, 'span', Ev),
+						Tl(123, '"form-field"'),
+						yl(),
+						Tl(124, ' '),
+						vl(125, 'span', Pv),
+						Tl(126, 'type'),
+						yl(),
+						Tl(127, '='),
+						vl(128, 'span', Ev),
+						Tl(129, '"text"'),
+						yl(),
+						Tl(130, ' id='),
+						vl(131, 'span', Ev),
+						Tl(132, '"name"'),
+						yl(),
+						Tl(133, ' name='),
+						vl(134, 'span', Ev),
+						Tl(135, '"name"'),
+						yl(),
+						Tl(136, ' placeholder='),
+						vl(137, 'span', Ev),
+						Tl(138, '"Enter name"'),
+						yl(),
+						Tl(139, ' readonly>\n        </'),
+						vl(140, 'span', Pv),
+						Tl(141, 'li'),
+						yl(),
+						Tl(142, '>\n    </ul>    \n</'),
+						vl(143, 'span', Pv),
+						Tl(144, 'form'),
+						yl(),
+						Tl(145, '>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(12), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var Vw = ['type', 'text', 'id', 'name', 'name', 'name', 'placeholder', 'Enter name', 'disabled', '', 1, 'form-field'],
-				Fw = ['type', 'text', 'id', 'name', 'name', 'name', 'placeholder', 'Enter name', 'readonly', '', 1, 'form-field'];
 			function Bw(t, e) {
-				if (
-					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'State'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Form fields can be disabled by adding a '),
-						wl(6, 'code'),
-						Al(7, 'disabled'),
-						_l(),
-						Al(8, ' attribute or readonly by adding a '),
-						wl(9, 'code'),
-						Al(10, 'readonly'),
-						_l(),
-						Al(11, ' attribute.'),
-						_l(),
-						_l(),
-						wl(12, 'section', tv),
-						wl(13, 'form'),
-						wl(14, 'ul', rw),
-						wl(15, 'li', ow),
-						wl(16, 'label', iw),
-						Al(17, 'Disabled'),
-						_l(),
-						xl(18, 'input', Vw),
-						_l(),
-						wl(19, 'li', ow),
-						wl(20, 'label', iw),
-						Al(21, 'Readonly'),
-						_l(),
-						xl(22, 'input', Fw),
-						_l(),
-						_l(),
-						_l(),
-						_l(),
-						wl(23, 'figure'),
-						wl(24, 'pre', iv),
-						Al(25, '<'),
-						wl(26, 'span', Ev),
-						Al(27, 'form'),
-						_l(),
-						Al(28, '>\n    <ul '),
-						wl(29, 'span', Ev),
-						Al(30, 'class'),
-						_l(),
-						Al(31, '='),
-						wl(32, 'span', Ov),
-						Al(33, '"form-group"'),
-						_l(),
-						Al(34, '>\n        <'),
-						wl(35, 'span', Ev),
-						Al(36, 'li'),
-						_l(),
-						Al(37, ' '),
-						wl(38, 'span', Ev),
-						Al(39, 'class'),
-						_l(),
-						Al(40, '='),
-						wl(41, 'span', Ov),
-						Al(42, '"field-group"'),
-						_l(),
-						Al(43, '>\n            <'),
-						wl(44, 'span', Ev),
-						Al(45, 'label'),
-						_l(),
-						Al(46, ' '),
-						wl(47, 'span', Ev),
-						Al(48, 'class'),
-						_l(),
-						Al(49, '='),
-						wl(50, 'span', Ov),
-						Al(51, '"form-label"'),
-						_l(),
-						Al(52, ' '),
-						wl(53, 'span', Ev),
-						Al(54, 'for'),
-						_l(),
-						Al(55, '='),
-						wl(56, 'span', Ov),
-						Al(57, '"name"'),
-						_l(),
-						Al(58, '>Disabled</'),
-						wl(59, 'span', Ev),
-						Al(60, 'label'),
-						_l(),
-						Al(61, '>\n            <'),
-						wl(62, 'span', Ev),
-						Al(63, 'input'),
-						_l(),
-						Al(64, ' '),
-						wl(65, 'span', Ev),
-						Al(66, 'class'),
-						_l(),
-						Al(67, '='),
-						wl(68, 'span', Ov),
-						Al(69, '"form-field"'),
-						_l(),
-						Al(70, ' '),
-						wl(71, 'span', Ev),
-						Al(72, 'type'),
-						_l(),
-						Al(73, '='),
-						wl(74, 'span', Ov),
-						Al(75, '"text"'),
-						_l(),
-						Al(76, ' id='),
-						wl(77, 'span', Ov),
-						Al(78, '"name"'),
-						_l(),
-						Al(79, ' name='),
-						wl(80, 'span', Ov),
-						Al(81, '"name"'),
-						_l(),
-						Al(82, ' placeholder='),
-						wl(83, 'span', Ov),
-						Al(84, '"Enter name"'),
-						_l(),
-						Al(85, ' disabled>\n        </'),
-						wl(86, 'span', Ev),
-						Al(87, 'li'),
-						_l(),
-						Al(88, '>\n        <'),
-						wl(89, 'span', Ev),
-						Al(90, 'li'),
-						_l(),
-						Al(91, ' '),
-						wl(92, 'span', Ev),
-						Al(93, 'class'),
-						_l(),
-						Al(94, '='),
-						wl(95, 'span', Ov),
-						Al(96, '"field-group"'),
-						_l(),
-						Al(97, '>\n            <'),
-						wl(98, 'span', Ev),
-						Al(99, 'label'),
-						_l(),
-						Al(100, ' '),
-						wl(101, 'span', Ev),
-						Al(102, 'class'),
-						_l(),
-						Al(103, '='),
-						wl(104, 'span', Ov),
-						Al(105, '"form-label"'),
-						_l(),
-						Al(106, ' '),
-						wl(107, 'span', Ev),
-						Al(108, 'for'),
-						_l(),
-						Al(109, '='),
-						wl(110, 'span', Ov),
-						Al(111, '"name"'),
-						_l(),
-						Al(112, '>Readonly</'),
-						wl(113, 'span', Ev),
-						Al(114, 'label'),
-						_l(),
-						Al(115, '>\n            <'),
-						wl(116, 'span', Ev),
-						Al(117, 'input'),
-						_l(),
-						Al(118, ' '),
-						wl(119, 'span', Ev),
-						Al(120, 'class'),
-						_l(),
-						Al(121, '='),
-						wl(122, 'span', Ov),
-						Al(123, '"form-field"'),
-						_l(),
-						Al(124, ' '),
-						wl(125, 'span', Ev),
-						Al(126, 'type'),
-						_l(),
-						Al(127, '='),
-						wl(128, 'span', Ov),
-						Al(129, '"text"'),
-						_l(),
-						Al(130, ' id='),
-						wl(131, 'span', Ov),
-						Al(132, '"name"'),
-						_l(),
-						Al(133, ' name='),
-						wl(134, 'span', Ov),
-						Al(135, '"name"'),
-						_l(),
-						Al(136, ' placeholder='),
-						wl(137, 'span', Ov),
-						Al(138, '"Enter name"'),
-						_l(),
-						Al(139, ' readonly>\n        </'),
-						wl(140, 'span', Ev),
-						Al(141, 'li'),
-						_l(),
-						Al(142, '>\n    </ul>    \n</'),
-						wl(143, 'span', Ev),
-						Al(144, 'form'),
-						_l(),
-						Al(145, '>'),
-						_l(),
-						_l(),
-						_l()),
-					2 & t)
-				) {
-					var n = El();
-					Za(12), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
-				}
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function qw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Area'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Gw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Area'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Container'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Zw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Container'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Item'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Ww(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Item'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Qw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Container'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Yw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Container'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Sticky Footer'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Jw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Sticky Footer'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Kw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function Xw(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Items'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function $w(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Items'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Links'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function t_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Links'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Placement'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function e_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Placement'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function n_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function r_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function o_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
-			}
-			function i_(t, e) {
 				1 & t &&
-					(wl(0, 'article', Xb),
-					wl(1, 'section', $b),
-					wl(2, 'p'),
-					Al(3, 'Resets are used to remove padding and margin from all elements. Use space classes to add spacing to elements.'),
-					_l(),
-					_l(),
-					_l());
+					(vl(0, 'article', Kb),
+					vl(1, 'section', Xb),
+					vl(2, 'p'),
+					Tl(3, 'Resets are used to remove padding and margin from all elements. Use space classes to add spacing to elements.'),
+					yl(),
+					yl(),
+					yl());
 			}
-			var a_ = [1, 'mar-t-xs'],
-				s_ = [1, 'mar-r-sm'],
-				l_ = [1, 'mar-b-md'],
-				u_ = [1, 'mar-l-lg'],
-				c_ = [1, 'mar-tb-xl'],
-				p_ = [1, 'mar-lr-md'],
-				f_ = [1, 'mar-a-md'];
-			function d_(t, e) {
+			var i_ = [1, 'mar-t-xs'],
+				a_ = [1, 'mar-r-sm'],
+				s_ = [1, 'mar-b-md'],
+				l_ = [1, 'mar-l-lg'],
+				u_ = [1, 'mar-tb-xl'],
+				c_ = [1, 'mar-lr-md'],
+				p_ = [1, 'mar-a-md'];
+			function f_(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Margin'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use a '),
-						wl(6, 'code'),
-						Al(7, '.mar-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]'),
-						_l(),
-						Al(8, ' class to add margin to an element.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'p', a_),
-						Al(11, 'top extra small'),
-						_l(),
-						wl(12, 'p', s_),
-						Al(13, 'right small'),
-						_l(),
-						wl(14, 'p', l_),
-						Al(15, 'bottom medium'),
-						_l(),
-						wl(16, 'p', u_),
-						Al(17, 'left large'),
-						_l(),
-						wl(18, 'p', c_),
-						Al(19, 'top bottom extra large'),
-						_l(),
-						wl(20, 'p', p_),
-						Al(21, 'left right medium'),
-						_l(),
-						wl(22, 'p', f_),
-						Al(23, 'all medium'),
-						_l(),
-						_l(),
-						wl(24, 'figure'),
-						wl(25, 'pre', iv),
-						Al(26, '<'),
-						wl(27, 'span', av),
-						Al(28, 'p'),
-						_l(),
-						Al(29, ' class='),
-						wl(30, 'span', Ov),
-						Al(31, '"mar-t-xs"'),
-						_l(),
-						Al(32, '>'),
-						wl(33, 'span', lv),
-						Al(34, 'top'),
-						_l(),
-						Al(35, ' extra small</p>\n<'),
-						wl(36, 'span', av),
-						Al(37, 'p'),
-						_l(),
-						Al(38, ' class='),
-						wl(39, 'span', Ov),
-						Al(40, '"mar-r-sm"'),
-						_l(),
-						Al(41, '>'),
-						wl(42, 'span', lv),
-						Al(43, 'right'),
-						_l(),
-						Al(44, ' small</p>\n<'),
-						wl(45, 'span', av),
-						Al(46, 'p'),
-						_l(),
-						Al(47, ' class='),
-						wl(48, 'span', Ov),
-						Al(49, '"mar-b-md"'),
-						_l(),
-						Al(50, '>'),
-						wl(51, 'span', lv),
-						Al(52, 'bottom'),
-						_l(),
-						Al(53, ' medium</p>\n<'),
-						wl(54, 'span', av),
-						Al(55, 'p'),
-						_l(),
-						Al(56, ' class='),
-						wl(57, 'span', Ov),
-						Al(58, '"mar-l-lg"'),
-						_l(),
-						Al(59, '>'),
-						wl(60, 'span', lv),
-						Al(61, 'left'),
-						_l(),
-						Al(62, ' large</p>\n<'),
-						wl(63, 'span', av),
-						Al(64, 'p'),
-						_l(),
-						Al(65, ' class='),
-						wl(66, 'span', Ov),
-						Al(67, '"mar-tb-xl"'),
-						_l(),
-						Al(68, '>'),
-						wl(69, 'span', lv),
-						Al(70, 'top'),
-						_l(),
-						Al(71, ' '),
-						wl(72, 'span', lv),
-						Al(73, 'bottom'),
-						_l(),
-						Al(74, ' extra large</p>\n<'),
-						wl(75, 'span', av),
-						Al(76, 'p'),
-						_l(),
-						Al(77, ' class='),
-						wl(78, 'span', Ov),
-						Al(79, '"mar-lr-md"'),
-						_l(),
-						Al(80, '>'),
-						wl(81, 'span', lv),
-						Al(82, 'left'),
-						_l(),
-						Al(83, ' '),
-						wl(84, 'span', lv),
-						Al(85, 'right'),
-						_l(),
-						Al(86, ' medium</p>\n<'),
-						wl(87, 'span', av),
-						Al(88, 'p'),
-						_l(),
-						Al(89, ' class='),
-						wl(90, 'span', Ov),
-						Al(91, '"mar-a-md"'),
-						_l(),
-						Al(92, '>all medium</p>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Margin'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use a '),
+						vl(6, 'code'),
+						Tl(7, '.mar-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]'),
+						yl(),
+						Tl(8, ' class to add margin to an element.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'p', i_),
+						Tl(11, 'top extra small'),
+						yl(),
+						vl(12, 'p', a_),
+						Tl(13, 'right small'),
+						yl(),
+						vl(14, 'p', s_),
+						Tl(15, 'bottom medium'),
+						yl(),
+						vl(16, 'p', l_),
+						Tl(17, 'left large'),
+						yl(),
+						vl(18, 'p', u_),
+						Tl(19, 'top bottom extra large'),
+						yl(),
+						vl(20, 'p', c_),
+						Tl(21, 'left right medium'),
+						yl(),
+						vl(22, 'p', p_),
+						Tl(23, 'all medium'),
+						yl(),
+						yl(),
+						vl(24, 'figure'),
+						vl(25, 'pre', ov),
+						Tl(26, '<'),
+						vl(27, 'span', iv),
+						Tl(28, 'p'),
+						yl(),
+						Tl(29, ' class='),
+						vl(30, 'span', Ev),
+						Tl(31, '"mar-t-xs"'),
+						yl(),
+						Tl(32, '>'),
+						vl(33, 'span', sv),
+						Tl(34, 'top'),
+						yl(),
+						Tl(35, ' extra small</p>\n<'),
+						vl(36, 'span', iv),
+						Tl(37, 'p'),
+						yl(),
+						Tl(38, ' class='),
+						vl(39, 'span', Ev),
+						Tl(40, '"mar-r-sm"'),
+						yl(),
+						Tl(41, '>'),
+						vl(42, 'span', sv),
+						Tl(43, 'right'),
+						yl(),
+						Tl(44, ' small</p>\n<'),
+						vl(45, 'span', iv),
+						Tl(46, 'p'),
+						yl(),
+						Tl(47, ' class='),
+						vl(48, 'span', Ev),
+						Tl(49, '"mar-b-md"'),
+						yl(),
+						Tl(50, '>'),
+						vl(51, 'span', sv),
+						Tl(52, 'bottom'),
+						yl(),
+						Tl(53, ' medium</p>\n<'),
+						vl(54, 'span', iv),
+						Tl(55, 'p'),
+						yl(),
+						Tl(56, ' class='),
+						vl(57, 'span', Ev),
+						Tl(58, '"mar-l-lg"'),
+						yl(),
+						Tl(59, '>'),
+						vl(60, 'span', sv),
+						Tl(61, 'left'),
+						yl(),
+						Tl(62, ' large</p>\n<'),
+						vl(63, 'span', iv),
+						Tl(64, 'p'),
+						yl(),
+						Tl(65, ' class='),
+						vl(66, 'span', Ev),
+						Tl(67, '"mar-tb-xl"'),
+						yl(),
+						Tl(68, '>'),
+						vl(69, 'span', sv),
+						Tl(70, 'top'),
+						yl(),
+						Tl(71, ' '),
+						vl(72, 'span', sv),
+						Tl(73, 'bottom'),
+						yl(),
+						Tl(74, ' extra large</p>\n<'),
+						vl(75, 'span', iv),
+						Tl(76, 'p'),
+						yl(),
+						Tl(77, ' class='),
+						vl(78, 'span', Ev),
+						Tl(79, '"mar-lr-md"'),
+						yl(),
+						Tl(80, '>'),
+						vl(81, 'span', sv),
+						Tl(82, 'left'),
+						yl(),
+						Tl(83, ' '),
+						vl(84, 'span', sv),
+						Tl(85, 'right'),
+						yl(),
+						Tl(86, ' medium</p>\n<'),
+						vl(87, 'span', iv),
+						Tl(88, 'p'),
+						yl(),
+						Tl(89, ' class='),
+						vl(90, 'span', Ev),
+						Tl(91, '"mar-a-md"'),
+						yl(),
+						Tl(92, '>all medium</p>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var h_ = [1, 'pad-t-xs'],
-				g_ = [1, 'pad-r-sm'],
-				m_ = [1, 'pad-b-md'],
-				b_ = [1, 'pad-l-lg'],
-				v_ = [1, 'pad-tb-xl'],
-				y_ = [1, 'pad-lr-md'],
-				w_ = [1, 'pad-a-md'];
-			function __(t, e) {
+			var d_ = [1, 'pad-t-xs'],
+				h_ = [1, 'pad-r-sm'],
+				g_ = [1, 'pad-b-md'],
+				m_ = [1, 'pad-l-lg'],
+				b_ = [1, 'pad-tb-xl'],
+				v_ = [1, 'pad-lr-md'],
+				y_ = [1, 'pad-a-md'];
+			function w_(t, e) {
 				if (
 					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'h2'),
-						Al(3, 'Padding'),
-						_l(),
-						wl(4, 'p'),
-						Al(5, 'Use a '),
-						wl(6, 'code'),
-						Al(7, '.pad-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]'),
-						_l(),
-						Al(8, ' class to add padding to an element.'),
-						_l(),
-						_l(),
-						wl(9, 'section', tv),
-						wl(10, 'p', h_),
-						Al(11, 'top extra small'),
-						_l(),
-						wl(12, 'p', g_),
-						Al(13, 'right small'),
-						_l(),
-						wl(14, 'p', m_),
-						Al(15, 'bottom medium'),
-						_l(),
-						wl(16, 'p', b_),
-						Al(17, 'left large'),
-						_l(),
-						wl(18, 'p', v_),
-						Al(19, 'top bottom extra large'),
-						_l(),
-						wl(20, 'p', y_),
-						Al(21, 'left right medium'),
-						_l(),
-						wl(22, 'p', w_),
-						Al(23, 'all medium'),
-						_l(),
-						_l(),
-						wl(24, 'figure'),
-						wl(25, 'pre', iv),
-						Al(26, '<'),
-						wl(27, 'span', av),
-						Al(28, 'p'),
-						_l(),
-						Al(29, ' class='),
-						wl(30, 'span', Ov),
-						Al(31, '"pad-t-xs"'),
-						_l(),
-						Al(32, '>'),
-						wl(33, 'span', lv),
-						Al(34, 'top'),
-						_l(),
-						Al(35, ' extra small</p>\n<'),
-						wl(36, 'span', av),
-						Al(37, 'p'),
-						_l(),
-						Al(38, ' class='),
-						wl(39, 'span', Ov),
-						Al(40, '"pad-r-sm"'),
-						_l(),
-						Al(41, '>'),
-						wl(42, 'span', lv),
-						Al(43, 'right'),
-						_l(),
-						Al(44, ' small</p>\n<'),
-						wl(45, 'span', av),
-						Al(46, 'p'),
-						_l(),
-						Al(47, ' class='),
-						wl(48, 'span', Ov),
-						Al(49, '"pad-b-md"'),
-						_l(),
-						Al(50, '>'),
-						wl(51, 'span', lv),
-						Al(52, 'bottom'),
-						_l(),
-						Al(53, ' medium</p>\n<'),
-						wl(54, 'span', av),
-						Al(55, 'p'),
-						_l(),
-						Al(56, ' class='),
-						wl(57, 'span', Ov),
-						Al(58, '"pad-l-lg"'),
-						_l(),
-						Al(59, '>'),
-						wl(60, 'span', lv),
-						Al(61, 'left'),
-						_l(),
-						Al(62, ' large</p>\n<'),
-						wl(63, 'span', av),
-						Al(64, 'p'),
-						_l(),
-						Al(65, ' class='),
-						wl(66, 'span', Ov),
-						Al(67, '"pad-tb-xl"'),
-						_l(),
-						Al(68, '>'),
-						wl(69, 'span', lv),
-						Al(70, 'top'),
-						_l(),
-						Al(71, ' '),
-						wl(72, 'span', lv),
-						Al(73, 'bottom'),
-						_l(),
-						Al(74, ' extra large</p>\n<'),
-						wl(75, 'span', av),
-						Al(76, 'p'),
-						_l(),
-						Al(77, ' class='),
-						wl(78, 'span', Ov),
-						Al(79, '"pad-lr-md"'),
-						_l(),
-						Al(80, '>'),
-						wl(81, 'span', lv),
-						Al(82, 'left'),
-						_l(),
-						Al(83, ' '),
-						wl(84, 'span', lv),
-						Al(85, 'right'),
-						_l(),
-						Al(86, ' medium</p>\n<'),
-						wl(87, 'span', av),
-						Al(88, 'p'),
-						_l(),
-						Al(89, ' class='),
-						wl(90, 'span', Ov),
-						Al(91, '"pad-a-md"'),
-						_l(),
-						Al(92, '>all medium</p>'),
-						_l(),
-						_l(),
-						_l()),
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'h2'),
+						Tl(3, 'Padding'),
+						yl(),
+						vl(4, 'p'),
+						Tl(5, 'Use a '),
+						vl(6, 'code'),
+						Tl(7, '.pad-[t || r || b || l || tb || lr || a]-[xs || sm || md || lg || xl]'),
+						yl(),
+						Tl(8, ' class to add padding to an element.'),
+						yl(),
+						yl(),
+						vl(9, 'section', $b),
+						vl(10, 'p', d_),
+						Tl(11, 'top extra small'),
+						yl(),
+						vl(12, 'p', h_),
+						Tl(13, 'right small'),
+						yl(),
+						vl(14, 'p', g_),
+						Tl(15, 'bottom medium'),
+						yl(),
+						vl(16, 'p', m_),
+						Tl(17, 'left large'),
+						yl(),
+						vl(18, 'p', b_),
+						Tl(19, 'top bottom extra large'),
+						yl(),
+						vl(20, 'p', v_),
+						Tl(21, 'left right medium'),
+						yl(),
+						vl(22, 'p', y_),
+						Tl(23, 'all medium'),
+						yl(),
+						yl(),
+						vl(24, 'figure'),
+						vl(25, 'pre', ov),
+						Tl(26, '<'),
+						vl(27, 'span', iv),
+						Tl(28, 'p'),
+						yl(),
+						Tl(29, ' class='),
+						vl(30, 'span', Ev),
+						Tl(31, '"pad-t-xs"'),
+						yl(),
+						Tl(32, '>'),
+						vl(33, 'span', sv),
+						Tl(34, 'top'),
+						yl(),
+						Tl(35, ' extra small</p>\n<'),
+						vl(36, 'span', iv),
+						Tl(37, 'p'),
+						yl(),
+						Tl(38, ' class='),
+						vl(39, 'span', Ev),
+						Tl(40, '"pad-r-sm"'),
+						yl(),
+						Tl(41, '>'),
+						vl(42, 'span', sv),
+						Tl(43, 'right'),
+						yl(),
+						Tl(44, ' small</p>\n<'),
+						vl(45, 'span', iv),
+						Tl(46, 'p'),
+						yl(),
+						Tl(47, ' class='),
+						vl(48, 'span', Ev),
+						Tl(49, '"pad-b-md"'),
+						yl(),
+						Tl(50, '>'),
+						vl(51, 'span', sv),
+						Tl(52, 'bottom'),
+						yl(),
+						Tl(53, ' medium</p>\n<'),
+						vl(54, 'span', iv),
+						Tl(55, 'p'),
+						yl(),
+						Tl(56, ' class='),
+						vl(57, 'span', Ev),
+						Tl(58, '"pad-l-lg"'),
+						yl(),
+						Tl(59, '>'),
+						vl(60, 'span', sv),
+						Tl(61, 'left'),
+						yl(),
+						Tl(62, ' large</p>\n<'),
+						vl(63, 'span', iv),
+						Tl(64, 'p'),
+						yl(),
+						Tl(65, ' class='),
+						vl(66, 'span', Ev),
+						Tl(67, '"pad-tb-xl"'),
+						yl(),
+						Tl(68, '>'),
+						vl(69, 'span', sv),
+						Tl(70, 'top'),
+						yl(),
+						Tl(71, ' '),
+						vl(72, 'span', sv),
+						Tl(73, 'bottom'),
+						yl(),
+						Tl(74, ' extra large</p>\n<'),
+						vl(75, 'span', iv),
+						Tl(76, 'p'),
+						yl(),
+						Tl(77, ' class='),
+						vl(78, 'span', Ev),
+						Tl(79, '"pad-lr-md"'),
+						yl(),
+						Tl(80, '>'),
+						vl(81, 'span', sv),
+						Tl(82, 'left'),
+						yl(),
+						Tl(83, ' '),
+						vl(84, 'span', sv),
+						Tl(85, 'right'),
+						yl(),
+						Tl(86, ' medium</p>\n<'),
+						vl(87, 'span', iv),
+						Tl(88, 'p'),
+						yl(),
+						Tl(89, ' class='),
+						vl(90, 'span', Ev),
+						Tl(91, '"pad-a-md"'),
+						yl(),
+						Tl(92, '>all medium</p>'),
+						yl(),
+						yl(),
+						yl()),
 					2 & t)
 				) {
-					var n = El();
-					Za(9), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
+					var n = Sl();
+					qa(9), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
 				}
 			}
-			var x_ = [1, 'spinner'],
-				C_ = [1, 'spinner-dotted'];
+			var __ = [1, 'spinner'],
+				x_ = [1, 'spinner-dotted'];
+			function C_(t, e) {
+				if (
+					(1 & t &&
+						(vl(0, 'article', Kb),
+						vl(1, 'section', Xb),
+						vl(2, 'p'),
+						Tl(3, 'Spinners are styled with a '),
+						vl(4, 'code'),
+						Tl(5, '.spinner[-dotted]'),
+						yl(),
+						Tl(6, ' class.'),
+						yl(),
+						yl(),
+						vl(7, 'section', $b),
+						wl(8, 'p', __),
+						wl(9, 'p', x_),
+						yl(),
+						vl(10, 'figure'),
+						vl(11, 'pre', ov),
+						vl(12, 'span', iv),
+						Tl(13, '<'),
+						vl(14, 'span', av),
+						Tl(15, 'p'),
+						yl(),
+						Tl(16, ' '),
+						vl(17, 'span', sv),
+						Tl(18, 'class'),
+						yl(),
+						Tl(19, '='),
+						vl(20, 'span', lv),
+						Tl(21, '"spinner"'),
+						yl(),
+						Tl(22, '>'),
+						yl(),
+						vl(23, 'span', iv),
+						Tl(24, '</'),
+						vl(25, 'span', av),
+						Tl(26, 'p'),
+						yl(),
+						Tl(27, '>'),
+						yl(),
+						Tl(28, '\n'),
+						vl(29, 'span', iv),
+						Tl(30, '<'),
+						vl(31, 'span', av),
+						Tl(32, 'p'),
+						yl(),
+						Tl(33, ' '),
+						vl(34, 'span', sv),
+						Tl(35, 'class'),
+						yl(),
+						Tl(36, '='),
+						vl(37, 'span', lv),
+						Tl(38, '"spinner-dotted"'),
+						yl(),
+						Tl(39, '>'),
+						yl(),
+						vl(40, 'span', iv),
+						Tl(41, '</'),
+						vl(42, 'span', av),
+						Tl(43, 'p'),
+						yl(),
+						Tl(44, '>'),
+						yl(),
+						yl(),
+						yl(),
+						yl()),
+					2 & t)
+				) {
+					var n = Sl();
+					qa(7), Fs('ngClass', Ku(1, uv, n.checkSection('Flexbox'), n.checkSection('Space')));
+				}
+			}
 			function k_(t, e) {
-				if (
-					(1 & t &&
-						(wl(0, 'article', Xb),
-						wl(1, 'section', $b),
-						wl(2, 'p'),
-						Al(3, 'Spinners are styled with a '),
-						wl(4, 'code'),
-						Al(5, '.spinner[-dotted]'),
-						_l(),
-						Al(6, ' class.'),
-						_l(),
-						_l(),
-						wl(7, 'section', tv),
-						xl(8, 'p', x_),
-						xl(9, 'p', C_),
-						_l(),
-						wl(10, 'figure'),
-						wl(11, 'pre', iv),
-						wl(12, 'span', av),
-						Al(13, '<'),
-						wl(14, 'span', sv),
-						Al(15, 'p'),
-						_l(),
-						Al(16, ' '),
-						wl(17, 'span', lv),
-						Al(18, 'class'),
-						_l(),
-						Al(19, '='),
-						wl(20, 'span', uv),
-						Al(21, '"spinner"'),
-						_l(),
-						Al(22, '>'),
-						_l(),
-						wl(23, 'span', av),
-						Al(24, '</'),
-						wl(25, 'span', sv),
-						Al(26, 'p'),
-						_l(),
-						Al(27, '>'),
-						_l(),
-						Al(28, '\n'),
-						wl(29, 'span', av),
-						Al(30, '<'),
-						wl(31, 'span', sv),
-						Al(32, 'p'),
-						_l(),
-						Al(33, ' '),
-						wl(34, 'span', lv),
-						Al(35, 'class'),
-						_l(),
-						Al(36, '='),
-						wl(37, 'span', uv),
-						Al(38, '"spinner-dotted"'),
-						_l(),
-						Al(39, '>'),
-						_l(),
-						wl(40, 'span', av),
-						Al(41, '</'),
-						wl(42, 'span', sv),
-						Al(43, 'p'),
-						_l(),
-						Al(44, '>'),
-						_l(),
-						_l(),
-						_l(),
-						_l()),
-					2 & t)
-				) {
-					var n = El();
-					Za(7), qs('ngClass', $u(1, cv, n.checkSection('Flexbox'), n.checkSection('Space')));
-				}
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function S_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function P_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function E_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Border'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function O_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Border'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Hover'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function I_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Hover'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Striped'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function T_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Striped'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Table Cell'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function M_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Table Cell'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Table Row'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function A_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Table Row'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function j_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function R_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Font'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function D_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Font'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Text'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function N_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Text'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function U_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'p'), Tl(3, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function L_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'p'), Al(3, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Hide'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
 			function H_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Hide'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
+				1 & t && (vl(0, 'article', Kb), vl(1, 'section', Xb), vl(2, 'h2'), Tl(3, 'Show'), yl(), vl(4, 'p'), Tl(5, 'Coming soon.'), yl(), yl(), yl());
 			}
-			function z_(t, e) {
-				1 & t && (wl(0, 'article', Xb), wl(1, 'section', $b), wl(2, 'h2'), Al(3, 'Show'), _l(), wl(4, 'p'), Al(5, 'Coming soon.'), _l(), _l(), _l());
-			}
-			var V_ = function(t) {
+			var z_ = function(t) {
 					return { 'bg-lt-gray': t };
 				},
-				F_ = [
+				V_ = [
 					{
 						path: 'components',
 						component: (function() {
@@ -22944,7 +22956,7 @@
 								(t.prototype.selectSection = function(t) {
 									this.section = t;
 								}),
-								(t.ngComponentDef = De({
+								(t.ngComponentDef = je({
 									type: t,
 									selectors: [['ng-component']],
 									factory: function(e) {
@@ -22954,537 +22966,537 @@
 									vars: 166,
 									template: function(t, e) {
 										1 & t &&
-											(wl(0, 'nav', wb),
-											wl(1, 'ul'),
-											wl(2, 'li'),
-											wl(3, 'a', _b),
-											kl('click', function(t) {
+											(vl(0, 'nav', yb),
+											vl(1, 'ul'),
+											vl(2, 'li'),
+											vl(3, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Alert');
 											}),
-											Al(4, 'Alert'),
-											_l(),
-											pl(5, Ob, 4, 0, 'ul', xb),
-											_l(),
-											wl(6, 'li'),
-											wl(7, 'a', _b),
-											kl('click', function(t) {
+											Tl(4, 'Alert'),
+											yl(),
+											ul(5, Eb, 4, 0, 'ul', _b),
+											yl(),
+											vl(6, 'li'),
+											vl(7, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Badge');
 											}),
-											Al(8, 'Badge'),
-											_l(),
-											pl(9, Ib, 4, 0, 'ul', xb),
-											_l(),
-											wl(10, 'li'),
-											wl(11, 'a', _b),
-											kl('click', function(t) {
+											Tl(8, 'Badge'),
+											yl(),
+											ul(9, Ob, 4, 0, 'ul', _b),
+											yl(),
+											vl(10, 'li'),
+											vl(11, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Button');
 											}),
-											Al(12, 'Button'),
-											_l(),
-											pl(13, Tb, 10, 0, 'ul', xb),
-											_l(),
-											wl(14, 'li'),
-											wl(15, 'a', _b),
-											kl('click', function(t) {
+											Tl(12, 'Button'),
+											yl(),
+											ul(13, Ib, 10, 0, 'ul', _b),
+											yl(),
+											vl(14, 'li'),
+											vl(15, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Card');
 											}),
-											Al(16, 'Card'),
-											_l(),
-											pl(17, Mb, 1, 0, 'ul', xb),
-											_l(),
-											wl(18, 'li'),
-											wl(19, 'a', _b),
-											kl('click', function(t) {
+											Tl(16, 'Card'),
+											yl(),
+											ul(17, Tb, 1, 0, 'ul', _b),
+											yl(),
+											vl(18, 'li'),
+											vl(19, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Collapse');
 											}),
-											Al(20, 'Collapse'),
-											_l(),
-											pl(21, Ab, 7, 0, 'ul', xb),
-											_l(),
-											wl(22, 'li'),
-											wl(23, 'a', _b),
-											kl('click', function(t) {
+											Tl(20, 'Collapse'),
+											yl(),
+											ul(21, Mb, 7, 0, 'ul', _b),
+											yl(),
+											vl(22, 'li'),
+											vl(23, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Color');
 											}),
-											Al(24, 'Color'),
-											_l(),
-											pl(25, jb, 13, 0, 'ul', xb),
-											_l(),
-											wl(26, 'li'),
-											wl(27, 'a', _b),
-											kl('click', function(t) {
+											Tl(24, 'Color'),
+											yl(),
+											ul(25, Ab, 13, 0, 'ul', _b),
+											yl(),
+											vl(26, 'li'),
+											vl(27, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Flexbox');
 											}),
-											Al(28, 'Flexbox'),
-											_l(),
-											pl(29, Rb, 25, 0, 'ul', xb),
-											_l(),
-											wl(30, 'li'),
-											wl(31, 'a', _b),
-											kl('click', function(t) {
+											Tl(28, 'Flexbox'),
+											yl(),
+											ul(29, jb, 25, 0, 'ul', _b),
+											yl(),
+											vl(30, 'li'),
+											vl(31, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Form');
 											}),
-											Al(32, 'Form'),
-											_l(),
-											pl(33, Db, 22, 0, 'ul', xb),
-											_l(),
-											wl(34, 'li'),
-											wl(35, 'a', _b),
-											kl('click', function(t) {
+											Tl(32, 'Form'),
+											yl(),
+											ul(33, Rb, 22, 0, 'ul', _b),
+											yl(),
+											vl(34, 'li'),
+											vl(35, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Grid');
 											}),
-											Al(36, 'Grid'),
-											_l(),
-											pl(37, Nb, 10, 0, 'ul', xb),
-											_l(),
-											wl(38, 'li'),
-											wl(39, 'a', _b),
-											kl('click', function(t) {
+											Tl(36, 'Grid'),
+											yl(),
+											ul(37, Db, 10, 0, 'ul', _b),
+											yl(),
+											vl(38, 'li'),
+											vl(39, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Layout');
 											}),
-											Al(40, 'Layout'),
-											_l(),
-											pl(41, Ub, 7, 0, 'ul', xb),
-											_l(),
-											wl(42, 'li'),
-											wl(43, 'a', _b),
-											kl('click', function(t) {
+											Tl(40, 'Layout'),
+											yl(),
+											ul(41, Nb, 7, 0, 'ul', _b),
+											yl(),
+											vl(42, 'li'),
+											vl(43, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Modal');
 											}),
-											Al(44, 'Modal'),
-											_l(),
-											pl(45, Lb, 1, 0, 'ul', xb),
-											_l(),
-											wl(46, 'li'),
-											wl(47, 'a', _b),
-											kl('click', function(t) {
+											Tl(44, 'Modal'),
+											yl(),
+											ul(45, Ub, 1, 0, 'ul', _b),
+											yl(),
+											vl(46, 'li'),
+											vl(47, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Nav');
 											}),
-											Al(48, 'Nav'),
-											_l(),
-											pl(49, Hb, 10, 0, 'ul', xb),
-											_l(),
-											wl(50, 'li'),
-											wl(51, 'a', _b),
-											kl('click', function(t) {
+											Tl(48, 'Nav'),
+											yl(),
+											ul(49, Lb, 10, 0, 'ul', _b),
+											yl(),
+											vl(50, 'li'),
+											vl(51, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Position');
 											}),
-											Al(52, 'Position'),
-											_l(),
-											pl(53, zb, 1, 0, 'ul', xb),
-											_l(),
-											wl(54, 'li'),
-											wl(55, 'a', _b),
-											kl('click', function(t) {
+											Tl(52, 'Position'),
+											yl(),
+											ul(53, Hb, 1, 0, 'ul', _b),
+											yl(),
+											vl(54, 'li'),
+											vl(55, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Slider');
 											}),
-											Al(56, 'Slider'),
-											_l(),
-											pl(57, Vb, 1, 0, 'ul', xb),
-											_l(),
-											wl(58, 'li'),
-											wl(59, 'a', _b),
-											kl('click', function(t) {
+											Tl(56, 'Slider'),
+											yl(),
+											ul(57, zb, 1, 0, 'ul', _b),
+											yl(),
+											vl(58, 'li'),
+											vl(59, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Slideshow');
 											}),
-											Al(60, 'Slideshow'),
-											_l(),
-											pl(61, Fb, 1, 0, 'ul', xb),
-											_l(),
-											wl(62, 'li'),
-											wl(63, 'a', _b),
-											kl('click', function(t) {
+											Tl(60, 'Slideshow'),
+											yl(),
+											ul(61, Vb, 1, 0, 'ul', _b),
+											yl(),
+											vl(62, 'li'),
+											vl(63, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Space');
 											}),
-											Al(64, 'Space'),
-											_l(),
-											pl(65, Bb, 7, 0, 'ul', xb),
-											_l(),
-											wl(66, 'li'),
-											wl(67, 'a', _b),
-											kl('click', function(t) {
+											Tl(64, 'Space'),
+											yl(),
+											ul(65, Fb, 7, 0, 'ul', _b),
+											yl(),
+											vl(66, 'li'),
+											vl(67, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Spinner');
 											}),
-											Al(68, 'Spinner'),
-											_l(),
-											pl(69, qb, 1, 0, 'ul', xb),
-											_l(),
-											wl(70, 'li'),
-											wl(71, 'a', _b),
-											kl('click', function(t) {
+											Tl(68, 'Spinner'),
+											yl(),
+											ul(69, Bb, 1, 0, 'ul', _b),
+											yl(),
+											vl(70, 'li'),
+											vl(71, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Switch');
 											}),
-											Al(72, 'Switch'),
-											_l(),
-											pl(73, Gb, 1, 0, 'ul', xb),
-											_l(),
-											wl(74, 'li'),
-											wl(75, 'a', _b),
-											kl('click', function(t) {
+											Tl(72, 'Switch'),
+											yl(),
+											ul(73, qb, 1, 0, 'ul', _b),
+											yl(),
+											vl(74, 'li'),
+											vl(75, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Tab');
 											}),
-											Al(76, 'Tab'),
-											_l(),
-											pl(77, Zb, 1, 0, 'ul', xb),
-											_l(),
-											wl(78, 'li'),
-											wl(79, 'a', _b),
-											kl('click', function(t) {
+											Tl(76, 'Tab'),
+											yl(),
+											ul(77, Gb, 1, 0, 'ul', _b),
+											yl(),
+											vl(78, 'li'),
+											vl(79, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Table');
 											}),
-											Al(80, 'Table'),
-											_l(),
-											pl(81, Wb, 16, 0, 'ul', xb),
-											_l(),
-											wl(82, 'li'),
-											wl(83, 'a', _b),
-											kl('click', function(t) {
+											Tl(80, 'Table'),
+											yl(),
+											ul(81, Zb, 16, 0, 'ul', _b),
+											yl(),
+											vl(82, 'li'),
+											vl(83, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Tooltip');
 											}),
-											Al(84, 'Tooltip'),
-											_l(),
-											pl(85, Qb, 1, 0, 'ul', xb),
-											_l(),
-											wl(86, 'li'),
-											wl(87, 'a', _b),
-											kl('click', function(t) {
+											Tl(84, 'Tooltip'),
+											yl(),
+											ul(85, Wb, 1, 0, 'ul', _b),
+											yl(),
+											vl(86, 'li'),
+											vl(87, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Typography');
 											}),
-											Al(88, 'Typography'),
-											_l(),
-											pl(89, Yb, 7, 0, 'ul', xb),
-											_l(),
-											wl(90, 'li'),
-											wl(91, 'a', _b),
-											kl('click', function(t) {
+											Tl(88, 'Typography'),
+											yl(),
+											ul(89, Qb, 7, 0, 'ul', _b),
+											yl(),
+											vl(90, 'li'),
+											vl(91, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Utilities');
 											}),
-											Al(92, 'Utilities'),
-											_l(),
-											pl(93, Jb, 1, 0, 'ul', xb),
-											_l(),
-											wl(94, 'li'),
-											wl(95, 'a', _b),
-											kl('click', function(t) {
+											Tl(92, 'Utilities'),
+											yl(),
+											ul(93, Yb, 1, 0, 'ul', _b),
+											yl(),
+											vl(94, 'li'),
+											vl(95, 'a', wb),
+											xl('click', function(t) {
 												return e.selectSection('Visibility');
 											}),
-											Al(96, 'Visibility'),
-											_l(),
-											pl(97, Kb, 7, 0, 'ul', xb),
-											_l(),
-											_l(),
-											_l(),
-											wl(98, 'main', Cb, kb),
-											xl(100, 'h1', Sb),
-											pl(101, pv, 109, 4, 'article', Pb),
-											pl(102, hv, 51, 4, 'article', Pb),
-											pl(103, vv, 89, 4, 'article', Pb),
-											pl(104, yv, 46, 4, 'article', Pb),
-											pl(105, Iv, 107, 4, 'article', Pb),
-											pl(106, jv, 295, 4, 'article', Pb),
-											pl(107, zv, 109, 4, 'article', Pb),
-											pl(108, Fv, 29, 4, 'article', Pb),
-											pl(109, Bv, 4, 0, 'article', Pb),
-											pl(110, qv, 4, 0, 'article', Pb),
-											pl(111, Gv, 6, 0, 'article', Pb),
-											pl(112, Zv, 6, 0, 'article', Pb),
-											pl(113, Wv, 4, 0, 'article', Pb),
-											pl(114, Qv, 6, 0, 'article', Pb),
-											pl(115, Yv, 6, 0, 'article', Pb),
-											pl(116, Jv, 6, 0, 'article', Pb),
-											pl(117, Kv, 6, 0, 'article', Pb),
-											pl(118, ny, 200, 4, 'article', Pb),
-											pl(119, dy, 484, 4, 'article', Pb),
-											pl(120, ky, 484, 4, 'article', Pb),
-											pl(121, jy, 438, 4, 'article', Pb),
-											pl(122, Ny, 83, 4, 'article', Pb),
-											pl(123, Uy, 438, 4, 'article', Pb),
-											pl(124, Vy, 329, 4, 'article', Pb),
-											pl(125, Qy, 380, 4, 'article', Pb),
-											pl(126, ew, 380, 4, 'article', Pb),
-											pl(127, nw, 16, 0, 'article', Pb),
-											pl(128, xw, 474, 4, 'article', Pb),
-											pl(129, Aw, 463, 4, 'article', Pb),
-											pl(130, jw, 85, 4, 'article', Pb),
-											pl(131, Dw, 97, 4, 'article', Pb),
-											pl(132, Hw, 269, 4, 'article', Pb),
-											pl(133, zw, 85, 4, 'article', Pb),
-											pl(134, Bw, 146, 4, 'article', Pb),
-											pl(135, qw, 4, 0, 'article', Pb),
-											pl(136, Gw, 6, 0, 'article', Pb),
-											pl(137, Zw, 6, 0, 'article', Pb),
-											pl(138, Ww, 6, 0, 'article', Pb),
-											pl(139, Qw, 4, 0, 'article', Pb),
-											pl(140, Yw, 6, 0, 'article', Pb),
-											pl(141, Jw, 6, 0, 'article', Pb),
-											pl(142, Kw, 4, 0, 'article', Pb),
-											pl(143, Xw, 4, 0, 'article', Pb),
-											pl(144, $w, 6, 0, 'article', Pb),
-											pl(145, t_, 6, 0, 'article', Pb),
-											pl(146, e_, 6, 0, 'article', Pb),
-											pl(147, n_, 4, 0, 'article', Pb),
-											pl(148, r_, 4, 0, 'article', Pb),
-											pl(149, o_, 4, 0, 'article', Pb),
-											pl(150, i_, 4, 0, 'article', Pb),
-											pl(151, d_, 93, 4, 'article', Pb),
-											pl(152, __, 93, 4, 'article', Pb),
-											pl(153, k_, 45, 4, 'article', Pb),
-											pl(154, S_, 4, 0, 'article', Pb),
-											pl(155, P_, 4, 0, 'article', Pb),
-											pl(156, E_, 4, 0, 'article', Pb),
-											pl(157, O_, 6, 0, 'article', Pb),
-											pl(158, I_, 6, 0, 'article', Pb),
-											pl(159, T_, 6, 0, 'article', Pb),
-											pl(160, M_, 6, 0, 'article', Pb),
-											pl(161, A_, 6, 0, 'article', Pb),
-											pl(162, j_, 4, 0, 'article', Pb),
-											pl(163, R_, 4, 0, 'article', Pb),
-											pl(164, D_, 6, 0, 'article', Pb),
-											pl(165, N_, 6, 0, 'article', Pb),
-											pl(166, U_, 4, 0, 'article', Pb),
-											pl(167, L_, 4, 0, 'article', Pb),
-											pl(168, H_, 6, 0, 'article', Pb),
-											pl(169, z_, 6, 0, 'article', Pb),
-											_l()),
+											Tl(96, 'Visibility'),
+											yl(),
+											ul(97, Jb, 7, 0, 'ul', _b),
+											yl(),
+											yl(),
+											yl(),
+											vl(98, 'main', xb, Cb),
+											wl(100, 'h1', kb),
+											ul(101, cv, 109, 4, 'article', Sb),
+											ul(102, dv, 51, 4, 'article', Sb),
+											ul(103, bv, 89, 4, 'article', Sb),
+											ul(104, vv, 46, 4, 'article', Sb),
+											ul(105, Ov, 107, 4, 'article', Sb),
+											ul(106, Av, 295, 4, 'article', Sb),
+											ul(107, Hv, 109, 4, 'article', Sb),
+											ul(108, Vv, 29, 4, 'article', Sb),
+											ul(109, Fv, 4, 0, 'article', Sb),
+											ul(110, Bv, 4, 0, 'article', Sb),
+											ul(111, qv, 6, 0, 'article', Sb),
+											ul(112, Gv, 6, 0, 'article', Sb),
+											ul(113, Zv, 4, 0, 'article', Sb),
+											ul(114, Wv, 6, 0, 'article', Sb),
+											ul(115, Qv, 6, 0, 'article', Sb),
+											ul(116, Yv, 6, 0, 'article', Sb),
+											ul(117, Jv, 6, 0, 'article', Sb),
+											ul(118, ey, 200, 4, 'article', Sb),
+											ul(119, fy, 484, 4, 'article', Sb),
+											ul(120, Cy, 484, 4, 'article', Sb),
+											ul(121, Ay, 438, 4, 'article', Sb),
+											ul(122, Dy, 83, 4, 'article', Sb),
+											ul(123, Ny, 438, 4, 'article', Sb),
+											ul(124, zy, 329, 4, 'article', Sb),
+											ul(125, Wy, 380, 4, 'article', Sb),
+											ul(126, tw, 380, 4, 'article', Sb),
+											ul(127, ew, 16, 0, 'article', Sb),
+											ul(128, _w, 474, 4, 'article', Sb),
+											ul(129, Mw, 463, 4, 'article', Sb),
+											ul(130, Aw, 85, 4, 'article', Sb),
+											ul(131, Rw, 97, 4, 'article', Sb),
+											ul(132, Lw, 269, 4, 'article', Sb),
+											ul(133, Hw, 85, 4, 'article', Sb),
+											ul(134, Fw, 146, 4, 'article', Sb),
+											ul(135, Bw, 4, 0, 'article', Sb),
+											ul(136, qw, 6, 0, 'article', Sb),
+											ul(137, Gw, 6, 0, 'article', Sb),
+											ul(138, Zw, 6, 0, 'article', Sb),
+											ul(139, Ww, 4, 0, 'article', Sb),
+											ul(140, Qw, 6, 0, 'article', Sb),
+											ul(141, Yw, 6, 0, 'article', Sb),
+											ul(142, Jw, 4, 0, 'article', Sb),
+											ul(143, Kw, 4, 0, 'article', Sb),
+											ul(144, Xw, 6, 0, 'article', Sb),
+											ul(145, $w, 6, 0, 'article', Sb),
+											ul(146, t_, 6, 0, 'article', Sb),
+											ul(147, e_, 4, 0, 'article', Sb),
+											ul(148, n_, 4, 0, 'article', Sb),
+											ul(149, r_, 4, 0, 'article', Sb),
+											ul(150, o_, 4, 0, 'article', Sb),
+											ul(151, f_, 93, 4, 'article', Sb),
+											ul(152, w_, 93, 4, 'article', Sb),
+											ul(153, C_, 45, 4, 'article', Sb),
+											ul(154, k_, 4, 0, 'article', Sb),
+											ul(155, S_, 4, 0, 'article', Sb),
+											ul(156, P_, 4, 0, 'article', Sb),
+											ul(157, E_, 6, 0, 'article', Sb),
+											ul(158, O_, 6, 0, 'article', Sb),
+											ul(159, I_, 6, 0, 'article', Sb),
+											ul(160, T_, 6, 0, 'article', Sb),
+											ul(161, M_, 6, 0, 'article', Sb),
+											ul(162, A_, 4, 0, 'article', Sb),
+											ul(163, j_, 4, 0, 'article', Sb),
+											ul(164, R_, 6, 0, 'article', Sb),
+											ul(165, D_, 6, 0, 'article', Sb),
+											ul(166, N_, 4, 0, 'article', Sb),
+											ul(167, U_, 4, 0, 'article', Sb),
+											ul(168, L_, 6, 0, 'article', Sb),
+											ul(169, H_, 6, 0, 'article', Sb),
+											yl()),
 											2 & t &&
-												(Za(3),
-												qs('ngClass', Xu(118, V_, e.checkSection('Alert'))),
-												Za(5),
-												qs('ngIf', e.checkSection('Alert')),
-												Za(7),
-												qs('ngClass', Xu(120, V_, e.checkSection('Badge'))),
-												Za(9),
-												qs('ngIf', e.checkSection('Badge')),
-												Za(11),
-												qs('ngClass', Xu(122, V_, e.checkSection('Button'))),
-												Za(13),
-												qs('ngIf', e.checkSection('Button')),
-												Za(15),
-												qs('ngClass', Xu(124, V_, e.checkSection('Card'))),
-												Za(17),
-												qs('ngIf', e.checkSection('Card')),
-												Za(19),
-												qs('ngClass', Xu(126, V_, e.checkSection('Collapse'))),
-												Za(21),
-												qs('ngIf', e.checkSection('Collapse')),
-												Za(23),
-												qs('ngClass', Xu(128, V_, e.checkSection('Color'))),
-												Za(25),
-												qs('ngIf', e.checkSection('Color')),
-												Za(27),
-												qs('ngClass', Xu(130, V_, e.checkSection('Flexbox'))),
-												Za(29),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(31),
-												qs('ngClass', Xu(132, V_, e.checkSection('Form'))),
-												Za(33),
-												qs('ngIf', e.checkSection('Form')),
-												Za(35),
-												qs('ngClass', Xu(134, V_, e.checkSection('Grid'))),
-												Za(37),
-												qs('ngIf', e.checkSection('Grid')),
-												Za(39),
-												qs('ngClass', Xu(136, V_, e.checkSection('Layout'))),
-												Za(41),
-												qs('ngIf', e.checkSection('Layout')),
-												Za(43),
-												qs('ngClass', Xu(138, V_, e.checkSection('Modal'))),
-												Za(45),
-												qs('ngIf', e.checkSection('Modal')),
-												Za(47),
-												qs('ngClass', Xu(140, V_, e.checkSection('Nav'))),
-												Za(49),
-												qs('ngIf', e.checkSection('Nav')),
-												Za(51),
-												qs('ngClass', Xu(142, V_, e.checkSection('Position'))),
-												Za(53),
-												qs('ngIf', e.checkSection('Position')),
-												Za(55),
-												qs('ngClass', Xu(144, V_, e.checkSection('Slider'))),
-												Za(57),
-												qs('ngIf', e.checkSection('Slider')),
-												Za(59),
-												qs('ngClass', Xu(146, V_, e.checkSection('Slideshow'))),
-												Za(61),
-												qs('ngIf', e.checkSection('Slideshow')),
-												Za(63),
-												qs('ngClass', Xu(148, V_, e.checkSection('Space'))),
-												Za(65),
-												qs('ngIf', e.checkSection('Space')),
-												Za(67),
-												qs('ngClass', Xu(150, V_, e.checkSection('Spinner'))),
-												Za(69),
-												qs('ngIf', e.checkSection('Spinner')),
-												Za(71),
-												qs('ngClass', Xu(152, V_, e.checkSection('Switch'))),
-												Za(73),
-												qs('ngIf', e.checkSection('Switch')),
-												Za(75),
-												qs('ngClass', Xu(154, V_, e.checkSection('Tab'))),
-												Za(77),
-												qs('ngIf', e.checkSection('Tab')),
-												Za(79),
-												qs('ngClass', Xu(156, V_, e.checkSection('Table'))),
-												Za(81),
-												qs('ngIf', e.checkSection('Table')),
-												Za(83),
-												qs('ngClass', Xu(158, V_, e.checkSection('Tooltip'))),
-												Za(85),
-												qs('ngIf', e.checkSection('Tooltip')),
-												Za(87),
-												qs('ngClass', Xu(160, V_, e.checkSection('Typography'))),
-												Za(89),
-												qs('ngIf', e.checkSection('Typography')),
-												Za(91),
-												qs('ngClass', Xu(162, V_, e.checkSection('Utilities'))),
-												Za(93),
-												qs('ngIf', e.checkSection('Utilities')),
-												Za(95),
-												qs('ngClass', Xu(164, V_, e.checkSection('Visibility'))),
-												Za(97),
-												qs('ngIf', e.checkSection('Visibility')),
-												Za(100),
-												qs('innerHTML', e.section, ro),
-												Za(101),
-												qs('ngIf', e.checkSection('Alert')),
-												Za(102),
-												qs('ngIf', e.checkSection('Alert')),
-												Za(103),
-												qs('ngIf', e.checkSection('Badge')),
-												Za(104),
-												qs('ngIf', e.checkSection('Badge')),
-												Za(105),
-												qs('ngIf', e.checkSection('Button')),
-												Za(106),
-												qs('ngIf', e.checkSection('Button')),
-												Za(107),
-												qs('ngIf', e.checkSection('Button')),
-												Za(108),
-												qs('ngIf', e.checkSection('Button')),
-												Za(109),
-												qs('ngIf', e.checkSection('Card')),
-												Za(110),
-												qs('ngIf', e.checkSection('Collapse')),
-												Za(111),
-												qs('ngIf', e.checkSection('Collapse')),
-												Za(112),
-												qs('ngIf', e.checkSection('Collapse')),
-												Za(113),
-												qs('ngIf', e.checkSection('Color')),
-												Za(114),
-												qs('ngIf', e.checkSection('Color')),
-												Za(115),
-												qs('ngIf', e.checkSection('Color')),
-												Za(116),
-												qs('ngIf', e.checkSection('Color')),
-												Za(117),
-												qs('ngIf', e.checkSection('Color')),
-												Za(118),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(119),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(120),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(121),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(122),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(123),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(124),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(125),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(126),
-												qs('ngIf', e.checkSection('Flexbox')),
-												Za(127),
-												qs('ngIf', e.checkSection('Form')),
-												Za(128),
-												qs('ngIf', e.checkSection('Form')),
-												Za(129),
-												qs('ngIf', e.checkSection('Form')),
-												Za(130),
-												qs('ngIf', e.checkSection('Form')),
-												Za(131),
-												qs('ngIf', e.checkSection('Form')),
-												Za(132),
-												qs('ngIf', e.checkSection('Form')),
-												Za(133),
-												qs('ngIf', e.checkSection('Form')),
-												Za(134),
-												qs('ngIf', e.checkSection('Form')),
-												Za(135),
-												qs('ngIf', e.checkSection('Grid')),
-												Za(136),
-												qs('ngIf', e.checkSection('Grid')),
-												Za(137),
-												qs('ngIf', e.checkSection('Grid')),
-												Za(138),
-												qs('ngIf', e.checkSection('Grid')),
-												Za(139),
-												qs('ngIf', e.checkSection('Layout')),
-												Za(140),
-												qs('ngIf', e.checkSection('Layout')),
-												Za(141),
-												qs('ngIf', e.checkSection('Layout')),
-												Za(142),
-												qs('ngIf', e.checkSection('Modal')),
-												Za(143),
-												qs('ngIf', e.checkSection('Nav')),
-												Za(144),
-												qs('ngIf', e.checkSection('Nav')),
-												Za(145),
-												qs('ngIf', e.checkSection('Nav')),
-												Za(146),
-												qs('ngIf', e.checkSection('Nav')),
-												Za(147),
-												qs('ngIf', e.checkSection('Position')),
-												Za(148),
-												qs('ngIf', e.checkSection('Slider')),
-												Za(149),
-												qs('ngIf', e.checkSection('Slideshow')),
-												Za(150),
-												qs('ngIf', e.checkSection('Space')),
-												Za(151),
-												qs('ngIf', e.checkSection('Space')),
-												Za(152),
-												qs('ngIf', e.checkSection('Space')),
-												Za(153),
-												qs('ngIf', e.checkSection('Spinner')),
-												Za(154),
-												qs('ngIf', e.checkSection('Switch')),
-												Za(155),
-												qs('ngIf', e.checkSection('Tab')),
-												Za(156),
-												qs('ngIf', e.checkSection('Table')),
-												Za(157),
-												qs('ngIf', e.checkSection('Table')),
-												Za(158),
-												qs('ngIf', e.checkSection('Table')),
-												Za(159),
-												qs('ngIf', e.checkSection('Table')),
-												Za(160),
-												qs('ngIf', e.checkSection('Table')),
-												Za(161),
-												qs('ngIf', e.checkSection('Table')),
-												Za(162),
-												qs('ngIf', e.checkSection('Tooltip')),
-												Za(163),
-												qs('ngIf', e.checkSection('Typography')),
-												Za(164),
-												qs('ngIf', e.checkSection('Typography')),
-												Za(165),
-												qs('ngIf', e.checkSection('Typography')),
-												Za(166),
-												qs('ngIf', e.checkSection('Utilities')),
-												Za(167),
-												qs('ngIf', e.checkSection('Visibility')),
-												Za(168),
-												qs('ngIf', e.checkSection('Visibility')),
-												Za(169),
-												qs('ngIf', e.checkSection('Visibility')));
+												(qa(3),
+												Fs('ngClass', Ju(118, z_, e.checkSection('Alert'))),
+												qa(5),
+												Fs('ngIf', e.checkSection('Alert')),
+												qa(7),
+												Fs('ngClass', Ju(120, z_, e.checkSection('Badge'))),
+												qa(9),
+												Fs('ngIf', e.checkSection('Badge')),
+												qa(11),
+												Fs('ngClass', Ju(122, z_, e.checkSection('Button'))),
+												qa(13),
+												Fs('ngIf', e.checkSection('Button')),
+												qa(15),
+												Fs('ngClass', Ju(124, z_, e.checkSection('Card'))),
+												qa(17),
+												Fs('ngIf', e.checkSection('Card')),
+												qa(19),
+												Fs('ngClass', Ju(126, z_, e.checkSection('Collapse'))),
+												qa(21),
+												Fs('ngIf', e.checkSection('Collapse')),
+												qa(23),
+												Fs('ngClass', Ju(128, z_, e.checkSection('Color'))),
+												qa(25),
+												Fs('ngIf', e.checkSection('Color')),
+												qa(27),
+												Fs('ngClass', Ju(130, z_, e.checkSection('Flexbox'))),
+												qa(29),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(31),
+												Fs('ngClass', Ju(132, z_, e.checkSection('Form'))),
+												qa(33),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(35),
+												Fs('ngClass', Ju(134, z_, e.checkSection('Grid'))),
+												qa(37),
+												Fs('ngIf', e.checkSection('Grid')),
+												qa(39),
+												Fs('ngClass', Ju(136, z_, e.checkSection('Layout'))),
+												qa(41),
+												Fs('ngIf', e.checkSection('Layout')),
+												qa(43),
+												Fs('ngClass', Ju(138, z_, e.checkSection('Modal'))),
+												qa(45),
+												Fs('ngIf', e.checkSection('Modal')),
+												qa(47),
+												Fs('ngClass', Ju(140, z_, e.checkSection('Nav'))),
+												qa(49),
+												Fs('ngIf', e.checkSection('Nav')),
+												qa(51),
+												Fs('ngClass', Ju(142, z_, e.checkSection('Position'))),
+												qa(53),
+												Fs('ngIf', e.checkSection('Position')),
+												qa(55),
+												Fs('ngClass', Ju(144, z_, e.checkSection('Slider'))),
+												qa(57),
+												Fs('ngIf', e.checkSection('Slider')),
+												qa(59),
+												Fs('ngClass', Ju(146, z_, e.checkSection('Slideshow'))),
+												qa(61),
+												Fs('ngIf', e.checkSection('Slideshow')),
+												qa(63),
+												Fs('ngClass', Ju(148, z_, e.checkSection('Space'))),
+												qa(65),
+												Fs('ngIf', e.checkSection('Space')),
+												qa(67),
+												Fs('ngClass', Ju(150, z_, e.checkSection('Spinner'))),
+												qa(69),
+												Fs('ngIf', e.checkSection('Spinner')),
+												qa(71),
+												Fs('ngClass', Ju(152, z_, e.checkSection('Switch'))),
+												qa(73),
+												Fs('ngIf', e.checkSection('Switch')),
+												qa(75),
+												Fs('ngClass', Ju(154, z_, e.checkSection('Tab'))),
+												qa(77),
+												Fs('ngIf', e.checkSection('Tab')),
+												qa(79),
+												Fs('ngClass', Ju(156, z_, e.checkSection('Table'))),
+												qa(81),
+												Fs('ngIf', e.checkSection('Table')),
+												qa(83),
+												Fs('ngClass', Ju(158, z_, e.checkSection('Tooltip'))),
+												qa(85),
+												Fs('ngIf', e.checkSection('Tooltip')),
+												qa(87),
+												Fs('ngClass', Ju(160, z_, e.checkSection('Typography'))),
+												qa(89),
+												Fs('ngIf', e.checkSection('Typography')),
+												qa(91),
+												Fs('ngClass', Ju(162, z_, e.checkSection('Utilities'))),
+												qa(93),
+												Fs('ngIf', e.checkSection('Utilities')),
+												qa(95),
+												Fs('ngClass', Ju(164, z_, e.checkSection('Visibility'))),
+												qa(97),
+												Fs('ngIf', e.checkSection('Visibility')),
+												qa(100),
+												Fs('innerHTML', e.section, eo),
+												qa(101),
+												Fs('ngIf', e.checkSection('Alert')),
+												qa(102),
+												Fs('ngIf', e.checkSection('Alert')),
+												qa(103),
+												Fs('ngIf', e.checkSection('Badge')),
+												qa(104),
+												Fs('ngIf', e.checkSection('Badge')),
+												qa(105),
+												Fs('ngIf', e.checkSection('Button')),
+												qa(106),
+												Fs('ngIf', e.checkSection('Button')),
+												qa(107),
+												Fs('ngIf', e.checkSection('Button')),
+												qa(108),
+												Fs('ngIf', e.checkSection('Button')),
+												qa(109),
+												Fs('ngIf', e.checkSection('Card')),
+												qa(110),
+												Fs('ngIf', e.checkSection('Collapse')),
+												qa(111),
+												Fs('ngIf', e.checkSection('Collapse')),
+												qa(112),
+												Fs('ngIf', e.checkSection('Collapse')),
+												qa(113),
+												Fs('ngIf', e.checkSection('Color')),
+												qa(114),
+												Fs('ngIf', e.checkSection('Color')),
+												qa(115),
+												Fs('ngIf', e.checkSection('Color')),
+												qa(116),
+												Fs('ngIf', e.checkSection('Color')),
+												qa(117),
+												Fs('ngIf', e.checkSection('Color')),
+												qa(118),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(119),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(120),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(121),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(122),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(123),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(124),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(125),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(126),
+												Fs('ngIf', e.checkSection('Flexbox')),
+												qa(127),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(128),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(129),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(130),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(131),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(132),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(133),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(134),
+												Fs('ngIf', e.checkSection('Form')),
+												qa(135),
+												Fs('ngIf', e.checkSection('Grid')),
+												qa(136),
+												Fs('ngIf', e.checkSection('Grid')),
+												qa(137),
+												Fs('ngIf', e.checkSection('Grid')),
+												qa(138),
+												Fs('ngIf', e.checkSection('Grid')),
+												qa(139),
+												Fs('ngIf', e.checkSection('Layout')),
+												qa(140),
+												Fs('ngIf', e.checkSection('Layout')),
+												qa(141),
+												Fs('ngIf', e.checkSection('Layout')),
+												qa(142),
+												Fs('ngIf', e.checkSection('Modal')),
+												qa(143),
+												Fs('ngIf', e.checkSection('Nav')),
+												qa(144),
+												Fs('ngIf', e.checkSection('Nav')),
+												qa(145),
+												Fs('ngIf', e.checkSection('Nav')),
+												qa(146),
+												Fs('ngIf', e.checkSection('Nav')),
+												qa(147),
+												Fs('ngIf', e.checkSection('Position')),
+												qa(148),
+												Fs('ngIf', e.checkSection('Slider')),
+												qa(149),
+												Fs('ngIf', e.checkSection('Slideshow')),
+												qa(150),
+												Fs('ngIf', e.checkSection('Space')),
+												qa(151),
+												Fs('ngIf', e.checkSection('Space')),
+												qa(152),
+												Fs('ngIf', e.checkSection('Space')),
+												qa(153),
+												Fs('ngIf', e.checkSection('Spinner')),
+												qa(154),
+												Fs('ngIf', e.checkSection('Switch')),
+												qa(155),
+												Fs('ngIf', e.checkSection('Tab')),
+												qa(156),
+												Fs('ngIf', e.checkSection('Table')),
+												qa(157),
+												Fs('ngIf', e.checkSection('Table')),
+												qa(158),
+												Fs('ngIf', e.checkSection('Table')),
+												qa(159),
+												Fs('ngIf', e.checkSection('Table')),
+												qa(160),
+												Fs('ngIf', e.checkSection('Table')),
+												qa(161),
+												Fs('ngIf', e.checkSection('Table')),
+												qa(162),
+												Fs('ngIf', e.checkSection('Tooltip')),
+												qa(163),
+												Fs('ngIf', e.checkSection('Typography')),
+												qa(164),
+												Fs('ngIf', e.checkSection('Typography')),
+												qa(165),
+												Fs('ngIf', e.checkSection('Typography')),
+												qa(166),
+												Fs('ngIf', e.checkSection('Utilities')),
+												qa(167),
+												Fs('ngIf', e.checkSection('Visibility')),
+												qa(168),
+												Fs('ngIf', e.checkSection('Visibility')),
+												qa(169),
+												Fs('ngIf', e.checkSection('Visibility')));
 									},
-									directives: [Vp, Fp, dd, md, vd, xd, Id],
+									directives: [Hp, zp, pd, hd, md, wd, Ed],
 									styles: [
 										'.styleguide[_ngcontent-%COMP%]{margin-left:16rem}.styleguide[_ngcontent-%COMP%]   .hljs-attr[_ngcontent-%COMP%]{color:#954121}.styleguide-menu[_ngcontent-%COMP%]{left:2rem;top:5.5rem;width:14rem}.styleguide-menu[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]{color:inherit;text-decoration:none}.styleguide[_ngcontent-%COMP%]   code[_ngcontent-%COMP%]{color:#6a0080}.styleguide[_ngcontent-%COMP%]   code[_ngcontent-%COMP%], .styleguide[_ngcontent-%COMP%]   pre[_ngcontent-%COMP%]{font-size:.875rem}.styleguide[_ngcontent-%COMP%]   .section[_ngcontent-%COMP%]{min-width:15rem}#styleguide[_ngcontent-%COMP%]   .hljs[_ngcontent-%COMP%]   pre[_ngcontent-%COMP%], .hljs[_ngcontent-%COMP%]{display:block;overflow-x:auto;padding:.5em;color:#000;background:#f8f8ff;-webkit-text-size-adjust:none}.diff[_ngcontent-%COMP%]   .hljs-header[_ngcontent-%COMP%], .hljs-comment[_ngcontent-%COMP%]{color:#408080;font-style:italic}.assignment[_ngcontent-%COMP%], .css[_ngcontent-%COMP%]   .rule[_ngcontent-%COMP%]   .hljs-keyword[_ngcontent-%COMP%], .hljs-keyword[_ngcontent-%COMP%], .hljs-literal[_ngcontent-%COMP%], .hljs-subst[_ngcontent-%COMP%], .hljs-winutils[_ngcontent-%COMP%], .javascript[_ngcontent-%COMP%]   .hljs-title[_ngcontent-%COMP%], .lisp[_ngcontent-%COMP%]   .hljs-title[_ngcontent-%COMP%]{color:#954121}.hljs-hexcolor[_ngcontent-%COMP%], .hljs-number[_ngcontent-%COMP%]{color:#40a070}.hljs-doctag[_ngcontent-%COMP%], .hljs-string[_ngcontent-%COMP%], .hljs-tag[_ngcontent-%COMP%]   .hljs-value[_ngcontent-%COMP%], .tex[_ngcontent-%COMP%]   .hljs-formula[_ngcontent-%COMP%]{color:#219161}.hljs-id[_ngcontent-%COMP%], .hljs-title[_ngcontent-%COMP%]{color:#19469d}.hljs-params[_ngcontent-%COMP%]{color:#00f}.hljs-subst[_ngcontent-%COMP%], .javascript[_ngcontent-%COMP%]   .hljs-title[_ngcontent-%COMP%], .lisp[_ngcontent-%COMP%]   .hljs-title[_ngcontent-%COMP%]{font-weight:400}.haskell[_ngcontent-%COMP%]   .hljs-label[_ngcontent-%COMP%], .hljs-class[_ngcontent-%COMP%]   .hljs-title[_ngcontent-%COMP%], .tex[_ngcontent-%COMP%]   .hljs-command[_ngcontent-%COMP%]{color:#458;font-weight:700}.django[_ngcontent-%COMP%]   .hljs-tag[_ngcontent-%COMP%]   .hljs-keyword[_ngcontent-%COMP%], .hljs-name[_ngcontent-%COMP%], .hljs-rule[_ngcontent-%COMP%]   .hljs-property[_ngcontent-%COMP%], .hljs-tag[_ngcontent-%COMP%], .hljs-tag[_ngcontent-%COMP%]   .hljs-title[_ngcontent-%COMP%]{color:navy;font-weight:400}.hljs-attr[_ngcontent-%COMP%], .hljs-variable[_ngcontent-%COMP%], .instancevar[_ngcontent-%COMP%], .lisp[_ngcontent-%COMP%]   .hljs-body[_ngcontent-%COMP%]{color:teal}.hljs-regexp[_ngcontent-%COMP%]{color:#b68}.hljs-class[_ngcontent-%COMP%]{color:#458;font-weight:700}.hljs-symbol[_ngcontent-%COMP%], .input_number[_ngcontent-%COMP%], .lisp[_ngcontent-%COMP%]   .hljs-keyword[_ngcontent-%COMP%], .ruby[_ngcontent-%COMP%]   .hljs-symbol[_ngcontent-%COMP%]   .hljs-keyword[_ngcontent-%COMP%], .ruby[_ngcontent-%COMP%]   .hljs-symbol[_ngcontent-%COMP%]   .hljs-string[_ngcontent-%COMP%], .ruby[_ngcontent-%COMP%]   .hljs-symbol[_ngcontent-%COMP%]   .keymethods[_ngcontent-%COMP%], .tex[_ngcontent-%COMP%]   .hljs-special[_ngcontent-%COMP%]{color:#990073}.builtin[_ngcontent-%COMP%], .constructor[_ngcontent-%COMP%], .hljs-built_in[_ngcontent-%COMP%], .lisp[_ngcontent-%COMP%]   .hljs-title[_ngcontent-%COMP%]{color:#0086b3}.hljs-cdata[_ngcontent-%COMP%], .hljs-doctype[_ngcontent-%COMP%], .hljs-pi[_ngcontent-%COMP%], .hljs-pragma[_ngcontent-%COMP%], .hljs-preprocessor[_ngcontent-%COMP%], .hljs-shebang[_ngcontent-%COMP%]{color:#999;font-weight:700}.hljs-deletion[_ngcontent-%COMP%]{background:#fdd}.hljs-addition[_ngcontent-%COMP%]{background:#dfd}.diff[_ngcontent-%COMP%]   .hljs-change[_ngcontent-%COMP%]{background:#0086b3}.hljs-chunk[_ngcontent-%COMP%]{color:#aaa}.tex[_ngcontent-%COMP%]   .hljs-formula[_ngcontent-%COMP%]{opacity:.5}.flexbox[_ngcontent-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;flex-wrap:wrap}.flexbox[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]{border:.0625rem solid #000;margin:.375rem}.flexbox[_ngcontent-%COMP%]   ul[class*=col][_ngcontent-%COMP%]{height:15.625rem;width:9.375rem}.flexbox[_ngcontent-%COMP%]   ul[class*=col][class*=wrap][_ngcontent-%COMP%]{width:18.75rem}.flexbox[_ngcontent-%COMP%]   ul.col-full[_ngcontent-%COMP%]{height:18.75rem}.flexbox[_ngcontent-%COMP%]   ul[class*=row][_ngcontent-%COMP%]{height:9.375rem}.flexbox[_ngcontent-%COMP%]   ul[class*=row][class*=wrap][_ngcontent-%COMP%]{height:18.75rem}.flexbox[_ngcontent-%COMP%]   ul.row[_ngcontent-%COMP%]{width:15.625rem}.flexbox[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]{-webkit-box-align:start;align-items:flex-start;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-align:center;align-items:center;background-color:#2196f3;color:#fff;-webkit-box-pack:center;justify-content:center;min-height:6.25rem;min-width:7.5rem}.flexbox[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]:nth-child(even){background-color:#4caf50;min-height:4.6875rem;min-width:6.25rem}.box[_ngcontent-%COMP%]{border:.0625rem solid #000;margin:1rem;padding:0}.box[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]{background-color:#2196f3;color:#fff;text-align:center}.box[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]:nth-child(even){background-color:#4caf50}.box[_ngcontent-%COMP%]   p[class*=pad][_ngcontent-%COMP%]{display:inline-block;margin:0 1rem}'
 									]
@@ -23496,52 +23508,52 @@
 					{ path: '', redirectTo: '/components', pathMatch: 'full' },
 					{ path: '**', redirectTo: '/components', pathMatch: 'full' }
 				],
-				B_ = (function() {
+				F_ = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							},
-							imports: [[cb.forRoot(F_, { useHash: !0, anchorScrolling: 'enabled' })], cb]
+							imports: [[ub.forRoot(V_, { useHash: !0, anchorScrolling: 'enabled' })], ub]
 						})),
 						t
 					);
 				})();
-			cb.forRoot(F_, { useHash: !0, anchorScrolling: 'enabled' });
-			var q_ = (function() {
+			ub.forRoot(V_, { useHash: !0, anchorScrolling: 'enabled' });
+			var B_ = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							},
-							imports: [[Gp, Ud]]
+							imports: [[Bp, Dd]]
 						})),
 						t
 					);
 				})(),
-				G_ = (function() {
+				q_ = (function() {
 					function t() {}
 					return (
-						(t.ngModuleDef = Le({ type: t, bootstrap: [yb] })),
-						(t.ngInjectorDef = Ct({
+						(t.ngModuleDef = Ne({ type: t, bootstrap: [vb] })),
+						(t.ngInjectorDef = _t({
 							factory: function(e) {
 								return new (e || t)();
 							},
-							imports: [[rd, Nd, B_, q_]]
+							imports: [[ed, Rd, F_, B_]]
 						})),
 						t
 					);
 				})();
 			(function() {
-				if (Ir) throw new Error('Cannot enable prod mode after platform setup.');
-				Or = !1;
+				if (Er) throw new Error('Cannot enable prod mode after platform setup.');
+				Pr = !1;
 			})(),
-				ed()
-					.bootstrapModule(G_, { defaultEncapsulation: Se.None })
+				$f()
+					.bootstrapModule(q_, { defaultEncapsulation: Ce.None })
 					.catch(function(t) {
 						return console.error(t);
 					});
