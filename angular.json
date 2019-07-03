@@ -86,7 +86,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "docs/easy-docs",
+						"outputPath": "docs",
 						"index": "projects/easy-docs/src/index.html",
 						"main": "projects/easy-docs/src/main.ts",
 						"polyfills": "projects/easy-docs/src/polyfills.ts",
