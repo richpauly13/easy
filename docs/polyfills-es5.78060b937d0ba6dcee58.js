@@ -1019,12 +1019,11 @@
 							var n,
 								r = this || t.target || b,
 								o = r[e];
-							return (
-								T && r === y && 'error' === t.type
-									? !0 === (n = o && o.call(this, t.message, t.filename, t.lineno, t.colno, t.error)) && t.preventDefault()
-									: null == (n = o && o.apply(this, arguments)) || n || t.preventDefault(),
-								n
-							);
+							if (T && r === y && 'error' === t.type) {
+								var i = t;
+								!0 === (n = o && o.call(this, i.message, i.filename, i.lineno, i.colno, i.error)) && t.preventDefault();
+							} else null == (n = o && o.apply(this, arguments)) || n || t.preventDefault();
+							return n;
 						}
 					};
 				function M(t, r, o) {
@@ -1433,11 +1432,12 @@
 								}
 							}),
 							(_[u] = function() {
-								for (var e = arguments[0], n = [], r = Y(this || t, T ? T(e) : e), o = 0; o < r.length; o++) {
-									var i = r[o];
-									n.push(i.originalDelegate ? i.originalDelegate : i.callback);
+								for (var e = this || t, n = arguments[0], r = [], o = Y(e, T ? T(n) : n), i = 0; i < o.length; i++) {
+									var a = o[i],
+										c = a.originalDelegate ? a.originalDelegate : a.callback;
+									r.push(c);
 								}
-								return n;
+								return r;
 							}),
 							(_[s] = function() {
 								var e = this || t,
@@ -1445,23 +1445,26 @@
 								if (n) {
 									var r = B[n];
 									if (r) {
-										var o = e[r[l]],
-											a = e[r[f]];
-										if (o) {
-											var c = o.slice();
-											for (h = 0; h < c.length; h++) this[i].call(this, n, (u = c[h]).originalDelegate ? u.originalDelegate : u.callback, u.options);
+										var o = r[l],
+											a = r[f],
+											c = e[o],
+											u = e[a];
+										if (c) {
+											var p = c.slice();
+											for (d = 0; d < p.length; d++) this[i].call(this, n, (h = p[d]).originalDelegate ? h.originalDelegate : h.callback, h.options);
 										}
-										if (a)
-											for (c = a.slice(), h = 0; h < c.length; h++) {
-												var u;
-												this[i].call(this, n, (u = c[h]).originalDelegate ? u.originalDelegate : u.callback, u.options);
+										if (u)
+											for (p = u.slice(), d = 0; d < p.length; d++) {
+												var h;
+												this[i].call(this, n, (h = p[d]).originalDelegate ? h.originalDelegate : h.callback, h.options);
 											}
 									}
 								} else {
-									for (var p = Object.keys(e), h = 0; h < p.length; h++) {
-										var v = K.exec(p[h]),
-											d = v && v[1];
-										d && 'removeListener' !== d && this[s].call(this, d);
+									for (var v = Object.keys(e), d = 0; d < v.length; d++) {
+										var g = v[d],
+											y = K.exec(g),
+											b = y && y[1];
+										b && 'removeListener' !== b && this[s].call(this, b);
 									}
 									this[s].call(this, 'removeListener');
 								}
@@ -3319,25 +3322,24 @@
 			var r = n('HAuM'),
 				o = n('hh1v'),
 				i = [].slice,
-				a = {};
+				a = {},
+				c = function(t, e, n) {
+					if (!(e in a)) {
+						for (var r = [], o = 0; o < e; o++) r[o] = 'a[' + o + ']';
+						a[e] = Function('C,a', 'return new C(' + r.join(',') + ')');
+					}
+					return a[e](t, n);
+				};
 			t.exports =
 				Function.bind ||
 				function(t) {
 					var e = r(this),
 						n = i.call(arguments, 1),
-						c = function() {
+						a = function() {
 							var r = n.concat(i.call(arguments));
-							return this instanceof c
-								? (function(t, e, n) {
-										if (!(e in a)) {
-											for (var r = [], o = 0; o < e; o++) r[o] = 'a[' + o + ']';
-											a[e] = Function('C,a', 'return new C(' + r.join(',') + ')');
-										}
-										return a[e](t, n);
-								  })(e, r.length, r)
-								: e.apply(t, r);
+							return this instanceof a ? c(e, r.length, r) : e.apply(t, r);
 						};
-					return o(e.prototype) && (c.prototype = e.prototype), c;
+					return o(e.prototype) && (a.prototype = e.prototype), a;
 				};
 		},
 		'BX/b': function(t, e, n) {
@@ -6923,4 +6925,4 @@
 	},
 	[[1, 0]]
 ]);
-//# sourceMappingURL=polyfills-es5.4017f53fd9cd99a96b61.js.map
+//# sourceMappingURL=polyfills-es5.78060b937d0ba6dcee58.js.map

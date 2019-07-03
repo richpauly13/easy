@@ -1123,14 +1123,15 @@
 							return D.apply(this, arguments);
 						}),
 						(T[i] = function() {
-							const t = arguments[0],
-								n = [],
-								o = V(this || e, w ? w(t) : t);
-							for (let e = 0; e < o.length; e++) {
-								const t = o[e];
-								n.push(t.originalDelegate ? t.originalDelegate : t.callback);
+							const t = this || e,
+								n = arguments[0],
+								o = [],
+								r = V(t, w ? w(n) : n);
+							for (let e = 0; e < r.length; e++) {
+								const t = r[e];
+								o.push(t.originalDelegate ? t.originalDelegate : t.callback);
 							}
-							return n;
+							return o;
 						}),
 						(T[l] = function() {
 							const t = this || e,
@@ -1843,4 +1844,4 @@
 	},
 	[[1, 0]]
 ]);
-//# sourceMappingURL=polyfills-es2015.f7c54862560a37b912d4.js.map
+//# sourceMappingURL=polyfills-es2015.e6779365a1d1129818dc.js.map
