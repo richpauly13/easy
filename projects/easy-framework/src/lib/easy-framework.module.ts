@@ -4,10 +4,10 @@ import { EasyComponent } from './easy-framework.component';
 
 @NgModule({
 	declarations: [
-        EasyComponent
-    ],
+		EasyComponent
+	],
 	exports: [
-        EasyComponent
-    ]
+		EasyComponent
+	]
 })
 export class EasyModule {}

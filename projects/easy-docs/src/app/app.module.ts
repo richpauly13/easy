@@ -29,7 +29,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 	imports: [
 		BrowserModule,
 		EasyModule,
-        ComponentsModule,
+		ComponentsModule,
 		CssModule,
 		RouterModule,
 		AppRoutingModule
