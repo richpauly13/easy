@@ -1,18 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AlertComponent } from './alert/alert.component';
-import { CssComponent } from './components/css.component';
-
 const routes: Routes = [
-	{
-		path: 'alert',
-		component: AlertComponent
-	},
-	{
-		path: 'components',
-		component: CssComponent
-	},
 	{
 		path: '',
 		redirectTo: '/components',
@@ -32,6 +21,8 @@ const routes: Routes = [
 			anchorScrolling: 'enabled'
 		})
 	],
-	exports: [RouterModule]
+	exports: [
+		RouterModule
+	]
 })
 export class AppRoutingModule {}

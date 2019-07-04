@@ -5,17 +5,15 @@
 	"projects": {
 		"easy-framework": {
 			"projectType": "library",
-			"root": "projects/easy-framework",
-			"sourceRoot": "projects/easy-framework/src",
-			"prefix": "ez",
-			"schematics": {
+            "schematics": {
 				"@schematics/angular:component": {
 					"styleext": "scss",
 					"inlineStyle": false,
 					"inlineTemplate": false,
 					"export": true,
 					"flat": true,
-					"spec": true
+					"spec": true,
+                    "viewEncapsulation": "None"
 				},
 				"@schematics/angular:directive": {
 					"export": true,
@@ -25,7 +23,8 @@
 				"@schematics/angular:module": {
 					"commonModule": false,
 					"module": "components",
-					"flat": false
+					"flat": false,
+					"spec": true
 				},
 				"@schematics/angular:service": {
 					"export": true,
@@ -43,6 +42,9 @@
 					"spec": true
 				}
 			},
+			"root": "projects/easy-framework",
+			"sourceRoot": "projects/easy-framework/src",
+			"prefix": "ez",			
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-ng-packagr:build",
@@ -76,7 +78,37 @@
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
-					"style": "scss"
+					"styleext": "scss",
+					"export": true,
+					"flat": false,
+					"spec": true,
+                    "module": "components"
+				},
+				"@schematics/angular:directive": {
+					"export": true,
+					"flat": true,
+					"spec": true
+				},
+				"@schematics/angular:module": {
+					"commonModule": false,
+					"module": "app",
+					"flat": false,
+					"spec": true
+				},
+				"@schematics/angular:service": {
+					"export": true,
+					"flat": true,
+					"spec": true
+				},
+				"@schematics/angular:pipe": {
+					"export": true,
+					"flat": true,
+					"spec": true
+				},
+				"@schematics/angular:class": {
+					"export": false,
+					"flat": true,
+					"spec": true
 				}
 			},
 			"root": "projects/easy-docs",
