@@ -1,28 +1,3 @@
-/* SG
-# Alert
-
-Alerts are styled with an `.alert-[bad || good || info || warn]` class.
-
-```
-<aside class="alert-bad">bad</aside>
-<aside class="alert-good">good</aside>
-<aside class="alert-info">info</aside>
-<aside class="alert-warn">warn</aside>
-<ez-alert class="alert-good">good</ez-alert>
-```
-*/
-
-/* SG
-# Alert/Close
-
-Alerts are closed by adding a `.close` class.
-
-```
-<aside class="alert-good close">close</aside>
-<ez-alert class="close alert-good">close</ez-alert>
-```
-*/
-
 @import '../../core/sass/functions';
 @import '../../core/sass/mixins';
 @import '../../core/sass/variables';

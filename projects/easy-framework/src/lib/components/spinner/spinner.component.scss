@@ -1,20 +1,9 @@
-/* SG
-# Spinner
-
-Spinners are styled with a `.spinner[-dotted]` class.
-
-```
-<p class="spinner"></p>
-<p class="spinner-dotted"></p>
-```
-*/
-
 @import '../../core/sass/functions';
 @import '../../core/sass/mixins';
 @import '../../core/sass/variables';
 
-:host {
-	// Spinner styles
+// Spinner styles
+:host {	
 	&.spinner,
 	&.spinner-dotted {
 		animation: spinner 2s linear infinite;
