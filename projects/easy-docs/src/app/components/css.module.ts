@@ -6,7 +6,12 @@ import { ComponentsModule } from 'easy-framework';
 import { CssComponent } from './css.component';
 
 @NgModule({
-	declarations: [CssComponent],
-	imports: [CommonModule, ComponentsModule]
+	declarations: [
+		CssComponent
+	],
+	imports: [
+		CommonModule,
+		ComponentsModule
+	]
 })
 export class CssModule {}
