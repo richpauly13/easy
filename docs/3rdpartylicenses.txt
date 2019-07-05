@@ -84,6 +84,7 @@ SOFTWARE.
 
 
 easy-framework
+MIT
 
 rxjs
 Apache-2.0
