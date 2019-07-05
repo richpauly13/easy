@@ -5,12 +5,13 @@ import { BadgeComponent } from './badge/badge.component';
 import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
 import { CollapseComponent } from './collapse/collapse.component';
+import { ComponentsComponent } from './components.component';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { FormComponent } from './form/form.component';
 import { GridComponent } from './grid/grid.component';
 import { ModalComponent } from './modal/modal.component';
 import { NavComponent } from './nav/nav.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from './../shared/shared.module';
 import { SliderComponent } from './slider/slider.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -26,6 +27,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		ButtonComponent,
 		CardComponent,
 		CollapseComponent,
+		ComponentsComponent,
 		FormComponent,
 		GridComponent,
 		ModalComponent,
@@ -47,6 +49,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		ButtonComponent,
 		CardComponent,
 		CollapseComponent,
+		ComponentsComponent,
 		ComponentsRoutingModule,
 		FormComponent,
 		GridComponent,

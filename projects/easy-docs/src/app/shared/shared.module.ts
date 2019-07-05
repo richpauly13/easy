@@ -5,14 +5,6 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule, EasyModule } from 'easy-framework';
 
 @NgModule({
-  declarations: [
-
-  ],
-  imports: [
-		ComponentsModule,
-		CommonModule,
-		EasyModule
-  ],
   exports: [
 		CommonModule,
 		ComponentsModule,

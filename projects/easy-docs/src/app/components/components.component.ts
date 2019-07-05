@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	templateUrl: './css.component.html',
-	styleUrls: ['./css.component.scss']
+	selector: 'docs-components',
+	templateUrl: './components.component.html',
+	styleUrls: [
+		'./components.component.scss'
+	]
 })
-export class CssComponent implements OnInit {
+export class ComponentsComponent implements OnInit {
 	public get section(): string {
 		return this.selectedSection;
 	}

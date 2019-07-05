@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AlertComponent } from './alert/alert.component';
-import { CssComponent } from './css.component';
+import { ComponentsComponent } from './components.component';
 
 const routes: Routes = [
 	{
@@ -11,7 +11,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'components',
-		component: CssComponent
+		component: ComponentsComponent
 	}
 ];
 

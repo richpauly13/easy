@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlertModule } from 'projects/easy-framework/src/public-api';
+import { AlertModule } from 'easy-framework';
 
 import { AlertComponent } from './alert.component';
 
@@ -26,7 +26,7 @@ describe('AlertComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create alert page', () => {
 		expect(component).toBeTruthy();
 	});
 });
