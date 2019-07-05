@@ -9,9 +9,9 @@ describe('ComponentsComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-            imports: [
-                SharedModule
-            ],
+			imports: [
+				SharedModule
+			],
 			declarations: [
 				ComponentsComponent
 			]
