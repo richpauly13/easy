@@ -8,27 +8,27 @@ import { Component, OnInit } from '@angular/core';
 	]
 })
 export class ComponentsComponent implements OnInit {
-	public get section(): string {
-		return this.selectedSection;
-	}
-
-	public set section(section: string) {
-		this.selectedSection = section;
-	}
-
-	private selectedSection: string;
+	public navs: string[];
 
 	public constructor() {}
 
 	public ngOnInit(): void {
-		this.section = 'Alert';
-	}
-
-	public checkSection(section: string): boolean {
-		return this.section === section;
-	}
-
-	public selectSection(section: string): void {
-		this.section = section;
+		this.navs = [
+			'alert',
+			'badge',
+			'button',
+			'card',
+			'collapse',
+			'form',
+			'modal',
+			'nav',
+			'slider',
+			'slideshow',
+			'spinner',
+			'switch',
+			'tab',
+			'table',
+			'tooltip'
+		];
 	}
 }

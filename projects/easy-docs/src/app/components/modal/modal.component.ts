@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'docs-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+	selector: 'docs-modal',
+	templateUrl: './modal.component.html',
+	styleUrls: [
+		'./modal.component.scss'
+	]
 })
 export class ModalComponent implements OnInit {
+	public constructor() { }
 
-  constructor() { }
+	public ngOnInit(): void {
 
-  public ngOnInit() {
-  }
-
+	}
 }

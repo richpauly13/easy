@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'docs-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+	selector: 'docs-nav',
+	templateUrl: './nav.component.html',
+	styleUrls: [
+		'./nav.component.scss'
+	]
 })
 export class NavComponent implements OnInit {
+	public constructor() { }
 
-  constructor() { }
+	public ngOnInit(): void {
 
-  public ngOnInit() {
-  }
-
+	}
 }

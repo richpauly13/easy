@@ -1,175 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
-@import './../../easy-framework/src/lib/core/sass/functions';
-@import './../../easy-framework/src/lib/core/sass/mixins';
-@import './../../easy-framework/src/lib/core/sass/variables';
+@import "../../easy-framework/src/lib/core/sass/functions";
+@import "../../easy-framework/src/lib/core/sass/mixins";
+@import "../../easy-framework/src/lib/core/sass/variables";
 
-// Styleguide styles
-.styleguide {
-	margin-left: 16rem;
+.attribute {
+	color: color(blue);
 }
 
-.styleguide .hljs-attr {
-	color: #954121;
+.box {
+	border: rem(1) solid color(black);
+	margin: rem(16);
+	padding: 0;
+
+	p {
+		background-color: color(blue);
+		color: color(white);
+		text-align: center;
+
+		&:nth-child(even) {
+			background-color: color(green);
+		}
+
+		&[class*="pad"] {
+			display: inline-block;
+			margin: 0 rem(16);
+		}
+	}
 }
 
-.styleguide-menu {
-	left: 2rem;
-	top: 5.5rem;
-	width: 14rem;
+.fixed-l {
+    top: rem(50);
 }
 
-.styleguide-menu a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.styleguide code {
-	color: #6a0080;
-}
-
-.styleguide code,
-.styleguide pre {
-	font-size: 0.875rem;
-}
-
-.styleguide .section {
-	min-width: 15rem;
-}
-
-// Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine (@thingsinjars)
-#styleguide .hljs pre,
-.hljs {
-	display: block;
-	overflow-x: auto;
-	padding: 0.5em;
-	color: #000;
-	background: #f8f8ff;
-	-webkit-text-size-adjust: none;
-}
-
-.hljs-comment,
-.diff .hljs-header {
-	color: #408080;
-	font-style: italic;
-}
-
-.hljs-keyword,
-.assignment,
-.hljs-literal,
-.css .rule .hljs-keyword,
-.hljs-winutils,
-.javascript .hljs-title,
-.lisp .hljs-title,
-.hljs-subst {
-	color: #954121;
-}
-
-.hljs-number,
-.hljs-hexcolor {
-	color: #40a070;
-}
-
-.hljs-string,
-.hljs-tag .hljs-value,
-.hljs-doctag,
-.tex .hljs-formula {
-	color: #219161;
-}
-
-.hljs-title,
-.hljs-id {
-	color: #19469d;
-}
-.hljs-params {
-	color: #00f;
-}
-
-.javascript .hljs-title,
-.lisp .hljs-title,
-.hljs-subst {
-	font-weight: normal;
-}
-
-.hljs-class .hljs-title,
-.haskell .hljs-label,
-.tex .hljs-command {
-	color: #458;
-	font-weight: bold;
-}
-
-.hljs-tag,
-.hljs-tag .hljs-title,
-.hljs-rule .hljs-property,
-.django .hljs-tag .hljs-keyword,
-.hljs-name {
-	color: #000080;
-	font-weight: normal;
-}
-
-.hljs-attr,
-.hljs-variable,
-.instancevar,
-.lisp .hljs-body {
-	color: #008080;
-}
-
-.hljs-regexp {
-	color: #b68;
-}
-
-.hljs-class {
-	color: #458;
-	font-weight: bold;
-}
-
-.hljs-symbol,
-.ruby .hljs-symbol .hljs-string,
-.ruby .hljs-symbol .hljs-keyword,
-.ruby .hljs-symbol .keymethods,
-.lisp .hljs-keyword,
-.tex .hljs-special,
-.input_number {
-	color: #990073;
-}
-
-.builtin,
-.constructor,
-.hljs-built_in,
-.lisp .hljs-title {
-	color: #0086b3;
-}
-
-.hljs-preprocessor,
-.hljs-pragma,
-.hljs-pi,
-.hljs-doctype,
-.hljs-shebang,
-.hljs-cdata {
-	color: #999;
-	font-weight: bold;
-}
-
-.hljs-deletion {
-	background: #fdd;
-}
-
-.hljs-addition {
-	background: #dfd;
-}
-
-.diff .hljs-change {
-	background: #0086b3;
-}
-
-.hljs-chunk {
-	color: #aaa;
-}
-
-.tex .hljs-formula {
-	opacity: 0.5;
-}
-
-// Doc styles
 .flexbox {
 	@include row;
 
@@ -179,11 +41,11 @@
 		border: rem(1) solid color(black);
 		margin: rem(6);
 
-		&[class*='col'] {
+		&[class*="col"] {
 			height: rem(250);
 			width: rem(150);
 
-			&[class*='wrap'] {
+			&[class*="wrap"] {
 				width: rem(300);
 			}
 		}
@@ -192,10 +54,10 @@
 			height: rem(300);
 		}
 
-		&[class*='row'] {
+		&[class*="row"] {
 			height: rem(150);
 
-			&[class*='wrap'] {
+			&[class*="wrap"] {
 				height: rem(300);
 			}
 		}
@@ -223,23 +85,29 @@
 	}
 }
 
-.box {
-	border: rem(1) solid color(black);
-	margin: rem(16);
-	padding: 0;
+.link {
+	color: inherit;
+	text-decoration: none;
+}
 
-	p {
-		background-color: color(blue);
-		color: color(white);
-		text-align: center;
+.main {
+	margin-left: rem(160);
+}
 
-		&:nth-child(even) {
-			background-color: color(green);
-		}
+.main code {
+	color: color(purple);
+}
 
-		&[class*='pad'] {
-			display: inline-block;
-			margin: 0 rem(16);
-		}
-	}
+.main code,
+.main pre {
+	font-size: rem(14);
+}
+
+.tag {
+	color: color(red);
+	font-weight: normal;
+}
+
+.value {
+	color: color(green);
 }

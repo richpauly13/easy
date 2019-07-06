@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'docs-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+	selector: 'docs-card',
+	templateUrl: './card.component.html',
+	styleUrls: [
+		'./card.component.scss'
+	]
 })
 export class CardComponent implements OnInit {
+	public constructor() { }
 
-  constructor() { }
+	public ngOnInit(): void {
 
-  public ngOnInit() {
-  }
-
+	}
 }

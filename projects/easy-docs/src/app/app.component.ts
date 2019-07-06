@@ -8,5 +8,14 @@ import { Component } from '@angular/core';
 	]
 })
 export class AppComponent {
-	public constructor() {}
+	public navs: string[];
+
+	public constructor() {
+		this.navs = [
+			'components',
+			'layout',
+			'typography',
+			'utilities'
+		];
+	}
 }

@@ -4,6 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
+import { HomeComponent } from './home/home.component';
+import { LayoutComponent } from './layout/layout.component';
+import { TypographyComponent } from './typography/typography.component';
+import { UtilitiesComponent } from './utilities/utilities.component';
 
 @NgModule({
 	imports: [
@@ -12,7 +16,11 @@ import { ComponentsModule } from './components/components.module';
 		AppRoutingModule
 	],
 	declarations: [
-		AppComponent
+		AppComponent,
+		HomeComponent,
+		LayoutComponent,
+		TypographyComponent,
+		UtilitiesComponent
 	],
 	bootstrap: [
 		AppComponent

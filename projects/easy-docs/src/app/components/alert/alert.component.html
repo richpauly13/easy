@@ -1,42 +1,44 @@
-<h1 class="pad-t-xl">Alert</h1>
+<h1>Alert</h1>
 
-<article class="mar-b-lg box-shadow-1 border-lr-gray section">
-    <p class="pad-a-sm bg-lt-gray border-tb-gray">Alerts are styled with an <code>.alert-[bad || good || info || warn]</code> class.</p>
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Alerts are styled with an <code>.alert-[bad || good || info || warn]</code> class.</p>
+    </section>
 
-    <section class="pad-a-sm">
-        <aside class="alert-bad">bad</aside>
-        <aside class="alert-good">good</aside>
-        <aside class="alert-info">info</aside>
-        <aside class="alert-warn">warn</aside>
+    <section class="pad-a-sm border-b-gray">
+        <p class="alert-bad">bad</p>
+        <p class="alert-good">good</p>
+        <p class="alert-info">info</p>
+        <p class="alert-warn">warn</p>
         <ez-alert class="alert-good">good</ez-alert>
     </section>
 
     <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-bad"</span>&gt;</span>bad<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-info"</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-warn"</span>&gt;</span>warn<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good"</span>&gt;</span>good<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span>
+        <pre class="pad-t-md">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"alert-bad"</span>&gt;</span>bad<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"alert-good"</span>&gt;</span>good<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"alert-info"</span>&gt;</span>info<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"alert-warn"</span>&gt;</span>warn<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">ez-alert</span> <span class="attribute">class</span>=<span class="value">"alert-good"</span>&gt;</span>good<span>&lt;/<span class="tag">ez-alert</span>&gt;</span>
         </pre>
     </figure>
 </article>
 
-<article class="mar-b-lg box-shadow-1 border-lr-gray section">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-    <h2>Close</h2>
-    <p>Alerts are closed by adding a <code>.close</code> class.</p>
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <h2>Close</h2>
+        <p>Alerts are closed by adding a <code>.close</code> class.</p>
     </section>
 
-    <section class="pad-a-sm">
-        <aside class="alert-good close">close</aside>
+    <section class="pad-a-sm border-b-gray">
+        <p class="alert-good close">close</p>
         <ez-alert class="close alert-good">close</ez-alert>
     </section>
 
     <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"alert-good close"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">ez-alert</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"close alert-good"</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-title">ez-alert</span>&gt;</span>
+        <pre class="pad-t-md">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"alert-good close"</span>&gt;</span>close<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">ez-alert</span> <span class="attribute">class</span>=<span class="value">"close alert-good"</span>&gt;</span>close<span>&lt;/<span class="tag">ez-alert</span>&gt;</span>
         </pre>
     </figure>
 </article>

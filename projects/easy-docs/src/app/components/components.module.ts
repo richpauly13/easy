@@ -8,7 +8,6 @@ import { CollapseComponent } from './collapse/collapse.component';
 import { ComponentsComponent } from './components.component';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { FormComponent } from './form/form.component';
-import { GridComponent } from './grid/grid.component';
 import { ModalComponent } from './modal/modal.component';
 import { NavComponent } from './nav/nav.component';
 import { SharedModule } from './../shared/shared.module';
@@ -29,7 +28,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		CollapseComponent,
 		ComponentsComponent,
 		FormComponent,
-		GridComponent,
 		ModalComponent,
 		NavComponent,
 		SliderComponent,
@@ -52,7 +50,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		ComponentsComponent,
 		ComponentsRoutingModule,
 		FormComponent,
-		GridComponent,
 		ModalComponent,
 		NavComponent,
 		SharedModule,

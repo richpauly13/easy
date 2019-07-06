@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'docs-layout',
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.scss']
+})
+export class LayoutComponent implements OnInit {
+
+  constructor() { }
+
+  public ngOnInit() {
+  }
+
+}
