@@ -1,1 +1,9 @@
-<p>layout works!</p>
+<nav class="pad-a-sm border-a-gray box-shadow-1 fixed-l">
+	<ul>
+		<li *ngFor="let nav of navs">
+			<a [routerLink]="['/layout/', nav]" routerLinkActive="bg-lt-gray" class="link bg-hover-lt-gray pad-a-xs">{{nav | titlecase}}</a>
+		</li>
+	</ul>
+</nav>
+
+<router-outlet></router-outlet>

@@ -12,4 +12,6 @@ platformBrowserDynamic()
 .bootstrapModule(AppModule, {
 	defaultEncapsulation: ViewEncapsulation.None
 })
-.catch((err) => console.error(err));
+.catch((error: Error) => {
+	console.error(error);
+});

@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'docs-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+	selector: 'docs-layout',
+	templateUrl: './layout.component.html',
+	styleUrls: [
+		'./layout.component.scss'
+	]
 })
 export class LayoutComponent implements OnInit {
+	public navs: string[];
 
-  constructor() { }
+	public constructor() { }
 
-  public ngOnInit() {
-  }
-
+	public ngOnInit(): void {
+		this.navs = [
+			'flexbox',
+			'grid',
+			'position'
+		];
+	}
 }

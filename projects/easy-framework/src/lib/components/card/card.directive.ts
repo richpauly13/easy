@@ -4,5 +4,5 @@ import { Directive } from '@angular/core';
 	selector: '[ezCard]'
 })
 export class CardDirective {
-	constructor() {}
+	public constructor() {}
 }

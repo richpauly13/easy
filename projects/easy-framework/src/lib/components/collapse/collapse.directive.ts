@@ -4,5 +4,5 @@ import { Directive } from '@angular/core';
 	selector: '[ezCollapse]'
 })
 export class CollapseDirective {
-	constructor() {}
+	public constructor() {}
 }

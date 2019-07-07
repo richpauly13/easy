@@ -79,6 +79,7 @@
 			"schematics": {
 				"@schematics/angular:component": {
 					"styleext": "scss",
+                    "export": true,
 					"flat": false,
 					"spec": true
 				},

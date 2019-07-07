@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'docs-utilities',
-  templateUrl: './utilities.component.html',
-  styleUrls: ['./utilities.component.scss']
+	selector: 'docs-utilities',
+	templateUrl: './utilities.component.html',
+	styleUrls: [
+		'./utilities.component.scss'
+	]
 })
 export class UtilitiesComponent implements OnInit {
+	public navs: string[];
 
-  constructor() { }
+	public constructor() { }
 
-  public ngOnInit() {
-  }
-
+	public ngOnInit(): void {
+		this.navs = [
+			'space',
+			'typography',
+			'visibility'
+		];
+	}
 }

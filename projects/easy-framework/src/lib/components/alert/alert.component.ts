@@ -6,11 +6,6 @@ import { Component, ElementRef, Input, HostBinding, OnInit, ViewChild } from '@a
 	styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit {
-	@ViewChild('message', { static: true }) public message: ElementRef;
-	@HostBinding('attr.aria-labelledby') public ariaLabelledby: string;
-	@HostBinding('attr.class') public hostClass: string;
-	@HostBinding('attr.role') public role: string;
-	@HostBinding('attr.tabindex') public tabindex: string;
 	@Input()
 	public set class(classList: string) {
 		if (classList.includes('close')) {
@@ -29,21 +24,26 @@ export class AlertComponent implements OnInit {
 	public get class(): string {
 		return this.classList;
 	}
+	@HostBinding('attr.aria-labelledby') public ariaLabelledby: string;
 
 	public close: boolean;
+	@HostBinding('attr.class') public hostClass: string;
 	public id: string;
+	@ViewChild('message', { static: true }) public message: ElementRef;
+	@HostBinding('attr.role') public role: string;
+	@HostBinding('attr.tabindex') public tabindex: string;
 
 	private classList: string;
 
 	public constructor(private elementRef: ElementRef) {}
 
+	public closeAlert(): void {
+		this.hostClass = 'hide';
+	}
+
 	public ngOnInit(): void {
 		this.hostClass = this.class;
 		this.tabindex = '-1';
-	}
-
-	public closeAlert(): void {
-		this.hostClass = 'hide';
 	}
 
 	public trap(): void {
