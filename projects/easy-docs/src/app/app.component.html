@@ -1,13 +1,17 @@
 <ez-root>
-    <nav class="bg-black text-white pad-a-xs fixed-t">
-        <ul class="row align-cm">
-            <li *ngFor="let nav of navs" class="pad-r-xl">
-                <a [routerLink]="['/', nav]" routerLinkActive="bg-dk-gray" class="link bg-hover-dk-gray">{{nav | titlecase}}</a>
+    <nav class="bg-black text-white fixed-t pad-a-sm">
+        <ul class="row align-sa">
+             <li>
+                <a routerLink="/home" class="link bg-hover-dk-gray pad-a-sm" aria-label="home">EASY</a>
+            </li>
+
+            <li *ngFor="let nav of navs">
+                <a [routerLink]="['/', nav]" routerLinkActive="bg-dk-gray" class="link bg-hover-dk-gray pad-a-sm">{{nav | titlecase}}</a>
             </li>
         </ul>
     </nav>
 
-    <main #content class="pad-a-xl main" tabindex="-1">
+    <main #content class="main" tabindex="-1">
         <router-outlet></router-outlet>
     </main>
 </ez-root>

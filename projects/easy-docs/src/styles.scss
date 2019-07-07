@@ -29,7 +29,7 @@
 }
 
 .fixed-l {
-    top: rem(50);
+    top: rem(110);
 }
 
 .flexbox {
@@ -91,11 +91,16 @@
 }
 
 .main {
-	margin-left: rem(160);
+	margin-left: rem(180);
+    padding-top: rem(100);
 }
 
 .main code {
 	color: color(purple);
+}
+
+.main pre {
+    white-space: pre-line; 
 }
 
 .main code,

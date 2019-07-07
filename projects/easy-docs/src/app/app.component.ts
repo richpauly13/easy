@@ -14,7 +14,6 @@ export class AppComponent {
 		this.navs = [
 			'components',
 			'layout',
-			'typography',
 			'utilities'
 		];
 	}

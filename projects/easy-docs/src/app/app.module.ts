@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
-import { TypographyComponent } from './typography/typography.component';
 import { UtilitiesComponent } from './utilities/utilities.component';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { UtilitiesComponent } from './utilities/utilities.component';
 		AppComponent,
 		HomeComponent,
 		LayoutComponent,
-		TypographyComponent,
 		UtilitiesComponent
 	],
 	bootstrap: [
