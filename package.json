@@ -33,7 +33,7 @@
     "ng": "ng",
     "pack": "cd dist/easy-framework && npm pack",
     "package": "run-s build:easy copy:all pack",
-    "publish:easy": "cd dist/easy-framework && npm publish easy-framework-0.1.0.tgz",
+    "publish:easy": "cd dist/easy-framework && npm publish easy-framework-0.2.0.tgz",
     "start": "ng serve -o",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
