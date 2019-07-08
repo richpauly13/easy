@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AlertComponent } from './alert/alert.component';
 import { BadgeComponent } from './badge/badge.component';
@@ -20,85 +20,84 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 
 const routes: Routes = [
 	{
-		path: 'components',
-		component: ComponentsComponent,
 		children: [
 			{
-				path: 'alert',
-				component: AlertComponent
-			},
-
-			{
-				path: 'badge',
-				component: BadgeComponent
+				component: AlertComponent,
+				path: 'alert'
 			},
 			{
-				path: 'button',
-				component: ButtonComponent
+				component: BadgeComponent,
+				path: 'badge'
 			},
 			{
-				path: 'card',
-				component: CardComponent
+				component: ButtonComponent,
+				path: 'button'
 			},
 			{
-				path: 'collapse',
-				component: CollapseComponent
+				component: CardComponent,
+				path: 'card'
 			},
 			{
-				path: 'form',
-				component: FormComponent
+				component: CollapseComponent,
+				path: 'collapse'
 			},
 			{
-				path: 'modal',
-				component: ModalComponent
+				component: FormComponent,
+				path: 'form'
 			},
 			{
-				path: 'nav',
-				component: NavComponent
+				component: ModalComponent,
+				path: 'modal'
 			},
 			{
-				path: 'slider',
-				component: SliderComponent
+				component: NavComponent,
+				path: 'nav'
 			},
 			{
-				path: 'slideshow',
-				component: SlideshowComponent
+				component: SliderComponent,
+				path: 'slider'
 			},
 			{
-				path: 'spinner',
-				component: SpinnerComponent
+				component: SlideshowComponent,
+				path: 'slideshow'
 			},
 			{
-				path: 'switch',
-				component: SwitchComponent
+				component: SpinnerComponent,
+				path: 'spinner'
 			},
 			{
-				path: 'tab',
-				component: TabComponent
+				component: SwitchComponent,
+				path: 'switch'
 			},
 			{
-				path: 'table',
-				component: TableComponent
+				component: TabComponent,
+				path: 'tab'
 			},
 			{
-				path: 'tooltip',
-				component: TooltipComponent
+				component: TableComponent,
+				path: 'table'
+			},
+			{
+				component: TooltipComponent,
+				path: 'tooltip'
 			},
 			{
 				path: '',
-				redirectTo: 'alert',
-				pathMatch: 'full'
+				pathMatch: 'full',
+				redirectTo: 'alert'
 			}
-		]
+		],
+		component: ComponentsComponent,
+		path: 'components'
 	}
 ];
 
 @NgModule({
-	imports: [
-		RouterModule.forChild(routes)
-	],
 	exports: [
 		RouterModule
+	],
+	imports: [
+		RouterModule.forChild(routes)
 	]
 })
 export class ComponentsRoutingModule { }

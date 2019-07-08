@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ez-card, .card',
-	templateUrl: './card.component.html',
-	styleUrls: ['./card.component.scss']
+	styleUrls: [
+		'./card.component.scss'
+	],
+	templateUrl: './card.component.html'
 })
-export class CardComponent implements OnInit {
-	public constructor() {}
+export class CardComponent {
 
-	public ngOnInit(): void {}
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
@@ -8,36 +8,36 @@ import { PositionComponent } from './position/position.component';
 
 const routes: Routes = [
 	{
-		path: 'layout',
-		component: LayoutComponent,
 		children: [
 			{
-				path: 'flexbox',
-				component: FlexboxComponent
+				component: FlexboxComponent,
+				path: 'flexbox'
 			},
 			{
-				path: 'grid',
-				component: GridComponent
+				component: GridComponent,
+				path: 'grid'
 			},
 			{
-				path: 'position',
-				component: PositionComponent
+				component: PositionComponent,
+				path: 'position'
 			},
 			{
 				path: '',
-				redirectTo: 'flexbox',
-				pathMatch: 'full'
+				pathMatch: 'full',
+				redirectTo: 'flexbox'
 			}
-		]
+		],
+		component: LayoutComponent,
+		path: 'layout'
 	}
 ];
 
 @NgModule({
-	imports: [
-		RouterModule.forChild(routes)
-	],
 	exports: [
 		RouterModule
+	],
+	imports: [
+		RouterModule.forChild(routes)
 	]
 })
 export class LayoutRoutingModule { }

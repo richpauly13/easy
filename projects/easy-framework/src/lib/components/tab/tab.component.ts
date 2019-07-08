@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ez-tab',
-	templateUrl: './tab.component.html',
-	styleUrls: ['./tab.component.scss']
+	styleUrls: [
+		'./tab.component.scss'
+	],
+	templateUrl: './tab.component.html'
 })
-export class TabComponent implements OnInit {
-	public constructor() {}
+export class TabComponent {
 
-	public ngOnInit(): void {}
 }

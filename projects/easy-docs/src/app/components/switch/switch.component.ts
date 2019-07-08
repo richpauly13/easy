@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-switch',
-	templateUrl: './switch.component.html',
 	styleUrls: [
 		'./switch.component.scss'
-	]
+	],
+	templateUrl: './switch.component.html'
 })
-export class SwitchComponent implements OnInit {
-	public constructor() { }
+export class SwitchComponent {
 
-	public ngOnInit(): void {
-
-	}
 }

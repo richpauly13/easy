@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezGrid]'
 })
 export class GridDirective {
-	public constructor() {}
 }

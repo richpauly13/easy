@@ -1,11 +1,18 @@
-import { Component, ElementRef, Input, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
-	templateUrl: './alert.component.html',
-	styleUrls: ['./alert.component.scss']
+	styleUrls: [
+		'./alert.component.scss'
+	],
+	templateUrl: './alert.component.html'
 })
 export class AlertComponent implements OnInit {
+	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;
+	@HostBinding('attr.class') public hostClass: string;
+	@HostBinding('attr.role') public role: string;
+	@HostBinding('attr.tabindex') public tabindex: string;
+
 	@Input()
 	public set class(classList: string) {
 		if (classList.includes('close')) {
@@ -18,24 +25,21 @@ export class AlertComponent implements OnInit {
 			this.role = 'alert';
 		}
 
-		this.ariaLabelledby = this.id = this.class.match(/\balert\S+\b/)[0];
+		this.ariaLabelledBy = this.id = this.class.match(/\balert\S+\b/)[0];
 	}
 
 	public get class(): string {
 		return this.classList;
 	}
-	@HostBinding('attr.aria-labelledby') public ariaLabelledby: string;
+
+	@ViewChild('message', {static: true}) public message: ElementRef;
 
 	public close: boolean;
-	@HostBinding('attr.class') public hostClass: string;
 	public id: string;
-	@ViewChild('message', { static: true }) public message: ElementRef;
-	@HostBinding('attr.role') public role: string;
-	@HostBinding('attr.tabindex') public tabindex: string;
 
 	private classList: string;
 
-	public constructor(private elementRef: ElementRef) {}
+	public constructor(private readonly elementRef: ElementRef) { }
 
 	public closeAlert(): void {
 		this.hostClass = 'hide';

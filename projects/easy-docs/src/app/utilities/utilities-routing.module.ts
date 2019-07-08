@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { SpaceComponent } from './space/space.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -8,36 +8,36 @@ import { VisibilityComponent } from './visibility/visibility.component';
 
 const routes: Routes = [
 	{
-		path: 'utilities',
-		component: UtilitiesComponent,
 		children: [
 			{
-				path: 'space',
-				component: SpaceComponent
+				component: SpaceComponent,
+				path: 'space'
 			},
 			{
-				path: 'typography',
-				component: TypographyComponent
+				component: TypographyComponent,
+				path: 'typography'
 			},
 			{
-				path: 'visibility',
-				component: VisibilityComponent
+				component: VisibilityComponent,
+				path: 'visibility'
 			},
 			{
 				path: '',
-				redirectTo: 'space',
-				pathMatch: 'full'
+				pathMatch: 'full',
+				redirectTo: 'space'
 			}
-		]
+		],
+		component: UtilitiesComponent,
+		path: 'utilities'
 	}
 ];
 
 @NgModule({
-	imports: [
-		RouterModule.forChild(routes)
-	],
 	exports: [
 		RouterModule
+	],
+	imports: [
+		RouterModule.forChild(routes)
 	]
 })
 export class UtilitiesRoutingModule { }

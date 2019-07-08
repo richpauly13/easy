@@ -1,34 +1,34 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
 	{
-		path: 'home',
-		component: HomeComponent
+		component: HomeComponent,
+		path: 'home'
 	},
 	{
 		path: '',
-		redirectTo: '/home',
-		pathMatch: 'full'
+		pathMatch: 'full',
+		redirectTo: '/home'
 	},
 	{
 		path: '**',
-		redirectTo: '/home',
-		pathMatch: 'full'
+		pathMatch: 'full',
+		redirectTo: '/home'
 	}
 ];
 
 @NgModule({
-	imports: [
-		RouterModule.forRoot(routes, {
-			useHash: true,
-			anchorScrolling: 'enabled'
-		})
-	],
 	exports: [
 		RouterModule
+	],
+	imports: [
+		RouterModule.forRoot(routes, {
+			anchorScrolling: 'enabled',
+			useHash: true
+		})
 	]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

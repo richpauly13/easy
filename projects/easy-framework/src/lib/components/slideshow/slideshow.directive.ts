@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezSlideshow]'
 })
 export class SlideshowDirective {
-	public constructor() {}
 }

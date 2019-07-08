@@ -1,1 +1,1 @@
-export class Modal {}
+export class Modal { }

@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'docs-grid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss']
+	selector: 'docs-grid',
+	styleUrls: [
+		'./grid.component.scss'
+	],
+	templateUrl: './grid.component.html'
 })
-export class GridComponent implements OnInit {
-
-  public constructor() { }
-
-  public ngOnInit(): void {
-  }
+export class GridComponent {
 
 }

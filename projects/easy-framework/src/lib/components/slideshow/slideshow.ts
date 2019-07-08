@@ -1,1 +1,1 @@
-export class Slideshow {}
+export class Slideshow { }

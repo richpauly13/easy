@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'docs-space',
-  templateUrl: './space.component.html',
-  styleUrls: ['./space.component.scss']
+	selector: 'docs-space',
+	styleUrls: [
+		'./space.component.scss'
+	],
+	templateUrl: './space.component.html'
 })
-export class SpaceComponent implements OnInit {
-
-  public constructor() { }
-
-  public ngOnInit(): void {
-  }
+export class SpaceComponent {
 
 }

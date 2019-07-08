@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ez-tooltip',
-	templateUrl: './tooltip.component.html',
-	styleUrls: ['./tooltip.component.scss']
+	styleUrls: [
+		'./tooltip.component.scss'
+	],
+	templateUrl: './tooltip.component.html'
 })
-export class TooltipComponent implements OnInit {
-	public constructor() {}
+export class TooltipComponent {
 
-	public ngOnInit(): void {}
 }

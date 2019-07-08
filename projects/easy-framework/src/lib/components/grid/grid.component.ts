@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ez-grid',
-	templateUrl: './grid.component.html',
-	styleUrls: ['./grid.component.scss']
+	styleUrls: [
+		'./grid.component.scss'
+	],
+	templateUrl: './grid.component.html'
 })
-export class GridComponent implements OnInit {
-	public constructor() {}
+export class GridComponent {
 
-	public ngOnInit(): void {}
 }

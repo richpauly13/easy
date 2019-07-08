@@ -1,1 +1,1 @@
-export class Switch {}
+export class Switch { }

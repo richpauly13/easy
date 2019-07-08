@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezTab]'
 })
 export class TabDirective {
-	public constructor() {}
 }

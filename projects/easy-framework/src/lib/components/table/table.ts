@@ -1,1 +1,1 @@
-export class Table {}
+export class Table { }

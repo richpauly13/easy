@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ez-slider',
-	templateUrl: './slider.component.html',
-	styleUrls: ['./slider.component.scss']
+	styleUrls: [
+		'./slider.component.scss'
+	],
+	templateUrl: './slider.component.html'
 })
-export class SliderComponent implements OnInit {
-	public constructor() {}
+export class SliderComponent {
 
-	public ngOnInit(): void {}
 }

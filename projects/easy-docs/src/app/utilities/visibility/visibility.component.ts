@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'docs-visibility',
-  templateUrl: './visibility.component.html',
-  styleUrls: ['./visibility.component.scss']
+	selector: 'docs-visibility',
+	styleUrls: [
+		'./visibility.component.scss'
+	],
+	templateUrl: './visibility.component.html'
 })
-export class VisibilityComponent implements OnInit {
-
-  public constructor() { }
-
-  public ngOnInit(): void {
-  }
+export class VisibilityComponent {
 
 }

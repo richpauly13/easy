@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ez-nav',
-	templateUrl: './nav.component.html',
-	styleUrls: ['./nav.component.scss']
+	styleUrls: [
+		'./nav.component.scss'
+	],
+	templateUrl: './nav.component.html'
 })
-export class NavComponent implements OnInit {
-	public constructor() {}
+export class NavComponent {
 
-	public ngOnInit(): void {}
 }

@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-badge',
-	templateUrl: './badge.component.html',
 	styleUrls: [
 		'./badge.component.scss'
-	]
+	],
+	templateUrl: './badge.component.html'
 })
-export class BadgeComponent implements OnInit {
-	public constructor() { }
+export class BadgeComponent {
 
-	public ngOnInit(): void {
-
-	}
 }

@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-alert',
-	templateUrl: './alert.component.html',
 	styleUrls: [
 		'./alert.component.scss'
-	]
+	],
+	templateUrl: './alert.component.html'
 })
-export class AlertComponent implements OnInit {
-	public constructor() { }
+export class AlertComponent {
 
-	public ngOnInit(): void {
-
-	}
 }

@@ -9,19 +9,19 @@ import { LayoutModule } from './layout/layout.module';
 import { UtilitiesModule } from './utilities/utilities.module';
 
 @NgModule({
+	bootstrap: [
+		AppComponent
+	],
+	declarations: [
+		AppComponent,
+		HomeComponent
+	],
 	imports: [
 		BrowserModule,
 		ComponentsModule,
 		LayoutModule,
 		UtilitiesModule,
 		AppRoutingModule
-	],
-	declarations: [
-		AppComponent,
-		HomeComponent
-	],
-	bootstrap: [
-		AppComponent
 	]
 })
-export class AppModule {}
+export class AppModule { }

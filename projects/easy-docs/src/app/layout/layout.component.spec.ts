@@ -9,11 +9,11 @@ describe('LayoutComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [
-				RouterTestingModule
-			],
 			declarations: [
 				LayoutComponent
+			],
+			imports: [
+				RouterTestingModule
 			]
 		})
 		.compileComponents();

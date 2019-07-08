@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezModal]'
 })
 export class ModalDirective {
-	public constructor() {}
 }

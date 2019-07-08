@@ -1,1 +1,1 @@
-export class Nav {}
+export class Nav { }

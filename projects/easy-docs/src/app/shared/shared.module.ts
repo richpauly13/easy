@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule, EasyModule } from 'easy-framework';
 
 @NgModule({
-  exports: [
+	exports: [
 		CommonModule,
 		ComponentsModule,
 		EasyModule,
 		RouterModule
-  ]
+	]
 })
 export class SharedModule { }

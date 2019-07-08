@@ -9,8 +9,12 @@ describe('EasyComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [RouterTestingModule],
-			declarations: [EasyComponent]
+			declarations: [
+				EasyComponent
+			],
+			imports: [
+				RouterTestingModule
+			]
 		}).compileComponents();
 	}));
 

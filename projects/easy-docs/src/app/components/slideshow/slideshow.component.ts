@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-slideshow',
-	templateUrl: './slideshow.component.html',
 	styleUrls: [
 		'./slideshow.component.scss'
-	]
+	],
+	templateUrl: './slideshow.component.html'
 })
-export class SlideshowComponent implements OnInit {
-	public constructor() { }
+export class SlideshowComponent {
 
-	public ngOnInit(): void {
-
-	}
 }

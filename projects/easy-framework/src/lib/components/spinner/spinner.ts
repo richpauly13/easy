@@ -1,1 +1,1 @@
-export class Spinner {}
+export class Spinner { }

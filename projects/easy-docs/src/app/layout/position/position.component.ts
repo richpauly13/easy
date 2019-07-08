@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'docs-position',
-  templateUrl: './position.component.html',
-  styleUrls: ['./position.component.scss']
+	selector: 'docs-position',
+	styleUrls: [
+		'./position.component.scss'
+	],
+	templateUrl: './position.component.html'
 })
-export class PositionComponent implements OnInit {
-
-  public constructor() { }
-
-  public ngOnInit(): void {
-  }
+export class PositionComponent {
 
 }

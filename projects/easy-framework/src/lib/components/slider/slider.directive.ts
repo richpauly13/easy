@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezSlider]'
 })
 export class SliderDirective {
-	public constructor() {}
 }

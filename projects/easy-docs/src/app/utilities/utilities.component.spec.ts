@@ -9,11 +9,11 @@ describe('UtilitiesComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [
-				RouterTestingModule
-			],
 			declarations: [
 				UtilitiesComponent
+			],
+			imports: [
+				RouterTestingModule
 			]
 		})
 		.compileComponents();

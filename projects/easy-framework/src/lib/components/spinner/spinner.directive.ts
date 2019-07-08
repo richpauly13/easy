@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezSpinner]'
 })
 export class SpinnerDirective {
-	public constructor() {}
 }

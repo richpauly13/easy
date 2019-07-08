@@ -1,17 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
+	encapsulation: ViewEncapsulation.None,
 	selector: 'ez-root',
-	templateUrl: './easy-framework.component.html',
-	styleUrls: ['./easy-framework.component.scss'],
-	encapsulation: ViewEncapsulation.None
+	styleUrls: [
+		'./easy-framework.component.scss'
+	],
+	templateUrl: './easy-framework.component.html'
 })
-export class EasyComponent implements OnInit {
+export class EasyComponent {
 	@ViewChild('content', { static: false }) public content: ElementRef;
-
-	public constructor(private elementRef: ElementRef) {}
-
-	public ngOnInit(): void {}
 
 	public skip(): void {
 		this.content.nativeElement.focus();

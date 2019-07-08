@@ -5,14 +5,12 @@ import { TabDirective } from './tab.directive';
 
 @NgModule({
 	declarations: [
-		// prettier-ignore
 		TabComponent,
 		TabDirective
 	],
 	exports: [
-		// prettier-ignore
 		TabComponent,
 		TabDirective
 	]
 })
-export class TabModule {}
+export class TabModule { }

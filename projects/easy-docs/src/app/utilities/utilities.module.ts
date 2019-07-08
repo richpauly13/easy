@@ -14,9 +14,6 @@ import { UtilitiesComponent } from './utilities.component';
 		UtilitiesComponent,
 		VisibilityComponent
 	],
-	imports: [
-		SharedModule
-	],
 	exports: [
 		SharedModule,
 		SpaceComponent,
@@ -24,6 +21,9 @@ import { UtilitiesComponent } from './utilities.component';
 		UtilitiesComponent,
 		UtilitiesRoutingModule,
 		VisibilityComponent
+	],
+	imports: [
+		SharedModule
 	]
 })
 export class UtilitiesModule { }

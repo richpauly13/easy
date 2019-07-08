@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezTable]'
 })
 export class TableDirective {
-	public constructor() {}
 }

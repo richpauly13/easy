@@ -37,4 +37,4 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		TooltipModule
 	]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

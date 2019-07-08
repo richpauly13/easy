@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezNav]'
 })
 export class NavDirective {
-	public constructor() {}
 }

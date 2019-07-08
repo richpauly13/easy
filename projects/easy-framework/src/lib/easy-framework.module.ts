@@ -10,4 +10,4 @@ import { EasyComponent } from './easy-framework.component';
 		EasyComponent
 	]
 })
-export class EasyModule {}
+export class EasyModule { }

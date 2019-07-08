@@ -5,14 +5,12 @@ import { CardDirective } from './card.directive';
 
 @NgModule({
 	declarations: [
-		// prettier-ignore
 		CardComponent,
 		CardDirective
 	],
 	exports: [
-		// prettier-ignore
 		CardComponent,
 		CardDirective
 	]
 })
-export class CardModule {}
+export class CardModule { }

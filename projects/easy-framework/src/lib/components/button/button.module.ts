@@ -4,7 +4,13 @@ import { ButtonComponent } from './button.component';
 import { ButtonDirective } from './button.directive';
 
 @NgModule({
-	declarations: [ButtonComponent, ButtonDirective],
-	exports: [ButtonComponent, ButtonDirective]
+	declarations: [
+		ButtonComponent,
+		ButtonDirective
+	],
+	exports: [
+		ButtonComponent,
+		ButtonDirective
+	]
 })
-export class ButtonModule {}
+export class ButtonModule { }

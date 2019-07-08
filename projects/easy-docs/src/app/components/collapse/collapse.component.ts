@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-collapse',
-	templateUrl: './collapse.component.html',
 	styleUrls: [
 		'./collapse.component.scss'
-	]
+	],
+	templateUrl: './collapse.component.html'
 })
-export class CollapseComponent implements OnInit {
-	public constructor() { }
+export class CollapseComponent {
 
-	public ngOnInit(): void {
-
-	}
 }

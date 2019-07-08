@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezSwitch]'
 })
 export class SwitchDirective {
-	public constructor() {}
 }

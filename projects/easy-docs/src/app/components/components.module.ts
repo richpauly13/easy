@@ -38,9 +38,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		TableComponent,
 		TooltipComponent
 	],
-	imports: [
-		SharedModule
-	],
 	exports: [
 		AlertComponent,
 		BadgeComponent,
@@ -60,6 +57,9 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		TabComponent,
 		TableComponent,
 		TooltipComponent
+	],
+	imports: [
+		SharedModule
 	]
 })
 export class ComponentsModule { }

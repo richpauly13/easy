@@ -4,5 +4,4 @@ import { Directive } from '@angular/core';
 	selector: '[ezTooltip]'
 })
 export class TooltipDirective {
-	public constructor() {}
 }

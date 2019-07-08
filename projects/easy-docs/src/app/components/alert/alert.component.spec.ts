@@ -10,11 +10,11 @@ describe('AlertComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [
-				AlertModule
-			],
 			declarations: [
 				AlertComponent
+			],
+			imports: [
+				AlertModule
 			]
 		})
 		.compileComponents();
