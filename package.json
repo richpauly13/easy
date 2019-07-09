@@ -38,7 +38,7 @@
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
     "test": "ng test",
-    "update:ng": "ng update --all --next --force && npm i --save-dev typescript@3.4.5",
+    "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.4.5",
     "update:webdriver": "webdriver-manager update --standalone=false --versions.chrome=2.46",
     "watch:easy": "ng build easy-framework --watch"
   },
@@ -63,7 +63,7 @@
     "@angular/language-service": "^8.2.0-next.0",
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^12.0.12",
+    "@types/node": "^12.6.1",
     "codecov": "^4.0.0-0",
     "codelyzer": "^5.1.0",
     "husky": "^3.0.0",
