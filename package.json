@@ -28,7 +28,7 @@
     "copy:all": "run-p copy:license copy:readme",
     "copy:license": "copy .\\LICENSE.md .\\dist\\easy-framework",
     "copy:readme": "copy .\\README.md .\\dist\\easy-framework",
-    "e2e": "ng e2e",
+    "e2e": "npm run update:webdriver && ng e2e",
     "lint": "ng lint",
     "ng": "ng",
     "pack": "cd dist/easy-framework && npm pack",
