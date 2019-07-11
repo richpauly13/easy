@@ -28,7 +28,7 @@
     "copy:all": "run-p copy:license copy:readme",
     "copy:license": "copy .\\LICENSE.md .\\dist\\easy-framework",
     "copy:readme": "copy .\\README.md .\\dist\\easy-framework",
-    "e2e": "npm run update:webdriver && ng e2e --no-webdriver-update",
+    "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
     "pack": "cd dist/easy-framework && npm pack",
@@ -39,7 +39,7 @@
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
     "test": "ng test",
     "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.4.5",
-    "update:webdriver": "webdriver-manager update --standalone=false --versions.chrome=2.46",
+    "update:webdriver": "webdriver-manager update",
     "watch:easy": "ng build easy-framework --watch"
   },
   "private": true,

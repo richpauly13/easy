@@ -8,7 +8,7 @@ version: 2.1
 base_image: &base_image
 
   # Node version
-  image: circleci/node:12.4.0-browsers
+  image: circleci/node:12.6.0-browsers
 
 job_common: &job_common
   docker:
@@ -108,10 +108,6 @@ jobs:
       - attach_workspace:
           at: .
           
-      - run:
-          name: Install correct selenium webdriver
-          command: npm run update:webdriver
-
       - run:
           name: Run docs e2e tests
           command: npm run e2e -- --protractor-config=./projects/easy-docs/e2e/protractor-ci.conf.js

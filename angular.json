@@ -197,7 +197,7 @@
 					"options": {
 						"protractorConfig": "projects/easy-docs/e2e/protractor.conf.js",
 						"devServerTarget": "easy-docs:serve",
-						"webdriverUpdate": true
+						"webdriverUpdate": false
 					},
 					"configurations": {
 						"production": {
