@@ -60,7 +60,7 @@
     "@angular-devkit/build-ng-packagr": "^0.802.0-next.0",
     "@angular/cli": "^8.2.0-next.0",
     "@angular/compiler-cli": "^8.2.0-next.1",
-    "@angular/language-service": "^8.2.0-next.1",
+    "@angular/language-service": "^8.2.0-next.2",
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^12.6.2",
