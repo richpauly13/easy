@@ -2,11 +2,11 @@
   "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Add my library to the project.",
+      "description": "Add the easy-framework library to the application.",
       "factory": "./ng-add/index#ngAdd"
     },
     "alert": {
-      "description": "Add an alert to the project.",
+      "description": "Add an alert to the application.",
       "factory": "./ng-generate/alert/index#alert",
       "schema": "./ng-generate/alert/schema.json"
     }

@@ -1,3 +1,5 @@
-<p [attr.id]="id" #message tabindex="-1"><ng-content></ng-content></p>
+<p [attr.id]="id" #message tabindex="-1">
+    <ng-content></ng-content>
+</p>
 
 <button *ngIf="close" (click)="closeAlert()" (blur)="trap()" class="close" type="button" aria-label="close-alert" autofocus>X</button>

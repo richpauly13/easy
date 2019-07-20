@@ -26,11 +26,13 @@ describe('AlertComponent', () => {
 
 	it('should have an alert class', () => {
 		component.class = 'alert-good';
+
 		expect(component.class).toEqual('alert-good');
 	});
 
 	it('should not have a close class', () => {
 		component.class = 'alert-good close';
+
 		expect(component.class).toEqual('alert-good');
 	});
 });
