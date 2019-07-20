@@ -5,7 +5,7 @@
 		"outDir": "./dist/out-tsc",
 		"sourceMap": true,
 		"declaration": false,
-        "strictNullChecks": true,
+        "strictNullChecks": false,
 		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"module": "esnext",
