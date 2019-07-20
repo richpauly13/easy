@@ -13,6 +13,7 @@
 		"skipTemplateCodegen": true,
 		"strictMetadataEmit": true,
 		"fullTemplateTypeCheck": true,
+        "strictNullChecks": false,
 		"strictInjectionParameters": true,
 		"enableResourceInlining": true
 	},

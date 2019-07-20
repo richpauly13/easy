@@ -4,9 +4,21 @@
   "title": "Alert Schema",
   "type": "object",
   "properties": {
+    "close": {
+      "default": true,
+      "description": "Whether the alert has a close button.",
+      "type": "boolean",
+      "x-prompt": "Add a close button?"
+    },
+    "message": {
+      "description": "The alert text.",
+      "type": "string",
+      "x-prompt": "What is the alert text?"
+    },
     "name": {
       "description": "The name of the alert.",
-      "type": "string"
+      "type": "string",
+      "x-prompt": "What should be the name of the alert?"
     },
     "path": {
       "type": "string",

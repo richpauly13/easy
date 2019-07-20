@@ -7,7 +7,7 @@
     },
     "alert": {
       "description": "Add an alert to the application.",
-      "factory": "./ng-generate/alert/index#alert",
+      "factory": "./ng-generate/alert/index",
       "schema": "./ng-generate/alert/schema.json"
     }
   }

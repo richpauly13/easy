@@ -2,14 +2,7 @@
   "extends": "tslint:recommended",
   "rules": {
     "adjacent-overload-signatures": true,
-    "align": [
-      true,
-      "arguments",
-      "elements",
-      "members",
-      "parameters",
-      "statements"
-    ],
+    "align": false,
     "array-type": [
       true,
       "array"
@@ -148,7 +141,7 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-default-export": true,
+    "no-default-export": false,
     "no-default-import": true,
     "no-duplicate-imports": true,
     "no-duplicate-super": true,
@@ -203,7 +196,7 @@
     "no-return-await": true,
     "no-shadowed-variable": true,
     "no-sparse-arrays": true,
-    "no-string-literal": true,
+    "no-string-literal": false,
     "no-string-throw": true,
     "no-submodule-imports": false,
     "no-switch-case-fall-through": true,
@@ -291,8 +284,8 @@
     ],
     "space-within-parens": false,
     "static-this": true,
-    "strict-boolean-expressions": true,
-    "strict-comparisons": true,
+    "strict-boolean-expressions": false,
+    "strict-comparisons": false,
     "switch-default": true,
     "switch-final-break": [
       true,
