@@ -1,17 +1,25 @@
 {
   "extends": "../../tslint.json",
   "rules": {
-    "directive-selector": [
-      true,
-      "attribute",
-      "ez",
-      "camelCase"
-    ],
     "component-selector": [
       true,
       "element",
       "ez",
       "kebab-case"
-    ]
+    ],
+    "directive-selector": [
+      true,
+      "attribute",
+      "ez",
+      "camelCase"
+    ],    
+    "only-arrow-functions": false,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore"
+      ]
+    }
   }
 }

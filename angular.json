@@ -7,39 +7,11 @@
 			"projectType": "library",
             "schematics": {
 				"@schematics/angular:component": {
-					"styleext": "scss",
-					"inlineStyle": false,
-					"inlineTemplate": false,
-					"export": true,
 					"flat": true,
-					"spec": true,
                     "viewEncapsulation": "None"
 				},
-				"@schematics/angular:directive": {
-					"export": true,
-					"flat": true,
-					"spec": true
-				},
 				"@schematics/angular:module": {
-					"commonModule": false,
-					"module": "components",
-					"flat": false,
-					"spec": true
-				},
-				"@schematics/angular:service": {
-					"export": true,
-					"flat": true,
-					"spec": true
-				},
-				"@schematics/angular:pipe": {
-					"export": true,
-					"flat": true,
-					"spec": true
-				},
-				"@schematics/angular:class": {
-					"export": false,
-					"flat": true,
-					"spec": true
+					"module": "components"
 				}
 			},
 			"root": "projects/easy-framework",
@@ -78,36 +50,10 @@
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
-					"styleext": "scss",
-                    "export": true,
-					"flat": false,
-					"spec": true
-				},
-				"@schematics/angular:directive": {
-					"export": true,
-					"flat": true,
-					"spec": true
+					"flat": false
 				},
 				"@schematics/angular:module": {
-					"commonModule": false,
-					"module": "app",
-					"flat": false,
-					"spec": true
-				},
-				"@schematics/angular:service": {
-					"export": true,
-					"flat": true,
-					"spec": true
-				},
-				"@schematics/angular:pipe": {
-					"export": true,
-					"flat": true,
-					"spec": true
-				},
-				"@schematics/angular:class": {
-					"export": false,
-					"flat": true,
-					"spec": true
+					"module": "app"
 				}
 			},
 			"root": "projects/easy-docs",
@@ -208,5 +154,40 @@
 			}
 		}
 	},
-	"defaultProject": "easy-framework"
+	"defaultProject": "easy-docs",
+    "schematics": {
+        "@schematics/angular:component": {
+            "styleext": "scss",
+            "export": true,
+            "flat": false,
+            "spec": true,
+            "inlineStyle": false,
+            "inlineTemplate": false
+        },
+        "@schematics/angular:directive": {
+            "export": true,
+            "flat": true,
+            "spec": true
+        },
+        "@schematics/angular:module": {
+            "commonModule": false,
+            "flat": false,
+            "spec": true
+        },
+        "@schematics/angular:service": {
+            "export": true,
+            "flat": true,
+            "spec": true
+        },
+        "@schematics/angular:pipe": {
+            "export": true,
+            "flat": true,
+            "spec": true
+        },
+        "@schematics/angular:class": {
+            "export": false,
+            "flat": true,
+            "spec": true
+        }
+    }
 }
