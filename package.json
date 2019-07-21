@@ -73,15 +73,16 @@
     "build:docs": "ng build easy-docs --prod",
     "build:easy": "ng build easy-framework",
     "build:schematics": "tsc -p projects/easy-framework/tsconfig.schematics.json",
-    "copy:all": "run-p copy:schematics copy:md",
+    "copy:all": "run-p copy:changes copy:md copy:schematics",
+    "copy:changes": "cpx projects/easy-framework/CHANGELOG.md ./",
     "copy:md": "cpx {LICENSE.md,README.md} dist/easy-framework",
-    "copy:schematics": "cpx projects/easy-framework/schematics/**/{collection.json,schema.json,files/**} dist/easy-framework/schematics",
+    "copy:schematics": "cpx projects/easy-framework/schematics/**/{collection.json,files/**,schema.json} dist/easy-framework/schematics",
     "e2e": "npm run update:webdriver && ng e2e",
     "lint": "ng lint",
     "ng": "ng",
     "pack": "cd dist/easy-framework && npm pack",
     "package": "run-s build:easy build:schematics copy:all pack",
-    "publish:easy": "standard-version --no-verify && git push --follow-tags origin master && npm publish ./dist --access public",
+    "release": "cd projects/easy-framework && standard-version --no-verify && cd ../.. && npm run package && git push --follow-tags origin master && npm publish ./dist/easy-framework --access public",
     "start": "ng serve -o",
     "test": "ng test",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
@@ -90,5 +91,5 @@
     "update:webdriver": "webdriver-manager update",
     "watch:easy": "ng build easy-framework --watch"
   },
-  "version": "1.1.1"
+  "version": "1.0.0"
 }
