@@ -76,7 +76,7 @@
     "copy:all": "run-p copy:schematics copy:md",
     "copy:md": "cpx {LICENSE.md,README.md} dist/easy-framework",
     "copy:schematics": "cpx projects/easy-framework/schematics/**/{collection.json,schema.json,files/**} dist/easy-framework/schematics",
-    "e2e": "ng e2e",
+    "e2e": "npm run update:webdriver && ng e2e",
     "lint": "ng lint",
     "ng": "ng",
     "pack": "npm pack ./dist/easy-framework",
