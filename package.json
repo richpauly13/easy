@@ -81,7 +81,7 @@
     "ng": "ng",
     "pack": "npm pack ./dist/easy-framework",
     "package": "run-s build:easy build:schematics copy:all pack",
-    "publish:easy": "standard-version --no-verify && git push --follow-tags origin master && npm publish dist/easy-framework/*.tgz --access public",
+    "publish:easy": "standard-version --no-verify && npm publish ./dist/easy-framework/*.tgz",
     "start": "ng serve -o",
     "test": "ng test",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",

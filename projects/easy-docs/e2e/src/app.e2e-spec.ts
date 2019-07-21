@@ -7,9 +7,9 @@ describe('workspace-project App', () => {
 		page = new AppPage();
 	});
 
-	it('should display home works!', () => {
+	it('should display Skip to content', () => {
 		page.navigateTo();
 
-		expect(page.getTitleText()).toEqual('home works!');
+		expect(page.getTitleText()).toEqual('Skip to content');
 	});
 });

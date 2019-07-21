@@ -157,7 +157,7 @@
 	"defaultProject": "easy-docs",
     "schematics": {
         "@schematics/angular:component": {
-            "styleext": "scss",
+            "style": "scss",
             "export": true,
             "flat": false,
             "spec": true,

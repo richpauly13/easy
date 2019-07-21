@@ -14,15 +14,9 @@
       "camelCase"
     ],
     "no-default-export": false,
+    "no-empty-interface": false,
     "no-magic-numbers": false,
     "no-non-null-assertion": false,
-    "only-arrow-functions": false,
-    "variable-name": {
-      "options": [
-        "ban-keywords",
-        "check-format",
-        "allow-leading-underscore"
-      ]
-    }
+    "only-arrow-functions": false
   }
 }

@@ -1,8 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
   "id": "ngGenerateAlert",
-  "title": "Generate Alert",
-  "type": "object",
   "properties": {
     "close": {
       "default": true,
@@ -11,30 +9,63 @@
       "x-prompt": "Add a close button?"
     },
     "message": {
+      "default": "New alert",
       "description": "The alert text.",
       "type": "string",
       "x-prompt": "What is the alert text?"
     },
     "name": {
+      "default": "alert",
       "description": "The name of the alert.",
       "type": "string",
-      "x-prompt": "What should be the name of the alert?"
+      "x-prompt": "What is the name of the alert?"
     },
     "path": {
-      "type": "string",
-      "format": "path",
       "description": "The path to create the alert.",
+      "format": "path",
+      "type": "string",
       "visible": false
     },
     "project": {
-      "type": "string",
-      "description": "The name of the project.",
       "$default": {
         "$source": "projectName"
+      },
+      "description": "The name of the project.",
+      "type": "string"
+    },
+    "type": {
+      "default": "good",
+      "description": "The type of alert",
+      "type": "string",
+      "x-prompt": {
+        "items": [
+          {
+            "label": "bad",
+            "value": "bad"
+          },
+          {
+            "label": "good",
+            "value": "good"
+          },
+          {
+            "label": "info",
+            "value": "info"
+          },
+          {
+            "label": "warn",
+            "value": "warn"
+          }
+        ],
+        "message": "Choose an alert type:",
+        "type": "list"
       }
     }
-   },
+  },
   "required": [
+    "close",
+    "message",
     "name"
-  ]
+  ],
+  "title": "Generate Alert",
+  "type": "object"
 }

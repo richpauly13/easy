@@ -1,6 +1,6 @@
 import { apply, applyTemplates, chain, mergeWith, move, Rule, SchematicsException, Source, Tree, url } from '@angular-devkit/schematics';
-import { experimental, normalize, strings } from '@angular-devkit/core';
-import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
+import { normalize, strings } from '@angular-devkit/core';
+import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 
 import { Schema as ngGenerateAlert } from './schema';
 
@@ -16,7 +16,7 @@ export default function(options: ngGenerateAlert): Rule {
 		const workspaceContent: string = workspaceConfig.toString();
 
 		// Parse workspace string into JSON object
-		const workspace: experimental.workspace.WorkspaceSchema = JSON.parse(workspaceContent);
+		const workspace: WorkspaceSchema = JSON.parse(workspaceContent);
 
 		if (!options.project) {
 			options.project = workspace.defaultProject;
@@ -38,7 +38,8 @@ export default function(options: ngGenerateAlert): Rule {
 				close: options.close,
 				dasherize: strings.dasherize,
 				message: options.message,
-				name: options.name
+				name: options.name,
+				type: options.type
 			}),
 			move(normalize(options.path))
 		]);

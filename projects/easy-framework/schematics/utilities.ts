@@ -1,16 +1,11 @@
 import { Tree } from '@angular-devkit/schematics';
 
-import * as fs from 'fs';
-import * as path from 'path';
+// Adds package to the package.json file
+export function addPackageToPackageJson(tree: Tree, pkg: string, version: string): Tree {
 
-export function getLibraryVersion(): any {
-	return JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')).version;
-}
-
-export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
-	if (host.exists('package.json')) {
-		const sourceText: string = host.read('package.json')!.toString('utf-8');
-		const json: any = JSON.parse(sourceText);
+	if (tree.exists('package.json')) {
+		const initialText: string = tree.read('package.json')!.toString('utf-8');
+		const json: any = JSON.parse(initialText);
 
 		if (!json.dependencies) {
 			json.dependencies = {};
@@ -18,20 +13,41 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
 
 		if (!json.dependencies[pkg]) {
 			json.dependencies[pkg] = version;
-			json.dependencies = sortObjectByKeys(json.dependencies);
+			json.dependencies = sortPackageDependencies(json.dependencies);
 		}
 
-		host.overwrite('package.json', JSON.stringify(json, undefined, 2));
+		tree.overwrite('package.json', JSON.stringify(json, undefined, 2));
 	}
 
-	return host;
+	return tree;
 }
 
-function sortObjectByKeys(obj: any): any {
-	return Object.keys(obj)
+// Gets the version of the library
+export function getLibraryVersion(tree: Tree): string {
+	return JSON.parse(tree.read('package.json')!.toString('utf8')).version;
+}
+
+// Gets the version of a package
+export function getPackageVersion(tree: Tree, name: string): string | undefined {
+	if (!tree.exists('package.json')) {
+		return undefined;
+	}
+
+	const packageJson: any = JSON.parse(tree.read('package.json')!.toString('utf8')).version;
+
+	if (packageJson.dependencies && packageJson.dependencies[name]) {
+		return packageJson.dependencies[name];
+	}
+
+	return undefined;
+}
+
+// Sorts dependency key
+function sortPackageDependencies(dependencies: any): any {
+	return Object.keys(dependencies)
 	.sort()
 	.reduce((result: any, key: any) => {
-		result[key] = obj[key];
+		result[key] = dependencies[key];
 
 		return result;
 	}, {});

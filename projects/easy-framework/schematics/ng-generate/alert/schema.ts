@@ -14,4 +14,7 @@ export interface Schema {
 
 	// The name of the project.
 	project?: string;
+
+	// The type of alert.
+	type: 'bad' | 'good' | 'info' | 'warn';
 }

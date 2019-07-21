@@ -1,1 +1,1 @@
-<ez-alert class="close alert-good">close</ez-alert>
+<ez-alert class="<% if(close) { %>close <% } %>alert-<%= type %>"><%= message %></ez-alert>
