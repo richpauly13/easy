@@ -79,9 +79,9 @@
     "e2e": "npm run update:webdriver && ng e2e",
     "lint": "ng lint",
     "ng": "ng",
-    "pack": "npm pack ./dist/easy-framework",
+    "pack": "cd dist/easy-framework && npm pack",
     "package": "run-s build:easy build:schematics copy:all pack",
-    "publish:easy": "standard-version --no-verify && npm publish ./dist/easy-framework/*.tgz",
+    "publish:easy": "standard-version && npm publish ./dist/easy-framework/*.tgz",
     "start": "ng serve -o",
     "test": "ng test",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
@@ -90,5 +90,5 @@
     "update:webdriver": "webdriver-manager update",
     "watch:easy": "ng build easy-framework --watch"
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
