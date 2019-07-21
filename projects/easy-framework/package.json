@@ -3,12 +3,16 @@
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
   },
-  "peerDependencies": {
-      "@angular/common": "^8.0.0",
-      "@angular/core": "^8.0.0"
+  "dependencies": {
+    "tslib": "^1.10.0"
   },
   "description": "EASY CSS framework.",
-  "homepage": "https://github.com/richpauly13/easy",
+  "es2015": "fesm2015/easy-framework.js",
+  "esm2015": "esm2015/easy-framework.js",
+  "esm5": "esm5/easy-framework.js",
+  "fesm2015": "fesm2015/easy-framework.js",
+  "fesm5": "fesm5/easy-framework.js",
+  "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
     "a11y",
     "accessible",
@@ -19,12 +23,22 @@
     "responsive"
   ],
   "license": "MIT",
+  "main": "bundles/easy-framework.umd.js",
+  "metadata": "easy-framework.metadata.json",
+  "module": "fesm5/easy-framework.js",
   "name": "easy-framework",
+  "peerDependencies": {
+    "@angular/cli": "^8.0.0",
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0"
+  },
   "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/richpauly13/easy.git"
   },
   "schematics": "./schematics/collection.json",
+  "sideEffects": false,
+  "typings": "easy-framework.d.ts",
   "version": "0.1.1"
 }

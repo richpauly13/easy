@@ -141,7 +141,7 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-default-export": false,
+    "no-default-export": true,
     "no-default-import": true,
     "no-duplicate-imports": true,
     "no-duplicate-super": true,
@@ -243,14 +243,14 @@
         "groups": [
           "^@angular",
           "^zone.js",
+          "^protractor",
           "^rxjs",
           "^easy-framework",
-          "^protractor",
           "^.|.."
         ],
         "import-sources-order": "any",
         "module-source-path": "full",
-        "named-imports-order": "lowercase-first"
+        "named-imports-order": "case-insensitive"
       }
     ],
     "prefer-conditional-expression": [

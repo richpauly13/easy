@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsAlert",
-  "title": "Alert Schema",
+  "id": "ngGenerateAlert",
+  "title": "Generate Alert",
   "type": "object",
   "properties": {
     "close": {

@@ -1,10 +1,10 @@
-import { apply, applyTemplates, chain, mergeWith, move, url, Rule, SchematicsException, Source, Tree } from '@angular-devkit/schematics';
+import { apply, applyTemplates, chain, mergeWith, move, Rule, SchematicsException, Source, Tree, url } from '@angular-devkit/schematics';
 import { experimental, normalize, strings } from '@angular-devkit/core';
 import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
 
-import { Schema as AlertSchema } from './schema';
+import { Schema as ngGenerateAlert } from './schema';
 
-export default function(options: AlertSchema): Rule {
+export default function(options: ngGenerateAlert): Rule {
 	return (tree: Tree): Rule => {
 		const workspaceConfig: Buffer | null = tree.read('/angular.json');
 
