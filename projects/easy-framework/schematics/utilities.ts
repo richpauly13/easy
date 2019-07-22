@@ -1,4 +1,9 @@
-import { Tree } from '@angular-devkit/schematics';
+import { SchematicsException, Tree, UpdateRecorder } from '@angular-devkit/schematics';
+
+import { addImportToModule } from '@schematics/angular/utility/ast-utils';
+import { Change, InsertChange } from '@schematics/angular/utility/change';
+
+import * as typescript from 'typescript';
 
 // Adds package to the package.json file
 export function addPackageToPackageJson(tree: Tree, pkg: string, version: string): Tree {
@@ -40,6 +45,37 @@ export function getPackageVersion(tree: Tree, name: string): string | undefined 
 	}
 
 	return undefined;
+}
+
+// Adds the library module to the application
+export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, src: string): void {
+	const moduleSource: typescript.SourceFile = getSourceModule(tree, modulePath);
+
+	if (!moduleSource) {
+		throw new SchematicsException(`Module not found: ${modulePath}`);
+	}
+
+	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, src);
+	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
+
+	changes.forEach((change: Change) => {
+		if (change instanceof InsertChange) {
+			recorder.insertLeft(change.pos, change.toAdd);
+		}
+	});
+
+	tree.commitUpdate(recorder);
+}
+
+// Gets the source module for the import
+export function getSourceModule(tree: Tree, path: string): typescript.SourceFile {
+	const buffer: Buffer | null = tree.read(path);
+
+	if (!buffer) {
+		throw new SchematicsException(`Could not find file for path: ${path}`);
+	}
+
+	return typescript.createSourceFile(path, buffer.toString(), typescript.ScriptTarget.Latest, true);
 }
 
 // Sorts dependency key

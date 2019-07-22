@@ -1,51 +1,75 @@
-import { apply, applyTemplates, chain, mergeWith, move, Rule, SchematicsException, Source, Tree, url } from '@angular-devkit/schematics';
-import { normalize, strings } from '@angular-devkit/core';
-import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
+import { apply, applyTemplates, branchAndMerge, chain, filter, MergeStrategy, mergeWith, move, noop, Rule, SchematicContext, Source, Tree, url } from '@angular-devkit/schematics';
+import { Path, strings } from '@angular-devkit/core';
 
-import { Schema as ngGenerateAlert } from './schema';
+import { applyLintFix } from '@schematics/angular/utility/lint-fix';
+import { buildDefaultPath, getProject } from '@schematics/angular/utility/project';
+import { findModuleFromOptions as internalFindModule } from '@schematics/angular/utility/find-module';
+import { getWorkspace } from '@schematics/angular/utility/config';
+import { parseName } from '@schematics/angular/utility/parse-name';
+import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-export default function(options: ngGenerateAlert): Rule {
-	return (tree: Tree): Rule => {
-		const workspaceConfig: Buffer | null = tree.read('/angular.json');
+import { addModuleImportToModule } from '../../utilities';
+import { Schema as AlertComponentSchema } from './schema';
 
-		if (!workspaceConfig) {
-			throw new SchematicsException('Could not find Angular workspace configuration');
-		}
-
-		// Convert workspace to string
-		const workspaceContent: string = workspaceConfig.toString();
-
-		// Parse workspace string into JSON object
-		const workspace: WorkspaceSchema = JSON.parse(workspaceContent);
-
-		if (!options.project) {
-			options.project = workspace.defaultProject;
-		}
-
-		const projectName: any = options.project;
-
-		const project: WorkspaceProject = workspace.projects[projectName];
-
-		const projectType: string = project.projectType === 'application' ? 'app' : 'lib';
+export default function(options: AlertComponentSchema): Rule {
+	return (tree: Tree, context: SchematicContext): any => {
+		const workspace: WorkspaceSchema = getWorkspace(tree);
+		const projectName: string = options.project || Object.keys(workspace.projects)[0];
+		const project: WorkspaceProject = getProject(tree, projectName);
 
 		if (options.path === undefined) {
-			options.path = `${project.sourceRoot}/${projectType}`;
+			options.path = buildDefaultPath(project);
 		}
 
+		const parsedPath: any = parseName(options.path, options.name);
+
+		options.name = parsedPath.name;
+		options.path = parsedPath.path;
+
 		const templateSource: Source = apply(url('./files'), [
+			options.spec ? noop() : filter((path: Path) => !path.endsWith('.spec.ts')),
 			applyTemplates({
-				classify: strings.classify,
-				close: options.close,
-				dasherize: strings.dasherize,
-				message: options.message,
-				name: options.name,
-				type: options.type
+				...strings,
+				'if-flat': (strg: string): string => (options.flat ? '' : strg),
+				...options
 			}),
-			move(normalize(options.path))
+			move(parsedPath.path)
 		]);
 
 		return chain([
-			mergeWith(templateSource)
-		]);
+			branchAndMerge(
+				chain([
+					addEasyModuleToModule(options),
+					mergeWith(templateSource, MergeStrategy.Default)
+				])
+			),
+			options.lintFix ? applyLintFix(options.path) : noop()
+		])(tree, context);
 	};
+}
+
+function addEasyModuleToModule(options: AlertComponentSchema): any {
+	return ((tree: Tree): Tree => {
+		const modulePath: string = findModuleFromOptions(tree, options)!;
+
+		addModuleImportToModule(tree, modulePath, 'ButtonModule', 'easy-framework');
+
+		return tree;
+	});
+}
+
+export function findModuleFromOptions(tree: Tree, options: AlertComponentSchema): string | undefined {
+	const workspace: WorkspaceSchema = getWorkspace(tree);
+
+	if (!options.project) {
+		options.project = Object.keys(workspace.projects)[0];
+	}
+
+	const project: WorkspaceProject = workspace.projects[options.project];
+
+	if (options.path === undefined) {
+		options.path = `/${project.root}/src/app`;
+	}
+
+	return internalFindModule(tree, options);
 }

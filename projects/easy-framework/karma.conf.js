@@ -4,35 +4,51 @@
 module.exports = function(config) {
 	config.set({
 		basePath: '',
-		frameworks: ['jasmine', '@angular-devkit/build-angular'],
+		frameworks: [
+            'jasmine',
+            '@angular-devkit/build-angular'
+        ],
 		plugins: [
-			require('karma-jasmine'),
+			require('@angular-devkit/build-angular/plugins/karma'),
 			require('karma-chrome-launcher'),
-			require('karma-edge-launcher'),
-			require('karma-firefox-launcher'),
-			require('karma-jasmine-html-reporter'),
 			require('karma-coverage-istanbul-reporter'),
-			require('karma-spec-reporter'),
-			require('@angular-devkit/build-angular/plugins/karma')
+			require('karma-edge-launcher'),
+			// require('karma-firefox-launcher'),
+			require('karma-jasmine-html-reporter'),
+			require('karma-jasmine'),
+			require('karma-spec-reporter')
 		],
 		client: {
 			clearContext: false // leave Jasmine Spec Runner output visible in browser
 		},
 		coverageIstanbulReporter: {
 			dir: require('path').join(__dirname, '../../coverage/easy-framework'),
-			reports: ['html', 'lcovonly'],
+			reports: [
+                'html',
+                'lcovonly'
+            ],
 			fixWebpackSourcePaths: true
 		},
-		reporters: ['spec', 'kjhtml'],
+		reporters: [
+            'spec',
+            'kjhtml'
+        ],
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
 		autoWatch: true,
-		browsers: ['Chrome', 'Edge', 'Firefox'],
+		browsers: [
+            'Chrome',
+            'Edge'/* ,
+            'Firefox' */
+        ],
 		customLaunchers: {
 			ChromeHeadlessCI: {
 				base: 'ChromeHeadless',
-				flags: ['--no-sandbox', '--disable-gpu']
+				flags: [
+                    '--no-sandbox',
+                    '--disable-gpu'
+                ]
 			}
 		},
 		singleRun: false,

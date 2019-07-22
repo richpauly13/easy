@@ -103,7 +103,7 @@
     ],
     "max-line-length": [
       true,
-      140
+      300
     ],
     "member-access": [
       true,
@@ -242,11 +242,12 @@
         "grouped-imports": true,
         "groups": [
           "^@angular",
+          "^@schematics",
+          "^typescript",
           "^zone.js",
           "^protractor",
           "^rxjs",
-          "^easy-framework",
-          "^.|.."
+          "^easy-framework"
         ],
         "import-sources-order": "any",
         "module-source-path": "full",
