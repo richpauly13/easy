@@ -194,7 +194,7 @@
     "no-require-imports": true,
     "no-restricted-globals": true,
     "no-return-await": true,
-    "no-shadowed-variable": true,
+    "no-shadowed-variable": false,
     "no-sparse-arrays": true,
     "no-string-literal": false,
     "no-string-throw": true,
