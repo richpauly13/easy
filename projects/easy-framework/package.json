@@ -27,11 +27,6 @@
   "metadata": "easy-framework.metadata.json",
   "module": "fesm5/easy-framework.js",
   "name": "easy-framework",
-  "peerDependencies": {
-    "@angular/cli": "^8.0.0",
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
-  },
   "private": false,
   "repository": {
     "type": "git",
@@ -40,5 +35,5 @@
   "schematics": "./schematics/collection.json",
   "sideEffects": false,
   "typings": "easy-framework.d.ts",
-  "version": "0.1.5"
+  "version": "0.1.6"
 }
