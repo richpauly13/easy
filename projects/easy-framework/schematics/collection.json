@@ -1,14 +1,15 @@
 {
   "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "ng-add": {
-      "description": "Add the easy-framework library to the application.",
-      "factory": "./ng-add/index"
-    },
     "alert": {
       "description": "Add an alert to the application.",
       "factory": "./ng-generate/alert/index",
       "schema": "./ng-generate/alert/schema.json"
+    },
+    "ng-add": {
+      "description": "Add the easy-framework library to the application.",
+      "factory": "./ng-add/index#addEasy",
+      "schema": "./ng-add/schema.json"
     }
   }
 }

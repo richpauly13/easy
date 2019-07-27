@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ButtonModule } from 'easy-framework';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
@@ -23,8 +21,7 @@ import { UtilitiesModule } from './utilities/utilities.module';
 		ComponentsModule,
 		LayoutModule,
 		UtilitiesModule,
-		AppRoutingModule,
-		ButtonModule
+		AppRoutingModule
 	]
 })
 export class AppModule { }

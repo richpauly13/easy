@@ -5,6 +5,29 @@ import { Change, InsertChange } from '@schematics/angular/utility/change';
 
 import * as typescript from 'typescript';
 
+import * as fs from 'fs';
+import * as path from 'path';
+
+// Adds the library module to the application
+export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, src: string): void {
+	const moduleSource: typescript.SourceFile = getSourceModule(tree, modulePath);
+
+	if (!moduleSource) {
+		throw new SchematicsException(`Module not found: ${modulePath}`);
+	}
+
+	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, src);
+	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
+
+	changes.forEach((change: Change) => {
+		if (change instanceof InsertChange) {
+			recorder.insertLeft(change.pos, change.toAdd);
+		}
+	});
+
+	tree.commitUpdate(recorder);
+}
+
 // Adds package to the package.json file
 export function addPackageToPackageJson(tree: Tree, pkg: string, version: string): Tree {
 
@@ -28,8 +51,10 @@ export function addPackageToPackageJson(tree: Tree, pkg: string, version: string
 }
 
 // Gets the version of the library
-export function getLibraryVersion(tree: Tree): string {
-	return JSON.parse(tree.read('package.json')!.toString('utf8')).version;
+export function getLibraryVersion(): string {
+	return JSON.parse(
+		fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')
+	).version;
 }
 
 // Gets the version of a package
@@ -45,26 +70,6 @@ export function getPackageVersion(tree: Tree, name: string): string | undefined 
 	}
 
 	return undefined;
-}
-
-// Adds the library module to the application
-export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, src: string): void {
-	const moduleSource: typescript.SourceFile = getSourceModule(tree, modulePath);
-
-	if (!moduleSource) {
-		throw new SchematicsException(`Module not found: ${modulePath}`);
-	}
-
-	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, src);
-	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
-
-	changes.forEach((change: Change) => {
-		if (change instanceof InsertChange) {
-			recorder.insertLeft(change.pos, change.toAdd);
-		}
-	});
-
-	tree.commitUpdate(recorder);
 }
 
 // Gets the source module for the import
