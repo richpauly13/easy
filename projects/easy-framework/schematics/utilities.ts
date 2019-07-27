@@ -2,11 +2,19 @@ import { SchematicsException, Tree, UpdateRecorder } from '@angular-devkit/schem
 
 import { addImportToModule } from '@schematics/angular/utility/ast-utils';
 import { Change, InsertChange } from '@schematics/angular/utility/change';
+import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
+import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 import * as typescript from 'typescript';
 
 import * as fs from 'fs';
 import * as path from 'path';
+
+export function addModuleImportToRootModule(host: Tree, moduleName: string, src: string, project: WorkspaceProject): void {
+	const modulePath: string = getAppModulePath(host, getProjectMainFile(project));
+
+	addModuleImportToModule(host, modulePath, moduleName, src);
+}
 
 // Adds the library module to the application
 export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, src: string): void {
@@ -30,7 +38,6 @@ export function addModuleImportToModule(tree: Tree, modulePath: string, moduleNa
 
 // Adds package to the package.json file
 export function addPackageToPackageJson(tree: Tree, pkg: string, version: string): Tree {
-
 	if (tree.exists('package.json')) {
 		const initialText: string = tree.read('package.json')!.toString('utf-8');
 		const json: any = JSON.parse(initialText);
@@ -52,9 +59,7 @@ export function addPackageToPackageJson(tree: Tree, pkg: string, version: string
 
 // Gets the version of the library
 export function getLibraryVersion(): string {
-	return JSON.parse(
-		fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')
-	).version;
+	return JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')).version;
 }
 
 // Gets the version of a package
@@ -72,15 +77,50 @@ export function getPackageVersion(tree: Tree, name: string): string | undefined 
 	return undefined;
 }
 
-// Gets the source module for the import
-export function getSourceModule(tree: Tree, path: string): typescript.SourceFile {
-	const buffer: Buffer | null = tree.read(path);
+export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?: string): WorkspaceProject {
+	const project: WorkspaceProject = workspace.projects[projectName || workspace.defaultProject!];
 
-	if (!buffer) {
-		throw new SchematicsException(`Could not find file for path: ${path}`);
+	if (!project) {
+		throw new SchematicsException(`Could not find project in workspace: ${projectName}`);
 	}
 
-	return typescript.createSourceFile(path, buffer.toString(), typescript.ScriptTarget.Latest, true);
+	return project;
+}
+
+// Looks for the main TypeScript file in the given project and returns its path.
+export function getProjectMainFile(project: WorkspaceProject): string {
+	const buildOptions: any = getProjectTargetOptions(project, 'build');
+
+	if (!buildOptions.main) {
+		throw new SchematicsException(`Could not find the project main file inside of the workspace config (${project.sourceRoot})`);
+	}
+
+	return buildOptions.main;
+}
+
+// Resolves the architect options for the build target of the given project.
+export function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string): any {
+	if (project.targets && project.targets[buildTarget] && project.targets[buildTarget].options) {
+		return project.targets[buildTarget].options;
+	}
+
+	// See: https://github.com/angular/angular-cli/commit/307160806cb48c95ecb8982854f452303801ac9f
+	if (project.architect && project.architect[buildTarget] && project.architect[buildTarget].options) {
+		return project.architect[buildTarget].options;
+	}
+
+	throw new SchematicsException(`Cannot determine project target configuration for: ${buildTarget}.`);
+}
+
+// Gets the source module for the import
+export function getSourceModule(tree: Tree, modulePath: string): typescript.SourceFile {
+	const buffer: Buffer | null = tree.read(modulePath);
+
+	if (!buffer) {
+		throw new SchematicsException(`Could not find file for path: ${modulePath}`);
+	}
+
+	return typescript.createSourceFile(modulePath, buffer.toString(), typescript.ScriptTarget.Latest, true);
 }
 
 // Sorts dependency key

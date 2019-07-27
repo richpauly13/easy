@@ -156,38 +156,38 @@
 	},
 	"defaultProject": "easy-docs",
     "schematics": {
-        "@schematics/angular:component": {
-            "style": "scss",
+        "@schematics/angular:component": {            
             "export": true,
             "flat": false,
-            "spec": true,
             "inlineStyle": false,
-            "inlineTemplate": false
+            "inlineTemplate": false,
+            "skipTests": false,
+            "style": "scss"
         },
         "@schematics/angular:directive": {
             "export": true,
             "flat": true,
-            "spec": true
+            "skipTests": false
         },
         "@schematics/angular:module": {
             "commonModule": false,
             "flat": false,
-            "spec": true
+            "skipTests": false
         },
         "@schematics/angular:service": {
             "export": true,
             "flat": true,
-            "spec": true
+            "skipTests": false
         },
         "@schematics/angular:pipe": {
             "export": true,
             "flat": true,
-            "spec": true
+            "skipTests": false
         },
         "@schematics/angular:class": {
             "export": false,
             "flat": true,
-            "spec": true
+            "skipTests": false
         }
     }
 }
