@@ -1,6 +1,6 @@
 export interface Schema {
 
-    export?: boolean;
+	export?: boolean;
 
 	// The name of the project.
 	project?: string;

@@ -3,13 +3,13 @@ export interface Schema {
 	// Whether the alert has a close button.
 	close: boolean;
 
-    // When true, the declaring module exports this component.
+	// When true, the declaring module exports this component.
 	export: boolean;
 
 	// Flag to indicate if a directory is created.
 	flat?: boolean;
 
-    // When true, the declaring module imports the alert module in the declaring module.
+	// When true, the declaring module imports the alert module in the declaring module.
 	import?: boolean;
 
 	// Specifies whether to apply lint fixes after generating the component.
