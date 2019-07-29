@@ -8,10 +8,21 @@
       "type": "boolean",
       "x-prompt": "Add a close button?"
     },
+    "export": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, the declaring module exports this component."
+    },
     "flat": {
       "type": "boolean",
       "default": false,
       "description": "Flag to indicate if a directory is created."
+    },
+    "import": {
+      "type": "boolean",
+      "default": true,
+      "description": "Specifies if the alert should be imported in the declaring module.",
+      "x-prompt": "Import alert module?"
     },
     "lintFix": {
       "type": "boolean",
@@ -48,10 +59,10 @@
       "description": "The name of the project.",
       "type": "string"
     },
-    "spec": {
+    "skipTests": {
       "type": "boolean",
-      "default": true,
-      "description": "Specifies if a spec file is generated."
+      "default": false,
+      "description": "When true, does not create 'spec.ts' test file for the new component."
     },
     "type": {
       "default": "good",

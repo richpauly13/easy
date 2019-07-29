@@ -10,12 +10,12 @@ import { Schema as AddEasySchema } from './schema';
 export function addEasy(options: AddEasySchema): Rule {
 	return (tree: Tree, context: SchematicContext): Tree => {
 		const angularWorkspace: WorkspaceSchema = getWorkspace(tree);
-		const easyFrameworkModuleName: string = 'EasyFramework';
+		const easyModuleName: string = 'EasyModule';
 		const project: WorkspaceProject = getProjectFromWorkspace(angularWorkspace, options.project);
 		const version: string = getLibraryVersion();
 
 		addPackageToPackageJson(tree, 'easy-framework', `^${version}`);
-		addModuleImportToRootModule(tree, easyFrameworkModuleName, 'easy-framework', project);
+		addModuleImportToRootModule(tree, easyModuleName, 'easy-framework', project);
 
 		context.addTask(new NodePackageInstallTask());
 
