@@ -4,18 +4,17 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-import { addModuleImportToRootModule, addPackageToPackageJson, getLibraryVersion, getProjectFromWorkspace } from '../utilities';
-import { Schema as AddEasySchema } from './schema';
+import { addDependencyToPackageJson, addModuleImportToRootModule, getLibraryVersion, getProjectFromWorkspace } from '../utilities';
+import { Schema as EasySchema } from './schema';
 
-export function addEasy(options: AddEasySchema): Rule {
+export function addEasy(options: EasySchema): Rule {
 	return (tree: Tree, context: SchematicContext): Tree => {
 		const angularWorkspace: WorkspaceSchema = getWorkspace(tree);
-		const easyModuleName: string = 'EasyModule';
 		const project: WorkspaceProject = getProjectFromWorkspace(angularWorkspace, options.project);
 		const version: string = getLibraryVersion();
 
-		addPackageToPackageJson(tree, 'easy-framework', `^${version}`);
-		addModuleImportToRootModule(tree, easyModuleName, 'easy-framework', project);
+		addModuleImportToRootModule(tree, 'EasyModule', 'easy-framework', project);
+		addDependencyToPackageJson(tree, 'easy-framework', `^${version}`);
 
 		context.addTask(new NodePackageInstallTask());
 

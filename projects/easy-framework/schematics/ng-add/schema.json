@@ -2,21 +2,6 @@
   "$schema": "http://json-schema.org/schema",
   "id": "ngAddEasy",
   "properties": {
-    "export": {
-      "type": "boolean",
-      "default": false,
-      "description": "When true, the declaring module exports this easy module."
-    },
-    "import": {
-      "type": "boolean",
-      "default": true,
-      "description": "Specifies if the easy module should be imported in the app module."
-    },
-    "module": {
-      "type": "string",
-      "description": "Allows specification of the declaring module.",
-      "alias": "m"
-    },
     "project": {
       "$default": {
         "$source": "projectName"

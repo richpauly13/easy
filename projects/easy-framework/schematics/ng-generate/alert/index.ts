@@ -3,15 +3,14 @@ import { Path, strings } from '@angular-devkit/core';
 
 import { applyLintFix } from '@schematics/angular/utility/lint-fix';
 import { buildDefaultPath, getProject } from '@schematics/angular/utility/project';
-import { findModuleFromOptions as internalFindModule } from '@schematics/angular/utility/find-module';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-import { addModuleImportToModule } from '../../utilities';
-import { Schema as AlertComponentSchema } from './schema';
+import { addModuleImportToModule, findModuleFromOptions } from '../../utilities';
+import { Schema } from './schema';
 
-export default function(options: AlertComponentSchema): Rule {
+export function addAlert(options: Schema): Rule {
 	return (tree: Tree, context: SchematicContext): any => {
 		const workspace: WorkspaceSchema = getWorkspace(tree);
 		const projectName: string = options.project || Object.keys(workspace.projects)[0];
@@ -27,7 +26,7 @@ export default function(options: AlertComponentSchema): Rule {
 		options.path = parsedPath.path;
 
 		const templateSource: Source = apply(url('./files'), [
-			options.spec ? noop() : filter((path: Path) => !path.endsWith('.spec.ts')),
+			options.skipTests ? noop() : filter((path: Path) => !path.endsWith('.spec.ts')),
 			applyTemplates({
 				...strings,
 				'if-flat': (strg: string): string => (options.flat ? '' : strg),
@@ -39,7 +38,7 @@ export default function(options: AlertComponentSchema): Rule {
 		return chain([
 			branchAndMerge(
 				chain([
-					addEasyModuleToModule(options),
+					addAlertModuleToModule(options),
 					mergeWith(templateSource, MergeStrategy.Default)
 				])
 			),
@@ -48,28 +47,12 @@ export default function(options: AlertComponentSchema): Rule {
 	};
 }
 
-function addEasyModuleToModule(options: AlertComponentSchema): any {
+function addAlertModuleToModule(options: Schema): any {
 	return ((tree: Tree): Tree => {
 		const modulePath: string = findModuleFromOptions(tree, options)!;
 
-		addModuleImportToModule(tree, modulePath, 'ButtonModule', 'easy-framework');
+		addModuleImportToModule(tree, modulePath, 'AlertModule', 'easy-framework');
 
 		return tree;
 	});
-}
-
-export function findModuleFromOptions(tree: Tree, options: AlertComponentSchema): string | undefined {
-	const workspace: WorkspaceSchema = getWorkspace(tree);
-
-	if (!options.project) {
-		options.project = Object.keys(workspace.projects)[0];
-	}
-
-	const project: WorkspaceProject = workspace.projects[options.project];
-
-	if (options.path === undefined) {
-		options.path = `/${project.root}/src/app`;
-	}
-
-	return internalFindModule(tree, options);
 }

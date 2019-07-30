@@ -2,7 +2,10 @@ import { SchematicsException, Tree, UpdateRecorder } from '@angular-devkit/schem
 
 import { addImportToModule } from '@schematics/angular/utility/ast-utils';
 import { Change, InsertChange } from '@schematics/angular/utility/change';
+import { findModuleFromOptions as internalFindModule } from '@schematics/angular/utility/find-module';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
+import { getWorkspace } from '@schematics/angular/utility/config';
+import { Schema as ComponentSchema } from '@schematics/angular/component/schema';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
 import * as typescript from 'typescript';
@@ -10,34 +13,8 @@ import * as typescript from 'typescript';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export function addModuleImportToRootModule(host: Tree, moduleName: string, src: string, project: WorkspaceProject): void {
-	const modulePath: string = getAppModulePath(host, getProjectMainFile(project));
-
-	addModuleImportToModule(host, modulePath, moduleName, src);
-}
-
-// Adds the library module to the application
-export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, src: string): void {
-	const moduleSource: typescript.SourceFile = getSourceModule(tree, modulePath);
-
-	if (!moduleSource) {
-		throw new SchematicsException(`Module not found: ${modulePath}`);
-	}
-
-	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, src);
-	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
-
-	changes.forEach((change: Change) => {
-		if (change instanceof InsertChange) {
-			recorder.insertLeft(change.pos, change.toAdd);
-		}
-	});
-
-	tree.commitUpdate(recorder);
-}
-
-// Adds package to the package.json file
-export function addPackageToPackageJson(tree: Tree, pkg: string, version: string): Tree {
+// Add dependency to the package.json file.
+export function addDependencyToPackageJson(tree: Tree, pkg: string, version: string): Tree {
 	if (tree.exists('package.json')) {
 		const initialText: string = tree.read('package.json')!.toString('utf-8');
 		const json: any = JSON.parse(initialText);
@@ -57,12 +34,57 @@ export function addPackageToPackageJson(tree: Tree, pkg: string, version: string
 	return tree;
 }
 
-// Gets the version of the library
+// Add and import module to specific module.
+export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, importSource: string): void {
+	const moduleSource: typescript.SourceFile = getSourceFile(tree, modulePath);
+
+	if (!moduleSource) {
+		throw new SchematicsException(`Module not found: ${modulePath}`);
+	}
+
+	// TypeScript version mismatch due to @schematics/angular using a different version than Easy.  Cast to any to avoid the type assignment failure.
+	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, importSource);
+	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
+
+	changes.forEach((change: Change) => {
+		if (change instanceof InsertChange) {
+			recorder.insertLeft(change.pos, change.toAdd);
+		}
+	});
+
+	tree.commitUpdate(recorder);
+}
+
+// Add module and import to root app module.
+export function addModuleImportToRootModule(tree: Tree, moduleName: string, importSource: string, project: WorkspaceProject): void {
+	const modulePath: string = getAppModulePath(tree, getProjectMainFile(project));
+
+	addModuleImportToModule(tree, modulePath, moduleName, importSource);
+}
+
+// Find the internal find module from options with undefined path handling.
+export function findModuleFromOptions(tree: Tree, options: ComponentSchema): string | undefined {
+	const workspace: WorkspaceSchema = getWorkspace(tree);
+
+	if (!options.project) {
+		options.project = Object.keys(workspace.projects)[0];
+	}
+
+	const project: WorkspaceProject = workspace.projects[options.project];
+
+	if (options.path === undefined) {
+		options.path = `/${project.root}/src/app`;
+	}
+
+	return internalFindModule(tree, options);
+}
+
+// Get the version of the library.
 export function getLibraryVersion(): string {
 	return JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')).version;
 }
 
-// Gets the version of a package
+// Get the version of a package.
 export function getPackageVersion(tree: Tree, name: string): string | undefined {
 	if (!tree.exists('package.json')) {
 		return undefined;
@@ -77,6 +99,7 @@ export function getPackageVersion(tree: Tree, name: string): string | undefined 
 	return undefined;
 }
 
+//
 export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?: string): WorkspaceProject {
 	const project: WorkspaceProject = workspace.projects[projectName || workspace.defaultProject!];
 
@@ -87,8 +110,8 @@ export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?
 	return project;
 }
 
-// Looks for the main TypeScript file in the given project and returns its path.
-export function getProjectMainFile(project: WorkspaceProject): string {
+// Get the main TypeScript file in the given project and return its path.
+function getProjectMainFile(project: WorkspaceProject): string {
 	const buildOptions: any = getProjectTargetOptions(project, 'build');
 
 	if (!buildOptions.main) {
@@ -98,13 +121,13 @@ export function getProjectMainFile(project: WorkspaceProject): string {
 	return buildOptions.main;
 }
 
-// Resolves the architect options for the build target of the given project.
-export function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string): any {
+// Get the architect options for the build target of the given project.
+function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string): any {
 	if (project.targets && project.targets[buildTarget] && project.targets[buildTarget].options) {
 		return project.targets[buildTarget].options;
 	}
 
-	// See: https://github.com/angular/angular-cli/commit/307160806cb48c95ecb8982854f452303801ac9f
+	// See: https://github.com/angular/angular-cli/commit/307160806cb48c95ecb8982854f452303801ac9f.
 	if (project.architect && project.architect[buildTarget] && project.architect[buildTarget].options) {
 		return project.architect[buildTarget].options;
 	}
@@ -112,18 +135,18 @@ export function getProjectTargetOptions(project: WorkspaceProject, buildTarget: 
 	throw new SchematicsException(`Cannot determine project target configuration for: ${buildTarget}.`);
 }
 
-// Gets the source module for the import
-export function getSourceModule(tree: Tree, modulePath: string): typescript.SourceFile {
+// Get the module path and return the TypeScript source file.
+function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 	const buffer: Buffer | null = tree.read(modulePath);
 
 	if (!buffer) {
-		throw new SchematicsException(`Could not find file for path: ${modulePath}`);
+		throw new SchematicsException(`Could not find file for path: ${path}`);
 	}
 
 	return typescript.createSourceFile(modulePath, buffer.toString(), typescript.ScriptTarget.Latest, true);
 }
 
-// Sorts dependency key
+// Sort the package.json dependencies.
 function sortPackageDependencies(dependencies: any): any {
 	return Object.keys(dependencies)
 	.sort()

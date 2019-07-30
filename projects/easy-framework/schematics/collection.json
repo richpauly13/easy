@@ -3,7 +3,7 @@
   "schematics": {
     "alert": {
       "description": "Add an alert to the application.",
-      "factory": "./ng-generate/alert/index",
+      "factory": "./ng-generate/alert/index#addAlert",
       "schema": "./ng-generate/alert/schema.json"
     },
     "ng-add": {

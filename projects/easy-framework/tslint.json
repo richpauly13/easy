@@ -13,7 +13,6 @@
       "ez",
       "camelCase"
     ],
-    "no-default-export": false,
     "no-empty-interface": false,
     "no-magic-numbers": false,
     "no-non-null-assertion": false,
