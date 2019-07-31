@@ -35,7 +35,7 @@ export function addDependencyToPackageJson(tree: Tree, pkg: string, version: str
 }
 
 // Add and import module to specific module.
-export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, importSource: string): void {
+export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, importPath: string): void {
 	const moduleSource: typescript.SourceFile = getSourceFile(tree, modulePath);
 
 	if (!moduleSource) {
@@ -43,7 +43,7 @@ export function addModuleImportToModule(tree: Tree, modulePath: string, moduleNa
 	}
 
 	// TypeScript version mismatch due to @schematics/angular using a different version than Easy.  Cast to any to avoid the type assignment failure.
-	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, importSource);
+	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, importPath);
 	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
 
 	changes.forEach((change: Change) => {
@@ -56,10 +56,10 @@ export function addModuleImportToModule(tree: Tree, modulePath: string, moduleNa
 }
 
 // Add module and import to root app module.
-export function addModuleImportToRootModule(tree: Tree, moduleName: string, importSource: string, project: WorkspaceProject): void {
+export function addModuleImportToRootModule(tree: Tree, moduleName: string, importPath: string, project: WorkspaceProject): void {
 	const modulePath: string = getAppModulePath(tree, getProjectMainFile(project));
 
-	addModuleImportToModule(tree, modulePath, moduleName, importSource);
+	addModuleImportToModule(tree, modulePath, moduleName, importPath);
 }
 
 // Find the internal find module from options with undefined path handling.
