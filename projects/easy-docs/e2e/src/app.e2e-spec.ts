@@ -7,9 +7,9 @@ describe('workspace-project App', () => {
 		page = new AppPage();
 	});
 
-	it('should display Skip to content', () => {
+	it('should contain alert', () => {
 		page.navigateTo();
 
-		expect(page.getTitleText()).toEqual('Skip to content');
+		expect(page.getTitleText()).toContain('Alert');
 	});
 });
