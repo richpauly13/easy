@@ -77,7 +77,7 @@ Read the [documentation](https://richpauly13.github.io/easy/).
 
 ## Changlog
 
-[Changelog](https://github.com/richpauly13/easy/blob/master/CHANGELOG.md)
+View the [Changelog](https://github.com/richpauly13/easy/blob/master/CHANGELOG.md).
 
 ## Contributing
 

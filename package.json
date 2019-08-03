@@ -14,7 +14,7 @@
     "@angular/router": "^9.0.0-next.0",
     "rxjs": "^6.5.2",
     "tslib": "^1.10.0",
-    "zone.js": "^0.9.1"
+    "zone.js": "^0.10.1"
   },
   "description": "Documentation for EASY framework.",
   "devDependencies": {
@@ -75,7 +75,7 @@
     "build:easy": "ng build easy-framework",
     "build:schematics": "tsc -p projects/easy-framework/tsconfig.schematics.json",
     "copy:all": "run-p copy:changes copy:md copy:schematics",
-    "copy:changes": "copyfiles ./projects/easy-framework/CHANGELOG.md ./",
+    "copy:changes": "copyfiles -u 2 ./projects/easy-framework/CHANGELOG.md ./",
     "copy:md": "copyfiles {LICENSE.md,README.md} ./dist/easy-framework",
     "copy:schematics": "copyfiles -u 3 ./projects/easy-framework/schematics/**/{collection.json,files/**,schema.json} ./dist/easy-framework/schematics",
     "e2e": "npm run update:webdriver && ng e2e",
@@ -87,7 +87,7 @@
     "test": "ng test",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
-    "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.5.3 && npm i --save zone.js@0.9.1",
+    "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.5.3",
     "update:webdriver": "webdriver-manager update",
     "version": "cd projects/easy-framework && standard-version --no-verify",
     "watch:easy": "ng build easy-framework --watch"

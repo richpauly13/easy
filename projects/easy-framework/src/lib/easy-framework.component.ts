@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	encapsulation: ViewEncapsulation.None,
@@ -9,9 +9,5 @@ import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/co
 	templateUrl: './easy-framework.component.html'
 })
 export class EasyComponent {
-	@ViewChild('content', { static: false }) public content: ElementRef;
 
-	public skip(): void {
-		this.content.nativeElement.focus();
-	}
 }

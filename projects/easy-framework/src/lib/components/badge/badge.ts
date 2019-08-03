@@ -1,1 +1,2 @@
-export class Badge { }
+export class Badge {
+}

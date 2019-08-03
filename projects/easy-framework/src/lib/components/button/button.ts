@@ -1,1 +1,2 @@
-export class Button { }
+export class Button {
+}

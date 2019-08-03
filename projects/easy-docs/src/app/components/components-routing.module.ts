@@ -84,8 +84,8 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: 'alert'
-			}
+				redirectTo: '/components/alert'
+			},
 		],
 		component: ComponentsComponent,
 		path: 'components'

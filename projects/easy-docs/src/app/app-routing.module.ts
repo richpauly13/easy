@@ -11,12 +11,12 @@ const routes: Routes = [
 	{
 		path: '',
 		pathMatch: 'full',
-		redirectTo: '/components'
+		redirectTo: '/components/alert'
 	},
 	{
 		path: '**',
 		pathMatch: 'full',
-		redirectTo: '/components'
+		redirectTo: '/components/alert'
 	}
 ];
 
@@ -26,7 +26,6 @@ const routes: Routes = [
 	],
 	imports: [
 		RouterModule.forRoot(routes, {
-			anchorScrolling: 'enabled',
 			useHash: true
 		})
 	]

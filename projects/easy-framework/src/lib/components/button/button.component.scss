@@ -10,12 +10,18 @@
 	&.btn-lg,
 	&.btn-xl,
 	&.btn-full {
-		margin-bottom: rem(16);
-		margin-right: rem(16);
-
 		&.rounded {
 			border-radius: rem(24);
 		}
+	}
+
+    &.btn-xs:not(:last-child),
+	&.btn-sm:not(:last-child),
+	&.btn-md:not(:last-child),
+	&.btn-lg:not(:last-child),
+	&.btn-xl:not(:last-child),
+	&.btn-full:not(:last-child) {
+		margin-right: rem(16);
 	}
 
 	// Button sizes
@@ -51,13 +57,14 @@
 	&.btn-group-row {
 		@include row;
 
+        flex-wrap: wrap;
 		padding-bottom: rem(16);
 		padding-top: rem(16);
 	}
 
-	&.btn-group-col {
-		@include column;
-	}
+    &.btn-group-col {
+        @include column;
+    }
 
 	&.btn-group-full {
 		width: 100%;
@@ -72,8 +79,8 @@
 	&.btn-md,
 	&.btn-lg,
 	&.btn-xl {
-		border-bottom: rem(1) solid color(white);
-		border-left: rem(1) solid color(white);
+        border-bottom: rem(1) solid color(white);
+		border-right: rem(1) solid color(white);
 		margin: 0;
 	}
 }
@@ -87,5 +94,3 @@
 		@include flex(1, 0, auto);
 	}
 }
-
-// TODO:  Add toggle buttons
