@@ -6,8 +6,8 @@ describe('EasyService', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
-                EasyService
-            ]
+				EasyService
+			]
 		});
 	});
 
