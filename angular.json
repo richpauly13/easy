@@ -7,8 +7,7 @@
 			"projectType": "library",
             "schematics": {
 				"@schematics/angular:component": {
-					"flat": true,
-                    "viewEncapsulation": "None"
+					"flat": true
 				},
 				"@schematics/angular:module": {
 					"module": "components"

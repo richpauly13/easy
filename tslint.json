@@ -114,7 +114,7 @@
     "member-ordering": [
       true,
       {
-        "alphabetize": true,
+        "alphabetize": false,
         "order": "fields-first"
       }
     ],

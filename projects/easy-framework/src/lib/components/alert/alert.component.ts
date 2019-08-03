@@ -8,6 +8,10 @@ import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@a
 	templateUrl: './alert.component.html'
 })
 export class AlertComponent implements OnInit {
+	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;
+	@HostBinding('attr.class') public hostClass: string;
+	@HostBinding('attr.role') public role: string;
+	@HostBinding('attr.tabindex') public tabindex: string;
 
 	@Input()
 	public set class(classList: string) {
@@ -27,15 +31,11 @@ export class AlertComponent implements OnInit {
 	public get class(): string {
 		return this.classList;
 	}
-	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;
-
-	public close: boolean;
-	@HostBinding('attr.class') public hostClass: string;
-	public id: string;
 
 	@ViewChild('message', {static: true}) public message: ElementRef;
-	@HostBinding('attr.role') public role: string;
-	@HostBinding('attr.tabindex') public tabindex: string;
+
+	public close: boolean;
+	public id: string;
 
 	private classList: string;
 

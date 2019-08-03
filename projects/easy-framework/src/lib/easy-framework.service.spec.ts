@@ -5,7 +5,9 @@ import { EasyService } from './easy-framework.service';
 describe('EasyService', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [EasyService]
+			providers: [
+                EasyService
+            ]
 		});
 	});
 
