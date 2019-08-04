@@ -3,3 +3,36 @@
 @import '../../core/sass/variables';
 
 // Card styles
+:host {
+    &.card {
+        @include shadow(1);
+
+        border: rem(1) solid color(gray);
+        border-radius: rem(8);
+        margin-bottom: rem(16);
+        padding: rem(16);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }    
+
+    @include media(md) {
+        &.card {
+            flex: 0 1 46%;
+            margin-right: rem(16);
+        }
+
+        &.cards {
+            display: flex;
+            flex-wrap: wrap;            
+        }                  
+    }
+
+    @include media(lg) {
+        &.card {
+            flex: 0 1 25%;
+            margin-bottom: 0;
+        }
+    }
+}
