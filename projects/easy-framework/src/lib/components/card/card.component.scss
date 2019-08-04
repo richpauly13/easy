@@ -7,32 +7,34 @@
     &.card {
         @include shadow(1);
 
+        background-color: color(white);
         border: rem(1) solid color(gray);
         border-radius: rem(8);
-        margin-bottom: rem(16);
+        flex: 1 0 rem(500);
+        margin: rem(8);
+        max-width: 100%;
         padding: rem(16);
 
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }    
-
-    @include media(md) {
-        &.card {
-            flex: 0 1 46%;
-            margin-right: rem(16);
+        @include media(sm) {
+            max-width: calc(50% - 1.1rem);                 
         }
 
-        &.cards {
-            display: flex;
-            flex-wrap: wrap;            
-        }                  
+        @include media(md) {
+            max-width: calc(33% - 1.1rem);                    
+        }
+
+        @include media(lg) {
+            max-width: calc(25% - 1.1rem);                    
+        }
+
+        @include media(xl) {
+            max-width: calc(20% - 1.1rem);                    
+        }
     }
 
-    @include media(lg) {
-        &.card {
-            flex: 0 1 25%;
-            margin-bottom: 0;
-        }
+    &.cards {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 100%;
     }
 }

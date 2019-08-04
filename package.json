@@ -87,7 +87,7 @@
     "test": "ng test",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
-    "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.5.3 && npm i --save zone.js@0.9.1",
+    "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.5.3",
     "update:webdriver": "webdriver-manager update",
     "version": "cd projects/easy-framework && standard-version --no-verify",
     "watch:easy": "ng build easy-framework --watch"
