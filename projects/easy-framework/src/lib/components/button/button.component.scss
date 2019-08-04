@@ -21,6 +21,7 @@
 	&.btn-lg:not(:last-child),
 	&.btn-xl:not(:last-child),
 	&.btn-full:not(:last-child) {
+        margin-bottom: rem(16);
 		margin-right: rem(16);
 	}
 

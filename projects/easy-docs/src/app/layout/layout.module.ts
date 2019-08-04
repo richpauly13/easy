@@ -6,13 +6,15 @@ import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { PositionComponent } from './position/position.component';
+import { ContainerComponent } from './container/container.component';
 
 @NgModule({
 	declarations: [
 		FlexboxComponent,
 		GridComponent,
 		LayoutComponent,
-		PositionComponent
+		PositionComponent,
+		ContainerComponent
 	],
 	exports: [
 		FlexboxComponent,
@@ -20,7 +22,8 @@ import { PositionComponent } from './position/position.component';
 		LayoutComponent,
 		LayoutRoutingModule,
 		PositionComponent,
-		SharedModule
+		SharedModule,
+		ContainerComponent
 	],
 	imports: [
 		SharedModule

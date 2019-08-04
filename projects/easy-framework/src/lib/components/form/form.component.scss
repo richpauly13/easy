@@ -1,10 +1,8 @@
-@import '../../core/sass/functions';
-@import '../../core/sass/mixins';
-@import '../../core/sass/variables';
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
 
 // Form styles
-
-// TODO: split this into separate components
 :host {
 	&.checkbox-group,
 	&.radio-group {
@@ -44,8 +42,8 @@
 			color: color(lt-black);
 		}
 
-		&[type='checkbox'],
-		&[type='radio'] {
+		&[type="checkbox"],
+		&[type="radio"] {
 			appearance: none;
 			height: rem(16);
 			position: relative;
@@ -64,19 +62,20 @@
 			}
 		}
 
-		&[type='checkbox']:checked::after {
-			content: '\2713';
+		&[type="checkbox"]:checked::after {
+			content: "\2713";
 		}
 
-		&[type='radio'] {
+		&[type="radio"] {
 			border-radius: 50%;
 
 			&:checked::after {
-				content: '\25CF';
+				content: "\25CF";
 			}
 		}
 
-		&:hover {
+		&:hover:not(:disabled),
+        &:hover:not([disabled]) {
 			@include animate(border);
 
 			border: rem(1) solid color(black);
@@ -87,10 +86,10 @@
 			@include shadow(1, blue);
 
 			border: rem(1) solid color(blue);
-			outline: 1px dotted color(blue);
+			outline: rem(1) dotted color(blue);
 		}
 
-		&:not([type='checkbox']):not([type='radio']) {
+		&:not([type="checkbox"]):not([type="radio"]) {
 			flex: 1 0 rem(220);
 			padding: rem(8);
 		}
@@ -141,7 +140,7 @@
 
 		&::-ms-value {
 			background-color: inherit;
-			color: color(dk-gray);
+			color: color(lt-black);
 		}
 
 		&[multiple] {

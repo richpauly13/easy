@@ -12,6 +12,7 @@ export class LayoutComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.navs = [
+			'container',
 			'flexbox',
 			'grid',
 			'position'

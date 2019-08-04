@@ -6,13 +6,17 @@ import { TypographyComponent } from './typography/typography.component';
 import { UtilitiesRoutingModule } from './utilities-routing.module';
 import { VisibilityComponent } from './visibility/visibility.component';
 import { UtilitiesComponent } from './utilities.component';
+import { ColorComponent } from './color/color.component';
+import { WidthComponent } from './width/width.component';
 
 @NgModule({
 	declarations: [
 		SpaceComponent,
 		TypographyComponent,
 		UtilitiesComponent,
-		VisibilityComponent
+		VisibilityComponent,
+		ColorComponent,
+		WidthComponent
 	],
 	exports: [
 		SharedModule,
@@ -20,7 +24,9 @@ import { UtilitiesComponent } from './utilities.component';
 		TypographyComponent,
 		UtilitiesComponent,
 		UtilitiesRoutingModule,
-		VisibilityComponent
+		VisibilityComponent,
+		ColorComponent,
+		WidthComponent
 	],
 	imports: [
 		SharedModule

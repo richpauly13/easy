@@ -1,1 +1,2 @@
-export class Form { }
+export class Form {
+}

@@ -5,10 +5,15 @@ import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
 import { PositionComponent } from './position/position.component';
+import { ContainerComponent } from './container/container.component';
 
 const routes: Routes = [
 	{
 		children: [
+			{
+				component: ContainerComponent,
+				path: 'container'
+			},
 			{
 				component: FlexboxComponent,
 				path: 'flexbox'
@@ -24,7 +29,7 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: 'flexbox'
+				redirectTo: 'container'
 			}
 		],
 		component: LayoutComponent,
