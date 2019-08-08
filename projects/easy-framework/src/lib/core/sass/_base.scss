@@ -117,7 +117,7 @@ blockquote + footer {
 	padding-right: rem(24);
 
 	&::before {
-		content: '\2012';
+		content: "\2012";
 
 		color: color(dk-gray);
 		padding-right: rem(8);
@@ -224,23 +224,23 @@ legend {
 	font-size: $font-md;
 }
 
-input[type='checkbox'],
-input[type='radio'] {
+input[type="checkbox"],
+input[type="radio"] {
 	vertical-align: middle;
 }
 
-input[type='date'],
-input[type='datetime-local'],
-input[type='month'],
-input[type='time'] {
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"] {
 	-webkit-appearance: listbox;
 }
 
-input[type='number'] {
+input[type="number"] {
 	-moz-appearance: textfield;
 }
 
-input[type='range'] {
+input[type="range"] {
 	width: 100%;
 
 	&::-webkit-slider-thumb {
@@ -275,13 +275,13 @@ textarea {
 	resize: vertical;
 }
 
-a[role='button'],
+a[role="button"],
 abbr[title],
 button,
-html input[type='button'],
+html input[type="button"],
 input,
-input[type='reset'],
-input[type='submit'],
+input[type="reset"],
+input[type="submit"],
 optgroup,
 select,
 textarea {
@@ -290,23 +290,23 @@ textarea {
 	border: 0;
 }
 
-a[role='button'],
+a[role="button"],
 button,
-html input[type='button'],
-input[type='reset'],
-input[type='submit'] {
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
 	appearance: none;
 	background-color: transparent;
 }
 
-a[role='button'],
+a[role="button"],
 button,
-html input[type='button'],
-input[type='range'],
-input[type='checkbox'],
-input[type='reset'],
-input[type='radio'],
-input[type='submit'],
+html input[type="button"],
+input[type="range"],
+input[type="checkbox"],
+input[type="reset"],
+input[type="radio"],
+input[type="submit"],
 select {
 	&:hover {
 		cursor: pointer;
@@ -335,8 +335,8 @@ progress {
 }
 
 // Credit: https://github.com/suitcss/base
-[tabindex='-1'],
-input[type='range'] {
+[tabindex="-1"],
+input[type="range"] {
 	&:focus {
 		outline: none;
 	}

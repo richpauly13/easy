@@ -34,7 +34,7 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: 'color'
+				redirectTo: 'space'
 			}
 		],
 		component: UtilitiesComponent,

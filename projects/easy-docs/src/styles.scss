@@ -89,24 +89,28 @@
 .link {
 	color: inherit;
 	text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .main {
 	margin-left: rem(220);
     padding-top: rem(100);
-}
 
-.main code {
-	color: color(purple);
-}
+    code,
+    pre {
+        font-size: rem(14);
+    }
 
-.main pre {
-    white-space: pre-line; 
-}
+    code {
+        color: color(purple);
+    }
 
-.main code,
-.main pre {
-	font-size: rem(14);
+    pre {
+        white-space: pre-line; 
+    }
 }
 
 .tag {

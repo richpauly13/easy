@@ -29,7 +29,7 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: 'container'
+				redirectTo: 'flexbox'
 			}
 		],
 		component: LayoutComponent,

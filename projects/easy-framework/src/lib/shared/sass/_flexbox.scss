@@ -1,336 +1,3 @@
-/* SG
-# Flexbox
-
-In order for flexbox to work, a parent container must have a `.row[-full]` or `.col[-full]` class.
-
-```
-<ul class="row">
-    <li>row</li>
-    <li>row</li>
-</ul>
-<ul class="row-full">
-    <li>full row</li>
-    <li>full row</li>
-</ul>
-<ul class="col">
-    <li>column</li>
-    <li>column</li>
-</ul>
-<ul class="col-full">
-    <li>full column</li>
-    <li>full column</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Container Row
-
-Use an `.align-[l || c || r || t || m || b || cm || sa || sb || st]` class to align ALL items in a `.row` flex container.
-
-```
-<ul class="row align-l">
-    <li>left (default)</li>
-    <li>left (default)</li>
-</ul>
-<ul class="row align-c">
-    <li>center</li>
-    <li>center</li>
-</ul>
-<ul class="row align-r">
-    <li>right</li>
-    <li>right</li>
-</ul>
-<ul class="row align-t">
-    <li>top (default)</li>
-    <li>top (default)</li>
-</ul>
-<ul class="row align-m">
-    <li>middle</li>
-    <li>middle</li>
-</ul>
-<ul class="row align-b">
-    <li>bottom</li>
-    <li>bottom</li>
-</ul>
-<ul class="row align-cm">
-    <li>center middle</li>
-    <li>center middle</li>
-</ul>
-<ul class="row align-sa">
-    <li>space around</li>
-    <li>space around</li>
-</ul>
-<ul class="row align-sb">
-    <li>space between</li>
-    <li>space between</li>
-</ul>
-<ul class="row align-st">
-    <li>stretch</li>
-    <li>stretch</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Container Column
-
-Use an `.align-[l || c || r || t || m || b || cm || sa || sb || st]` class to align ALL items in a `.col` flex container.
-
-```
-<ul class="col align-l">
-    <li>left (default)</li>
-    <li>left (default)</li>
-</ul>
-<ul class="col align-c">
-    <li>center</li>
-    <li>center</li>
-</ul>
-<ul class="col align-r">
-    <li>right</li>
-    <li>right</li>
-</ul>
-<ul class="col align-t">
-    <li>top (default)</li>
-    <li>top (default)</li>
-</ul>
-<ul class="col align-m">
-    <li>middle</li>
-    <li>middle</li>
-</ul>
-<ul class="col align-b">
-    <li>bottom</li>
-    <li>bottom</li>
-</ul>
-<ul class="col align-cm">
-    <li>center middle</li>
-    <li>center middle</li>
-</ul>
-<ul class="col align-sa">
-    <li>space around</li>
-    <li>space around</li>
-</ul>
-<ul class="col align-sb">
-    <li>space between</li>
-    <li>space between</li>
-</ul>
-<ul class="col align-st">
-    <li>stretch</li>
-    <li>stretch</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Wrap Row
-
-Use a `.wrap-[m || t || b || sa || sb || st]` class to align multi-row items in a `.row` flex container.
-
-```
-<ul class="row wrap-m">
-    <li>middle</li>
-    <li>middle</li>
-    <li>middle</li>
-</ul>
-<ul class="row wrap-t">
-    <li>top (default)</li>
-    <li>top (default)</li>
-    <li>top (default)</li>
-</ul>
-<ul class="row wrap-b">
-    <li>bottom</li>
-    <li>bottom</li>
-    <li>bottom</li>
-</ul>
-<ul class="row wrap-sa">
-    <li>space around</li>
-    <li>space around</li>
-    <li>space around</li>
-</ul>
-<ul class="row wrap-sb">
-    <li>space between</li>
-    <li>space between</li>
-    <li>space between</li>
-</ul>
-<ul class="row wrap-st">
-    <li>stretch</li>
-    <li>stretch</li>
-    <li>stretch</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Wrap Column
-
-Use a `.wrap-[c || l || r || sa || sb || st]` class to align multi-column items in a `.col` flex container.
-
-```
-<ul class="col wrap-c">
-    <li>center</li>
-    <li>center</li>
-    <li>center</li>
-</ul>
-<ul class="col wrap-l">
-    <li>left (default)</li>
-    <li>left (default)</li>
-    <li>left (default)</li>
-</ul>
-<ul class="col wrap-r">
-    <li>right</li>
-    <li>right</li>
-    <li>right</li>
-</ul>
-<ul class="col wrap-sa">
-    <li>space around</li>
-    <li>space around</li>
-    <li>space around</li>
-</ul>
-<ul class="col wrap-sb">
-    <li>space between</li>
-    <li>space between</li>
-    <li>space between</li>
-</ul>
-<ul class="col wrap-st">
-    <li>stretch</li>
-    <li>stretch</li>
-    <li>stretch</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Item Row
-
-Use an `.item-[l || c || r || t || m || b || cm || st]` class to align ONE child in a `.row` flex container.
-
-```
-<ul class="row">
-    <li>default</li>
-    <li class="item-l">left (default)</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-c">center</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-r">right</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-t">top (default)</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-m">middle</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-b">bottom</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-cm">center middle</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-st">stretch</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Item Column
-
-Use `.item-[l || c || r || t || m || b || cm || st]` classes to align ONE child in a `.col` flex container.
-
-```
-<ul class="col">
-    <li>default</li>
-    <li class="item-l">left (default)</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-c">center</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-r">right</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-t">top (default)</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-m">middle</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-b">bottom</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-cm">center middle</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-st">stretch</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Item Size
-
-Use `.item-[g || s || gs]-[1 - 12]` classes to grow and/or shrink children in a flex container.
-
-```
-<ul class="row">
-    <li>default</li>
-    <li class="item-g-1">grow</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-s-1">shrink</li>
-</ul>
-<ul class="row">
-    <li>default</li>
-    <li class="item-gs-1">grow & shrink</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-g-1">grow</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-s-1">shrink</li>
-</ul>
-<ul class="col">
-    <li>default</li>
-    <li class="item-gs-1">grow & shrink</li>
-</ul>
-```
-*/
-
-/* SG
-# Flexbox/Item Order
-
-Use `.item-order-[1 - 12]` classes to align children in a flex container.
-
-```
-<ul class="row">
-    <li class="item-order-2">1</li>
-    <li class="item-order-1">2</li>
-</ul>
-<ul class="col">
-    <li class="item-order-2">1</li>
-    <li class="item-order-1">2</li>
-</ul>
-```
-*/
-
 // Flexbox container styles
 .row,
 .row-full {
@@ -351,32 +18,32 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 }
 
 // Flexbox container alignment styles
-.align-c,
+.align-c:not(.col),
 .col.align-m {
 	justify-content: center;
 }
 
-.align-l,
+.align-l:not(.col),
 .col.align-t {
 	justify-content: flex-start;
 }
 
-.align-r,
+.align-r:not(.col),
 .col.align-b {
 	justify-content: flex-end;
 }
 
-.align-m,
+.align-m:not(.col),
 .col.align-c {
 	align-items: center;
 }
 
-.align-b,
+.align-b:not(.col),
 .col.align-r {
 	align-items: flex-end;
 }
 
-.align-t,
+.align-t:not(.col),
 .col.align-l {
 	align-items: flex-start;
 }
@@ -438,22 +105,22 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 }
 
 // Flex item alignment styles
-.item-t,
+.row .item-t,
 .col .item-l {
 	align-self: flex-start;
 }
 
-.item-b,
+.row .item-b,
 .col .item-r {
 	align-self: flex-end;
 }
 
-.item-m,
+.row .item-m,
 .col .item-c {
 	align-self: center;
 }
 
-.item-l {
+.row .item-l {
 	margin-right: auto;
 }
 
@@ -461,7 +128,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	margin-bottom: auto;
 }
 
-.item-r {
+.row .item-r {
 	margin-left: auto;
 }
 
@@ -469,7 +136,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	margin-top: auto;
 }
 
-.item-c {
+.row .item-c {
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -479,7 +146,7 @@ Use `.item-order-[1 - 12]` classes to align children in a flex container.
 	margin-top: auto;
 }
 
-.item-cm {
+.row .item-cm {
 	align-self: center;
 	margin-left: auto;
 	margin-right: auto;
