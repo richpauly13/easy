@@ -162,31 +162,24 @@
 	align-self: stretch;
 }
 
+// Flex item order styles
+@for $number from 0 through 12 {
+	.item-order-#{$number} {
+		order: $number;
+	}
+}
+
 // Flex item grow and shrink styles
 @for $number from 0 through 12 {
-	.item-gs-#{$number} {
-		flex-grow: $number;
-		flex-shrink: $number;
-	}
-
 	.item-g-#{$number} {
-		flex-grow: $number;
+		flex: $number 0 auto;
 	}
 
 	.item-s-#{$number} {
-		flex-shrink: $number;
+		flex: 0 $number auto;
 	}
-}
 
-[class*='flex-g'] {
-	flex-basis: auto;
-}
-
-// Flex item order styles
-
-// TODO: Base this on media queries
-@for $number from 1 through 12 {
-	.item-order-#{$number} {
-		order: $number;
+    .item-gs-#{$number} {
+		flex: $number $number auto;
 	}
 }
