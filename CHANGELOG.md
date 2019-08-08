@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **flexbox:** Fixed flexbox altingments and items ([cc0fc75](https://github.com/richpauly13/easy/commit/cc0fc75))
+* **flexbox:** Fix flexbox alignments and items ([cc0fc75](https://github.com/richpauly13/easy/commit/cc0fc75))
 
 ### [0.2.3](https://github.com/richpauly13/easy/compare/v0.2.2...v0.2.3) (2019-08-04)
 
@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* **schematics:** Added ng-add to schematics ([7cfd1aa](https://github.com/richpauly13/easy/commit/7cfd1aa))
+* **schematics:** Add ng-add to schematics ([7cfd1aa](https://github.com/richpauly13/easy/commit/7cfd1aa))
 
 
 
