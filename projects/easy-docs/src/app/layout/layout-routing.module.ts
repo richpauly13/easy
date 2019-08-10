@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ContainerComponent } from './container/container.component';
 import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
+import { NavComponent } from './nav/nav.component';
 import { PositionComponent } from './position/position.component';
-import { ContainerComponent } from './container/container.component';
 
 const routes: Routes = [
 	{
@@ -21,6 +22,10 @@ const routes: Routes = [
 			{
 				component: GridComponent,
 				path: 'grid'
+			},
+			{
+				component: NavComponent,
+				path: 'nav'
 			},
 			{
 				component: PositionComponent,

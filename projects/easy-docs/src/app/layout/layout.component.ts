@@ -15,6 +15,7 @@ export class LayoutComponent implements OnInit {
 			'container',
 			'flexbox',
 			'grid',
+			'nav',
 			'position'
 		];
 	}

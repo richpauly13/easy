@@ -1,0 +1,44 @@
+// Position sytles
+.fixed-b,
+.fixed-l,
+.fixed-r,
+.fixed-t {
+	position: fixed;
+	z-index: 10;
+}
+
+// TODO: See if this is needed
+.fixed-b,
+.fixed-t {
+	width: 100%;
+}
+
+.fixed-b {
+	bottom: 0;
+}
+
+.fixed-l {
+	left: 0;
+}
+
+.fixed-r {
+	right: 0;
+}
+
+.fixed-t {
+	top: 0;
+}
+
+.sticky-footer {
+	@include column;
+
+	align-items: stretch;
+	flex-wrap: nowrap;
+	height: 100%;
+
+	& :last-child {
+		margin-top: auto;
+	}
+}
+
+// TODO: Add sticky, relative, and absolute

@@ -6,7 +6,7 @@
 :host {	
 	&.spinner,
 	&.spinner-dotted {
-		animation: spinner 2s linear infinite;
+		animation: spinner 3s linear infinite;
 		border-radius: 50%;
 		height: rem(120);
 		width: rem(120);

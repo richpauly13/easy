@@ -4,9 +4,10 @@ $screen-md: 48em; // 768px
 $screen-lg: 64em; // 1024px
 $screen-xl: 85em; // 1360px
 
-// Font family variables
+// Font family variable
 $font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
+// Font size variables
 $font-xs: rem(12);
 $font-sm: rem(14);
 $font-md: rem(18);
@@ -45,12 +46,12 @@ $colors: (
 
 // Headings list variable
 $headings: (
-    (h1, rem(32), rem(10.72)),
-    (h2, rem(24), rem(12)),
-    (h3, rem(18.72), rem(13.28)),
-    (h4, rem(16), rem(17.92)),
-    (h5, rem(13.28), rem(24)),
-    (h6, rem(12), rem(26.72))
+    (h1, rem(32)),
+    (h2, rem(24)),
+    (h3, rem(18.72)),
+    (h4, rem(16)),
+    (h5, rem(13.28)),
+    (h6, rem(12))
 );
 
 // Space map variable

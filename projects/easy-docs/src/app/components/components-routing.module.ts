@@ -9,7 +9,6 @@ import { CollapseComponent } from './collapse/collapse.component';
 import { ComponentsComponent } from './components.component';
 import { FormComponent } from './form/form.component';
 import { ModalComponent } from './modal/modal.component';
-import { NavComponent } from './nav/nav.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -48,10 +47,6 @@ const routes: Routes = [
 			{
 				component: ModalComponent,
 				path: 'modal'
-			},
-			{
-				component: NavComponent,
-				path: 'nav'
 			},
 			{
 				component: SliderComponent,

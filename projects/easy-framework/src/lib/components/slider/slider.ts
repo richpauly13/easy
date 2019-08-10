@@ -1,1 +1,2 @@
-export class Slider { }
+export class Slider {
+}

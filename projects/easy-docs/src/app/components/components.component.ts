@@ -19,7 +19,6 @@ export class ComponentsComponent implements OnInit {
 			'collapse',
 			'form',
 			'modal',
-			'nav',
 			'slider',
 			'slideshow',
 			'spinner',

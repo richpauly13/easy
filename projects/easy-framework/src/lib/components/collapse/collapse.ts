@@ -1,1 +1,2 @@
-export class Collapse { }
+export class Collapse {
+}

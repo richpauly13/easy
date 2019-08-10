@@ -1,1 +1,2 @@
-export class Tooltip { }
+export class Tooltip {
+}

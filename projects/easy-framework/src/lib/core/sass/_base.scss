@@ -84,15 +84,11 @@ video {
 	height: auto;
 }
 
-// Sets heading font sizes and bottom margins
-@each $heading, $font, $margin in $headings {
+// Sets heading font sizes
+@each $heading, $font in $headings {
 	#{$heading},
 	.#{$heading} {
 		font-size: $font;
-	}
-
-	.#{$heading} {
-		margin-bottom: $margin;
 	}
 }
 
@@ -124,7 +120,6 @@ blockquote + footer {
 	}
 }
 
-// TODO: Make these classes
 blockquote,
 blockquote + footer {
 	border-left: rem(2) solid color(lt-gray);
@@ -172,6 +167,8 @@ pre {
 // Sets proper vertical alignment
 caption,
 img,
+input[type="checkbox"],
+input[type="radio"],
 label,
 td,
 th {
@@ -222,11 +219,6 @@ fieldset {
 
 legend {
 	font-size: $font-md;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-	vertical-align: middle;
 }
 
 input[type="date"],
@@ -339,5 +331,66 @@ progress {
 input[type="range"] {
 	&:focus {
 		outline: none;
+	}
+}
+
+// Global styles
+:disabled,
+[disabled] {
+	background-color: color(lt-gray);
+	color: color(lt-black);
+
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.circle {
+	border-radius: 50%;
+}
+
+.close {
+	color: inherit;
+}
+
+.hover:hover {
+	cursor: pointer;
+}
+
+.list {
+	margin-bottom: rem(16);
+	margin-left: rem(40);
+}
+
+ol.list {
+	list-style: decimal;
+
+	& ol.list {
+		list-style: lower-alpha;
+	}
+}
+
+.rounded {
+	border-radius: rem(8);
+}
+
+ul.list {
+	list-style: disc;
+
+	& ul.list {
+		list-style: circle;
+	}
+}
+
+// Creates box-shadows with 1 - 5 depth
+@for $shadow from 1 through 5 {
+	.box-shadow-#{$shadow} {
+		@include shadow($shadow);
 	}
 }

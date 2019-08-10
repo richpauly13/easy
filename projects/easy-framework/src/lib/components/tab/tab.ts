@@ -1,1 +1,2 @@
-export class Tab { }
+export class Tab {
+}
