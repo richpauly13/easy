@@ -34,7 +34,7 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: 'flexbox'
+				redirectTo: 'container'
 			}
 		],
 		component: LayoutComponent,

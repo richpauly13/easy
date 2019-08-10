@@ -1,6 +1,6 @@
-@import "../../core/sass/functions";
-@import "../../core/sass/mixins";
-@import "../../core/sass/variables";
+@import '../../core/sass/functions';
+@import '../../core/sass/mixins';
+@import '../../core/sass/variables';
 
 // Form styles
 :host {
@@ -18,7 +18,7 @@
 
 		align-items: center;
 		flex-wrap: wrap;
-		padding: rem(8);
+		padding: space(xs);
 	}
 
 	&.fieldset {
@@ -45,9 +45,9 @@
 		&[type="checkbox"],
 		&[type="radio"] {
 			appearance: none;
-			height: rem(16);
+			height: space(sm);
 			position: relative;
-			width: rem(16);
+			width: space(sm);
 
 			&::after {
 				display: block;
@@ -91,7 +91,7 @@
 
 		&:not([type="checkbox"]):not([type="radio"]) {
 			flex: 1 0 rem(220);
-			padding: rem(8);
+			padding: space(xs);
 		}
 
 		&::-webkit-input-placeholder {
@@ -169,8 +169,8 @@
 
 	&.form-label {
 		flex: none;
-		font-size: rem(16);
-		padding-left: rem(8);
+		font-size: space(sm);
+		padding-left: space(xs);
 
 		&:hover {
 			cursor: pointer;

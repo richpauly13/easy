@@ -12,15 +12,14 @@
 
 @mixin flex($grow, $shrink, $basis) {
 	@if $basis == 0 {
-		flex-basis: 0%;
+		$basis: 0%;
 	} @else if type-of($basis) == number {
-		flex-basis: rem($basis);
+		$basis: rem($basis);
 	} @else {
-		flex-basis: auto;
+		$basis: auto;
 	}
 
-	flex-grow: $grow;
-	flex-shrink: $shrink;
+	flex: $grow $shrink $basis;
 }
 
 // TODO: See if this can be simplified while adding min, max, and print
@@ -70,7 +69,7 @@
 }
 
 @mixin thumb {
-	@include shadow(1, color(black));
+	@include shadow(1);
 
 	background: color(white);
 	border: rem(1) solid color(black);
@@ -79,6 +78,6 @@
 
 @mixin track {
 	cursor: pointer;
-	height: rem(16);
+	height: size(sm);
 	width: 100%;
 }

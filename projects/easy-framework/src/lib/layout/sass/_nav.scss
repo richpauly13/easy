@@ -33,18 +33,18 @@
 }
 
 .nav-toggle {
-	height: rem(40);
+	height: space(xl);
 	position: relative;
-	width: rem(40);
+	width: space(xl);
 
 	&::after {
 		content: '';
 
 		background-color: color(white);
-		box-shadow: 0 6px 0 color(white), 0 12px 0 color(white);
+		box-shadow: 0 rem(6) 0 color(white), 0 rem(12) 0 color(white);
 		height: rem(2);
 		position: absolute;
-		width: rem(24);
+		width: space(md);
 	}
 
 	@media screen and (min-width: $screen-lg) {

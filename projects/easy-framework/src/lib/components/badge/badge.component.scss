@@ -7,7 +7,7 @@
 	&.badge-sm,
 	&.badge-md,
 	&.badge-lg {
-		border-radius: rem(16);
+		border-radius: space(sm);
 		display: inline-block;
 
 		&:empty {
@@ -16,8 +16,8 @@
 	}
 
 	&.badge-sm {
-		line-height: rem(8);
-		padding: rem(8);
+		line-height: space(xs);
+		padding: space(xs);
 	}
 
 	&.badge-md {

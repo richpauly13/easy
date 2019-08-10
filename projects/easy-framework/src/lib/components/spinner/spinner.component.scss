@@ -16,14 +16,14 @@
 		border-color: color(lt-gray);
 		border-left-color: color(blue);
 		border-style: solid;
-		border-width: rem(16);
+		border-width: size(sm);
 	}
 
 	&.spinner-dotted {
 		border-bottom-color: color(lt-blue);
 		border-bottom-width: rem(12);
 		border-left-color: #3399ff;
-		border-left-width: rem(8);
+		border-left-width: size(xs);
 		border-right-color: color(blue);
 		border-right-width: rem(14);
 		border-top-color: color(dk-blue);

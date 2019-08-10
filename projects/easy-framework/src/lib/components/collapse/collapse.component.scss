@@ -8,20 +8,20 @@
 		display: none;
 
 		&:checked + .collapse-content {
-			padding: rem(8);
+			padding: space(xs);
 		}
 	}
 
 	&.collapse-label {
 		background-color: color(lt-white);
-		padding: rem(8);
+		padding: space(xs);
 		width: 100%;
 	}
 
 	&.collapse-content {
 		margin: 0;
 		max-height: 0;
-		padding: rem(0 8);
+		padding: 0 space(xs);
 	}
 
 	&.collapse-content {

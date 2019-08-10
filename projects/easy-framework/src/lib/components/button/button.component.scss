@@ -11,7 +11,7 @@
 	&.btn-xl,
 	&.btn-full {
 		&.rounded {
-			border-radius: rem(24);
+			border-radius: space(md);
 		}
 	}
 
@@ -21,13 +21,13 @@
 	&.btn-lg:not(:last-child),
 	&.btn-xl:not(:last-child),
 	&.btn-full:not(:last-child) {
-        margin-bottom: rem(16);
-		margin-right: rem(16);
+        margin-bottom: space(sm);
+		margin-right: space(sm);
 	}
 
 	// Button sizes
 	&.btn-xs {
-		padding: rem(8 10);
+		padding: space(xs) rem(10);
 	}
 
 	&.btn-sm {
@@ -40,11 +40,11 @@
 	}
 
 	&.btn-lg {
-		padding: rem(14 40);
+		padding: rem(14) space(xl);
 	}
 
 	&.btn-xl {
-		padding: rem(16 50);
+		padding: space(sm) rem(50);
 	}
 
 	&.btn-full {
@@ -59,8 +59,8 @@
 		@include row;
 
         flex-wrap: wrap;
-		padding-bottom: rem(16);
-		padding-top: rem(16);
+		padding-bottom: space(sm);
+		padding-top: space(sm);
 	}
 
     &.btn-group-col {

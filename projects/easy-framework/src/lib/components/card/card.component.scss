@@ -9,11 +9,11 @@
 
         background-color: color(white);
         border: rem(1) solid color(gray);
-        border-radius: rem(8);
+        border-radius: space(xs);
         flex: 1 0 rem(500);
-        margin: rem(8);
+        margin: space(xs);
         max-width: 100%;
-        padding: rem(16);
+        padding: space(sm);
 
         @include media(sm) {
             max-width: calc(50% - 1.1rem);                 

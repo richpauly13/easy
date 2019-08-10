@@ -103,20 +103,20 @@ address {
 }
 
 blockquote {
-	padding: rem(16);
+	padding: space(sm);
 }
 
 blockquote + footer {
 	color: color(dk-gray);
-	padding-bottom: rem(16);
-	padding-left: rem(24);
-	padding-right: rem(24);
+	padding-bottom: space(sm);
+	padding-left: space(md);
+	padding-right: space(md);
 
 	&::before {
 		content: "\2012";
 
 		color: color(dk-gray);
-		padding-right: rem(8);
+		padding-right: space(xs);
 	}
 }
 
@@ -130,7 +130,7 @@ caption {
 }
 
 dd {
-	margin-bottom: rem(8);
+	margin-bottom: space(xs);
 }
 
 hr {
@@ -144,7 +144,7 @@ mark {
 
 address,
 dl {
-	margin-bottom: rem(16);
+	margin-bottom: space(sm);
 }
 
 address,
@@ -196,7 +196,7 @@ sup {
 code,
 kbd,
 samp {
-	font-size: rem(16);
+	font-size: space(sm);
 }
 
 code,
@@ -206,7 +206,7 @@ pre {
 }
 
 pre {
-	font-size: rem(8);
+	font-size: space(xs);
 	white-space: pre-wrap;
 	word-spacing: normal;
 }
@@ -364,8 +364,8 @@ input[type="range"] {
 }
 
 .list {
-	margin-bottom: rem(16);
-	margin-left: rem(40);
+	margin-bottom: space(sm);
+	margin-left: space(xl);
 }
 
 ol.list {
@@ -377,7 +377,7 @@ ol.list {
 }
 
 .rounded {
-	border-radius: rem(8);
+	border-radius: space(xs);
 }
 
 ul.list {

@@ -31,8 +31,8 @@
 	@return $rems;
 }
 
-@function space($space) {
-	@return map-get($spacers, $space);
+@function space($size) {
+	@return map-get($space, $size);
 }
 
 // Credit: https://css-tricks.com/snippets/sass/material-shadows-mixin/

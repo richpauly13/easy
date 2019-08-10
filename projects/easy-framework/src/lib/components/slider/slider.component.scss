@@ -18,51 +18,51 @@ input[type='range'] {
 }
 
 input[type='range'].slider-v::-webkit-slider-thumb {
-	height: rem(40);
-	width: rem(16);
+	height: space(xl);
+	width: space(sm);
 }
 
 input[type='range'].slider-v::-moz-range-thumb {
-	height: rem(40);
-	width: rem(16);
+	height: space(xl);
+	width: space(sm);
 }
 
 input[type='range'].slider-v::-ms-thumb {
-	height: rem(40);
-	width: rem(16);
+	height: space(xl);
+	width: space(sm);
 }
 
 input[type='range'].slider-h::-webkit-slider-thumb {
-	height: rem(24);
-	width: rem(40);
+	height: space(md);
+	width: space(xl);
 }
 
 input[type='range'].slider-h::-moz-range-thumb {
-	height: rem(24);
-	width: rem(40);
+	height: space(md);
+	width: space(xl);
 }
 
 input[type='range'].slider-h::-ms-thumb {
-	height: rem(24);
-	width: rem(40);
+	height: space(md);
+	width: space(xl);
 }
 
 input[type='range'].slider-circle::-webkit-slider-thumb {
 	border-radius: 50%;
-	height: rem(40);
-	width: rem(40);
+	height: space(xl);
+	width: space(xl);
 }
 
 input[type='range'].slider-circle::-moz-range-thumb {
 	border-radius: 50%;
-	height: rem(40);
-	width: rem(40);
+	height: space(xl);
+	width: space(xl);
 }
 
 input[type='range'].slider-circle::-ms-thumb {
 	border-radius: 50%;
-	height: rem(40);
-	width: rem(40);
+	height: space(xl);
+	width: space(xl);
 }
 
 input[type='range']::-webkit-slider-runnable-track {
@@ -81,7 +81,7 @@ input[type='range']::-moz-range-track {
 
 input[type='range']::-ms-track {
 	@include track;
-	border-width: rem(16 0);
+	border-width: space(sm) 0;
 }
 
 input[type='range']::-ms-fill-lower {

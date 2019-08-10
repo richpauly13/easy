@@ -1,4 +1,17 @@
 // Container styles
+.container,
+.container-fluid,
+.container-full {
+    display: flex;
+	margin-left: auto;
+	margin-right: auto;
+    padding-bottom: space(sm);
+    padding-left: space(xs);
+    padding-right: space(xs);
+    padding-top: space(sm);
+	width: 100%;
+}
+
 .container {
 	@include media(md) {
 		width: 80%;
@@ -19,14 +32,6 @@
 	}
 
 	@include media(xl) {
-		width: rem(1168);
+		width: rem(1328);
 	}
-}
-
-.container,
-.container-fluid,
-.container-full {
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
 }
