@@ -46,7 +46,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		ComponentsRoutingModule,
 		FormComponent,
 		ModalComponent,
-		SharedModule,
 		SliderComponent,
 		SlideshowComponent,
 		SpinnerComponent,

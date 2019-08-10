@@ -10,6 +10,8 @@ import { PositionComponent } from './position/position.component';
 
 const routes: Routes = [
 	{
+		path: '',
+		component: LayoutComponent,
 		children: [
 			{
 				component: ContainerComponent,
@@ -36,9 +38,7 @@ const routes: Routes = [
 				pathMatch: 'full',
 				redirectTo: 'container'
 			}
-		],
-		component: LayoutComponent,
-		path: 'layout'
+		]
 	}
 ];
 

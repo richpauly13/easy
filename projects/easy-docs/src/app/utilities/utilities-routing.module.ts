@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ColorComponent } from './color/color.component';
 import { SpaceComponent } from './space/space.component';
 import { TypographyComponent } from './typography/typography.component';
 import { UtilitiesComponent } from './utilities.component';
 import { VisibilityComponent } from './visibility/visibility.component';
-import { ColorComponent } from './color/color.component';
 import { WidthComponent } from './width/width.component';
 
 const routes: Routes = [
 	{
+		path: '',
+		component: UtilitiesComponent,
 		children: [
 			{
 				component: ColorComponent,
@@ -36,9 +38,7 @@ const routes: Routes = [
 				pathMatch: 'full',
 				redirectTo: 'space'
 			}
-		],
-		component: UtilitiesComponent,
-		path: 'utilities'
+		]
 	}
 ];
 

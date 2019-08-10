@@ -1,20 +1,18 @@
 // Nav styles
+.nav-h .nav-row {
+	@include row;
+
+    align-items: middle;
+    width: 100%;
+}
+
 .nav-v {
 	overflow-y: auto;
 	width: auto;
 }
 
-.nav-h,
-.nav-h .nav-row {
-	@include row;
-
-	width: 100%;
-}
-
 .nav-item,
 .nav-link {
-	@include flex(1, 0, auto);
-
 	color: inherit;
 	text-align: center;
 	text-decoration: none;
@@ -23,13 +21,17 @@
 	&:active,
 	&:focus {
 		cursor: pointer;
+        text-decoration: underline;
 		outline: rem(1) dotted color(white);
 	}
+}
 
-	.nav-link {
-		display: block;
-		flex: none;
-	}
+.nav-item {
+	@include flex(1, 0, auto);
+}
+
+.nav-link {
+    display: block;
 }
 
 .nav-toggle {
@@ -39,7 +41,6 @@
 
 	&::after {
 		content: '';
-
 		background-color: color(white);
 		box-shadow: 0 rem(6) 0 color(white), 0 rem(12) 0 color(white);
 		height: rem(2);

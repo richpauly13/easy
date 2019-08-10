@@ -3,10 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ComponentsModule } from './components/components.module';
 import { HomeComponent } from './home/home.component';
-import { LayoutModule } from './layout/layout.module';
-import { UtilitiesModule } from './utilities/utilities.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
 	bootstrap: [
@@ -18,10 +16,8 @@ import { UtilitiesModule } from './utilities/utilities.module';
 	],
 	imports: [
 		BrowserModule,
-		ComponentsModule,
-		LayoutModule,
-		UtilitiesModule,
-		AppRoutingModule
+		AppRoutingModule,
+		SharedModule
 	]
 })
 export class AppModule { }

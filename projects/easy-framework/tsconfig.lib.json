@@ -5,17 +5,21 @@
 		"target": "es2015",
 		"declaration": true,
 		"inlineSources": true,
-		"types": [],
+		"types": [
+            
+        ],
 		"lib": ["dom", "es2018"]
 	},
 	"angularCompilerOptions": {
-		"annotateForClosureCompiler": true,
-		"skipTemplateCodegen": true,
-		"strictMetadataEmit": true,
-		"fullTemplateTypeCheck": true,
+        "annotateForClosureCompiler": true,
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "fullTemplateTypeCheck": true,
         "strictNullChecks": false,
-		"strictInjectionParameters": true,
-		"enableResourceInlining": true
+        "strictInjectionParameters": true,
+        "enableResourceInlining": true
 	},
-	"exclude": ["src/test.ts", "**/*.spec.ts"]
+	"exclude": [
+        "src/test.ts", "**/*.spec.ts"
+    ]
 }

@@ -25,8 +25,7 @@ import { SharedModule } from '../shared/shared.module';
 		LayoutComponent,
 		LayoutRoutingModule,
 		NavComponent,
-		PositionComponent,
-		SharedModule
+		PositionComponent
 	],
 	imports: [
 		SharedModule

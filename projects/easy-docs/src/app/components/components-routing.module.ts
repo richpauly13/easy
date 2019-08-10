@@ -19,6 +19,8 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 
 const routes: Routes = [
 	{
+		path: '',
+		component: ComponentsComponent,
 		children: [
 			{
 				component: AlertComponent,
@@ -79,11 +81,9 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: '/components/alert'
-			},
-		],
-		component: ComponentsComponent,
-		path: 'components'
+				redirectTo: 'alert'
+			}
+		]
 	}
 ];
 

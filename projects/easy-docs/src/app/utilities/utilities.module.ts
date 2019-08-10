@@ -19,7 +19,6 @@ import { WidthComponent } from './width/width.component';
 		WidthComponent
 	],
 	exports: [
-		SharedModule,
 		SpaceComponent,
 		TypographyComponent,
 		UtilitiesComponent,
