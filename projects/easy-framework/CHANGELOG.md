@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/richpauly13/easy/compare/v0.2.6...v0.2.7) (2019-08-11)
+
+
+### Bug Fixes
+
+* **sass:** Fix components sass ([348261f](https://github.com/richpauly13/easy/commit/348261f))
+
 ### [0.2.6](https://github.com/richpauly13/easy/compare/v0.2.5...v0.2.6) (2019-08-11)
 
 
