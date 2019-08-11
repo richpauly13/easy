@@ -1,6 +1,6 @@
-@import '../../../core/sass/functions';
-@import '../../../core/sass/mixins';
-@import '../../../core/sass/variables';
+@import '../../core/sass/functions';
+@import '../../core/sass/mixins';
+@import '../../core/sass/variables';
 
 // Nav styles
 .nav-h .nav-row {
@@ -50,7 +50,11 @@
 		position: absolute;
         top: 30%;
 		width: space(md);
-	}    
+	}
+
+    &.active + .nav-row {
+        display: block;
+    }  
 
     @include media(md) {
         display: none;
