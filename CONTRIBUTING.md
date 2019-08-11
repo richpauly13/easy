@@ -56,7 +56,7 @@ Other types that will not appear in changelog:
 - **chore** - changes in build or other application unrelated changes
 - **refactor** - changes to implementation without changes to functionality
 - **test** - adding tests
-- **style** - changes to codestyle (should be unnecessary since we use prettier)
+- **style** - changes to codestyle
 
 Any line of the commit message should not be longer 100 characters! This allows the message to be easier
 to read on GitHub as well as in various git tools.

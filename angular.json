@@ -7,10 +7,10 @@
 			"projectType": "library",
             "schematics": {
 				"@schematics/angular:component": {
-					"flat": true
+                    "viewEncapsulation": "None"
 				},
 				"@schematics/angular:module": {
-					"module": "components"
+					"routing": false
 				}
 			},
 			"root": "projects/easy-framework",
@@ -48,11 +48,8 @@
 		"easy-docs": {
 			"projectType": "application",
 			"schematics": {
-				"@schematics/angular:component": {
-					"flat": false
-				},
 				"@schematics/angular:module": {
-					"module": "app"
+					"routing": true
 				}
 			},
 			"root": "projects/easy-docs",

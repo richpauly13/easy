@@ -1,8 +1,16 @@
+@import '../../../core/sass/functions';
+@import '../../../core/sass/mixins';
+@import '../../../core/sass/variables';
+
 // Nav styles
 .nav-h .nav-row {
 	@include row;
 
     align-items: middle;
+}
+
+.nav-v {
+    overflow-y: auto;
 }
 
 .nav-item {
@@ -30,12 +38,26 @@
 	position: relative;
 	width: space(xl);
 
-	&::after {
-		content: '';
+    + .nav-row {
+        display: none;       
+    }
+
+	&::before {
+		content: "";
 		background-color: color(white);
 		box-shadow: 0 rem(6) 0 color(white), 0 rem(12) 0 color(white);
 		height: rem(2);
 		position: absolute;
+        top: 30%;
 		width: space(md);
-	}
+	}    
+
+    @include media(md) {
+        display: none;
+
+        + .nav-row {
+            display: flex;
+        }
+    }
 }
+

@@ -16,4 +16,6 @@ export * from './lib/components/switch/switch.module';
 export * from './lib/components/tab/tab.module';
 export * from './lib/components/table/table.module';
 export * from './lib/components/tooltip/tooltip.module';
+export * from './lib/layout/layout.module';
+export * from './lib/layout/nav/nav.module';
 export * from './lib/easy-framework.module';
