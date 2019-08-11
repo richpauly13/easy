@@ -3,27 +3,10 @@
 	@include row;
 
     align-items: middle;
-    width: 100%;
 }
 
 .nav-v {
 	overflow-y: auto;
-	width: auto;
-}
-
-.nav-item,
-.nav-link {
-	color: inherit;
-	text-align: center;
-	text-decoration: none;
-
-	&:hover,
-	&:active,
-	&:focus {
-		cursor: pointer;
-        text-decoration: underline;
-		outline: rem(1) dotted color(white);
-	}
 }
 
 .nav-item {
@@ -31,7 +14,19 @@
 }
 
 .nav-link {
+    color: inherit;
     display: block;
+    padding: space(sm);
+    text-align: center;	
+    text-decoration: none;
+
+    &.active,
+    &:hover,
+	&:active,
+	&:focus {
+        outline: rem(1) dotted color(white);
+		text-decoration: underline;
+	}
 }
 
 .nav-toggle {
@@ -46,9 +41,5 @@
 		height: rem(2);
 		position: absolute;
 		width: space(md);
-	}
-
-	@media screen and (min-width: $screen-lg) {
-		display: none;
 	}
 }

@@ -9,7 +9,7 @@
 
 .box {
 	border: rem(1) solid color(black);
-	margin: rem(16);
+	margin: space(sm);
 	padding: 0;
 
 	p {
@@ -23,7 +23,7 @@
 
 		&[class*="pad"] {
 			display: inline-block;
-			margin: 0 rem(16);
+			margin: 0 space(sm);
 		}
 	}
 }
