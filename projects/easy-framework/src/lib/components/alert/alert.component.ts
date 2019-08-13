@@ -1,11 +1,12 @@
-import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
+	templateUrl: './alert.component.html',
 	styleUrls: [
 		'./alert.component.scss'
 	],
-	templateUrl: './alert.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class AlertComponent implements OnInit {
 	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;

@@ -167,8 +167,8 @@ pre {
 // Sets proper vertical alignment
 caption,
 img,
-input[type="checkbox"],
-input[type="radio"],
+input[type=checkbox],
+input[type=radio],
 label,
 td,
 th {
@@ -221,18 +221,18 @@ legend {
 	font-size: $font-md;
 }
 
-input[type="date"],
-input[type="datetime-local"],
-input[type="month"],
-input[type="time"] {
+input[type=date],
+input[type=datetime-local],
+input[type=month],
+input[type=time] {
 	-webkit-appearance: listbox;
 }
 
-input[type="number"] {
+input[type=number] {
 	-moz-appearance: textfield;
 }
 
-input[type="range"] {
+input[type=range] {
 	width: 100%;
 
 	&::-webkit-slider-thumb {
@@ -267,13 +267,13 @@ textarea {
 	resize: vertical;
 }
 
-a[role="button"],
+a[role=button],
 abbr[title],
 button,
-html input[type="button"],
+html input[type=button],
 input,
-input[type="reset"],
-input[type="submit"],
+input[type=reset],
+input[type=submit],
 optgroup,
 select,
 textarea {
@@ -282,23 +282,23 @@ textarea {
 	border: 0;
 }
 
-a[role="button"],
+a[role=button],
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
+html input[type=button],
+input[type=reset],
+input[type=submit] {
 	appearance: none;
 	background-color: transparent;
 }
 
-a[role="button"],
+a[role=button],
 button,
-html input[type="button"],
-input[type="range"],
-input[type="checkbox"],
-input[type="reset"],
-input[type="radio"],
-input[type="submit"],
+html input[type=button],
+input[type=range],
+input[type=checkbox],
+input[type=reset],
+input[type=radio],
+input[type=submit],
 select {
 	&:hover {
 		cursor: pointer;
@@ -328,69 +328,8 @@ progress {
 
 // Credit: https://github.com/suitcss/base
 [tabindex="-1"],
-input[type="range"] {
+input[type=range] {
 	&:focus {
 		outline: none;
-	}
-}
-
-// Global styles
-:disabled,
-[disabled] {
-	background-color: color(lt-gray);
-	color: color(lt-black);
-
-	&:hover {
-		cursor: not-allowed;
-	}
-}
-
-.center {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.circle {
-	border-radius: 50%;
-}
-
-.close {
-	color: inherit;
-}
-
-.hover:hover {
-	cursor: pointer;
-}
-
-.list {
-	margin-bottom: space(sm);
-	margin-left: space(xl);
-}
-
-ol.list {
-	list-style: decimal;
-
-	& ol.list {
-		list-style: lower-alpha;
-	}
-}
-
-.rounded {
-	border-radius: space(xs);
-}
-
-ul.list {
-	list-style: disc;
-
-	& ul.list {
-		list-style: circle;
-	}
-}
-
-// Creates box-shadows with 1 - 5 depth
-@for $shadow from 1 through 5 {
-	.box-shadow-#{$shadow} {
-		@include shadow($shadow);
 	}
 }

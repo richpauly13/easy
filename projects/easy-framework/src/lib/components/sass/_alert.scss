@@ -1,0 +1,33 @@
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
+
+// Alert styles
+.alert-bad,
+.alert-good,
+.alert-info,
+.alert-warn {
+    @include row;
+
+    align-items: center;
+    color: color(white);
+    justify-content: space-between;
+    padding: space(xs) space(sm);
+}
+
+.alert-bad {
+    background-color: color(red);
+}
+
+.alert-good {
+    background-color: color(dk-green);
+}
+
+.alert-info {
+    background-color: color(dk-blue);
+}
+
+.alert-warn {
+    background-color: color(yellow);
+    color: color(lt-black);
+}

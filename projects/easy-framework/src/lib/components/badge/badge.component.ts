@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'ez-badge, .badge-sm, .badge-md, .badge-lg',
+	templateUrl: './badge.component.html',
 	styleUrls: [
 		'./badge.component.scss'
 	],
-	templateUrl: './badge.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class BadgeComponent {
 

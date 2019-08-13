@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-switch',
+	selector: 'ez-switch, .switch',
+	templateUrl: './switch.component.html',
 	styleUrls: [
 		'./switch.component.scss'
 	],
-	templateUrl: './switch.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class SwitchComponent {
 

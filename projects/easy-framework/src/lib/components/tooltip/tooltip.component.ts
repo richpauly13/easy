@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-tooltip',
+	selector: 'ez-tooltip, .tooltip',
+	templateUrl: './tooltip.component.html',
 	styleUrls: [
 		'./tooltip.component.scss'
 	],
-	templateUrl: './tooltip.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class TooltipComponent {
 

@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-form, .checkbox-group, .field-group, .fieldset, .form-field, .form-group, .form-group-inline, .form-label, .radio-group',
+	selector: 'ez-form, .form-field',
+	templateUrl: './form.component.html',
 	styleUrls: [
 		'./form.component.scss'
 	],
-	templateUrl: './form.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class FormComponent {
 

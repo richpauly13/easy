@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'ez-card, ez-cards, .card, .cards',
+	templateUrl: './card.component.html',
 	styleUrls: [
 		'./card.component.scss'
 	],
-	templateUrl: './card.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class CardComponent {
 

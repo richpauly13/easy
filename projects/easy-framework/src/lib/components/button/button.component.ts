@@ -1,14 +1,15 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-button, .btn-xs, .btn-sm, .btn-md, .btn-lg, .btn-xl, .btn-full, .btn-group-col, .btn-group-full, .btn-group-row',
-	styleUrls: [
+	selector: 'ez-button, .btn-xs, .btn-sm, .btn-md, .btn-lg, .btn-xl, .btn-full',
+	templateUrl: './button.component.html', styleUrls: [
 		'./button.component.scss'
 	],
-	templateUrl: './button.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class ButtonComponent implements OnInit {
 	@HostBinding('attr.type')
+
 	public set type(type: string) {
 		type ? this.hostType = type : this.hostType = 'button';
 	}

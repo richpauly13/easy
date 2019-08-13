@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-modal, .modal-sm, .modal-md, .modal-lg, .backdrop',
+	selector: 'ez-modal, .modal-sm, .modal-md, .modal-lg',
+	templateUrl: './modal.component.html',
 	styleUrls: [
 		'./modal.component.scss'
 	],
-	templateUrl: './modal.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class ModalComponent {
 

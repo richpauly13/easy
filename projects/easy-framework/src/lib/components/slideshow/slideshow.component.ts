@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-slideshow',
+	selector: 'ez-slideshow, .slideshow',
+	templateUrl: './slideshow.component.html',
 	styleUrls: [
 		'./slideshow.component.scss'
 	],
-	templateUrl: './slideshow.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class SlideshowComponent {
 

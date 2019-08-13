@@ -1,0 +1,41 @@
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
+
+// Spinner styles
+.spinner,
+.spinner-dotted {
+    animation: spinner 3s linear infinite;
+    border-radius: 50%;
+    height: rem(120);
+    width: rem(120);
+}
+
+.spinner {
+    border-color: color(lt-gray);
+    border-left-color: color(blue);
+    border-style: solid;
+    border-width: space(sm);
+}
+
+.spinner-dotted {
+    border-bottom-color: color(lt-blue);
+    border-bottom-width: rem(12);
+    border-left-color: #3399ff;
+    border-left-width: space(xs);
+    border-right-color: color(blue);
+    border-right-width: rem(14);
+    border-top-color: color(dk-blue);
+    border-top-width: rem(18);
+    border-style: dotted;
+}
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,60 @@
+// Misc styles
+:disabled,
+[disabled] {
+	background-color: color(lt-gray);
+	color: color(lt-black);
+
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.circle {
+	border-radius: 50%;
+}
+
+.close {
+	color: inherit;
+}
+
+.hover:hover {
+	cursor: pointer;
+}
+
+.list {
+	margin-bottom: space(sm);
+	margin-left: space(xl);
+}
+
+ol.list {
+	list-style: decimal;
+
+	& ol.list {
+		list-style: lower-alpha;
+	}
+}
+
+.rounded {
+	border-radius: space(xs);
+}
+
+ul.list {
+	list-style: disc;
+
+	& ul.list {
+		list-style: circle;
+	}
+}
+
+// Creates box-shadows with 1 - 5 depth
+@for $shadow from 1 through 5 {
+	.box-shadow-#{$shadow} {
+		@include shadow($shadow);
+	}
+}

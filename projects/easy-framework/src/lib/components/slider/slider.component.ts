@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-slider',
+	selector: 'ez-slider, .slider',
+	templateUrl: './slider.component.html',
 	styleUrls: [
 		'./slider.component.scss'
 	],
-	templateUrl: './slider.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class SliderComponent {
 

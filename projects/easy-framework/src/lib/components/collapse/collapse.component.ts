@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-collapse, .collapse, .expand',
+	selector: 'ez-collapse, .collapse',
+	templateUrl: './collapse.component.html',
 	styleUrls: [
 		'./collapse.component.scss'
 	],
-	templateUrl: './collapse.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class CollapseComponent {
 

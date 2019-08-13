@@ -1,0 +1,31 @@
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
+
+// Collapse and accordion styles
+.collapse {
+    display: none;
+
+    &:checked + .collapse-content {
+        @include animate(max-height);
+
+        max-height: rem(1080);
+        overflow: auto;
+        padding: space(xs);
+    }
+}
+
+.collapse-content {
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 space(xs);
+}
+
+.collapse-label {
+    @include animate(max-height);
+    
+    background-color: color(lt-white);
+    padding: space(xs);
+    width: 100%;
+}

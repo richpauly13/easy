@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'ez-spinner, .spinner, .spinner-dotted',
+	templateUrl: './spinner.component.html',
 	styleUrls: [
 		'./spinner.component.scss'
 	],
-	templateUrl: './spinner.component.html'
+	encapsulation: ViewEncapsulation.None
 })
 export class SpinnerComponent {
 

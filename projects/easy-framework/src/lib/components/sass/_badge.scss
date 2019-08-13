@@ -1,0 +1,30 @@
+@import '../../core/sass/functions';
+@import '../../core/sass/mixins';
+@import '../../core/sass/variables';
+
+// Badge styles
+.badge-sm,
+.badge-md,
+.badge-lg {
+    border-radius: space(sm);
+    display: inline-block;
+
+    &:empty {
+        display: none;
+    }
+}
+
+.badge-sm {
+    line-height: space(xs);
+    padding: space(xs);
+}
+
+.badge-md {
+    line-height: rem(10);
+    padding: rem(10);
+}
+
+.badge-lg {
+    line-height: rem(12);
+    padding: rem(12);
+}
