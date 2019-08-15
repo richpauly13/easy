@@ -22,7 +22,7 @@
     "@angular-devkit/build-ng-packagr": "^0.803.0-next.1",
     "@angular-devkit/core": "^8.3.0-next.1",
     "@angular-devkit/schematics": "^8.3.0-next.1",
-    "@angular/cli": "^8.3.0-next.1",
+    "@angular/cli": "^8.3.0-next.2",
     "@angular/compiler-cli": "^9.0.0-next.2",
     "@angular/language-service": "^9.0.0-next.2",
     "@schematics/angular": "^8.3.0-next.1",
