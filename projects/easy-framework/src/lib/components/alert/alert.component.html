@@ -2,4 +2,4 @@
     <ng-content></ng-content>
 </p>
 
-<button *ngIf="close" (click)="closeAlert()" (blur)="trap()" class="close" type="button" aria-label="close-alert" autofocus>X</button>
+<button *ngIf="close" (click)="onClose()" (blur)="trap()" class="close" type="button" aria-label="close-alert" autofocus>X</button>

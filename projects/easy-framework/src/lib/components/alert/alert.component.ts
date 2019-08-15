@@ -12,8 +12,6 @@ export class AlertComponent implements OnInit {
 	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;
 	@HostBinding('attr.class') public hostClass: string;
 
-	@HostBinding('attr.tabindex') public tabindex: string;
-
 	@Input()
 	public set class(classList: string) {
 		if (classList.includes('close')) {
@@ -40,13 +38,13 @@ export class AlertComponent implements OnInit {
 
 	public constructor(private readonly elementRef: ElementRef, private readonly renderer2: Renderer2) { }
 
-	public closeAlert(): void {
-		this.hostClass = 'hide';
-	}
-
 	public ngOnInit(): void {
 		this.hostClass = this.class;
-		this.tabindex = '-1';
+		this.renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
+	}
+
+	public onClose(): void {
+		this.hostClass = 'hide';
 	}
 
 	public trap(): void {
