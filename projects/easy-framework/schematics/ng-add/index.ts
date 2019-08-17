@@ -10,9 +10,8 @@ import { Schema as EasySchema } from './schema';
 export default function(options: EasySchema): Rule {
 	return chain([
 		addEasyFrameworkToPackageJson(),
-		addEasyFrameworkModule(options)
+		addEasyFrameworkModuleToAppModule(options)
 	]);
-
 }
 
 function addEasyFrameworkToPackageJson(): Rule {
@@ -27,7 +26,7 @@ function addEasyFrameworkToPackageJson(): Rule {
 	};
 }
 
-function addEasyFrameworkModule(options: EasySchema): Rule {
+function addEasyFrameworkModuleToAppModule(options: EasySchema): Rule {
 	return (tree: Tree): Tree => {
 		const angularWorkspace: WorkspaceSchema = getWorkspace(tree);
 		const project: WorkspaceProject = getProjectFromWorkspace(angularWorkspace, options.project);
