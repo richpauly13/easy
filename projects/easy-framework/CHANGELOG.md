@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.12](https://github.com/richpauly13/easy/compare/v0.2.11...v0.2.12) (2019-08-17)
+
+
+### Bug Fixes
+
+* **schematics:** fix ng-add schematics ([2b02681](https://github.com/richpauly13/easy/commit/2b02681))
+
 ### [0.2.11](https://github.com/richpauly13/easy/compare/v0.2.10...v0.2.11) (2019-08-17)
 
 
