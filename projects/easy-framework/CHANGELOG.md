@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.9](https://github.com/richpauly13/easy/compare/v0.2.8...v0.2.9) (2019-08-17)
+
 ### [0.2.8](https://github.com/richpauly13/easy/compare/v0.2.7...v0.2.8) (2019-08-12)
 
 
