@@ -22,6 +22,9 @@
 		"paths": {
 			"easy-framework": [
                 "projects/easy-framework/src"
+            ],
+            "easy-framework/*": [
+                "projects/easy-framework/*"
             ]
 		}
 	},

@@ -26,6 +26,8 @@ export function addDependencyToPackageJson(tree: Tree, pkg: string, version: str
 		if (!json.dependencies[pkg]) {
 			json.dependencies[pkg] = version;
 			json.dependencies = sortPackageDependencies(json.dependencies);
+		} else {
+			json.dependencies[pkg] = version;
 		}
 
 		tree.overwrite('package.json', JSON.stringify(json, undefined, 2));
@@ -140,7 +142,7 @@ function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 	const buffer: Buffer | null = tree.read(modulePath);
 
 	if (!buffer) {
-		throw new SchematicsException(`Could not find file for path: ${path}`);
+		throw new SchematicsException(`Could not find file for path: ${modulePath}`);
 	}
 
 	return typescript.createSourceFile(modulePath, buffer.toString(), typescript.ScriptTarget.Latest, true);
