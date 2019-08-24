@@ -13,7 +13,7 @@ module.exports = function(config) {
 			require('karma-chrome-launcher'),
 			require('karma-coverage-istanbul-reporter'),
 			require('karma-edge-launcher'),
-			// require('karma-firefox-launcher'),
+			require('karma-firefox-launcher'),
 			require('karma-jasmine-html-reporter'),
 			require('karma-jasmine'),
 			require('karma-spec-reporter')
@@ -39,8 +39,8 @@ module.exports = function(config) {
 		autoWatch: true,
 		browsers: [
             'Chrome',
-            'Edge'/* ,
-            'Firefox' */
+            'Edge',
+            'Firefox'
         ],
 		customLaunchers: {
 			ChromeHeadlessCI: {
