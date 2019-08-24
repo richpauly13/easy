@@ -22,14 +22,12 @@
 		"paths": {
 			"easy-framework": [
                 "projects/easy-framework/src"
-            ],
-            "easy-framework/*": [
-                "projects/easy-framework/*"
             ]
 		}
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
-		"strictInjectionParameters": true
+		"strictInjectionParameters": true,
+        "enableIvy": false
 	}
 }
