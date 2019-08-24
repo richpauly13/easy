@@ -22,8 +22,13 @@
 					"options": {
 						"tsConfig": "projects/easy-framework/tsconfig.lib.json",
 						"project": "projects/easy-framework/ng-package.json"
-					}
-				},
+					},
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/easy-framework/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
@@ -90,7 +95,12 @@
 									"type": "initial",
 									"maximumWarning": "2mb",
 									"maximumError": "5mb"
-								}
+								},
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+
 							]
 						}
 					}
