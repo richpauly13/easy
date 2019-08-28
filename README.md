@@ -39,7 +39,7 @@ Developers can use only the components needed for a particular project. This is 
 
 ## Installation
 
-**NPM:** `npm i --save easy-framework`
+**NPM:** `npm i easy-framework`
 
 **Angular CLI:** `ng add easy-framework`
 
