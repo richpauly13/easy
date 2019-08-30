@@ -7,7 +7,7 @@ import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/w
 import { addDependencyToPackageJson, addModuleImportToRootModule, getLibraryVersion, getProjectFromWorkspace } from '../utilities';
 import { Schema as EasySchema } from './schema';
 
-export default function(options: EasySchema): Rule {
+export function ngAdd(options: EasySchema): Rule {
 	return chain([
 		addEasyFrameworkToPackageJson(),
 		addEasyFrameworkModuleToAppModule(options)

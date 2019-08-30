@@ -20,7 +20,8 @@
     "css",
     "flexbox",
     "framework",
-    "responsive"
+    "responsive",
+    "sass"
   ],
   "license": "MIT",
   "main": "bundles/easy-framework.umd.js",
