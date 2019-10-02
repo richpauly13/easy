@@ -28,7 +28,7 @@
     "@schematics/angular": "^9.0.0-next.6",
     "@types/jasmine": "^3.4.1",
     "@types/jasminewd2": "^2.0.7",
-    "@types/node": "^12.7.8",
+    "@types/node": "^12.7.9",
     "codecov": "^4.0.0-0",
     "codelyzer": "^5.1.2",
     "copyfiles": "^2.1.1",
