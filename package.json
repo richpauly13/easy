@@ -26,7 +26,7 @@
     "@angular/compiler-cli": "^9.0.0-next.9",
     "@angular/language-service": "^9.0.0-next.9",
     "@schematics/angular": "^9.0.0-next.8",
-    "@types/jasmine": "^3.4.2",
+    "@types/jasmine": "^3.4.3",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.7.12",
     "codecov": "^4.0.0-0",
