@@ -4,15 +4,15 @@
     "url": "https://github.com/richpauly13/easy/issues"
   },
   "dependencies": {
-    "@angular/animations": "^9.0.0-next.11",
-    "@angular/common": "^9.0.0-next.11",
-    "@angular/compiler": "^9.0.0-next.11",
-    "@angular/core": "^9.0.0-next.11",
-    "@angular/forms": "^9.0.0-next.11",
-    "@angular/platform-browser": "^9.0.0-next.11",
-    "@angular/platform-browser-dynamic": "^9.0.0-next.11",
-    "@angular/router": "^9.0.0-next.11",
-    "rxjs": "^6.5.3",
+    "@angular/animations": "^9.0.0-next.12",
+    "@angular/common": "^9.0.0-next.12",
+    "@angular/compiler": "^9.0.0-next.12",
+    "@angular/core": "^9.0.0-next.12",
+    "@angular/forms": "^9.0.0-next.12",
+    "@angular/platform-browser": "^9.0.0-next.12",
+    "@angular/platform-browser-dynamic": "^9.0.0-next.12",
+    "@angular/router": "^9.0.0-next.12",
+    "rxjs": "^7.0.0-alpha.0",
     "tslib": "^1.10.0",
     "zone.js": "^0.10.2"
   },
@@ -23,8 +23,8 @@
     "@angular-devkit/core": "^9.0.0-next.12",
     "@angular-devkit/schematics": "^9.0.0-next.12",
     "@angular/cli": "^9.0.0-next.12",
-    "@angular/compiler-cli": "^9.0.0-next.11",
-    "@angular/language-service": "^9.0.0-next.11",
+    "@angular/compiler-cli": "^9.0.0-next.12",
+    "@angular/language-service": "^9.0.0-next.12",
     "@schematics/angular": "^9.0.0-next.12",
     "@types/jasmine": "^3.4.4",
     "@types/jasminewd2": "^2.0.8",
@@ -35,7 +35,7 @@
     "husky": "^4.0.0-beta.3",
     "jasmine-core": "^3.5.0",
     "jasmine-spec-reporter": "^4.2.1",
-    "karma": "^4.4.0",
+    "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.0",
     "karma-edge-launcher": "^0.4.2",
@@ -50,7 +50,7 @@
     "ts-node": "^8.4.1",
     "tsickle": "^0.37.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.0-dev.20191018"
   },
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
