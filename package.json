@@ -13,7 +13,7 @@
     "@angular/platform-browser": "^9.0.0-next.14",
     "@angular/platform-browser-dynamic": "^9.0.0-next.14",
     "@angular/router": "^9.0.0-next.14",
-    "rxjs": "^7.0.0-alpha.0",
+    "rxjs": "^6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "^0.10.2"
   },
@@ -51,7 +51,7 @@
     "ts-node": "^8.4.1",
     "tsickle": "^0.37.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.8.0-dev.20191026"
+    "typescript": "^3.6.4"
   },
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
