@@ -4,13 +4,8 @@
 
 // Nav styles
 .nav-h .nav-row {
-	@include row;
-
-    align-items: middle;
-}
-
-.nav-v {
-    overflow-y: auto;
+	align-items: center;
+    display: flex;
 }
 
 .nav-item {
@@ -20,7 +15,6 @@
 .nav-link {
     color: inherit;
     display: block;
-    padding: space(sm);
     text-align: center;	
     text-decoration: none;
 
@@ -59,8 +53,16 @@
     @include media(md) {
         display: none;
 
+        &.active + .nav-row {
+            display: flex;
+        }  
+
         + .nav-row {
             display: flex;
         }
     }
+}
+
+.nav-v {
+    overflow-y: auto;
 }

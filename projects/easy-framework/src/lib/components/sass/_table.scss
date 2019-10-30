@@ -4,60 +4,46 @@
 
 // Table styles
 .table,
-.table-cell,
-.table-row,
-.table-header {
-	@include row;
-
-	-ms-overflow-style: -ms-autohiding-scrollbar;
-	white-space: nowrap;
-	width: 100%;
-}
-
-.table {
-    
-	// Check this
-	align-items: stretch;
-
-	// TODO: See if this does anything
-	border-collapse: collapse;
-	border-spacing: 0;
-
-	@include media(xl) {
-		flex-direction: column;
-	}
+.table-bordered,
+.table-hover,
+.table-striped {
+    display: block;
 }
 
 .table-bordered {
-	border: rem(1) solid color(black);
-}
+	border: rem(1) solid color(lt-gray);
 
-.table-bordered .table-header {
-	border-bottom: rem(1) solid color(black);
-}
+    .table-cell:not(:last-child) {
+        border-right: rem(1) solid color(lt-gray);
+    }
 
-.table-bordered .table-cell {
-	border-top: rem(1) solid color(black);
-	border-right: rem(1) solid color(black);
-}
-
-.table-bordered .table-cell:last-child {
-	border-right: none;
-}
-
-.table-striped .table-row:nth-child(even) {
-	background-color: color(lt-white);
-}
-
-.table-hover .table-row:hover {
-	background-color: color(lt-blue);
+    .table-header,
+    .table-row {
+        border-bottom: rem(1) solid color(lt-gray);
+    }    
 }
 
 .table-cell {
-	@include flex(1, 0, 0);
+	flex: 1;	
+}
 
-	// TODO: Check this
-	align-items: center;
-	justify-content: center;
-	white-space: pre-wrap;
+.table-cell,
+.table-header,
+.table-row {
+    align-items: center;
+	display: flex;
+    justify-content: center;
+    text-align: center;  
+}
+
+.table-hover {
+    .table-row:hover {
+        background-color: color(lt-white);
+    }	
+}
+
+.table-striped {
+    .table-row:nth-child(even) {
+        background-color: color(lt-white);
+    }
 }
