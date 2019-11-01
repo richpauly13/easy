@@ -13,7 +13,7 @@
     "@angular/platform-browser": "^9.0.0-rc.0",
     "@angular/platform-browser-dynamic": "^9.0.0-rc.0",
     "@angular/router": "^9.0.0-rc.0",
-    "rxjs": "^6.5.3",
+    "rxjs": "^7.0.0-alpha.0",
     "tslib": "^1.10.0",
     "zone.js": "^0.10.2"
   },
@@ -27,9 +27,9 @@
     "@angular/compiler-cli": "^9.0.0-rc.0",
     "@angular/language-service": "^9.0.0-rc.0",
     "@schematics/angular": "^9.0.0-rc.0",
-    "@types/jasmine": "^3.4.4",
+    "@types/jasmine": "^3.4.5",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^12.12.3",
+    "@types/node": "^12.12.5",
     "codecov": "^4.0.0-0",
     "codelyzer": "^5.2.0",
     "copyfiles": "^2.1.1",
@@ -51,7 +51,7 @@
     "ts-node": "^8.4.1",
     "tsickle": "^0.37.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.8.0-dev.20191101"
   },
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
