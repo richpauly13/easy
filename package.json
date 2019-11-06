@@ -50,7 +50,7 @@
     "standard-version": "^7.0.0",
     "ts-node": "^8.4.1",
     "tsickle": "^0.37.0",
-    "tslint": "^5.20.0",
+    "tslint": "^5.20.1",
     "typescript": "^3.6.4"
   },
   "homepage": "https://github.com/richpauly13/easy#readme",
