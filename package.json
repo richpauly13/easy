@@ -29,7 +29,7 @@
     "@schematics/angular": "^9.0.0-rc.1",
     "@types/jasmine": "^3.4.6",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^12.12.6",
+    "@types/node": "^12.12.7",
     "codecov": "^4.0.0-0",
     "codelyzer": "^5.2.0",
     "copyfiles": "^2.1.1",
@@ -90,7 +90,7 @@
     "test": "ng test",
     "test:docs": "ng test easy-docs --browsers=ChromeHeadlessCI",
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
-    "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.6.4 && npm i --save rxjs@6.5.3 && npm i --save-dev tslint@5.20.1",
+    "update:ng": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.6.4 && npm i --save rxjs@6.5.3",
     "update:webdriver": "webdriver-manager update",
     "version": "cd projects/easy-framework && standard-version --no-verify",
     "watch:easy": "ng build easy-framework --watch"
