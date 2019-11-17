@@ -1,5 +1,5 @@
-<p [attr.id]="id" tabindex="-1">
+<p [id]="id" tabindex="-1">
     <ng-content></ng-content>
 </p>
 
-<button *ngIf="close" (click)="onClose()" (blur)="trap()" class="close" type="button" aria-label="close-alert" autofocus>X</button>
+<button *ngIf="close" (click)="onClose()" (blur)="onTrap()" class="close" type="button" aria-label="Close Alert" autofocus>X</button>

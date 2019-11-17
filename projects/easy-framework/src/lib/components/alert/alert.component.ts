@@ -47,7 +47,7 @@ export class AlertComponent implements OnInit {
 		this.hostClass = 'hide';
 	}
 
-	public trap(): void {
+	public onTrap(): void {
 		this.elementRef.nativeElement.focus();
 	}
 }

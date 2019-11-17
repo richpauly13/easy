@@ -1,8 +1,257 @@
 <h1>Table</h1>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
-    <section class="pad-a-sm bg-lt-gray">
-        <p>Coming soon.</p>
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Tables are styled with <code>.table</code>, <code>.table-header</code>, <code>.table-header-cell</code>, and <code>.table-row</code> classes.</p>
     </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <ul class="table">
+            <li class="table-header">
+                <p class="table-header-cell">header 1</p>
+                <p class="table-header-cell">header 2</p>
+                <p class="table-header-cell">header 3</p>
+                <p class="table-header-cell">header 4</p>
+            </li>
+
+            <li class="table-row">
+                <p class="table-cell">cell 1</p>
+                <p class="table-cell">cell 2</p>
+                <p class="table-cell">cell 3</p>
+                <p class="table-cell">cell 4</p>
+            </li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"table"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-header"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-row"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
 </article>
 
+<h2>Table Bordered</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Bordered tables are styled with a <code>.table-bordered</code> instead of <code>.table</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <ul class="table-bordered">
+            <li class="table-header">
+                <p class="table-header-cell">header 1</p>
+                <p class="table-header-cell">header 2</p>
+                <p class="table-header-cell">header 3</p>
+                <p class="table-header-cell">header 4</p>
+            </li>
+
+            <li class="table-row">
+                <p class="table-cell">cell 1</p>
+                <p class="table-cell">cell 2</p>
+                <p class="table-cell">cell 3</p>
+                <p class="table-cell">cell 4</p>
+            </li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"table-bordered"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-header"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-row"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Table Hover</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Hover tables are styled with a <code>.table-hover</code> instead of <code>.table</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <ul class="table-hover">
+            <li class="table-header">
+                <p class="table-header-cell">header 1</p>
+                <p class="table-header-cell">header 2</p>
+                <p class="table-header-cell">header 3</p>
+                <p class="table-header-cell">header 4</p>
+            </li>
+
+            <li class="table-row">
+                <p class="table-cell">cell 1</p>
+                <p class="table-cell">cell 2</p>
+                <p class="table-cell">cell 3</p>
+                <p class="table-cell">cell 4</p>
+            </li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"table-hover"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-header"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-row"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Table Striped</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Striped tables are styled with a <code>.table-striped</code> instead of <code>.table</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <ul class="table-striped">
+            <li class="table-header">
+                <p class="table-header-cell">header 1</p>
+                <p class="table-header-cell">header 2</p>
+                <p class="table-header-cell">header 3</p>
+                <p class="table-header-cell">header 4</p>
+            </li>
+
+            <li class="table-row">
+                <p class="table-cell">cell 1</p>
+                <p class="table-cell">cell 2</p>
+                <p class="table-cell">cell 3</p>
+                <p class="table-cell">cell 4</p>
+            </li>
+
+            <li class="table-row">
+                <p class="table-cell">cell 1</p>
+                <p class="table-cell">cell 2</p>
+                <p class="table-cell">cell 3</p>
+                <p class="table-cell">cell 4</p>
+            </li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"table-striped"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-header"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-row"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-row"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Table Combination</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Combination tables are styled with <code>.table-bordered</code>, <code>.table-hover</code>, and/or <code>.table-striped</code> classes.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <ul class="table-bordered table-hover table-striped">
+            <li class="table-header">
+                <p class="table-header-cell">header 1</p>
+                <p class="table-header-cell">header 2</p>
+                <p class="table-header-cell">header 3</p>
+                <p class="table-header-cell">header 4</p>
+            </li>
+
+            <li class="table-row">
+                <p class="table-cell">cell 1</p>
+                <p class="table-cell">cell 2</p>
+                <p class="table-cell">cell 3</p>
+                <p class="table-cell">cell 4</p>
+            </li>
+
+            <li class="table-row">
+                <p class="table-cell">cell 1</p>
+                <p class="table-cell">cell 2</p>
+                <p class="table-cell">cell 3</p>
+                <p class="table-cell">cell 4</p>
+            </li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"table-bordered table-hover table-striped"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-header"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-header-cell"</span>&gt;</span>header 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-row"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"table-row"</span>&gt;</span>   
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"table-cell"</span>&gt;</span>cell 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
