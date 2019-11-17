@@ -9,8 +9,8 @@ describe('ButtonComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
-                ButtonComponent
-            ]
+				ButtonComponent
+			]
 		}).compileComponents();
 	}));
 
@@ -24,7 +24,7 @@ describe('ButtonComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-    it('should have a button type', () => {
+	it('should have a button type', () => {
 		component.type = 'button';
 
 		expect(component.type).toEqual('button');

@@ -9,8 +9,8 @@ describe('TableComponent', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
-                TableComponent
-            ]
+				TableComponent
+			]
 		}).compileComponents();
 	}));
 
@@ -24,14 +24,14 @@ describe('TableComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-    it('should have a table class', () => {
+	it('should have a table class', () => {
 		component.class = 'table';
 
 		expect(component.class).toEqual('table');
 	});
 
-    it('should have a grid role', () => {
-        component.class = 'table';
+	it('should have a grid role', () => {
+		component.class = 'table';
 
 		expect(component.role).toEqual('grid');
 	});

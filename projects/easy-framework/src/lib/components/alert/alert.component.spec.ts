@@ -38,20 +38,20 @@ describe('AlertComponent', () => {
 		expect(component.class).toEqual('alert-good');
 	});
 
-    it('should have a hide class after onClose()', () => {
-        component.onClose();
+	it('should have a hide class after onClose()', () => {
+		component.onClose();
 
 		expect(component.hostClass).toEqual('hide');
 	});
 
-    it('should have close button remain focused after blur', () => {
-        component.close = true;
-        fixture.detectChanges();
+	it('should have close button remain focused after blur', () => {
+		component.close = true;
+		fixture.detectChanges();
 
-        const button: DebugElement = fixture.debugElement.query(By.css('.close'));
-        const focusedElement = fixture.debugElement.query(By.css('.close'));
+		const button: DebugElement = fixture.debugElement.query(By.css('.close'));
+		const focusedElement: DebugElement = fixture.debugElement.query(By.css('.close'));
 
-        component.onTrap();
+		component.onTrap();
 
 		expect(focusedElement).toBe(button);
 	});

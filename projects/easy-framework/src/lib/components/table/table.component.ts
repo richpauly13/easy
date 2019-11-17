@@ -23,12 +23,12 @@ export class TableComponent {
 			this.role = 'grid';
 		}
 
-        this.classList = classList;
+		this.classList = classList;
 	}
 
-    public get class(): string {
+	public get class(): string {
 		return this.classList;
 	}
 
-    private classList: string;
+	private classList: string;
 }
