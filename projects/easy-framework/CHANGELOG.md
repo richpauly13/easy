@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.17](https://github.com/richpauly13/easy/compare/v0.2.16...v0.2.17) (2019-11-17)
+
+
+### Features
+
+* **table:** add table docs ([b9c8d13](https://github.com/richpauly13/easy/commit/b9c8d1324725d0ced672d3160e98085b309e51e7))
+
 ### [0.2.16](https://github.com/richpauly13/easy/compare/v0.2.15...v0.2.16) (2019-10-30)
 
 ### [0.2.15](https://github.com/richpauly13/easy/compare/v0.2.14...v0.2.15) (2019-09-21)
