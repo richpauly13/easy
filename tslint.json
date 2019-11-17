@@ -254,10 +254,7 @@
         "named-imports-order": "case-insensitive"
       }
     ],
-    "prefer-conditional-expression": [
-      true,
-      "check-else-if"
-    ],
+    "prefer-conditional-expression": false,
     "prefer-const": true,
     "prefer-for-of": true,
     "prefer-function-over-method": true,

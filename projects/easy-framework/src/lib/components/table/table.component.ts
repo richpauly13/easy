@@ -9,18 +9,26 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
 	encapsulation: ViewEncapsulation.None
 })
 export class TableComponent {
-    @HostBinding('attr.role') public role: string;
+	@HostBinding('attr.role') public role: string;
 
-    @Input()
+	@Input()
 	public set class(classList: string) {
-        if (classList.includes('table-cell')) {
+		if (classList.includes('table-cell')) {
 			this.role = 'gridcell';
 		} else if ((classList.includes('table-header') && !classList.includes('table-header-cell')) || classList.includes('table-row')) {
 			this.role = 'row';
 		} else if (classList.includes('table-header-cell')) {
 			this.role = 'columnheader';
 		} else {
-            this.role = 'grid';
-        }
+			this.role = 'grid';
+		}
+
+        this.classList = classList;
 	}
+
+    public get class(): string {
+		return this.classList;
+	}
+
+    private classList: string;
 }

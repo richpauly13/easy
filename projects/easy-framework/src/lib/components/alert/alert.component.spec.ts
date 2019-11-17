@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
 import { AlertComponent } from './alert.component';
 
@@ -24,7 +26,7 @@ describe('AlertComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have an alert class', () => {
+	it('should have an alert-good class', () => {
 		component.class = 'alert-good';
 
 		expect(component.class).toEqual('alert-good');
@@ -34,5 +36,23 @@ describe('AlertComponent', () => {
 		component.class = 'alert-good close';
 
 		expect(component.class).toEqual('alert-good');
+	});
+
+    it('should have a hide class after onClose()', () => {
+        component.onClose();
+
+		expect(component.hostClass).toEqual('hide');
+	});
+
+    it('should have close button remain focused after blur', () => {
+        component.close = true;
+        fixture.detectChanges();
+
+        const button: DebugElement = fixture.debugElement.query(By.css('.close'));
+        const focusedElement = fixture.debugElement.query(By.css('.close'));
+
+        component.onTrap();
+
+		expect(focusedElement).toBe(button);
 	});
 });

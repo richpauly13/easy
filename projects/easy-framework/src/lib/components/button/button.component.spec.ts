@@ -8,7 +8,9 @@ describe('ButtonComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ButtonComponent]
+			declarations: [
+                ButtonComponent
+            ]
 		}).compileComponents();
 	}));
 
@@ -18,7 +20,13 @@ describe('ButtonComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should be created', () => {
 		expect(component).toBeTruthy();
+	});
+
+    it('should have a button type', () => {
+		component.type = 'button';
+
+		expect(component.type).toEqual('button');
 	});
 });
