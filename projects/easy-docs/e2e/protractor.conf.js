@@ -11,9 +11,9 @@ exports.config = {
 	allScriptsTimeout: 11000,
 	specs: ['./src/**/*.e2e-spec.ts'],
     multiCapabilities: [
-        {
+        /* {
             browserName: 'chrome'
-        },
+        }, */
         {
             browserName: 'firefox'
         }
