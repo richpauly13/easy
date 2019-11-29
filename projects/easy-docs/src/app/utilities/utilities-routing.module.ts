@@ -36,7 +36,7 @@ const routes: Routes = [
 			{
 				path: '',
 				pathMatch: 'full',
-				redirectTo: 'space'
+				redirectTo: 'color'
 			}
 		]
 	}
