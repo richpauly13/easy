@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.18](https://github.com/richpauly13/easy/compare/v0.2.17...v0.2.18) (2019-11-29)
+
+
+### Features
+
+* **color:** add color docs ([37379ed](https://github.com/richpauly13/easy/commit/37379ed9ff216e9da7736304f780980be75b8fe9))
+* **space:** add -n to all classes ([ff6a79c](https://github.com/richpauly13/easy/commit/ff6a79cd97890d3fd0a5475187afbabc2780caf3))
+* **width:** add width scss and docs ([2925443](https://github.com/richpauly13/easy/commit/29254431e34546249ac407c0932045cae7a6f4a1))
+* **width:** add width scss and docs ([4fc1721](https://github.com/richpauly13/easy/commit/4fc1721a1a21d83be74180209277c83c86dfb8b6))
+
+
+### Bug Fixes
+
+* **alert:** fix alert-good color ([bf3dd42](https://github.com/richpauly13/easy/commit/bf3dd42dbe9c2bcc068507ee1f6d7647c39291b0))
+
 ### [0.2.17](https://github.com/richpauly13/easy/compare/v0.2.16...v0.2.17) (2019-11-17)
 
 
