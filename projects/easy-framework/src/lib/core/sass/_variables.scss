@@ -23,25 +23,20 @@ $screen-font-xl: 16px;
 
 // Colors map variable
 $colors: (
-	red: #ba000d,
-	lt-purple: #d05ce3,
-	purple: #9c27b0,
-	dk-purple: #6a0080,
-	yellow: #ffeb3b,
-	orange: #ff9800,
-	lt-green: #80e27e,
-	green: #4caf50,
-	dk-green: #087f23,
-	lt-blue: #6ec6ff,
+	black: #000,
 	blue: #2196f3,
 	dk-blue: #0069c0,
-	lt-gray: #efefef,
-	gray: #bdbdbd,
 	dk-gray: #8d8d8d,
-	lt-white: #fafafa,
-	white: #fff,
+	gray: #bdbdbd,
+	green: #4caf50,
 	lt-black: #191919,
-	black: #000
+	lt-gray: #efefef,
+	lt-white: #fafafa,
+	orange: #ff9800,
+	red: #ba000d,
+	white: #fff,
+    purple: #9c27b0,
+    yellow: #ffeb3b
 );
 
 // Headings list variable

@@ -1,7 +1,131 @@
 <h1>Color</h1>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
-    <section class="pad-a-sm bg-lt-gray">
-        <p>Coming soon.</p>
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Color is styled with default color classes.</p>
     </section>
+
+    <section class="pad-a-sm">
+        <p>black</p>
+        <p class="bg-black">&nbsp;</p>
+        <p>blue</p>
+        <p class="bg-blue">&nbsp;</p>
+        <p>dk-blue</p>
+        <p class="bg-dk-blue">&nbsp;</p>
+        <p>dk-gray</p>
+        <p class="bg-dk-gray">&nbsp;</p>
+        <p>gray</p>
+        <p class="bg-gray">&nbsp;</p>
+        <p>green</p>
+        <p class="bg-green">&nbsp;</p>
+        <p>lt-gray</p>
+        <p class="bg-lt-gray">&nbsp;</p>
+        <p>lt-white (default backround color)</p>
+        <p class="bg-lt-white">&nbsp;</p>
+        <p>orange</p>
+        <p class="bg-orange">&nbsp;</p>
+        <p>red</p>
+        <p class="bg-red">&nbsp;</p>
+        <p>white</p>
+        <p class="bg-white">&nbsp;</p>
+        <p>purple</p>
+        <p class="bg-purple">&nbsp;</p>
+        <p>yellow</p>
+        <p class="bg-yellow">&nbsp;</p>
+    </section>
+</article>
+
+<h2>Background Color</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-tb-gray">
+        <p>Background color is styled with a <code>.bg-[color]</code> class.</p>
+        <p><strong>Note: </strong>Light black is reserved for text color.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="bg-black text-white">black background</p>
+        <p class="bg-blue text-white">blue background</p>
+        <p class="bg-dk-blue text-white">dark blue background</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"bg-black"</span>&gt;</span><span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"bg-blue"</span>&gt;</span><span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"bg-dk-blue"</span>&gt;</span><span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Background Hover Color</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Background hover color is styled with a <code>.bg-hover-[color]</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="bg-black bg-hover-dk-blue text-white">black background with a dark blue background on hover</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"bg-black bg-hover-dk-blue"</span>&gt;</span>black background with a dark blue background on hover<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Text Color</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Text color is styled with a <code>.text-[color]</code> class.</p>
+        <p><strong>Note: </strong>Light white is reserved for background color.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="text-lt-black">light black (default text color)</p>
+        <p class="text-blue">blue</p>
+        <p class="text-dk-blue">dark blue</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-lt-black"</span>&gt;</span>light black (default text color)<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-blue"</span>&gt;</span>blue<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-dk-blue"</span>&gt;</span>dark blue<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Border Color</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Border color is styled with a <code>.border-[side]-[color]</code> class.</p>
+        <p><strong>Note: </strong>Light white is reserved for background color and light black is reserved for text color.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="border-a-black mar-b-xs">black border on all sides</p>        
+        <p class="border-l-dk-blue mar-b-xs">dark blue left border</p>
+        <p class="border-t-blue mar-b-xs">blue top border</p>
+        <p class="border-b-red mar-b-xs">red bottom border</p>
+        <p class="border-r-green mar-b-xs">green right border</p>
+        <p class="border-lr-purple mar-b-xs">purple left and right border</p>
+        <p class="border-tb-orange">orange top and bottom border</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-a-black"</span>&gt;</span>black border on all sides<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-l-dk-blue"</span>&gt;</span>dark blue left border<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-t-blue"</span>&gt;</span>blue top border<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-b-red"</span>&gt;</span>red bottom border<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-r-green"</span>&gt;</span>green right border<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-lr-purple"</span>&gt;</span>purple left and right border<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-tb-orange"</span>&gt;</span>orange top and bottom border<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
 </article>

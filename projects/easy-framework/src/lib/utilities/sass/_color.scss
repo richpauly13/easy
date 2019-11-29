@@ -10,8 +10,7 @@
 
 	// Text color styles
 	@if $name != lt-white {
-		.text-#{'' + $name},
-		.text-hover-#{'' + $name}:hover {
+		.text-#{'' + $name} {
 			color: $color;
 		}
 	}
@@ -39,7 +38,3 @@
 		}
 	}
 }
-
-// TODO: Automate hover behavior based on color
-
-// TODO: Contrast overrides for accessibility
