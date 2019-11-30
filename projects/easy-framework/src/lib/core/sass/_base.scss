@@ -44,7 +44,8 @@ body {
 }
 
 body,
-html {
+html,
+main {
 	height: 100%;
 	width: 100%;
 }
@@ -92,10 +93,11 @@ video {
 	}
 }
 
-// Special element normalization and resets
+// Special element normalization, styles, and resets
 abbr[title] {
 	border-bottom: rem(1) dotted color(lt-black);
 	cursor: help;
+    text-decoration: none;
 }
 
 address {
@@ -103,26 +105,21 @@ address {
 }
 
 blockquote {
+    border-left: rem(2) solid color(gray);
+    margin-bottom: space(sm);
+    margin-left: space(sm);
+    margin-top: space(sm);
 	padding: space(sm);
-}
 
-blockquote + footer {
-	color: color(dk-gray);
-	padding-bottom: space(sm);
-	padding-left: space(md);
-	padding-right: space(md);
+    .footer {
+        color: color(dk-gray);
 
-	&::before {
-		content: "\2012";
-
-		color: color(dk-gray);
-		padding-right: space(xs);
-	}
-}
-
-blockquote,
-blockquote + footer {
-	border-left: rem(2) solid color(lt-gray);
+        &::before {
+            content: "\2012";
+            color: color(dk-gray);
+            padding-right: space(xs);
+        }
+    }
 }
 
 caption {
@@ -130,7 +127,7 @@ caption {
 }
 
 dd {
-	margin-bottom: space(xs);
+    padding-left: space(md);
 }
 
 hr {
@@ -143,12 +140,8 @@ mark {
 }
 
 address,
-dl {
-	margin-bottom: space(sm);
-}
-
-address,
 cite,
+dfn,
 em,
 i {
 	font-style: italic;
@@ -173,23 +166,6 @@ label,
 td,
 th {
 	vertical-align: middle;
-}
-
-// Removes positioning set by normalize.css
-sub,
-sup {
-	bottom: 0;
-	position: static;
-	top: 0;
-}
-
-// Adds transform for better performance
-sub {
-	transform: translateY(rem(4));
-}
-
-sup {
-	transform: translateY(rem(-8));
 }
 
 // Code normalization and resets
@@ -268,7 +244,6 @@ textarea {
 }
 
 a[role=button],
-abbr[title],
 button,
 html input[type=button],
 input,

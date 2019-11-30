@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VisibilityComponent } from './visibility.component';
+import { TextComponent } from './text.component';
 
-describe('VisibilityComponent', () => {
-    let component: VisibilityComponent;
-    let fixture: ComponentFixture<VisibilityComponent>;
+describe('TextComponent', () => {
+    let component: TextComponent;
+    let fixture: ComponentFixture<TextComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                VisibilityComponent
+                TextComponent
             ]
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(VisibilityComponent);
+        fixture = TestBed.createComponent(TextComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -10,8 +10,6 @@ All notable changes to this project will be documented in this file. See [standa
 * **color:** add color docs ([37379ed](https://github.com/richpauly13/easy/commit/37379ed9ff216e9da7736304f780980be75b8fe9))
 * **space:** add -n to all classes ([ff6a79c](https://github.com/richpauly13/easy/commit/ff6a79cd97890d3fd0a5475187afbabc2780caf3))
 * **width:** add width scss and docs ([2925443](https://github.com/richpauly13/easy/commit/29254431e34546249ac407c0932045cae7a6f4a1))
-* **width:** add width scss and docs ([4fc1721](https://github.com/richpauly13/easy/commit/4fc1721a1a21d83be74180209277c83c86dfb8b6))
-
 
 ### Bug Fixes
 

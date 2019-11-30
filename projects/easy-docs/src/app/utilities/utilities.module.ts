@@ -8,6 +8,7 @@ import { UtilitiesComponent } from './utilities.component';
 import { UtilitiesRoutingModule } from './utilities-routing.module';
 import { VisibilityComponent } from './visibility/visibility.component';
 import { WidthComponent } from './width/width.component';
+import { TextComponent } from './text/text.component';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,8 @@ import { WidthComponent } from './width/width.component';
 		TypographyComponent,
 		UtilitiesComponent,
 		VisibilityComponent,
-		WidthComponent
+		WidthComponent,
+		TextComponent
 	],
 	exports: [
 		ColorComponent,
@@ -25,7 +27,8 @@ import { WidthComponent } from './width/width.component';
 		UtilitiesComponent,
 		UtilitiesRoutingModule,
 		VisibilityComponent,
-		WidthComponent
+		WidthComponent,
+		TextComponent
 	],
 	imports: [
 		SharedModule

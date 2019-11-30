@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ColorComponent } from './color/color.component';
 import { SpaceComponent } from './space/space.component';
+import { TextComponent } from './text/text.component';
 import { TypographyComponent } from './typography/typography.component';
 import { UtilitiesComponent } from './utilities.component';
 import { VisibilityComponent } from './visibility/visibility.component';
@@ -20,6 +21,10 @@ const routes: Routes = [
 			{
 				component: SpaceComponent,
 				path: 'space'
+			},
+            {
+				component: TextComponent,
+				path: 'text'
 			},
 			{
 				component: TypographyComponent,

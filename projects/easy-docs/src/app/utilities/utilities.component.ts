@@ -14,6 +14,7 @@ export class UtilitiesComponent implements OnInit {
 		this.navs = [
 			'color',
 			'space',
+            'text',
 			'typography',
 			'visibility',
 			'width'
