@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ColorComponent } from './color/color.component';
+import { MiscComponent } from './misc/misc.component';
 import { SpaceComponent } from './space/space.component';
 import { TextComponent } from './text/text.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -17,6 +18,10 @@ const routes: Routes = [
 			{
 				component: ColorComponent,
 				path: 'color'
+			},
+            {
+				component: MiscComponent,
+				path: 'misc'
 			},
 			{
 				component: SpaceComponent,

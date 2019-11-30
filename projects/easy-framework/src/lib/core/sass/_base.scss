@@ -121,10 +121,6 @@ blockquote {
     }
 }
 
-caption {
-	caption-side: bottom;
-}
-
 dd {
     padding-left: space(md);
 }
@@ -157,6 +153,10 @@ pre {
 }
 
 // Sets proper vertical alignment
+caption {
+	caption-side: bottom;
+}
+
 caption,
 img,
 input[type=checkbox],
@@ -169,20 +169,14 @@ th {
 
 // Code normalization and resets
 code,
-kbd,
-samp {
-	font-size: space(sm);
-}
-
-code,
 pre {
+    font-size: rem(14);
 	hyphens: none;
 	tab-size: 4;
 }
 
 pre {
-	font-size: space(xs);
-	white-space: pre-wrap;
+	white-space: pre-line;
 	word-spacing: normal;
 }
 

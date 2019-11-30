@@ -3,6 +3,31 @@
 @import "../../core/sass/variables";
 
 // Form styles
+select.form-field {
+    background-color: inherit;
+    color: color(lt-black);
+    height: rem(36);
+    padding-left: rem(4);
+
+    &::-ms-expand {
+        height: inherit;
+    }
+
+    &::-ms-value {
+        background-color: inherit;
+        color: color(lt-black);
+    }
+
+    &[multiple] {
+        height: rem(100);
+        padding-top: rem(4);
+    }
+}
+
+textarea.form-field {
+    height: rem(100);
+}
+
 .checkbox-group,
 .radio-group {
     @include row;
@@ -45,38 +70,6 @@
     @include animate(border, box-shadow);
 
     border: rem(1) solid color(gray);
-
-    // TODO: Remove arrow, backgroud color, and ensure text is lt-black
-    &select {
-        appearance: none;
-        background-color: inherit;
-        color: color(lt-black);
-        height: rem(36);
-        padding-left: rem(4);
-
-        &::-ms-expand {
-            display: none;
-        }
-
-        &::-ms-value {
-            background-color: inherit;
-            color: color(lt-black);
-        }
-
-        &[multiple] {
-            height: rem(100);
-        }
-
-        &:not([multiple]) {
-            padding-bottom: 0;
-            padding-top: 0;
-            padding-right: 0;
-        }
-    }
-
-    &textarea.form-field {
-        height: rem(100);
-    }
 
     &:not(:disabled),
     &:not([disabled]) {
@@ -121,13 +114,6 @@
         }
     }
 
-    &:hover:not(:disabled),
-    &:hover:not([disabled]) {
-        @include animate(border);
-
-        border: rem(1) solid color(black);
-    }
-
     &:focus {
         @include animate(border, box-shadow);
         @include shadow(1, blue);
@@ -138,7 +124,10 @@
 
     &:not([type=checkbox]):not([type=radio]) {
         flex: 1 0 rem(220);
-        padding: space(xs);
+        
+        &:not(select) {
+            padding: space(xs);
+        }
     }
 
     &::-webkit-input-placeholder {

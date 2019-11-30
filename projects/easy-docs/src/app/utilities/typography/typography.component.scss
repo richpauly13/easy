@@ -1,1 +1,6 @@
+@import '../../../../../easy-framework/src/lib/core/sass/functions';
+@import '../../../../../easy-framework/src/lib/core/sass/variables';
 
+.default {
+    color: color(lt-black);
+}
