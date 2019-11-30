@@ -22,7 +22,7 @@ const routes: Routes = [
 				component: SpaceComponent,
 				path: 'space'
 			},
-            {
+			{
 				component: TextComponent,
 				path: 'text'
 			},
