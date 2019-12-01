@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.19](https://github.com/richpauly13/easy/compare/v0.2.18...v0.2.19) (2019-12-01)
+
+
+### Features
+
+* **typography:** add typography docs ([c37b97b](https://github.com/richpauly13/easy/commit/c37b97b84253b5c64fee6b440d675dab8588f032))
+
+
+### Bug Fixes
+
+* **base:** removed height and width from main ([89b2bc8](https://github.com/richpauly13/easy/commit/89b2bc8baccd9c1f0ceca47600d3f9f339de98ca))
+* **form:** fixed padding and height for select arrow ([dba4e59](https://github.com/richpauly13/easy/commit/dba4e59fe23e28233896b810adbeebe8740084fd))
+
 ### [0.2.18](https://github.com/richpauly13/easy/compare/v0.2.17...v0.2.18) (2019-11-29)
 
 
