@@ -18,7 +18,6 @@ export class ComponentsComponent implements OnInit {
 			'card',
 			'collapse',
 			'form',
-			'modal',
 			'slider',
 			'slideshow',
 			'spinner',

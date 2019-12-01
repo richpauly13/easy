@@ -8,7 +8,6 @@ export * from './card';
 export * from './collapse';
 export * from './components.module';
 export * from './form';
-export * from './modal';
 export * from './slider';
 export * from './slideshow';
 export * from './spinner';

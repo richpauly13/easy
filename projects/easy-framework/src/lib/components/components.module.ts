@@ -6,7 +6,6 @@ import { ButtonModule } from './button/button.module';
 import { CardModule } from './card/card.module';
 import { CollapseModule } from './collapse/collapse.module';
 import { FormModule } from './form/form.module';
-import { ModalModule } from './modal/modal.module';
 import { SliderModule } from './slider/slider.module';
 import { SlideshowModule } from './slideshow/slideshow.module';
 import { SpinnerModule } from './spinner/spinner.module';
@@ -23,7 +22,6 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		CardModule,
 		CollapseModule,
 		FormModule,
-		ModalModule,
 		SliderModule,
 		SlideshowModule,
 		SpinnerModule,

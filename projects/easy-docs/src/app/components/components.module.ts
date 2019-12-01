@@ -8,7 +8,6 @@ import { CollapseComponent } from './collapse/collapse.component';
 import { ComponentsComponent } from './components.component';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { FormComponent } from './form/form.component';
-import { ModalComponent } from './modal/modal.component';
 import { SharedModule } from './../shared/shared.module';
 import { SliderComponent } from './slider/slider.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
@@ -27,7 +26,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		CollapseComponent,
 		ComponentsComponent,
 		FormComponent,
-		ModalComponent,
 		SliderComponent,
 		SlideshowComponent,
 		SpinnerComponent,
@@ -45,7 +43,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		ComponentsComponent,
 		ComponentsRoutingModule,
 		FormComponent,
-		ModalComponent,
 		SliderComponent,
 		SlideshowComponent,
 		SpinnerComponent,
