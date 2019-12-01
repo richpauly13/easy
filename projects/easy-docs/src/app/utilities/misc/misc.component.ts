@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'docs-misc',
   templateUrl: './misc.component.html',
   styleUrls: [
-      './misc.component.scss'
-    ]
+		'./misc.component.scss'
+	]
 })
 export class MiscComponent {
 

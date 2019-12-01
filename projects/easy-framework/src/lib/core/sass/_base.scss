@@ -84,6 +84,21 @@ video {
 	height: auto;
 }
 
+// Sets proper vertical alignment
+caption {
+	caption-side: bottom;
+}
+
+caption,
+img,
+input[type=checkbox],
+input[type=radio],
+label,
+td,
+th {
+	vertical-align: middle;
+}
+
 // Sets heading font sizes
 @each $heading, $font in $headings {
 	#{$heading},
@@ -110,7 +125,7 @@ blockquote {
     margin-top: space(sm);
 	padding: space(sm);
 
-    .footer {
+    .author {
         color: color(dk-gray);
 
         &::before {
@@ -119,10 +134,6 @@ blockquote {
             padding-right: space(xs);
         }
     }
-}
-
-dd {
-    padding-left: space(md);
 }
 
 hr {
@@ -144,27 +155,10 @@ i {
 
 // Removes margins added by normalize.css
 address,
-dl,
 figure,
 h1,
-ol,
 pre {
 	margin: 0;
-}
-
-// Sets proper vertical alignment
-caption {
-	caption-side: bottom;
-}
-
-caption,
-img,
-input[type=checkbox],
-input[type=radio],
-label,
-td,
-th {
-	vertical-align: middle;
 }
 
 // Code normalization and resets
