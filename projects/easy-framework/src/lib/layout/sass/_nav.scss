@@ -19,10 +19,10 @@
     text-decoration: none;
 
     &.active,
-    &:hover,
+    &:hover:not(:disabled),
 	&:active,
-	&:focus {
-        outline: rem(1) dotted color(white);
+	&:focus:not(:disabled) {
+        outline: none;
 		text-decoration: underline;
 	}
 }

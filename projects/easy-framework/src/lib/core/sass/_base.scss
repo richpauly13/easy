@@ -34,11 +34,11 @@ html {
 
 // Main color, text, and sizing
 body {
-	background-color: color(lt-white);
+	background-color: color(white);
 	color: color(lt-black);
 	font-family: $font-stack;
 	font-size: 1rem;
-	line-height: 1.618;
+	line-height: 1.4;
 	overflow-x: hidden;
 	text-rendering: optimizeLegibility;
 }
@@ -84,34 +84,19 @@ video {
 	height: auto;
 }
 
-// Sets proper vertical alignment
-caption {
-	caption-side: bottom;
-}
-
-caption,
-img,
-input[type=checkbox],
-input[type=radio],
-label,
-td,
-th {
-	vertical-align: middle;
-}
-
-// Sets heading font sizes
+// Sets heading font sizes and bottom margins
 @each $heading, $font in $headings {
 	#{$heading},
 	.#{$heading} {
 		font-size: $font;
+        margin: 0;
 	}
 }
 
-// Special element normalization, styles, and resets
+// Special element normalization and resets
 abbr[title] {
 	border-bottom: rem(1) dotted color(lt-black);
 	cursor: help;
-    text-decoration: none;
 }
 
 address {
@@ -119,21 +104,35 @@ address {
 }
 
 blockquote {
-    border-left: rem(2) solid color(gray);
-    margin-bottom: space(sm);
-    margin-left: space(sm);
-    margin-top: space(sm);
-	padding: space(sm);
+	padding: rem(16);
+}
 
-    .author {
-        color: color(dk-gray);
+blockquote + footer {
+	color: color(dk-gray);
+	padding-bottom: rem(16);
+	padding-left: rem(24);
+	padding-right: rem(24);
 
-        &::before {
-            content: "\2012";
-            color: color(dk-gray);
-            padding-right: space(xs);
-        }
-    }
+	&::before {
+		content: "\2012";
+
+		color: color(dk-gray);
+		padding-right: rem(8);
+	}
+}
+
+// TODO: Make these classes
+blockquote,
+blockquote + footer {
+	border-left: rem(2) solid color(lt-gray);
+}
+
+caption {
+	caption-side: bottom;
+}
+
+dd {
+	margin-bottom: rem(8);
 }
 
 hr {
@@ -146,8 +145,12 @@ mark {
 }
 
 address,
+dl {
+	margin-bottom: rem(16);
+}
+
+address,
 cite,
-dfn,
 em,
 i {
 	font-style: italic;
@@ -155,22 +158,56 @@ i {
 
 // Removes margins added by normalize.css
 address,
+dl,
 figure,
 h1,
+ol,
 pre {
 	margin: 0;
 }
 
+// Sets proper vertical alignment
+caption,
+img,
+label,
+td,
+th {
+	vertical-align: middle;
+}
+
+// Removes positioning set by normalize.css
+sub,
+sup {
+	bottom: 0;
+	position: static;
+	top: 0;
+}
+
+// Adds transform for better performance
+sub {
+	transform: translateY(rem(4));
+}
+
+sup {
+	transform: translateY(rem(-8));
+}
+
 // Code normalization and resets
 code,
+kbd,
+samp {
+	font-size: rem(16);
+}
+
+code,
 pre {
-    font-size: rem(14);
 	hyphens: none;
 	tab-size: 4;
 }
 
 pre {
-	white-space: pre-line;
+	font-size: rem(8);
+	white-space: pre-wrap;
 	word-spacing: normal;
 }
 
@@ -184,18 +221,23 @@ legend {
 	font-size: $font-md;
 }
 
-input[type=date],
-input[type=datetime-local],
-input[type=month],
-input[type=time] {
+input[type="checkbox"],
+input[type="radio"] {
+	vertical-align: middle;
+}
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"] {
 	-webkit-appearance: listbox;
 }
 
-input[type=number] {
+input[type="number"] {
 	-moz-appearance: textfield;
 }
 
-input[type=range] {
+input[type="range"] {
 	width: 100%;
 
 	&::-webkit-slider-thumb {
@@ -216,6 +258,11 @@ input[type=range] {
 
 select {
 	overflow-y: auto;
+
+    &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #191919;
+    }
 }
 
 optgroup {
@@ -230,37 +277,60 @@ textarea {
 	resize: vertical;
 }
 
-a[role=button],
+// Link and button resets
+a {
+    &:focus:not(:disabled),
+    &:hover:not(:disabled) {
+        outline: rem(1) solid color(blue);        
+    }
+}
+
+a,
+a[role="button"],
+abbr[title],
 button,
-html input[type=button],
+html input[type="button"],
 input,
-input[type=reset],
-input[type=submit],
+input[type="reset"],
+input[type="submit"],
 optgroup,
 select,
 textarea {
-	text-decoration: none;
-	font-family: inherit;
 	border: 0;
+    font-family: inherit;
+    text-decoration: none;    
 }
 
-a[role=button],
+[type="button"],
+[type="reset"],
+[type="submit"],
+a[role="button"],
 button,
-html input[type=button],
-input[type=reset],
-input[type=submit] {
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
 	appearance: none;
 	background-color: transparent;
+
+    &:focus:not(:disabled),
+    &:hover:not(:disabled) {
+        outline: none;
+        text-decoration: underline;        
+    }
+
+    &:-moz-focus-inner {
+       outline: rem(1) solid color(blue);
+    }   
 }
 
-a[role=button],
+a[role="button"],
 button,
-html input[type=button],
-input[type=range],
-input[type=checkbox],
-input[type=reset],
-input[type=radio],
-input[type=submit],
+html input[type="button"],
+input[type="range"],
+input[type="checkbox"],
+input[type="reset"],
+input[type="radio"],
+input[type="submit"],
 select {
 	&:hover {
 		cursor: pointer;
@@ -289,8 +359,9 @@ progress {
 }
 
 // Credit: https://github.com/suitcss/base
+[tabindex="0"],
 [tabindex="-1"],
-input[type=range] {
+input[type="range"] {
 	&:focus {
 		outline: none;
 	}
