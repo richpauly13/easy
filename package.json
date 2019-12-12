@@ -19,14 +19,14 @@
   },
   "description": "Documentation for EASY framework.",
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.900.0-rc.5",
-    "@angular-devkit/build-ng-packagr": "^0.900.0-rc.5",
-    "@angular-devkit/core": "^9.0.0-rc.5",
-    "@angular-devkit/schematics": "^9.0.0-rc.5",
-    "@angular/cli": "^9.0.0-rc.5",
+    "@angular-devkit/build-angular": "^0.900.0-rc.6",
+    "@angular-devkit/build-ng-packagr": "^0.900.0-rc.6",
+    "@angular-devkit/core": "^9.0.0-rc.6",
+    "@angular-devkit/schematics": "^9.0.0-rc.6",
+    "@angular/cli": "^9.0.0-rc.6",
     "@angular/compiler-cli": "^9.0.0-rc.6",
     "@angular/language-service": "^9.0.0-rc.6",
-    "@schematics/angular": "^9.0.0-rc.5",
+    "@schematics/angular": "^9.0.0-rc.6",
     "@types/jasmine": "^3.5.0",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.12.17",
@@ -78,7 +78,7 @@
     "build:easy": "ng build easy-framework",
     "build:prod": "ng build easy-framework --prod",
     "build:schematics": "node ./node_modules/typescript/bin/tsc -p projects/easy-framework/tsconfig.schematics.json",
-    "bump:deps": "git add . && git commit -m \"chore(deps): bump deps\" && git push",
+    "bump:deps": "npm run build && git add . && git commit -m \"chore(deps): bump deps\" && git push",
     "copy:all": "run-p copy:md copy:schematics",
     "copy:md": "copyfiles {LICENSE.md,README.md} ./dist/easy-framework",
     "copy:schematics": "copyfiles -u 3 ./projects/easy-framework/schematics/**/{collection.json,files/**,schema.json} ./dist/easy-framework/schematics",
@@ -93,10 +93,9 @@
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
     "update:core": "npm i -g npm && npm i -g @angular/cli@next",
     "update:deps": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.6.4 && npm i --save rxjs@6.5.3",
-    "update:ng": "run-s update:core update:deps audit build bump:deps",
+    "update:ng": "run-s update:core update:deps audit",
     "update:webdriver": "webdriver-manager update",
-    "version": "cd projects/easy-framework && standard-version --no-verify",
-    "watch:easy": "ng build easy-framework --watch"
+    "version": "cd projects/easy-framework && standard-version --no-verify"
   },
   "version": "1.0.0"
 }
