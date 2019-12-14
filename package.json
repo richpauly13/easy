@@ -72,7 +72,7 @@
     "url": "https://github.com/richpauly13/easy.git"
   },
   "scripts": {
-    "audit": "npm audit fix --force",
+    "audit:deps": "npm audit fix --force",
     "build": "run-s build:easy build:docs",
     "build:docs": "ng build easy-docs --prod",
     "build:easy": "ng build easy-framework",
@@ -93,7 +93,7 @@
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
     "update:core": "npm i -g npm && npm i -g @angular/cli@next",
     "update:deps": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.6.4 && npm i --save rxjs@6.5.3",
-    "update:ng": "run-s update:core update:deps audit",
+    "update:ng": "run-s update:core update:deps audit:deps",
     "update:webdriver": "webdriver-manager update",
     "version": "cd projects/easy-framework && standard-version --no-verify"
   },

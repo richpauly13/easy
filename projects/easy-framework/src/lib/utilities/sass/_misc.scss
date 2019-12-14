@@ -1,17 +1,4 @@
 // List styles
-dd {
-    padding-left: space(md);
-}
-
-dd,
-dl,
-dt,
-li,
-ol,
-ul {
-    margin: 0;    
-}
-
 .list {
 	margin-bottom: space(sm);
 	margin-left: space(xl);
@@ -52,10 +39,6 @@ ul.list {
 
 .circle {
 	border-radius: 50%;
-}
-
-.hover:hover {
-	cursor: pointer;
 }
 
 .rounded {

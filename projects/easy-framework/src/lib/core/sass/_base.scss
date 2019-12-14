@@ -97,6 +97,8 @@ video {
 abbr[title] {
 	border-bottom: rem(1) dotted color(lt-black);
 	cursor: help;
+    font-family: inherit;
+    text-decoration: none;
 }
 
 address {
@@ -104,35 +106,25 @@ address {
 }
 
 blockquote {
+    border-left: rem(2) solid color(dk-gray);
+    margin-left: rem(16);
 	padding: rem(16);
-}
 
-blockquote + footer {
-	color: color(dk-gray);
-	padding-bottom: rem(16);
-	padding-left: rem(24);
-	padding-right: rem(24);
+    & .author {
+        color: color(dk-gray);
+        padding-left: rem(16);
+        padding-top: rem(16);
 
-	&::before {
-		content: "\2012";
-
-		color: color(dk-gray);
-		padding-right: rem(8);
-	}
-}
-
-// TODO: Make these classes
-blockquote,
-blockquote + footer {
-	border-left: rem(2) solid color(lt-gray);
+        &::before {
+            color: color(dk-gray);
+            content: "\2012";            
+            padding-right: rem(8);
+        }
+    }
 }
 
 caption {
 	caption-side: bottom;
-}
-
-dd {
-	margin-bottom: rem(8);
 }
 
 hr {
@@ -144,13 +136,13 @@ mark {
 	color: color(lt-black);
 }
 
-address,
-dl {
-	margin-bottom: rem(16);
+dd {
+    padding-left: space(md);
 }
 
 address,
 cite,
+dfn,
 em,
 i {
 	font-style: italic;
@@ -158,11 +150,14 @@ i {
 
 // Removes margins added by normalize.css
 address,
+dd,
 dl,
+dt,
 figure,
-h1,
+li,
 ol,
-pre {
+pre,
+ul {
 	margin: 0;
 }
 
@@ -173,23 +168,6 @@ label,
 td,
 th {
 	vertical-align: middle;
-}
-
-// Removes positioning set by normalize.css
-sub,
-sup {
-	bottom: 0;
-	position: static;
-	top: 0;
-}
-
-// Adds transform for better performance
-sub {
-	transform: translateY(rem(4));
-}
-
-sup {
-	transform: translateY(rem(-8));
 }
 
 // Code normalization and resets
@@ -206,7 +184,7 @@ pre {
 }
 
 pre {
-	font-size: rem(14);
+	font-size: $font-sm;
 	white-space: pre-line;
 	word-spacing: normal;
 }
@@ -278,16 +256,8 @@ textarea {
 }
 
 // Link and button resets
-a {
-    &:focus:not(:disabled),
-    &:hover:not(:disabled) {
-        outline: rem(1) solid color(blue);        
-    }
-}
-
 a,
 a[role="button"],
-abbr[title],
 button,
 html input[type="button"],
 input,
@@ -301,6 +271,7 @@ textarea {
     text-decoration: none;    
 }
 
+a,
 [type="button"],
 [type="reset"],
 [type="submit"],
@@ -313,14 +284,11 @@ input[type="submit"] {
 	background-color: transparent;
 
     &:focus:not(:disabled),
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled),
+    &:-moz-focus-inner {
         outline: none;
         text-decoration: underline;        
-    }
-
-    &:-moz-focus-inner {
-       outline: rem(1) solid color(blue);
-    }   
+    }  
 }
 
 a[role="button"],
