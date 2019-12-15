@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 import { ColorComponent } from './color/color.component';
-import { MiscComponent } from './misc/misc.component';
 import { SharedModule } from '../shared/shared.module';
 import { SpaceComponent } from './space/space.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -14,7 +13,6 @@ import { TextComponent } from './text/text.component';
 @NgModule({
 	declarations: [
 		ColorComponent,
-		MiscComponent,
 		SpaceComponent,
 		TypographyComponent,
 		UtilitiesComponent,
@@ -24,7 +22,6 @@ import { TextComponent } from './text/text.component';
 	],
 	exports: [
 		ColorComponent,
-		MiscComponent,
 		SpaceComponent,
 		TypographyComponent,
 		UtilitiesComponent,

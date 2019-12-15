@@ -189,6 +189,35 @@ pre {
 	word-spacing: normal;
 }
 
+// List styles
+.list {
+	padding-bottom: space(sm);
+	padding-left: space(xl);
+    padding-top: space(sm);
+
+    & .list {
+        padding-bottom: 0;
+        padding-left: space(md);
+        padding-top: 0;
+    }
+}
+
+ol.list {
+	list-style: decimal;
+
+	& .list {
+		list-style: lower-alpha;
+	}
+}
+
+ul.list {
+	list-style: disc;
+
+	& .list {
+        list-style: circle;        
+	}
+}
+
 // Link and button resets
 [type="button"],
 [type="reset"],
