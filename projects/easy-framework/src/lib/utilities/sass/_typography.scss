@@ -1,0 +1,107 @@
+// Sets heading font sizes and removes margins
+@each $heading, $font in $headings {
+	#{$heading},
+	.#{$heading} {
+		font-size: $font;
+        margin: 0;
+	}
+}
+
+// Special element normalization and resets
+abbr[title] {
+	border-bottom: rem(1) dotted color(lt-black);
+	cursor: help;
+    font-family: inherit;
+    text-decoration: none;
+}
+
+address {
+	line-height: inherit;
+}
+
+blockquote {
+    border-left: rem(2) solid color(dk-gray);
+    margin-left: rem(16);
+	padding: rem(16);
+
+    & .author {
+        color: color(dk-gray);
+        padding-left: rem(16);
+        padding-top: rem(16);
+
+        &::before {
+            color: color(dk-gray);
+            content: "\2012";            
+            padding-right: rem(8);
+        }
+    }
+}
+
+hr {
+	border-bottom: rem(1) solid color(dk-gray);
+}
+
+mark {
+	background-color: color(yellow);
+	color: color(lt-black);
+}
+
+dd {
+    padding-left: space(md);
+}
+
+address,
+cite,
+dfn,
+em,
+i {
+	font-style: italic;
+}
+
+// Code normalization and resets
+code,
+kbd,
+samp {
+	font-size: rem(16);
+}
+
+code,
+pre {
+	hyphens: none;
+	tab-size: 4;
+}
+
+pre {
+	font-size: $font-sm;
+	white-space: pre-line;
+	word-spacing: normal;
+}
+
+// List styles
+.list {
+	padding-bottom: space(sm);
+	padding-left: space(xl);
+    padding-top: space(sm);
+
+    & .list {
+        padding-bottom: 0;
+        padding-left: space(md);
+        padding-top: 0;
+    }
+}
+
+ol.list {
+	list-style: decimal;
+
+	& .list {
+		list-style: lower-alpha;
+	}
+}
+
+ul.list {
+	list-style: disc;
+
+	& .list {
+        list-style: circle;        
+	}
+}

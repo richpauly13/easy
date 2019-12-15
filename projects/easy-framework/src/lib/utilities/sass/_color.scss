@@ -36,13 +36,20 @@
 		.border-tb-#{"" + $name} {
 			border-top: rem(1) solid $color;
 			border-bottom: rem(1) solid $color;
-		}
+        }
 
         // Box shadow styles
         @for $shadow from 1 through 5 {
-            .box-shadow-#{$shadow} {
-                @include shadow($shadow);
+            .box-shadow-#{$shadow}-#{"" + $name} {
+                @include shadow($shadow, $name);
             }
-        }
+        }  
 	}
+}
+
+// Default black box shadow styles
+@for $shadow from 1 through 5 {
+    .box-shadow-#{$shadow} {
+        @include shadow($shadow);
+    }
 }

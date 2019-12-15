@@ -38,7 +38,7 @@
 <h2>Background Color</h2>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
         <p>Background color is styled with a <code>.bg-[color]</code> class.</p>
         <p><strong>Note: </strong>Light black is reserved for text color.</p>
     </section>
@@ -99,6 +99,24 @@
     </figure>
 </article>
 
+<h2>Text Hover Color</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Text hover color is styled with a <code>.text-hover-[color]</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="text-hover-dk-blue">lt-black text with dark blue text on hover</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-hover-dk-blue"</span>&gt;</span>lt-black text with dark blue text on hover<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
 <h2>Border Color</h2>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
@@ -126,6 +144,34 @@
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-r-green"</span>&gt;</span>green right border<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-lr-purple"</span>&gt;</span>purple left and right border<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"border-tb-orange"</span>&gt;</span>orange top and bottom border<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Box Shadow Color</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Box shadow color is styled with a <code>.box-shadow-[1-5]-[color]</code> class.</p>
+        <p>Color is optional and will default to black.</p>
+        <p><strong>Note: </strong>Light white is reserved for background color and light black is reserved for text color.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="box-shadow-1-green mar-b-lg">green box shadow with a depth of 1</p>        
+        <p class="box-shadow-2-blue mar-b-lg">blue box shadow with a depth of 2</p>
+        <p class="box-shadow-3-red mar-b-lg">red box shadow with a depth of 3</p>
+        <p class="box-shadow-4-purple mar-b-lg">purple box shadow with a depth of 4</p>
+        <p class="box-shadow-5 mar-b-lg">black (default) box shadow with a depth of 5</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"box-shadow-1-green"</span>&gt;</span>green box shadow with a depth of 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"box-shadow-2-blue"</span>&gt;</span>blue box shadow with a depth of 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"box-shadow-3-red"</span>&gt;</span>red box shadow with a depth of 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"box-shadow-4-purple"</span>&gt;</span>purple box shadow with a depth of 4<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"box-shadow-5"</span>&gt;</span>black (default) box shadow with a depth of 5<span>&lt;/<span class="tag">p</span>&gt;</span>
         </pre>
     </figure>
 </article>
