@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/richpauly13/easy/compare/v0.3.2...v0.3.3) (2019-12-15)
+
+
+### Features
+
+* **docs:** add lists to typography and box shadow to color docs ([313bd7e](https://github.com/richpauly13/easy/commit/313bd7ee035a5dbd7f631a6c8af0fae86b1bb1ae))
+
+
+### Bug Fixes
+
+* **form:** fix form ([8cd4eb9](https://github.com/richpauly13/easy/commit/8cd4eb98113f4210fb0ea9bb57a26ac3e7390787))
+* **table:** fix table ([b308aa1](https://github.com/richpauly13/easy/commit/b308aa17879b8a81f1bf29de72c5aa1f0a44a8e0))
+* **typography:** fix typography ([158ad6d](https://github.com/richpauly13/easy/commit/158ad6dbcbcb807eea1da18c236f2aeef72c8e34))
+
 ### [0.3.2](https://github.com/richpauly13/easy/compare/v0.3.1...v0.3.2) (2019-12-15)
 
 ### [0.3.1](https://github.com/richpauly13/easy/compare/v0.2.20...v0.3.1) (2019-12-15)
