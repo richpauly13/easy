@@ -1,3 +1,7 @@
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
+
 // Table styles
 .table,
 .table-bordered,
@@ -7,24 +11,28 @@
 }
 
 .table-bordered {
-	border: rem(1) solid color(lt-gray);
+	border: rem(1) solid color(gray);
 
-    .table-cell:not(:last-child) {
-        border-right: rem(1) solid color(lt-gray);
+    .table-cell:not(:last-child),
+    .table-header-cell:not(:last-child) {
+        border-right: rem(1) solid color(gray);
     }
 
-    .table-header,
-    .table-row {
-        border-bottom: rem(1) solid color(lt-gray);
+    .table-header:not(:last-child),
+    .table-row:not(:last-child) {
+        border-bottom: rem(1) solid color(gray);
     }    
 }
 
-.table-cell {
-	flex: 1;	
+.table-cell,
+.table-header-cell {
+	flex: 1;
+    padding: space(sm);
 }
 
 .table-cell,
 .table-header,
+.table-header-cell,
 .table-row {
     align-items: center;
 	display: flex;
@@ -34,12 +42,12 @@
 
 .table-hover {
     .table-row:hover {
-        background-color: color(lt-white);
+        background-color: color(lt-gray);
     }	
 }
 
 .table-striped {
     .table-row:nth-child(even) {
-        background-color: color(lt-white);
+        background-color: color(lt-gray);
     }
 }
