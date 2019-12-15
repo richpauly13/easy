@@ -2,38 +2,77 @@
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
     <section class="pad-a-sm bg-lt-gray border-b-gray">
-        <p></p>
+        <p>Several miscellaneous helper classed have been added for convienence.</p>
     </section>
-
-    <section class="pad-a-sm border-b-gray">
-
-    </section>
-
-    <figure>
-        <pre class="pad-a-sm">
-            
-        </pre>
-    </figure>
 </article>
 
 <h2>Lists</h2>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
     <section class="pad-a-sm bg-lt-gray border-b-gray">
-        <p></p>
+        <p>Because <code>&lt;ul&gt;</code>s, <code>&lt;ol&gt;</code>s, and <code>&lt;li&gt;</code>s are often used for document structure, all formatting has been removed.</p>
+        <p>If you want them to represent list items, use the <code>.list</code> class on <code>&lt;ul&gt;</code>s and <code>&lt;ol&gt;</code>s.</p>
     </section>
 
     <section class="pad-a-sm border-b-gray">
         <ul class="list">
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>item 1</li>
+            <li>item 2
+                <ul class="list">
+                    <li>sub item 1</li>
+                    <li>sub item 2</li>
+                </ul>
+            </li>
         </ul>
+        <ol class="list">
+            <li>item 1</li>
+            <li>item 2
+                <ol class="list">
+                    <li>sub item 1</li>
+                    <li>sub item 2</li>
+                </ol>
+            </li>
+        </ol>
     </section>
 
     <figure>
         <pre class="pad-a-sm">
-            
+            <span>&lt;<span class="tag">ul <span class="attribute">class</span>=<span class="value">"list"</span></span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>item 1<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>item 2
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul <span class="attribute">class</span>=<span class="value">"list"</span></span>&gt;</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>sub item 1<span>&lt;/<span class="tag">li</span>&gt;</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>sub item 2<span>&lt;/<span class="tag">li</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ol <span class="attribute">class</span>=<span class="value">"list"</span></span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>item 1<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>item 2
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul <span class="attribute">class</span>=<span class="value">"list"</span></span>&gt;</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>sub item 1<span>&lt;/<span class="tag">li</span>&gt;</span>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>sub item 2<span>&lt;/<span class="tag">li</span>&gt;</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ol</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Center</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Elements can be centered with a <code>.center</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <button class="center">centered</button>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">button <span class="attribute">class</span>=<span class="value">"center"</span> <span class="attribute">type</span>=<span class="value">"button"</span></span>&gt;</span>rounded<span>&lt;/<span class="tag">button</span>&gt;</span>
         </pre>
     </figure>
 </article>

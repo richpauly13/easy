@@ -1,13 +1,20 @@
 // List styles
 .list {
-	margin-bottom: space(sm);
-	margin-left: space(xl);
+	padding-bottom: space(sm);
+	padding-left: space(xl);
+    padding-top: space(sm);
+
+    & .list {
+        padding-bottom: 0;
+        padding-left: space(md);
+        padding-top: 0;
+    }
 }
 
 ol.list {
 	list-style: decimal;
 
-	& ol.list {
+	& .list {
 		list-style: lower-alpha;
 	}
 }
@@ -15,34 +22,9 @@ ol.list {
 ul.list {
 	list-style: disc;
 
-	& ul.list {
-		list-style: circle;
+	& .list {
+        list-style: circle;        
 	}
-}
-
-// Misc styles
-:disabled,
-[disabled] {
-	background-color: color(lt-gray);
-	color: color(lt-black);
-
-	&:hover {
-		cursor: not-allowed;
-	}
-}
-
-.center {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.circle {
-	border-radius: 50%;
-}
-
-.rounded {
-	border-radius: space(xs);
 }
 
 // Box shadow styles

@@ -3,16 +3,6 @@
 @import "../../core/sass/variables";
 
 // Form styles
-:disabled,
-[disabled] {
-	background-color: color(lt-white);
-    color: color(dk-gray);
-
-	&:hover {
-		cursor: not-allowed;
-	}
-}
-
 .checkbox-group,
 .radio-group {
     @include row;
@@ -21,12 +11,13 @@
     flex: 1 0 rem(220);
     flex-wrap: wrap;
 
-    .field-group {
-        flex-wrap: wrap;
-	}
+    .form-field:hover {
+        outline: rem(1) dotted color(black);
+    }
 
     .form-label {
 		flex: none;
+        padding-bottom: 0;
 		padding-left: rem(8);
 		padding-right: rem(8);
 
@@ -53,18 +44,18 @@
     @include animate(border, box-shadow);
 
     border: rem(1) solid color(gray);
-    height: rem(40);
+    height: rem(40);    
     padding: rem(8);
 
-    &:focus,
-    &:hover {
+    &:focus:not([disabled]):not([type="checkbox"]):not([type="radio"]),
+    &:hover:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]) {
         @include shadow(1, blue);
 
         border: rem(1) solid color(blue);
     }
 
-    &:not([type='checkbox']):not([type='radio']) {
-        flex: 1 0 rem(220);
+    &:not([type="checkbox"]):not([type="radio"]) {
+        flex: 1 0 rem(220);        
     }
 
     &::-webkit-input-placeholder {

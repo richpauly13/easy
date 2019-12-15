@@ -189,7 +189,78 @@ pre {
 	word-spacing: normal;
 }
 
+// Link and button resets
+[type="button"],
+[type="reset"],
+[type="submit"],
+a,
+a[role="button"],
+button,
+html input[type="button"],
+input,
+input[type="reset"],
+input[type="submit"],
+optgroup,
+select,
+textarea {
+	border: 0;
+    font-family: inherit;
+    text-decoration: none;    
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"],
+a,
+a[role="button"],
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	appearance: none;
+	background-color: transparent;
+
+    &:focus:not(:disabled),
+    &:hover:not(:disabled) {
+        outline: none;
+        text-decoration: underline;
+    }
+
+    &:-moz-focus-inner {
+        outline: none;
+        text-decoration: underline;        
+    }  
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"],
+a,
+a[role="button"],
+button,
+html input[type="button"],
+input[type="range"],
+input[type="checkbox"],
+input[type="reset"],
+input[type="radio"],
+input[type="submit"],
+select {
+	&:hover {
+		cursor: pointer;
+	}
+}
+
 // Form normalization and resets
+[disabled]:hover {   
+	cursor: not-allowed;
+}
+
+[disabled],
+[readonly] {
+	background-color: color(lt-gray);
+	color: color(lt-black);	
+}
+
 fieldset {
 	min-width: 0;
 	padding: 0;
@@ -248,61 +319,11 @@ optgroup {
 }
 
 option {
-	color: color(dk-gray);
+	color: color(lt-black);
 }
 
 textarea {
 	resize: vertical;
-}
-
-// Link and button resets
-a,
-a[role="button"],
-button,
-html input[type="button"],
-input,
-input[type="reset"],
-input[type="submit"],
-optgroup,
-select,
-textarea {
-	border: 0;
-    font-family: inherit;
-    text-decoration: none;    
-}
-
-a,
-[type="button"],
-[type="reset"],
-[type="submit"],
-a[role="button"],
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-	appearance: none;
-	background-color: transparent;
-
-    &:focus:not(:disabled),
-    &:hover:not(:disabled),
-    &:-moz-focus-inner {
-        outline: none;
-        text-decoration: underline;        
-    }  
-}
-
-a[role="button"],
-button,
-html input[type="button"],
-input[type="range"],
-input[type="checkbox"],
-input[type="reset"],
-input[type="radio"],
-input[type="submit"],
-select {
-	&:hover {
-		cursor: pointer;
-	}
 }
 
 // Credit: https://css-tricks.com/html5-progress-element/

@@ -55,7 +55,7 @@
     padding-bottom: space(sm);
     padding-top: space(sm);
 
-    [class*=btn] {
+    [class*="btn"] {
         border-bottom: rem(1) solid color(white);
         border-right: rem(1) solid color(white);
         margin: 0;
@@ -69,7 +69,13 @@
 .btn-group-full {
     width: 100%;
 
-    [class*=btn] {
+    [class*="btn"] {
         @include flex(1, 0, auto);
     }
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
