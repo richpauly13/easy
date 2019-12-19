@@ -31,7 +31,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.12.17",
     "codecov": "^4.0.0-0",
-    "codelyzer": "^5.2.0",
+    "codelyzer": "^5.2.1",
     "copyfiles": "^2.1.1",
     "husky": "^4.0.0-beta.5",
     "jasmine-core": "^3.5.0",
