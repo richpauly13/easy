@@ -29,7 +29,7 @@
     "@schematics/angular": "^9.0.0-rc.7",
     "@types/jasmine": "^3.5.0",
     "@types/jasminewd2": "^2.0.8",
-    "@types/node": "^13.1.2",
+    "@types/node": "^13.1.4",
     "codecov": "^4.0.0-0",
     "codelyzer": "^5.2.1",
     "copyfiles": "^2.1.1",
@@ -41,7 +41,7 @@
     "karma-coverage-istanbul-reporter": "^2.1.1",
     "karma-edge-launcher": "^0.4.2",
     "karma-firefox-launcher": "^1.2.0",
-    "karma-jasmine": "^2.0.1",
+    "karma-jasmine": "^3.0.0",
     "karma-jasmine-html-reporter": "^1.5.1",
     "karma-spec-reporter": "0.0.32",
     "ng-packagr": "^9.0.0-rc.3",
@@ -72,7 +72,7 @@
     "url": "https://github.com/richpauly13/easy.git"
   },
   "scripts": {
-    "audit:deps": "npm audit fix --force",
+    "audit:fix": "npm audit fix --force",
     "build": "run-s build:easy build:docs",
     "build:docs": "ng build easy-docs --prod",
     "build:easy": "ng build easy-framework",
@@ -93,7 +93,7 @@
     "test:easy": "ng test easy-framework --browsers=ChromeHeadlessCI",
     "update:core": "npm i -g npm && npm i -g @angular/cli@next",
     "update:deps": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.6.4 && npm i --save rxjs@6.5.4",
-    "update:ng": "run-s update:core update:deps audit:deps",
+    "update:ng": "run-s update:core update:deps audit:fix",
     "update:webdriver": "webdriver-manager update",
     "version": "cd projects/easy-framework && standard-version --no-verify"
   },
