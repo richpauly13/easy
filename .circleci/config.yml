@@ -78,7 +78,7 @@ jobs:
           at: .
           
       - run:
-          name: Run easy unit tests
+          name: Run easy-framework unit tests
           command: npm run test:easy
 
       - run:
@@ -93,7 +93,7 @@ jobs:
           at: .
           
       - run:
-          name: Run docs unit tests
+          name: Run easy-docs unit tests
           command: npm run test:docs
       
       - run:
@@ -108,8 +108,8 @@ jobs:
           at: .
           
       - run:
-          name: Run docs e2e tests
-          command: npm run e2e -- --protractor-config=./projects/easy-docs/e2e/protractor-ci.conf.js
+          name: Run easy-docs e2e tests
+          command: npm run e2e
 
 workflows:
   default_workflow:

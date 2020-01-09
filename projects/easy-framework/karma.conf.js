@@ -42,15 +42,6 @@ module.exports = function(config) {
             'Edge',
             'Firefox'
         ],
-		customLaunchers: {
-			ChromeHeadlessCI: {
-				base: 'ChromeHeadless',
-				flags: [
-                    '--no-sandbox',
-                    '--disable-gpu'
-                ]
-			}
-		},
 		singleRun: false,
 		restartOnFileChange: true
 	});
