@@ -12,7 +12,6 @@ module.exports = function(config) {
 			require('@angular-devkit/build-angular/plugins/karma'),
 			require('karma-chrome-launcher'),
 			require('karma-coverage-istanbul-reporter'),
-			require('karma-edge-launcher'),
 			require('karma-firefox-launcher'),
 			require('karma-jasmine-html-reporter'),
 			require('karma-jasmine'),
@@ -39,7 +38,6 @@ module.exports = function(config) {
 		autoWatch: true,
 		browsers: [
             'Chrome',
-            'Edge',
             'Firefox'
         ],
 		singleRun: false,
