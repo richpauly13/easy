@@ -11,6 +11,18 @@ import { noop } from 'rxjs';
 	encapsulation: ViewEncapsulation.None
 })
 export class NavComponent implements OnInit {
+	public get active(): boolean {
+		return this.isActive;
+	}
+
+	public set active(active: boolean) {
+		this.isActive = active;
+	}
+
+	public set toggle(element: any) {
+		this.onToggle(element);
+	}
+
 	private isActive: boolean;
 
 	public constructor(private readonly renderer2: Renderer2) { }
@@ -27,13 +39,13 @@ export class NavComponent implements OnInit {
 		}
 	}
 
-	private onToggle(element: ElementRef): void {
-		if (!this.isActive) {
+	private onToggle(element: any): void {
+		if (!this.active) {
 			this.renderer2.addClass(element, 'active');
 		} else {
 			this.renderer2.removeClass(element, 'active');
 		}
 
-		this.isActive = !this.isActive;
+		this.active = !this.active;
 	}
 }

@@ -203,7 +203,7 @@
     "no-tautology-expression": true,
     "no-this-assignment": true,
     "no-trailing-whitespace": true,
-    "no-unbound-method": true,
+    "no-unbound-method": false,
     "no-unnecessary-callback-wrapper": true,
     "no-unnecessary-class": [
       true,
