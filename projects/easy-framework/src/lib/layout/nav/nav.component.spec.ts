@@ -52,15 +52,15 @@ describe('NavComponent', () => {
 	});
 
 	it('should add the active class', () => {
-		component.active = false;
-		component.toggle = fixture2.nativeElement;
+		component['isActive'] = false;
+		component['onToggle'](fixture2.nativeElement);
 
 		expect(fixture2.nativeElement).toHaveClass('active');
 	});
 
 	it('should remove the active class', () => {
-		component.active = true;
-		component.toggle = fixture2.nativeElement;
+		component['isActive'] = true;
+		component['onToggle'](fixture2.nativeElement);
 
 		expect(fixture2.nativeElement).not.toHaveClass('active');
 	});
