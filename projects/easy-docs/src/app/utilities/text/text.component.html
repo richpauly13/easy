@@ -2,6 +2,85 @@
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
     <section class="pad-a-sm bg-lt-gray">
-        <p>Coming soon.</p>
+        <p>Text size, alignment, and transform can be easily styled with <code>.text-*</code> classes.</p>
     </section>
+</article>
+
+<h2>Text Size</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Text size is styled with a <code>.text-[xs || sm || md || lg || xl]</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="text-xs">extra small (.75rem/12px)</p>
+        <p class="text-sm">small (.875rem/14px)</p>
+        <p>default (1rem/16px)</p>
+        <p class="text-md">medium (1.125rem/18px)</p>
+        <p class="text-lg">large (1.5rem/24px)</p>
+        <p class="text-xl">extra large (2.25rem/36px)</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-xs"</span>&gt;</span>extra small (.75rem/12px)<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-sm"</span>&gt;</span>small (.875rem/14px)<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span>&gt;</span>default (1rem/16px)<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-md"</span>&gt;</span>medium (1.125rem/18px)<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-lg"</span>&gt;</span>large (1.5rem/24px)<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-xl"</span>&gt;</span>extra large (2.25rem/36px)<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Text Alignment</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Text alignment is styled with a <code>.text-[l || c || r || j]</code> class.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="text-l pad-b-sm"><strong>left (default)</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.</p>
+        <p class="text-c pad-b-sm"><strong>center</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.</p>
+        <p class="text-r pad-b-sm"><strong>right</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.</p>
+        <p class="text-j"><strong>justify</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-l"</span>&gt;</span><span>&lt;<span class="tag">strong</span>&gt;</span>left (default)<span>&lt;/<span class="tag">strong</span>&gt;</span>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-c"</span>&gt;</span><span>&lt;<span class="tag">strong</span>&gt;</span>center<span>&lt;/<span class="tag">strong</span>&gt;</span>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-r"</span>&gt;</span><span>&lt;<span class="tag">strong</span>&gt;</span>right<span>&lt;/<span class="tag">strong</span>&gt;</span>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-j"</span>&gt;</span><span>&lt;<span class="tag">strong</span>&gt;</span>justify<span>&lt;/<span class="tag">strong</span>&gt;</span>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Text Transform</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Text transform is styled with a <code>.text-[caps || upper || lower || sm-caps || hypens]</code> class.</p>
+        <p><strong>Note: </strong><code>.text-hypens</code> only works when the text does not fit the width of the screen.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="text-caps">capitalize</p>
+        <p class="text-upper">uppercase</p>
+        <p class="text-lower">LOWERCASE</p>
+        <p class="text-sm-caps">small caps</p>
+        <p class="text-hyphens"><strong>hyphenated</strong>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-caps"</span>&gt;</span>capitalize<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-upper"</span>&gt;</span>uppercase<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-lower"</span>&gt;</span>LOWERCASE<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-sm-caps"</span>&gt;</span>small caps<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-hyphens"</span>&gt;</span><span>&lt;<span class="tag">strong</span>&gt;</span>hyphenated<span>&lt;/<span class="tag">strong</span>&gt;</span>: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae interdum enim. Aenean non odio magna. Praesent massa odio, porta vitae purus non, feugiat porttitor nisi. Pellentesque posuere euismod tortor. Curabitur imperdiet et leo id suscipit.<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
 </article>
