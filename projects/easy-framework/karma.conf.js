@@ -10,7 +10,6 @@ module.exports = function(config) {
         ],
 		plugins: [
 			require('@angular-devkit/build-angular/plugins/karma'),
-			require('karma-chrome-launcher'),
 			require('karma-coverage-istanbul-reporter'),
 			require('karma-firefox-launcher'),
 			require('karma-jasmine-html-reporter'),
@@ -37,7 +36,6 @@ module.exports = function(config) {
 		logLevel: config.LOG_INFO,
 		autoWatch: true,
 		browsers: [
-            'Chrome',
             'Firefox'
         ],
 		singleRun: false,

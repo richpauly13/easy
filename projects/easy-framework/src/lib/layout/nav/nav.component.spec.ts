@@ -10,7 +10,7 @@ import { NavComponent } from './nav.component';
 class MockComponent { }
 
 describe('NavComponent', () => {
-    let buttonToggle: DebugElement;
+	let buttonToggle: DebugElement;
 	let component: NavComponent;
 	let fixture1: ComponentFixture<NavComponent>;
 	let fixture2: ComponentFixture<MockComponent>;
@@ -33,7 +33,7 @@ describe('NavComponent', () => {
 		fixture2 = TestBed.createComponent(MockComponent);
 		fixture2.detectChanges();
 
-        buttonToggle = fixture2.debugElement.query(By.css('.nav-toggle'));
+		buttonToggle = fixture2.debugElement.query(By.css('.nav-toggle'));
 	});
 
 	it('should be created', () => {

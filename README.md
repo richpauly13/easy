@@ -96,4 +96,4 @@ Report an [issue](https://github.com/richpauly13/easy/issues/new?template=bug_re
 
 ## License
 
-Copyright (c) 2019, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE.md)).
+Copyright (c) 2020, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE.md)).
