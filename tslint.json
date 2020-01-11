@@ -260,7 +260,7 @@
     "prefer-function-over-method": true,
     "prefer-method-signature": true,
     "prefer-object-spread": true,
-    "prefer-readonly": true,
+    "prefer-readonly": false,
     "prefer-switch": true,
     "prefer-template": true,
     "prefer-while": true,

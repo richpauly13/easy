@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Renderer2 } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { Component, DebugElement } from '@angular/core';
 
 import { NavComponent } from './nav.component';
 
@@ -9,23 +10,19 @@ import { NavComponent } from './nav.component';
 class MockComponent { }
 
 describe('NavComponent', () => {
+    let buttonToggle: DebugElement;
 	let component: NavComponent;
 	let fixture1: ComponentFixture<NavComponent>;
 	let fixture2: ComponentFixture<MockComponent>;
-	let renderer2: Renderer2;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [
 				MockComponent,
 				NavComponent
-			],
-			providers: [
-				Renderer2
 			]
 		})
 		.compileComponents();
-
 	}));
 
 	beforeEach(() => {
@@ -36,29 +33,39 @@ describe('NavComponent', () => {
 		fixture2 = TestBed.createComponent(MockComponent);
 		fixture2.detectChanges();
 
-		renderer2 = fixture1.componentRef.injector.get<Renderer2>(Renderer2);
+        buttonToggle = fixture2.debugElement.query(By.css('.nav-toggle'));
 	});
 
 	it('should be created', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should add renderer2.listen event', () => {
-		spyOn(renderer2, 'listen').and.callThrough();
-
+	it('should have isActive be true after .nav-toggle click', () => {
+		component['isActive'] = false;
 		component.ngOnInit();
 
-		expect(renderer2.listen).toHaveBeenCalled();
+		buttonToggle.triggerEventHandler('click', {});
+
+		expect(component['isActive']).toBe(true);
 	});
 
-	it('should add the active class', () => {
+	it('should have isActive be false after .nav-toggle click', () => {
+		component['isActive'] = true;
+		component.ngOnInit();
+
+		buttonToggle.triggerEventHandler('click', {});
+
+		expect(component['isActive']).toBe(false);
+	});
+
+	it('should add the active class to the MockComponent after OnToggle()', () => {
 		component['isActive'] = false;
 		component['onToggle'](fixture2.nativeElement);
 
 		expect(fixture2.nativeElement).toHaveClass('active');
 	});
 
-	it('should remove the active class', () => {
+	it('should remove the active class from the MockComponent after OnToggle()', () => {
 		component['isActive'] = true;
 		component['onToggle'](fixture2.nativeElement);
 

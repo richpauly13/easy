@@ -1,7 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 
-import { noop } from 'rxjs';
-
 @Component({
 	selector: 'ez-nav, .nav-h, .nav-v',
 	templateUrl: './nav.component.html',
@@ -13,7 +11,7 @@ import { noop } from 'rxjs';
 export class NavComponent implements OnInit {
 	private isActive: boolean;
 
-	public constructor(private readonly renderer2: Renderer2) { }
+	public constructor(private renderer2: Renderer2) { }
 
 	public ngOnInit(): void {
 		try  {
@@ -23,7 +21,7 @@ export class NavComponent implements OnInit {
 				this.onToggle(element);
 			});
 		} catch (error) {
-			noop();
+			return;
 		}
 	}
 
