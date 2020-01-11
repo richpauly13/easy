@@ -53,6 +53,18 @@ app.module.ts
 import { EasyModule } from 'easy-framework';
 ```
 
+Add the import to your app root NgModule.
+
+app.module.ts
+
+```ts
+@NgModule({
+	imports: [
+		EasyModule
+	]
+})
+```
+
 Add the `<ez-root>` tag in your app root component.
 
 app.component.html

@@ -1,10 +1,10 @@
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
 
-import { addDependencyToPackageJson, addModuleImportToRootModule, getLibraryVersion, getProjectFromWorkspace } from '../utilities';
+import { addDependencyToPackageJson, addModuleImportToRootModule, getProjectFromWorkspace } from '../utilities';
 import { Schema as EasySchema } from './schema';
 
 export function ngAdd(options: EasySchema): Rule {
@@ -16,7 +16,7 @@ export function ngAdd(options: EasySchema): Rule {
 
 function addEasyFrameworkToPackageJson(): Rule {
 	return (tree: Tree, context: SchematicContext): Tree => {
-		const version: string | undefined = getLibraryVersion();
+		const version: string = '0.0.0-PLACEHOLDER';
 
 		addDependencyToPackageJson(tree, 'easy-framework', `^${version}`);
 

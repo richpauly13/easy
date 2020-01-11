@@ -23,11 +23,9 @@ export function addDependencyToPackageJson(tree: Tree, pkg: string, version: str
 		if (!json.dependencies[pkg]) {
 			json.dependencies[pkg] = version;
 			json.dependencies = sortPackageDependencies(json.dependencies);
-		} else {
-			json.dependencies[pkg] = version;
 		}
 
-		tree.overwrite('package.json', JSON.stringify(json, undefined, 2));
+		tree.overwrite('package.json', JSON.stringify(json, null, 2));
 	}
 
 	return tree;
@@ -61,8 +59,8 @@ export function addModuleImportToRootModule(tree: Tree, moduleName: string, impo
 	addModuleImportToModule(tree, modulePath, moduleName, importPath);
 }
 
-// Find the internal find module from options with undefined path handling.
-export function findModuleFromOptions(tree: Tree, options: ComponentSchema): string | undefined {
+// Find the internal find module from options with null path handling.
+export function findModuleFromOptions(tree: Tree, options: ComponentSchema): string | null {
 	const workspace: WorkspaceSchema = getWorkspace(tree);
 
 	if (!options.project) {
@@ -71,7 +69,7 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): str
 
 	const project: WorkspaceProject = workspace.projects[options.project];
 
-	if (options.path === undefined) {
+	if (options.path === null) {
 		options.path = `/${project.root}/src/app`;
 	}
 
@@ -79,18 +77,18 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): str
 }
 
 // Get the version of the library.
-export function getLibraryVersion(): string | undefined {
+export function getLibraryVersion(): string | null {
 	try {
 		return require('easy-framework/package.json').version;
 	} catch {
-		return undefined;
+		return null;
 	}
 }
 
 // Get the version of a package.
-export function getPackageVersion(tree: Tree, name: string): string | undefined {
+export function getPackageVersion(tree: Tree, name: string): string | null {
 	if (!tree.exists('package.json')) {
-		return undefined;
+		return null;
 	}
 
 	const packageJson: any = JSON.parse(tree.read('package.json')!.toString('utf8')).version;
@@ -99,7 +97,7 @@ export function getPackageVersion(tree: Tree, name: string): string | undefined 
 		return packageJson.dependencies[name];
 	}
 
-	return undefined;
+	return null;
 }
 
 //
