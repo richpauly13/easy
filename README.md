@@ -59,9 +59,9 @@ app.module.ts
 
 ```ts
 @NgModule({
-	imports: [
-		EasyModule
-	]
+    imports: [
+        EasyModule
+    ]
 })
 ```
 
