@@ -11,10 +11,10 @@ import { WidthModule } from './width/width.module';
 	exports: [
 		ColorModule,
 		SpaceModule,
-        TextModule,
-        TypographyModule,
-        VisibilityModule,
-        WidthModule
+		TextModule,
+		TypographyModule,
+		VisibilityModule,
+		WidthModule
 	]
 })
 export class UtilitiesModule { }

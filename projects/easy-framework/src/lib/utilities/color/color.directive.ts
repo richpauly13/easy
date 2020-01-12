@@ -4,5 +4,5 @@ import { Directive } from '@angular/core';
 	selector: '[ezColor]'
 })
 export class ColorDirective {
-    
+
 }

@@ -3,25 +3,25 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PositionComponent } from './position.component';
 
 describe('PositionComponent', () => {
-    let component: PositionComponent;
-    let fixture: ComponentFixture<PositionComponent>;
+	let component: PositionComponent;
+	let fixture: ComponentFixture<PositionComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                PositionComponent
-            ]
-        })
-        .compileComponents();
-    }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				PositionComponent
+			]
+		})
+		.compileComponents();
+	}));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(PositionComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(PositionComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-    it('should be created', () => {
-        expect(component).toBeTruthy();
-    });
+	it('should be created', () => {
+		expect(component).toBeTruthy();
+	});
 });

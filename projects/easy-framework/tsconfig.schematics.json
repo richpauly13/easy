@@ -12,13 +12,13 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "noUnusedParameters": false,
-    "noUnusedLocals": false,
-    "rootDir": "schematics",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "rootDir": "./schematics",
     "outDir": "../../dist/easy-framework/schematics",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "strictNullChecks": true,
     "target": "es6",
     "types": [
@@ -29,6 +29,6 @@
     "schematics/**/*"
   ],
   "exclude": [
-    "schematics/*/files/**/*"
+    "schematics/**/files/**/*"
   ]
 }

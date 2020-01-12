@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: '[ezSpace]'
+	selector: '[ezSpace]'
 })
 export class SpaceDirective {
 

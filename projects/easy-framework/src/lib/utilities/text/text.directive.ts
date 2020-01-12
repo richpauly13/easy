@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: '[ezText]'
+	selector: '[ezText]'
 })
 export class TextDirective {
 

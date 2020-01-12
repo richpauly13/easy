@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: '[ezPosition]'
+	selector: '[ezPosition]'
 })
 export class PositionDirective {
 

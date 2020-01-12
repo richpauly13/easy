@@ -3,25 +3,25 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContainerComponent } from './container.component';
 
 describe('ContainerComponent', () => {
-    let component: ContainerComponent;
-    let fixture: ComponentFixture<ContainerComponent>;
+	let component: ContainerComponent;
+	let fixture: ComponentFixture<ContainerComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                ContainerComponent
-            ]
-        })
-        .compileComponents();
-    }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				ContainerComponent
+			]
+		})
+		.compileComponents();
+	}));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(ContainerComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(ContainerComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-    it('be should created', () => {
-        expect(component).toBeTruthy();
-    });
+	it('be should created', () => {
+		expect(component).toBeTruthy();
+	});
 });

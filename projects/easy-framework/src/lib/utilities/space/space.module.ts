@@ -4,13 +4,13 @@ import { SpaceComponent } from './space.component';
 import { SpaceDirective } from './space.directive';
 
 @NgModule({
-    declarations: [
-        SpaceComponent,
-        SpaceDirective
-    ],
-    exports: [
-        SpaceComponent,
-        SpaceDirective
-    ]
+	declarations: [
+		SpaceComponent,
+		SpaceDirective
+	],
+	exports: [
+		SpaceComponent,
+		SpaceDirective
+	]
 })
 export class SpaceModule { }

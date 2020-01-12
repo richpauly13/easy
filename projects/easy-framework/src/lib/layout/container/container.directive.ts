@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: '[ezContainer]'
+	selector: '[ezContainer]'
 })
 export class ContainerDirective {
 

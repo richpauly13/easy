@@ -8,11 +8,11 @@ import { PositionModule } from './position/position.module';
 
 @NgModule({
 	exports: [
-        ContainerModule,
-        FlexboxModule,
-        GridModule,
+		ContainerModule,
+		FlexboxModule,
+		GridModule,
 		NavModule,
-        PositionModule
+		PositionModule
 	]
 })
 export class LayoutModule { }

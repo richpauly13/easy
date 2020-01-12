@@ -3,25 +3,25 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TypographyComponent } from './typography.component';
 
 describe('TypographyComponent', () => {
-    let component: TypographyComponent;
-    let fixture: ComponentFixture<TypographyComponent>;
+	let component: TypographyComponent;
+	let fixture: ComponentFixture<TypographyComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                TypographyComponent
-            ]
-        })
-        .compileComponents();
-    }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				TypographyComponent
+			]
+		})
+		.compileComponents();
+	}));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(TypographyComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(TypographyComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-    it('should be created', () => {
-        expect(component).toBeTruthy();
-    });
+	it('should be created', () => {
+		expect(component).toBeTruthy();
+	});
 });

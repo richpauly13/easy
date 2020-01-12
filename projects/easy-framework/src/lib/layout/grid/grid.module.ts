@@ -4,13 +4,13 @@ import { GridComponent } from './grid.component';
 import { GridDirective } from './grid.directive';
 
 @NgModule({
-    declarations: [
-        GridComponent,
-        GridDirective
-    ],
-    exports: [
-        GridComponent,
-        GridDirective
-    ]
+	declarations: [
+		GridComponent,
+		GridDirective
+	],
+	exports: [
+		GridComponent,
+		GridDirective
+	]
 })
 export class GridModule { }

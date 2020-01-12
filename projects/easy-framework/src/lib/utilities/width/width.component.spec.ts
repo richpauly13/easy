@@ -3,25 +3,25 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { WidthComponent } from './width.component';
 
 describe('WidthComponent', () => {
-    let component: WidthComponent;
-    let fixture: ComponentFixture<WidthComponent>;
+	let component: WidthComponent;
+	let fixture: ComponentFixture<WidthComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                WidthComponent
-            ]
-        })
-        .compileComponents();
-    }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				WidthComponent
+			]
+		})
+		.compileComponents();
+	}));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(WidthComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(WidthComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-    it('should be created', () => {
-        expect(component).toBeTruthy();
-    });
+	it('should be created', () => {
+		expect(component).toBeTruthy();
+	});
 });

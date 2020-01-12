@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: '[ezVisibility]'
+	selector: '[ezVisibility]'
 })
 export class VisibilityDirective {
 
