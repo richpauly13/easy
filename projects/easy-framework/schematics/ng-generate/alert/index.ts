@@ -10,7 +10,7 @@ import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/w
 import { addModuleImportToModule, findModuleFromOptions } from '../../utilities';
 import { Schema } from './schema';
 
-export function addAlert(options: Schema): Rule {
+export default function(options: Schema): Rule {
 	return (tree: Tree, context: SchematicContext): any => {
 		const workspace: WorkspaceSchema = getWorkspace(tree);
 		const projectName: string = options.project || Object.keys(workspace.projects)[0];
