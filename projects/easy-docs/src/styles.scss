@@ -27,11 +27,6 @@
 	}
 }
 
-.fixed-l {
-    top: rem(110);
-    width: rem(180);
-}
-
 .flexbox {
 	align-items: flex-start;
 	display: flex;
@@ -87,11 +82,16 @@
 
 .main {
 	margin-left: rem(220);
-    padding-top: rem(100);
+    padding-top: rem(50);
 
     code {
         color: color(purple);
     }
+}
+
+.pos-fixed-l {
+    top: rem(110);
+    width: rem(180);
 }
 
 .tag {

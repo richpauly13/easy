@@ -3,52 +3,52 @@
 @import "../../core/sass/variables";
 
 // Position sytles
-.abs {
+.pos-abs {
     position: absolute;
 }
 
-.fixed-b,
-.fixed-l,
-.fixed-r,
-.fixed-t {
+.pos-fixed-b,
+.pos-fixed-l,
+.pos-fixed-r,
+.pos-fixed-t {
 	position: fixed;
 	z-index: 10;
 }
 
-.fixed-b,
-.fixed-t {
+.pos-fixed-b,
+.pos-fixed-t {
 	width: 100%;
 }
 
-.fixed-b {
+.pos-fixed-b {
 	bottom: 0;
 }
 
-.fixed-l {
+.pos-fixed-l {
 	left: space(sm);
 }
 
-.fixed-r {
+.pos-fixed-r {
 	right: space(sm);
 }
 
-.fixed-t {
+.pos-fixed-t {
 	top: 0;
 }
 
-.rel {
+.pos-rel {
     position: relative;
 }
 
-.static {
+.pos-static {
     position: sticky;
 }
 
-.sticky {
+.pos-sticky {
     position: sticky;
 }
 
-.sticky-footer {
+.pos-sticky-footer {
     align-items: stretch;
 	display: flex;
     flex-direction: column;

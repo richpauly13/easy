@@ -92,7 +92,7 @@
     "update:deps": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.6.4 && npm i --save rxjs@6.5.4",
     "update:ng": "run-s update:core update:deps audit:fix",
     "update:webdriver": "webdriver-manager update",
-    "version": "cd projects/easy-framework && standard-version --no-verify"
+    "version": "cd projects/easy-framework && standard-version"
   },
   "version": "1.0.0"
 }
