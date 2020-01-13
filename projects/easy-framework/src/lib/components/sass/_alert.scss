@@ -6,11 +6,10 @@
 .alert-bad,
 .alert-good,
 .alert-info,
-.alert-warn {
-    @include row;
-
+.alert-warn {   
     align-items: center;
     color: color(white);
+    display: flex;
     justify-content: space-between;
     padding: space(xs) space(sm);
 }

@@ -3,6 +3,10 @@
 @import "../../core/sass/variables";
 
 // Position sytles
+.abs {
+    position: absolute;
+}
+
 .fixed-b,
 .fixed-l,
 .fixed-r,
@@ -32,16 +36,27 @@
 	top: 0;
 }
 
-.sticky-footer {
-	@include column;
+.rel {
+    position: relative;
+}
 
-	align-items: stretch;
-	flex-wrap: nowrap;
-	height: 100%;
+.static {
+    position: sticky;
+}
+
+.sticky {
+    position: sticky;
+}
+
+.sticky-footer {
+    align-items: stretch;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+	justify-content: flex-start;
 
 	& :last-child {
 		margin-top: auto;
 	}
 }
-
-// TODO: Add sticky, relative, and absolute

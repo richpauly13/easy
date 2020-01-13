@@ -5,12 +5,17 @@
 // Flexbox container styles
 .row,
 .row-full {
-	@include row;
+	align-items: flex-start;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .col,
 .col-full {
-	@include column;
+	align-items: flex-start;
+	display: flex;
+    flex-direction: column;
+	justify-content: flex-start;
 }
 
 .row-full {

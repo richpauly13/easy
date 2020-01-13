@@ -75,12 +75,44 @@ app.component.html
 </ez-root>
 ```
 
-Then, import component modules where needed.
+Then, import component module(s) where needed.
 
 some.module.ts
 
 ```ts
 import { ButtonModule } from 'easy-framework';
+```
+
+Add the import(s) to your NgModule.
+
+some.module.ts
+
+```ts
+@NgModule({
+    imports: [
+        ButtonModule
+    ]
+})
+```
+
+Or, import all component modules.
+
+some.module.ts
+
+```ts
+import { ComponentsModule } from 'easy-framework';
+```
+
+Add the import to your NgModule.
+
+some.module.ts
+
+```ts
+@NgModule({
+    imports: [
+        ComponentsModule
+    ]
+})
 ```
 
 ## Documentation

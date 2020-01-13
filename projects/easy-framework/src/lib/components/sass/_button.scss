@@ -49,9 +49,10 @@
 .btn-group-col,
 .btn-group-full,
 .btn-group-row {
-    @include row;
-
+    align-items: flex-start;
+	display: flex;
     flex-wrap: wrap;
+	justify-content: flex-start;    
     padding-bottom: space(sm);
     padding-top: space(sm);
 
@@ -63,7 +64,10 @@
 }
 
 .btn-group-col {
-    @include column;
+    align-items: flex-start;
+	display: flex;
+    flex-direction: column;
+	justify-content: flex-start;
 }
 
 .btn-group-full {

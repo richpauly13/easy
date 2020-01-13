@@ -4,12 +4,12 @@
 
 // Form styles
 .checkbox-group,
-.radio-group {
-    @include row;
-
+.radio-group {  
     align-items: center;
+    display: flex;
     flex: 1 0 rem(220);
     flex-wrap: wrap;
+    justify-content: flex-start;
 
     .form-field:hover {
         outline: rem(1) dotted color(black);
@@ -33,10 +33,10 @@
 }
 
 .field-group {
-    @include row;
-
     align-items: center;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
     padding: rem(8);
 }
 
@@ -85,9 +85,10 @@
 }
 
 .form-group-inline {
-    @include row;
-
+    align-items: flex-start;
+	display: flex;
     flex-wrap: wrap;
+	justify-content: flex-start;    
 
     .field-group {
 		flex: 1 1 rem(220);

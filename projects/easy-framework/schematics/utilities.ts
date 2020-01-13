@@ -1,3 +1,4 @@
+import { Path } from '@angular-devkit/core';
 import { SchematicsException, Tree, UpdateRecorder } from '@angular-devkit/schematics';
 
 import { addImportToModule } from '@schematics/angular/utility/ast-utils';
@@ -63,7 +64,7 @@ export function addModuleImportToRootModule(tree: Tree, moduleName: string, impo
 }
 
 // Find the internal find module from options with null path handling.
-export function findModuleFromOptions(tree: Tree, options: ComponentSchema): string | null {
+export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Path {
 	const workspace: WorkspaceSchema = getWorkspace(tree);
 
 	if (!options.project) {
@@ -109,7 +110,7 @@ export function getPackageVersion(tree: Tree, name: string): string | null {
 	return null;
 }
 
-//
+// Get project from the workspace
 export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?: string): WorkspaceProject {
 	const project: WorkspaceProject = workspace.projects[projectName || workspace.defaultProject!];
 

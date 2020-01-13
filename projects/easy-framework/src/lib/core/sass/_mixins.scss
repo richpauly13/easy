@@ -4,12 +4,6 @@
 	transition-timing-function: linear;
 }
 
-@mixin column {
-	@include row;
-
-	flex-direction: column;
-}
-
 @mixin flex($grow, $shrink, $basis) {
 	@if $basis == 0 {
 		$basis: 0%;
@@ -49,12 +43,6 @@
 	background: color(blue);
 	border: rem(1) solid color(black);
 	border-radius: rem(3);
-}
-
-@mixin row {
-	align-items: flex-start;
-	display: flex;
-	justify-content: flex-start;
 }
 
 // Credit: https://css-tricks.com/snippets/sass/material-shadows-mixin/

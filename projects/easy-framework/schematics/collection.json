@@ -3,12 +3,12 @@
   "schematics": {
     "ng-add": {
       "description": "Add the easy-framework library to the application.",
-      "factory": "./ng-add/index",
+      "factory": "./ng-add",
       "schema": "./ng-add/schema.json"
     },
     "alert": {
       "description": "Add an alert to the application.",
-      "factory": "./ng-generate/alert/index",
+      "factory": "./ng-generate/alert",
       "schema": "./ng-generate/alert/schema.json"
     }    
   }
