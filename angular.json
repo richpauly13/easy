@@ -166,7 +166,8 @@
 	},
 	"defaultProject": "easy-docs",
     "schematics": {
-        "@schematics/angular:component": {            
+        "@schematics/angular:component": {   
+            "changeDetection": "OnPush",         
             "export": true,            
             "inlineStyle": false,
             "inlineTemplate": false,
