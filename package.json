@@ -46,9 +46,9 @@
     "protractor": "^5.4.0",
     "standard-version": "^7.1.0",
     "ts-node": "^8.6.2",
-    "tsickle": "^0.37.1",
+    "tsickle": "^0.38.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.5"
   },
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
@@ -88,7 +88,7 @@
     "test:docs": "ng test easy-docs",
     "test:easy": "ng test easy-framework",
     "update:core": "npm i -g npm && npm i -g @angular/cli@next",
-    "update:deps": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.7.4 && npm i --save rxjs@6.5.4 && npm i --save-dev tsickle@0.37.1",
+    "update:deps": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.7.5 && npm i --save rxjs@6.5.4",
     "update:ng": "run-s update:core update:deps audit:fix",
     "update:webdriver": "webdriver-manager update",
     "version": "cd projects/easy-framework && standard-version"
