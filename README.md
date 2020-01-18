@@ -45,7 +45,7 @@ Developers can use only the components needed for a particular project. This is 
 
 ## Usage
 
-Import core styles into your app root module.
+Import core styles and behaviors into your app root module.
 
 app.module.ts
 
@@ -65,7 +65,7 @@ app.module.ts
 })
 ```
 
-Add the `<ez-root>` tag in your app root component.
+Add the `<ez-root>` tag in your app root component's HTML.
 
 app.component.html
 
@@ -75,12 +75,12 @@ app.component.html
 </ez-root>
 ```
 
-Then, import component module(s) where needed.
+Then, import specific module(s) where needed.
 
 some.module.ts
 
 ```ts
-import { ButtonModule } from 'easy-framework';
+import { ButtonModule, FlexboxModule } from 'easy-framework';
 ```
 
 Add the import(s) to your NgModule.
@@ -90,27 +90,29 @@ some.module.ts
 ```ts
 @NgModule({
     imports: [
-        ButtonModule
+        ButtonModule,
+        FlexboxModule
     ]
 })
 ```
 
-Or, import all component modules.
+Or, import all component and/or layout modules.
 
 some.module.ts
 
 ```ts
-import { ComponentsModule } from 'easy-framework';
+import { ComponentsModule, LayoutModule } from 'easy-framework';
 ```
 
-Add the import to your NgModule.
+Add the import(s) to your NgModule.
 
 some.module.ts
 
 ```ts
 @NgModule({
     imports: [
-        ComponentsModule
+        ComponentsModule,
+        LayoutModule
     ]
 })
 ```
