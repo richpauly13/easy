@@ -6,7 +6,6 @@ import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
-import { PositionComponent } from './position/position.component';
 
 const routes: Routes = [
 	{
@@ -28,10 +27,6 @@ const routes: Routes = [
 			{
 				component: NavComponent,
 				path: 'nav'
-			},
-			{
-				component: PositionComponent,
-				path: 'position'
 			},
 			{
 				path: '',

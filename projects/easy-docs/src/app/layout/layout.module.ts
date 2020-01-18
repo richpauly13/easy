@@ -6,7 +6,6 @@ import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { NavComponent } from './nav/nav.component';
-import { PositionComponent } from './position/position.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -15,8 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 		FlexboxComponent,
 		GridComponent,
 		LayoutComponent,
-		NavComponent,
-		PositionComponent
+		NavComponent
 	],
 	exports: [
 		ContainerComponent,
@@ -24,8 +22,7 @@ import { SharedModule } from '../shared/shared.module';
 		GridComponent,
 		LayoutComponent,
 		LayoutRoutingModule,
-		NavComponent,
-		PositionComponent
+		NavComponent
 	],
 	imports: [
 		SharedModule
