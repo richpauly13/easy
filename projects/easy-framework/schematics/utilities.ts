@@ -43,7 +43,6 @@ export function addModuleImportToModule(tree: Tree, modulePath: string, moduleNa
 		throw new SchematicsException(`Module not found: ${modulePath}`);
 	}
 
-	// TypeScript version mismatch due to @schematics/angular using a different version than Easy.  Cast to any to avoid the type assignment failure.
 	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, importPath);
 	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
 
@@ -64,7 +63,7 @@ export function addModuleImportToRootModule(tree: Tree, moduleName: string, impo
 }
 
 // Find the internal find module from options with null path handling.
-export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Path {
+export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Path | undefined {
 	const workspace: WorkspaceSchema = getWorkspace(tree);
 
 	if (!options.project) {
@@ -79,15 +78,6 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Pat
 
 	return internalFindModule(tree, options);
 }
-
-// Get the version of the library.
-/* export function getLibraryVersion(): string | null {
-	try {
-		return require('easy-framework/package.json').version;
-	} catch {
-		return null;
-	}
-} */
 
 export function getLibraryVersion(): any {
 	return JSON.parse(
