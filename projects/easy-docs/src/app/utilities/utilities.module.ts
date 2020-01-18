@@ -14,7 +14,7 @@ import { TextComponent } from './text/text.component';
 @NgModule({
 	declarations: [
 		ColorComponent,
-        PositionComponent,
+		PositionComponent,
 		SpaceComponent,
 		TypographyComponent,
 		UtilitiesComponent,
@@ -24,7 +24,7 @@ import { TextComponent } from './text/text.component';
 	],
 	exports: [
 		ColorComponent,
-        PositionComponent,
+		PositionComponent,
 		SpaceComponent,
 		TypographyComponent,
 		UtilitiesComponent,

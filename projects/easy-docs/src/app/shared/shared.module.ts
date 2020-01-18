@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ComponentsModule, EasyModule, LayoutModule, UtilitiesModule } from 'easy-framework';
+import { ComponentsModule, EasyModule, LayoutModule } from 'easy-framework';
 
 @NgModule({
 	exports: [
@@ -10,8 +10,7 @@ import { ComponentsModule, EasyModule, LayoutModule, UtilitiesModule } from 'eas
 		ComponentsModule,
 		EasyModule,
 		LayoutModule,
-		RouterModule,
-		UtilitiesModule
+		RouterModule
 	]
 })
 export class SharedModule { }

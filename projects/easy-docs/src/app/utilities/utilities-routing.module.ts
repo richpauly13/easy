@@ -19,7 +19,7 @@ const routes: Routes = [
 				component: ColorComponent,
 				path: 'color'
 			},
-            {
+			{
 				component: PositionComponent,
 				path: 'position'
 			},
