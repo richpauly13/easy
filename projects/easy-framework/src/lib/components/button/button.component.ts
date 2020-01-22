@@ -8,6 +8,8 @@ import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core
 	encapsulation: ViewEncapsulation.None
 })
 export class ButtonComponent implements OnInit {
+
+	private hostType: string;
 	@HostBinding('attr.type')
 
 	public set type(type: string) {
@@ -17,8 +19,6 @@ export class ButtonComponent implements OnInit {
 	public get type(): string {
 		return this.hostType;
 	}
-
-	private hostType: string;
 
 	public ngOnInit(): void {
 		this.type = this.hostType;

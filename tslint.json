@@ -302,7 +302,6 @@
     "typedef": [
       true,
       "array-destructuring",
-      "arrow-call-signature",
       "call-signature",
       "member-variable-declaration",
       "object-destructuring",

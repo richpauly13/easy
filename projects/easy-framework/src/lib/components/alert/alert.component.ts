@@ -12,6 +12,13 @@ export class AlertComponent implements OnInit {
 	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;
 	@HostBinding('attr.class') public hostClass: string;
 
+	public close: boolean;
+	public id: string;
+
+	private classList: string;
+
+	public constructor(private readonly elementRef: ElementRef, private readonly renderer2: Renderer2) { }
+
 	@Input()
 	public set class(classList: string) {
 		if (classList.includes('close')) {
@@ -30,13 +37,6 @@ export class AlertComponent implements OnInit {
 	public get class(): string {
 		return this.classList;
 	}
-
-	public close: boolean;
-	public id: string;
-
-	private classList: string;
-
-	public constructor(private readonly elementRef: ElementRef, private readonly renderer2: Renderer2) { }
 
 	public ngOnInit(): void {
 		this.hostClass = this.class;

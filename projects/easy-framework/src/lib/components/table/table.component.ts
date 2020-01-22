@@ -11,6 +11,8 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
 export class TableComponent {
 	@HostBinding('attr.role') public role: string;
 
+	private classList: string;
+
 	@Input()
 	public set class(classList: string) {
 		if (classList.includes('table-cell')) {
@@ -29,6 +31,4 @@ export class TableComponent {
 	public get class(): string {
 		return this.classList;
 	}
-
-	private classList: string;
 }
