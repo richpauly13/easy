@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-table',
-	styleUrls: [
-		'./table.component.scss'
-	],
-	templateUrl: './table.component.html'
+	templateUrl: './table.component.html',
+	styleUrls: ['./table.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
 

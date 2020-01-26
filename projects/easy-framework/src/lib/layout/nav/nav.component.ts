@@ -1,12 +1,11 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'ez-nav, .nav-h, .nav-v',
 	templateUrl: './nav.component.html',
-	styleUrls: [
-		'./nav.component.scss'
-	],
-	encapsulation: ViewEncapsulation.None
+	styleUrls: ['./nav.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent implements OnInit {
 	private isActive: boolean;

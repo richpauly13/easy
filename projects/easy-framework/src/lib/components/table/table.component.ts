@@ -1,12 +1,11 @@
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-table, .table, .table-bordered, .table-cell, .table-header, .table-header-cell, .table-hover, .table-row, .table-striped',
+	selector: 'ez-table, .table, .table-bordered, .table-hover, .table-striped',
 	templateUrl: './table.component.html',
-	styleUrls: [
-		'./table.component.scss'
-	],
-	encapsulation: ViewEncapsulation.None
+	styleUrls: ['./table.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
 	@HostBinding('attr.role') public role: string;

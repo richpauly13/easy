@@ -1,11 +1,11 @@
-import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'ez-button, .btn-xs, .btn-sm, .btn-md, .btn-lg, .btn-xl, .btn-full',
-	templateUrl: './button.component.html', styleUrls: [
-		'./button.component.scss'
-	],
-	encapsulation: ViewEncapsulation.None
+	templateUrl: './button.component.html',
+	styleUrls: ['./button.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit {
 

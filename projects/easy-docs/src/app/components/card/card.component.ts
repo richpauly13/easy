@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-card',
-	styleUrls: [
-		'./card.component.scss'
-	],
-	templateUrl: './card.component.html'
+	templateUrl: './card.component.html',
+	styleUrls: ['./card.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
 

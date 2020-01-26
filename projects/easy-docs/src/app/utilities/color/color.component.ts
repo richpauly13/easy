@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-color',
 	templateUrl: './color.component.html',
-	styleUrls: [
-		'./color.component.scss'
-	]
+	styleUrls: ['./color.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorComponent {
 

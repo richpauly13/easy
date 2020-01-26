@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-switch',
-	styleUrls: [
-		'./switch.component.scss'
-	],
-	templateUrl: './switch.component.html'
+	templateUrl: './switch.component.html',
+	styleUrls: ['./switch.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SwitchComponent {
 

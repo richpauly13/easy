@@ -1,12 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	encapsulation: ViewEncapsulation.None,
 	selector: 'ez-root',
-	styleUrls: [
-		'./easy-framework.component.scss'
-	],
-	templateUrl: './easy-framework.component.html'
+	templateUrl: './easy-framework.component.html',
+	styleUrls: ['./easy-framework.component.scss'],
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EasyComponent {
 

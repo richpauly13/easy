@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'docs-utilities',
-	styleUrls: [
-		'./utilities.component.scss'
-	],
-	templateUrl: './utilities.component.html'
+	templateUrl: './utilities.component.html',
+	styleUrls: ['./utilities.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UtilitiesComponent implements OnInit {
 	public navs: string[];

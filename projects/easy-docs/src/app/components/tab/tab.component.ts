@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-tab',
-	styleUrls: [
-		'./tab.component.scss'
-	],
-	templateUrl: './tab.component.html'
+	templateUrl: './tab.component.html',
+	styleUrls: ['./tab.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabComponent {
 

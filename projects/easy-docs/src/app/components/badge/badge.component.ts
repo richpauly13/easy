@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-badge',
-	styleUrls: [
-		'./badge.component.scss'
-	],
-	templateUrl: './badge.component.html'
+	templateUrl: './badge.component.html',
+	styleUrls: ['./badge.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BadgeComponent {
 

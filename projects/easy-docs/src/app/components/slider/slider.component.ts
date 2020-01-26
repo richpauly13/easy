@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-slider',
-	styleUrls: [
-		'./slider.component.scss'
-	],
-	templateUrl: './slider.component.html'
+	templateUrl: './slider.component.html',
+	styleUrls: ['./slider.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SliderComponent {
 

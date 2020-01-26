@@ -1,10 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-grid',
+	selector: 'ez-grid, .grid',
 	templateUrl: './grid.component.html',
 	styleUrls: ['./grid.component.scss'],
-	encapsulation: ViewEncapsulation.None
+	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridComponent {
 

@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-collapse',
-	styleUrls: [
-		'./collapse.component.scss'
-	],
-	templateUrl: './collapse.component.html'
+	templateUrl: './collapse.component.html',
+	styleUrls: ['./collapse.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CollapseComponent {
 
