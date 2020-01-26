@@ -47,16 +47,3 @@
 .pos-sticky {
     position: sticky;
 }
-
-.pos-sticky-footer {
-    align-items: stretch;
-	display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100%;
-	justify-content: flex-start;
-
-	& :last-child {
-		margin-top: auto;
-	}
-}

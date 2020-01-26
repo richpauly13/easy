@@ -6,6 +6,7 @@ import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
+import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
 
 const routes: Routes = [
 	{
@@ -27,6 +28,10 @@ const routes: Routes = [
 			{
 				component: NavComponent,
 				path: 'nav'
+			},
+			{
+				component: StickyFooterComponent,
+				path: 'sticky-footer'
 			},
 			{
 				path: '',

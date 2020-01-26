@@ -7,6 +7,7 @@ import { LayoutComponent } from './layout.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { NavComponent } from './nav/nav.component';
 import { SharedModule } from '../shared/shared.module';
+import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
 
 @NgModule({
 	declarations: [
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
 		FlexboxComponent,
 		GridComponent,
 		LayoutComponent,
-		NavComponent
+		NavComponent,
+		StickyFooterComponent
 	],
 	exports: [
 		ContainerComponent,
@@ -22,7 +24,8 @@ import { SharedModule } from '../shared/shared.module';
 		GridComponent,
 		LayoutComponent,
 		LayoutRoutingModule,
-		NavComponent
+		NavComponent,
+		StickyFooterComponent
 	],
 	imports: [
 		SharedModule

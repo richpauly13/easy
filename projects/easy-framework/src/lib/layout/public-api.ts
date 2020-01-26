@@ -6,3 +6,4 @@ export * from './flexbox';
 export * from './grid';
 export * from './layout.module';
 export * from './nav';
+export * from './sticky-footer';
