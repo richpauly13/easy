@@ -5,6 +5,7 @@ import { ContainerComponent } from './container/container.component';
 import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
+import { MultiColumnComponent } from './multi-column/multi-column.component';
 import { NavComponent } from './nav/nav.component';
 import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
 
@@ -24,6 +25,10 @@ const routes: Routes = [
 			{
 				component: GridComponent,
 				path: 'grid'
+			},
+			{
+				component: MultiColumnComponent,
+				path: 'multi-column'
 			},
 			{
 				component: NavComponent,

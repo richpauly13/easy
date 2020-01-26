@@ -4,6 +4,7 @@
 
 // Color styles
 @each $name, $color in $colors {
+    
 	// Background color styles
 	@if $name != lt-black {
 		.bg-#{"" + $name},

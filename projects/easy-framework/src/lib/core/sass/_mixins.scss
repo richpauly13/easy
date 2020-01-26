@@ -1,5 +1,5 @@
 @mixin animate($types...) {
-	transition-duration: 0.3s;
+	transition-duration: .3s;
 	transition-property: $types;
 	transition-timing-function: linear;
 }
@@ -16,24 +16,25 @@
 	flex: $grow $shrink $basis;
 }
 
-// TODO: See if this can be simplified while adding min, max, and print
 @mixin media($size) {
 	@if $size == sm {
-		@media screen and (min-width: $screen-sm) {
+		@media (min-width: $screen-sm) {
 			@content;
 		}
 	} @else if $size == md {
-		@media screen and (min-width: $screen-md) {
+		@media (min-width: $screen-md) {
 			@content;
 		}
 	} @else if $size == lg {
-		@media screen and (min-width: $screen-lg) {
+		@media (min-width: $screen-lg) {
+			@content;
+		}
+	} @else if $size == xl {
+		@media (min-width: $screen-xl) {
 			@content;
 		}
 	} @else {
-		@media screen and (min-width: $screen-xl) {
-			@content;
-		}
+		@warn "Invalid $size `#{$size}`.";
 	}
 }
 
@@ -50,7 +51,7 @@
 	@if $depth < 1 {
 		box-shadow: none;
 	} @else if $depth > 5 {
-		@warn "Invalid $depth `#{$depth}` for mixin `shadow`.";
+		@warn "Invalid $depth `#{$depth}` for mixin shadow.";
 	} @else {
 		box-shadow: bottom-shadow($depth, $color), top-shadow($depth, $color);
 	}

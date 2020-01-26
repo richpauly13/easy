@@ -96,7 +96,7 @@ some.module.ts
 })
 ```
 
-Or, import all component and/or layout modules.
+Or, import all component and/or layout module(s).
 
 some.module.ts
 
