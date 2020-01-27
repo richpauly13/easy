@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.9](https://github.com/richpauly13/easy/compare/v0.3.8...v0.3.9) (2020-01-27)
+
+
+### Bug Fixes
+
+* **change detection:** add on push change detection to easy and docs ([067ddf0](https://github.com/richpauly13/easy/commit/067ddf0862953678f1d188a6392e52180f17639f))
+* **classes:** add attibute selectors to classes that contain multiple instances ([bc2fe5f](https://github.com/richpauly13/easy/commit/bc2fe5f02742d45295261373f26ea8a6b9a245ad))
+
 ### [0.3.8](https://github.com/richpauly13/easy/compare/v0.3.7...v0.3.8) (2020-01-18)
 
 ### [0.3.7](https://github.com/richpauly13/easy/compare/v0.3.6...v0.3.7) (2020-01-18)

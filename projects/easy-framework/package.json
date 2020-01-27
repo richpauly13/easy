@@ -39,5 +39,5 @@
   "schematics": "./schematics/collection.json",
   "sideEffects": false,
   "typings": "easy-framework.d.ts",
-  "version": "0.3.8"
+  "version": "0.3.9"
 }
