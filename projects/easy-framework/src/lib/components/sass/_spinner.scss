@@ -3,8 +3,7 @@
 @import "../../core/sass/variables";
 
 // Spinner styles
-.spinner,
-.spinner-dotted {
+[class^="spinner"] {
     animation: spinner 3s linear infinite;
     border-radius: 50%;
     height: rem(120);

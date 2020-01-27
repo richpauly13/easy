@@ -2,48 +2,48 @@
 @import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
-// Position sytles
-.pos-abs {
+// Position styles
+.abs {
     position: absolute;
 }
 
-.pos-fixed-b,
-.pos-fixed-l,
-.pos-fixed-r,
-.pos-fixed-t {
+.fixed-b,
+.fixed-l,
+.fixed-r,
+.fixed-t {
 	position: fixed;
-	z-index: 10;
+	z-index: 100;
 }
 
-.pos-fixed-b,
-.pos-fixed-t {
+.fixed-b,
+.fixed-t {
 	width: 100%;
 }
 
-.pos-fixed-b {
+.fixed-b {
 	bottom: 0;
 }
 
-.pos-fixed-l {
+.fixed-l {
 	left: space(sm);
 }
 
-.pos-fixed-r {
+.fixed-r {
 	right: space(sm);
 }
 
-.pos-fixed-t {
+.fixed-t {
 	top: 0;
 }
 
-.pos-rel {
+.rel {
     position: relative;
 }
 
-.pos-static {
+.static {
     position: static;
 }
 
-.pos-sticky {
+.sticky {
     position: sticky;
 }

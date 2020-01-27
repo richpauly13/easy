@@ -3,10 +3,7 @@
 @import "../../core/sass/variables";
 
 // Alert styles
-.alert-bad,
-.alert-good,
-.alert-info,
-.alert-warn {   
+[class^="alert"] {   
     align-items: center;
     color: color(white);
     display: flex;

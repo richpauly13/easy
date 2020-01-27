@@ -3,9 +3,7 @@
 @import "../../core/sass/variables";
 
 // Container styles
-.container,
-.container-fluid,
-.container-full {
+[class^="container"] {
     display: flex;
 	margin-left: auto;
 	margin-right: auto;

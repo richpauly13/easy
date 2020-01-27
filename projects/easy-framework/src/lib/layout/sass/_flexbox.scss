@@ -172,14 +172,14 @@
 }
 
 // Flex item order styles
-@for $number from 0 through 12 {
+@for $number from 0 through 6 {
 	.item-order-#{$number} {
 		order: $number;
 	}
 }
 
 // Flex item grow and shrink styles
-@for $number from 0 through 12 {
+@for $number from 0 through 6 {
 	.item-g-#{$number} {
 		flex: $number 0 auto;
 	}

@@ -19,19 +19,19 @@
 }
 
 .hide-sm {
-	@media screen and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
 		display: none;
 	}
 }
 
 .hide-md {
-	@media screen and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
 		display: none;
 	}
 }
 
 .hide-lg {
-	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
 		display: none;
 	}
 }
@@ -60,19 +60,19 @@
 }
 
 .show-sm {
-	@media screen and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
 		display: block;
 	}
 }
 
 .show-md {
-	@media screen and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
 		display: block;
 	}
 }
 
 .show-lg {
-	@media screen and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
 		display: block;
 	}
 }

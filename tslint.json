@@ -111,13 +111,7 @@
       "check-constructor",
       "check-parameter-property"
     ],
-    "member-ordering": [
-      true,
-      {
-        "alphabetize": false,
-        "order": "fields-first"
-      }
-    ],
+    "member-ordering": false,
     "new-parens": true,
     "newline-before-return": true,
     "newline-per-chained-call": false,

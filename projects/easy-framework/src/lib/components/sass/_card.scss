@@ -3,6 +3,10 @@
 @import "../../core/sass/variables";
 
 // Card styles
+[class^="card"] {
+    max-width: 100%;
+}
+
 .card {
     @include shadow(1);
 
@@ -11,7 +15,6 @@
     border-radius: space(xs);
     flex: 1 0 rem(500);
     margin: space(xs);
-    max-width: 100%;
     padding: space(sm);
 
     @include media(sm) {
@@ -35,5 +38,4 @@
 .cards {
     display: flex;
     flex-wrap: wrap;
-    max-width: 100%;
 }

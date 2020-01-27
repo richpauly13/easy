@@ -3,9 +3,7 @@
 @import '../../core/sass/variables';
 
 // Badge styles
-.badge-sm,
-.badge-md,
-.badge-lg {
+[class^="badge"] {
     border-radius: space(sm);
     display: inline-block;
 

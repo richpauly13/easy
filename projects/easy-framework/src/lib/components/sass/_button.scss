@@ -46,9 +46,7 @@
 }
 
 // Button groups
-.btn-group-col,
-.btn-group-full,
-.btn-group-row {
+[class^="btn-group"] {
     align-items: flex-start;
 	display: flex;
     flex-wrap: wrap;

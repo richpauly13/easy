@@ -8,10 +8,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulat
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent implements OnInit {
-
-	private hostType: string;
 	@HostBinding('attr.type')
-
 	public set type(type: string) {
 		type ? this.hostType = type : this.hostType = 'button';
 	}
@@ -19,6 +16,8 @@ export class ButtonComponent implements OnInit {
 	public get type(): string {
 		return this.hostType;
 	}
+
+	private hostType: string;
 
 	public ngOnInit(): void {
 		this.type = this.hostType;
