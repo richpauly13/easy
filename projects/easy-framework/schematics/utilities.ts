@@ -11,8 +11,8 @@ import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/w
 
 import * as typescript from 'typescript';
 
-import * as fs from 'fs';
-import * as path from 'path';
+/* import * as fs from 'fs';
+import * as path from 'path'; */
 
 // Add dependency to the package.json file.
 export function addDependencyToPackageJson(tree: Tree, pkg: string, version: string): Tree {
@@ -80,9 +80,11 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Pat
 }
 
 export function getLibraryVersion(): any {
-	return JSON.parse(
+	/* return JSON.parse(
 		fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')
-	).version;
+	).version; */
+
+    return require('../package.json').version;
 }
 
 // Get the version of a package.

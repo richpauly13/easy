@@ -16,7 +16,9 @@ export default function(options: EasySchema): Rule {
 
 function addEasyFrameworkToPackageJson(): Rule {
 	return (tree: Tree, context: SchematicContext): Tree => {
-		addDependencyToPackageJson(tree, 'easy-framework', '^0.3.9');
+        const version: any = getLibraryVersion();
+
+		addDependencyToPackageJson(tree, 'easy-framework', `^${version}`);
 
 		context.addTask(new NodePackageInstallTask());
 
