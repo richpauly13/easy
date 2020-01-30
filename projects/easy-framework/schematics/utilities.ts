@@ -84,7 +84,7 @@ export function getLibraryVersion(): any {
 		fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')
 	).version; */
 
-    return require('../package.json').version;
+	return require('../package.json').version;
 }
 
 // Get the version of a package.

@@ -26,7 +26,15 @@ module.exports = function(config) {
                 'lcovonly',
                 'text-summary'
             ],
-			fixWebpackSourcePaths: true
+			fixWebpackSourcePaths: true,
+            thresholds: {
+                global: {
+                    branches: 100,
+                    functions: 100,
+                    lines: 100,
+                    statements: 100
+                }
+            }
 		},
 		reporters: [
             'spec',
