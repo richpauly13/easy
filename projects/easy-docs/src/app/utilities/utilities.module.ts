@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { ColorComponent } from './color/color.component';
+import { DisplayComponent } from './display/display.component';
 import { PositionComponent } from './position/position.component';
 import { SharedModule } from '../shared/shared.module';
 import { SpaceComponent } from './space/space.component';
@@ -14,6 +15,7 @@ import { TextComponent } from './text/text.component';
 @NgModule({
 	declarations: [
 		ColorComponent,
+		DisplayComponent,
 		PositionComponent,
 		SpaceComponent,
 		TypographyComponent,
@@ -24,6 +26,7 @@ import { TextComponent } from './text/text.component';
 	],
 	exports: [
 		ColorComponent,
+		DisplayComponent,
 		PositionComponent,
 		SpaceComponent,
 		TypographyComponent,

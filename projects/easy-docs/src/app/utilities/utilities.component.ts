@@ -12,6 +12,7 @@ export class UtilitiesComponent implements OnInit {
 	public ngOnInit(): void {
 		this.navs = [
 			'color',
+			'display',
 			'position',
 			'space',
 			'text',

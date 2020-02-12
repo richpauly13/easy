@@ -1,0 +1,16 @@
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
+
+// Display styles
+.dis-block {
+	display: block;
+}
+
+.dis-inline {
+	display: inline;
+}
+
+.dis-inline-block {
+	display: inline-block;
+}

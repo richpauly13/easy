@@ -38,7 +38,7 @@ html {
 
 // Main color, text, and sizing
 body {
-	background-color: color(white);
+	background-color: color(lt-white);
 	color: color(lt-black);
 	font-family: $font-stack;
 	font-size: 1rem;
@@ -102,6 +102,10 @@ ul {
 }
 
 // Sets proper vertical alignment
+caption {
+	caption-side: bottom;
+}
+
 caption,
 img,
 label,
@@ -110,13 +114,9 @@ th {
 	vertical-align: middle;
 }
 
-caption {
-	caption-side: bottom;
-}
-
 // Link, form, and button resets
 a {
-	color: color(blue);
+	color: color(dk-blue);
 
 	&:visited {
 		color: color(purple);
@@ -183,7 +183,6 @@ select {
 	}
 }
 
-// Form normalization and resets
 [disabled]:hover {   
 	cursor: not-allowed;
 }
