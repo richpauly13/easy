@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.11](https://github.com/richpauly13/easy/compare/v0.3.10...v0.3.11) (2020-02-12)
+
+
+### Features
+
+* **link:** add link styles and docs ([2eff208](https://github.com/richpauly13/easy/commit/2eff208c475d030a892e837219a5cd106c15dbf3))
+* **space:** add center class to space in easy-framework and easy-docs ([d1207b0](https://github.com/richpauly13/easy/commit/d1207b073e9b3a18dade79d20e4fefde17f33a71))
+
+
+### Bug Fixes
+
+* **docs:** change section to div for containers in docs ([7a1b6cc](https://github.com/richpauly13/easy/commit/7a1b6cc461980e9b2bcbd598f78a7feea0392236))
+
 ### [0.3.10](https://github.com/richpauly13/easy/compare/v0.3.9...v0.3.10) (2020-01-27)
 
 ### [0.3.9](https://github.com/richpauly13/easy/compare/v0.3.8...v0.3.9) (2020-01-27)
