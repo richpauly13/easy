@@ -17,11 +17,14 @@
     display: block;
     text-align: center;	
     text-decoration: none;
-
-    &.active,
+    
+    &:visited,
+    &:focus:not(:disabled),
     &:hover:not(:disabled),
-	&:active,
-	&:focus:not(:disabled) {
+    &:active,
+    &.active
+	 {
+        color: inherit;
         outline: none;
 		text-decoration: underline;
 	}

@@ -114,17 +114,25 @@ caption {
 	caption-side: bottom;
 }
 
-// Link and button resets
+// Link, form, and button resets
+a {
+	color: color(blue);
+
+	&:visited {
+		color: color(purple);
+	}
+}
+
 [type="button"],
 [type="reset"],
 [type="submit"],
-a,
 a[role="button"],
-button,
 html input[type="button"],
-input,
 input[type="reset"],
 input[type="submit"],
+a,
+button,
+input,
 optgroup,
 select,
 textarea {
@@ -136,17 +144,17 @@ textarea {
 [type="button"],
 [type="reset"],
 [type="submit"],
-a,
 a[role="button"],
-button,
 html input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"],
+a,
+button {
 	appearance: none;
 	background-color: transparent;
 
-    &:focus:not(:disabled),
-    &:hover:not(:disabled) {
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
         outline: none;
         text-decoration: underline;
     }
@@ -160,15 +168,15 @@ input[type="submit"] {
 [type="button"],
 [type="reset"],
 [type="submit"],
-a,
 a[role="button"],
-button,
 html input[type="button"],
 input[type="range"],
 input[type="checkbox"],
 input[type="reset"],
 input[type="radio"],
 input[type="submit"],
+a,
+button,
 select {
 	&:hover {
 		cursor: pointer;
