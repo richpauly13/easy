@@ -3,6 +3,12 @@
 @import "../../core/sass/variables";
 
 // Space styles
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 @each $size, $rem in $space {
 	@each $side in top, right, bottom, left {
 		.mar-#{str-slice($side, 1, 1)}-#{$size} {
