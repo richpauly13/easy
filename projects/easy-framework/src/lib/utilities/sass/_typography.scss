@@ -35,7 +35,7 @@ blockquote {
 
         &::before {
             color: color(dk-gray);
-            content: "\2012";            
+            content: "\2012";
             padding-right: rem(8);
         }
     }
@@ -106,6 +106,15 @@ ul.list {
 	list-style: disc;
 
 	& .list {
-        list-style: circle;        
+        list-style: circle;
+	}
+}
+
+// Link styles
+a {
+	color: color(dk-blue);
+
+	&:visited {
+		color: color(purple);
 	}
 }

@@ -114,15 +114,7 @@ th {
 	vertical-align: middle;
 }
 
-// Link, form, and button resets
-a {
-	color: color(dk-blue);
-
-	&:visited {
-		color: color(purple);
-	}
-}
-
+// Form and button resets
 [type="button"],
 [type="reset"],
 [type="submit"],
@@ -138,7 +130,7 @@ select,
 textarea {
 	border: 0;
     font-family: inherit;
-    text-decoration: none;    
+    text-decoration: none;
 }
 
 [type="button"],
@@ -154,15 +146,16 @@ button {
 	background-color: transparent;
 
     &:focus:not([disabled]),
-    &:hover:not([disabled]) {
+	&:hover:not([disabled]),
+	&:active:not([disabled]) {
         outline: none;
         text-decoration: underline;
     }
 
     &:-moz-focus-inner {
         outline: none;
-        text-decoration: underline;        
-    }  
+        text-decoration: underline;
+    }
 }
 
 [type="button"],
@@ -183,14 +176,14 @@ select {
 	}
 }
 
-[disabled]:hover {   
+[disabled]:hover {
 	cursor: not-allowed;
 }
 
 [disabled],
 [readonly] {
 	background-color: color(lt-gray);
-	color: color(lt-black);	
+	color: color(lt-black);
 }
 
 fieldset {
