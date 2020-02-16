@@ -26,7 +26,7 @@
     "@angular/compiler-cli": "^9.1.0-next.0",
     "@angular/language-service": "^9.1.0-next.0",
     "@schematics/angular": "^9.0.2",
-    "@types/jasmine": "^3.5.3",
+    "@types/jasmine": "^3.5.4",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^13.7.1",
     "codecov": "^4.0.0-0",
@@ -69,7 +69,6 @@
     "url": "https://github.com/richpauly13/easy.git"
   },
   "scripts": {
-    "audit:fix": "npm audit fix --force",
     "build": "run-s build:easy build:docs",
     "build:docs": "ng build easy-docs --prod",
     "build:easy": "ng build easy-framework --prod",
@@ -88,7 +87,7 @@
     "test:docs": "ng test easy-docs",
     "test:easy": "ng test easy-framework",
     "test:watch": "ng test easy-framework --watch",
-    "update:core": "npm i -g npm && npm i -g @angular/cli@next",
+    "update:core": "npm i -g npm && npm i -g @angular/cli@latest",
     "update:deps": "ng update --all --next --force --allowDirty && npm i --save-dev typescript@3.7.5 && npm i --save rxjs@6.5.4",
     "update:ng": "run-s update:core update:deps",
     "update:webdriver": "webdriver-manager update",

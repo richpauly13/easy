@@ -8,7 +8,7 @@ version: 2.1
 base_image: &base_image
 
   # Node version
-  image: circleci/node:13.0.1-browsers
+  image: circleci/node:13.8.0-browsers
 
 job_common: &job_common
   docker:
@@ -48,9 +48,9 @@ jobs:
       - run:
           name: Update dependencies
           command: npm i --silent
-      
+
       # Cache dependencies
-      - <<: *save          
+      - <<: *save
 
   build:
     <<: *job_common
@@ -76,13 +76,13 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-          
+
       - run:
           name: Run easy-framework unit tests
           command: npm run test:easy
 
       - run:
-          name: Upload easy code coverage report to codecov 
+          name: Upload easy code coverage report to codecov
           command: bash <(curl -s https://codecov.io/bash) -c -F easy
 
   test_docs:
@@ -91,13 +91,13 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-          
+
       - run:
           name: Run easy-docs unit tests
           command: npm run test:docs
-      
+
       - run:
-          name: Upload docs code coverage report to codecov 
+          name: Upload docs code coverage report to codecov
           command: bash <(curl -s https://codecov.io/bash) -c -F docs
 
   e2e:
@@ -106,7 +106,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-          
+
       - run:
           name: Run easy-docs e2e tests
           command: sudo npm run e2e
