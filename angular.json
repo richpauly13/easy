@@ -1,206 +1,224 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-	"version": 1,
-	"newProjectRoot": "projects",
-	"projects": {
-		"easy-framework": {
-			"projectType": "library",
-            "schematics": {
-				"@schematics/angular:component": {
-                    "flat": true,
-                    "viewEncapsulation": "None"
-				},
-				"@schematics/angular:module": {
-					"routing": false
-				}
-			},
-			"root": "projects/easy-framework",
-			"sourceRoot": "projects/easy-framework/src",
-			"prefix": "ez",			
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-ng-packagr:build",
-					"options": {
-						"tsConfig": "projects/easy-framework/tsconfig.lib.json",
-						"project": "projects/easy-framework/ng-package.json"
-					},
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "projects/easy-framework/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/easy-framework/src/test.ts",
-						"tsConfig": "projects/easy-framework/tsconfig.spec.json",
-						"karmaConfig": "projects/easy-framework/karma.conf.js",
-						"watch": false,
-						"codeCoverage": true,
-						"progress": false
-					}
-				},
-				"lint": {
-					"builder": "@angular-devkit/build-angular:tslint",
-					"options": {
-						"tsConfig": ["projects/easy-framework/tsconfig.lib.json", "projects/easy-framework/tsconfig.spec.json"],
-						"exclude": ["**/node_modules/**"],
-						"fix": true
-					}
-				}
-			}
-		},
-		"easy-docs": {
-			"projectType": "application",
-			"schematics": {
-                "@schematics/angular:component": {
-                    "flat": false
-				},
-				"@schematics/angular:module": {
-					"routing": true
-				}
-			},
-			"root": "projects/easy-docs",
-			"sourceRoot": "projects/easy-docs/src",
-			"prefix": "docs",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
-					"options": {
-						"outputPath": "docs",
-						"index": "projects/easy-docs/src/index.html",
-						"main": "projects/easy-docs/src/main.ts",
-						"polyfills": "projects/easy-docs/src/polyfills.ts",
-						"tsConfig": "projects/easy-docs/tsconfig.app.json",
-						"aot": true,
-						"assets": ["projects/easy-docs/src/favicon.ico"],
-						"styles": ["projects/easy-docs/src/styles.scss"]
-					},
-					"configurations": {
-						"production": {
-							"fileReplacements": [
-								{
-									"replace": "projects/easy-docs/src/environments/environment.ts",
-									"with": "projects/easy-docs/src/environments/environment.prod.ts"
-								}
-							],
-							"optimization": true,
-							"outputHashing": "all",
-							"sourceMap": false,
-							"extractCss": true,
-							"namedChunks": false,
-							"aot": true,
-							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true,
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "2mb",
-									"maximumError": "5mb"
-								},
-                                {
-                                    "type": "anyComponentStyle",
-                                    "maximumWarning": "6kb"
-                                }
-
-							]
-						}
-					}
-				},
-				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"options": {
-						"browserTarget": "easy-docs:build"
-					},
-					"configurations": {
-						"production": {
-							"browserTarget": "easy-docs:build:production"
-						}
-					}
-				},
-				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n",
-					"options": {
-						"browserTarget": "easy-docs:build"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/easy-docs/src/test.ts",
-						"polyfills": "projects/easy-docs/src/polyfills.ts",
-						"tsConfig": "projects/easy-docs/tsconfig.spec.json",
-						"karmaConfig": "projects/easy-docs/karma.conf.js",
-						"watch": false,
-						"codeCoverage": true,
-						"progress": false,
-						"assets": ["projects/easy-docs/src/favicon.ico"],
-						"styles": ["projects/easy-docs/src/styles.scss"]
-					}
-				},
-				"lint": {
-					"builder": "@angular-devkit/build-angular:tslint",
-					"options": {
-						"tsConfig": ["projects/easy-docs/tsconfig.app.json", "projects/easy-docs/tsconfig.spec.json", "projects/easy-docs/e2e/tsconfig.json"],
-						"exclude": ["**/node_modules/**"],
-						"fix": true
-					}
-				},
-				"e2e": {
-					"builder": "@angular-devkit/build-angular:protractor",
-					"options": {
-						"protractorConfig": "projects/easy-docs/e2e/protractor.conf.js",
-						"devServerTarget": "easy-docs:serve",
-						"webdriverUpdate": false
-					},
-					"configurations": {
-						"production": {
-							"devServerTarget": "easy-docs:serve:production"
-						}
-					}
-				}
-			}
-		}
-	},
-	"defaultProject": "easy-docs",
-    "schematics": {
-        "@schematics/angular:component": {   
-            "changeDetection": "OnPush",         
-            "export": true,            
-            "inlineStyle": false,
-            "inlineTemplate": false,
-            "skipImport": false,
-            "skipTests": false,
-            "style": "scss"
-        },
-        "@schematics/angular:directive": {
-            "export": true,
-            "flat": true,
-            "skipImport": false,
-            "skipTests": false
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "easy-framework": {
+      "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "flat": true,
+          "viewEncapsulation": "None"
         },
         "@schematics/angular:module": {
-            "commonModule": false,
-            "flat": false,
-            "routingScope": "Child"
-        },
-        "@schematics/angular:service": {
-            "export": true,
-            "flat": true,
-            "skipTests": false
-        },
-        "@schematics/angular:pipe": {
-            "export": true,
-            "flat": true,
-            "skipImport": false,
-            "skipTests": false
-        },
-        "@schematics/angular:class": {
-            "export": true,
-            "flat": true,
-            "skipTests": false
+          "routing": false
         }
+      },
+      "root": "projects/easy-framework",
+      "sourceRoot": "projects/easy-framework/src",
+      "prefix": "ez",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/easy-framework/tsconfig.lib.json",
+            "project": "projects/easy-framework/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/easy-framework/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/easy-framework/src/test.ts",
+            "tsConfig": "projects/easy-framework/tsconfig.spec.json",
+            "karmaConfig": "projects/easy-framework/karma.conf.js",
+            "watch": false,
+            "codeCoverage": true,
+            "progress": false
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/easy-framework/tsconfig.lib.json",
+              "projects/easy-framework/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ],
+            "fix": true
+          }
+        }
+      }
+    },
+    "easy-docs": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "flat": false
+        },
+        "@schematics/angular:module": {
+          "routing": true
+        }
+      },
+      "root": "projects/easy-docs",
+      "sourceRoot": "projects/easy-docs/src",
+      "prefix": "docs",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "docs",
+            "index": "projects/easy-docs/src/index.html",
+            "main": "projects/easy-docs/src/main.ts",
+            "polyfills": "projects/easy-docs/src/polyfills.ts",
+            "tsConfig": "projects/easy-docs/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/easy-docs/src/favicon.ico"
+            ],
+            "styles": [
+              "projects/easy-docs/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/easy-docs/src/environments/environment.ts",
+                  "with": "projects/easy-docs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "100kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "easy-docs:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "easy-docs:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "easy-docs:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/easy-docs/src/test.ts",
+            "polyfills": "projects/easy-docs/src/polyfills.ts",
+            "tsConfig": "projects/easy-docs/tsconfig.spec.json",
+            "karmaConfig": "projects/easy-docs/karma.conf.js",
+            "watch": false,
+            "codeCoverage": true,
+            "progress": false,
+            "assets": [
+              "projects/easy-docs/src/favicon.ico"
+            ],
+            "styles": [
+              "projects/easy-docs/src/styles.scss"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/easy-docs/tsconfig.app.json",
+              "projects/easy-docs/tsconfig.spec.json",
+              "projects/easy-docs/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ],
+            "fix": true
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/easy-docs/e2e/protractor.conf.js",
+            "devServerTarget": "easy-docs:serve",
+            "webdriverUpdate": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "easy-docs:serve:production"
+            }
+          }
+        }
+      }
     }
+  },
+  "defaultProject": "easy-docs",
+  "schematics": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "export": true,
+      "inlineStyle": false,
+      "inlineTemplate": false,
+      "skipImport": false,
+      "skipTests": false,
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "export": true,
+      "flat": true,
+      "skipImport": false,
+      "skipTests": false
+    },
+    "@schematics/angular:module": {
+      "commonModule": false,
+      "flat": false,
+      "routingScope": "Child"
+    },
+    "@schematics/angular:service": {
+      "export": true,
+      "flat": true,
+      "skipTests": false
+    },
+    "@schematics/angular:pipe": {
+      "export": true,
+      "flat": true,
+      "skipImport": false,
+      "skipTests": false
+    },
+    "@schematics/angular:class": {
+      "export": true,
+      "flat": true,
+      "skipTests": false
+    }
+  }
 }
