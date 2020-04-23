@@ -20,7 +20,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.0-next.1",
     "@angular-devkit/build-ng-packagr": "^0.1000.0-next.1",
-    "@angular-devkit/core": "^10.0.0-next.1",
+    "@angular-devkit/core": "^10.0.0-next.2",
     "@angular-devkit/schematics": "^10.0.0-next.1",
     "@angular/cli": "^10.0.0-next.1",
     "@angular/compiler-cli": "^10.0.0-next.2",
