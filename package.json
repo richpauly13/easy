@@ -30,7 +30,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^13.13.2",
     "codecov": "^4.0.0-0",
-    "codelyzer": "^5.2.2",
+    "codelyzer": "^6.0.0-next.1",
     "copyfiles": "^2.2.0",
     "husky": "^4.2.5",
     "jasmine-core": "^3.5.0",
