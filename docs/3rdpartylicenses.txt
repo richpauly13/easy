@@ -3,7 +3,7 @@ Do Not Translate or Localize
 
 
 --------------------------------------------------------------------------------
-@angular-devkit/build-angular v0.1000.0-next.2 - Angular Authors
+@angular-devkit/build-angular v0.1000.0-next.3 - Angular Authors
 git+https://github.com/angular/angular-cli.git
 --------------------------------------------------------------------------------
 
@@ -31,35 +31,35 @@ SOFTWARE.
 
 
 --------------------------------------------------------------------------------
-@angular/common v10.0.0-next.3 - angular
+@angular/common v10.0.0-next.4 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/core v10.0.0-next.3 - angular
+@angular/core v10.0.0-next.4 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/platform-browser v10.0.0-next.3 - angular
+@angular/platform-browser v10.0.0-next.4 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/platform-browser-dynamic v10.0.0-next.3 - angular
+@angular/platform-browser-dynamic v10.0.0-next.4 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/router v10.0.0-next.3 - angular
+@angular/router v10.0.0-next.4 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
@@ -92,7 +92,7 @@ THE SOFTWARE.
 
 
 --------------------------------------------------------------------------------
-css-loader v3.5.2 - Tobias Koppers @sokra
+css-loader v3.5.3 - Tobias Koppers @sokra
 git+https://github.com/webpack-contrib/css-loader.git
 --------------------------------------------------------------------------------
 
