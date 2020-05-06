@@ -2,17 +2,16 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": [
-        
-    ]
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": true
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "src/test.ts", "src/**/*.spec.ts"
+    "src/test.ts",
+    "src/**/*.spec.ts",
+    "src/environments/environment.prod.ts"
   ]
 }

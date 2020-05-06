@@ -254,17 +254,20 @@ textarea {
 // Credit: https://css-tricks.com/html5-progress-element/
 progress {
 	appearance: none;
-	background-color: color(gray);
-	border: none;
+	background-color: none;
+	border: rem(1) solid color(gray);
+	border-radius: rem(16);
 	color: color(dk-blue);
+	height: rem(16);
+	width: 100%;
 
 	&::-webkit-progress-bar {
-		background-color: color(gray);
-		color: color(dk-blue);
+		background-color: none;
+		color: color(blue);
 	}
 
 	&::-moz-progress-bar {
-		background-color: color(dk-blue);
+		background-color: color(blue);
 	}
 
 	&::-ms-fill {
