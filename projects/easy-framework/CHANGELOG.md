@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.12](https://github.com/richpauly13/easy/compare/v0.3.11...v0.3.12) (2020-05-07)
+
+
+### Features
+
+* **docs:** add display docs ([e702613](https://github.com/richpauly13/easy/commit/e702613a4b18798f4fb8cc4d01c0d4f4b7ce077a))
+* **layout:** start grid styles ([32ee275](https://github.com/richpauly13/easy/commit/32ee275f9b096e57529baae7c9af75544b0e5e0c))
+* **spinner:** remove dotted and ad two other spinners ([ab4321d](https://github.com/richpauly13/easy/commit/ab4321d7911dc958cc09b765fd86cb4cae3bdf39))
+
+
+### Bug Fixes
+
+* **base:** fix progress normalization ([64e6f6d](https://github.com/richpauly13/easy/commit/64e6f6d7e45a87dd06df3e01c92bce06b9683fec))
+* **layout:** remove multi-column module ([635bdf7](https://github.com/richpauly13/easy/commit/635bdf7bc4e03e9d9f47e37b2b57a1896fb500a9))
+
 ### [0.3.11](https://github.com/richpauly13/easy/compare/v0.3.10...v0.3.11) (2020-02-12)
 
 
