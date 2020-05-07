@@ -4,36 +4,32 @@
 
 // Spinner styles
 [class^="spinner"] {
-    animation: spinner 3s linear infinite;
+	animation: spinner 1.5s linear infinite;
+	border: space(xs) solid color(lt-gray);
     border-radius: 50%;
-    height: rem(120);
-    width: rem(120);
+    height: space(xl);
+    width: space(xl);
 }
 
 .spinner {
-    border-color: color(lt-gray);
     border-left-color: color(blue);
-    border-style: solid;
-    border-width: space(sm);
 }
 
-.spinner-dotted {
-    border-bottom-color: color(lt-blue);
-    border-bottom-width: rem(12);
-    border-left-color: #3399ff;
-    border-left-width: space(xs);
-    border-right-color: color(blue);
-    border-right-width: rem(14);
-    border-top-color: color(dk-blue);
-    border-top-width: rem(18);
-    border-style: dotted;
+.spinner-2 {
+	border-bottom-color: color(dk-blue);
+	border-left-color: color(blue);
+	border-right-color: color(blue);
+	border-top-color: color(dk-blue);
+}
+
+.spinner-multi {
+	border-bottom-color: color(green);
+	border-left-color: color(purple);
+	border-right-color: color(yellow);
+	border-top-color: color(orange);
 }
 
 @keyframes spinner {
-    from {
-        transform: rotate(0deg);
-    }
-
     to {
         transform: rotate(360deg);
     }
