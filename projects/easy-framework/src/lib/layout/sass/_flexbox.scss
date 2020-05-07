@@ -27,32 +27,32 @@
 }
 
 // Flexbox container alignment styles
-.align-c:not(.col),
+.align-c:not(.col):not(.grid),
 .col.align-m {
 	justify-content: center;
 }
 
-.align-l:not(.col),
+.align-l:not(.col):not(.grid),
 .col.align-t {
 	justify-content: flex-start;
 }
 
-.align-r:not(.col),
+.align-r:not(.col):not(.grid),
 .col.align-b {
 	justify-content: flex-end;
 }
 
-.align-m:not(.col),
+.align-m:not(.col):not(.grid),
 .col.align-c {
 	align-items: center;
 }
 
-.align-b:not(.col),
+.align-b:not(.col):not(.grid),
 .col.align-r {
 	align-items: flex-end;
 }
 
-.align-t:not(.col),
+.align-t:not(.col):not(.grid),
 .col.align-l {
 	align-items: flex-start;
 }

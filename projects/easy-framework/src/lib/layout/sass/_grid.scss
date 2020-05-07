@@ -6,3 +6,90 @@
 .grid {
     display: grid;
 }
+
+
+@for $number from 1 to 12 {
+	.cols-#{$number} {
+		grid-template-columns: repeat($number, 1fr);
+	}
+
+	.rows-#{$number} {
+		grid-template-rows: repeat($number, 1fr);
+	}
+}
+
+// Grid container alignment styles
+.grid.align-b {
+	align-items: end;
+}
+
+.grid.align-c {
+	align-items: center;
+}
+
+.grid.align-cm {
+	align-items: center;
+	justify-items: center;
+}
+
+.grid.align-l {
+	justify-items: start;
+}
+
+.grid.align-m {
+	justify-items: center;
+}
+
+.grid.align-r {
+	justify-items: end;
+}
+
+.grid.align-t {
+	align-items: start;
+}
+
+// Grid container gap styles
+/* @each $size, $rem in $space {
+
+} */
+
+// Grid item placement styles
+@for $number from 1 to 12 {
+	.col-#{$number} {
+		grid-column: $number;
+	}
+
+	.row-#{$number} {
+		grid-row: $number;
+	}
+}
+
+// Grid item alignment styles
+.grid .align-b {
+	align-self: end;
+}
+
+.grid .align-c {
+	align-self: center;
+}
+
+.grid .align-cm {
+	align-self: center;
+	justify-self: center;
+}
+
+.grid .align-l {
+	justify-self: start;
+}
+
+.grid .align-m {
+	justify-self: center;
+}
+
+.grid .align-r {
+	justify-self: end;
+}
+
+.grid .align-t {
+	align-self: start;
+}
