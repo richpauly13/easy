@@ -14,7 +14,6 @@ export class LayoutComponent implements OnInit {
 			'container',
 			'flexbox',
 			'grid',
-			'multi-column',
 			'nav',
 			'sticky-footer'
 		];

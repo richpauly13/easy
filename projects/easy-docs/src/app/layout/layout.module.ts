@@ -5,7 +5,6 @@ import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
 import { LayoutRoutingModule } from './layout-routing.module';
-import { MultiColumnComponent } from './multi-column/multi-column.component';
 import { NavComponent } from './nav/nav.component';
 import { SharedModule } from '../shared/shared.module';
 import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
@@ -16,7 +15,6 @@ import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
 		FlexboxComponent,
 		GridComponent,
 		LayoutComponent,
-		MultiColumnComponent,
 		NavComponent,
 		StickyFooterComponent
 	],
@@ -26,7 +24,6 @@ import { StickyFooterComponent } from './sticky-footer/sticky-footer.component';
 		GridComponent,
 		LayoutComponent,
 		LayoutRoutingModule,
-		MultiColumnComponent,
 		NavComponent,
 		StickyFooterComponent
 	],
