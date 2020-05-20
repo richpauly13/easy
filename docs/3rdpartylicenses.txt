@@ -31,35 +31,35 @@ SOFTWARE.
 
 
 --------------------------------------------------------------------------------
-@angular/common v10.0.0-next.8 - angular
+@angular/common v10.0.0-next.9 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/core v10.0.0-next.8 - angular
+@angular/core v10.0.0-next.9 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/platform-browser v10.0.0-next.8 - angular
+@angular/platform-browser v10.0.0-next.9 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/platform-browser-dynamic v10.0.0-next.8 - angular
+@angular/platform-browser-dynamic v10.0.0-next.9 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
 MIT
 
 --------------------------------------------------------------------------------
-@angular/router v10.0.0-next.8 - angular
+@angular/router v10.0.0-next.9 - angular
 git+https://github.com/angular/angular.git
 --------------------------------------------------------------------------------
 
