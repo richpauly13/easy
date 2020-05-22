@@ -19,7 +19,7 @@
   "description": "Documentation for EASY framework.",
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.0-next.6",
-    "@angular-devkit/build-ng-packagr": "^0.1000.0-next.6",
+    "@angular-devkit/build-ng-packagr": "^0.1000.0-rc.0",
     "@angular-devkit/core": "^10.0.0-next.6",
     "@angular-devkit/schematics": "^10.0.0-next.6",
     "@angular/cli": "^10.0.0-next.6",
