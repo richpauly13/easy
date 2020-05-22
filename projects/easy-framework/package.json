@@ -17,6 +17,7 @@
     "css",
     "flexbox",
     "framework",
+    "grid",
     "responsive",
     "sass"
   ],
@@ -39,5 +40,5 @@
   "schematics": "./schematics/collection.json",
   "sideEffects": false,
   "typings": "easy-framework.d.ts",
-  "version": "0.3.12"
+  "version": "0.3.13"
 }

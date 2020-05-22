@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.13](https://github.com/richpauly13/easy/compare/v0.3.12...v0.3.13) (2020-05-22)
+
+
+### Features
+
+* **layout:** finish grid styles and docs ([8d3ba4d](https://github.com/richpauly13/easy/commit/8d3ba4d19a410c845a287dc997f35cf936e6903d))
+* **layout:** start grid styles and documentation ([2d7daf9](https://github.com/richpauly13/easy/commit/2d7daf9dd642d0700bdcd22bf2b6b4dbf25065a5))
+* **utilities:** rename width to dimension and add height styles and docs ([4ad454b](https://github.com/richpauly13/easy/commit/4ad454bab0e825e7e7c6f1af62b7d7aa4f56a00b))
+
 ### [0.3.12](https://github.com/richpauly13/easy/compare/v0.3.11...v0.3.12) (2020-05-07)
 
 
