@@ -11,6 +11,14 @@
 	margin: space(sm);
 	padding: 0;
 
+	&.col {
+		height: rem(400);
+
+		& * {
+			width: 100%;
+		}
+	}
+
 	p {
 		background-color: color(blue);
 		color: color(white);

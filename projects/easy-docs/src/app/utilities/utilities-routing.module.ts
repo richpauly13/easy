@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ColorComponent } from './color/color.component';
+import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
 import { PositionComponent } from './position/position.component';
 import { SpaceComponent } from './space/space.component';
@@ -9,7 +10,6 @@ import { TextComponent } from './text/text.component';
 import { TypographyComponent } from './typography/typography.component';
 import { UtilitiesComponent } from './utilities.component';
 import { VisibilityComponent } from './visibility/visibility.component';
-import { WidthComponent } from './width/width.component';
 
 const routes: Routes = [
 	{
@@ -19,6 +19,10 @@ const routes: Routes = [
 			{
 				component: ColorComponent,
 				path: 'color'
+			},
+			{
+				component: DimensionComponent,
+				path: 'dimension'
 			},
 			{
 				component: DisplayComponent,
@@ -43,10 +47,6 @@ const routes: Routes = [
 			{
 				component: VisibilityComponent,
 				path: 'visibility'
-			},
-			{
-				component: WidthComponent,
-				path: 'width'
 			},
 			{
 				path: '',

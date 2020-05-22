@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { ColorComponent } from './color/color.component';
+import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
 import { PositionComponent } from './position/position.component';
 import { SharedModule } from '../shared/shared.module';
@@ -9,7 +10,6 @@ import { TypographyComponent } from './typography/typography.component';
 import { UtilitiesComponent } from './utilities.component';
 import { UtilitiesRoutingModule } from './utilities-routing.module';
 import { VisibilityComponent } from './visibility/visibility.component';
-import { WidthComponent } from './width/width.component';
 import { TextComponent } from './text/text.component';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { TextComponent } from './text/text.component';
 		TypographyComponent,
 		UtilitiesComponent,
 		VisibilityComponent,
-		WidthComponent,
+		DimensionComponent,
 		TextComponent
 	],
 	exports: [
@@ -33,7 +33,7 @@ import { TextComponent } from './text/text.component';
 		UtilitiesComponent,
 		UtilitiesRoutingModule,
 		VisibilityComponent,
-		WidthComponent,
+		DimensionComponent,
 		TextComponent
 	],
 	imports: [

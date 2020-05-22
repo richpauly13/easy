@@ -2,6 +2,31 @@
 @import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
+// Height styles
+.h-25 {
+    height: 25%;
+}
+
+.h-33 {
+    height: 33%;
+}
+
+.h-50 {
+    height: 50%;
+}
+
+.h-66 {
+    height: 66%;
+}
+
+.h-75 {
+    height: 75%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
 // Width styles
 .w-25 {
     width: 25%;
