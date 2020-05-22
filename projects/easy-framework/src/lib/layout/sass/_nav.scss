@@ -15,9 +15,10 @@
 .nav-link {
     color: inherit;
     display: block;
-    text-align: center;	
+    text-align: center;
     text-decoration: none;
-    
+
+	&:link,
     &:visited,
     &:focus:not(:disabled),
     &:hover:not(:disabled),
@@ -26,7 +27,6 @@
 	 {
         color: inherit;
         outline: none;
-		text-decoration: underline;
 	}
 }
 
@@ -36,7 +36,7 @@
 	width: space(xl);
 
     + .nav-row {
-        display: none;       
+        display: none;
     }
 
 	&::before {
@@ -51,14 +51,14 @@
 
     &.active + .nav-row {
         display: block;
-    }  
+    }
 
     @include media(md) {
         display: none;
 
         &.active + .nav-row {
             display: flex;
-        }  
+        }
 
         + .nav-row {
             display: flex;

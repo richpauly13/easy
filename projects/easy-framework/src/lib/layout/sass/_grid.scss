@@ -4,14 +4,7 @@
 
 // Grid container styles
 .grid {
-	align-items: start;
 	display: grid;
-	justify-items: start;
-
-	* {
-		align-self: start;
-		justify-self: start;
-	}
 }
 
 // Grid container columns and rows styles
@@ -27,16 +20,18 @@
 
 // Grid container gap styles
 @each $size, $rem in $space {
-	.grid.col-gap-#{$size} {
-		column-gap: $rem;
-	}
+	@if $size != n {
+		.grid.col-gap-#{$size} {
+			column-gap: $rem;
+		}
 
-	.grid.gap-#{$size} {
-		gap: $rem $rem;
-	}
+		.grid.gap-#{$size} {
+			gap: $rem $rem;
+		}
 
-	.grid.row-gap-#{$size} {
-		row-gap: $rem;
+		.grid.row-gap-#{$size} {
+			row-gap: $rem;
+		}
 	}
 }
 
@@ -46,7 +41,7 @@
 }
 
 .grid.align-c {
-	align-items: center;
+	justify-items: center;
 }
 
 .grid.align-cm {
@@ -54,24 +49,16 @@
 	justify-items: center;
 }
 
-.grid.align-col-st {
-	justify-items: stretch;
-}
-
 .grid.align-l {
 	justify-items: start;
 }
 
 .grid.align-m {
-	justify-items: center;
+	align-items: center;
 }
 
 .grid.align-r {
 	justify-items: end;
-}
-
-.grid.align-row-st {
-	align-items: start;
 }
 
 .grid.align-t {
@@ -89,13 +76,26 @@
 	}
 }
 
+// Grid item span styles
+@for $number1 from 1 to 13 {
+	@for $number2 from 2 to 13 {
+		.grid .col-#{$number1}-span-#{$number2} {
+			grid-column: $number1 / span $number2;
+		}
+
+		.grid .row-#{$number1}-span-#{$number2} {
+			grid-row: $number1 / span $number2;
+		}
+	}
+}
+
 // Grid item alignment styles
 .grid .item-b {
 	align-self: end;
 }
 
 .grid .item-c {
-	align-self: center;
+	justify-self: center;
 }
 
 .grid .item-cm {
@@ -108,7 +108,7 @@
 }
 
 .grid .item-m {
-	justify-self: center;
+	align-self: center;
 }
 
 .grid .item-r {

@@ -8,8 +8,8 @@
 	margin-left: auto;
 	margin-right: auto;
     padding-bottom: space(sm);
-    padding-left: space(xs);
-    padding-right: space(xs);
+    padding-left: space(sm);
+    padding-right: space(sm);
     padding-top: space(sm);
 	width: 100%;
 }
@@ -22,18 +22,18 @@
 
 .container-fluid {
 	@include media(sm) {
-		width: rem(448);
+		max-width: rem(448);
 	}
 
 	@include media(md) {
-		width: rem(736);
+		max-width: rem(736);
 	}
 
 	@include media(lg) {
-		width: rem(992);
+		max-width: rem(992);
 	}
 
 	@include media(xl) {
-		width: rem(1328);
+		max-width: rem(1328);
 	}
 }

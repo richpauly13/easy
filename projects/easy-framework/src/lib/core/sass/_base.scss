@@ -140,8 +140,24 @@ a[role="button"],
 html input[type="button"],
 input[type="reset"],
 input[type="submit"],
-a,
 button {
+	appearance: none;
+	background-color: transparent;
+
+    &:focus:not([disabled]),
+	&:hover:not([disabled]),
+	&:active:not([disabled]) {
+		border: rem(1) solid color(blue);
+        outline: none;
+    }
+
+    &:-moz-focus-inner {
+		border: rem(1) solid color(blue);
+        outline: none;
+    }
+}
+
+a {
 	appearance: none;
 	background-color: transparent;
 

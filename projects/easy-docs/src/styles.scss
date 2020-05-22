@@ -100,11 +100,13 @@
 		margin-bottom: rem(16);
 	}
 
+	&.h-50 {
+		height: rem(50);
+	}
+
 	li {
 		background-color: color(blue);
 		color: color(white);
-		height: rem(75);
-		width: 100%;
 
 		&:nth-child(even) {
 			background-color: color(green);
