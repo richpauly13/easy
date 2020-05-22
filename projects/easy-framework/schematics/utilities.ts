@@ -80,10 +80,6 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Pat
 }
 
 export function getLibraryVersion(): any {
-	/* return JSON.parse(
-		fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8')
-	).version; */
-
 	return require('../package.json').version;
 }
 

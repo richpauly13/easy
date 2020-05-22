@@ -1,7 +1,130 @@
 <h1>Grid</h1>
 
-<article class="mar-b-lg box-shadow-1 border-lr-gray border-t-gray">
-    <section class="pad-a-sm bg-lt-gray">
-        <p>Coming soon.</p>
+<article class="mar-b-lg box-shadow-1 border-lr-gray">
+    <section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>In order for grid to work, a parent container must have a <code>.grid</code> class.</p>
+		<p>Because of the complexity and flexibility of grid, EASY only provides simple styles for layout.</p>
+		<p>For named areas and lines, please provide your own styles. See <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank">A Complete Guide to Grid</a> for more details.</p>
     </section>
+
+    <section class="pad-a-sm">
+        <ul class="grid">
+            <li>grid item</li>
+			<li>grid item</li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm border-tb-gray">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"grid"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Container Columns and Rows</h2>
+
+<article class="mar-b-lg box-shadow-1 border-lr-gray">
+    <section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Use <code>.cols-[1 - 12]</code> and <code>.rows-[1 - 12]</code> classes on the grid container to build your grid.</p>
+    </section>
+
+    <section class="pad-a-sm">
+        <ul class="grid cols-4 rows-1">
+            <li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+		</ul>
+		<ul class="grid cols-1 rows-4">
+            <li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+		</ul>
+		<ul class="grid cols-2 rows-2">
+            <li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm border-tb-gray">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"grid cols-4 rows-1"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+			<span>&lt;/<span class="tag">ul</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"grid cols-1 rows-4"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+			<span>&lt;/<span class="tag">ul</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"grid cols-2 rows-2"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Container Column and Row Gaps</h2>
+
+<article class="mar-b-lg box-shadow-1 border-lr-gray">
+    <section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Use <code>.col-gap-[xs || sm || md || lg || xl]</code> and <code>.row-gap-[xs || sm || md || lg || xl]</code> classes on the grid container to add grid gaps.</p>
+		<p>A <code>gap-[xs || sm || md || lg || xl]</code> class can be used to set both.</p>
+    </section>
+
+    <section class="pad-a-sm">
+        <ul class="grid cols-4 rows-1 col-gap-sm">
+            <li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+		</ul>
+		<ul class="grid cols-1 rows-4 row-gap-sm">
+            <li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+		</ul>
+		<ul class="grid cols-2 rows-2 gap-sm">
+            <li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+			<li>grid item</li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm border-tb-gray">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"grid cols-4 rows-1 col-gap-sm"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+			<span>&lt;/<span class="tag">ul</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"grid cols-1 rows-4 row-gap-sm"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+			<span>&lt;/<span class="tag">ul</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"grid cols-2 rows-2 gap-sm"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>grid item<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
 </article>

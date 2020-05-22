@@ -85,6 +85,25 @@
 	}
 }
 
+.grid {
+	border: rem(1) solid color(black);
+
+	&:not(:last-of-type) {
+		margin-bottom: rem(16);
+	}
+
+	li {
+		background-color: color(blue);
+		color: color(white);
+		height: rem(75);
+		width: 100%;
+
+		&:nth-child(even) {
+			background-color: color(green);
+		}
+	}
+}
+
 .main {
 	margin-left: rem(220);
     padding-top: rem(100);

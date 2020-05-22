@@ -4,17 +4,39 @@
 
 // Grid container styles
 .grid {
-    display: grid;
+	align-items: start;
+	display: grid;
+	justify-items: start;
+
+	* {
+		align-self: start;
+		justify-self: start;
+	}
 }
 
-
-@for $number from 1 to 12 {
-	.cols-#{$number} {
+// Grid container columns and rows styles
+@for $number from 1 to 13 {
+	.grid.cols-#{$number} {
 		grid-template-columns: repeat($number, 1fr);
 	}
 
-	.rows-#{$number} {
+	.grid.rows-#{$number} {
 		grid-template-rows: repeat($number, 1fr);
+	}
+}
+
+// Grid container gap styles
+@each $size, $rem in $space {
+	.grid.col-gap-#{$size} {
+		column-gap: $rem;
+	}
+
+	.grid.gap-#{$size} {
+		gap: $rem $rem;
+	}
+
+	.grid.row-gap-#{$size} {
+		row-gap: $rem;
 	}
 }
 
@@ -32,6 +54,10 @@
 	justify-items: center;
 }
 
+.grid.align-col-st {
+	justify-items: stretch;
+}
+
 .grid.align-l {
 	justify-items: start;
 }
@@ -44,52 +70,51 @@
 	justify-items: end;
 }
 
+.grid.align-row-st {
+	align-items: start;
+}
+
 .grid.align-t {
 	align-items: start;
 }
 
-// Grid container gap styles
-/* @each $size, $rem in $space {
-
-} */
-
 // Grid item placement styles
-@for $number from 1 to 12 {
-	.col-#{$number} {
+@for $number from 1 to 13 {
+	.grid .col-#{$number} {
 		grid-column: $number;
 	}
 
-	.row-#{$number} {
+	.grid .row-#{$number} {
 		grid-row: $number;
 	}
 }
 
 // Grid item alignment styles
-.grid .align-b {
+.grid .item-b {
 	align-self: end;
 }
 
-.grid .align-c {
+.grid .item-c {
 	align-self: center;
 }
 
-.grid .align-cm {
+.grid .item-cm {
 	align-self: center;
 	justify-self: center;
 }
 
-.grid .align-l {
+.grid .item-l {
 	justify-self: start;
 }
 
-.grid .align-m {
+.grid .item-m {
 	justify-self: center;
 }
 
-.grid .align-r {
+.grid .item-r {
 	justify-self: end;
 }
 
-.grid .align-t {
+.grid .item-t {
 	align-self: start;
 }
