@@ -2,7 +2,6 @@ import { apply, applyTemplates, branchAndMerge, chain, filter, MergeStrategy, me
 import { Path, strings } from '@angular-devkit/core';
 
 import { applyLintFix } from '@schematics/angular/utility/lint-fix';
-import { buildDefaultPath, getProject } from '@schematics/angular/utility/project';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/workspace-models';
@@ -14,10 +13,11 @@ export default function(options: Schema): Rule {
 	return (tree: Tree, context: SchematicContext): any => {
 		const workspace: WorkspaceSchema = getWorkspace(tree);
 		const projectName: string = options.project || Object.keys(workspace.projects)[0];
-		const project: WorkspaceProject = getProject(tree, projectName);
+		const project: WorkspaceProject = workspace.projects[projectName];
+		const projectType: 'app' | 'lib' = project.projectType === 'application' ? 'app' : 'lib';
 
 		if (options.path === undefined) {
-			options.path = buildDefaultPath(project);
+			options.path = `${project.sourceRoot}/${projectType}`;
 		}
 
 		const parsedPath: any = parseName(options.path, options.name);

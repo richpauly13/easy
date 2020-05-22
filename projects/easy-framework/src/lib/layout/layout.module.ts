@@ -5,7 +5,6 @@ import { FlexboxModule } from './flexbox/flexbox.module';
 import { GridModule } from './grid/grid.module';
 import { MultiColumnModule } from './multi-column/multi-column.module';
 import { NavModule } from './nav/nav.module';
-import { StickyFooterModule } from './sticky-footer/sticky-footer.module';
 
 @NgModule({
 	exports: [
@@ -13,8 +12,7 @@ import { StickyFooterModule } from './sticky-footer/sticky-footer.module';
 		FlexboxModule,
 		GridModule,
 		MultiColumnModule,
-		NavModule,
-		StickyFooterModule
+		NavModule
 	]
 })
 export class LayoutModule { }
