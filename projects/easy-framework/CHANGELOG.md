@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.14](https://github.com/richpauly13/easy/compare/v0.3.13...v0.3.14) (2020-05-23)
+
+
+### Features
+
+* **docs:** add services and tests to remember current nav ([8ef220c](https://github.com/richpauly13/easy/commit/8ef220c6bc545a1151b72f1f352e8331bebd207a))
+* **docs:** add services and tests to remember current nav ([d30ab61](https://github.com/richpauly13/easy/commit/d30ab613433ad34566468189fb630f0ebb172431))
+* **layout:** remove multi-column styles ([9d52453](https://github.com/richpauly13/easy/commit/9d524533e3a587adcb083793eec41a1349c3d79f))
+* **layout:** remove sticky footer styles and docs ([e70a76c](https://github.com/richpauly13/easy/commit/e70a76cb838526093d6cf3eedea2b98fde9f5651))
+
 ### [0.3.13](https://github.com/richpauly13/easy/compare/v0.3.12...v0.3.13) (2020-05-22)
 
 
