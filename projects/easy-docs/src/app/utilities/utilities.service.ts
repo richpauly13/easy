@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UtilitiesService {
 	public get nav(): string {
-		return this.currentNav || 'display';
+		return this.currentNav || 'color';
 	}
 
 	public set nav(nav: string) {

@@ -31,7 +31,12 @@ export class ComponentsComponent implements OnInit {
 			'tooltip'
 		];
 
-		this.router.navigate(['/components/', this.componentsService.nav]);
+		if (this.router.url.includes('/components/')) {
+			this.onSetNav(this.router.url.split('/')[2]);
+			this.router.navigate([this.router.url]);
+		} else {
+			this.router.navigate(['/components/', this.componentsService.nav]);
+		}
 	}
 
 	public onSetNav(nav: string): void {

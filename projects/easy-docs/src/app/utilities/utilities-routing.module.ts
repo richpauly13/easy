@@ -47,11 +47,6 @@ const routes: Routes = [
 			{
 				component: VisibilityComponent,
 				path: 'visibility'
-			},
-			{
-				path: '',
-				pathMatch: 'full',
-				redirectTo: 'color'
 			}
 		]
 	}

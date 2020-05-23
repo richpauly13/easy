@@ -26,7 +26,12 @@ export class UtilitiesComponent implements OnInit {
 			'visibility'
 		];
 
-		this.router.navigate(['/utilities/', this.utilitiesService.nav]);
+		if (this.router.url.includes('/utilities/')) {
+			this.onSetNav(this.router.url.split('/')[2]);
+			this.router.navigate([this.router.url]);
+		} else {
+			this.router.navigate(['/utilities/', this.utilitiesService.nav]);
+		}
 	}
 
 	public onSetNav(nav: string): void {

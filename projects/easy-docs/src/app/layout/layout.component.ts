@@ -22,7 +22,12 @@ export class LayoutComponent implements OnInit {
 			'nav'
 		];
 
-		this.router.navigate(['/layout/', this.layoutService.nav]);
+		if (this.router.url.includes('/layout/')) {
+			this.onSetNav(this.router.url.split('/')[2]);
+			this.router.navigate([this.router.url]);
+		} else {
+			this.router.navigate(['/layout', this.layoutService.nav]);
+		}
 	}
 
 	public onSetNav(nav: string): void {

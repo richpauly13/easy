@@ -19,8 +19,8 @@ describe('UtilitiesService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should have display as the nav when the nav is not not set', () => {
-		expect(service.nav).toEqual('display');
+	it('should have color as the nav when the nav is not not set', () => {
+		expect(service.nav).toEqual('color');
 	});
 
 	it('should set the nav to display', () => {

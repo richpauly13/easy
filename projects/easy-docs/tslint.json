@@ -12,6 +12,7 @@
       "element",
       "docs",
       "kebab-case"
-    ]
+    ],
+    "no-magic-numbers": false
   }
 }
