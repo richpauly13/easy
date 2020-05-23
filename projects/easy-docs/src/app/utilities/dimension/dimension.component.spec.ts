@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DimensionComponent } from './dimension.component';
 
-describe('WidthComponent', () => {
+describe('DimensionComponent', () => {
 	let component: DimensionComponent;
 	let fixture: ComponentFixture<DimensionComponent>;
 

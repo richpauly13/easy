@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { UtilitiesService } from './utilities.service';
 
 @Component({
 	selector: 'docs-utilities',
@@ -8,6 +11,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class UtilitiesComponent implements OnInit {
 	public navs: string[];
+
+	public constructor(private utilitiesService: UtilitiesService, private router: Router) { }
 
 	public ngOnInit(): void {
 		this.navs = [
@@ -20,5 +25,11 @@ export class UtilitiesComponent implements OnInit {
 			'typography',
 			'visibility'
 		];
+
+		this.router.navigate(['/utilities/', this.utilitiesService.nav]);
+	}
+
+	public onSetNav(nav: string): void {
+		this.utilitiesService.nav = nav;
 	}
 }
