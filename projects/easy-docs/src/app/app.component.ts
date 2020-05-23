@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'docs-root',
@@ -6,10 +6,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	styleUrls: ['./app.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	public navs: string[];
 
-	public constructor() {
+	public ngOnInit(): void {
 		this.navs = [
 			'components',
 			'layout',

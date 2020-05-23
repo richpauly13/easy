@@ -1,7 +1,7 @@
 <nav class="nav-v border-a-gray box-shadow-1 pos-fixed-l">
 	<ul class="nav-row">
 		<li *ngFor="let nav of navs" class="nav-item">
-			<a [routerLink]="['/layout/', nav]" routerLinkActive="active bg-lt-gray" class="bg-hover-lt-gray nav-link pad-tb-sm">{{nav | titlecase}}</a>
+			<a (click)="onSetNav(nav)" [routerLink]="['/layout/', nav]" routerLinkActive="active bg-lt-gray" class="bg-hover-lt-gray nav-link pad-tb-sm">{{nav | titlecase}}</a>
 		</li>
 	</ul>
 </nav>
