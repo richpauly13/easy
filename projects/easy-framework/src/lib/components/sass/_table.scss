@@ -1,7 +1,3 @@
-@import "../../core/sass/functions";
-@import "../../core/sass/mixins";
-@import "../../core/sass/variables";
-
 // Table styles
 .table,
 .table-bordered,
@@ -21,13 +17,7 @@
     .table-header:not(:last-child),
     .table-row:not(:last-child) {
         border-bottom: rem(1) solid color(gray);
-    }    
-}
-
-.table-cell,
-.table-header-cell {
-	flex: 1;
-    padding: space(sm);
+    }
 }
 
 .table-cell,
@@ -36,18 +26,29 @@
 .table-row {
     align-items: center;
 	display: flex;
-    justify-content: center;
-    text-align: center;  
+}
+
+.table-cell,
+.table-header-cell {
+	flex: 1;
+	height: rem(46);
+	overflow: hidden;
+	padding-left: space(md);
+	word-wrap: break-word;
+
+	&:last-of-type {
+		padding-right: space(md);
+	}
 }
 
 .table-hover {
     .table-row:hover {
-        background-color: color(lt-gray);
-    }	
+        background-color: color(lt-white);
+    }
 }
 
 .table-striped {
     .table-row:nth-child(even) {
-        background-color: color(lt-gray);
+        background-color: color(lt-white);
     }
 }
