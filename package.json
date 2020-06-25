@@ -22,7 +22,7 @@
     "@angular-devkit/build-ng-packagr": "^0.1000.0-rc.5",
     "@angular-devkit/core": "^10.0.0-rc.5",
     "@angular-devkit/schematics": "^10.0.0-rc.5",
-    "@angular/cli": "^10.0.0-rc.5",
+    "@angular/cli": "^10.0.0",
     "@angular/compiler-cli": "^10.0.0-rc.6",
     "@angular/language-service": "^10.0.0-rc.6",
     "@schematics/angular": "^10.0.0-rc.5",
