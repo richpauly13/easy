@@ -48,7 +48,7 @@
     "ts-node": "^8.10.2",
     "tsickle": "^0.39.1",
     "tslint": "^6.1.2",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
