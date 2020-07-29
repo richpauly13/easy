@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.15](https://github.com/richpauly13/easy/compare/v0.3.14...v0.3.15) (2020-07-29)
+
+
+### Features
+
+* **base:** add further normalizations to progress and button/link hover, focus, and active states ([c22fd10](https://github.com/richpauly13/easy/commit/c22fd10e6d0940ff881bfc4b2f34fc84ba19ab5e))
+
+
+### Bug Fixes
+
+* **docs:** fix services and tests to remember current nav on refresh ([0af6f4d](https://github.com/richpauly13/easy/commit/0af6f4d70aedf8f6859ee95333ca4dfae58a84f0))
+* **table:** fix table to looks better ([2622725](https://github.com/richpauly13/easy/commit/2622725671c2021496d41f14f10b63d0998a0452))
+
 ### [0.3.14](https://github.com/richpauly13/easy/compare/v0.3.13...v0.3.14) (2020-05-23)
 
 
