@@ -26,11 +26,12 @@
   "metadata": "easy-framework.metadata.json",
   "module": "fesm5/easy-framework.js",
   "name": "easy-framework",
+  "ng-add": {
+    "save": "dependencies"
+  },
   "peerDependencies": {
-    "@angular/common": "^6.0.0",
-    "@angular/core": "^6.0.0",
-    "rxjs": "^6.4.0",
-    "typescript": "^3.4.0"
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
   },
   "private": false,
   "repository": {

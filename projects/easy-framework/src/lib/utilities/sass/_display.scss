@@ -3,26 +3,22 @@
 @import "../../core/sass/variables";
 
 // Display styles
-.d-block {
+.dis-block {
 	display: block;
 }
 
-.d-flex {
+.dis-flex {
 	display: flex;
 }
 
-.d-grid {
+.dis-grid {
 	display: grid;
 }
 
-.d-inline {
+.dis-inline {
 	display: inline;
 }
 
-.d-inline-block {
+.dis-i-block {
 	display: inline-block;
-}
-
-.d-none {
-	display: none;
 }

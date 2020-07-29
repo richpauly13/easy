@@ -11,30 +11,6 @@ import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/w
 
 import * as typescript from 'typescript';
 
-/* import * as fs from 'fs';
-import * as path from 'path'; */
-
-// Add dependency to the package.json file.
-export function addDependencyToPackageJson(tree: Tree, pkg: string, version: string): Tree {
-	if (tree.exists('package.json')) {
-		const initialText: string = tree.read('package.json')!.toString('utf-8');
-		const json: any = JSON.parse(initialText);
-
-		if (!json.dependencies) {
-			json.dependencies = {};
-		}
-
-		if (!json.dependencies[pkg]) {
-			json.dependencies[pkg] = version;
-			json.dependencies = sortPackageDependencies(json.dependencies);
-		}
-
-		tree.overwrite('package.json', JSON.stringify(json, null, 2));
-	}
-
-	return tree;
-}
-
 // Add and import module to specific module.
 export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, importPath: string): void {
 	const moduleSource: typescript.SourceFile = getSourceFile(tree, modulePath);
@@ -77,25 +53,6 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Pat
 	}
 
 	return internalFindModule(tree, options);
-}
-
-export function getLibraryVersion(): any {
-	return require('../package.json').version;
-}
-
-// Get the version of a package.
-export function getPackageVersion(tree: Tree, name: string): string | null {
-	if (!tree.exists('package.json')) {
-		return null;
-	}
-
-	const packageJson: any = JSON.parse(tree.read('package.json')!.toString('utf8')).version;
-
-	if (packageJson.dependencies && packageJson.dependencies[name]) {
-		return packageJson.dependencies[name];
-	}
-
-	return null;
 }
 
 // Get project from the workspace
@@ -143,15 +100,4 @@ function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 	}
 
 	return typescript.createSourceFile(modulePath, buffer.toString(), typescript.ScriptTarget.Latest, true);
-}
-
-// Sort the package.json dependencies.
-function sortPackageDependencies(dependencies: any): any {
-	return Object.keys(dependencies)
-	.sort()
-	.reduce((result: any, key: any) => {
-		result[key] = dependencies[key];
-
-		return result;
-	}, {});
 }

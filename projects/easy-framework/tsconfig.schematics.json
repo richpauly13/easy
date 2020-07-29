@@ -14,14 +14,15 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "rootDir": "./schematics",
+    "rootDir": "schematics",
     "outDir": "../../dist/easy-framework/schematics",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "strictNullChecks": true,
     "target": "es6",
     "types": [
+      "jasmine",
       "node"
     ]
   },
@@ -29,6 +30,6 @@
     "schematics/**/*"
   ],
   "exclude": [
-    "schematics/**/files/**/*"
+    "schematics/*/files/**/*"
   ]
 }

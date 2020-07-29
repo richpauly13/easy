@@ -10,9 +10,6 @@
       "type": "string"
     }
   },
-  "required": [
-
-  ],
   "title": "Add easy-framework to the project",
   "type": "object"
 }
