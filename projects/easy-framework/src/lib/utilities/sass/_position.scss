@@ -1,45 +1,41 @@
 // Position styles
-.pos-abs {
+.pos-a {
     position: absolute;
 }
 
-.pos-fixed-b,
-.pos-fixed-l,
-.pos-fixed-r,
-.pos-fixed-t {
+.pos-f-b,
+.pos-f-l,
+.pos-f-r,
+.pos-f-t {
 	position: fixed;
 	z-index: 100;
 }
 
-.pos-fixed-b,
-.pos-fixed-t {
+.pos-f-b,
+.pos-f-t {
 	width: 100%;
 }
 
-.pos-fixed-b {
+.pos-f-b {
 	bottom: 0;
 }
 
-.pos-fixed-l {
+.pos-f-l {
 	left: space(sm);
 }
 
-.pos-fixed-r {
+.pos-f-r {
 	right: space(sm);
 }
 
-.pos-fixed-t {
+.pos-f-t {
 	top: 0;
 }
 
-.pos-rel {
+.pos-r {
     position: relative;
 }
 
-.pos-static {
-    position: static;
-}
-
-.pos-sticky {
+.pos-s {
     position: sticky;
 }
