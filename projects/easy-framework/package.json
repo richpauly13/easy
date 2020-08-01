@@ -1,14 +1,9 @@
 {
-  "author": "Paul Chehak <pauly13@sbcglobal.net>",
+  "author": "Paul Chehak <pauly13@att.net>",
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
   },
   "description": "EASY CSS framework.",
-  "es2015": "fesm2015/easy-framework.js",
-  "esm2015": "esm2015/easy-framework.js",
-  "esm5": "esm5/easy-framework.js",
-  "fesm2015": "fesm2015/easy-framework.js",
-  "fesm5": "fesm5/easy-framework.js",
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
     "a11y",
@@ -22,9 +17,6 @@
     "sass"
   ],
   "license": "MIT",
-  "main": "bundles/easy-framework.umd.js",
-  "metadata": "easy-framework.metadata.json",
-  "module": "fesm5/easy-framework.js",
   "name": "easy-framework",
   "ng-add": {
     "save": "dependencies"
@@ -39,7 +31,5 @@
     "url": "https://github.com/richpauly13/easy.git"
   },
   "schematics": "./schematics/collection.json",
-  "sideEffects": false,
-  "typings": "easy-framework.d.ts",
   "version": "0.3.15"
 }

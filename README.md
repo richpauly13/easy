@@ -45,7 +45,7 @@ Developers can use only the components needed for a particular project. This is 
 
 ## Usage
 
-Import core styles and behaviors into your app root module.
+Import core styles into your app root module.
 
 app.module.ts
 
