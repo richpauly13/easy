@@ -1,6 +1,4 @@
 @import "../../core/sass/functions";
-@import "../../core/sass/mixins";
-@import "../../core/sass/variables";
 
 // Sets heading font sizes and removes margins
 @each $heading, $font in $headings {
@@ -83,14 +81,15 @@ pre {
 
 // List styles
 .list {
-	padding-bottom: space(sm);
 	padding-left: space(xl);
-    padding-top: space(sm);
+
+	&:not(:last-child) {
+		padding-bottom: space(sm);
+	}
 
     & .list {
         padding-bottom: 0;
         padding-left: space(md);
-        padding-top: 0;
     }
 }
 
@@ -107,14 +106,5 @@ ul.list {
 
 	& .list {
         list-style: circle;
-	}
-}
-
-// Link styles
-a {
-	color: color(dk-blue);
-
-	&:visited {
-		color: color(purple);
 	}
 }

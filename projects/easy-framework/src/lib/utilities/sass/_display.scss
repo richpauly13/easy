@@ -1,24 +1,12 @@
-@import "../../core/sass/functions";
-@import "../../core/sass/mixins";
-@import "../../core/sass/variables";
-
 // Display styles
-.dis-block {
+.dis-b {
 	display: block;
 }
 
-.dis-flex {
-	display: flex;
-}
-
-.dis-grid {
-	display: grid;
-}
-
-.dis-inline {
+.dis-i {
 	display: inline;
 }
 
-.dis-i-block {
+.dis-i-b {
 	display: inline-block;
 }

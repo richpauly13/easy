@@ -1,9 +1,8 @@
 @import "../../core/sass/functions";
-@import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
 // Alert styles
-[class^="alert"] {   
+[class^="alert"] {
     align-items: center;
     color: color(white);
     display: flex;

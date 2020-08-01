@@ -114,64 +114,59 @@ th {
 	vertical-align: middle;
 }
 
+// Link styles and resets
+a {
+	appearance: none;
+	background-color: transparent;
+	color: color(dk-blue);
+	text-decoration: none;
+
+	&:link {
+		color: color(dk-blue);
+	}
+
+	&:visited {
+		color: color(purple);
+	}
+
+	&:focus:not([disabled]),
+	&:hover:not([disabled]),
+	&:active:not([disabled]) {
+        text-decoration: underline;
+    }
+
+    &:-moz-focus-inner:not([disabled]) {
+        text-decoration: underline;
+    }
+}
+
 // Form and button resets
 [type="button"],
 [type="reset"],
 [type="submit"],
+a,
 a[role="button"],
+button,
 html input[type="button"],
+input,
 input[type="reset"],
 input[type="submit"],
-a,
-button,
-input,
 optgroup,
 select,
 textarea {
 	border: 0;
     font-family: inherit;
-    text-decoration: none;
-}
-
-[type="button"],
-[type="reset"],
-[type="submit"],
-a[role="button"],
-html input[type="button"],
-input[type="reset"],
-input[type="submit"],
-button {
-	appearance: none;
-	background-color: transparent;
-
-    &:focus:not([disabled]),
-	&:hover:not([disabled]),
-	&:active:not([disabled]) {
-		border: rem(1) solid color(blue);
-        outline: none;
-    }
-
-    &:-moz-focus-inner:not([disabled]) {
-		border: rem(1) solid color(blue);
-        outline: none;
-    }
-}
-
-a {
-	appearance: none;
-	background-color: transparent;
 	text-decoration: none;
 
-    &:focus:not([disabled]),
-	&:hover:not([disabled]),
-	&:active:not([disabled]) {
-        outline: none;
-        text-decoration: underline;
-    }
+	&:focus,
+	&:hover,
+	&:active {
+		outline: none;
+		outline-offset: 0;
+	}
 
-    &:-moz-focus-inner:not([disabled]) {
+	&:-moz-focus-inner:not([disabled]) {
         outline: none;
-        text-decoration: underline;
     }
 }
 
@@ -179,14 +174,36 @@ a {
 [type="reset"],
 [type="submit"],
 a[role="button"],
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	appearance: none;
+	background-color: transparent;
+
+    &:focus:not([disabled]),
+	&:hover:not([disabled]),
+	&:active:not([disabled]) {
+		border: rem(2) solid color(blue);
+    }
+
+    &:-moz-focus-inner:not([disabled]) {
+		border: rem(2) solid color(blue);
+    }
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"],
+a,
+a[role="button"],
+button,
 html input[type="button"],
 input[type="range"],
 input[type="checkbox"],
 input[type="reset"],
 input[type="radio"],
 input[type="submit"],
-a,
-button,
 select {
 	&:hover {
 		cursor: pointer;
@@ -200,16 +217,12 @@ select {
 [disabled],
 [readonly] {
 	background-color: color(lt-gray);
-	color: color(lt-black);
+	color: color(dk-gray);
 }
 
 fieldset {
 	min-width: 0;
 	padding: 0;
-}
-
-legend {
-	font-size: $font-md;
 }
 
 input[type="checkbox"],
@@ -247,6 +260,10 @@ input[type="range"] {
 	}
 }
 
+legend {
+	font-size: $font-md;
+}
+
 select {
 	overflow-y: auto;
 
@@ -273,8 +290,7 @@ progress {
 	appearance: none;
 	background-color: transparent;
 	border: rem(1) solid color(gray);
-	border-bottom-left-radius: rem(16);
-	border-top-left-radius: rem(16);
+	border-radius: rem(16);
 	color: color(blue);
 	height: rem(16);
 	width: 100%;
@@ -293,6 +309,7 @@ progress {
 		background-color: transparent;
 		border-bottom-left-radius: rem(16);
 		border-top-left-radius: rem(16);
+		color: color(blue);
 	}
 
 	&::-webkit-progress-value {
