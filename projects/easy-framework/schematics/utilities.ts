@@ -38,6 +38,27 @@ export function addModuleImportToRootModule(tree: Tree, moduleName: string, impo
 	addModuleImportToModule(tree, modulePath, moduleName, importPath);
 }
 
+// Add a package to the package.json in the given host tree.
+export function addPackageToPackageJson(tree: Tree, name: string, version: string): Tree {
+	if (tree.exists('package.json')) {
+		const sourceText: string = tree.read('package.json')!.toString('utf-8');
+		const json: any = JSON.parse(sourceText);
+
+		if (!json.dependencies) {
+			json.dependencies = {};
+		}
+
+		if (!json.dependencies[name]) {
+			json.dependencies[name] = version;
+			json.dependencies = sortObjectByKeys(json.dependencies);
+		}
+
+		tree.overwrite('package.json', JSON.stringify(json, null, 2));
+	}
+
+	return tree;
+}
+
 // Find the internal find module from options with null path handling.
 export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Path | undefined {
 	const workspace: WorkspaceSchema = getWorkspace(tree);
@@ -53,6 +74,21 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Pat
 	}
 
 	return internalFindModule(tree, options);
+}
+
+// Get the version of the specified package by looking at the package.json in the given tree.
+export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
+	if (!tree.exists('package.json')) {
+		return null;
+	}
+
+	const packageJson: any = JSON.parse(tree.read('package.json')!.toString('utf8'));
+
+	if (packageJson.dependencies && packageJson.dependencies[name]) {
+		return packageJson.dependencies[name];
+	}
+
+	return null;
 }
 
 // Get project from the workspace
@@ -100,4 +136,9 @@ function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 	}
 
 	return typescript.createSourceFile(modulePath, buffer.toString(), typescript.ScriptTarget.Latest, true);
+}
+
+// Sort the keys of the given object.
+function sortObjectByKeys(object: any) {
+	return Object.keys(object).sort().reduce((result: any, key: string) => (result[key] = object[key]) && result, {});
 }

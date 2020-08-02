@@ -8,7 +8,7 @@
     },
     "alert": {
       "description": "Add alert to the project.",
-      "factory": "./ng-generate/alert",
+      "factory": "./ng-generate/alert/index#ngGenerateAlert",
       "schema": "./ng-generate/alert/schema.json"
     }
   }
