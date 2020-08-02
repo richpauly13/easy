@@ -16,6 +16,11 @@
 	width: 100%;
 }
 
+.pos-f-l,
+.pos-f-r {
+	overflow-y: auto;
+}
+
 .pos-f-b {
 	bottom: 0;
 }

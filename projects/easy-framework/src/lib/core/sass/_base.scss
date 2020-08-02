@@ -121,14 +121,6 @@ a {
 	color: color(dk-blue);
 	text-decoration: none;
 
-	&:link {
-		color: color(dk-blue);
-	}
-
-	&:visited {
-		color: color(purple);
-	}
-
 	&:focus:not([disabled]),
 	&:hover:not([disabled]),
 	&:active:not([disabled]) {

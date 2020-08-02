@@ -2,15 +2,91 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray border-t-gray">
     <section class="pad-a-sm bg-lt-gray">
-        <p>Coming soon.</p>
+		<p>Postition classes are used to determine where an element should be placed in the viewport or another element.</p>
+		<p>These classes allow for the use of <code>bottom</code>, <code>left</code>, <code>right</code>, and <code>top</code> properties in CSS.</p>
+		<p><strong>Note</strong>: Caution should be used when deciding to use position as the results can be unpredicatable. <a routerLink="/layout/flexbox">Flexbox</a> or <a routerLink="/layout/grid">grid</a> can be used instead yielding more predicatable results.</p>
     </section>
 </article>
 
-<h2>Block</h2>
+<h2>Asolute</h2>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
     <section class="pad-a-sm bg-lt-gray border-b-gray">
-		<p>Use a <code>.dis-b</code> class to override an inline or inline block element.</p>
-		<p>This makes the element full width with the ability to set the height and width.</p>
+		<p>Use a <code>.pos-a</code> class to fix an element absolutely to a relatively positioned containing element.</p>
+		<p><strong>Note</strong>: Without a relatively positioned containing element, the position absolute element will be fixed absolutely to its closest ancestor (the <code>body</code> element).</p>
+	</section>
+
+	<section class="pad-a-md box">
+		<p class="pos-a">absolute with left: 15rem (240px) from the body</p>
     </section>
+
+	<figure>
+        <pre class="pad-a-sm">
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pos-a"</span>&gt;</span>absolute with left: 15rem (240px) from the body<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Fixed</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.pos-f-[b || l || r || t]</code> class to fix an element to the bottom, left, right, or top of the viewport, respectively.</p>
+		<p><strong>Note</strong>: Padding is needed on other elements to prevent them from overlapping the fixed one.</p>
+	</section>
+
+	<figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pos-f-b"</span>&gt;</span>fixed to the bottom of the viewport<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pos-f-l"</span>&gt;</span>fixed to the left of the viewport<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pos-f-r"</span>&gt;</span>fixed to the right of the viewport<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pos-f-t"</span>&gt;</span>fixed to the top of the viewport<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Relative</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.pos-r</code> class to create a relative element container for a child position absolute element.</p>
+	</section>
+
+	<section class="pad-a-md box">
+		relative
+		<section class="pos-r">
+			<p class="pos-a">absolute with left: 15rem (240px) from the section</p>
+		</section>
+    </section>
+
+	<figure>
+        <pre class="pad-a-sm">
+			<span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"pos-r"</span>&gt;</span>
+			&nbsp;&nbsp;&nbsp;&nbsp;relative
+			<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pos-a"</span>&gt;</span>absolute with left: 15rem (240px) from the section<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;/<span class="tag">section</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Sticky</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.pos-s</code> class to make an element relatively positioned until a <code>top</code> value is reached on the <code>body</code>.</p>
+		<p>After the <code>top</code> value is reached on the <code>body</code>, the element becomes positioned fixed.</p>
+		<p><strong>Note</strong>: Position sticky only works on "evergreen" browsers (Chrome, Edge > 15, Firefox, and Safari).</p>
+	</section>
+
+	<section class="pad-a-sm box">
+		<p class="pos-s">sticky with top: 0</p>
+		<p>placeholder with padding to enable scrolling</p>
+    </section>
+
+	<figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pos-s"</span>&gt;</span>sticky with top: 0<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span>&gt;</span>placeholder with padding to enable scrolling<span>&lt;/<span class="tag">p</span>&gt;</span>
+		</pre>
+    </figure>
 </article>

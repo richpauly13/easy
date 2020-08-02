@@ -25,6 +25,19 @@
 			display: inline-block;
 			margin: 0 space(sm);
 		}
+
+		&.pos-a {
+			left: rem(240);
+		}
+
+		&.pos-s {
+			top: 0;
+			z-index: 1000;
+
+			& + p {
+				padding-bottom: rem(1000);
+			}
+		}
 	}
 
 	&.col {
