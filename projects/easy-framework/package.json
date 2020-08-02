@@ -44,5 +44,5 @@
     "release": "npm run version && npm run package && git push --follow-tags origin master && npm publish ../../dist/easy-framework --access public",
     "version": "standard-version"
   },
-  "version": "0.3.15"
+  "version": "0.3.16"
 }

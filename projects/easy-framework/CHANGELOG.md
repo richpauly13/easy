@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.16](https://github.com/richpauly13/easy/compare/v0.3.15...v0.3.16) (2020-08-02)
+
+
+### Features
+
+* **position:** add position classes and docs ([642b133](https://github.com/richpauly13/easy/commit/642b133e233e5d5a6133f8f1998838e31feae5e7))
+
 ### [0.3.15](https://github.com/richpauly13/easy/compare/v0.3.14...v0.3.15) (2020-07-29)
 
 
