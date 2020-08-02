@@ -139,6 +139,6 @@ function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 }
 
 // Sort the keys of the given object.
-function sortObjectByKeys(object: any) {
+function sortObjectByKeys(object: any): any {
 	return Object.keys(object).sort().reduce((result: any, key: string) => (result[key] = object[key]) && result, {});
 }

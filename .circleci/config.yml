@@ -61,8 +61,12 @@ jobs:
       - <<: *restore
 
       - run:
-          name: Build easy-framework and easy-docs
-          command: npm run build
+          name: Build easy-framework
+          command: npm run build:easy
+
+	  - run:
+		name: Build easy-docs
+		command: npm npm run build:docs
 
       # Add dependencies to workspace
       - persist_to_workspace:
