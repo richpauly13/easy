@@ -10,11 +10,13 @@
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
     <section class="pad-a-sm bg-lt-gray border-b-gray">
-		<p>Height is styled with a <code>.h-[25 || 33 || 50 || 66 || 75 || 100]</code> class.</p>
+		<p>Height is styled with a <code>.h-[a || 0 || 25 || 33 || 50 || 66 || 75 || 100]</code> class.</p>
 		<p><strong>Note</strong>: An absolute height must be set on the container.</p>
     </section>
 
     <section class="pad-a-sm box col">
+		<p class="h-a">auto</p>
+		<p class="h-0">0%</p>
         <p class="h-25">25%</p>
         <p class="h-33">33%</p>
         <p class="h-50">50%</p>
@@ -25,6 +27,8 @@
 
     <figure>
         <pre class="pad-a-sm">
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"h-a"</span>&gt;</span>auto<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"h-0"</span>&gt;</span>0%<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"h-25"</span>&gt;</span>25%<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"h-33"</span>&gt;</span>33%<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"h-50"</span>&gt;</span>50%<span>&lt;/<span class="tag">p</span>&gt;</span>
@@ -39,10 +43,12 @@
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
     <section class="pad-a-sm bg-lt-gray border-b-gray">
-        <p>Width is styled with a <code>.w-[25 || 33 || 50 || 66 || 75 || 100]</code> class.</p>
+        <p>Width is styled with a <code>.w-[[a || 0 || 25 || 33 || 50 || 66 || 75 || 100]</code> class.</p>
     </section>
 
     <section class="pad-a-sm box">
+		<p class="w-a">auto</p>
+        <p class="w-0">0%</p>
         <p class="w-25">25%</p>
         <p class="w-33">33%</p>
         <p class="w-50">50%</p>
@@ -53,6 +59,8 @@
 
     <figure>
         <pre class="pad-a-sm">
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"w-a"</span>&gt;</span>auto<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"w-0"</span>&gt;</span>0%<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"w-25"</span>&gt;</span>25%<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"w-33"</span>&gt;</span>33%<span>&lt;/<span class="tag">p</span>&gt;</span>
             <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"w-50"</span>&gt;</span>50%<span>&lt;/<span class="tag">p</span>&gt;</span>

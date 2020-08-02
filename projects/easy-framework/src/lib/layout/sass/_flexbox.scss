@@ -1,4 +1,6 @@
 // Flexbox container styles
+.col,
+.col-full,
 .row,
 .row-full {
 	align-items: flex-start;
@@ -8,18 +10,15 @@
 
 .col,
 .col-full {
-	align-items: flex-start;
-	display: flex;
     flex-direction: column;
-	justify-content: flex-start;
-}
-
-.row-full {
-	width: 100%;
 }
 
 .col-full {
 	height: 100%;
+}
+
+.row-full {
+	width: 100%;
 }
 
 // Flexbox container alignment styles

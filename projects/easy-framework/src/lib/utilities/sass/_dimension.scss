@@ -1,4 +1,12 @@
 // Height styles
+.h-a {
+	height: auto;
+}
+
+.h-0 {
+	height: 0%;
+}
+
 .h-25 {
     height: 25%;
 }
@@ -24,6 +32,14 @@
 }
 
 // Width styles
+.w-a {
+	width: auto;
+}
+
+.w-0 {
+	width: 0%;
+}
+
 .w-25 {
     width: 25%;
 }

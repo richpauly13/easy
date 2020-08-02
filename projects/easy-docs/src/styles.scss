@@ -11,14 +11,6 @@
 	margin: space(sm);
 	padding: 0;
 
-	&.col {
-		height: rem(400);
-
-		& * {
-			width: 100%;
-		}
-	}
-
 	p,
 	span {
 		background-color: color(blue);
@@ -32,6 +24,14 @@
 		&[class*="pad"] {
 			display: inline-block;
 			margin: 0 space(sm);
+		}
+	}
+
+	&.col {
+		height: rem(400);
+
+		& * {
+			width: 100%;
 		}
 	}
 }
@@ -111,7 +111,8 @@
 }
 
 .main {
-	margin-left: rem(220);
+	padding-left: rem(220);
+	padding-right: space(md);
     padding-top: rem(156);
 
     code {
@@ -119,7 +120,8 @@
     }
 }
 
-.pos-f-l {
+.pos-f-l.nav-v {
+	left: space(sm);
     top: rem(164);
     width: rem(180);
 }
