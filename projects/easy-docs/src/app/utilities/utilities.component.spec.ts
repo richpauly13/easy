@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -72,7 +72,7 @@ describe('UtilitiesComponent', () => {
 	let router: Router;
 	let service: UtilitiesService;
 
-	beforeEach(async(() => {
+	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
 			declarations: [
 				ColorComponent,
@@ -114,7 +114,7 @@ describe('UtilitiesComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should set the nav to the router.url if present', async(() => {
+	it('should set the nav to the router.url if present', waitForAsync(() => {
 		fixture.ngZone.run(() => {
 			fixture.whenStable().then(() => {
 				router.navigate(['/utilities/display']).then(() => {
