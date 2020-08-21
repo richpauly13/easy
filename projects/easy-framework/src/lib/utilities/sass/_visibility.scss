@@ -100,8 +100,8 @@
 
 .show-focus {
 	&:hover,
-	&:active,
-	&:focus {
+	&:focus,
+	&:active {
 		clip: auto;
 		color: color(lt-black);
 		display: block;
