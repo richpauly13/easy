@@ -79,7 +79,7 @@
     "test:docs": "ng test easy-docs",
     "test:easy": "ng test easy-framework",
     "test:watch": "ng test easy-framework --watch",
-    "update:core": "npm i -g npm && npm i -g @angular/cli@next",
+    "update:core": "npm i -g npm@latest && npm i -g @angular/cli@next",
     "update:deps": "ng update --next --all --force --allowDirty && npm i -D typescript@4.0.2 && npm i --save rxjs@6.6.2",
     "update:ng": "run-s update:core update:deps",
     "update:webdriver": "webdriver-manager update"
