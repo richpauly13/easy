@@ -19,7 +19,7 @@
       "prefix": "ez",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/easy-framework/tsconfig.lib.json",
             "project": "projects/easy-framework/ng-package.json"
@@ -97,7 +97,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
