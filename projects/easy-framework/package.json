@@ -3,6 +3,9 @@
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
   },
+  "dependencies": {
+    "tslib": "^2.0.1"
+  },
   "description": "EASY CSS framework.",
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
@@ -44,5 +47,6 @@
     "release": "npm run version && npm run package && git push --follow-tags origin master && npm publish ../../dist/easy-framework",
     "version": "standard-version"
   },
+  "sideEffects": false,
   "version": "0.3.16"
 }
