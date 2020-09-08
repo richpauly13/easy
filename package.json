@@ -12,7 +12,7 @@
     "@angular/platform-browser": "^11.0.0-next.0",
     "@angular/platform-browser-dynamic": "^11.0.0-next.0",
     "@angular/router": "^11.0.0-next.0",
-    "rxjs": "^6.6.2",
+    "rxjs": "^6.6.3",
     "tslib": "^2.0.1",
     "zone.js": "^0.11.1"
   },
@@ -81,7 +81,7 @@
     "test:easy": "ng test easy-framework",
     "test:watch": "ng test easy-framework --watch",
     "update:core": "npm i -g npm@latest && npm i -g @angular/cli@next",
-    "update:deps": "ng update --next --all --force --allowDirty && npm i -D typescript@4.0.2 && npm i --save rxjs@6.6.2",
+    "update:deps": "ng update --next --all --force --allowDirty && npm i -D typescript@4.0.2 && npm i --save rxjs@6.6.3",
     "update:ng": "run-s update:core update:deps",
     "update:webdriver": "webdriver-manager update"
   },
