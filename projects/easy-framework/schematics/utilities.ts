@@ -11,7 +11,7 @@ import { WorkspaceProject, WorkspaceSchema } from '@schematics/angular/utility/w
 
 import * as typescript from 'typescript';
 
-// Add and import module to specific module.
+// add and import module to specific module.
 export function addModuleImportToModule(tree: Tree, modulePath: string, moduleName: string, importPath: string): void {
 	const moduleSource: typescript.SourceFile = getSourceFile(tree, modulePath);
 
@@ -31,14 +31,14 @@ export function addModuleImportToModule(tree: Tree, modulePath: string, moduleNa
 	tree.commitUpdate(recorder);
 }
 
-// Add module and import to root app module.
+// add module and import to root app module.
 export function addModuleImportToRootModule(tree: Tree, moduleName: string, importPath: string, project: WorkspaceProject): void {
 	const modulePath: string = getAppModulePath(tree, getProjectMainFile(project));
 
 	addModuleImportToModule(tree, modulePath, moduleName, importPath);
 }
 
-// Add a package to the package.json in the given host tree.
+// add a package to the package.json in the given host tree.
 export function addPackageToPackageJson(tree: Tree, name: string, version: string): Tree {
 	if (tree.exists('package.json')) {
 		const sourceText: string = tree.read('package.json')!.toString('utf-8');
@@ -59,7 +59,7 @@ export function addPackageToPackageJson(tree: Tree, name: string, version: strin
 	return tree;
 }
 
-// Find the internal find module from options with null path handling.
+// find the internal find module from options with null path handling.
 export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Path | undefined {
 	const workspace: WorkspaceSchema = getWorkspace(tree);
 
@@ -76,7 +76,7 @@ export function findModuleFromOptions(tree: Tree, options: ComponentSchema): Pat
 	return internalFindModule(tree, options);
 }
 
-// Get the version of the specified package by looking at the package.json in the given tree.
+// get the version of the specified package by looking at the package.json in the given tree.
 export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
 	if (!tree.exists('package.json')) {
 		return null;
@@ -91,7 +91,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 	return null;
 }
 
-// Get project from the workspace
+// get project from the workspace
 export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?: string): WorkspaceProject {
 	const project: WorkspaceProject = workspace.projects[projectName || workspace.defaultProject!];
 
@@ -102,7 +102,7 @@ export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?
 	return project;
 }
 
-// Get the main TypeScript file in the given project and return its path.
+// get the main TypeScript file in the given project and return its path.
 function getProjectMainFile(project: WorkspaceProject): string {
 	const buildOptions: any = getProjectTargetOptions(project, 'build');
 
@@ -113,13 +113,13 @@ function getProjectMainFile(project: WorkspaceProject): string {
 	return buildOptions.main;
 }
 
-// Get the architect options for the build target of the given project.
+// get the architect options for the build target of the given project.
 function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string): any {
 	if (project.targets && project.targets[buildTarget] && project.targets[buildTarget].options) {
 		return project.targets[buildTarget].options;
 	}
 
-	// See: https://github.com/angular/angular-cli/commit/307160806cb48c95ecb8982854f452303801ac9f.
+	// see: https://github.com/angular/angular-cli/commit/307160806cb48c95ecb8982854f452303801ac9f.
 	if (project.architect && project.architect[buildTarget] && project.architect[buildTarget].options) {
 		return project.architect[buildTarget].options;
 	}
@@ -127,7 +127,7 @@ function getProjectTargetOptions(project: WorkspaceProject, buildTarget: string)
 	throw new SchematicsException(`Cannot determine project target configuration for: ${buildTarget}.`);
 }
 
-// Get the module path and return the TypeScript source file.
+// get the module path and return the TypeScript source file.
 function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 	const buffer: Buffer | null = tree.read(modulePath);
 
@@ -138,7 +138,7 @@ function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 	return typescript.createSourceFile(modulePath, buffer.toString(), typescript.ScriptTarget.Latest, true);
 }
 
-// Sort the keys of the given object.
+// sort the keys of the given object.
 function sortObjectByKeys(object: any): any {
 	return Object.keys(object).sort().reduce((result: any, key: string) => (result[key] = object[key]) && result, {});
 }
