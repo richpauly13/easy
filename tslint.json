@@ -36,7 +36,7 @@
     "class-name": true,
     "comment-format": [
       true,
-      "allow-trailing-lowercase",
+      "check-lowercase",
       "check-space",
       "check-uppercase",
       {
@@ -171,11 +171,7 @@
     "no-non-null-assertion": true,
     "no-null-keyword": false,
     "no-null-undefined-union": true,
-    "no-object-literal-type-assertion": [
-      true, {
-        "allow-arguments": true
-      }
-    ],
+    "no-object-literal-type-assertion": true,
     "no-output-native": true,
     "no-output-on-prefix": true,
     "no-output-rename": true,
@@ -235,13 +231,38 @@
       {
         "grouped-imports": true,
         "groups": [
-          "^@angular",
-          "^@schematics",
-          "^typescript",
-          "^zone.js",
-          "^protractor",
-          "^rxjs",
-          "^easy-framework"
+          {
+            "match": "^@angular",
+            "order": 10
+          },
+          {
+            "match": "^@schematics",
+            "order": 20
+          },
+          {
+            "match": "^typescript",
+            "order": 30
+          },
+          {
+            "match": "^zone.js",
+            "order": 40
+          },
+          {
+            "match": "^protractor",
+            "order": 50
+          },
+          {
+            "match": "^rxjs",
+            "order": 60
+          },
+          {
+            "match":  "^easy-framework",
+            "order": 70
+          },
+          {
+            "match": "^/./.",
+            "order": 80
+          }
         ],
         "import-sources-order": "any",
         "module-source-path": "full",
@@ -272,7 +293,11 @@
     ],
     "space-before-function-paren": [
       true,
-      "never"
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "never"
+      }
     ],
     "space-within-parens": false,
     "static-this": true,

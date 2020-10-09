@@ -1,5 +1,5 @@
 export interface Schema {
 
-	// The name of the project.
+	// the name of the project.
 	project: string;
 }
