@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { EasyModule } from 'easy-framework';
-
 import { AppComponent } from './app.component';
+import { EasyModule } from 'easy-framework';
 
 describe('AppComponent', () => {
 	let app: AppComponent;

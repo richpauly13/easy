@@ -15,6 +15,59 @@
         "plugin:@angular-eslint/recommended"
       ],
       "rules": {
+        "@angular-eslint/component-class-suffix": [
+          "error",
+          {
+            "suffixes": [
+              "Component"
+            ]
+          }
+        ],
+        "@angular-eslint/component-max-inline-declarations": [
+          "error",
+          {
+            "animations": 8,
+            "styles": 1,
+            "template": 1
+          }
+        ],
+        "@angular-eslint/contextual-lifecycle": [
+          "error"
+        ],
+        "@angular-eslint/directive-class-suffix": [
+          "error",
+          {
+            "suffixes": [
+              "Directive"
+            ]
+          }
+        ],
+        "@angular-eslint/no-attribute-decorator": [
+          "error"
+        ],
+        "@angular-eslint/no-conflicting-lifecycle": [
+          "error"
+        ],
+        "@angular-eslint/no-empty-lifecycle-method": [
+          "error"
+        ],
+        "@angular-eslint/no-forward-ref": [
+          "error"
+        ],
+        "@angular-eslint/no-host-metadata-property": [
+          "error"
+        ],
+        "@angular-eslint/no-input-prefix": [
+          "error",
+          {
+            "prefixes": [
+              "can",
+              "has",
+              "is",
+              "should"
+            ]
+          }
+        ],
         "max-len": [
           "error",
           {
@@ -43,6 +96,14 @@
           "error",
           {
             "code": 600
+          }
+        ],
+        "quotes": [
+          "error",
+          "double",
+          {
+            "allowTemplateLiterals": true,
+            "avoidEscape": true
           }
         ]
       }
