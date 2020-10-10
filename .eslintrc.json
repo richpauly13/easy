@@ -1,0 +1,59 @@
+{
+  "root": true,
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.*?.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended"
+      ],
+      "rules": {
+        "max-len": [
+          "error",
+          {
+            "code": 200
+          }
+        ],
+        "quotes": [
+          "error",
+          "single",
+          {
+            "allowTemplateLiterals": true,
+            "avoidEscape": true
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.component.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "max-len": [
+          "error",
+          {
+            "code": 600
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.component.ts"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ]
+    }
+  ]
+}

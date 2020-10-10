@@ -45,11 +45,6 @@
       "description": "Specifies if the template will be in the ts file.",
       "type": "boolean"
     },
-    "lintFix": {
-      "default": false,
-      "description": "When true, applies lint fixes after generating the component.",
-      "type": "boolean"
-    },
     "message": {
       "default": "New Alert",
       "description": "Specifies the component message.",

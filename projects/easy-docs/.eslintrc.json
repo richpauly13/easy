@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "../../.eslintrc.json"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "projects/easy-docs/tsconfig.*?.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "docs",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "docs",
+            "style": "camelCase"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.component.html"
+      ],
+      "rules": {
+
+      }
+    }
+  ]
+}

@@ -41,15 +41,14 @@ export function ngGenerateAlert(options: Schema): Rule {
 					addAlertModuleToModule(options),
 					mergeWith(templateSource, MergeStrategy.Default)
 				])
-			),
-			options.lintFix ? applyLintFix(options.path) : noop()
+			)
 		])(tree, context);
 	};
 }
 
 function addAlertModuleToModule(options: Schema): any {
 	return ((tree: Tree): Tree => {
-		const modulePath: string = findModuleFromOptions(tree, options)!;
+		const modulePath: string = findModuleFromOptions(tree, options);
 
 		addModuleImportToModule(tree, modulePath, 'AlertModule', 'easy-framework');
 
