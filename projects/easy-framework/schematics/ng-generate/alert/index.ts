@@ -26,7 +26,7 @@ export function ngGenerateAlert(options: Schema): Rule {
 		options.path = parsedPath.path;
 
 		const templateSource: Source = apply(url('./files'), [
-			options.skipTests ? noop() : filter((path: Path) => !path.endsWith('.spec.ts')),
+			options.skipTests ? noop() : filter((path: Path): boolean => !path.endsWith('.spec.ts')),
 			applyTemplates({
 				...strings,
 				'if-flat': (strg: string): string => (options.flat ? '' : strg),

@@ -2,24 +2,24 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { GridComponent } from './grid.component';
 
-describe('GridComponent', () => {
+describe('GridComponent', (): void => {
   let component: GridComponent;
   let fixture: ComponentFixture<GridComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(waitForAsync((): void => {
 	TestBed.configureTestingModule({
 		declarations: [ GridComponent ]
 	})
 	.compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach((): void => {
 	fixture = TestBed.createComponent(GridComponent);
 	component = fixture.componentInstance;
 	fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', (): void => {
 	expect(component).toBeTruthy();
   });
 });

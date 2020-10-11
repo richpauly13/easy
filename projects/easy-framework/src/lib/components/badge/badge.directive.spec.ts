@@ -1,8 +1,8 @@
 import { BadgeDirective } from './badge.directive';
 
-describe('BadgeDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new BadgeDirective();
+describe('BadgeDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: BadgeDirective = new BadgeDirective();
 
 		expect(directive).toBeTruthy();
 	});

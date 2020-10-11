@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TableComponent } from './table.component';
 
-describe('TableComponent', () => {
+describe('TableComponent', (): void => {
 	let component: TableComponent;
 	let fixture: ComponentFixture<TableComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				TableComponent
@@ -15,13 +15,13 @@ describe('TableComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(TableComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create the table page', () => {
+	it('should create the table page', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

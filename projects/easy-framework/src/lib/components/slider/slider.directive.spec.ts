@@ -1,8 +1,8 @@
 import { SliderDirective } from './slider.directive';
 
-describe('SliderDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new SliderDirective();
+describe('SliderDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: SliderDirective = new SliderDirective();
 
 		expect(directive).toBeTruthy();
 	});

@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NavComponent } from './nav.component';
 
-describe('NavComponent', () => {
+describe('NavComponent', (): void => {
 	let component: NavComponent;
 	let fixture: ComponentFixture<NavComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				NavComponent
@@ -15,13 +15,13 @@ describe('NavComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(NavComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

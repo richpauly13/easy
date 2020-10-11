@@ -2,23 +2,23 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CardComponent } from './card.component';
 
-describe('CardComponent', () => {
+describe('CardComponent', (): void => {
 	let component: CardComponent;
 	let fixture: ComponentFixture<CardComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [CardComponent]
 		}).compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(CardComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

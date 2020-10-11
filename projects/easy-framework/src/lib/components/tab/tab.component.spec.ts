@@ -2,23 +2,23 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TabComponent } from './tab.component';
 
-describe('TabComponent', () => {
+describe('TabComponent', (): void => {
 	let component: TabComponent;
 	let fixture: ComponentFixture<TabComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [TabComponent]
 		}).compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(TabComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

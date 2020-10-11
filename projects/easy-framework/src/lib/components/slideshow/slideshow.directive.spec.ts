@@ -1,8 +1,8 @@
 import { SlideshowDirective } from './slideshow.directive';
 
-describe('SlideshowDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new SlideshowDirective();
+describe('SlideshowDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: SlideshowDirective = new SlideshowDirective();
 
 		expect(directive).toBeTruthy();
 	});

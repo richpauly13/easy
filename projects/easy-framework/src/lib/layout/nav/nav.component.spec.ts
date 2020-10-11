@@ -11,13 +11,13 @@ import { NavComponent } from './nav.component';
 })
 class MockComponent { }
 
-describe('NavComponent', () => {
+describe('NavComponent', (): void => {
 	let buttonToggle: DebugElement;
 	let component: NavComponent;
 	let fixture1: ComponentFixture<NavComponent>;
 	let fixture2: ComponentFixture<MockComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				MockComponent,
@@ -27,7 +27,7 @@ describe('NavComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture1 = TestBed.createComponent(NavComponent);
 		component = fixture1.componentInstance;
 		fixture1.detectChanges();
@@ -38,11 +38,11 @@ describe('NavComponent', () => {
 		buttonToggle = fixture2.debugElement.query(By.css('.nav-toggle'));
 	});
 
-	it('should be created', () => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have isActive be true after .nav-toggle click', () => {
+	it('should have isActive be true after .nav-toggle click', (): void => {
 		component['isActive'] = false;
 		component.ngOnInit();
 
@@ -51,7 +51,7 @@ describe('NavComponent', () => {
 		expect(component['isActive']).toBe(true);
 	});
 
-	it('should have isActive be false after .nav-toggle click', () => {
+	it('should have isActive be false after .nav-toggle click', (): void => {
 		component['isActive'] = true;
 		component.ngOnInit();
 
@@ -60,14 +60,14 @@ describe('NavComponent', () => {
 		expect(component['isActive']).toBe(false);
 	});
 
-	it('should add the active class to the MockComponent after OnToggle()', () => {
+	it('should add the active class to the MockComponent after OnToggle()', (): void => {
 		component['isActive'] = false;
 		component['onToggle'](fixture2.nativeElement);
 
 		expect(fixture2.nativeElement).toHaveClass('active');
 	});
 
-	it('should remove the active class from the MockComponent after OnToggle()', () => {
+	it('should remove the active class from the MockComponent after OnToggle()', (): void => {
 		component['isActive'] = true;
 		component['onToggle'](fixture2.nativeElement);
 

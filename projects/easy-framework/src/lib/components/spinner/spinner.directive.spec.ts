@@ -1,8 +1,8 @@
 import { SpinnerDirective } from './spinner.directive';
 
-describe('SpinnerDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new SpinnerDirective();
+describe('SpinnerDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: SpinnerDirective = new SpinnerDirective();
 
 		expect(directive).toBeTruthy();
 	});

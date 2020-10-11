@@ -30,9 +30,7 @@
             "style": "camelCase"
           }
         ],
-        "@angular-eslint/no-lifecycle-call": [
-          "off"
-        ],
+        "@angular-eslint/no-lifecycle-call": "off",
         "@angular-eslint/pipe-prefix": [
           "error",
           {
@@ -41,12 +39,8 @@
             ]
           }
         ],
-        "@angular-eslint/use-component-view-encapsulation": [
-          "off"
-        ],
-        "@typescript-eslint/no-non-null-assertion": [
-          "off"
-        ],
+        "@angular-eslint/use-component-view-encapsulation": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
         "max-len": [
           "error",
           {

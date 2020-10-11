@@ -2,24 +2,24 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PositionComponent } from './position.component';
 
-describe('PositionComponent', () => {
+describe('PositionComponent', (): void => {
   let component: PositionComponent;
   let fixture: ComponentFixture<PositionComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(waitForAsync((): void => {
 	TestBed.configureTestingModule({
 		declarations: [ PositionComponent ]
 	})
 	.compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach((): void => {
 	fixture = TestBed.createComponent(PositionComponent);
 	component = fixture.componentInstance;
 	fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', (): void => {
 	expect(component).toBeTruthy();
   });
 });

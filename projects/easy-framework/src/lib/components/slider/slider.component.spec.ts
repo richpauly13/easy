@@ -2,23 +2,23 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SliderComponent } from './slider.component';
 
-describe('SliderComponent', () => {
+describe('SliderComponent', (): void => {
 	let component: SliderComponent;
 	let fixture: ComponentFixture<SliderComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [SliderComponent]
 		}).compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(SliderComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

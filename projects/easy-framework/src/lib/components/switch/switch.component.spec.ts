@@ -2,23 +2,23 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SwitchComponent } from './switch.component';
 
-describe('SwitchComponent', () => {
+describe('SwitchComponent', (): void => {
 	let component: SwitchComponent;
 	let fixture: ComponentFixture<SwitchComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [SwitchComponent]
 		}).compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(SwitchComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

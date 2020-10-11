@@ -3,11 +3,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { EasyComponent } from './easy-framework.component';
 
-describe('EasyComponent', () => {
+describe('EasyComponent', (): void => {
 	let component: EasyComponent;
 	let fixture: ComponentFixture<EasyComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				EasyComponent
@@ -18,13 +18,13 @@ describe('EasyComponent', () => {
 		}).compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(EasyComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should be created', () => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

@@ -15,7 +15,7 @@ export function ngAdd(options: Schema): Rule {
 }
 
 function addEasyFrameworkToPackageJson(): Rule {
-	return (tree: Tree, context: SchematicContext) => {
+	return (tree: Tree, context: SchematicContext): Tree => {
 		context.addTask(new NodePackageInstallTask());
 
 		return tree;

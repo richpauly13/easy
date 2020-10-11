@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ContainerComponent } from './container.component';
 
-describe('ContainerComponent', () => {
+describe('ContainerComponent', (): void => {
 	let component: ContainerComponent;
 	let fixture: ComponentFixture<ContainerComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				ContainerComponent
@@ -15,13 +15,13 @@ describe('ContainerComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(ContainerComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('be should created', () => {
+	it('be should created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

@@ -1,8 +1,8 @@
 import { FormDirective } from './form.directive';
 
-describe('FormDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new FormDirective();
+describe('FormDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: FormDirective = new FormDirective();
 
 		expect(directive).toBeTruthy();
 	});

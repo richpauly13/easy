@@ -22,7 +22,7 @@ export function addModuleImportToModule(tree: Tree, modulePath: string, moduleNa
 	const changes: Change[] = addImportToModule(moduleSource as any, modulePath, moduleName, importPath);
 	const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
 
-	changes.forEach((change: Change) => {
+	changes.forEach((change: Change): void => {
 		if (change instanceof InsertChange) {
 			recorder.insertLeft(change.pos, change.toAdd);
 		}
@@ -140,5 +140,5 @@ function getSourceFile(tree: Tree, modulePath: string): typescript.SourceFile {
 
 // sort the keys of the given object.
 function sortObjectByKeys(object: any): any {
-	return Object.keys(object).sort().reduce((result: any, key: string) => (result[key] = object[key]) && result, {});
+	return Object.keys(object).sort().reduce((result: Record<string, unknown>, key: string): Record<string, unknown> => (result[key] = object[key]) && result, {});
 }

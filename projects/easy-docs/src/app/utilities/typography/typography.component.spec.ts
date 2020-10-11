@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TypographyComponent } from './typography.component';
 
-describe('TypographyComponent', () => {
+describe('TypographyComponent', (): void => {
 	let component: TypographyComponent;
 	let fixture: ComponentFixture<TypographyComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				TypographyComponent
@@ -15,13 +15,13 @@ describe('TypographyComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(TypographyComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should be created', () => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

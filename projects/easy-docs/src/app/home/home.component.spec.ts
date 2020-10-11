@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
 
-describe('HomeComponent', () => {
+describe('HomeComponent', (): void => {
 	let component: HomeComponent;
 	let fixture: ComponentFixture<HomeComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				HomeComponent
@@ -15,13 +15,13 @@ describe('HomeComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(HomeComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create the home page', () => {
+	it('should create the home page', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

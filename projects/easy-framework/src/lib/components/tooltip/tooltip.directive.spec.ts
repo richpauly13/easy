@@ -1,8 +1,8 @@
 import { TooltipDirective } from './tooltip.directive';
 
-describe('TooltipDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new TooltipDirective();
+describe('TooltipDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: TooltipDirective = new TooltipDirective();
 
 		expect(directive).toBeTruthy();
 	});

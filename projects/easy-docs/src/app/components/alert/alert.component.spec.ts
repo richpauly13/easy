@@ -4,11 +4,11 @@ import { AlertModule } from 'easy-framework';
 
 import { AlertComponent } from './alert.component';
 
-describe('AlertComponent', () => {
+describe('AlertComponent', (): void => {
 	let component: AlertComponent;
 	let fixture: ComponentFixture<AlertComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				AlertComponent
@@ -20,13 +20,13 @@ describe('AlertComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(AlertComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create alert page', () => {
+	it('should create alert page', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

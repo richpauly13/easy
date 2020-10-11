@@ -1,8 +1,8 @@
 import { SwitchDirective } from './switch.directive';
 
-describe('SwitchDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new SwitchDirective();
+describe('SwitchDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: SwitchDirective = new SwitchDirective();
 
 		expect(directive).toBeTruthy();
 	});

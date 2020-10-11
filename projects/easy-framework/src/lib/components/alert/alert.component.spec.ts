@@ -4,11 +4,11 @@ import { DebugElement } from '@angular/core';
 
 import { AlertComponent } from './alert.component';
 
-describe('AlertComponent', () => {
+describe('AlertComponent', (): void => {
 	let component: AlertComponent;
 	let fixture: ComponentFixture<AlertComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				AlertComponent
@@ -16,35 +16,35 @@ describe('AlertComponent', () => {
 		}).compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(AlertComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should be created', () => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have an alert-good class', () => {
+	it('should have an alert-good class', (): void => {
 		component.class = 'alert-good';
 
 		expect(component.class).toEqual('alert-good');
 	});
 
-	it('should not have a close class', () => {
+	it('should not have a close class', (): void => {
 		component.class = 'alert-good close';
 
 		expect(component.class).toEqual('alert-good');
 	});
 
-	it('should have a hide class after onClose()', () => {
+	it('should have a hide class after onClose()', (): void => {
 		component.onClose();
 
 		expect(component.hostClass).toEqual('hide');
 	});
 
-	it('should have close button remain focused after blur', () => {
+	it('should have close button remain focused after blur', (): void => {
 		component.close = true;
 		fixture.detectChanges();
 

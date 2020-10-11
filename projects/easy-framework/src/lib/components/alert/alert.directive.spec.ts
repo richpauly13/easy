@@ -1,8 +1,8 @@
 import { AlertDirective } from './alert.directive';
 
-describe('AlertDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new AlertDirective();
+describe('AlertDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: AlertDirective = new AlertDirective();
 
 		expect(directive).toBeTruthy();
 	});

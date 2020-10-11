@@ -1,8 +1,8 @@
 import { TabDirective } from './tab.directive';
 
-describe('TabDirective', () => {
-	it('should create an instance', () => {
-		const directive: { } = new TabDirective();
+describe('TabDirective', (): void => {
+	it('should create an instance', (): void => {
+		const directive: TabDirective = new TabDirective();
 
 		expect(directive).toBeTruthy();
 	});

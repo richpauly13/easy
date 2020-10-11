@@ -1,7 +1,7 @@
 import { FlexboxDirective } from './flexbox.directive';
 
-describe('FlexboxDirective', () => {
-	it('should create an instance', () => {
+describe('FlexboxDirective', (): void => {
+	it('should create an instance', (): void => {
 		const directive: FlexboxDirective = new FlexboxDirective();
 
 		expect(directive).toBeTruthy();

@@ -21,7 +21,7 @@ class MockLayoutService {
 	private currentNav: string;
 }
 
-describe('LayoutComponent', () => {
+describe('LayoutComponent', (): void => {
 	const routes: Routes = [
 		{
 			path: 'layout',
@@ -52,7 +52,7 @@ describe('LayoutComponent', () => {
 	let router: Router;
 	let service: LayoutService;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				ContainerComponent,
@@ -74,26 +74,26 @@ describe('LayoutComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(LayoutComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 		router = TestBed.inject(Router);
 		service = TestBed.inject(LayoutService);
 
-		fixture.ngZone.run(() => {
+		fixture.ngZone.run((): void => {
 			router.initialNavigation();
 		});
 	});
 
-	it('should create the layout page', () => {
+	it('should create the layout page', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should set the nav to the router.url if present', waitForAsync(() => {
-		fixture.ngZone.run(() => {
-			fixture.whenStable().then(() => {
-				router.navigate(['/layout/grid']).then(() => {
+	it('should set the nav to the router.url if present', waitForAsync((): void => {
+		fixture.ngZone.run((): void => {
+			fixture.whenStable().then((): void => {
+				router.navigate(['/layout/grid']).then((): void => {
 					fixture.detectChanges();
 					expect(service.nav).toEqual('grid');
 				});
@@ -102,7 +102,7 @@ describe('LayoutComponent', () => {
 		});
 	}));
 
-	it('should set the nav to grid', () => {
+	it('should set the nav to grid', (): void=> {
 		component.onSetNav('grid');
 
 		expect(service.nav).toEqual('grid');

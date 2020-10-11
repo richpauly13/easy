@@ -4,11 +4,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { EasyModule } from 'easy-framework';
 
-describe('AppComponent', () => {
+describe('AppComponent', (): void => {
 	let app: AppComponent;
 	let fixture: ComponentFixture<AppComponent>;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				AppComponent
@@ -20,13 +20,13 @@ describe('AppComponent', () => {
 		}).compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(AppComponent);
 		app = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create the app', () => {
+	it('should create the app', (): void => {
 		expect(app).toBeTruthy();
 	});
 });

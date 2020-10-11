@@ -31,7 +31,7 @@ class MockComponentsService {
 	private currentNav: string;
 }
 
-describe('ComponentsComponent', () => {
+describe('ComponentsComponent', (): void => {
 	const routes: Routes = [
 		{
 			path: 'components',
@@ -98,7 +98,7 @@ describe('ComponentsComponent', () => {
 	let router: Router;
 	let service: ComponentsService;
 
-	beforeEach(waitForAsync(() => {
+	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				AlertComponent,
@@ -130,26 +130,26 @@ describe('ComponentsComponent', () => {
 		.compileComponents();
 	}));
 
-	beforeEach(() => {
+	beforeEach((): void => {
 		fixture = TestBed.createComponent(ComponentsComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 		router = TestBed.inject(Router);
 		service = TestBed.inject(ComponentsService);
 
-		fixture.ngZone.run(() => {
+		fixture.ngZone.run((): void => {
 			router.initialNavigation();
 		});
 	});
 
-	it('should create the components page', () => {
+	it('should create the components page', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should set the nav to the router.url if present', waitForAsync(() => {
-		fixture.ngZone.run(() => {
-			fixture.whenStable().then(() => {
-				router.navigate(['/components/form']).then(() => {
+	it('should set the nav to the router.url if present', waitForAsync((): void => {
+		fixture.ngZone.run((): void => {
+			fixture.whenStable().then((): void => {
+				router.navigate(['/components/form']).then((): void => {
 					fixture.detectChanges();
 					expect(service.nav).toEqual('form');
 				});
@@ -158,7 +158,7 @@ describe('ComponentsComponent', () => {
 		});
 	}));
 
-	it('should set the nav to button', () => {
+	it('should set the nav to button', (): void => {
 		component.onSetNav('button');
 
 		expect(service.nav).toEqual('button');
