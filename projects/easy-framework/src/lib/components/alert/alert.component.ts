@@ -10,7 +10,6 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnI
 export class AlertComponent implements OnInit {
 	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;
 	@HostBinding('attr.class') public hostClass: string;
-
 	@Input()
 	public set class(classList: string) {
 		if (classList.includes('close')) {

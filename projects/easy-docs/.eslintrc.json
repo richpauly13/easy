@@ -29,6 +29,14 @@
             "prefix": "docs",
             "style": "camelCase"
           }
+        ],
+        "@angular-eslint/pipe-prefix": [
+          "error",
+          {
+            "prefixes": [
+              "docs"
+            ]
+          }
         ]
       }
     },
@@ -37,7 +45,12 @@
         "*.component.html"
       ],
       "rules": {
-
+        "max-len": [
+          "error",
+          {
+            "code": 600
+          }
+        ]
       }
     }
   ]

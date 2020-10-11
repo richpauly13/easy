@@ -1,11 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Component, DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NavComponent } from './nav.component';
 
 @Component({
-	template: '<button class="nav-toggle" type="button"></button>'
+	selector: 'ez-nav, .nav-h, .nav-v',
+	template: '<button class="nav-toggle" type="button"></button>',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 class MockComponent { }
 

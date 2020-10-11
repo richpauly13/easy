@@ -29,6 +29,29 @@
             "prefix": "ez",
             "style": "camelCase"
           }
+        ],
+        "@angular-eslint/no-lifecycle-call": [
+          "off"
+        ],
+        "@angular-eslint/pipe-prefix": [
+          "error",
+          {
+            "prefixes": [
+              "ez"
+            ]
+          }
+        ],
+        "@angular-eslint/use-component-view-encapsulation": [
+          "off"
+        ],
+        "@typescript-eslint/no-non-null-assertion": [
+          "off"
+        ],
+        "max-len": [
+          "error",
+          {
+            "code": 200
+          }
         ]
       }
     },

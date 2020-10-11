@@ -41,7 +41,7 @@ export function addModuleImportToRootModule(tree: Tree, moduleName: string, impo
 // add a package to the package.json in the given host tree.
 export function addPackageToPackageJson(tree: Tree, name: string, version: string): Tree {
 	if (tree.exists('package.json')) {
-		const sourceText: string = tree.read('package.json').toString('utf-8');
+		const sourceText: string = tree.read('package.json')!.toString('utf-8');
 		const json: any = JSON.parse(sourceText);
 
 		if (!json.dependencies) {
@@ -82,7 +82,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 		return null;
 	}
 
-	const packageJson: any = JSON.parse(tree.read('package.json').toString('utf8'));
+	const packageJson: any = JSON.parse(tree.read('package.json')!.toString('utf8'));
 
 	if (packageJson.dependencies && packageJson.dependencies[name]) {
 		return packageJson.dependencies[name];
@@ -93,7 +93,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 
 // get project from the workspace
 export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?: string): WorkspaceProject {
-	const project: WorkspaceProject = workspace.projects[projectName || workspace.defaultProject];
+	const project: WorkspaceProject = workspace.projects[projectName || workspace.defaultProject!];
 
 	if (!project) {
 		throw new SchematicsException(`Could not find project in workspace: ${projectName}`);
