@@ -8,26 +8,26 @@
         "*.ts"
       ],
       "parserOptions": {
+        "createDefaultProgram": true,
         "project": [
-          "projects/easy-framework/tsconfig.*?.json"
-        ],
-        "createDefaultProgram": true
+          "tsconfig.*?.json"
+        ]
       },
       "rules": {
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
             "prefix": "ez",
-            "style": "kebab-case"
+            "style": "kebab-case",
+            "type": "element"
           }
         ],
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "type": "attribute",
             "prefix": "ez",
-            "style": "camelCase"
+            "style": "camelCase",
+            "type": "attribute"
           }
         ],
         "@angular-eslint/no-lifecycle-call": "off",

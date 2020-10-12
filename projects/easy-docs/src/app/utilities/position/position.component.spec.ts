@@ -3,23 +3,23 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PositionComponent } from './position.component';
 
 describe('PositionComponent', (): void => {
-  let component: PositionComponent;
-  let fixture: ComponentFixture<PositionComponent>;
+	let component: PositionComponent;
+	let fixture: ComponentFixture<PositionComponent>;
 
-  beforeEach(waitForAsync((): void => {
-	TestBed.configureTestingModule({
-		declarations: [ PositionComponent ]
-	})
-	.compileComponents();
-  }));
+	beforeEach(waitForAsync((): void => {
+		TestBed.configureTestingModule({
+			declarations: [ PositionComponent ]
+		})
+		.compileComponents();
+	}));
 
-  beforeEach((): void => {
-	fixture = TestBed.createComponent(PositionComponent);
-	component = fixture.componentInstance;
-	fixture.detectChanges();
-  });
+	beforeEach((): void => {
+		fixture = TestBed.createComponent(PositionComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', (): void => {
-	expect(component).toBeTruthy();
-  });
+	it('should create', (): void => {
+		expect(component).toBeTruthy();
+	});
 });

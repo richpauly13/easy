@@ -3,23 +3,23 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ContainerComponent } from './container.component';
 
 describe('ContainerComponent', (): void => {
-  let component: ContainerComponent;
-  let fixture: ComponentFixture<ContainerComponent>;
+	let component: ContainerComponent;
+	let fixture: ComponentFixture<ContainerComponent>;
 
-  beforeEach(waitForAsync((): void => {
-	TestBed.configureTestingModule({
-		declarations: [ ContainerComponent ]
-	})
-	.compileComponents();
-  }));
+	beforeEach(waitForAsync((): void => {
+		TestBed.configureTestingModule({
+			declarations: [ ContainerComponent ]
+		})
+		.compileComponents();
+	}));
 
-  beforeEach((): void => {
-	fixture = TestBed.createComponent(ContainerComponent);
-	component = fixture.componentInstance;
-	fixture.detectChanges();
-  });
+	beforeEach((): void => {
+		fixture = TestBed.createComponent(ContainerComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', (): void => {
-	expect(component).toBeTruthy();
-  });
+	it('should create', (): void => {
+		expect(component).toBeTruthy();
+	});
 });

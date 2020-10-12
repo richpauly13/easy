@@ -1,19 +1,18 @@
 {
-  "root": true,
   "overrides": [
     {
+      "extends": [
+        "plugin:@angular-eslint/recommended"
+      ],
       "files": [
         "*.ts"
       ],
       "parserOptions": {
+        "createDefaultProgram": true,
         "project": [
           "tsconfig.*?.json"
-        ],
-        "createDefaultProgram": true
+        ]
       },
-      "extends": [
-        "plugin:@angular-eslint/recommended"
-      ],
       "rules": {
         "@angular-eslint/component-class-suffix": [
           "error",
@@ -34,9 +33,9 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
             "prefix": "app",
-            "style": "kebab-case"
+            "style": "kebab-case",
+            "type": "element"
           }
         ],
         "@angular-eslint/contextual-lifecycle": "error",
@@ -51,12 +50,12 @@
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "type": "attribute",
             "prefix": "app",
-            "style": "camelCase"
+            "style": "camelCase",
+            "type": "attribute"
           }
         ],
-        /* "@angular-eslint/no-autofocus": "error", */
+        // "@angular-eslint/no-autofocus": "error",
         "@angular-eslint/no-attribute-decorator": "error",
         "@angular-eslint/no-conflicting-lifecycle": "error",
         "@angular-eslint/no-empty-lifecycle-method": "error",
@@ -108,7 +107,7 @@
             "readonly": "array"
           }
         ],
-        /* "@typescript-eslint/await-thenable": "error", */
+        // "@typescript-eslint/await-thenable": "error",
         "@typescript-eslint/ban-ts-comment": [
           "error",
           { "minimumDescriptionLength": 10,
@@ -190,11 +189,217 @@
             "allowTypedFunctionExpressions": false
           }
         ],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit",
+            "ignoredMethodNames": [
+
+            ],
+            "overrides": {
+              "accessors": "explicit",
+              "constructors": "explicit",
+              "methods": "explicit",
+              "parameterProperties": "explicit",
+              "properties": "explicit"
+            }
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": [
+          "error",
+          {
+            "allowArgumentsExplicitlyTypedAsAny": false,
+            "allowDirectConstAssertionInArrowFunctions": false,
+            "allowedNames": [
+
+            ],
+            "allowHigherOrderFunctions": false,
+            "allowTypedFunctionExpressions": false
+          }
+        ],
+        "@typescript-eslint/func-call-spacing": [
+          "error",
+          "never"
+        ],
+        "@typescript-eslint/indent": [
+          "error",
+          "tab",
+          {
+            "ArrayExpression": 1,
+            "CallExpression": {
+              "arguments": 1
+            },
+            "flatTernaryExpressions": true,
+            "FunctionDeclaration": {
+              "body": 1,
+              "parameters": 2
+            },
+            "FunctionExpression": {
+              "body": 1,
+              "parameters": 2
+            },
+            "ignoredNodes": [
+
+            ],
+            "ImportDeclaration": 1,
+            "MemberExpression": 0,
+            "ObjectExpression": 1,
+            "offsetTernaryExpressions": true,
+            "outerIIFEBody": 0,
+            "SwitchCase": 1,
+            "VariableDeclarator": {
+              "const": 0,
+              "let": 0,
+              "var": 0
+            }
+          }
+        ],
+        "@typescript-eslint/init-declarations": [
+          "error",
+          "never",
+          {
+            "ignoreForLoopInit": true
+          }
+        ],
+        "@typescript-eslint/keyword-spacing": [
+          "error",
+          {
+            "after": true,
+            "before": true,
+            "overrides": {
+              /* "if": {
+                "after": true
+              } */
+            }
+          }
+        ],
+        "@typescript-eslint/lines-between-class-members": [
+          "error",
+          "always",
+          {
+            "exceptAfterOverload": false,
+            "exceptAfterSingleLine": true
+          }
+        ],
+        "@typescript-eslint/member-delimiter-style": [
+          "error",
+          {
+            "multiline": {
+              "delimiter": "comma",
+              "requireLast": true
+            },
+            "singleline": {
+              "delimiter": "comma",
+              "requireLast": true
+            },
+            "overrides": {
+              "interface": {
+                "multiline": {
+                  "delimiter": "semi",
+                  "requireLast": true
+                },
+                "singleline": {
+                  "delimiter": "semi",
+                  "requireLast": true
+                }
+              },
+              "typeLiteral": {
+                "multiline": {
+                  "delimiter": "comma",
+                  "requireLast": true
+                },
+                "singleline": {
+                  "delimiter": "comma",
+                  "requireLast": true
+                }
+              }
+            }
+          }
+        ],
+        /* "@typescript-eslint/member-ordering": [
+          "error",
+          {
+            "default": [
+              // Index signature
+              "signature",
+
+              // Fields
+              "public-static-field",
+              "protected-static-field",
+              "private-static-field",
+
+              "public-decorated-field",
+              "protected-decorated-field",
+              "private-decorated-field",
+
+              "public-instance-field",
+              "protected-instance-field",
+              "private-instance-field",
+
+              "public-abstract-field",
+              "protected-abstract-field",
+              "private-abstract-field",
+
+              "public-field",
+              "protected-field",
+              "private-field",
+
+              "static-field",
+              "instance-field",
+              "abstract-field",
+
+              "decorated-field",
+
+              "field",
+
+              // Constructors
+              "public-constructor",
+              "protected-constructor",
+              "private-constructor",
+
+              "constructor",
+
+              // Methods
+              "public-static-method",
+              "protected-static-method",
+              "private-static-method",
+
+              "public-decorated-method",
+              "protected-decorated-method",
+              "private-decorated-method",
+
+              "public-instance-method",
+              "protected-instance-method",
+              "private-instance-method",
+
+              "public-abstract-method",
+              "protected-abstract-method",
+              "private-abstract-method",
+
+              "public-method",
+              "protected-method",
+              "private-method",
+
+              "static-method",
+              "instance-method",
+              "abstract-method",
+
+              "decorated-method",
+
+              "method"
+            ]
+          }
+        ], */
         "brace-style": "off",
         "comma-dangle": "off",
         "comma-spacing": "off",
         "default-param-last": "off",
         "dot-notation": "off",
+        "func-call-spacing": "off",
+        "indent": "off",
+        "init-declarations": "off",
+        "keyword-spacing": "off",
+        "lines-between-class-members": "off",
         "max-len": [
           "error",
           {
@@ -212,11 +417,11 @@
       }
     },
     {
-      "files": [
-        "*.component.html"
-      ],
       "extends": [
         "plugin:@angular-eslint/template/recommended"
+      ],
+      "files": [
+        "*.component.html"
       ],
       "rules": {
         "@angular-eslint/template/banana-in-box": "error",
@@ -246,12 +451,13 @@
       }
     },
     {
-      "files": [
-        "*.component.ts"
-      ],
       "extends": [
         "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "files": [
+        "*.component.ts"
       ]
     }
-  ]
+  ],
+  "root": true
 }

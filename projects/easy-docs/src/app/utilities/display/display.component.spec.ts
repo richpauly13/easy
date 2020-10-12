@@ -12,7 +12,7 @@ describe('DisplayComponent', (): void => {
 				DisplayComponent
 			]
 		})
-			.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

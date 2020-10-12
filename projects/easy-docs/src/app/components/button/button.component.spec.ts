@@ -7,10 +7,10 @@ describe('ButtonComponent', (): void => {
 	let fixture: ComponentFixture<ButtonComponent>;
 
 	beforeEach(waitForAsync((): void => {
-	TestBed.configureTestingModule({
-		declarations: [
-			ButtonComponent
-		]
+		TestBed.configureTestingModule({
+			declarations: [
+				ButtonComponent
+			]
 		})
 		.compileComponents();
 	}));
