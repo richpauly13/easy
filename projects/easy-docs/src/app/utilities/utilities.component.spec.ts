@@ -23,6 +23,10 @@ class MockUtilitiesService {
 	}
 
 	private currentNav: string;
+
+	public constructor() {
+		this.currentNav = '';
+	}
 }
 
 describe('UtilitiesComponent', (): void => {
@@ -105,7 +109,7 @@ describe('UtilitiesComponent', (): void => {
 		service = TestBed.inject(UtilitiesService);
 		router = TestBed.inject(Router);
 
-		fixture.ngZone.run((): void => {
+		fixture.ngZone!.run((): void => {
 			router.initialNavigation();
 		});
 	});
@@ -115,7 +119,7 @@ describe('UtilitiesComponent', (): void => {
 	});
 
 	it('should set the nav to the router.url if present', waitForAsync((): void => {
-		fixture.ngZone.run((): void => {
+		fixture.ngZone!.run((): void => {
 			fixture.whenStable().then((): void => {
 				router.navigate(['/utilities/display']).then((): void => {
 					fixture.detectChanges();

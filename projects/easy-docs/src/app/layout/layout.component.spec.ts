@@ -19,6 +19,10 @@ class MockLayoutService {
 	}
 
 	private currentNav: string;
+
+	public constructor() {
+		this.currentNav = '';
+	}
 }
 
 describe('LayoutComponent', (): void => {
@@ -81,7 +85,7 @@ describe('LayoutComponent', (): void => {
 		router = TestBed.inject(Router);
 		service = TestBed.inject(LayoutService);
 
-		fixture.ngZone.run((): void => {
+		fixture.ngZone!.run((): void => {
 			router.initialNavigation();
 		});
 	});
@@ -91,7 +95,7 @@ describe('LayoutComponent', (): void => {
 	});
 
 	it('should set the nav to the router.url if present', waitForAsync((): void => {
-		fixture.ngZone.run((): void => {
+		fixture.ngZone!.run((): void => {
 			fixture.whenStable().then((): void => {
 				router.navigate(['/layout/grid']).then((): void => {
 					fixture.detectChanges();

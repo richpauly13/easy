@@ -29,6 +29,10 @@ class MockComponentsService {
 	}
 
 	private currentNav: string;
+
+	public constructor() {
+		this.currentNav = '';
+	}
 }
 
 describe('ComponentsComponent', (): void => {
@@ -137,7 +141,7 @@ describe('ComponentsComponent', (): void => {
 		router = TestBed.inject(Router);
 		service = TestBed.inject(ComponentsService);
 
-		fixture.ngZone.run((): void => {
+		fixture.ngZone!.run((): void => {
 			router.initialNavigation();
 		});
 	});
@@ -147,7 +151,7 @@ describe('ComponentsComponent', (): void => {
 	});
 
 	it('should set the nav to the router.url if present', waitForAsync((): void => {
-		fixture.ngZone.run((): void => {
+		fixture.ngZone!.run((): void => {
 			fixture.whenStable().then((): void => {
 				router.navigate(['/components/form']).then((): void => {
 					fixture.detectChanges();

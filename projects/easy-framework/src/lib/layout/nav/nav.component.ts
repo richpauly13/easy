@@ -10,7 +10,9 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, View
 export class NavComponent implements OnInit {
 	private isActive: boolean;
 
-	public constructor(private renderer2: Renderer2) { }
+	public constructor(private renderer2: Renderer2) {
+		this.isActive = false;
+	}
 
 	public ngOnInit(): void {
 		try  {

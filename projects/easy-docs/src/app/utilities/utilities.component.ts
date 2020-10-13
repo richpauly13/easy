@@ -12,9 +12,7 @@ import { UtilitiesService } from './utilities.service';
 export class UtilitiesComponent implements OnInit {
 	public navs: string[];
 
-	public constructor(private utilitiesService: UtilitiesService, private router: Router) { }
-
-	public ngOnInit(): void {
+	public constructor(private utilitiesService: UtilitiesService, private router: Router) {
 		this.navs = [
 			'color',
 			'dimension',
@@ -25,7 +23,9 @@ export class UtilitiesComponent implements OnInit {
 			'typography',
 			'visibility'
 		];
+	}
 
+	public ngOnInit(): void {
 		if (this.router.url.includes('/utilities/')) {
 			this.onSetNav(this.router.url.split('/')[2]);
 			this.router.navigate([this.router.url]);
