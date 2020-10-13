@@ -12,16 +12,16 @@ import { LayoutService } from './layout.service';
 export class LayoutComponent implements OnInit {
 	public navs: string[];
 
-	public constructor(private layoutService: LayoutService, private router: Router) { }
-
-	public ngOnInit(): void {
+	public constructor(private layoutService: LayoutService, private router: Router) {
 		this.navs = [
 			'container',
 			'flexbox',
 			'grid',
 			'nav'
 		];
+	}
 
+	public ngOnInit(): void {
 		if (this.router.url.includes('/layout/')) {
 			this.onSetNav(this.router.url.split('/')[2]);
 			this.router.navigate([this.router.url]);

@@ -4,14 +4,15 @@
 		"baseUrl": "./",
 		"outDir": "./dist/out-tsc",
 		"sourceMap": true,
-		"declaration": false,
-    "strictNullChecks": false,
-		"downlevelIteration": true,
-		"experimentalDecorators": true,
+    "declaration": false,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
 		"module": "es2020",
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
 		"importHelpers": true,
 		"target": "es2015",
 		"typeRoots": [
@@ -28,7 +29,8 @@
 		}
 	},
 	"angularCompilerOptions": {
-		"fullTemplateTypeCheck": true,
-		"strictInjectionParameters": true
+		"strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
 	}
 }

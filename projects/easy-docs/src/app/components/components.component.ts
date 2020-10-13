@@ -12,9 +12,7 @@ import { ComponentsService } from './components.service';
 export class ComponentsComponent implements OnInit {
 	public navs: string[];
 
-	public constructor(private componentsService: ComponentsService, private router: Router) { }
-
-	public ngOnInit(): void {
+	public constructor(private componentsService: ComponentsService, private router: Router) {
 		this.navs = [
 			'alert',
 			'badge',
@@ -30,7 +28,9 @@ export class ComponentsComponent implements OnInit {
 			'table',
 			'tooltip'
 		];
+	}
 
+	public ngOnInit(): void {
 		if (this.router.url.includes('/components/')) {
 			this.onSetNav(this.router.url.split('/')[2]);
 			this.router.navigate([this.router.url]);

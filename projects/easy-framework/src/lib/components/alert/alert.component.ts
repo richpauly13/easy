@@ -22,7 +22,7 @@ export class AlertComponent implements OnInit {
 			this.renderer2.setAttribute(this.elementRef.nativeElement, 'role', 'alert');
 		}
 
-		this.ariaLabelledBy = this.id = this.class.match(/\balert\S+\b/)[0];
+		this.ariaLabelledBy = this.id = this.class.match(/\balert\S+\b/)![0];
 	}
 
 	public get class(): string {
@@ -34,7 +34,13 @@ export class AlertComponent implements OnInit {
 
 	private classList: string;
 
-	public constructor(private readonly elementRef: ElementRef, private readonly renderer2: Renderer2) { }
+	public constructor(private readonly elementRef: ElementRef, private readonly renderer2: Renderer2) {
+		this.ariaLabelledBy = '';
+		this.classList = '';
+		this.close = false;
+		this.hostClass = '';
+		this.id = '';
+	}
 
 	public ngOnInit(): void {
 		this.hostClass = this.class;

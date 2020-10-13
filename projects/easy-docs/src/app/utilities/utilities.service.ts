@@ -13,4 +13,8 @@ export class UtilitiesService {
 	}
 
 	private currentNav: string;
+
+	public constructor() {
+		this.currentNav = '';
+	}
 }

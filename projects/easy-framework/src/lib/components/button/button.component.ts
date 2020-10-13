@@ -19,6 +19,10 @@ export class ButtonComponent implements OnInit {
 
 	private hostType: string;
 
+	public constructor() {
+		this.hostType = '';
+	}
+
 	public ngOnInit(): void {
 		this.type = this.hostType;
 	}

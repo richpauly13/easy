@@ -13,4 +13,8 @@ export class ComponentsService {
 	}
 
 	private currentNav: string;
+
+	public constructor() {
+		this.currentNav = '';
+	}
 }

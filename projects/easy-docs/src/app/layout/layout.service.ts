@@ -13,4 +13,8 @@ export class LayoutService {
 	}
 
 	private currentNav: string;
+
+	public constructor() {
+		this.currentNav = '';
+	}
 }
