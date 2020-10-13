@@ -150,9 +150,6 @@
         "@angular-eslint/use-pipe-transform-interface": [
           "error"
         ],
-        "@typescript-eslint/no-non-null-assertion": [
-          "error"
-        ],
         "@typescript-eslint/adjacent-overload-signatures": [
           "error"
         ],
@@ -513,13 +510,6 @@
             "selector": "typeLike"
           }
         ],
-        "@typescript-eslint/no-inferrable-types": [
-          "error",
-          {
-            "ignoreParameters": true,
-            "ignoreProperties": true
-          }
-        ],
         "@typescript-eslint/no-array-constructor": [
           "error"
         ],
@@ -567,6 +557,16 @@
               "setters"
             ]
           }
+        ],
+        "@typescript-eslint/no-inferrable-types": [
+          "off"/* ,
+          {
+            "ignoreParameters": true,
+            "ignoreProperties": true
+          } */
+        ],
+        "@typescript-eslint/no-non-null-assertion": [
+          "off"
         ],
         "brace-style": "off",
         "camelcase": "off",
