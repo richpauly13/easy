@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { CardComponent } from './card.component';
-import { CardDirective } from './card.directive';
 
 @NgModule({
 	declarations: [
-		CardComponent,
-		CardDirective
+		CardComponent
 	],
 	exports: [
-		CardComponent,
-		CardDirective
+		CardComponent
 	]
 })
 export class CardModule { }

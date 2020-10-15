@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { SlideshowComponent } from './slideshow.component';
-import { SlideshowDirective } from './slideshow.directive';
 
 @NgModule({
 	declarations: [
-		SlideshowComponent,
-		SlideshowDirective
+		SlideshowComponent
 	],
 	exports: [
-		SlideshowComponent,
-		SlideshowDirective
+		SlideshowComponent
 	]
 })
 export class SlideshowModule { }

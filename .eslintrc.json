@@ -569,14 +569,68 @@
           {
             "fixToUnknown": false,
             "ignoreRestArgs": false
-            }
-          ],
-        "@typescript-eslint/no-inferrable-types": [
-          "off"/* ,
+          }
+        ],
+        "@typescript-eslint/no-extra-non-null-assertion": [
+          "error"
+        ],
+        "@typescript-eslint/no-extra-parens": [
+          "error",
+          "all",
           {
-            "ignoreParameters": true,
-            "ignoreProperties": true
-          } */
+            "conditionalAssign": false,
+            "enforceForArrowConditionals": false,
+            "enforceForFunctionPrototypeMethods": false,
+            "enforceForNewInMemberExpressions": false,
+            "enforceForSequenceExpressions": false,
+            "ignoreJSX": "none",
+            "nestedBinaryExpressions": false,
+            "returnAssign": false
+          }
+        ],
+        "@typescript-eslint/no-extra-semi": [
+          "error"
+        ],
+        "@typescript-eslint/no-extraneous-class": [
+          "error",
+          {
+            "allowConstructorOnly": true,
+            "allowEmpty": true,
+            "allowStaticOnly": false,
+            "allowWithDecorator": false
+          }
+        ],
+        /* "@typescript-eslint/no-floating-promises": [
+          "error",
+          {
+            "ignoreIIFE": false,
+            "ignoreVoid": false
+          }
+        ], */
+        "@typescript-eslint/no-for-in-array": [
+          "error"
+        ],
+        "@typescript-eslint/no-implicit-any-catch": [
+          "error",
+          {
+            "allowExplicitAny": false
+          }
+        ],
+        /* "@typescript-eslint/no-implied-eval": [
+          "error"
+        ], */
+        "@typescript-eslint/no-inferrable-types": [
+          "off",
+          {
+            "ignoreParameters": false,
+            "ignoreProperties": false
+          }
+        ],
+        "@typescript-eslint/no-invalid-this": [
+          "error",
+          {
+            "capIsConstructor": false
+          }
         ],
         "@typescript-eslint/no-non-null-assertion": [
           "off"
@@ -602,6 +656,10 @@
         "no-dupe-class-members": "off",
         "no-duplicate-imports": "off",
         "no-empty-function": "off",
+        "no-extra-parens": "off",
+        "no-extra-semi": "off",
+        "no-implied-eval": "off",
+        "no-invalid-this": "off",
         "quotes": [
           "error",
           "single",

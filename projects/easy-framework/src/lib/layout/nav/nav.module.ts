@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { NavComponent } from './nav.component';
-import { NavDirective } from './nav.directive';
 
 @NgModule({
 	declarations: [
-		NavComponent,
-		NavDirective
+		NavComponent
 	],
 	exports: [
-		NavComponent,
-		NavDirective
+		NavComponent
 	]
 })
 export class NavModule { }

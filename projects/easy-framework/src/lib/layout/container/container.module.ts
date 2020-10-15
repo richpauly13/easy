@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { ContainerComponent } from './container.component';
-import { ContainerDirective } from './container.directive';
 
 @NgModule({
 	declarations: [
-		ContainerComponent,
-		ContainerDirective
+		ContainerComponent
 	],
 	exports: [
-		ContainerComponent,
-		ContainerDirective
+		ContainerComponent
 	]
 })
 export class ContainerModule { }

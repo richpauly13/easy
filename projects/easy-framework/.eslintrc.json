@@ -40,7 +40,9 @@
           }
         ],
         "@angular-eslint/use-component-view-encapsulation": "off",
-        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-non-null-assertion": [
+          "off"
+        ],
         "max-len": [
           "error",
           {

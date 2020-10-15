@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { TabComponent } from './tab.component';
-import { TabDirective } from './tab.directive';
 
 @NgModule({
 	declarations: [
-		TabComponent,
-		TabDirective
+		TabComponent
 	],
 	exports: [
-		TabComponent,
-		TabDirective
+		TabComponent
 	]
 })
 export class TabModule { }

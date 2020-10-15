@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { GridComponent } from './grid.component';
-import { GridDirective } from './grid.directive';
 
 @NgModule({
 	declarations: [
-		GridComponent,
-		GridDirective
+		GridComponent
 	],
 	exports: [
-		GridComponent,
-		GridDirective
+		GridComponent
 	]
 })
 export class GridModule { }

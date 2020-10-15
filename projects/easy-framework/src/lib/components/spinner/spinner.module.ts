@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { SpinnerComponent } from './spinner.component';
-import { SpinnerDirective } from './spinner.directive';
 
 @NgModule({
 	declarations: [
-		SpinnerComponent,
-		SpinnerDirective
+		SpinnerComponent
 	],
 	exports: [
-		SpinnerComponent,
-		SpinnerDirective
+		SpinnerComponent
 	]
 })
 export class SpinnerModule { }

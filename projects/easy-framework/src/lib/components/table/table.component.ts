@@ -13,7 +13,7 @@ export class TableComponent {
 	public set class(classList: string) {
 		if (classList.includes('table-cell')) {
 			this.role = 'gridcell';
-		} else if ((classList.includes('table-header') && !classList.includes('table-header-cell')) || classList.includes('table-row')) {
+		} else if (classList.includes('table-header') && !classList.includes('table-header-cell') || classList.includes('table-row')) {
 			this.role = 'row';
 		} else if (classList.includes('table-header-cell')) {
 			this.role = 'columnheader';

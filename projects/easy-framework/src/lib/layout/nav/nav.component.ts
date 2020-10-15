@@ -21,7 +21,7 @@ export class NavComponent implements OnInit {
 			this.renderer2.listen(element, 'click', (): void => {
 				this.onToggle(element);
 			});
-		} catch (error) {
+		} catch (error: unknown) {
 			return;
 		}
 	}

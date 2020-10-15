@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { SwitchComponent } from './switch.component';
-import { SwitchDirective } from './switch.directive';
 
 @NgModule({
 	declarations: [
-		SwitchComponent,
-		SwitchDirective
+		SwitchComponent
 	],
 	exports: [
-		SwitchComponent,
-		SwitchDirective
+		SwitchComponent
 	]
 })
 export class SwitchModule { }
