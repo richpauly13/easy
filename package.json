@@ -20,8 +20,6 @@
   "devDependencies": {
     "@angular-devkit/architect": "^0.1001.6",
     "@angular-devkit/build-angular": "^0.1100.0-next.6",
-    "@angular-devkit/core": "^11.0.0-next.6",
-    "@angular-devkit/schematics": "^11.0.0-next.6",
     "@angular-eslint/builder": "^0.5.0-beta.4",
     "@angular-eslint/eslint-plugin": "^0.5.0-beta.4",
     "@angular-eslint/eslint-plugin-template": "^0.5.0-beta.4",
@@ -30,7 +28,6 @@
     "@angular/cli": "^11.0.0-next.6",
     "@angular/compiler-cli": "^11.0.0-next.5",
     "@angular/language-service": "^11.0.0-next.5",
-    "@schematics/angular": "^11.0.0-next.6",
     "@types/jasmine": "^3.5.14",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^14.11.8",

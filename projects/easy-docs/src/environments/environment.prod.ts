@@ -1,3 +1,3 @@
-export const environment: any = {
+export const environment: Record<string, unknown> = {
 	production: true
 };

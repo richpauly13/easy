@@ -41,8 +41,6 @@ Developers can use only the components needed for a particular project. This is 
 
 **NPM:** `npm i --save easy-framework`
 
-**Angular CLI:** `ng add easy-framework`
-
 ## Usage
 
 Import core styles into your app root module.

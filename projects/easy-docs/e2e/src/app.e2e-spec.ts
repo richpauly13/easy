@@ -10,6 +10,6 @@ describe('workspace-project App', (): void => {
 	it('should contain alert', (): void => {
 		page.navigateTo();
 
-		expect(page.getTitleText()).toContain('Alert');
+		expect(page.titleText).toContain('Alert');
 	});
 });

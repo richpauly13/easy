@@ -9,15 +9,15 @@ import { UtilitiesModule } from './utilities/utilities.module';
 const routes: Routes = [
 	{
 		path: 'components',
-		loadChildren: (): Promise<any> => import('projects/easy-docs/src/app/components/components.module').then((mod): ComponentsModule => mod.ComponentsModule)
+		loadChildren: (): Promise<ComponentsModule> => import('projects/easy-docs/src/app/components/components.module').then((mod): ComponentsModule => mod.ComponentsModule)
 	},
 	{
 		path: 'layout',
-		loadChildren: (): Promise<any> => import('projects/easy-docs/src/app/layout/layout.module').then((mod): LayoutModule => mod.LayoutModule)
+		loadChildren: (): Promise<LayoutModule> => import('projects/easy-docs/src/app/layout/layout.module').then((mod): LayoutModule => mod.LayoutModule)
 	},
 	{
 		path: 'utilities',
-		loadChildren: (): Promise<any> => import('projects/easy-docs/src/app/utilities/utilities.module').then((mod): UtilitiesModule => mod.UtilitiesModule)
+		loadChildren: (): Promise<UtilitiesModule> => import('projects/easy-docs/src/app/utilities/utilities.module').then((mod): UtilitiesModule => mod.UtilitiesModule)
 	},
 	{
 		component: HomeComponent,

@@ -26,7 +26,7 @@ export class NavComponent implements OnInit {
 		}
 	}
 
-	private onToggle(element: any): void {
+	private onToggle(element: ElementRef): void {
 		if (!this.isActive) {
 			this.renderer2.addClass(element, 'active');
 		} else {

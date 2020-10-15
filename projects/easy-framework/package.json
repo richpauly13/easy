@@ -21,9 +21,6 @@
   ],
   "license": "MIT",
   "name": "easy-framework",
-  "ng-add": {
-    "save": "dependencies"
-  },
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
@@ -33,17 +30,10 @@
     "type": "git",
     "url": "https://github.com/richpauly13/easy.git"
   },
-  "schematics": "./schematics/collection.json",
   "scripts": {
-    "build:easy": "ng build easy-framework --prod",
-    "build:schematics": "node ../../node_modules/typescript/bin/tsc -p tsconfig.schematics.json",
-    "build": "run-s build:easy build:schematics",
-    "copy:all": "run-p copy:collection copy:files copy:md copy:schemas",
-    "copy:collection": "copyfiles schematics/collection.json ../../dist/easy-framework",
-    "copy:files": "copyfiles schematics/**/files/** ../../dist/easy-framework/",
+    "build": "ng build easy-framework --prod",
     "copy:md": "copyfiles -f ../../{LICENSE.md,README.md} ../../dist/easy-framework",
-    "copy:schemas": "copyfiles schematics/*/schema.json ../../dist/easy-framework/",
-    "package": "run-s build copy:all",
+    "package": "run-s build copy:md",
     "release": "npm run version && npm run package && git push --follow-tags origin master && npm publish ../../dist/easy-framework",
     "version": "standard-version"
   },
