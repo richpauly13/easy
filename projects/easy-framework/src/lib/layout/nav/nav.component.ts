@@ -22,7 +22,7 @@ export class NavComponent implements OnInit {
 				this.onToggle(element);
 			});
 		} catch (error: unknown) {
-			return;
+			console.log(error);
 		}
 	}
 

@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulat
 export class ButtonComponent implements OnInit {
 	@HostBinding('attr.type')
 	public set type(type: string) {
-		type ? this.hostType = type : this.hostType = 'button';
+		type = type ? this.hostType = type : this.hostType = 'button';
 	}
 
 	public get type(): string {
