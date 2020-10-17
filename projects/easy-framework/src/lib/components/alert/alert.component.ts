@@ -34,7 +34,7 @@ export class AlertComponent implements OnInit {
 
 	private classList: string;
 
-	public constructor(private readonly elementRef: ElementRef, private readonly renderer2: Renderer2) {
+	public constructor(private elementRef: ElementRef, private renderer2: Renderer2) {
 		this.ariaLabelledBy = '';
 		this.classList = '';
 		this.close = false;
