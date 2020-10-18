@@ -10,7 +10,7 @@ declare const require: any;
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 // then we find all the tests.
-const context: any = require.context('./', true, /\.spec\.ts$/);
+const context: any = require.context('./', true, /\.spec\.ts$/u);
 
 // and load the modules.
 context.keys().map(context);

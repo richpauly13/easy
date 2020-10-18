@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		try  {
+		try {
 			const element: ElementRef = this.renderer2.selectRootElement('.nav-toggle');
 
 			this.renderer2.listen(element, 'click', (): void => {

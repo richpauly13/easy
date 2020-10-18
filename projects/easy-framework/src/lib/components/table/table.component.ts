@@ -10,6 +10,10 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 export class TableComponent {
 	@HostBinding('attr.role') public role: string;
 	@Input()
+	public get class(): string {
+		return this.classList;
+	}
+
 	public set class(classList: string) {
 		if (classList.includes('table-cell')) {
 			this.role = 'gridcell';
@@ -22,10 +26,6 @@ export class TableComponent {
 		}
 
 		this.classList = classList;
-	}
-
-	public get class(): string {
-		return this.classList;
 	}
 
 	private classList: string;
