@@ -13,5 +13,5 @@ platformBrowserDynamic()
 	defaultEncapsulation: ViewEncapsulation.None
 })
 .catch((error: Error): void => {
-	console.error(error);
+	console.log(error);
 });
