@@ -1050,6 +1050,24 @@
             "checkForEach": true
           }
         ],
+        "arrow-body-style": [
+          "error",
+          "as-needed",
+          {
+            "requireReturnForObjectLiteral": false
+          }
+        ],
+        "arrow-parens": [
+          "error",
+          "always"
+        ],
+        "arrow-spacing": [
+          "error",
+          {
+            "after": true,
+            "before": true
+          }
+        ],
         "block-scoped-var": "error",
         "brace-style": "off",
         "camelcase": "off",
@@ -1074,6 +1092,9 @@
           {
             "treatUndefinedAsUnspecified": true
           }
+        ],
+        "constructor-super": [
+          "error"
         ],
         "curly": [
           "error",
@@ -1101,6 +1122,16 @@
         ],
         "for-direction": "error",
         "func-call-spacing": "off",
+        "generator-star-spacing": [
+          "error",
+          {
+            "after": false,
+            "anonymous": "neither",
+            "before": false,
+            "method": "neither",
+            "named": "neither"
+          }
+        ],
         "getter-return": [
           "error",
           {
@@ -1132,10 +1163,17 @@
         "no-await-in-loop": "error",
         "no-caller": "error",
         "no-case-declarations": "error",
+        "no-class-assign": "error",
         "no-compare-neg-zero": "error",
         "no-cond-assign": [
           "error",
           "always"
+        ],
+        "no-confusing-arrow": [
+          "error",
+          {
+            "allowParens": false
+          }
         ],
         "no-console": [
           "error",
@@ -1151,6 +1189,7 @@
             "checkLoops": true
           }
         ],
+        "no-const-assign": "error",
         "no-constructor-return": "error",
         "no-control-regex": "error",
         "no-debugger": "error",
@@ -1287,6 +1326,7 @@
         "no-multi-str": "error",
         "no-new": "error",
         "no-new-func": "error",
+        "no-new-symbol": "error",
         "no-new-wrappers": "error",
         "no-obj-calls": "error",
         "no-octal": "error",
@@ -1308,6 +1348,28 @@
         "no-prototype-builtins": "error",
         "no-redeclare": "off",
         "no-regex-spaces": "error",
+        "no-restricted-exports": [
+          "error",
+          {
+            "restrictedNamedExports": [
+
+            ]
+          }
+        ],
+        "no-restricted-imports": [
+          "error"/* ,
+          {
+            "paths": [
+              {
+                "importNames": [
+
+                ],
+                "message": "",
+                "name": ""
+              }
+            ]
+          } */
+        ],
         "no-restricted-globals": [
           "error",
           {
@@ -1347,6 +1409,7 @@
         "no-shadow-restricted-names": "error",
         "no-sparse-arrays": "error",
         "no-template-curly-in-string": "error",
+        "no-this-before-super": "error",
         "no-throw-literal": "off",
         "no-undef": [
           "error",
@@ -1385,10 +1448,25 @@
         "no-useless-backreference": "error",
         "no-useless-call": "error",
         "no-useless-catch": "error",
+        "no-useless-computed-key": [
+          "error",
+          {
+            "enforceForClassMembers": true
+          }
+        ],
         "no-useless-concat": "error",
         "no-useless-constructor": "off",
         "no-useless-escape": "error",
+        "no-useless-rename": [
+          "error",
+          {
+            "ignoreDestructuring": false,
+            "ignoreExport": false,
+            "ignoreImport": false
+          }
+        ],
         "no-useless-return": "error",
+        "no-var": "error",
         "no-void": [
           "error",
           {
@@ -1404,6 +1482,29 @@
             "location": "anywhere" }
         ],
         "no-with": "error",
+        "object-shorthand": [
+          "error",
+          "never"/* ,
+          {
+            "avoidExplicitReturnArrows": false,
+            "avoidQuotes": false,
+            "ignoreConstructors": false
+          } */
+        ],
+        "prefer-arrow-callback": [
+          "error",
+          {
+            "allowNamedFunctions": false,
+            "allowUnboundThis": false
+          }
+        ],
+        "prefer-const": [
+          "error",
+          {
+            "destructuring": "all",
+            "ignoreReadBeforeAssign": false
+          }
+        ],
         "prefer-named-capture-group": "error",
         "prefer-promise-reject-errors": [
           "error",

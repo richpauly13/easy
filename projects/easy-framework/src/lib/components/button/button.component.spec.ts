@@ -20,7 +20,7 @@ describe('ButtonComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should be created', (): void=> {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 

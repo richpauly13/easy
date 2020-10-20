@@ -106,7 +106,7 @@ describe('LayoutComponent', (): void => {
 		});
 	}));
 
-	it('should set the nav to grid', (): void=> {
+	it('should set the nav to grid', (): void => {
 		component.onSetNav('grid');
 
 		expect(service.nav).toEqual('grid');
