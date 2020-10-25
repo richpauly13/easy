@@ -103,7 +103,6 @@ describe('LayoutComponent', (): void => {
 					fixture.detectChanges();
 					expect(service.nav).toEqual('grid');
 				});
-
 			});
 		});
 	}));

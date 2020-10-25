@@ -159,7 +159,6 @@ describe('ComponentsComponent', (): void => {
 					fixture.detectChanges();
 					expect(service.nav).toEqual('form');
 				});
-
 			});
 		});
 	}));

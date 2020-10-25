@@ -46,7 +46,9 @@ describe('NavComponent', (): void => {
 		component['isActive'] = false;
 		component.ngOnInit();
 
-		buttonToggle.triggerEventHandler('click', {});
+		buttonToggle.triggerEventHandler('click', {
+
+		});
 
 		expect(component['isActive']).toBe(true);
 	});
@@ -55,7 +57,9 @@ describe('NavComponent', (): void => {
 		component['isActive'] = true;
 		component.ngOnInit();
 
-		buttonToggle.triggerEventHandler('click', {});
+		buttonToggle.triggerEventHandler('click', {
+
+		});
 
 		expect(component['isActive']).toBe(false);
 	});

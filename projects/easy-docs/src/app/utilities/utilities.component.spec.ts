@@ -127,7 +127,6 @@ describe('UtilitiesComponent', (): void => {
 					fixture.detectChanges();
 					expect(service.nav).toEqual('display');
 				});
-
 			});
 		});
 	}));

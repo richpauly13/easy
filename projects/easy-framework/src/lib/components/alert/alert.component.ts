@@ -28,7 +28,8 @@ export class AlertComponent implements OnInit {
 			this.renderer2.setAttribute(this.elementRef.nativeElement, 'role', 'alert');
 		}
 
-		this.ariaLabelledBy = this.id = this.class.match(/\balert\S+\b/u)![0];
+		this.ariaLabelledBy = this.class.match(/\balert\S+\b/u)![0];
+		this.id = this.class.match(/\balert\S+\b/u)![0];
 	}
 
 	public close: boolean;
