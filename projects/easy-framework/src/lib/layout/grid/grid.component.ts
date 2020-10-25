@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'ez-grid, .grid',
 	templateUrl: './grid.component.html',
-	styleUrls: ['./grid.component.scss'],
+	styleUrls: [
+		'./grid.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -121,7 +121,9 @@ describe('UtilitiesComponent', (): void => {
 	it('should set the nav to the router.url if present', waitForAsync((): void => {
 		fixture.ngZone!.run((): void => {
 			fixture.whenStable().then((): void => {
-				router.navigate(['/utilities/display']).then((): void => {
+				router.navigate([
+					'/utilities/display'
+				]).then((): void => {
 					fixture.detectChanges();
 					expect(service.nav).toEqual('display');
 				});

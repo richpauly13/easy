@@ -1,6 +1,4 @@
-/*
- * Public API Surface of components
- */
+/* Public API Surface of components */
 export * from './alert';
 export * from './badge';
 export * from './button';

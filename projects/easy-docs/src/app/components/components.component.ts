@@ -6,7 +6,9 @@ import { ComponentsService } from './components.service';
 @Component({
 	selector: 'docs-components',
 	templateUrl: './components.component.html',
-	styleUrls: ['./components.component.scss'],
+	styleUrls: [
+		'./components.component.scss'
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentsComponent implements OnInit {
@@ -33,9 +35,14 @@ export class ComponentsComponent implements OnInit {
 	public ngOnInit(): void {
 		if (this.router.url.includes('/components/')) {
 			this.onSetNav(this.router.url.split('/')[2]);
-			this.router.navigate([this.router.url]);
+			this.router.navigate([
+				this.router.url
+			]);
 		} else {
-			this.router.navigate(['/components/', this.componentsService.nav]);
+			this.router.navigate([
+				'/components/',
+				this.componentsService.nav
+			]);
 		}
 	}
 

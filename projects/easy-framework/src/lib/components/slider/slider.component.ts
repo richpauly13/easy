@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'ez-slider, .slider',
 	templateUrl: './slider.component.html',
-	styleUrls: ['./slider.component.scss'],
+	styleUrls: [
+		'./slider.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

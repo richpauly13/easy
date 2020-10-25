@@ -6,7 +6,9 @@ import { UtilitiesService } from './utilities.service';
 @Component({
 	selector: 'docs-utilities',
 	templateUrl: './utilities.component.html',
-	styleUrls: ['./utilities.component.scss'],
+	styleUrls: [
+		'./utilities.component.scss'
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UtilitiesComponent implements OnInit {
@@ -28,9 +30,14 @@ export class UtilitiesComponent implements OnInit {
 	public ngOnInit(): void {
 		if (this.router.url.includes('/utilities/')) {
 			this.onSetNav(this.router.url.split('/')[2]);
-			this.router.navigate([this.router.url]);
+			this.router.navigate([
+				this.router.url
+			]);
 		} else {
-			this.router.navigate(['/utilities/', this.utilitiesService.nav]);
+			this.router.navigate([
+				'/utilities/',
+				this.utilitiesService.nav
+			]);
 		}
 	}
 

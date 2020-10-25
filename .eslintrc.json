@@ -285,7 +285,10 @@
         ],
         "@typescript-eslint/func-call-spacing": [
           "error",
-          "never"
+          "never"/* ,
+          {
+            "allowNewlines": true
+          } */
         ],
         "@typescript-eslint/indent": [
           "error",
@@ -1043,11 +1046,37 @@
             "setWithoutGet": true
           }
         ],
+        "array-bracket-newline": [
+          "error",
+          "always"
+        ],
+        "array-bracket-spacing": [
+          "error",
+          "never",
+          {
+            "arraysInArrays": false,
+            "objectsInArrays": false,
+            "singleValue": false
+          }
+        ],
         "array-callback-return": [
           "error",
           {
             "allowImplicit": true,
             "checkForEach": true
+          }
+        ],
+        "array-element-newline": [
+          "error",
+          {
+            "ArrayExpression": {
+              "minItems": 1,
+              "multiline": true
+            },
+            "ArrayPattern": {
+              "minItems": 1,
+              "multiline": true
+            }
           }
         ],
         "arrow-body-style": [
@@ -1069,8 +1098,21 @@
           }
         ],
         "block-scoped-var": "error",
+        "block-spacing": [
+          "error",
+          "never"
+        ],
         "brace-style": "off",
         "camelcase": "off",
+        "capitalized-comments": [
+          "error",
+          "always",
+          {
+            "ignoreConsecutiveComments": true,
+            "ignoreInlineComments": true,
+            "ignorePattern": ""
+          }
+        ],
         "class-methods-use-this": [
           "error",
           {
@@ -1081,10 +1123,34 @@
         ],
         "comma-dangle": "off",
         "comma-spacing": "off",
-        "complexity": [
+        "comma-style": [
           "error",
+          "last",
+          {
+            "ArrayExpression": false,
+            "ArrayPattern": false,
+            "ArrowFunctionExpression": false,
+            "CallExpression": false,
+            "FunctionDeclaration": false,
+            "FunctionExpression": false,
+            "ImportDeclaration": false,
+            "ObjectExpression": false,
+            "ObjectPattern": false,
+            "VariableDeclaration": false,
+            "NewExpression": false
+          }
+        ],
+        "complexity": [
+          "off"/* ,
           {
             "max": 20
+          } */
+        ],
+        "computed-property-spacing": [
+          "error",
+          "never",
+          {
+            "enforceForClassMembers": true
           }
         ],
         "consistent-return": [
@@ -1092,6 +1158,10 @@
           {
             "treatUndefinedAsUnspecified": true
           }
+        ],
+        "consistent-this": [
+          "error",
+          "self"
         ],
         "constructor-super": [
           "error"
@@ -1113,6 +1183,10 @@
           "property"
         ],
         "dot-notation": "off",
+        "eol-last": [
+          "error",
+          "always"
+        ],
         "eqeqeq": [
           "error",
           "always",
@@ -1122,6 +1196,36 @@
         ],
         "for-direction": "error",
         "func-call-spacing": "off",
+        "func-name-matching": [
+          "error",
+          "always",
+          {
+            "considerPropertyDescriptor": true,
+            "includeCommonJSModuleExports": true
+          }
+        ],
+        "func-names": [
+          "error",
+          "always",
+          {
+            "generators": "always"
+          }
+        ],
+        "func-style": [
+          "error",
+          "declaration",
+          {
+            "allowArrowFunctions": true
+          }
+        ],
+        "function-call-argument-newline": [
+          "error",
+          "never"
+        ],
+        "function-paren-newline": [
+          "error",
+          "never"
+        ],
         "generator-star-spacing": [
           "error",
           {
@@ -1143,18 +1247,186 @@
           "getBeforeSet"
         ],
         "guard-for-in": "error",
+        "id-denylist": [
+          "error",
+          "callback",
+          "cb",
+          "data",
+          "e",
+          "err",
+          "value"
+        ],
+        "id-length": [
+          "error",
+          {
+            "exceptionPatterns": [
+
+            ],
+            "exceptions": [
+
+            ],
+            "max": 30,
+            "min": 2,
+            "properties": "always"
+          }
+        ],
+        "id-match": [
+          "error",
+          "(?:[a-z]+|[A-Z]+|^)([a-z]|)*",
+          {
+            "ignoreDestructuring": false,
+            "onlyDeclarations": false,
+            "properties": true
+          }
+        ],
+        "implicit-arrow-linebreak": [
+          "error",
+          "beside"
+        ],
         "indent": "off",
         "init-declarations": "off",
+        "jsx-quotes": [
+          "error",
+          "prefer-single"
+        ],
+        "key-spacing": [
+          "error",
+          {
+            "afterColon": true,
+            "beforeColon": false
+          }
+        ],
         "keyword-spacing": "off",
+        "linebreak-style": [
+          "error",
+          "unix"
+        ],
+        "line-comment-position": [
+          "error",
+          {
+            "applyDefaultIgnorePatterns": false,
+            "ignorePattern": "eslint",
+            "position": "above"
+          }
+        ],
+        "lines-around-comment": [
+          "error",
+          {
+            "afterBlockComment": false,
+            "afterLineComment": false,
+            "allowArrayEnd": false,
+            "allowArrayStart": true,
+            "allowBlockEnd": false,
+            "allowBlockStart": true,
+            "allowClassEnd": false,
+            "allowClassStart": true,
+            "allowObjectEnd": false,
+            "allowObjectStart": true,
+            "applyDefaultIgnorePatterns": false,
+            "beforeBlockComment": true,
+            "beforeLineComment": true,
+            "ignorePattern": ""
+          }
+        ],
         "lines-between-class-members": "off",
         "max-classes-per-file": [
           "error",
           1
         ],
+        "max-depth": [
+          "error",
+          {
+            "max": 4
+          }
+        ],
         "max-len": [
           "error",
           {
             "code": 160
+          }
+        ],
+        "max-lines": [
+          "error",
+          {
+            "max": 300,
+            "skipBlankLines": true,
+            "skipComments": true
+          }
+        ],
+        "max-lines-per-function": [
+          "error",
+          {
+            "IIFEs": true,
+            "max": 150,
+            "skipBlankLines": true,
+            "skipComments": true
+          }
+        ],
+        "max-nested-callbacks": [
+          "error",
+          {
+            "max": 5
+          }
+        ],
+        "max-params": [
+          "error",
+          {
+            "max": 3
+          }
+        ],
+        "max-statements": [
+          "error",
+          10,
+          {
+            "ignoreTopLevelFunctions": true
+          }
+        ],
+        "max-statements-per-line": [
+          "error",
+          {
+            "max": 1
+          }
+        ],
+        "multiline-comment-style": [
+          "error",
+          "bare-block"
+        ],
+        "multiline-ternary": [
+          "error",
+          "never"
+        ],
+        "new-cap": [
+          "error",
+          {
+            "capIsNew": true,
+            "capIsNewExceptionPattern": "",
+            "capIsNewExceptions": [
+              "Component",
+              "Directive",
+              "HostBinding",
+              "HostListener",
+              "Injectable",
+              "Input",
+              "NgModule",
+              "ViewChild",
+              "ViewChildren"
+            ],
+            "newIsCap": true,
+            "newIsCapExceptionPattern": "",
+            "newIsCapExceptions": [
+
+            ],
+            "properties": true
+          }
+        ],
+        "new-parens": [
+          "error",
+          "always"
+        ],
+        "newline-per-chained-call": [
+          "error",
+          {
+            "ignoreChainWithDepth": 2
           }
         ],
         "no-alert": "off",
@@ -1176,12 +1448,12 @@
           }
         ],
         "no-console": [
-          "error",
+          "error"/* ,
           {
             "allow": [
-              "log"
+
             ]
-          }
+          } */
         ],
         "no-constant-condition": [
           "error",

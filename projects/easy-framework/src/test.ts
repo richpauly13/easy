@@ -7,11 +7,11 @@ import 'zone.js/dist/zone-testing';
 
 declare const require: any;
 
-// first, initialize the Angular testing environment.
+// First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
-// then we find all the tests.
+// Then we find all the tests.
 const context: any = require.context('./', true, /\.spec\.ts$/u);
 
-// and load the modules.
+// And load the modules.
 context.keys().map(context);

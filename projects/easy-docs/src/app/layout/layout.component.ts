@@ -6,7 +6,9 @@ import { LayoutService } from './layout.service';
 @Component({
 	selector: 'docs-layout',
 	templateUrl: './layout.component.html',
-	styleUrls: ['./layout.component.scss'],
+	styleUrls: [
+		'./layout.component.scss'
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent implements OnInit {
@@ -24,9 +26,14 @@ export class LayoutComponent implements OnInit {
 	public ngOnInit(): void {
 		if (this.router.url.includes('/layout/')) {
 			this.onSetNav(this.router.url.split('/')[2]);
-			this.router.navigate([this.router.url]);
+			this.router.navigate([
+				this.router.url
+			]);
 		} else {
-			this.router.navigate(['/layout', this.layoutService.nav]);
+			this.router.navigate([
+				'/layout',
+				this.layoutService.nav
+			]);
 		}
 	}
 

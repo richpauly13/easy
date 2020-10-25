@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 @Component({
 	selector: 'ez-table, .table, .table-bordered, .table-hover, .table-striped',
 	templateUrl: './table.component.html',
-	styleUrls: ['./table.component.scss'],
+	styleUrls: [
+		'./table.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

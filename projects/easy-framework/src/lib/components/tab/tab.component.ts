@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'ez-tab, .tab',
 	templateUrl: './tab.component.html',
-	styleUrls: ['./tab.component.scss'],
+	styleUrls: [
+		'./tab.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

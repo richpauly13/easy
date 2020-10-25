@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnI
 @Component({
 	selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
 	templateUrl: './alert.component.html',
-	styleUrls: ['./alert.component.scss'],
+	styleUrls: [
+		'./alert.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

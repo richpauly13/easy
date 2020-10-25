@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'ez-spinner, .spinner, .spinner-dotted',
 	templateUrl: './spinner.component.html',
-	styleUrls: ['./spinner.component.scss'],
+	styleUrls: [
+		'./spinner.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

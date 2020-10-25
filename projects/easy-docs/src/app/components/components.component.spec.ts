@@ -153,7 +153,9 @@ describe('ComponentsComponent', (): void => {
 	it('should set the nav to the router.url if present', waitForAsync((): void => {
 		fixture.ngZone!.run((): void => {
 			fixture.whenStable().then((): void => {
-				router.navigate(['/components/form']).then((): void => {
+				router.navigate([
+					'/components/form'
+				]).then((): void => {
 					fixture.detectChanges();
 					expect(service.nav).toEqual('form');
 				});

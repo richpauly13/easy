@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, View
 @Component({
 	selector: 'ez-nav, .nav-h, .nav-v',
 	templateUrl: './nav.component.html',
-	styleUrls: ['./nav.component.scss'],
+	styleUrls: [
+		'./nav.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -22,7 +24,7 @@ export class NavComponent implements OnInit {
 				this.onToggle(element);
 			});
 		} catch (error: unknown) {
-			console.log(error);
+			throw new Error(`${error}`);
 		}
 	}
 

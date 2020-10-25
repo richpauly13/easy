@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'ez-switch, .switch',
 	templateUrl: './switch.component.html',
-	styleUrls: ['./switch.component.scss'],
+	styleUrls: [
+		'./switch.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
