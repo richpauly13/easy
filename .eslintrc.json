@@ -1125,20 +1125,7 @@
         "comma-spacing": "off",
         "comma-style": [
           "error",
-          "last",
-          {
-            "ArrayExpression": false,
-            "ArrayPattern": false,
-            "ArrowFunctionExpression": false,
-            "CallExpression": false,
-            "FunctionDeclaration": false,
-            "FunctionExpression": false,
-            "ImportDeclaration": false,
-            "ObjectExpression": false,
-            "ObjectPattern": false,
-            "VariableDeclaration": false,
-            "NewExpression": false
-          }
+          "last"
         ],
         "complexity": [
           "off"/* ,
@@ -1640,9 +1627,7 @@
                 "||"
               ],
               [
-                "??"
-              ],
-              [
+                "??",
                 "?:"
               ],
               [
@@ -1959,13 +1944,7 @@
         ],
         "padded-blocks": [
           "error",
-          // "never",
-          {
-            "allowSingleLineBlocks": false,
-            "blocks": "never",
-            "classes": "never",
-            "switches": "never"
-          }
+          "never"
         ],
         "padding-line-between-statements": [
           "error",
