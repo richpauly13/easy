@@ -1,3 +1,3 @@
-/* Public API Surface of grid */
+/* public API Surface of grid */
 export * from './grid.component';
 export * from './grid.module';

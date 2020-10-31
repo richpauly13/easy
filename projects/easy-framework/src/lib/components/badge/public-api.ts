@@ -1,3 +1,3 @@
-/* Public API Surface of badge */
+/* public API Surface of badge */
 export * from './badge.component';
 export * from './badge.module';

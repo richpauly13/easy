@@ -1106,7 +1106,7 @@
         "camelcase": "off",
         "capitalized-comments": [
           "error",
-          "always",
+          "never",
           {
             "ignoreConsecutiveComments": true,
             "ignoreInlineComments": true,
@@ -1884,7 +1884,10 @@
           {
             "ExportDeclaration": "never",
             "ImportDeclaration": "never",
-            "ObjectExpression": "always",
+            "ObjectExpression": {
+              "multiline": true,
+              "minProperties": 1
+            },
             "ObjectPattern": "never"
           }
         ],

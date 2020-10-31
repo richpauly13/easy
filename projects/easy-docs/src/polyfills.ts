@@ -1,5 +1,5 @@
 /**
- * This file includes polyfills needed by Angular and is loaded before the app.
+ * this file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
  *
  * This file is divided into 2 sections:
@@ -60,5 +60,5 @@
 import 'zone.js/dist/zone';
 
 /**
- * APPLICATION IMPORTS
+ * aPPLICATION IMPORTS
  */

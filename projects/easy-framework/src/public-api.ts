@@ -1,4 +1,4 @@
-/* Public API Surface of easy-framework */
+/* public API Surface of easy-framework */
 export * from './lib/components';
 export * from './lib/easy-framework.component';
 export * from './lib/easy-framework.module';

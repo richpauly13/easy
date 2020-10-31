@@ -1,3 +1,3 @@
-/* Public API Surface of spinner */
+/* public API Surface of spinner */
 export * from './spinner.component';
 export * from './spinner.module';

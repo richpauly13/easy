@@ -1,4 +1,4 @@
-/* Public API Surface of layout */
+/* public API Surface of layout */
 export * from './container';
 export * from './flexbox';
 export * from './grid';
