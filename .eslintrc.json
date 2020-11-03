@@ -1285,8 +1285,8 @@
         ],
         "keyword-spacing": "off",
         "linebreak-style": [
-          "error",
-          "unix"
+          "off"/* ,
+          "unix" */
         ],
         "line-comment-position": [
           "error",
