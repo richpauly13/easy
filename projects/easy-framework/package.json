@@ -30,9 +30,7 @@
     "type": "git",
     "url": "https://github.com/richpauly13/easy.git"
   },
-  "scripts": {
-
-  },
+  "scripts": {},
   "sideEffects": false,
-  "version": "0.3.16"
+  "version": "0.3.17"
 }

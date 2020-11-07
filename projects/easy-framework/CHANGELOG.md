@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.17](https://github.com/richpauly13/easy/compare/v0.3.16...v0.3.17) (2020-11-07)
+
+
+### Bug Fixes
+
+* **schematics:** remove schematics from project ([3a83cfd](https://github.com/richpauly13/easy/commit/3a83cfd38b518cf19dd5c9f314d2a0cfe065c1ca))
+* upgrade zone.js from 0.10.3 to 0.11.1 ([7211432](https://github.com/richpauly13/easy/commit/721143273600f54a07838f5bc10ef86df3ca82de))
+* **circle-ci:** fix circle-ci config ([c8e7a97](https://github.com/richpauly13/easy/commit/c8e7a9719e911c631f3da1f8da44ef77b32648f0))
+* **circle-ci:** fix circle-ci config ([2cb1c8c](https://github.com/richpauly13/easy/commit/2cb1c8c4bc84c1c321180166f8d1b7ad01ee6cc4))
+* **circle-ci:** fix circle-ci config ([ca1e2ee](https://github.com/richpauly13/easy/commit/ca1e2ee7e831458bd5b04d2be9b5e08991a19d0f))
+
 ### [0.3.16](https://github.com/richpauly13/easy/compare/v0.3.15...v0.3.16) (2020-08-02)
 
 
