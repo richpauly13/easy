@@ -46,6 +46,7 @@
             "prefer": "no-type-imports"
           }
         ],
+        "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
         "max-len": [
           "error",
@@ -60,12 +61,18 @@
         "*.component.html"
       ],
       "rules": {
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-implied-eval": "off",
+        "@typescript-eslint/no-throw-literal": "off",
+        "import/first": "off",
+        "lines-around-directive": "off",
         "max-len": [
           "error",
           {
             "code": 600
           }
-        ]
+        ],
+        "strict": "off"
       }
     }
   ]

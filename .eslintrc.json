@@ -14,11 +14,14 @@
         "expect": "readonly",
         "it": "readonly"
       },
+      "parser": "@typescript-eslint/parser",
       "parserOptions": {
         "createDefaultProgram": true,
+        "ecmaVersion": 2020,
         "project": [
           "tsconfig.*?.json"
-        ]
+        ],
+        "sourceType": "module"
       },
       "rules": {
         "@angular-eslint/component-class-suffix": [
@@ -64,9 +67,6 @@
             "type": "attribute"
           }
         ],
-        /* "@angular-eslint/no-autofocus": [
-          "error"
-        ], */
         "@angular-eslint/no-attribute-decorator": [
           "error"
         ],
@@ -541,12 +541,12 @@
         "@typescript-eslint/no-dupe-class-members": [
           "error"
         ],
-        "@typescript-eslint/no-duplicate-imports": [
+        /* "@typescript-eslint/no-duplicate-imports": [
           "error",
           {
             "includeExports": true
           }
-        ],
+        ], */
         "@typescript-eslint/no-dynamic-delete": [
           "error"
         ],
@@ -717,7 +717,8 @@
           "error",
           {
             "allow": [
-
+              "module",
+              "require"
             ],
             "builtinGlobals": true,
             "hoist": "all",
@@ -2241,6 +2242,7 @@
         "@angular-eslint/template/no-positive-tabindex": [
           "error"
         ],
+        "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/quotes": [
           "error",
           "double",
