@@ -31,11 +31,7 @@
     "url": "https://github.com/richpauly13/easy.git"
   },
   "scripts": {
-    "build": "ng build easy-framework --prod",
-    "copy:md": "copyfiles -f ../../{LICENSE.md,README.md} ../../dist/easy-framework",
-    "package": "run-s build copy:md",
-    "release": "npm run version && npm run package && git push --follow-tags origin master && npm publish ../../dist/easy-framework",
-    "version": "standard-version"
+
   },
   "sideEffects": false,
   "version": "0.3.16"

@@ -82,9 +82,12 @@
     "build:docs": "ng build easy-docs --prod",
     "build:easy": "ng build easy-framework --prod",
     "bump:deps": "npm run build && git add . && git commit -m \"chore(deps): bump deps\" && git push",
+    "copy:md": "copyfiles {LICENSE.md,README.md} ./dist/easy-framework",
     "e2e": "npm run update:webdriver && ng e2e",
     "lint": "ng lint",
     "ng": "ng",
+    "package": "run-s build:easy copy:md",
+    "release": "npm run version && git push --follow-tags origin master && npm run package && npm publish ./dist/easy-framework --access public",
     "start": "ng serve -o",
     "test": "ng test",
     "test:docs": "ng test easy-docs",
@@ -95,7 +98,8 @@
     "update:deps": "npm update && npm i",
     "update:global": "npm i -g npm@next && npm i -g @angular/cli@next",
     "update:ng": "run-s update:global update:cli update:core update:deps",
-    "update:webdriver": "webdriver-manager update"
+    "update:webdriver": "webdriver-manager update",
+    "version": "cd projects/easy-framework && standard-version"
   },
   "version": "1.0.0"
 }
