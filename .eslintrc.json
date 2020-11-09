@@ -720,7 +720,7 @@
               "module",
               "require"
             ],
-            "builtinGlobals": true,
+            "builtinGlobals": false,
             "hoist": "all",
             "ignoreFunctionTypeParameterNameValueShadow": false,
             "ignoreTypeValueShadow": false
@@ -2228,10 +2228,10 @@
           "error"
         ],
         "@angular-eslint/template/cyclomatic-complexity": [
-          "error",
+          "off"/* ,
           {
             "maxComplexity": 20
-          }
+          } */
         ],
         "@angular-eslint/template/no-call-expression": [
           "error"
