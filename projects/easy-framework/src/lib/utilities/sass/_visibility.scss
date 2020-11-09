@@ -10,6 +10,15 @@
 	display: none;
 }
 
+.hidden,
+.shown-sm,
+.shown-md,
+.shown-lg,
+.shown-xl {
+	visibility: hidden;
+}
+
+// Hide styles
 .hide-xs {
 	@include media(sm) {
 		display: none;
@@ -43,6 +52,37 @@
 .hide-print {
 	@media print {
 		display: none;
+	}
+}
+
+// Hidden styles
+.hidden-xs {
+	@include media(sm) {
+		visibility: hidden;
+	}
+}
+
+.hidden-sm {
+	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+		visibility: hidden;
+	}
+}
+
+.hidden-md {
+	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+		visibility: hidden;
+	}
+}
+
+.hidden-lg {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+		visibility: hidden;
+	}
+}
+
+.hidden-xl {
+	@include media(xl) {
+		visibility: hidden;
 	}
 }
 
@@ -84,6 +124,41 @@
 .show-print {
 	@media print {
 		display: block;
+	}
+}
+
+// Shown styles
+.shown {
+	visibility: visible;
+}
+
+.shown-xs {
+	@include media(sm) {
+		visibility: hidden;
+	}
+}
+
+.shown-sm {
+	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+		visibility: visible;
+	}
+}
+
+.shown-md {
+	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+		visibility: visible;
+	}
+}
+
+.shown-lg {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+		visibility: visible;
+	}
+}
+
+.shown-xl {
+	@include media(xl) {
+		visibility: visible;
 	}
 }
 
