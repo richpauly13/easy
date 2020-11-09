@@ -24,7 +24,7 @@
     "@angular-eslint/eslint-plugin": "^0.7.0-alpha.9",
     "@angular-eslint/eslint-plugin-template": "0.7.0-alpha.9",
     "@angular-eslint/schematics": "^0.7.0-alpha.9",
-    "@angular-eslint/template-parser": "^0.7.0-alpha.9",
+    "@angular-eslint/template-parser": "^0.7.0-alpha.11",
     "@angular/cli": "^11.0.0-rc.2",
     "@angular/compiler-cli": "^11.0.0-rc.2",
     "@angular/language-service": "^11.0.0-rc.2",
