@@ -1,4 +1,5 @@
 {
+  "parser": "@typescript-eslint/parser",
   "overrides": [
     {
       "extends": [
@@ -185,10 +186,18 @@
           "error",
           {
             "types": {
-              /* "String": {
+              "Boolean": {
+                "message": "Use boolean instead",
+                "fixWith": "boolean"
+              },
+              "Number": {
+                "message": "Use number instead",
+                "fixWith": "number"
+              },
+              "String": {
                 "message": "Use string instead",
                 "fixWith": "string"
-              } */
+              }
             }
           }
         ],
@@ -211,10 +220,10 @@
             "before": false
           }
         ],
-        /* "@typescript-eslint/consistent-indexed-object-style": [
+        "@typescript-eslint/consistent-indexed-object-style": [
           "error",
           "record"
-        ], */
+        ],
         "@typescript-eslint/consistent-type-assertions": [
           "error",
           {
@@ -236,14 +245,14 @@
         "@typescript-eslint/default-param-last": [
           "error"
         ],
-        /* "@typescript-eslint/dot-notation": [
+        "@typescript-eslint/dot-notation": [
           "error",
           {
             "allowKeywords": true,
             "allowPattern": "",
             "allowPrivateClassPropertyAccess": true
           }
-        ], */
+        ],
         "@typescript-eslint/explicit-function-return-type": [
           "error",
           {
@@ -487,7 +496,7 @@
             ],
             "selector": "memberLike"
           },
-         /*  {
+          /* {
             "format": [
               "PascalCase"
             ],
@@ -540,12 +549,12 @@
         "@typescript-eslint/no-dupe-class-members": [
           "error"
         ],
-        /* "@typescript-eslint/no-duplicate-imports": [
+        "@typescript-eslint/no-duplicate-imports": [
           "error",
           {
             "includeExports": true
           }
-        ], */
+        ],
         "@typescript-eslint/no-dynamic-delete": [
           "error"
         ],
