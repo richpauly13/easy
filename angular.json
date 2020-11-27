@@ -46,7 +46,7 @@
           "options": {
             "lintFilePatterns": [
               "projects/easy-framework/**/*.ts",
-              "projects/easy-framework/**/*.component.html"
+              "projects/easy-framework/**/*.html"
             ]
           }
         }
@@ -168,7 +168,7 @@
           "options": {
             "lintFilePatterns": [
               "projects/easy-docs/**/*.ts",
-              "projects/easy-docs/**/*.component.html"
+              "projects/easy-docs/**/*.html"
             ]
           }
         }

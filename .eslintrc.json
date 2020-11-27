@@ -1,9 +1,14 @@
 {
-  "parser": "@typescript-eslint/parser",
   "overrides": [
     {
+      "env": {
+        "browser": true,
+        "es6": true
+      },
       "extends": [
-        "plugin:@angular-eslint/recommended"
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "files": [
         "*.ts"
@@ -16,13 +21,17 @@
       },
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
+        "ecmaVersion": 2021,
         "createDefaultProgram": true,
-        "ecmaVersion": 2020,
         "project": [
-          "tsconfig.*?.json"
+          "tsconfig.json"
         ],
         "sourceType": "module"
       },
+      "plugins": [
+        "eslint-plugin-unicorn",
+        "eslint-plugin-no-null"
+      ],
       "rules": {
         "@angular-eslint/component-class-suffix": [
           "error",
@@ -220,10 +229,6 @@
             "before": false
           }
         ],
-        "@typescript-eslint/consistent-indexed-object-style": [
-          "error",
-          "record"
-        ],
         "@typescript-eslint/consistent-type-assertions": [
           "error",
           {
@@ -235,13 +240,13 @@
           "error",
           "interface"
         ],
-        "@typescript-eslint/consistent-type-imports": [
+        "@typescript-eslint/consistent-type-imports": "off"/* [
           "error",
           {
             "disallowTypeAnnotations": true,
             "prefer": "no-type-imports"
           }
-        ],
+        ] */,
         "@typescript-eslint/default-param-last": [
           "error"
         ],
@@ -548,12 +553,6 @@
         ],
         "@typescript-eslint/no-dupe-class-members": [
           "error"
-        ],
-        "@typescript-eslint/no-duplicate-imports": [
-          "error",
-          {
-            "includeExports": true
-          }
         ],
         "@typescript-eslint/no-dynamic-delete": [
           "error"
@@ -2229,7 +2228,7 @@
         "plugin:@angular-eslint/template/recommended"
       ],
       "files": [
-        "*.component.html"
+        "*.html"
       ],
       "rules": {
         "@angular-eslint/template/banana-in-box": [
@@ -2250,7 +2249,6 @@
         "@angular-eslint/template/no-positive-tabindex": [
           "error"
         ],
-        "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/quotes": [
           "error",
           "double",
@@ -2267,15 +2265,10 @@
         ],
         "quotes": "off"
       }
-    },
-    {
-      "extends": [
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
-      "files": [
-        "*.component.ts"
-      ]
     }
   ],
-  "root": true
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ]
 }
