@@ -1,12 +1,8 @@
 {
-  "angularCompilerOptions": {
-    "enableIvy": false
-  },
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
     "types": [
-      "jasmine",
-      "node"
+      "jasmine"
     ]
   },
   "extends": "../../tsconfig.json",
