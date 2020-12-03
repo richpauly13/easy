@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
   "newProjectRoot": "projects",
   "projects": {
     "easy-framework": {
@@ -150,6 +153,15 @@
             ]
           }
         },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/easy-docs/**/*.ts",
+              "projects/easy-docs/**/*.html"
+            ]
+          }
+        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -162,15 +174,6 @@
               "devServerTarget": "easy-docs:serve:production"
             }
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/easy-docs/**/*.ts",
-              "projects/easy-docs/**/*.html"
-            ]
-          }
         }
       }
     }
@@ -180,8 +183,6 @@
     "@schematics/angular:component": {
       "changeDetection": "OnPush",
       "export": true,
-      "inlineStyle": false,
-      "inlineTemplate": false,
       "skipImport": false,
       "skipTests": false,
       "style": "scss"

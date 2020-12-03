@@ -1,16 +1,12 @@
 {
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
-    "enableIvy": true,
     "enableResourceInlining": true,
-    "fullTemplateTypeCheck": true,
     "skipTemplateCodegen": true,
-    "strictInjectionParameters": true,
-    "strictMetadataEmit": true,
-    "strictNullChecks": false
+    "strictMetadataEmit": true
   },
 	"compilerOptions": {
     "declaration": true,
+    "declarationMap": true,
     "inlineSources": true,
     "lib": [
       "dom",
@@ -21,10 +17,7 @@
   },
 	"exclude": [
     "src/test.ts",
-    "src/**/*.spec.ts",
+    "**/*.spec.ts",
   ],
-  "extends": "../../tsconfig.json",
-  "include": [
-    "src/**/*.ts"
-  ]
+  "extends": "../../tsconfig.json"
 }
