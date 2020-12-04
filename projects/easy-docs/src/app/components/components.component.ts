@@ -35,6 +35,7 @@ export class ComponentsComponent implements OnInit {
 	public ngOnInit(): void {
 		if (this.router.url.includes('/components/')) {
 			this.onSetNav(this.router.url.split('/')[2]);
+
 			this.router.navigate([
 				this.router.url
 			]);

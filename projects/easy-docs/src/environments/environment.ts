@@ -1,8 +1,8 @@
 /* this file can be replaced during build by using the `fileReplacements` array.
    `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-   the list of file replacements can be found in `angular.json`. */
+   The list of file replacements can be found in `angular.json`. */
 
-export const environment: Record<string, unknown> = {
+export const environment: Record<string, boolean> = {
 	production: false
 };
 
@@ -11,5 +11,4 @@ export const environment: Record<string, unknown> = {
 
    This import should be commented out in production mode because it will have a negative impact
    on performance if an error is thrown. */
-
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.

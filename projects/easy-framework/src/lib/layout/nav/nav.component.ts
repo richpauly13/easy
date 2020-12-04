@@ -29,12 +29,7 @@ export class NavComponent implements OnInit {
 	}
 
 	private onToggle(element: ElementRef): void {
-		if (this.isActive) {
-			this.renderer2.removeClass(element, 'active');
-		} else {
-			this.renderer2.addClass(element, 'active');
-		}
-
+		this.isActive ? this.renderer2.removeClass(element, 'active') : this.renderer2.addClass(element, 'active');
 		this.isActive = !this.isActive;
 	}
 }

@@ -14,10 +14,12 @@
         "*.ts"
       ],
       "globals": {
+        "afterEach": "readonly",
         "beforeEach": "readonly",
         "describe": "readonly",
         "expect": "readonly",
-        "it": "readonly"
+        "it": "readonly",
+        "jasmine": "readonly"
       },
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
@@ -802,7 +804,7 @@
           {
             "allowShortCircuit": false,
             "allowTaggedTemplates": false,
-            "allowTernary": false
+            "allowTernary": true
           }
         ],
         "@typescript-eslint/no-unused-vars": [
@@ -1122,12 +1124,12 @@
           }
         ],
         "class-methods-use-this": [
-          "error",
+          "error"/* ,
           {
             "exceptMethods": [
 
             ]
-          }
+          } */
         ],
         "comma-dangle": "off",
         "comma-spacing": "off",

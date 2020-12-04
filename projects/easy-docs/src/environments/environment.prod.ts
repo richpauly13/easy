@@ -1,3 +1,3 @@
-export const environment: Record<string, unknown> = {
+export const environment: Record<string, boolean> = {
 	production: true
 };

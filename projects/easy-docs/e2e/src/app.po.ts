@@ -1,13 +1,11 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
-	// eslint-disable-next-line class-methods-use-this
-	public get titleText(): Promise<string> {
-		return element(by.css('ez-root')).getText() as Promise<string>;
+	public async navigateTo(): Promise<unknown> {
+		return browser.get(browser.baseUrl) as Promise<unknown>;
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	public navigateTo(): Promise<string> {
-		return browser.get(browser.baseUrl) as Promise<string>;
+	public async getTitleText(): Promise<string> {
+		return element(by.css('ez-root h1')).getText() as Promise<string>;
 	}
 }
