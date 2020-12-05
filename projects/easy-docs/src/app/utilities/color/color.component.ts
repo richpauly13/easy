@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'docs-color',
@@ -8,6 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColorComponent {
+export class ColorComponent implements OnInit {
+	public constructor(private title: Title) { }
 
+	public ngOnInit(): void {
+		this.title.setTitle('Utilities - Color - EASY');
+	}
 }

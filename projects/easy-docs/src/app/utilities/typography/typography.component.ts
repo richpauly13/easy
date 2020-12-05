@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'docs-typography',
@@ -8,6 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TypographyComponent {
+export class TypographyComponent implements OnInit {
+	public constructor(private title: Title) { }
 
+	public ngOnInit(): void {
+		this.title.setTitle('Utilities - Typography - EASY');
+	}
 }

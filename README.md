@@ -127,9 +127,10 @@ View the [Changelog](https://github.com/richpauly13/easy/blob/master/projects/ea
 
 1. Review the [Code of Conduct](https://github.com/richpauly13/easy/blob/master/CODE_OF_CONDUCT.md)
 1. Review the [Contributing](https://github.com/richpauly13/easy/blob/master/CONTRIBUTING.md) guidelines
-1. Fork or clone the repo
+1. Fork the repo
 1. Run `npm i`
 1. Run `npm start`
+1. In a second terminal, run `npm run watch:easy`
 1. Open the projects/easy-framework/src/lib folder in your code editor
 1. Edit the code base
 1. Submit a pull request

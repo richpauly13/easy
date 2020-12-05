@@ -35,73 +35,13 @@
             "type": "attribute"
           }
         ],
-        "@typescript-eslint/array-type": [
+        "@angular-eslint/pipe-prefix": [
           "error",
           {
-            "default": "array"
+            "prefixes": [
+              "docs"
+            ]
           }
-        ],
-        "@typescript-eslint/ban-ts-comment": "error",
-        "@typescript-eslint/ban-types": [
-          "error",
-          {
-            "types": {
-              "Boolean": {
-                "message": "Use boolean instead."
-              },
-              "Number": {
-                "message": "Use number instead."
-              },
-              "Object": {
-                "message": "Use {} instead."
-              },
-              "String": {
-                "message": "Use string instead."
-              }
-            }
-          }
-        ],
-        "@typescript-eslint/consistent-type-definitions": "error",
-        "@typescript-eslint/dot-notation": "off",
-        "@typescript-eslint/explicit-member-accessibility": [
-          "error",
-          {
-            "accessibility": "explicit",
-            "overrides": {
-              "accessors": "explicit",
-              "constructors": "explicit",
-              "parameterProperties": "explicit"
-            }
-          }
-        ],
-        "@typescript-eslint/member-ordering": "off",
-        "@typescript-eslint/no-empty-function": "error",
-        "@typescript-eslint/no-extraneous-class": "error",
-        "@typescript-eslint/no-floating-promises": "off",
-        "@typescript-eslint/no-for-in-array": "error",
-        "@typescript-eslint/no-inferrable-types": "off",
-        "@typescript-eslint/no-invalid-void-type": [
-          "error",
-          {
-            "allowAsThisParameter": false,
-            "allowInGenericTypeArguments": true
-          }
-        ],
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-require-imports": "off",
-        "@typescript-eslint/no-this-alias": "error",
-        "@typescript-eslint/no-var-requires": "error",
-        "@typescript-eslint/prefer-readonly": "off",
-        "@typescript-eslint/promise-function-async": "off",
-        "@typescript-eslint/strict-boolean-expressions": "off",
-        "@typescript-eslint/unbound-method": "off",
-        "arrow-parens": [
-          "error",
-          "always"
-        ],
-        "brace-style": [
-          "error",
-          "1tbs"
         ],
         "class-methods-use-this": [
           "error",
@@ -112,22 +52,7 @@
             ]
           }
         ],
-        "complexity": "error",
-        "default-case": "error",
-        "eqeqeq": [
-          "error",
-          "always"
-        ],
-        "import/no-default-export": "off",
-        "import/no-deprecated": "error",
-        "import/no-extraneous-dependencies": "off",
-        "import/no-internal-modules": "off",
-        "import/no-unassigned-import": "off",
-        "max-classes-per-file": [
-          "error",
-          1
-        ],
-        "max-len": [
+       "max-len": [
           "error",
           {
             "code": 300
@@ -136,51 +61,7 @@
         "max-lines": [
           "error",
           300
-        ],
-        "newline-per-chained-call": "off",
-        "no-duplicate-case": "error",
-        "no-duplicate-imports": "error",
-        "no-empty": "error",
-        "no-extra-bind": "error",
-        "no-invalid-this": "error",
-        "no-irregular-whitespace": "error",
-        "no-magic-numbers": "off",
-        "no-multiple-empty-lines": "error",
-        "no-new-func": "error",
-        "no-null/no-null": "off",
-        "no-plusplus": [
-          "error",
-          {
-            "allowForLoopAfterthoughts": true
-          }
-        ],
-        "no-redeclare": "error",
-        "no-return-await": "error",
-        "no-sequences": "error",
-        "no-sparse-arrays": "error",
-        "no-template-curly-in-string": "error",
-        "no-useless-constructor": "error",
-        "no-void": "error",
-        "padding-line-between-statements": [
-          "error",
-          {
-            "blankLine": "always",
-            "prev": "*",
-            "next": "return"
-          }
-        ],
-        "prefer-object-spread": "error",
-        "prefer-template": "error",
-        "space-before-function-paren": [
-          "error",
-          "never"
-        ],
-        "space-in-parens": [
-          "off",
-          "never"
-        ],
-        "unicorn/filename-case": "error",
-        "yoda": "error"
+        ]
       }
     },
     {

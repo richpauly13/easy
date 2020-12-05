@@ -26,7 +26,7 @@
         "ecmaVersion": 2021,
         "createDefaultProgram": true,
         "project": [
-          "tsconfig.json"
+          "tsconfig.*?.json"
         ],
         "sourceType": "module"
       },
@@ -54,7 +54,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "prefix": "app",
+            "prefix": "easy",
             "style": "kebab-case",
             "type": "element"
           }
@@ -73,7 +73,7 @@
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "prefix": "app",
+            "prefix": "easy",
             "style": "camelCase",
             "type": "attribute"
           }
@@ -143,7 +143,7 @@
           "error",
           {
             "prefixes": [
-              "app"
+              "easy"
             ]
           }
         ],
@@ -183,7 +183,8 @@
         ], */
         "@typescript-eslint/ban-ts-comment": [
           "error",
-          { "minimumDescriptionLength": 10,
+          {
+            "minimumDescriptionLength": 10,
             "ts-check": false,
             "ts-expect-error": "allow-with-description",
             "ts-ignore": "allow-with-description",
@@ -252,14 +253,14 @@
         "@typescript-eslint/default-param-last": [
           "error"
         ],
-        "@typescript-eslint/dot-notation": [
+        "@typescript-eslint/dot-notation": "off"/* [
           "error",
           {
             "allowKeywords": true,
             "allowPattern": "",
             "allowPrivateClassPropertyAccess": true
           }
-        ],
+        ] */,
         "@typescript-eslint/explicit-function-return-type": [
           "error",
           {
@@ -657,7 +658,7 @@
           "error",
           {
             "allowAsThisParameter": false,
-            "allowInGenericTypeArguments": false
+            "allowInGenericTypeArguments": true
           }
         ],
         "@typescript-eslint/no-loop-func": [
@@ -702,7 +703,7 @@
           "error"
         ],
         "@typescript-eslint/no-non-null-assertion": [
-          "error"
+          "off"
         ],
         "@typescript-eslint/no-parameter-properties": [
           "error",
@@ -1686,6 +1687,7 @@
         "no-new-object": "error",
         "no-new-symbol": "error",
         "no-new-wrappers": "error",
+        "no-null/no-null": "off",
         "no-obj-calls": "error",
         "no-octal": "error",
         "no-octal-escape": "error",
@@ -2149,12 +2151,12 @@
         ],
         "space-in-parens": [
           "error",
-          "never",
+          "never"/* ,
           {
             "exceptions": [
 
             ]
-          }
+          } */
         ],
         "space-unary-ops": [
           "error",
@@ -2189,6 +2191,12 @@
         "unicode-bom": [
           "error",
           "never"
+        ],
+        "unicorn/filename-case": [
+          "error",
+          {
+            "case": "kebabCase"
+          }
         ],
         "use-isnan": [
           "error",

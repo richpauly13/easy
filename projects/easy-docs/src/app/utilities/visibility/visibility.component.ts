@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'docs-visibility',
@@ -8,6 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VisibilityComponent {
+export class VisibilityComponent implements OnInit {
+	public constructor(private title: Title) { }
 
+	public ngOnInit(): void {
+		this.title.setTitle('Utilities - Visibility - EASY');
+	}
 }

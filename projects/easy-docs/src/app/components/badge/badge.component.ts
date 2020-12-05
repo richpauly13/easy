@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
 	selector: 'docs-badge',
@@ -8,6 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BadgeComponent {
+export class BadgeComponent implements OnInit {
+	public constructor(private title: Title) { }
 
+	public ngOnInit(): void {
+		this.title.setTitle('Components - Badge - EASY');
+	}
 }

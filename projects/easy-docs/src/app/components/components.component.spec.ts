@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars-experimental */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -138,12 +137,10 @@ describe('ComponentsComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(ComponentsComponent);
 
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 		router = TestBed.inject(Router);
 
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		service = TestBed.inject(ComponentsService);
 
 		fixture.ngZone!.run((): void => {
@@ -151,7 +148,7 @@ describe('ComponentsComponent', (): void => {
 		});
 	});
 
-	/* it('should create the components page', (): void => {
+	it('should create the components page', (): void => {
 		expect(component).toBeTruthy();
 	});
 
@@ -160,7 +157,8 @@ describe('ComponentsComponent', (): void => {
 			fixture.whenStable().then((): void => {
 				router.navigate([
 					'/components/form'
-				]).then((): void => {
+				])
+				.then((): void => {
 					fixture.detectChanges();
 
 					expect(service.nav).toEqual('form');
@@ -173,5 +171,5 @@ describe('ComponentsComponent', (): void => {
 		component.onSetNav('button');
 
 		expect(service.nav).toEqual('button');
-	}); */
+	});
 });
