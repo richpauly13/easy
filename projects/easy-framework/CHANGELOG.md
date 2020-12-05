@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/richpauly13/easy/compare/v0.3.17...v1.2.0) (2020-12-05)
+
+
+### Features
+
+* **text:** add lh class and text to docs ([6d0dadd](https://github.com/richpauly13/easy/commit/6d0dadd5d1105c3e4e770e53cff9ebb88471a935))
+
+
+### Bug Fixes
+
+* upgrade zone.js from 0.10.3 to 0.11.3 ([2c98cd3](https://github.com/richpauly13/easy/commit/2c98cd34f45d4981d4dd00e4fb68b4c3d6cce3d7))
+
 ## [1.1.0](https://github.com/richpauly13/easy/compare/v0.3.17...v1.1.0) (2020-12-05)
 
 
