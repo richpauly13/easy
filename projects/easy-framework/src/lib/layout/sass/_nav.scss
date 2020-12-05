@@ -30,42 +30,6 @@
 	}
 }
 
-.nav-toggle {
-	height: space(xl);
-	position: relative;
-	width: space(xl);
-
-    + .nav-row {
-        display: none;
-    }
-
-	&::before {
-		content: "";
-		background-color: color(white);
-		box-shadow: 0 rem(6) 0 color(white), 0 rem(12) 0 color(white);
-		height: rem(2);
-		position: absolute;
-        top: 30%;
-		width: space(md);
-	}
-
-    &.active + .nav-row {
-        display: block;
-    }
-
-    @include media(md) {
-        display: none;
-
-        &.active + .nav-row {
-            display: flex;
-        }
-
-        + .nav-row {
-            display: flex;
-        }
-    }
-}
-
 .nav-v {
     overflow-y: auto;
 }
