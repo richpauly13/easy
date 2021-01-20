@@ -18,7 +18,7 @@
   },
   "description": "Documentation for EASY framework.",
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1101.0-rc.0",
+    "@angular-devkit/architect": "^0.1101.0",
     "@angular-devkit/build-angular": "^0.1101.0-rc.0",
     "@angular-eslint/builder": "^1.1.0",
     "@angular-eslint/eslint-plugin": "^1.1.0",
