@@ -33,7 +33,7 @@
     "@typescript-eslint/parser": "^4.14.2-alpha.1",
     "codecov": "^4.0.0-0",
     "copyfiles": "^2.4.1",
-    "eslint": "^7.18.0",
+    "eslint": "^7.19.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsdoc": "^31.4.0",
     "eslint-plugin-no-null": "^1.0.2",
