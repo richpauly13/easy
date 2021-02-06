@@ -22,7 +22,7 @@
     "@angular-devkit/build-angular": "^0.1102.0-rc.1",
     "@angular-eslint/builder": "^1.1.1-alpha.13",
     "@angular-eslint/eslint-plugin": "^1.1.1-alpha.13",
-    "@angular-eslint/eslint-plugin-template": "^1.1.1-alpha.13",
+    "@angular-eslint/eslint-plugin-template": "^1.1.1-alpha.15",
     "@angular-eslint/schematics": "^1.1.1-alpha.13",
     "@angular-eslint/template-parser": "^1.1.1-alpha.13",
     "@angular/cli": "^11.2.0-rc.1",
