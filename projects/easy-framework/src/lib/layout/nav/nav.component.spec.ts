@@ -5,7 +5,7 @@ import { NavComponent } from './nav.component';
 
 @Component({
 	selector: 'ez-nav, .nav-h, .nav-v',
-	template: '<button class="nav-toggle" type="button"></button>',
+	template: '<button class="nav-toggle" type="button">Toggle</button>',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 class MockComponent { }

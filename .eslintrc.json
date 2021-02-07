@@ -1,11 +1,8 @@
 {
   "overrides": [
     {
-      "env": {
-        "browser": true,
-        "es6": true
-      },
       "extends": [
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/template/process-inline-templates"
@@ -21,14 +18,11 @@
         "it": "readonly",
         "jasmine": "readonly"
       },
-      "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "ecmaVersion": 2021,
         "createDefaultProgram": true,
         "project": [
           "tsconfig.*?.json"
-        ],
-        "sourceType": "module"
+        ]
       },
       "plugins": [
         "eslint-plugin-unicorn",
@@ -58,6 +52,9 @@
             "style": "kebab-case",
             "type": "element"
           }
+        ],
+        "@angular-eslint/contextual-decorator": [
+          "error"
         ],
         "@angular-eslint/contextual-lifecycle": [
           "error"
@@ -98,11 +95,9 @@
           {
             "prefixes": [
               "can",
-              "did",
               "has",
               "is",
-              "should",
-              "will"
+              "should"
             ]
           }
         ],
@@ -266,7 +261,7 @@
           {
             "allowConciseArrowFunctionExpressionsStartingWithVoid": false,
             "allowDirectConstAssertionInArrowFunctions": false,
-            "allowExpressions": false,
+            "allowExpressions": true,
             "allowHigherOrderFunctions": false,
             "allowTypedFunctionExpressions": false
           }
@@ -1091,11 +1086,12 @@
           }
         ],
         "arrow-body-style": [
+          "off"/*
           "error",
           "as-needed",
           {
             "requireReturnForObjectLiteral": false
-          }
+          } */
         ],
         "arrow-parens": [
           "error",
@@ -2241,16 +2237,66 @@
         "*.html"
       ],
       "rules": {
+        "@angular-eslint/template/accessibility-alt-text": [
+          "error"
+        ],
+        "@angular-eslint/template/accessibility-elements-content": [
+          "error"
+        ],
+        "@angular-eslint/template/accessibility-label-for": [
+          "error",
+          {
+            "controlComponents": [
+
+            ],
+            "labelAttributes": [
+
+            ],
+            "labelComponents": [
+
+            ]
+          }
+        ],
+        "@angular-eslint/template/accessibility-table-scope": [
+          "error"
+        ],
+        "@angular-eslint/template/accessibility-valid-aria": [
+          "error"
+        ],
         "@angular-eslint/template/banana-in-box": [
           "error"
         ],
-        "@angular-eslint/template/cyclomatic-complexity": [
-          "off"/* ,
+        "@angular-eslint/template/click-events-have-key-events": [
+          "error"
+        ],
+        "@angular-eslint/template/mouse-events-have-key-events": [
+          "error"
+        ],
+        "@angular-eslint/template/conditional-complexity": [
+          "error",
           {
-            "maxComplexity": 20
-          } */
+            "maxComplexity": 4
+          }
+        ],
+        "@angular-eslint/template/cyclomatic-complexity": [
+          "error",
+          {
+            "maxComplexity": 6
+          }
+        ],
+        "@angular-eslint/template/i18n": [
+          "off"
+        ],
+        "@angular-eslint/template/no-any": [
+          "error"
+        ],
+        "@angular-eslint/template/no-autofocus": [
+          "error"
         ],
         "@angular-eslint/template/no-call-expression": [
+          "error"
+        ],
+        "@angular-eslint/template/no-distracting-elements": [
           "error"
         ],
         "@angular-eslint/template/no-negated-async": [
@@ -2258,6 +2304,9 @@
         ],
         "@angular-eslint/template/no-positive-tabindex": [
           "error"
+        ],
+        "@angular-eslint/template/use-track-by-function": [
+          "off"
         ],
         "@typescript-eslint/quotes": [
           "error",
