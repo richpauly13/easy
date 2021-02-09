@@ -40,4 +40,8 @@ export class LayoutComponent implements OnInit {
 	public onSetNav(nav: string): void {
 		this.layoutService.nav = nav;
 	}
+
+	public trackById(navIndex: number, nav: string): string {
+		return `${nav}${navIndex}`;
+	}
 }

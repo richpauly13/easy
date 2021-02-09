@@ -18,4 +18,8 @@ export class AppComponent {
 			'utilities'
 		];
 	}
+
+	public trackById(navIndex: number, nav: string): string {
+		return `${nav}${navIndex}`;
+	}
 }

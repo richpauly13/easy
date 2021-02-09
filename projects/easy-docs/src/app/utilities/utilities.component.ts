@@ -44,4 +44,8 @@ export class UtilitiesComponent implements OnInit {
 	public onSetNav(nav: string): void {
 		this.utilitiesService.nav = nav;
 	}
+
+	public trackById(navIndex: number, nav: string): string {
+		return `${nav}${navIndex}`;
+	}
 }

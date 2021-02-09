@@ -1,26 +1,21 @@
 {
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on"
       ],
       "files": [
         "*.ts"
       ],
-      "globals": {
-        "afterEach": "readonly",
-        "beforeEach": "readonly",
-        "describe": "readonly",
-        "expect": "readonly",
-        "it": "readonly",
-        "jasmine": "readonly"
-      },
       "parserOptions": {
         "createDefaultProgram": true,
         "project": [
-          "tsconfig.*?.json"
+          "tsconfig.json"
         ]
       },
       "plugins": [
@@ -400,10 +395,8 @@
           {
             "default": {
               "memberTypes": [
-                // Index signature
                 "signature",
 
-                // Fields
                 "public-static-field",
                 "protected-static-field",
                 "private-static-field",
@@ -425,21 +418,16 @@
                 "private-field",
 
                 "static-field",
+                "decorated-field",
                 "instance-field",
                 "abstract-field",
-
-                "decorated-field",
-
                 "field",
 
-                // Constructors
                 "public-constructor",
                 "protected-constructor",
                 "private-constructor",
-
                 "constructor",
 
-                // Methods
                 "public-static-method",
                 "protected-static-method",
                 "private-static-method",
@@ -461,11 +449,9 @@
                 "private-method",
 
                 "static-method",
+                "decorated-method",
                 "instance-method",
                 "abstract-method",
-
-                "decorated-method",
-
                 "method"
               ],
               "order": "alphabetically"
@@ -504,11 +490,9 @@
             ],
             "prefix": [
               "can",
-              "did",
               "has",
               "is",
-              "should",
-              "will"
+              "should"
             ],
             "selector": "variable",
             "types": [
@@ -635,13 +619,13 @@
         /* "@typescript-eslint/no-implied-eval": [
           "error"
         ], */
-        "@typescript-eslint/no-inferrable-types": "off"/* [
+        "@typescript-eslint/no-inferrable-types": [
           "error",
           {
             "ignoreParameters": false,
             "ignoreProperties": false
           }
-        ] */,
+        ],
         "@typescript-eslint/no-invalid-this": [
           "error",
           {
@@ -1120,12 +1104,12 @@
           }
         ],
         "class-methods-use-this": [
-          "error"/* ,
+          "off",
           {
             "exceptMethods": [
 
             ]
-          } */
+          }
         ],
         "comma-dangle": "off",
         "comma-spacing": "off",
@@ -1134,10 +1118,10 @@
           "last"
         ],
         "complexity": [
-          "off"/* ,
+          "error",
           {
             "max": 20
-          } */
+          }
         ],
         "computed-property-spacing": [
           "error",
@@ -1335,7 +1319,7 @@
         "max-len": [
           "error",
           {
-            "code": 160
+            "code": 300
           }
         ],
         "max-lines": [
@@ -1795,7 +1779,7 @@
           }
         ],
         "no-undef": [
-          "error",
+          "off",
           {
             "typeof": true
           }
@@ -2305,7 +2289,7 @@
           "error"
         ],
         "@angular-eslint/template/use-track-by-function": [
-          "off"
+          "error"
         ],
         "@typescript-eslint/quotes": [
           "error",
@@ -2324,9 +2308,5 @@
         "quotes": "off"
       }
     }
-  ],
-  "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
   ]
 }

@@ -9,15 +9,13 @@
         "*.ts"
       ],
       "parserOptions": {
+        "createDefaultProgram": true,
         "project": [
-          "projects/easy-framework/tsconfig.*?.json"
-        ],
-        "createDefaultProgram": true
+          "projects/easy-framework/tsconfig.lib.json",
+          "projects/easy-framework/tsconfig.lib.prod.json",
+          "projects/easy-framework/tsconfig.spec.json"
+        ]
       },
-      "plugins": [
-        "eslint-plugin-unicorn",
-        "eslint-plugin-no-null"
-      ],
       "rules": {
         "@angular-eslint/component-selector": [
           "error",
@@ -45,19 +43,7 @@
         ],
         "@angular-eslint/use-component-view-encapsulation": [
           "off"
-        ],
-        "max-lines": [
-          "error",
-          300
         ]
-      }
-    },
-    {
-      "files": [
-        "*.html"
-      ],
-      "rules": {
-
       }
     }
   ]

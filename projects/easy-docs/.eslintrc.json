@@ -9,15 +9,13 @@
         "*.ts"
       ],
       "parserOptions": {
+        "createDefaultProgram": true,
         "project": [
-          "projects/easy-docs/tsconfig.*?.json"
-        ],
-        "createDefaultProgram": true
+          "projects/easy-docs/e2e/tsconfig.json",
+          "projects/easy-docs/tsconfig.app.json",
+          "projects/easy-docs/tsconfig.spec.json"
+        ]
       },
-      "plugins": [
-        "eslint-plugin-unicorn",
-        "eslint-plugin-no-null"
-      ],
       "rules": {
         "@angular-eslint/component-selector": [
           "error",
@@ -42,25 +40,6 @@
               "docs"
             ]
           }
-        ],
-        "class-methods-use-this": [
-          "error",
-          {
-            "exceptMethods": [
-              "getTitleText",
-              "navigateTo"
-            ]
-          }
-        ],
-       "max-len": [
-          "error",
-          {
-            "code": 300
-          }
-        ],
-        "max-lines": [
-          "error",
-          300
         ]
       }
     },

@@ -50,4 +50,8 @@ export class ComponentsComponent implements OnInit {
 	public onSetNav(nav: string): void {
 		this.componentsService.nav = nav;
 	}
+
+	public trackById(navIndex: number, nav: string): string {
+		return `${nav}${navIndex}`;
+	}
 }
