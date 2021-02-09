@@ -11,9 +11,7 @@
       "parserOptions": {
         "createDefaultProgram": true,
         "project": [
-          "projects/easy-framework/tsconfig.lib.json",
-          "projects/easy-framework/tsconfig.lib.prod.json",
-          "projects/easy-framework/tsconfig.spec.json"
+          "projects/easy-framework/tsconfig.*?.json"
         ]
       },
       "rules": {
