@@ -40,7 +40,7 @@
     "eslint-plugin-jsdoc": "^31.6.1",
     "eslint-plugin-no-null": "^1.0.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-unicorn": "^27.0.0",
+    "eslint-plugin-unicorn": "^28.0.0",
     "husky": "^5.0.9",
     "jasmine-core": "^3.6.0",
     "jasmine-spec-reporter": "^6.0.0",
