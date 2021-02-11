@@ -5,7 +5,6 @@
 // Responsive fonts
 html {
 	-moz-osx-font-smoothing: grayscale;
-	-ms-overflow-style: scrollbar;
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	box-sizing: border-box;
@@ -122,10 +121,9 @@ a {
 	text-decoration: none;
 
 	&:focus:not([disabled]),
-	&:hover:not([disabled]),
-	&:active:not([disabled]) {
-        text-decoration: underline;
-    }
+	&:hover:not([disabled]) {
+		text-decoration: underline;
+	}
 
     &:-moz-focus-inner:not([disabled]) {
         text-decoration: underline;
@@ -133,9 +131,6 @@ a {
 }
 
 // Form and button resets
-[type="button"],
-[type="reset"],
-[type="submit"],
 a,
 a[role="button"],
 button,
@@ -145,14 +140,16 @@ input[type="reset"],
 input[type="submit"],
 optgroup,
 select,
-textarea {
+textarea,
+[type="button"],
+[type="reset"],
+[type="submit"] {
 	border: 0;
     font-family: inherit;
 	text-decoration: none;
 
 	&:focus,
-	&:hover,
-	&:active {
+	&:hover {
 		outline: none;
 		outline-offset: 0;
 	}
@@ -162,20 +159,19 @@ textarea {
     }
 }
 
-[type="button"],
-[type="reset"],
-[type="submit"],
 a[role="button"],
 button,
 html input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"],
+[type="button"],
+[type="reset"],
+[type="submit"] {
 	appearance: none;
 	background-color: transparent;
 
     &:focus:not([disabled]),
-	&:hover:not([disabled]),
-	&:active:not([disabled]) {
+	&:hover:not([disabled]) {
 		border: rem(2) solid color(blue);
     }
 
@@ -184,9 +180,6 @@ input[type="submit"] {
     }
 }
 
-[type="button"],
-[type="reset"],
-[type="submit"],
 a,
 a[role="button"],
 button,
@@ -196,20 +189,25 @@ input[type="checkbox"],
 input[type="reset"],
 input[type="radio"],
 input[type="submit"],
-select {
+select,
+[type="button"],
+[type="reset"],
+[type="submit"] {
 	&:hover {
 		cursor: pointer;
 	}
 }
 
-[disabled]:hover {
-	cursor: not-allowed;
-}
-
+button[type="button"][disabled],
+button[type="button"][readonly],
 [disabled],
 [readonly] {
 	background-color: color(lt-gray);
 	color: color(dk-gray);
+}
+
+[disabled]:hover {
+	cursor: not-allowed;
 }
 
 fieldset {

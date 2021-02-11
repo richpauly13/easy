@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { ComponentsModule } from './components/components.module';
 
+import { ComponentsModule } from './components/components.module';
 import { HomeComponent } from './home/home.component';
 import { LayoutModule } from './layout/layout.module';
 import { UtilitiesModule } from './utilities/utilities.module';

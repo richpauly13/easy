@@ -34,24 +34,14 @@
 .table-cell,
 .table-header-cell {
 	flex: 1;
-	height: rem(46);
-	overflow: hidden;
-	padding-left: space(md);
-	word-wrap: break-word;
-
-	&:last-of-type {
-		padding-right: space(md);
-	}
+	min-height: rem(46);
+	word-break: break-word;
 }
 
-.table-hover {
-    .table-row:hover {
-        background-color: color(lt-white);
-    }
+.table-hover .table-row:hover {
+	background-color: color(lt-white);
 }
 
-.table-striped {
-    .table-row:nth-child(even) {
-        background-color: color(lt-white);
-    }
+.table-striped .table-row:nth-child(even) {
+	background-color: color(lt-white);
 }
