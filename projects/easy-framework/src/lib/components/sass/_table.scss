@@ -1,4 +1,5 @@
 @import "../../core/sass/functions";
+@import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
 // Table styles
@@ -34,14 +35,54 @@
 .table-cell,
 .table-header-cell {
 	flex: 1;
-	min-height: rem(46);
-	word-break: break-word;
+	min-height: rem(50);
+	min-width: rem(80);
+	padding-bottom: space(xs);
+	padding-left: space(sm);
+	padding-top: space(xs);
+
+	&:last-child {
+		padding-right: space(sm);
+	}
+
+	@media screen and (min-width: rem(900)) {
+		padding-left: space(md);
+
+		&:last-child {
+			padding-right: space(md);
+		}
+	}
+}
+
+.table-header-cell {
+	min-height: rem(45);
 }
 
 .table-hover .table-row:hover {
 	background-color: color(lt-white);
 }
 
-.table-striped .table-row:nth-child(even) {
-	background-color: color(lt-white);
+.table-striped  .table-row:nth-child(even) {
+    background-color: color(lt-white);
+}
+
+.table-wrapper {
+    max-width: 100%;
+    overflow: auto;
+    width: rem(550);
+
+	@include media(md) {
+		width: auto;
+	}
+
+	.table,
+	.table-bordered,
+	.table-hover,
+	.table-striped {
+		width: rem(800);
+
+		@include media(md) {
+			width: auto;
+		}
+	}
 }

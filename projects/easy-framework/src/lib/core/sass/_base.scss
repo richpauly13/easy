@@ -35,13 +35,13 @@ html {
 	box-sizing: inherit;
 }
 
-// Main color, text, and sizing
+// Main color, fonts, and sizing
 body {
 	background-color: color(lt-white);
 	color: color(lt-black);
 	font-family: $font-stack;
 	font-size: 1rem;
-	line-height: 1.4;
+	line-height: 1;
 	overflow-x: hidden;
 	text-rendering: optimizeLegibility;
 }
@@ -113,20 +113,18 @@ th {
 	vertical-align: middle;
 }
 
-// Link styles and resets
+// Anchor styles and resets
 a {
 	appearance: none;
 	background-color: transparent;
-	color: color(dk-blue);
-	text-decoration: none;
+	outline: none;
 
-	&:focus:not([disabled]),
-	&:hover:not([disabled]) {
+    &:focus {
 		text-decoration: underline;
-	}
+    }
 
-    &:-moz-focus-inner:not([disabled]) {
-        text-decoration: underline;
+    &:-moz-focus-inner {
+		text-decoration: underline;
     }
 }
 
@@ -145,18 +143,14 @@ textarea,
 [type="reset"],
 [type="submit"] {
 	border: 0;
+	border-radius: 0;
     font-family: inherit;
-	text-decoration: none;
+    text-decoration: none;
 
-	&:focus,
-	&:hover {
+	&:focus {
 		outline: none;
 		outline-offset: 0;
 	}
-
-	&:-moz-focus-inner:not([disabled]) {
-        outline: none;
-    }
 }
 
 a[role="button"],
@@ -170,13 +164,14 @@ input[type="submit"],
 	appearance: none;
 	background-color: transparent;
 
-    &:focus:not([disabled]),
-	&:hover:not([disabled]) {
+    &:focus:not([disabled]) {
 		border: rem(2) solid color(blue);
+		outline: none;
     }
 
     &:-moz-focus-inner:not([disabled]) {
 		border: rem(2) solid color(blue);
+		outline: none;
     }
 }
 
@@ -184,35 +179,24 @@ a,
 a[role="button"],
 button,
 html input[type="button"],
-input[type="range"],
 input[type="checkbox"],
-input[type="reset"],
 input[type="radio"],
+input[type="range"],
+input[type="reset"],
 input[type="submit"],
-select,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+select {
 	&:hover {
 		cursor: pointer;
 	}
 }
 
-button[type="button"][disabled],
-button[type="button"][readonly],
-[disabled],
-[readonly] {
-	background-color: color(lt-gray);
-	color: color(dk-gray);
-}
-
-[disabled]:hover {
-	cursor: not-allowed;
-}
-
 fieldset {
 	min-width: 0;
 	padding: 0;
+}
+
+legend {
+	font-size: $font-md;
 }
 
 input[type="checkbox"],
@@ -225,6 +209,10 @@ input[type="datetime-local"],
 input[type="month"],
 input[type="time"] {
 	-webkit-appearance: listbox;
+}
+
+input[type="file"] {
+	padding: 0;
 }
 
 input[type="number"] {
@@ -250,8 +238,10 @@ input[type="range"] {
 	}
 }
 
-legend {
-	font-size: $font-md;
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 select {
@@ -275,20 +265,33 @@ textarea {
 	resize: vertical;
 }
 
+// Disabled and readonly styles
+button[disabled],
+button[readonly],
+[disabled],
+[readonly] {
+	background-color: color(lt-gray);
+	color: color(dk-gray);
+}
+
+[disabled]:hover {
+	cursor: not-allowed;
+}
+
 // Credit: https://css-tricks.com/html5-progress-element/
 progress {
 	appearance: none;
 	background-color: transparent;
 	border: rem(1) solid color(gray);
-	border-radius: rem(16);
+	border-radius: rem(15);
 	color: color(blue);
-	height: rem(16);
+	height: rem(15);
 	width: 100%;
 
 	&::-moz-progress-bar {
 		background-color: color(blue);
-		border-bottom-left-radius: rem(16);
-		border-top-left-radius: rem(16);
+		border-bottom-left-radius: rem(15);
+		border-top-left-radius: rem(15);
 	}
 
 	&::-ms-fill {
@@ -297,23 +300,21 @@ progress {
 
 	&::-webkit-progress-bar {
 		background-color: transparent;
-		border-bottom-left-radius: rem(16);
-		border-top-left-radius: rem(16);
+		border-bottom-left-radius: rem(15);
+		border-top-left-radius: rem(15);
 		color: color(blue);
 	}
 
 	&::-webkit-progress-value {
 		background-color: color(blue);
-		border-bottom-left-radius: rem(16);
-		border-top-left-radius: rem(16);
+		border-bottom-left-radius: rem(15);
+		border-top-left-radius: rem(15);
 	}
 }
 
 // Credit: https://github.com/suitcss/base
-[tabindex="0"],
-[tabindex="-1"],
-input[type="range"] {
-	&:focus {
-		outline: none;
-	}
+[tabindex="0"]:focus,
+[tabindex="-1"]:focus,
+input[type="range"]:focus {
+	outline: none;
 }
