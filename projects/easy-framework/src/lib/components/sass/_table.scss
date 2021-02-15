@@ -13,13 +13,13 @@
 .table-bordered {
 	border: rem(1) solid color(gray);
 
-    .table-cell:not(:last-child),
-    .table-header-cell:not(:last-child) {
+    .table-cell:not(:last-of-type),
+    .table-header-cell:not(:last-of-type) {
         border-right: rem(1) solid color(gray);
     }
 
-    .table-header:not(:last-child),
-    .table-row:not(:last-child) {
+    .table-header,
+    .table-row:not(:last-of-type) {
         border-bottom: rem(1) solid color(gray);
     }
 }
@@ -41,17 +41,21 @@
 	padding-left: space(sm);
 	padding-top: space(xs);
 
-	&:last-child {
+	&:last-of-type {
 		padding-right: space(sm);
 	}
 
-	@media screen and (min-width: rem(900)) {
+	@include media(md) {
 		padding-left: space(md);
 
-		&:last-child {
+		&:last-of-type {
 			padding-right: space(md);
 		}
 	}
+}
+
+.table-header {
+	background-color: color(lt-gray);
 }
 
 .table-header-cell {

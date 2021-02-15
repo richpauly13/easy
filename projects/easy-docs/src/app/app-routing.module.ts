@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { ComponentsModule } from './components/components.module';
-import { HomeComponent } from './home/home.component';
 import { LayoutModule } from './layout/layout.module';
 import { UtilitiesModule } from './utilities/utilities.module';
 
@@ -18,10 +17,6 @@ const routes: Routes = [
 	{
 		path: 'utilities',
 		loadChildren: (): Promise<UtilitiesModule> => import('projects/easy-docs/src/app/utilities/utilities.module').then((module: typeof import('projects/easy-docs/src/app/utilities/utilities.module')): UtilitiesModule => module.UtilitiesModule)
-	},
-	{
-		component: HomeComponent,
-		path: 'home'
 	},
 	{
 		path: '',
