@@ -51,10 +51,11 @@ $headings: (
 
 // Space map variable
 $space: (
-    n: 0,
-	xs: rem(8),
-	sm: rem(16),
-	md: rem(24),
+	a: auto,
 	lg: rem(32),
-	xl: rem(40)
+	md: rem(24),
+	n: 0,
+	sm: rem(16),
+	xl: rem(40),
+	xs: rem(8)
 );

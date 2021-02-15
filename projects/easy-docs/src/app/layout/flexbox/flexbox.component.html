@@ -2,7 +2,8 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>In order for flexbox to work, a parent container must have a <code>.row[-full]</code> or <code>.col[-full]</code> class.</p>
+        <p>In order for flexbox to work, a container must have a <code>.col[-full]</code> or <code>.row[-full]</code> class.</p>
+		<p><strong>Note</strong>: The <code>.col-full</code> or <code>.row-full</code> classes only affect the height or width of the container, respectively, and does not affect the flex items.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
@@ -11,16 +12,16 @@
             <li>row</li>
         </ul>
         <ul class="row-full">
-            <li>full row</li>
-            <li>full row</li>
+            <li>row-full</li>
+            <li>row-full</li>
         </ul>
         <ul class="col">
-            <li>column</li>
-            <li>column</li>
+            <li>col</li>
+            <li>col</li>
         </ul>
         <ul class="col-full">
-            <li>full column</li>
-            <li>full column</li>
+            <li>col-full</li>
+            <li>col-full</li>
         </ul>
     </section>
 
@@ -50,7 +51,7 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.col</code> flex container.</p>
+        <p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || se || st]</code> class to align ALL flex items in a <code>.col[-full]</code> flex container.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
@@ -90,6 +91,10 @@
             <li>space between</li>
             <li>space between</li>
         </ul>
+		<ul class="col align-se">
+            <li>space evenly</li>
+            <li>space evenly</li>
+        </ul>
         <ul class="col align-st">
             <li>stretch</li>
             <li>stretch</li>
@@ -98,43 +103,47 @@
 
     <figure>
         <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-l"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-c"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-r"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>right<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>right<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-t"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-m"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>middle<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>middle<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-b"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>bottom<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>bottom<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-cm"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center middle<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center middle<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-sa"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space around<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space around<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-sb"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space between<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space between<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-se"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space evenly<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space evenly<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col align-st"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
@@ -146,7 +155,7 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || st]</code> class to align ALL items in a <code>.row</code> flex container.</p>
+        <p>Use an <code>.align-[l || c || r || t || m || b || cm || sa || sb || se || st]</code> class to align ALL flex items in a <code>.row[-full]</code> flex container.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
@@ -186,6 +195,10 @@
             <li>space between</li>
             <li>space between</li>
         </ul>
+		<ul class="row align-se">
+            <li>space evenly</li>
+            <li>space evenly</li>
+        </ul>
         <ul class="row align-st">
             <li>stretch</li>
             <li>stretch</li>
@@ -194,43 +207,47 @@
 
     <figure>
         <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-l"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-c"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-r"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>right<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>right<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-t"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-m"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>middle<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>middle<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-b"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>bottom<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>bottom<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-cm"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center middle<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center middle<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-sa"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space around<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space around<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-sb"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space between<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space between<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-se"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space evenly<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>space evenly<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row align-st"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
@@ -242,14 +259,15 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use a <code>.wrap-[l || c || r || sa || sb || st]</code> class to align multi-column items in a <code>.col</code> flex container.</p>
-    </section>
+        <p>Use a <code>.wrap-[l || c || r || sa || sb || st || n]</code> class to align multi-column flex items in a <code>.col[-full]</code> flex container.</p>
+		<p><strong>Note</strong>: The <code>.wrap-n</code> class does not wrap the flex items and they can overflow the flex container.</p>
+	</section>
 
     <section class="pad-a-sm flexbox">
         <ul class="col wrap-l">
-            <li>left (default)</li>
-            <li>left (default)</li>
-            <li>left (default)</li>
+            <li>left</li>
+            <li>left</li>
+            <li>left</li>
         </ul>
         <ul class="col wrap-c">
             <li>center</li>
@@ -276,14 +294,19 @@
             <li>stretch</li>
             <li>stretch</li>
         </ul>
+		<ul class="col wrap-n">
+            <li>none (default)</li>
+            <li>none (default)</li>
+            <li>none (default)</li>
+        </ul>
     </section>
 
     <figure>
         <pre class="pad-a-sm border-tb-gray">
             <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col wrap-l"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>left<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
             <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col wrap-c"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>center<span>&lt;/<span class="tag">li</span>&gt;</span>
@@ -311,6 +334,11 @@
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col wrap-n"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>none (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>none (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>none (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
         </pre>
     </figure>
 </article>
@@ -319,14 +347,15 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use a <code>.wrap-[t || m || b || sa || sb || st]</code> class to align multi-row items in a <code>.row</code> flex container.</p>
-    </section>
+        <p>Use a <code>.wrap-[t || m || b || sa || sb || st || n]</code> class to align multi-row flex items in a <code>.row[-full]</code> flex container.</p>
+		<p><strong>Note</strong>: The <code>.wrap-n</code> class does not wrap the flex items and they can overflow the flex container.</p>
+	</section>
 
     <section class="pad-a-sm flexbox">
         <ul class="row wrap-t">
-            <li>top (default)</li>
-            <li>top (default)</li>
-            <li>top (default)</li>
+            <li>top</li>
+            <li>top</li>
+            <li>top</li>
         </ul>
         <ul class="row wrap-m">
             <li>middle</li>
@@ -353,14 +382,19 @@
             <li>stretch</li>
             <li>stretch</li>
         </ul>
+		<ul class="row wrap-n">
+            <li>none (default)</li>
+            <li>none (default)</li>
+            <li>none (default)</li>
+        </ul>
     </section>
 
     <figure>
         <pre class="pad-a-sm border-tb-gray">
             <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row wrap-l"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>top<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
             <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row wrap-c"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>middle<span>&lt;/<span class="tag">li</span>&gt;</span>
@@ -388,6 +422,11 @@
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>stretch<span>&lt;/<span class="tag">li</span>&gt;</span>
             <span>&lt;/<span class="tag">ul</span>&gt;</span>
+			<span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row wrap-n"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>none (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>none (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>none (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
         </pre>
     </figure>
 </article>
@@ -396,7 +435,7 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use <code>.item-[l || c || r || t || m || b || cm || st]</code> class to align a child item in a <code>.col</code> flex container.</p>
+        <p>Use <code>.item-[l || c || r || t || m || b || cm || st]</code> class to align a single flex item in a <code>.col[-full]</code> flex container.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
@@ -476,7 +515,7 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use an <code>.item-[l || c || r || t || m || b || cm || st]</code> class to align a child item in a <code>.row</code> flex container.</p>
+        <p>Use an <code>.item-[l || c || r || t || m || b || cm || st]</code> class to align a single flex item in a <code>.row[-full]</code> flex container.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
@@ -556,7 +595,7 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use <code>.item-order-[0 - 6]</code> classes to order children in a flex container.</p>
+        <p>Use <code>.item-order-[0 - 12]</code> classes to order flex items in a flex container.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
@@ -588,7 +627,7 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use <code>.item-[g || s || gs]-[0 - 6]</code> classes to grow and/or shrink children in a flex container.</p>
+        <p>Use <code>.item-[g || s || gs]-[0 - 6]</code> classes to grow and/or shrink flex items in a flex container.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
@@ -647,3 +686,67 @@
         </pre>
     </figure>
 </article>
+
+<!-- <h2>Flexbox sticky footer</h2>
+
+<article class="mar-b-lg box-shadow-1 border-lr-gray">
+    <section class="pad-a-sm bg-lt-gray border-tb-gray">
+        <p>Use the <code>.sticky-footer</code> class to .</p>
+    </section>
+
+    <section class="pad-a-sm flexbox">
+        <ul class="col">
+            <li>default</li>
+            <li class="item-g-1">grow</li>
+        </ul>
+        <ul class="col">
+            <li>default</li>
+            <li class="item-s-1">shrink</li>
+        </ul>
+        <ul class="col">
+            <li>default</li>
+            <li class="item-gs-1">grow &amp; shrink</li>
+        </ul>
+        <ul class="row">
+            <li>default</li>
+            <li class="item-g-1">grow</li>
+        </ul>
+        <ul class="row">
+            <li>default</li>
+            <li class="item-s-1">shrink</li>
+        </ul>
+        <ul class="row">
+            <li>default</li>
+            <li class="item-gs-1">grow &amp; shrink</li>
+        </ul>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm border-tb-gray">
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>default<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"item-g-1"</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>default<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"item-s-1"</span>&gt;</span>center<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"col"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>default<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"item-gs-1"</span>&gt;</span>right<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>default<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"item-g-1"</span>&gt;</span>left (default)<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>default<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"item-s-1"</span>&gt;</span>center<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+            <span>&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span>&gt;</span>default<span>&lt;/<span class="tag">li</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"item-gs-1"</span>&gt;</span>right<span>&lt;/<span class="tag">li</span>&gt;</span>
+            <span>&lt;/<span class="tag">ul</span>&gt;</span>
+        </pre>
+    </figure>
+</article> -->

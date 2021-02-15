@@ -6,8 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "easy-framework": [
-        "dist/easy-framework/easy-framework",
-        "dist/easy-framework"
+        "projects/easy-framework/src/public-api"
       ]
     },
     "strict": true,

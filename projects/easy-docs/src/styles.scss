@@ -2,6 +2,13 @@
 @import "../../easy-framework/src/lib/core/sass/mixins";
 @import "../../easy-framework/src/lib/core/sass/variables";
 
+h1,
+h1 + article section.bg-lt-gray p,
+h2,
+h2 + article section.bg-lt-gray p {
+	line-height: 1.4 !important;
+}
+
 .attribute {
 	color: color(blue);
 }
@@ -81,7 +88,7 @@
 		}
 
 		&.row {
-			width: rem(250);
+			width: rem(300);
 		}
 
 		li {
@@ -124,6 +131,7 @@
 }
 
 .main {
+	padding-bottom: space(lg);
 	padding-left: rem(220);
 	padding-right: space(md);
     padding-top: rem(156);

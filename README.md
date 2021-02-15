@@ -130,9 +130,9 @@ View the [Changelog](https://github.com/richpauly13/easy/blob/master/projects/ea
 1. Fork the repo
 1. Run `npm i`
 1. Run `npm start`
-1. In a second terminal, run `npm run watch:easy`
 1. Open the projects/easy-framework/src/lib folder in your code editor
 1. Edit the code base
+1. Update the documentatation as needed
 1. Submit a pull request
 
 ## Issues
@@ -141,4 +141,4 @@ Report an [issue](https://github.com/richpauly13/easy/issues/new?template=bug_re
 
 ## License
 
-Copyright (c) 2020, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE.md)).
+Copyright (c) 2021, Paul Chehak. ([MIT License](https://github.com/richpauly13/easy/blob/master/LICENSE.md)).

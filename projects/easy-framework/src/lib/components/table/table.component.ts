@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-table, .table, .table-bordered, .table-hover, .table-striped',
+	selector: 'ez-table, .table, .table-bordered, .table-cell, .table-header, .table-header-cell, .table-hover, .table-row, .table-striped, .table-wrapper',
 	templateUrl: './table.component.html',
 	styleUrls: [
 		'./table.component.scss'

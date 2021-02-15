@@ -1,8 +1,13 @@
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
+
 // Flexbox container styles
 .col,
 .col-full,
 .row,
 .row-full {
+	align-content: flex-start;
 	align-items: flex-start;
 	display: flex;
 	justify-content: flex-start;
@@ -22,70 +27,83 @@
 }
 
 // Flexbox container alignment styles
-.align-c:not(.col):not(.grid),
-.col.align-m:not(.grid) {
-	justify-content: center;
-}
-
-.align-l:not(.col):not(.grid),
-.col.align-t:not(.grid) {
-	justify-content: flex-start;
-}
-
-.align-r:not(.col):not(.grid),
-.col.align-b:not(.grid) {
+.col.align-b,
+.row.align-r {
 	justify-content: flex-end;
 }
 
-.align-m:not(.col):not(.grid),
-.col.align-c:not(.grid) {
+.col.align-c,
+.row.align-m {
 	align-items: center;
 }
 
-.align-b:not(.col):not(.grid),
-.col.align-r:not(.grid) {
-	align-items: flex-end;
-}
-
-.align-t:not(.col):not(.grid),
-.col.align-l:not(.grid) {
-	align-items: flex-start;
-}
-
-.align-sa:not(.grid) {
-	justify-content: space-around;
-}
-
-.align-sb:not(.grid) {
-	justify-content: space-between;
-}
-
-.align-st:not(.grid) {
-	align-items: stretch;
-}
-
-.align-cm:not(.grid) {
+.col.align-cm,
+.row.align-cm {
 	align-items: center;
 	justify-content: center;
 }
 
+.col.align-l,
+.row.align-t {
+	align-items: flex-start;
+}
+
+.col.align-m,
+.row.align-c {
+	justify-content: center;
+}
+
+.col.align-r,
+.row.align-b {
+	align-items: flex-end;
+}
+
+.col.align-sa,
+.row.align-sa {
+	justify-content: space-around;
+}
+
+.col.align-sb,
+.row.align-sb {
+	justify-content: space-between;
+}
+
+.col.align-se,
+.row.align-se {
+	justify-content: space-evenly;
+}
+
+.col.align-st,
+.row.align-st {
+	align-items: stretch;
+}
+
+.col.align-t,
+.row.align-l {
+	justify-content: flex-start;
+}
+
 // Flexbox container wrap styles
-.wrap-t,
-.col.wrap-l {
+.col.wrap-c,
+.row.wrap-m {
+	align-content: center;
+	flex-wrap: wrap;
+}
+
+.col.wrap-l,
+.row.wrap-t {
 	align-content: flex-start;
 	flex-wrap: wrap;
 }
 
-.wrap-b,
-.col.wrap-r {
+.col.wrap-r,
+.row.wrap-b {
 	align-content: flex-end;
 	flex-wrap: wrap;
 }
 
-.wrap-m,
-.col.wrap-c {
-	align-content: center;
-	flex-wrap: wrap;
+.wrap-n {
+	flex-wrap: nowrap;
 }
 
 .wrap-sa {
@@ -100,90 +118,103 @@
 
 .wrap-st {
 	align-content: stretch;
+	align-items: stretch;
 	flex-wrap: wrap;
 }
 
-.wrap-n {
-	flex-wrap: nowrap;
-	max-width: 100%;
+// Flex item alignment styles
+.col .item-b {
+	margin-top: auto;
 }
 
-// Flex item alignment styles
-.row .item-t:not(.grid),
-.col .item-l:not(.grid) {
+.col .item-c,
+.row .item-m {
+	align-self: center;
+}
+
+.col .item-cm {
+	align-self: center;
+	margin-bottom: auto;
+	margin-top: auto;
+}
+
+.col .item-m {
+	margin-bottom: auto;
+	margin-top: auto;
+}
+
+.col .item-l,
+.row .item-t {
 	align-self: flex-start;
 }
 
-.row .item-b:not(.grid),
-.col .item-r:not(.grid) {
+.col .item-r,
+.row .item-b {
 	align-self: flex-end;
 }
 
-.row .item-m:not(.grid),
-.col .item-c:not(.grid) {
-	align-self: center;
-}
-
-.row .item-l:not(.grid) {
-	margin-right: auto;
-}
-
-.col .item-t:not(.grid) {
-	margin-bottom: auto;
-}
-
-.row .item-r:not(.grid) {
-	margin-left: auto;
-}
-
-.col .item-b:not(.grid) {
-	margin-top: auto;
-}
-
-.row .item-c:not(.grid) {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.col .item-m:not(.grid) {
-	margin-bottom: auto;
-	margin-top: auto;
-}
-
-.row .item-cm:not(.grid) {
-	align-self: center;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.col .item-cm:not(.grid) {
-	align-self: center;
-	margin-bottom: auto;
-	margin-top: auto;
-}
-
-.item-st:not(.grid) {
+.col .item-st,
+.row .item-st {
 	align-self: stretch;
+}
+
+.col .item-t {
+	margin-bottom: auto;
+}
+
+.row .item-c {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.row .item-cm {
+	align-self: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.row .item-l {
+	margin-right: auto;
+}
+
+.row .item-r {
+	margin-left: auto;
 }
 
 // Flex item order styles
 @for $number from 0 through 13 {
-	.item-order-#{$number} {
+	.col .item-order-#{$number},
+	.row .item-order-#{$number} {
 		order: $number;
 	}
 }
 
 // Flex item grow and shrink styles
-@for $number from 0 through 13 {
+@for $number from 0 through 7 {
 	.item-g-#{$number} {
 		flex: $number 0 auto;
+	}
+
+	.item-gs-#{$number} {
+		flex: $number $number auto;
 	}
 
 	.item-s-#{$number} {
 		flex: 0 $number auto;
 	}
+}
 
-    .item-gs-#{$number} {
-		flex: $number $number auto;
-	}
+// Flexbox sticky footer
+.sticky-footer {
+	display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    & > * {
+        flex-shrink: 0;
+    }
+
+    & main {
+        flex: 1 0 auto;
+    }
 }
