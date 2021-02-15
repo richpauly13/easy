@@ -1,1 +1,7 @@
+.flex-sticky-footer {
+	height: 12.5rem;
 
+    & .main-content {
+        flex: 1 0 auto;
+    }
+}
