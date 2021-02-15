@@ -4,13 +4,9 @@
 
 // Container styles
 [class^="container"] {
-    display: flex;
 	margin-left: auto;
 	margin-right: auto;
-    padding-bottom: space(sm);
-    padding-left: space(sm);
-    padding-right: space(sm);
-    padding-top: space(sm);
+    max-width: 100%;
 	width: 100%;
 }
 
@@ -21,19 +17,9 @@
 }
 
 .container-fluid {
-	@include media(sm) {
-		max-width: rem(448);
-	}
+	max-width: rem(1366);
+}
 
-	@include media(md) {
-		max-width: rem(736);
-	}
-
-	@include media(lg) {
-		max-width: rem(992);
-	}
-
-	@include media(xl) {
-		max-width: rem(1328);
-	}
+.rounded {
+	border-radius: space(xs);
 }
