@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/richpauly13/easy/compare/v1.2.0...v1.3.0) (2021-02-15)
+
+
+### Features
+
+* **container:** add rounded container and update docs ([06f7e5c](https://github.com/richpauly13/easy/commit/06f7e5cb2b3c12c19d51fef07d16160d95afbe6f))
+* **flexbox:** add flex-sticky-footer ro flexbox and add docs ([cc028ac](https://github.com/richpauly13/easy/commit/cc028ac997010287a20956a101947f737ec93b00))
+* **table:** add table-wrapper and update docs ([8b47a40](https://github.com/richpauly13/easy/commit/8b47a40f61caa526faa95ebd647eda222a246ecc))
+
+
+### Bug Fixes
+
+* **flexbox:** add new styles and update docs ([63e4b25](https://github.com/richpauly13/easy/commit/63e4b25f1a247eb16bd914326abb60a515546226))
+* **form:** add proper behavior for form-group ([5f90ef3](https://github.com/richpauly13/easy/commit/5f90ef3390e9e37f8aa56b60abc3624f4812afe3))
+
 ## [1.2.0](https://github.com/richpauly13/easy/compare/v0.3.17...v1.2.0) (2020-12-05)
 
 
