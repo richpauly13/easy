@@ -1,9 +1,10 @@
 {
-  "name": "easy-framework",
-  "version": "1.3.0",
   "author": "Paul Chehak <pauly13@att.net>",
   "bugs": {
     "url": "https://github.com/richpauly13/easy/issues"
+  },
+  "dependencies": {
+    "tslib": "^2.0.3"
   },
   "description": "EASY CSS framework.",
   "homepage": "https://github.com/richpauly13/easy#readme",
@@ -19,16 +20,19 @@
     "sass"
   ],
   "license": "MIT",
-  "private": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/richpauly13/easy.git"
+  "name": "easy-framework",
+  "ng-add": {
+    "save": "dependencies"
   },
   "peerDependencies": {
     "@angular/common": "^11.0.0",
     "@angular/core": "^11.0.0"
   },
-  "dependencies": {
-    "tslib": "^2.0.3"
-  }
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richpauly13/easy.git"
+  },
+  "schematics": "./schematics/collection.json",
+  "version": "1.3.0"
 }
