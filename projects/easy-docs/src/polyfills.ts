@@ -57,7 +57,7 @@
  */
 
 // included with Angular CLI.
-import 'zone.js/dist/zone';
+import 'zone.js';
 
 /** *************************************************************************************************
  * aPPLICATION IMPORTS
