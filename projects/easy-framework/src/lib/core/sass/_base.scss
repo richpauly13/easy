@@ -119,7 +119,9 @@ a {
 	background-color: transparent;
 	outline: none;
 
-    &:focus {
+    &:hover:not([disabled]),
+    &:focus:not([disabled]),
+	&:active:not([disabled]) {
 		text-decoration: underline;
     }
 
@@ -147,7 +149,9 @@ textarea,
     font-family: inherit;
     text-decoration: none;
 
-	&:focus {
+	&:hover:not([disabled]),
+    &:focus:not([disabled]),
+	&:active:not([disabled]) {
 		outline: none;
 		outline-offset: 0;
 	}
@@ -164,7 +168,9 @@ input[type="submit"],
 	appearance: none;
 	background-color: transparent;
 
-    &:focus:not([disabled]) {
+	&:hover:not([disabled]),
+    &:focus:not([disabled]),
+	&:active:not([disabled]) {
 		border: rem(2) solid color(blue);
 		outline: none;
     }
