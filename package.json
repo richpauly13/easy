@@ -79,7 +79,7 @@
   },
   "scripts": {
     "build": "run-s build:easy build:docs",
-    "build:docs": "ng build easy-docs --prod --base-href .",
+    "build:docs": "ng build easy-docs --prod --base-href ./",
     "build:easy": "ng build easy-framework --prod",
     "bump:deps": "npm run build && git add . && git commit -m \"chore(deps): bump deps\" && git push",
     "copy:md": "copyfiles {LICENSE.md,README.md} ./dist/easy-framework",
