@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-button, .btn, .btn-full, .btn-lg, .btn-md, .btn-sm, .btn-xl, .btn-xs',
+	selector: 'ez-button, .btn, .btn-full, .btn-lg, .btn-md, .btn-sm, .btn-xl, .btn-xs, .btn-group-col, .btn-group-full, .btn-group-row',
 	templateUrl: './button.component.html',
 	styleUrls: [
 		'./button.component.scss'
@@ -9,37 +9,31 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEnc
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonComponent implements OnInit {
-	@HostBinding('attr.disabled') public isHostDisabled: string | null;
+export class ButtonComponent {
+	@HostBinding('attr.disabled')
+	public get hostDisabled(): string | null {
+		return this.disabled === '' ? 'true' : null;
+	}
+
+	@HostBinding('attr.role')
+	public get hostRole(): string | null {
+		return this.class?.includes('group') ? 'group' : null;
+	}
+
 	@HostBinding('attr.type')
-	public get type(): string {
-		return this.hostType;
+	public get hostType(): string | null {
+		return this.class?.includes('group') ? null : this.type || 'button';
 	}
 
-	public set type(type: string) {
-		this.hostType = type || 'button';
-	}
-
-	@Input()
-	public get disabled(): string | null {
-		return this.isDisabled;
-	}
-
-	public set disabled(disabled: string | null) {
-		this.isDisabled = disabled === '' ? 'true' : null;
-	}
-
-	private hostType: string;
-	private isDisabled: string | null;
+	@Input() public class: string | null;
+	@Input() public disabled: string | null;
+	@Input() public role: string | null;
+	@Input() public type: string | null;
 
 	public constructor() {
-		this.hostType = '';
-		this.isDisabled = null;
-		this.isHostDisabled = null;
-	}
-
-	public ngOnInit(): void {
-		this.isHostDisabled = this.isDisabled;
-		this.type = this.hostType;
+		this.class = null;
+		this.disabled = null;
+		this.role = null;
+		this.type = null;
 	}
 }

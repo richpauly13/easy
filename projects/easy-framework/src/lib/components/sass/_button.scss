@@ -55,6 +55,10 @@
     padding-bottom: space(sm);
     padding-top: space(sm);
 
+	&:hover:not([disabled="true"]) {
+		text-decoration: none;
+	}
+
     [class*="btn"] {
         border-bottom: rem(1) solid color(white);
         border-right: rem(1) solid color(white);
@@ -63,16 +67,9 @@
 }
 
 .btn-group-col {
-    align-items: flex-start;
-	display: flex;
     flex-direction: column;
-	justify-content: flex-start;
 }
 
-.btn-group-full {
-    width: 100%;
-
-    [class*="btn"] {
-        @include flex(1, 0, auto);
-    }
+.btn-group-full [class*="btn"] {
+	@include flex(1, 0, auto);
 }
