@@ -113,24 +113,7 @@ th {
 	vertical-align: middle;
 }
 
-// Anchor styles and resets
-a {
-	appearance: none;
-	background-color: transparent;
-	outline: none;
-
-    &:hover:not([disabled]),
-    &:focus:not([disabled]),
-	&:active:not([disabled]) {
-		text-decoration: underline;
-    }
-
-    &:-moz-focus-inner {
-		text-decoration: underline;
-    }
-}
-
-// Form and button resets
+// Form, link, and button resets
 a,
 a[role="button"],
 button,
@@ -149,14 +132,20 @@ textarea,
     font-family: inherit;
     text-decoration: none;
 
-	&:hover:not([disabled]),
-    &:focus:not([disabled]),
-	&:active:not([disabled]) {
+	&:hover:not([disabled="true"]),
+    &:focus:not([disabled="true"]),
+	&:active:not([disabled="true"]) {
 		outline: none;
 		outline-offset: 0;
 	}
+
+	&:-moz-focus-inner:not([disabled="true"]) {
+		outline: none;
+		outline-offset: 0;
+    }
 }
 
+a,
 a[role="button"],
 button,
 html input[type="button"],
@@ -168,16 +157,14 @@ input[type="submit"],
 	appearance: none;
 	background-color: transparent;
 
-	&:hover:not([disabled]),
-    &:focus:not([disabled]),
-	&:active:not([disabled]) {
-		border: rem(2) solid color(blue);
-		outline: none;
+	&:hover:not([disabled="true"]),
+    &:focus:not([disabled="true"]),
+	&:active:not([disabled="true"]) {
+		text-decoration: underline;
     }
 
-    &:-moz-focus-inner:not([disabled]) {
-		border: rem(2) solid color(blue);
-		outline: none;
+    &:-moz-focus-inner:not([disabled="true"]) {
+		text-decoration: underline;
     }
 }
 
@@ -272,16 +259,16 @@ textarea {
 }
 
 // Disabled and readonly styles
-button[disabled],
-button[readonly],
-[disabled],
-[readonly] {
+button[disabled="true"],
+button[readonly="true"],
+[disabled="true"],
+[readonly="true"] {
 	background-color: color(lt-gray);
 	color: color(dk-gray);
-}
 
-[disabled]:hover {
-	cursor: not-allowed;
+	&:hover {
+		cursor: not-allowed;
+	}
 }
 
 // Credit: https://css-tricks.com/html5-progress-element/

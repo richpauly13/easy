@@ -16,18 +16,6 @@
     color: inherit;
     display: block;
     text-align: center;
-
-	&:link,
-    &:visited,
-    &.active:not([disabled])
-	 {
-        color: inherit;
-        outline: none;
-	}
-
-    &.active:not([disabled]) {
-		text-decoration: underline;
-	}
 }
 
 .nav-v {

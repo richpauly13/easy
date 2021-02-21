@@ -3,12 +3,13 @@
 @import "../../core/sass/variables";
 
 // Button styles
-.btn-xs,
-.btn-sm,
-.btn-md,
+.btn,
+.btn-full,
 .btn-lg,
+.btn-md,
+.btn-sm,
 .btn-xl,
-.btn-full {
+.btn-xs {
     &:not(:last-child) {
         margin-bottom: space(sm);
         margin-right: space(sm);
@@ -20,29 +21,29 @@
 }
 
 // Button sizes
-.btn-xs {
-    padding: space(xs) rem(10);
-}
-
-.btn-sm {
-    padding: rem(10 20);
-}
-
 .btn-full,
 .btn-md {
     padding: rem(12 30);
+}
+
+.btn-full {
+    width: 100%;
 }
 
 .btn-lg {
     padding: rem(14) space(xl);
 }
 
+.btn-sm {
+    padding: rem(10 20);
+}
+
 .btn-xl {
     padding: space(sm) rem(50);
 }
 
-.btn-full {
-    width: 100%;
+.btn-xs {
+    padding: space(xs) rem(10);
 }
 
 // Button groups
