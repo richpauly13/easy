@@ -72,6 +72,11 @@ const routes: Routes = [
 			{
 				component: TooltipComponent,
 				path: 'tooltip'
+			},
+			{
+				redirectTo: 'alert',
+				pathMatch: 'full',
+				path: ''
 			}
 		]
 	}

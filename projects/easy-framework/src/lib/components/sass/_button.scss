@@ -10,7 +10,7 @@
 .btn-sm,
 .btn-xl,
 .btn-xs {
-    &:not(:last-child) {
+    &:not(:last-of-type) {
         margin-bottom: space(sm);
         margin-right: space(sm);
     }

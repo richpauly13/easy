@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { ComponentsService } from './components.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-components',
@@ -11,10 +8,10 @@ import { ComponentsService } from './components.service';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponentsComponent implements OnInit {
+export class ComponentsComponent {
 	public navs: string[];
 
-	public constructor(private componentsService: ComponentsService, private router: Router) {
+	public constructor() {
 		this.navs = [
 			'alert',
 			'badge',
@@ -30,25 +27,6 @@ export class ComponentsComponent implements OnInit {
 			'table',
 			'tooltip'
 		];
-	}
-
-	public ngOnInit(): void {
-		if (this.router.url.includes('/components/')) {
-			this.onSetNav(this.router.url.split('/')[2]);
-
-			this.router.navigate([
-				this.router.url
-			]);
-		} else {
-			this.router.navigate([
-				'/components/',
-				this.componentsService.nav
-			]);
-		}
-	}
-
-	public onSetNav(nav: string): void {
-		this.componentsService.nav = nav;
 	}
 
 	public trackById(navIndex: number, nav: string): string {

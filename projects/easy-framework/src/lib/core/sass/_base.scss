@@ -159,7 +159,8 @@ input[type="submit"],
 
 	&:hover:not([disabled="true"]),
     &:focus:not([disabled="true"]),
-	&:active:not([disabled="true"]) {
+	&:active:not([disabled="true"]),
+	&.active:not([disabled="true"]) {
 		text-decoration: underline;
     }
 
