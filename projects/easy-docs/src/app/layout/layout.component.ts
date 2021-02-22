@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { LayoutService } from './layout.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-layout',
@@ -11,34 +8,16 @@ import { LayoutService } from './layout.service';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
 	public navs: string[];
 
-	public constructor(private layoutService: LayoutService, private router: Router) {
+	public constructor() {
 		this.navs = [
 			'container',
 			'flexbox',
 			'grid',
 			'nav'
 		];
-	}
-
-	public ngOnInit(): void {
-		if (this.router.url.includes('/layout/')) {
-			this.onSetNav(this.router.url.split('/')[2]);
-			this.router.navigate([
-				this.router.url
-			]);
-		} else {
-			this.router.navigate([
-				'/layout',
-				this.layoutService.nav
-			]);
-		}
-	}
-
-	public onSetNav(nav: string): void {
-		this.layoutService.nav = nav;
 	}
 
 	public trackById(navIndex: number, nav: string): string {

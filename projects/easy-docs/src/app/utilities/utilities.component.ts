@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { UtilitiesService } from './utilities.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'docs-utilities',
@@ -11,11 +8,12 @@ import { UtilitiesService } from './utilities.service';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UtilitiesComponent implements OnInit {
+export class UtilitiesComponent {
 	public navs: string[];
 
-	public constructor(private utilitiesService: UtilitiesService, private router: Router) {
+	public constructor() {
 		this.navs = [
+			'alignment',
 			'color',
 			'dimension',
 			'display',
@@ -25,24 +23,6 @@ export class UtilitiesComponent implements OnInit {
 			'typography',
 			'visibility'
 		];
-	}
-
-	public ngOnInit(): void {
-		if (this.router.url.includes('/utilities/')) {
-			this.onSetNav(this.router.url.split('/')[2]);
-			this.router.navigate([
-				this.router.url
-			]);
-		} else {
-			this.router.navigate([
-				'/utilities/',
-				this.utilitiesService.nav
-			]);
-		}
-	}
-
-	public onSetNav(nav: string): void {
-		this.utilitiesService.nav = nav;
 	}
 
 	public trackById(navIndex: number, nav: string): string {

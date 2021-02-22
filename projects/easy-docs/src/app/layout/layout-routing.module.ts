@@ -27,6 +27,11 @@ const routes: Routes = [
 			{
 				component: NavComponent,
 				path: 'nav'
+			},
+			{
+				redirectTo: 'container',
+				pathMatch: 'full',
+				path: ''
 			}
 		]
 	}

@@ -3,6 +3,7 @@
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
         <p>Buttons are styled with a <code>.btn-[xs || sm || md || lg || xl || full]</code> class.</p>
+		<p><strong>Note</strong>: The button type="button" will be automatically assigned if not present.</p>
     </section>
 
     <section class="pad-a-sm">
@@ -26,77 +27,60 @@
     </figure>
 </article>
 
-<h2>Center</h2>
-
-<article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Buttons can be centered using a <code>.center</code> class.</p>
-    </section>
-
-    <section class="pad-a-sm">
-        <button class="btn-xs bg-dk-blue text-white bg-hover-blue center" type="button">centered</button>
-    </section>
-
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-xs bg-dk-blue text-white bg-hover-blue center"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>centered<span>&lt;/<span class="tag">button</span>&gt;</span>
-        </pre>
-    </figure>
-</article>
-
 <h2>Group</h2>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
         <p>Buttons are grouped with a <code>.btn-group-[row || col || full]</code> class on a parent container.</p>
+		<p><strong>Note</strong>: The aria role="group" will be automatically assigned to the button group.</p>
     </section>
 
     <section class="pad-a-sm">
-        <section class="btn-group-row" role="group" aria-label="button row group">
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+        <section class="btn-group-row">
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-row</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-row</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-row</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-row</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-row</button>
         </section>
-        <section class="btn-group-col" role="group" aria-label="button column group">
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+        <section class="btn-group-col">
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-col</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-col</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-col</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-col</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-col</button>
         </section>
-        <section class="btn-group-full" role="group" aria-label="button full row group">
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
-            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">md</button>
+        <section class="btn-group-full">
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-full</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-full</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-full</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-full</button>
+            <button class="btn-md bg-dk-blue text-white bg-hover-blue" type="button">btn-group-full</button>
         </section>
     </section>
 
     <figure>
         <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"btn-group-row"</span> <span class="attribute">role</span>=<span class="value">"group"</span> <span class="attribute">aria-label</span>=<span class="value">"button row group"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
+            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"btn-group-row"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-row<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-row<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-row<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-row<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-row<span>&lt;/<span class="tag">button</span>&gt;</span>
             <span>&lt;/<span class="tag">section</span>&gt;</span>
-            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"btn-group-column"</span> <span class="attribute">role</span>=<span class="value">"group"</span> <span class="attribute">aria-label</span>=<span class="value">"button column group"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
+            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"btn-group-column"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-col<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-col<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-col<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-col<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-col<span>&lt;/<span class="tag">button</span>&gt;</span>
             <span>&lt;/<span class="tag">section</span>&gt;</span>
-            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"btn-group-full"</span> <span class="attribute">role</span>=<span class="value">"group"</span> <span class="attribute">aria-label</span>=<span class="value">"button full group"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>md<span>&lt;/<span class="tag">button</span>&gt;</span>
+            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"btn-group-full"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-full<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-full<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-full<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-full<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-md bg-dk-blue text-white bg-hover-blue"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>btn-group-full<span>&lt;/<span class="tag">button</span>&gt;</span>
             <span>&lt;/<span class="tag">section</span>&gt;</span>
         </pre>
     </figure>

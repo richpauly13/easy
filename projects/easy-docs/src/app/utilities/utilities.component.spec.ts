@@ -10,24 +10,7 @@ import { SpaceComponent } from './space/space.component';
 import { TextComponent } from './text/text.component';
 import { TypographyComponent } from './typography/typography.component';
 import { UtilitiesComponent } from './utilities.component';
-import { UtilitiesService } from './utilities.service';
 import { VisibilityComponent } from './visibility/visibility.component';
-
-class MockUtilitiesService {
-	public get nav(): string {
-		return this.currentNav || 'color';
-	}
-
-	public set nav(nav: string) {
-		this.currentNav = nav;
-	}
-
-	private currentNav: string;
-
-	public constructor() {
-		this.currentNav = '';
-	}
-}
 
 describe('UtilitiesComponent', (): void => {
 	const routes: Routes = [
@@ -74,7 +57,6 @@ describe('UtilitiesComponent', (): void => {
 	let component: UtilitiesComponent;
 	let fixture: ComponentFixture<UtilitiesComponent>;
 	let router: Router;
-	let service: UtilitiesService;
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
@@ -91,12 +73,6 @@ describe('UtilitiesComponent', (): void => {
 			],
 			imports: [
 				RouterTestingModule.withRoutes(routes)
-			],
-			providers: [
-				{
-					provide: UtilitiesService,
-					useClass: MockUtilitiesService
-				}
 			]
 		})
 		.compileComponents();
@@ -106,7 +82,6 @@ describe('UtilitiesComponent', (): void => {
 		fixture = TestBed.createComponent(UtilitiesComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
-		service = TestBed.inject(UtilitiesService);
 		router = TestBed.inject(Router);
 
 		fixture.ngZone!.run((): void => {
@@ -116,24 +91,5 @@ describe('UtilitiesComponent', (): void => {
 
 	it('should create the utilities page', (): void => {
 		expect(component).toBeTruthy();
-	});
-
-	it('should set the nav to the router.url if present', waitForAsync((): void => {
-		fixture.ngZone!.run((): void => {
-			fixture.whenStable().then((): void => {
-				router.navigate([
-					'/utilities/display'
-				]).then((): void => {
-					fixture.detectChanges();
-					expect(service.nav).toEqual('display');
-				});
-			});
-		});
-	}));
-
-	it('should set the nav to display', (): void => {
-		component.onSetNav('display');
-
-		expect(service.nav).toEqual('display');
 	});
 });

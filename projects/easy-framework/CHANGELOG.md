@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/richpauly13/easy/compare/v1.3.0...v1.4.0) (2021-02-22)
+
+
+### Features
+
+* **alignment:** add alignment classes and docs ([f46fc35](https://github.com/richpauly13/easy/commit/f46fc35afddc945f9512f23f3f14041b1116f48d))
+* **alignment:** add alignment classes and docs ([8a12db4](https://github.com/richpauly13/easy/commit/8a12db471bae3a187d63a07bbc1b0d1520b2dbb7))
+* **alignment:** add alignment classes and docs ([f95dff6](https://github.com/richpauly13/easy/commit/f95dff600afa9690ba9f9fc12d9d2da6625feec2))
+
+
+### Bug Fixes
+
+* **button:** add automatic roles and type ([fb99c41](https://github.com/richpauly13/easy/commit/fb99c41382c2f3752910db23844d7d7c394aca75))
+* **button:** add proper disabled state for button ([fbbcfb1](https://github.com/richpauly13/easy/commit/fbbcfb1152b1f29b070859480f3557661c5e784d))
+
 ## [1.3.0](https://github.com/richpauly13/easy/compare/v1.2.0...v1.3.0) (2021-02-15)
 
 

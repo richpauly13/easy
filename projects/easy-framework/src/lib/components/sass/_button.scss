@@ -3,13 +3,14 @@
 @import "../../core/sass/variables";
 
 // Button styles
-.btn-xs,
-.btn-sm,
-.btn-md,
+.btn,
+.btn-full,
 .btn-lg,
+.btn-md,
+.btn-sm,
 .btn-xl,
-.btn-full {
-    &:not(:last-child) {
+.btn-xs {
+    &:not(:last-of-type) {
         margin-bottom: space(sm);
         margin-right: space(sm);
     }
@@ -20,29 +21,29 @@
 }
 
 // Button sizes
-.btn-xs {
-    padding: space(xs) rem(10);
-}
-
-.btn-sm {
-    padding: rem(10 20);
-}
-
 .btn-full,
 .btn-md {
     padding: rem(12 30);
+}
+
+.btn-full {
+    width: 100%;
 }
 
 .btn-lg {
     padding: rem(14) space(xl);
 }
 
+.btn-sm {
+    padding: rem(10 20);
+}
+
 .btn-xl {
     padding: space(sm) rem(50);
 }
 
-.btn-full {
-    width: 100%;
+.btn-xs {
+    padding: space(xs) rem(10);
 }
 
 // Button groups
@@ -54,6 +55,10 @@
     padding-bottom: space(sm);
     padding-top: space(sm);
 
+	&:hover:not([disabled="true"]) {
+		text-decoration: none;
+	}
+
     [class*="btn"] {
         border-bottom: rem(1) solid color(white);
         border-right: rem(1) solid color(white);
@@ -62,16 +67,9 @@
 }
 
 .btn-group-col {
-    align-items: flex-start;
-	display: flex;
     flex-direction: column;
-	justify-content: flex-start;
 }
 
-.btn-group-full {
-    width: 100%;
-
-    [class*="btn"] {
-        @include flex(1, 0, auto);
-    }
+.btn-group-full [class*="btn"] {
+	@include flex(1, 0, auto);
 }

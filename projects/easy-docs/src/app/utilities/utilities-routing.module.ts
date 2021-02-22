@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AlignmentComponent } from './alignment/alignment.component';
 import { ColorComponent } from './color/color.component';
 import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
 		path: '',
 		component: UtilitiesComponent,
 		children: [
+			{
+				component: AlignmentComponent,
+				path: 'alignment'
+			},
 			{
 				component: ColorComponent,
 				path: 'color'
@@ -47,6 +52,11 @@ const routes: Routes = [
 			{
 				component: VisibilityComponent,
 				path: 'visibility'
+			},
+			{
+				redirectTo: 'alignment',
+				pathMatch: 'full',
+				path: ''
 			}
 		]
 	}
