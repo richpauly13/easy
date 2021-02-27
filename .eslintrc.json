@@ -1461,10 +1461,10 @@
         "no-duplicate-case": "error",
         "no-duplicate-imports": "off",
         "no-else-return": [
-          "error",
+          "off"/* ,
           {
             "allowElseIf": false
-          }
+          } */
         ],
         "no-empty": [
           "error",

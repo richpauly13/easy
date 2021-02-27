@@ -10,6 +10,17 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
+	@HostBinding('attr.aria-label')
+	public get hostAriaLabel(): string | null {
+		if (this.ariaLabel) {
+			return this.ariaLabel;
+		} else if (this.class?.includes('group')) {
+			return this.class.match(/\bbtn-group\S+\b/u)![0];
+		} else {
+			return null;
+		}
+	}
+
 	@HostBinding('attr.disabled')
 	public get hostDisabled(): string | null {
 		return this.disabled === '' ? 'true' : null;
@@ -25,15 +36,15 @@ export class ButtonComponent {
 		return this.class?.includes('group') ? null : this.type || 'button';
 	}
 
+	@Input('aria-label') public ariaLabel: string | null;
 	@Input() public class: string | null;
 	@Input() public disabled: string | null;
-	@Input() public role: string | null;
 	@Input() public type: string | null;
 
 	public constructor() {
+		this.ariaLabel = null;
 		this.class = null;
 		this.disabled = null;
-		this.role = null;
 		this.type = null;
 	}
 }

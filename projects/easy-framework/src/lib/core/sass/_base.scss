@@ -44,6 +44,28 @@ body {
 	line-height: 1;
 	overflow-x: hidden;
 	text-rendering: optimizeLegibility;
+
+	input,
+	select,
+	textarea {
+		font-size: 1.3333rem;
+
+		@include media(sm) {
+			font-size: 1.2308rem;
+		}
+
+		@include media(md) {
+			font-size: 1.1429rem;
+		}
+
+		@include media(lg) {
+			font-size: 1.0667rem;
+		}
+
+		@include media(xl) {
+			font-size: 1rem;
+		}
+	}
 }
 
 body,
