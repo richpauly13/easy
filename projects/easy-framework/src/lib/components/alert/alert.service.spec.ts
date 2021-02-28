@@ -6,11 +6,22 @@ describe('AlertService', () => {
 	let service: AlertService;
 
 	beforeEach(() => {
-		TestBed.configureTestingModule({});
+		TestBed.configureTestingModule({
+			providers: [
+				AlertService
+			]
+		});
+
 		service = TestBed.inject(AlertService);
 	});
 
 	it('should be created', () => {
 		expect(service).toBeTruthy();
+	});
+
+	it('should have one for alertCounter', () => {
+		service.alertCounter = 1;
+
+		expect(service.alertCounter).toEqual(1);
 	});
 });

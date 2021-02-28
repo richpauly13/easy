@@ -2,7 +2,7 @@
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
     <section class="pad-a-sm bg-lt-gray border-b-gray">
-        <p>A card is styled with a <code>.card</code> class.</p>
+        <p>A basic card is styled with a <code>.card</code> class.</p>
     </section>
 
     <section class="pad-a-sm border-b-gray">
@@ -23,8 +23,9 @@
 <h2>Cards</h2>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
-    <section class="pad-a-sm bg-lt-gray border-b-gray">        
-        <p>Cards an be evenly laid out using a <code>.cards</code> container class.</p>
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Basic cards an be evenly laid out using a <code>.cards</code> container class.</p>
+		<p><strong>Note</strong>: The aria role="group" will be automatically assigned to the card group.</p>
     </section>
 
     <section class="pad-a-sm border-b-gray cards">
@@ -62,8 +63,64 @@
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">article</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">article</span> <span class="attribute">class</span>=<span class="value">"card"</span>&gt;</span>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span>&gt;</span>card<span>&lt;/<span class="tag">p</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">article</span>&gt;</span>          
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">article</span>&gt;</span>
             <span>&lt;/<span class="tag">section</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Card</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Add a <code>.card-focus</code> class to a card to make it focusable.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <article class="card card-focus">
+            <p>card</p>
+        </article>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">article</span> <span class="attribute">class</span>=<span class="value">"card card-focus"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span>&gt;</span>card<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;/<span class="tag">article</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Complex Card</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>A complex card is styled with <a class="text-dk-blue" href="https://richpauly13.github.io/easy/#/utilities/alignment">utility</a> classes.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <article class="card">
+			<h3 class="text-md pad-b-sm">Card Title</h3>
+            <p class="text-dk-gray pad-b-sm">Card subtitle</p>
+			<figure class="pad-b-sm">
+				<img class="center" src="http://placehold.it/200x200" alt="placeholder image">
+			</figure>
+			<p class="pad-b-sm text-c">Card content</p>
+			<button class="btn-sm bg-dk-blue text-white bg-hover-lt-gray text-hover-lt-black" type="button">Click</button>
+        </article>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">article</span> <span class="attribute">class</span>=<span class="value">"card"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">h3</span> <span class="attribute">class</span>=<span class="value">"text-md pad-b-sm"</span>&gt;</span>Card Title<span>&lt;/<span class="tag">h3</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"text-dk-gray pad-b-sm"</span>&gt;</span>Card subtitle<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">figure</span> <span class="attribute">class</span>=<span class="value">"pad-b-sm"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">img</span> <span class="attribute">class</span>=<span class="value">"center"</span> <span class="attribute">src</span>=<span class="value">"http://placehold.it/200x200"</span> <span class="attribute">alt</span>=<span class="value">"placeholder image"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">figure</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"pad-b-sm text-c"</span>&gt;</span>Card content<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"btn-sm bg-dk-blue text-white bg-hover-lt-gray text-hover-lt-black"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>Click<span>&lt;/<span class="tag">button</span>&gt;</span>
+            <span>&lt;/<span class="tag">article</span>&gt;</span>
         </pre>
     </figure>
 </article>

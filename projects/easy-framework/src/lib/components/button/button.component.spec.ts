@@ -36,7 +36,7 @@ describe('ButtonComponent', (): void => {
 	});
 
 	it('should have a hostType of null', (): void => {
-		component.class = 'group';
+		component.class = 'btn-group';
 
 		expect(component.hostType).toBeNull();
 	});
@@ -52,7 +52,7 @@ describe('ButtonComponent', (): void => {
 	});
 
 	it('should have a hostRole of group', (): void => {
-		component.class = 'group';
+		component.class = 'btn-group';
 
 		expect(component.hostRole).toEqual('group');
 	});

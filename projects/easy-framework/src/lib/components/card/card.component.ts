@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: '.card, .cards',
@@ -10,5 +10,19 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
+	@HostBinding('attr.role')
+	public get hostRole(): string | null {
+		return this.class.includes('cards') ? 'group' : null;
+	}
 
+	@HostBinding('attr.tabindex')
+	public get hostTabindex(): string | null {
+		return this.class.includes('card-focus') ? '0' : null;
+	}
+
+	@Input() public class: string;
+
+	public constructor() {
+		this.class = '';
+	}
 }

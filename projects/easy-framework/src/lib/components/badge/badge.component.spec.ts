@@ -17,10 +17,9 @@ describe('BadgeComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(BadgeComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
-	it('should create', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

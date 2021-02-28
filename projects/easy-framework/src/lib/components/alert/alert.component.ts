@@ -53,7 +53,7 @@ export class AlertComponent {
 	}
 
 	public onClose(): void {
-		this.class = this.class ? `${this.class} hide` : 'hide';
+		this.class = 'hide';
 	}
 
 	public onTrap(event: KeyboardEvent): void {

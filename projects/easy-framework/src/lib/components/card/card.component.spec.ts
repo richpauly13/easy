@@ -17,10 +17,29 @@ describe('CardComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(CardComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
-	it('should create', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a hostRole of group', (): void => {
+		component.class = 'cards';
+
+		expect(component.hostRole).toEqual('group');
+	});
+
+	it('should have a hostRole of null', (): void => {
+		expect(component.hostRole).toBeNull();
+	});
+
+	it('should have a hostTabindex of 0', (): void => {
+		component.class = 'card-focus';
+
+		expect(component.hostTabindex).toEqual('0');
+	});
+
+	it('should have a hostTabindex of null', (): void => {
+		expect(component.hostTabindex).toBeNull();
 	});
 });

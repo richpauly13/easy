@@ -41,13 +41,6 @@ describe('AlertComponent', (): void => {
 		expect(component.hostClass).toEqual('hide');
 	});
 
-	it('should have a hostClass of hide after onClose()', (): void => {
-		component.class = 'alert-good';
-		component.onClose();
-
-		expect(component.hostClass).toEqual('alert-good hide');
-	});
-
 	it('should have a hostAriaLabelledby of alert-good-1', (): void => {
 		component.class = 'alert-good';
 

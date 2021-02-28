@@ -4,7 +4,7 @@
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
         <p>Buttons are styled with a <code>.btn[-xs || -sm || -md || -lg || -xl || -full]</code> class.</p>
 		<p><strong>Note</strong>: The <code>.btn</code> class does not have any padding, but still behaves like other <code>.btn-*</code> classes.</p>
-		<p><strong>Note</strong>: The button type="button" will be automatically assigned if not present.</p>
+		<p><strong>Note</strong>: A button without a type defaults to type="submit" which can cause unwanted behavior, so type="button" will be automatically assigned if no type is present.</p>
     </section>
 
     <section class="pad-a-sm">
@@ -35,7 +35,7 @@
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
         <p>Buttons are grouped with a <code>.btn-group-[row || col || full]</code> class on a parent container.</p>
-		<p><strong>Note</strong>: The aria role="group" will be automatically assigned to the button group.</p>
+		<p><strong>Note</strong>: The aria role="group" and an aria-label will be automatically assigned to the button group if neither are present.</p>
     </section>
 
     <section class="pad-a-sm">
