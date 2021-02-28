@@ -1,5 +1,5 @@
-<p [id]="id" tabindex="-1">
+<p [id]="id">
     <ng-content></ng-content>
 </p>
 
-<button *ngIf="close" (click)="onClose()" (blur)="onTrap()" class="close" type="button" aria-label="close alert">X</button>
+<button *ngIf="close" (click)="onClose()" (keydown)="onTrap($event)" class="close" type="button" aria-label="close alert">X</button>

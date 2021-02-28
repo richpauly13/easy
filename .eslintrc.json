@@ -397,10 +397,6 @@
               "memberTypes": [
                 "signature",
 
-                "public-static-field",
-                "protected-static-field",
-                "private-static-field",
-
                 "public-decorated-field",
                 "protected-decorated-field",
                 "private-decorated-field",
@@ -408,6 +404,10 @@
                 "public-instance-field",
                 "protected-instance-field",
                 "private-instance-field",
+
+                "public-static-field",
+                "protected-static-field",
+                "private-static-field",
 
                 "public-abstract-field",
                 "protected-abstract-field",
@@ -417,9 +417,9 @@
                 "protected-field",
                 "private-field",
 
-                "static-field",
                 "decorated-field",
                 "instance-field",
+                "static-field",
                 "abstract-field",
                 "field",
 
@@ -427,10 +427,6 @@
                 "protected-constructor",
                 "private-constructor",
                 "constructor",
-
-                "public-static-method",
-                "protected-static-method",
-                "private-static-method",
 
                 "public-decorated-method",
                 "protected-decorated-method",
@@ -440,6 +436,10 @@
                 "protected-instance-method",
                 "private-instance-method",
 
+                "public-static-method",
+                "protected-static-method",
+                "private-static-method",
+
                 "public-abstract-method",
                 "protected-abstract-method",
                 "private-abstract-method",
@@ -448,9 +448,9 @@
                 "protected-method",
                 "private-method",
 
-                "static-method",
                 "decorated-method",
                 "instance-method",
+                "static-method",
                 "abstract-method",
                 "method"
               ],
@@ -1990,7 +1990,7 @@
           }
         ],
         "prefer-destructuring": [
-          "error",
+          "off",
           {
             "AssignmentExpression":
             {

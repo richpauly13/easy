@@ -14,7 +14,7 @@ export class ButtonComponent {
 	public get hostAriaLabel(): string | null {
 		if (this.ariaLabel) {
 			return this.ariaLabel;
-		} else if (this.class?.includes('group')) {
+		} else if (this.class.includes('group')) {
 			return this.class.match(/\bbtn-group\S+\b/u)![0];
 		} else {
 			return null;
@@ -28,22 +28,22 @@ export class ButtonComponent {
 
 	@HostBinding('attr.role')
 	public get hostRole(): string | null {
-		return this.class?.includes('group') ? 'group' : null;
+		return this.class.includes('group') ? 'group' : null;
 	}
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		return this.class?.includes('group') ? null : this.type || 'button';
+		return this.class.includes('group') ? null : this.type || 'button';
 	}
 
 	@Input('aria-label') public ariaLabel: string | null;
-	@Input() public class: string | null;
+	@Input() public class: string;
 	@Input() public disabled: string | null;
 	@Input() public type: string | null;
 
 	public constructor() {
 		this.ariaLabel = null;
-		this.class = null;
+		this.class = '';
 		this.disabled = null;
 		this.type = null;
 	}

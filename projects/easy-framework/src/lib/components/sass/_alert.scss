@@ -1,4 +1,5 @@
 @import "../../core/sass/functions";
+@import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
 // Alert styles
@@ -8,6 +9,10 @@
     display: flex;
     justify-content: space-between;
     padding: space(xs) space(sm);
+
+	&.hide {
+		display: none;
+	}
 }
 
 .alert-bad {

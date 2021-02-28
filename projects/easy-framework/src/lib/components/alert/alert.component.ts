@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+
+import { AlertService } from './alert.service';
 
 @Component({
 	selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
@@ -9,52 +11,54 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnI
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertComponent implements OnInit {
-	@HostBinding('attr.aria-labelledby') public ariaLabelledBy: string;
-	@HostBinding('attr.class') public hostClass: string;
-	@Input()
-	public get class(): string {
-		return this.classList;
+export class AlertComponent {
+	@HostBinding('attr.aria-labelledby')
+	public get hostAriaLabelledby(): string {
+		const alertCounter: number = this.alertService.alertCounter;
+
+		this.id = `${this.class.match(/\balert\S+\b/u)![0]}-${alertCounter}`;
+
+		return `${this.class.match(/\balert\S+\b/u)![0]}-${alertCounter}`;
 	}
 
-	public set class(classList: string) {
-		if (classList.includes('close')) {
-			this.classList = classList.replace(/ close|close /gu, '');
+	@HostBinding('attr.class')
+	public get hostClass(): string {
+		if (this.class.includes('close')) {
+			this.class = this.class.replace(/ close|close /gu, '');
 			this.close = true;
-			this.renderer2.setAttribute(this.elementRef.nativeElement, 'role', 'alertdialog');
-		} else {
-			this.classList = classList;
-			this.close = false;
-			this.renderer2.setAttribute(this.elementRef.nativeElement, 'role', 'alert');
 		}
 
-		this.ariaLabelledBy = this.class.match(/\balert\S+\b/u)![0];
-		this.id = this.class.match(/\balert\S+\b/u)![0];
+		return this.class;
 	}
+
+	@HostBinding('attr.role')
+	public get hostRole(): string {
+		return this.close ? 'alertdialog' : 'alert';
+	}
+
+	@HostBinding('attr.tabindex')
+	public get hostTabindex(): string {
+		return '-1';
+	}
+
+	@Input() public class: string ;
 
 	public close: boolean;
 	public id: string;
 
-	private classList: string;
-
-	public constructor(private elementRef: ElementRef, private renderer2: Renderer2) {
-		this.ariaLabelledBy = '';
-		this.classList = '';
+	public constructor(private alertService: AlertService) {
+		this.class = '';
 		this.close = false;
-		this.hostClass = '';
 		this.id = '';
 	}
 
-	public ngOnInit(): void {
-		this.hostClass = this.class;
-		this.renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', '-1');
-	}
-
 	public onClose(): void {
-		this.hostClass = 'hide';
+		this.class = this.class ? `${this.class} hide` : 'hide';
 	}
 
-	public onTrap(): void {
-		this.elementRef.nativeElement.focus();
+	public onTrap(event: KeyboardEvent): void {
+		if (event.key === 'Tab' || (event.shiftKey && event.key === 'Tab')) {
+			event.preventDefault();
+		}
 	}
 }

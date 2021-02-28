@@ -17,66 +17,65 @@ describe('ButtonComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(ButtonComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have a type of button', (): void => {
+	it('should have a hostType of button', (): void => {
 		component.type = 'button';
-
-		fixture.detectChanges();
 
 		expect(component.hostType).toEqual('button');
 	});
 
-	it('should be disabled', (): void => {
-		component.disabled = '';
+	it('should have a hostType of button', (): void => {
+		component.type = null;
 
-		fixture.detectChanges();
-
-		expect(component.hostDisabled).toEqual('true');
+		expect(component.hostType).toEqual('button');
 	});
 
-	it('should not be disabled', (): void => {
-		component.disabled = null;
+	it('should have a hostType of null', (): void => {
+		component.class = 'group';
 
-		fixture.detectChanges();
+		expect(component.hostType).toBeNull();
+	});
 
+	it('should have a hostDisabled of true', (): void => {
+		component.disabled = '';
+
+		expect(component.hostDisabled).toBeTruthy();
+	});
+
+	it('should have a hostDisabled of null', (): void => {
 		expect(component.hostDisabled).toBeNull();
 	});
 
-	it('should have a class of group', (): void => {
+	it('should have a hostRole of group', (): void => {
 		component.class = 'group';
-
-		fixture.detectChanges();
-
-		expect(component.class).toEqual('group');
-	});
-
-	it('should not have a class of group', (): void => {
-		component.class = '';
-
-		fixture.detectChanges();
-
-		expect(component.class).not.toContain('group');
-	});
-
-	it('should have a role of group', (): void => {
-		component.class = 'group';
-
-		fixture.detectChanges();
 
 		expect(component.hostRole).toEqual('group');
 	});
 
-	it('should not have a role', (): void => {
+	it('should have a hostRole of null', (): void => {
 		component.class = '';
 
-		fixture.detectChanges();
-
 		expect(component.hostRole).toBeNull();
+	});
+
+	it('should have a hostAriaLabel of close button', (): void => {
+		component.ariaLabel = 'close button';
+
+		expect(component.hostAriaLabel).toEqual('close button');
+	});
+
+	it('should have an hostAriaLabel of btn-group-row', (): void => {
+		component.class = 'btn-group-row';
+
+		expect(component.hostAriaLabel).toEqual('btn-group-row');
+	});
+
+	it('should have an hostAriaLabel of null', (): void => {
+		expect(component.hostAriaLabel).toBeNull();
 	});
 });

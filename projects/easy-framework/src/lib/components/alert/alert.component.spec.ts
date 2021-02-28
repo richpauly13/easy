@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { AlertComponent } from './alert.component';
 
@@ -19,40 +17,76 @@ describe('AlertComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(AlertComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have an alert-good class', (): void => {
+	it('should have a hostClass of alert-good', (): void => {
 		component.class = 'alert-good';
 
-		expect(component.class).toEqual('alert-good');
+		expect(component.hostClass).toEqual('alert-good');
 	});
 
-	it('should not have a close class', (): void => {
+	it('should not have a hostClass of close', (): void => {
 		component.class = 'alert-good close';
 
-		expect(component.class).toEqual('alert-good');
+		expect(component.hostClass).toEqual('alert-good');
 	});
 
-	it('should have a hide class after onClose()', (): void => {
+	it('should have a hostClass of hide after onClose()', (): void => {
 		component.onClose();
 
 		expect(component.hostClass).toEqual('hide');
 	});
 
-	it('should have close button remain focused after blur', (): void => {
+	it('should have a hostClass of hide after onClose()', (): void => {
+		component.class = 'alert-good';
+		component.onClose();
+
+		expect(component.hostClass).toEqual('alert-good hide');
+	});
+
+	it('should have a hostAriaLabelledby of alert-good-1', (): void => {
+		component.class = 'alert-good';
+
+		expect(component.hostAriaLabelledby).toEqual('alert-good-1');
+	});
+
+	it('should have a hostRole of alertdialog', (): void => {
 		component.close = true;
-		fixture.detectChanges();
 
-		const button: DebugElement = fixture.debugElement.query(By.css('.close'));
-		const focusedElement: DebugElement = fixture.debugElement.query(By.css('.close'));
+		expect(component.hostRole).toEqual('alertdialog');
+	});
 
-		component.onTrap();
+	it('should have a hostRole of alert', (): void => {
+		expect(component.hostRole).toEqual('alert');
+	});
 
-		expect(focusedElement).toBe(button);
+	it('should have a hostTabindex of -1', (): void => {
+		expect(component.hostTabindex).toEqual('-1');
+	});
+
+	it('should have preventDefault() called on tab', (): void => {
+		const event: KeyboardEvent = new KeyboardEvent('keypress', {
+			key: 'Tab'
+		});
+		const spy: jasmine.Spy = spyOn(event, 'preventDefault');
+
+		component.onTrap(event);
+
+		expect(spy).toHaveBeenCalled();
+	});
+
+	it('should not have preventDefault() called on shift', (): void => {
+		const event: KeyboardEvent = new KeyboardEvent('keypress', {
+			shiftKey: true
+		});
+		const spy: jasmine.Spy = spyOn(event, 'preventDefault');
+
+		component.onTrap(event);
+
+		expect(spy).not.toHaveBeenCalled();
 	});
 });

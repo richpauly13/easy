@@ -1,5 +1,6 @@
-@import '../../core/sass/functions';
-@import '../../core/sass/variables';
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
 
 // Badge styles
 [class^="badge"] {
