@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/richpauly13/easy/compare/v1.4.0...v1.5.0) (2021-02-28)
+
+
+### Features
+
+* **card:** add focusable and complex cards, tests, and docs ([972ff20](https://github.com/richpauly13/easy/commit/972ff2006d752079bf30fb4f8ecd00e38e8a8ae0))
+
+
+### Bug Fixes
+
+* **alert:** remove Renderer2 and ElementRef and replaced with @HostBinding, add unique id, and fix focus trap ([3e6efad](https://github.com/richpauly13/easy/commit/3e6efadcbbae03ecc6c6a705438bfe7f7eded596))
+* **button:** remove styles and code that was not needed ([cf55c6c](https://github.com/richpauly13/easy/commit/cf55c6c33cd45d7aeb7436796e5b87e775082f4c))
+* **flexbox:** change classes so that components can utilize align, wrap, and item classes while not clashing with grid ([492285a](https://github.com/richpauly13/easy/commit/492285a2104b34f5c4a0b3d629e4c6774c11c92c))
+* **spinner:** fix spinner component and add aria roles and labels and tests ([6f6cc0d](https://github.com/richpauly13/easy/commit/6f6cc0d1fceafcc52cae5bb037e9216397375d2e))
+
 ## [1.4.0](https://github.com/richpauly13/easy/compare/v1.3.0...v1.4.0) (2021-02-22)
 
 
