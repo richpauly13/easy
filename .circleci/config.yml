@@ -87,7 +87,7 @@ jobs:
 
       - run:
           name: Upload easy code coverage report to codecov
-          command: bash <(curl -s https://codecov.io/bash) -f coverage/easy-framework -F easy
+          command: bash <(curl -s https://codecov.io/bash) -c -F easy
 
   test_docs:
     <<: *job_common
@@ -102,7 +102,7 @@ jobs:
 
       - run:
           name: Upload docs code coverage report to codecov
-          command: bash <(curl -s https://codecov.io/bash) -f coverage/easy-docs -F docs
+          command: bash <(curl -s https://codecov.io/bash) -c -F docs
 
   e2e:
     <<: *job_common
