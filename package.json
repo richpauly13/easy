@@ -31,7 +31,7 @@
     "@angular/compiler-cli": "^12.0.0-next.2",
     "@types/jasmine": "^3.6.4",
     "@types/node": "^14.14.31",
-    "@typescript-eslint/eslint-plugin": "^4.15.3-alpha.12",
+    "@typescript-eslint/eslint-plugin": "^4.15.3-alpha.17",
     "@typescript-eslint/parser": "^4.15.3-alpha.12",
     "codecov": "^4.0.0-0",
     "copyfiles": "^2.4.1",
