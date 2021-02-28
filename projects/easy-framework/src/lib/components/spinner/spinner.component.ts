@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: '.spinner, .spinner-dotted',
+	selector: '.spinner, .spinner-2, .spinner-multi',
 	templateUrl: './spinner.component.html',
 	styleUrls: [
 		'./spinner.component.scss'
@@ -10,5 +10,19 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpinnerComponent {
+	@HostBinding('attr.aria-label')
+	public get hostAriaLabel(): string {
+		return this.ariaLabel || 'please wait';
+	}
 
+	@HostBinding('attr.role')
+	public get hostRole(): string {
+		return 'progressbar';
+	}
+
+	@Input('aria-label') public ariaLabel: string | null;
+
+	public constructor() {
+		this.ariaLabel = null;
+	}
 }

@@ -2,7 +2,7 @@
 @import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
-// Collapsible styles
+// Collapse styles
 .collapse {
     display: none;
 
@@ -24,7 +24,7 @@
 
 .collapse-label {
     @include animate(max-height);
-    
+
     background-color: color(lt-white);
     padding: space(xs);
     width: 100%;

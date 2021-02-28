@@ -41,7 +41,7 @@ export class AlertComponent {
 		return '-1';
 	}
 
-	@Input() public class: string ;
+	@Input() public class: string;
 
 	public close: boolean;
 	public id: string;

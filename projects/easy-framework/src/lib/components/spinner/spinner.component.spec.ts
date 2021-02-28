@@ -17,10 +17,23 @@ describe('SpinnerComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(SpinnerComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
-	it('should create', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a hostAriaLabel of please wait', (): void => {
+		expect(component.hostAriaLabel).toEqual('please wait');
+	});
+
+	it('should have a hostAriaLabel of waiting for page', (): void => {
+		component.ariaLabel = 'waiting for page';
+
+		expect(component.hostAriaLabel).toEqual('waiting for page');
+	});
+
+	it('should have a hostRole of progressbar', (): void => {
+		expect(component.hostRole).toEqual('progressbar');
 	});
 });

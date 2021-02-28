@@ -17,10 +17,9 @@ describe('CollapseComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(CollapseComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
-	it('should create', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });
