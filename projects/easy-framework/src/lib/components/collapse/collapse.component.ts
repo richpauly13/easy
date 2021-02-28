@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-collapse, .collapse',
+	selector: '.collapse',
 	templateUrl: './collapse.component.html',
 	styleUrls: [
 		'./collapse.component.scss'

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-card, ez-cards, .card, .cards',
+	selector: '.card, .cards',
 	templateUrl: './card.component.html',
 	styleUrls: [
 		'./card.component.scss'

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-form, .form-field',
+	selector: '.form-field',
 	templateUrl: './form.component.html',
 	styleUrls: [
 		'./form.component.scss'

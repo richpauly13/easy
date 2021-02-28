@@ -8,7 +8,7 @@ version: 2.1
 base_image: &base_image
 
   # Node version
-  image: circleci/node:14.15.5-browsers
+  image: circleci/node:14.16.0-browsers
 
 job_common: &job_common
   docker:
@@ -87,7 +87,7 @@ jobs:
 
       - run:
           name: Upload easy code coverage report to codecov
-          command: bash <(curl -s https://codecov.io/bash) -c -F easy
+          command: bash <(curl -s https://codecov.io/bash)
 
   test_docs:
     <<: *job_common
@@ -102,7 +102,7 @@ jobs:
 
       - run:
           name: Upload docs code coverage report to codecov
-          command: bash <(curl -s https://codecov.io/bash) -c -F docs
+          command: bash <(curl -s https://codecov.io/bash)
 
   e2e:
     <<: *job_common

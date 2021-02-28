@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-switch, .switch',
+	selector: '.switch',
 	templateUrl: './switch.component.html',
 	styleUrls: [
 		'./switch.component.scss'

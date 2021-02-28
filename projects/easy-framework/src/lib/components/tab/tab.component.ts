@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-tab, .tab',
+	selector: '.tab',
 	templateUrl: './tab.component.html',
 	styleUrls: [
 		'./tab.component.scss'

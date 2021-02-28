@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-grid, .grid',
+	selector: '.grid',
 	templateUrl: './grid.component.html',
 	styleUrls: [
 		'./grid.component.scss'

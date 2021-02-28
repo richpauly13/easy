@@ -18,9 +18,9 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "prefix": "ez",
+            "prefix": "",
             "style": "kebab-case",
-            "type": "element"
+            "type": "class"
           }
         ],
         "@angular-eslint/directive-selector": [

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-slider, .slider',
+	selector: '.slider',
 	templateUrl: './slider.component.html',
 	styleUrls: [
 		'./slider.component.scss'

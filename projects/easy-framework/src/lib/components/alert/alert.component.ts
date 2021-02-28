@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 import { AlertService } from './alert.service';
 
 @Component({
-	selector: 'ez-alert, .alert-bad, .alert-good, .alert-info, .alert-warn',
+	selector: '.alert-bad, .alert-good, .alert-info, .alert-warn',
 	templateUrl: './alert.component.html',
 	styleUrls: [
 		'./alert.component.scss'

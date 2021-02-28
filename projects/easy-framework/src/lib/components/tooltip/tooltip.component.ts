@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-tooltip, .tooltip',
+	selector: '.tooltip',
 	templateUrl: './tooltip.component.html',
 	styleUrls: [
 		'./tooltip.component.scss'

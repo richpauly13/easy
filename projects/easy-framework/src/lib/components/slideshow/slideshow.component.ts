@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'ez-slideshow, .slideshow',
+	selector: '.slideshow',
 	templateUrl: './slideshow.component.html',
 	styleUrls: [
 		'./slideshow.component.scss'
