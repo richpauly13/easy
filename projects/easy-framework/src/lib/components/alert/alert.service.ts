@@ -15,6 +15,6 @@ export class AlertService {
 	private currentAlertCounter: number;
 
 	public constructor() {
-		this.currentAlertCounter = 1;
+		this.currentAlertCounter = 0;
 	}
 }

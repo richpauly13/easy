@@ -72,7 +72,7 @@
 }
 
 // Grid item placement styles
-@for $number from 1 to 12 {
+@for $number from 1 to 13 {
 	.grid .col-#{$number} {
 		grid-column: $number;
 	}
@@ -83,8 +83,8 @@
 }
 
 // Grid item span styles
-@for $number1 from 1 to 12 {
-	@for $number2 from 2 to 12 {
+@for $number1 from 1 to 13 {
+	@for $number2 from 2 to 13 {
 		.grid .col-#{$number1}-span-#{$number2} {
 			grid-column: $number1 / span $number2;
 		}
