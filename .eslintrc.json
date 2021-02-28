@@ -651,6 +651,7 @@
             "detectObjects": false,
             "enforceConst": true,
             "ignore": [
+              0,
               1
             ],
             "ignoreArrayIndexes": true,

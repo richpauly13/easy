@@ -41,10 +41,10 @@ describe('AlertComponent', (): void => {
 		expect(component.hostClass).toEqual('hide');
 	});
 
-	it('should have a hostAriaLabelledby of alert-good-1', (): void => {
+	it('should have a hostAriaLabelledby of alert-good-0', (): void => {
 		component.class = 'alert-good';
 
-		expect(component.hostAriaLabelledby).toEqual('alert-good-1');
+		expect(component.hostAriaLabelledby).toEqual('alert-good-0');
 	});
 
 	it('should have a hostRole of alertdialog', (): void => {

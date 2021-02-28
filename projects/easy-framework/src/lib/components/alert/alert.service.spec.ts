@@ -20,8 +20,8 @@ describe('AlertService', () => {
 	});
 
 	it('should have one for alertCounter', () => {
-		service.alertCounter = 1;
+		service.alertCounter = 0;
 
-		expect(service.alertCounter).toEqual(1);
+		expect(service.alertCounter).toEqual(0);
 	});
 });
