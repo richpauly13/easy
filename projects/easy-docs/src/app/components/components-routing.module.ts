@@ -5,7 +5,6 @@ import { AlertComponent } from './alert/alert.component';
 import { BadgeComponent } from './badge/badge.component';
 import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
-import { CollapseComponent } from './collapse/collapse.component';
 import { ComponentsComponent } from './components.component';
 import { FormComponent } from './form/form.component';
 import { SliderComponent } from './slider/slider.component';
@@ -36,10 +35,6 @@ const routes: Routes = [
 			{
 				component: CardComponent,
 				path: 'card'
-			},
-			{
-				component: CollapseComponent,
-				path: 'collapse'
 			},
 			{
 				component: FormComponent,

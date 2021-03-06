@@ -45,6 +45,6 @@ export class ButtonComponent {
 		this.ariaLabel = null;
 		this.class = '';
 		this.disabled = null;
-		this.type = null;
+		this.type = '';
 	}
 }

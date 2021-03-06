@@ -17,7 +17,6 @@ export class ComponentsComponent {
 			'badge',
 			'button',
 			'card',
-			'collapse',
 			'form',
 			'slider',
 			'slideshow',

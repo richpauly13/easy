@@ -4,7 +4,6 @@ import { AlertComponent } from './alert/alert.component';
 import { BadgeComponent } from './badge/badge.component';
 import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
-import { CollapseComponent } from './collapse/collapse.component';
 import { ComponentsComponent } from './components.component';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { FormComponent } from './form/form.component';
@@ -23,7 +22,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		BadgeComponent,
 		ButtonComponent,
 		CardComponent,
-		CollapseComponent,
 		ComponentsComponent,
 		FormComponent,
 		SliderComponent,
@@ -39,7 +37,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		BadgeComponent,
 		ButtonComponent,
 		CardComponent,
-		CollapseComponent,
 		ComponentsComponent,
 		ComponentsRoutingModule,
 		FormComponent,

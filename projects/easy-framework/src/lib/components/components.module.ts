@@ -4,7 +4,6 @@ import { AlertModule } from './alert/alert.module';
 import { BadgeModule } from './badge/badge.module';
 import { ButtonModule } from './button/button.module';
 import { CardModule } from './card/card.module';
-import { CollapseModule } from './collapse/collapse.module';
 import { FormModule } from './form/form.module';
 import { SliderModule } from './slider/slider.module';
 import { SlideshowModule } from './slideshow/slideshow.module';
@@ -20,7 +19,6 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		BadgeModule,
 		ButtonModule,
 		CardModule,
-		CollapseModule,
 		FormModule,
 		SliderModule,
 		SlideshowModule,

@@ -8,8 +8,6 @@ export * from './lib/components/button/button.component';
 export * from './lib/components/button/button.module';
 export * from './lib/components/card/card.component';
 export * from './lib/components/card/card.module';
-export * from './lib/components/collapse/collapse.component';
-export * from './lib/components/collapse/collapse.module';
 export * from './lib/components/components.module';
 export * from './lib/components/form/form.component';
 export * from './lib/components/form/form.module';
