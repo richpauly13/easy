@@ -6,7 +6,6 @@ import { AlertComponent } from './alert/alert.component';
 import { BadgeComponent } from './badge/badge.component';
 import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
-import { CollapseComponent } from './collapse/collapse.component';
 import { ComponentsComponent } from './components.component';
 import { FormComponent } from './form/form.component';
 import { SharedModule } from '../shared/shared.module';
@@ -39,10 +38,6 @@ describe('ComponentsComponent', (): void => {
 				{
 					component: CardComponent,
 					path: 'card'
-				},
-				{
-					component: CollapseComponent,
-					path: 'collapse'
 				},
 				{
 					component: FormComponent,
@@ -91,7 +86,6 @@ describe('ComponentsComponent', (): void => {
 				BadgeComponent,
 				ButtonComponent,
 				CardComponent,
-				CollapseComponent,
 				ComponentsComponent,
 				FormComponent,
 				SliderComponent,

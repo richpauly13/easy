@@ -34,19 +34,28 @@ textarea.form-field {
 .radio-group {
     align-items: center;
     display: flex;
-    flex: 1 0 rem(220);
     flex-wrap: wrap;
     justify-content: flex-start;
 
-	.form-label {
-		flex: none;
-        padding-bottom: 0;
-		padding-left: space(xs);
-		padding-right: space(xs);
-		width: auto;
+	.field-group {
+		flex: 0 0 33%;
+		flex-wrap: nowrap;
+		justify-content: center;
 
-		&:hover {
-			cursor: pointer;
+		@include media(md) {
+			flex: 0 0 25%;
+		}
+
+		.form-label {
+			flex: none;
+			padding-bottom: 0;
+			padding-left: space(sm);
+			padding-right: space(xs);
+			width: rem(80);
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
 }
@@ -78,8 +87,11 @@ textarea.form-field {
     padding: space(xs);
 	width: rem(20);
 
-    &:focus:not([disabled]):not([type="checkbox"]):not([type="radio"]) {
-		border: rem(1.6) solid color(blue);
+    &:hover:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]),
+	&:focus:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]),
+	&:focus-visible:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]),
+    &:active:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]) {
+        border: rem(1.6) solid color(blue);
     }
 
     &:not([type="checkbox"]):not([type="radio"]) {
