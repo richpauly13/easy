@@ -19,7 +19,7 @@ describe('AlertService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should have one for alertCounter', () => {
+	it('should have one for the alertCounter', () => {
 		service.alertCounter = 0;
 
 		expect(service.alertCounter).toEqual(0);

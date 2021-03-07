@@ -20,7 +20,7 @@ describe('TabComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

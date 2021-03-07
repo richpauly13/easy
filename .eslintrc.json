@@ -397,6 +397,10 @@
               "memberTypes": [
                 "signature",
 
+                "public-decorated-method",
+                "protected-decorated-method",
+                "private-decorated-method",
+
                 "public-decorated-field",
                 "protected-decorated-field",
                 "private-decorated-field",
@@ -427,10 +431,6 @@
                 "protected-constructor",
                 "private-constructor",
                 "constructor",
-
-                "public-decorated-method",
-                "protected-decorated-method",
-                "private-decorated-method",
 
                 "public-instance-method",
                 "protected-instance-method",
@@ -646,7 +646,7 @@
           "error"
         ],
         "@typescript-eslint/no-magic-numbers": [
-          "error",
+          "off"/* ,
           {
             "detectObjects": false,
             "enforceConst": true,
@@ -659,7 +659,7 @@
             "ignoreEnums": false,
             "ignoreNumericLiteralTypes": false,
             "ignoreReadonlyClassProperties": false
-          }
+          } */
         ],
         "@typescript-eslint/no-misused-new": [
           "error"
@@ -1229,7 +1229,6 @@
           "error",
           "callback",
           "cb",
-          "data",
           "e",
           "err",
           "value"

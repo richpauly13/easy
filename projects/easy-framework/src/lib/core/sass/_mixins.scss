@@ -1,3 +1,5 @@
+@import "../../core/sass/functions";
+
 @mixin animate($types...) {
 	transition-duration: .3s;
 	transition-property: $types;
@@ -38,16 +40,8 @@
 	}
 }
 
-@mixin range {
-	@include shadow(1);
-
-	background: color(blue);
-	border: rem(1) solid color(black);
-	border-radius: rem(3);
-}
-
 // Credit: https://css-tricks.com/snippets/sass/material-shadows-mixin/
-@mixin shadow($depth, $color: black) {
+@mixin shadow($depth, $color: color(black)) {
 	@if $depth < 1 {
 		box-shadow: none;
 	} @else if $depth > 5 {
@@ -57,16 +51,19 @@
 	}
 }
 
-@mixin thumb {
-	@include shadow(1);
-
-	background: color(white);
+// Credit: https://css-tricks.com/sliding-nightmare-understanding-range-input
+@mixin thumb() {
+	background: color(dk-gray);
 	border: rem(1) solid color(black);
-	border-radius: rem(3);
+	box-sizing: border-box;
+	height: space(sm);
+	width: space(sm);
 }
 
-@mixin track {
-	cursor: pointer;
-	height: size(sm);
-	width: 100%;
+// Credit: https://css-tricks.com/sliding-nightmare-understanding-range-input
+@mixin track() {
+	background: color(lt-gray);
+	border: none;
+	box-sizing: border-box;
+	height: space(xs);
 }

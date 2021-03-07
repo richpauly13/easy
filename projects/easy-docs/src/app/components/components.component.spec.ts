@@ -116,7 +116,7 @@ describe('ComponentsComponent', (): void => {
 		});
 	});
 
-	it('should create the components page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

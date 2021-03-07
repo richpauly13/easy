@@ -21,7 +21,7 @@ describe('TableComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create the table page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

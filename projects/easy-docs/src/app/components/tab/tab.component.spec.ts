@@ -21,7 +21,7 @@ describe('TabComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create the tab page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

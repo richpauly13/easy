@@ -3,7 +3,7 @@
 @import "../../core/sass/variables";
 
 // Spinner styles
-[class^="spinner"] {
+[class^=spinner] {
 	animation: spinner 1.5s linear infinite;
 	border: space(xs) solid color(lt-gray);
     border-radius: 50%;

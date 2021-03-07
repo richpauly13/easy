@@ -21,7 +21,7 @@ describe('SpinnerComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create the spinner page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

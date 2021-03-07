@@ -3,19 +3,7 @@
 @import "../../core/sass/variables";
 
 // Form styles
-input[type="file"].form-field {
-	height: auto;
-}
-
 select.form-field {
-    &::-ms-expand {
-        display: none;
-    }
-
-    &::-ms-value {
-        color: color(lt-black);
-    }
-
     &[multiple] {
         height: rem(100);
     }
@@ -48,9 +36,8 @@ textarea.form-field {
 
 		.form-label {
 			flex: none;
-			padding-bottom: 0;
 			padding-left: space(sm);
-			padding-right: space(xs);
+			padding-right: space(sm);
 			width: rem(80);
 
 			&:hover {
@@ -65,12 +52,12 @@ textarea.form-field {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    padding: space(sm);
+    padding-bottom: space(sm);
+	padding-top: space(sm);
 
 	p.form-label {
 		flex: 1 0 rem(120);
 		max-width: rem(220);
-		padding-bottom: 0;
 	}
 }
 
@@ -87,14 +74,14 @@ textarea.form-field {
     padding: space(xs);
 	width: rem(20);
 
-    &:hover:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]),
-	&:focus:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]),
-	&:focus-visible:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]),
-    &:active:not([disabled]):not([readonly]):not([type="checkbox"]):not([type="radio"]) {
+    &:hover:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
+	&:focus:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
+	&:focus-visible:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
+    &:active:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]) {
         border: rem(1.6) solid color(blue);
     }
 
-    &:not([type="checkbox"]):not([type="radio"]) {
+    &:not([type=checkbox]):not([type=radio]) {
         flex: 1 0 rem(220);
     }
 
@@ -136,12 +123,11 @@ textarea.form-field {
 		.form-label {
 			flex: 1 0 rem(120);
 			max-width: rem(220);
-			padding-bottom: 0;
 		}
 	}
 }
 
 .form-label {
-    width: 100%;
-    padding-bottom: space(xs);
+    display: block;
+	width: 100%;
 }

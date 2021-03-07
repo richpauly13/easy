@@ -1,25 +1,25 @@
 // Breakpoint variables
-$screen-sm: 30em; // 480px
-$screen-md: 48em; // 768px
 $screen-lg: 56.25em; // 900px
+$screen-md: 48em; // 768px
+$screen-sm: 30em; // 480px
 $screen-xl: 85.375em; // 1366px
 
 // Font family variable
 $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Font size variables
-$font-xs: rem(12);
-$font-sm: rem(14);
-$font-md: rem(18);
 $font-lg: rem(24);
+$font-md: rem(18);
+$font-sm: rem(14);
 $font-xl: rem(36);
+$font-xs: rem(12);
 
 // Root font size variables - must remain in px for rem to work
-$screen-font-xs: 12px;
-$screen-font-sm: 13px;
-$screen-font-md: 14px;
 $screen-font-lg: 15px;
+$screen-font-md: 14px;
+$screen-font-sm: 13px;
 $screen-font-xl: 16px;
+$screen-font-xs: 12px;
 
 // Colors map variable
 $colors: (

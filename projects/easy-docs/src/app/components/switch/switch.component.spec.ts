@@ -21,7 +21,7 @@ describe('SwitchComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create the switch page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });
