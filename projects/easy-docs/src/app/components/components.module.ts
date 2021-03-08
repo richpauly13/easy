@@ -7,6 +7,7 @@ import { CardComponent } from './card/card.component';
 import { ComponentsComponent } from './components.component';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { FormComponent } from './form/form.component';
+import { ProgressComponent } from './progress/progress.component';
 import { SharedModule } from './../shared/shared.module';
 import { SliderComponent } from './slider/slider.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
@@ -24,6 +25,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		CardComponent,
 		ComponentsComponent,
 		FormComponent,
+		ProgressComponent,
 		SliderComponent,
 		SlideshowComponent,
 		SpinnerComponent,
@@ -40,6 +42,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		ComponentsComponent,
 		ComponentsRoutingModule,
 		FormComponent,
+		ProgressComponent,
 		SliderComponent,
 		SlideshowComponent,
 		SpinnerComponent,

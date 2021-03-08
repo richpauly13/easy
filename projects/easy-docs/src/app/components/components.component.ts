@@ -18,6 +18,7 @@ export class ComponentsComponent {
 			'button',
 			'card',
 			'form',
+			'progress',
 			'slider',
 			'slideshow',
 			'spinner',

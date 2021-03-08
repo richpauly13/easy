@@ -7,6 +7,7 @@ import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
 import { ComponentsComponent } from './components.component';
 import { FormComponent } from './form/form.component';
+import { ProgressComponent } from './progress/progress.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
 			{
 				component: FormComponent,
 				path: 'form'
+			},
+			{
+				component: ProgressComponent,
+				path: 'progress'
 			},
 			{
 				component: SliderComponent,
