@@ -26,7 +26,7 @@ describe('AlertComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create alert page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

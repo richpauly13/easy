@@ -11,16 +11,16 @@ html {
 	font-size: $screen-font-xs;
 	text-size-adjust: 100%;
 
-	@include media(sm) {
-		font-size: $screen-font-sm;
+	@include media(lg) {
+		font-size: $screen-font-lg;
 	}
 
 	@include media(md) {
 		font-size: $screen-font-md;
 	}
 
-	@include media(lg) {
-		font-size: $screen-font-lg;
+	@include media(sm) {
+		font-size: $screen-font-sm;
 	}
 
 	@include media(xl) {
@@ -50,16 +50,16 @@ body {
 	textarea {
 		font-size: 1.3333rem;
 
-		@include media(sm) {
-			font-size: 1.2308rem;
+		@include media(lg) {
+			font-size: 1.0667rem;
 		}
 
 		@include media(md) {
 			font-size: 1.1429rem;
 		}
 
-		@include media(lg) {
-			font-size: 1.0667rem;
+		@include media(sm) {
+			font-size: 1.2308rem;
 		}
 
 		@include media(xl) {
@@ -137,69 +137,69 @@ th {
 
 // Form, link, and button resets
 a,
-a[role="button"],
+a[role=button],
 button,
-html input[type="button"],
+html input[type=button],
 input,
-input[type="reset"],
-input[type="submit"],
+input[type=reset],
+input[type=submit],
 optgroup,
 select,
 textarea,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type=button],
+[type=reset],
+[type=submit] {
 	border: 0;
 	border-radius: 0;
     font-family: inherit;
     text-decoration: none;
 
-	&:hover:not([disabled="true"]),
-    &:focus:not([disabled="true"]),
-	&:active:not([disabled="true"]) {
+	&:hover:not([disabled=true]),
+    &:focus:not([disabled=true]),
+	&:active:not([disabled=true]) {
 		outline: none;
 		outline-offset: 0;
 	}
 
-	&:-moz-focus-inner:not([disabled="true"]) {
+	&:-moz-focus-inner:not([disabled=true]) {
 		outline: none;
 		outline-offset: 0;
     }
 }
 
 a,
-a[role="button"],
+a[role=button],
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"],
-[type="button"],
-[type="reset"],
-[type="submit"] {
+html input[type=button],
+input[type=reset],
+input[type=submit],
+[type=button],
+[type=reset],
+[type=submit] {
 	appearance: none;
 	background-color: transparent;
 
-	&:hover:not([disabled="true"]),
-    &:focus:not([disabled="true"]),
-	&:active:not([disabled="true"]),
-	&.active:not([disabled="true"]) {
+	&:hover:not([disabled=true]),
+    &:focus:not([disabled=true]),
+	&:active:not([disabled=true]),
+	&.active:not([disabled=true]) {
 		text-decoration: underline;
     }
 
-    &:-moz-focus-inner:not([disabled="true"]) {
+    &:-moz-focus-inner:not([disabled=true]) {
 		text-decoration: underline;
     }
 }
 
 a,
-a[role="button"],
+a[role=button],
 button,
-html input[type="button"],
-input[type="checkbox"],
-input[type="radio"],
-input[type="range"],
-input[type="reset"],
-input[type="submit"],
+html input[type=button],
+input[type=checkbox],
+input[type=radio],
+input[type=range],
+input[type=reset],
+input[type=submit],
 select {
 	&:hover {
 		cursor: pointer;
@@ -211,46 +211,42 @@ fieldset {
 	padding: 0;
 }
 
-legend {
-	font-size: $font-md;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
+input[type=checkbox],
+input[type=radio] {
 	vertical-align: middle;
 }
 
-input[type="date"],
-input[type="datetime-local"],
-input[type="month"],
-input[type="time"] {
+input[type=date],
+input[type=datetime-local],
+input[type=month],
+input[type=time] {
 	-webkit-appearance: listbox;
 }
 
-input[type="file"] {
+input[type=file] {
+	height: auto;
 	padding: 0;
 }
 
-input[type="number"] {
+input[type=number] {
 	-moz-appearance: textfield;
 }
 
-input[type="range"] {
+// Credit: https://css-tricks.com/sliding-nightmare-understanding-range-input
+input[type=range] {
+	background: transparent;
+	font: inherit;
+	margin: 0;
+	padding: 0;
 	width: 100%;
 
-	&::-moz-range-track {
-		-moz-appearance: none;
+	&::-ms-tooltip {
+		display: none;
 	}
 
-	&::-ms-track {
-		background: transparent;
-		border-color: transparent;
-		color: transparent;
-	}
-
+	&,
 	&::-webkit-slider-thumb {
 		-webkit-appearance: none;
-		margin-top: rem(-14);
 	}
 }
 
@@ -258,6 +254,18 @@ input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+legend {
+	font-size: $font-md;
+}
+
+optgroup {
+	font-weight: bolder;
+}
+
+option {
+	color: color(lt-black);
 }
 
 select {
@@ -269,23 +277,17 @@ select {
     }
 }
 
-optgroup {
-	font-weight: bolder;
-}
-
-option {
-	color: color(lt-black);
-}
-
 textarea {
 	resize: vertical;
 }
 
-// Disabled and readonly styles
-button[disabled="true"],
-button[readonly="true"],
-[disabled="true"],
-[readonly="true"] {
+// Disabled styles
+button[disabled=true],
+button:disabled,
+input[disabled=true],
+input:disabled,
+[disabled=true]
+:disabled {
 	background-color: color(lt-gray);
 	color: color(dk-gray);
 
@@ -310,10 +312,6 @@ progress {
 		border-top-left-radius: rem(15);
 	}
 
-	&::-ms-fill {
-		border: none;
-	}
-
 	&::-webkit-progress-bar {
 		background-color: transparent;
 		border-bottom-left-radius: rem(15);
@@ -331,6 +329,6 @@ progress {
 // Credit: https://github.com/suitcss/base
 [tabindex="0"]:focus,
 [tabindex="-1"]:focus,
-input[type="range"]:focus {
+input[type=range]:focus {
 	outline: none;
 }

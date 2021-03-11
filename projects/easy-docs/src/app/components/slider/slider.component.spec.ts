@@ -21,7 +21,7 @@ describe('SliderComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create the slider page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

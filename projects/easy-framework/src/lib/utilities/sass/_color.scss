@@ -1,5 +1,6 @@
 @import "../../core/sass/functions";
 @import "../../core/sass/mixins";
+@import "../../core/sass/variables";
 
 // Color styles
 @each $name, $color in $colors {
@@ -9,6 +10,20 @@
 		.bg-#{"" + $name},
 		.bg-hover-#{"" + $name}:hover {
 			background-color: $color;
+
+			&[type=range][class*=slider] {
+				&::-moz-range-track {
+					background: $color;
+				}
+
+				&::-ms-thumb {
+					background: $color;
+				}
+
+				&::-webkit-slider-runnable-track {
+					background: $color;
+				}
+			}
 		}
 	}
 
@@ -17,6 +32,20 @@
 		.text-#{"" + $name},
         .text-hover-#{"" + $name}:hover {
 			color: $color;
+
+			&[type=range][class*=slider] {
+				&::-moz-range-thumb {
+					background: $color;
+				}
+
+				&::-ms-track {
+					background: $color;
+				}
+
+				&::-webkit-slider-thumb {
+					background: $color;
+				}
+			}
 		}
 	}
 

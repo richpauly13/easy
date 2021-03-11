@@ -65,7 +65,7 @@ describe('LayoutComponent', (): void => {
 		});
 	});
 
-	it('should create the layout page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

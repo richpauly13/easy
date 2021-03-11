@@ -5,6 +5,7 @@ import { BadgeModule } from './badge/badge.module';
 import { ButtonModule } from './button/button.module';
 import { CardModule } from './card/card.module';
 import { FormModule } from './form/form.module';
+import { ProgressModule } from './progress/progress.module';
 import { SliderModule } from './slider/slider.module';
 import { SlideshowModule } from './slideshow/slideshow.module';
 import { SpinnerModule } from './spinner/spinner.module';
@@ -20,6 +21,7 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		ButtonModule,
 		CardModule,
 		FormModule,
+		ProgressModule,
 		SliderModule,
 		SlideshowModule,
 		SpinnerModule,

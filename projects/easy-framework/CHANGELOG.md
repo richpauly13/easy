@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/richpauly13/easy/compare/v1.5.0...v1.6.0) (2021-03-08)
+
+
+### Features
+
+* **slider:** add slider classes, docs, and tests ([6f7056d](https://github.com/richpauly13/easy/commit/6f7056d8c9477ebdd8b7420c4bacf9bb2722bfe6))
+
+
+### Bug Fixes
+
+* **collapse:** remove collapse from easy and docs ([7818562](https://github.com/richpauly13/easy/commit/781856226f9707d18b83fc52f4b162a99521ccb6))
+* **form:** fix check/radio group behavior and spacing ([dabfba7](https://github.com/richpauly13/easy/commit/dabfba7041ea51cb0d6cb953894100b8802ce859))
+
 ## [1.5.0](https://github.com/richpauly13/easy/compare/v1.4.0...v1.5.0) (2021-02-28)
 
 

@@ -11,6 +11,8 @@ export * from './lib/components/card/card.module';
 export * from './lib/components/components.module';
 export * from './lib/components/form/form.component';
 export * from './lib/components/form/form.module';
+export * from './lib/components/progress/progress.component';
+export * from './lib/components/progress/progress.module';
 export * from './lib/components/slider/slider.component';
 export * from './lib/components/slider/slider.module';
 export * from './lib/components/slideshow/slideshow.component';

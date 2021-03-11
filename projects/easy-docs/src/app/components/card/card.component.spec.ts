@@ -21,7 +21,7 @@ describe('CardComponent', (): void => {
 		fixture.detectChanges();
 	});
 
-	it('should create the card page', (): void => {
+	it('should be created', (): void => {
 		expect(component).toBeTruthy();
 	});
 });

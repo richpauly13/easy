@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: '.form-field',
+	selector: '.checkbox-group, .field-group, .fieldset, .form-field, .form-group, .form-group-inline, .form-label, .radio-group',
 	templateUrl: './form.component.html',
 	styleUrls: [
 		'./form.component.scss'

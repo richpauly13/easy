@@ -41,6 +41,13 @@
         ],
         "@angular-eslint/use-component-view-encapsulation": [
           "off"
+        ],
+        "id-denylist": [
+          "error",
+          "callback",
+          "cb",
+          "e",
+          "err"
         ]
       }
     }
