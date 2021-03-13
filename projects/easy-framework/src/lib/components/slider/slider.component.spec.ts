@@ -1,6 +1,17 @@
+import { By } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SliderComponent } from './slider.component';
+
+@Component({
+	selector: '.mock-slider',
+	template: `<input class="slider-circle" type="range">`,
+	changeDetection: ChangeDetectionStrategy.OnPush
+})
+class MockSliderComponent {
+
+}
 
 describe('SliderComponent', (): void => {
 	let component: SliderComponent;
@@ -9,6 +20,7 @@ describe('SliderComponent', (): void => {
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
+				MockSliderComponent,
 				SliderComponent
 			]
 		}).compileComponents();
@@ -45,5 +57,16 @@ describe('SliderComponent', (): void => {
 		component.value = '20';
 
 		expect(component.hostValue).toEqual('20');
+	});
+
+	it('should have a value of 20', (): void => {
+		const event: InputEvent = new InputEvent('input', {});
+		const mockComponent: ComponentFixture<MockSliderComponent> = TestBed.createComponent(MockSliderComponent);
+		const mockInput: DebugElement = mockComponent.debugElement.query(By.css('input'));
+
+		mockInput.nativeElement.value = '20';
+		mockInput.nativeElement.dispatchEvent(event);
+
+		expect(mockInput.nativeElement.value).toEqual('20');
 	});
 });

@@ -7,7 +7,8 @@
     {
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on"
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "files": [
         "*.ts"
@@ -19,8 +20,12 @@
         ]
       },
       "plugins": [
-        "eslint-plugin-unicorn",
-        "eslint-plugin-no-null"
+        "eslint-plugin-import",
+        "eslint-plugin-jsdoc",
+        "eslint-plugin-no-null",
+        "eslint-plugin-prefer-arrow",
+        "eslint-plugin-rxjs",
+        "eslint-plugin-unicorn"
       ],
       "rules": {
         "@angular-eslint/component-class-suffix": [
