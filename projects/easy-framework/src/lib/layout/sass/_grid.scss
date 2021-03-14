@@ -4,22 +4,18 @@
 
 // Grid container styles
 .grid {
-	display: block;
-
 	@supports (grid-area: auto) {
-		@include media(lg) {
-			display: grid;
-		}
+		display: grid;
 	}
 }
 
 // Grid container columns and rows styles
 @for $number from 1 to 12 {
-	.grid.cols-#{$number} {
+	.cols-#{$number} {
 		grid-template-columns: repeat($number, 1fr);
 	}
 
-	.grid.rows-#{$number} {
+	.rows-#{$number} {
 		grid-template-rows: repeat($number, 1fr);
 	}
 }
@@ -27,15 +23,15 @@
 // Grid container gap styles
 @each $size, $rem in $space {
 	@if $size != n {
-		.grid.col-gap-#{$size} {
+		.col-gap-#{$size} {
 			column-gap: $rem;
 		}
 
-		.grid.gap-#{$size} {
+		.gap-#{$size} {
 			gap: $rem $rem;
 		}
 
-		.grid.row-gap-#{$size} {
+		.row-gap-#{$size} {
 			row-gap: $rem;
 		}
 	}
@@ -73,11 +69,11 @@
 
 // Grid item placement styles
 @for $number from 1 to 13 {
-	.grid .col-#{$number} {
+	.col-#{$number} {
 		grid-column: $number;
 	}
 
-	.grid .row-#{$number} {
+	.row-#{$number} {
 		grid-row: $number;
 	}
 }
@@ -85,11 +81,11 @@
 // Grid item span styles
 @for $number1 from 1 to 13 {
 	@for $number2 from 2 to 13 {
-		.grid .col-#{$number1}-span-#{$number2} {
+		.col-#{$number1}-span-#{$number2} {
 			grid-column: $number1 / span $number2;
 		}
 
-		.grid .row-#{$number1}-span-#{$number2} {
+		.row-#{$number1}-span-#{$number2} {
 			grid-row: $number1 / span $number2;
 		}
 	}

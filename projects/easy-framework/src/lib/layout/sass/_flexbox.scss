@@ -205,7 +205,8 @@
 		flex-shrink: 0;
 	}
 
-	& main {
+	& main,
+	& .main {
 		flex: 1 0 auto;
 	}
 }

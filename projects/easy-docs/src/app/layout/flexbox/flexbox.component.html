@@ -688,18 +688,18 @@
     </figure>
 </article>
 
-<h2>Flexbox sticky footer</h2>
+<h2>Flexbox Sticky Footer</h2>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
     <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Use the <code>.flex-sticky-footer</code> class on the <code>app-root</code> element to keep the footer at the bottom until enough content makes it scroll.</p>
+        <p>Use a <code>.flex-sticky-footer</code> class on a container and a <code>.main</code> class on the main content to keep the footer at the bottom until the main content content pushes it down.</p>
     </section>
 
     <section class="pad-a-sm flexbox">
         <article class="flex-sticky-footer">
 			<header>Header</header>
 
-			<section class="main-content">Main</section>
+			<section class="main">Main</section>
 
 			<footer>Footer</footer>
 		</article>
@@ -709,7 +709,7 @@
         <pre class="pad-a-sm border-tb-gray">
             <span>&lt;<span class="tag">article</span> <span class="attribute">class</span>=<span class="value">"flex-sticky-footer"</span>&gt;</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">header</span>&gt;</span>Header<span>&lt;/<span class="tag">header</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span>&gt;</span>Main<span>&lt;/<span class="tag">section</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"main"</span>&gt;</span>Main<span>&lt;/<span class="tag">section</span>&gt;</span>
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">footer</span>&gt;</span>Footer<span>&lt;/<span class="tag">footer</span>&gt;</span>
             <span>&lt;/<span class="tag">article</span>&gt;</span>
         </pre>
