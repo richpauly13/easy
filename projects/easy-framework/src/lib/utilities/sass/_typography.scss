@@ -1,4 +1,6 @@
 @import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
 
 // Sets heading font sizes and removes margins
 @each $heading, $font in $headings {

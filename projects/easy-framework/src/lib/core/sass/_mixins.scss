@@ -1,4 +1,5 @@
 @import "../../core/sass/functions";
+@import "../../core/sass/variables";
 
 @mixin animate($types...) {
 	transition-duration: .3s;
@@ -60,7 +61,6 @@
 	width: space(sm);
 }
 
-// Credit: https://css-tricks.com/sliding-nightmare-understanding-range-input
 @mixin track() {
 	background: color(lt-gray);
 	border: none;

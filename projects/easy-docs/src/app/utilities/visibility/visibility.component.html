@@ -2,6 +2,161 @@
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray border-t-gray">
     <section class="pad-a-sm bg-lt-gray">
-        <p>Coming soon.</p>
+        <p>Use <code>.hide</code>, <code>.show</code>, <code>.hidden</code>, and <code>.shown</code> classes to express how an elemnt is rendered.</p>
+		<p>Adjust your browser's width to see the affect for the various classes below.</p>
+		<p><strong>Note</strong>: Sizes refer to the viewport width xs: &lt; 480px, sm: 480px to 768px, md: 768px to 1024px, lg: 1024px to 1366px, and xl: &gt;= 1366px.</p>
     </section>
+</article>
+
+<h2>Hide</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.hide[-xs || -sm || -md || -lg || -xl]</code> class to set an element to <code>display: none</code>.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="hide">always hide</p>
+		<p class="hide-xs">hide-xs</p>
+		<p class="hide-sm">hide-sm</p>
+		<p class="hide-md">hide-md</p>
+		<p class="hide-lg">hide-lg</p>
+		<p class="hide-xl">hide-xl</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hide"</span>&gt;</span>always hide<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hide-xs"</span>&gt;</span>hide-xs<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hide-sm"</span>&gt;</span>hide-sm<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hide-md"</span>&gt;</span>hide-md<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hide-lg"</span>&gt;</span>hide-lg<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hide-xl"</span>&gt;</span>hide-xl<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Hidden</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.hidden[-xs || -sm || -md || -lg || -xl]</code> class to set an element to <code>visibility: hidden</code>.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="hidden">always hidden</p>
+		<p class="hidden-xs">hidden-xs</p>
+		<p class="hidden-sm">hidden-sm</p>
+		<p class="hidden-md">hidden-md</p>
+		<p class="hidden-lg">hidden-lg</p>
+		<p class="hidden-xl">hidden-xl</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hidden"</span>&gt;</span>always hidden<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hidden-xs"</span>&gt;</span>hidden-xs<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hidden-sm"</span>&gt;</span>hidden-sm<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hidden-md"</span>&gt;</span>hidden-md<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hidden-lg"</span>&gt;</span>hidden-lg<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hidden-xl"</span>&gt;</span>hidden-xl<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Show</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.show[-xs || -sm || -md || -lg || -xl]</code> class to set an element to <code>display: inherit</code>.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="show">always show</p>
+		<p class="show-xs">show-xs</p>
+		<p class="show-sm">show-sm</p>
+		<p class="show-md">show-md</p>
+		<p class="show-lg">show-lg</p>
+		<p class="show-xl">show-xl</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show"</span>&gt;</span>always show<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-xs"</span>&gt;</span>show-xs<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-sm"</span>&gt;</span>show-sm<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-md"</span>&gt;</span>show-md<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-lg"</span>&gt;</span>show-lg<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-xl"</span>&gt;</span>show-xl<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Shown</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.shown[-xs || -sm || -md || -lg || -xl]</code> class to set an element to <code>visibility: visible</code>.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="shown">always shown</p>
+		<p class="shown-xs">shown-xs</p>
+		<p class="shown-sm">shown-sm</p>
+		<p class="shown-md">shown-md</p>
+		<p class="shown-lg">shown-lg</p>
+		<p class="shown-xl">shown-xl</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"shown"</span>&gt;</span>always shown<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"shown-xs"</span>&gt;</span>shown-xs<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"shown-sm"</span>&gt;</span>shown-sm<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"shown-md"</span>&gt;</span>shown-md<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"shown-lg"</span>&gt;</span>shown-lg<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"shown-xl"</span>&gt;</span>shown-xl<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Print</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.hide-print</code> or <code>.show-print</code> class to set an element to <code>display: none</code> or <code>display: inherit</code>, repectively when a user prints.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="hide-print">hide when printing</p>
+		<p class="show-print">show when printing</p>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"hide-print"</span>&gt;</span>hide when printing<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-print"</span>&gt;</span>show when printing<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Accessibility</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+		<p>Use a <code>.show-sr</code> class to hide elements visually while allowing screen readers to navigate the elements.&nbsp;&nbsp;This class is useful for checkbox and radio elements so they can be styled differently but maintain their behavior for screen readers.</p>
+		<p>Use a <code>.show-focus</code> class to only show elements when they are focused.&nbsp;&nbsp;This class is useful for skip to main content elements.</p>
+    </section>
+
+    <section class="pad-a-sm border-b-gray">
+        <p class="show-sr">hide accept for screen readers</p>
+		<a class="show-focus" href>show on focus</a>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-sr"</span>&gt;</span>hide accept for screen readers<span>&lt;/<span class="tag">p</span>&gt;</span>
+			<span>&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"show-focus"</span>&gt;</span>show on focus<span>&lt;/<span class="tag">p</span>&gt;</span>
+        </pre>
+    </figure>
 </article>

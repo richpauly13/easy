@@ -1,19 +1,23 @@
+@import "../../core/sass/functions";
 @import "../../core/sass/mixins";
+@import "../../core/sass/variables";
 
 // Visibility styles
 .hide,
-.show-sm,
-.show-md,
+.hide-xs,
 .show-lg,
-.show-xl,
-.show-print {
+.show-md,
+.show-print,
+.show-sm,
+.show-xl {
 	display: none;
 }
 
 .hidden,
-.shown-sm,
-.shown-md,
+.hidden-xs,
 .shown-lg,
+.shown-md,
+.shown-sm,
 .shown-xl {
 	visibility: hidden;
 }
@@ -21,7 +25,7 @@
 // Hide styles
 .hide-xs {
 	@include media(sm) {
-		display: none;
+		display: inherit;
 	}
 }
 
@@ -58,7 +62,7 @@
 // Hidden styles
 .hidden-xs {
 	@include media(sm) {
-		visibility: hidden;
+		visibility: visible;
 	}
 }
 
@@ -88,7 +92,7 @@
 
 // Show styles
 .show {
-	display: block;
+	display: inherit;
 }
 
 .show-xs {
@@ -99,39 +103,35 @@
 
 .show-sm {
 	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
-		display: block;
+		display: inherit;
 	}
 }
 
 .show-md {
 	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
-		display: block;
+		display: inherit;
 	}
 }
 
 .show-lg {
 	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
-		display: block;
+		display: inherit;
 	}
 }
 
 .show-xl {
 	@include media(xl) {
-		display: block;
+		display: inherit;
 	}
 }
 
 .show-print {
 	@media print {
-		display: block;
+		display: inherit;
 	}
 }
 
 // Shown styles
-.shown {
-	visibility: visible;
-}
-
 .shown-xs {
 	@include media(sm) {
 		visibility: hidden;
@@ -162,9 +162,9 @@
 	}
 }
 
-// Hidden except for screen readers
+// Accessibility styles
 .show-focus,
-.sr-only {
+.show-sr {
 	clip: rect(0, 0, 0, 0);
 	height: rem(1);
 	position: absolute;
@@ -174,16 +174,14 @@
 }
 
 .show-focus {
-	&:hover,
-	&:focus,
-	&:active {
+	&:focus {
 		clip: auto;
 		color: color(lt-black);
 		display: block;
 		height: auto;
 		left: rem(5);
 		padding: space(sm);
-		text-decoration: none;
+		position: static;
 		top: rem(5);
 		width: auto;
 		z-index: 100;

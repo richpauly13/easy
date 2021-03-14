@@ -19,9 +19,10 @@ describe('AlertService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should have one for the alertCounter', () => {
+	it('should have zero for the alertCounter', () => {
 		service.alertCounter = 0;
 
+		// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 		expect(service.alertCounter).toEqual(0);
 	});
 });
