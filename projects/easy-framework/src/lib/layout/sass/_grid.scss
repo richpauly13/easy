@@ -10,7 +10,7 @@
 }
 
 // Grid container columns and rows styles
-@for $number from 1 to 12 {
+@for $number from 1 to 13 {
 	.cols-#{$number} {
 		grid-template-columns: repeat($number, 1fr);
 	}
@@ -119,4 +119,20 @@
 
 .grid .item-t {
 	align-self: start;
+}
+
+// Grid sticky footer
+.grid-sticky-footer {
+	display: grid;
+	min-height: 100%;
+
+	@for $number from 1 to 13 {
+		&.rows-#{$number} {
+			grid-template-rows: repeat($number - 1, 1fr) auto;
+
+			~ footer {
+				grid-row: $number / span $number + 1;
+			}
+		}
+	}
 }
