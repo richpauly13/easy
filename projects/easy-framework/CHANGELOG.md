@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/richpauly13/easy/compare/v1.6.0...v1.7.0) (2021-03-14)
+
+
+### Features
+
+* **visibility:** added visibility classes and docs to utilities ([88a7298](https://github.com/richpauly13/easy/commit/88a72980e33339ecd84abf52e3075ba8fa1dbc9c))
+
 ## [1.6.0](https://github.com/richpauly13/easy/compare/v1.5.0...v1.6.0) (2021-03-08)
 
 
