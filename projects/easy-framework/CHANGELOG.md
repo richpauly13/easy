@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/richpauly13/easy/compare/v1.7.0...v1.8.0) (2021-03-15)
+
+
+### Features
+
+* **grid:** add grid sticky footer classes and docs ([4b80f72](https://github.com/richpauly13/easy/commit/4b80f72ecc39517e0c8113ba7327fcd57a5b7045))
+* **switch:** add switch classes, tests, and docs ([6ccbfec](https://github.com/richpauly13/easy/commit/6ccbfece5b2bc9788f5a4485acda2b56aa521895))
+
 ## [1.7.0](https://github.com/richpauly13/easy/compare/v1.6.0...v1.7.0) (2021-03-14)
 
 
