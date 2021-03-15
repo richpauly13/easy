@@ -63,7 +63,7 @@
 		transform: translateX(rem(73));
 	}
 
-	&.switch-toggle + .switch-label {
+	/* &.switch-toggle + .switch-label {
 		height: rem(70);
 		position: relative;
 		width: rem(128);
@@ -102,5 +102,5 @@
 			background-color: transparent;
 			transform: rotate(15deg) skewX(15deg);
 		}
-	}
+	} */
 }
