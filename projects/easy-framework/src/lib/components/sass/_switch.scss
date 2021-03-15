@@ -3,50 +3,104 @@
 @import "../../core/sass/variables";
 
 // Switch styles
-.switch {
-	display: none;
+[class*=switch]:not(.switch-label) {
+	border: rem(1) solid color(n);
 
-	&:checked + .switch-label::after {
-		left: rem(-26);
-	}
-
+	&:checked + .switch-label::after,
 	&:checked + .switch-label::before {
-		background-color: color(green);
-	}
-}
-
-.switch-label {
-	margin-left: rem(50);
-	padding: rem(0 10);
-	position: relative;
-	user-select: none;
-
-	&::after,
-	&::before {
-        
-		// TODO: Animate only what is needed
 		@include animate(all);
-
-		content: "";
-		position: absolute;
 	}
 
-	&::before {
-		background-color: color(red);
-		border-radius: space(sm);
+	&:hover + .switch-label,
+	&:focus + .switch-label,
+	&:active + .switch-label {
 		border: rem(1) solid color(black);
-		bottom: rem(-50);
-		height: size(sm);
-		top: rem(-4);
-		width: size(md);
 	}
 
-	&::after {
-		background-color: color(white);
-		border-radius: 50%;
-		height: rem(20);
-		left: rem(-46);
-		top: rem(-2);
-		width: rem(20);
+	+ .switch-label {
+		background-color: color(lt-gray);
+		cursor: pointer;
+		display: inline-block;
+		height: rem(40);
+		width: rem(100);
+
+		&::after,
+		&::before {
+			@include animate(all);
+
+			content: "";
+			display: inline-block;
+		}
+
+		&::before {
+			background-color: color(red);
+			height: rem(26);
+			margin-top: rem(7);
+			transform: translateX(0);
+			width: rem(26);
+		}
+	}
+
+	&.switch-circle + .switch-label {
+		border-radius: rem(25);
+
+		&::before {
+			border-radius: 50%;
+		}
+	}
+
+	&.switch-square + .switch-label {
+		border-radius: rem(3);
+
+		&::before {
+			border-radius: rem(3);
+		}
+	}
+
+	&.switch-circle:checked + .switch-label::before,
+	&.switch-square:checked + .switch-label::before{
+		background-color: color(green);
+		transform: translateX(rem(73));
+	}
+
+	&.switch-toggle + .switch-label {
+		height: rem(70);
+		position: relative;
+		width: rem(128);
+
+		&::after,
+		&::before {
+			border: rem(1) solid color(black);
+			height: rem(40);
+			position: absolute;
+			width: rem(48);
+		}
+
+		&::after {
+			border-left: none;
+			right: rem(16);
+			top: rem(20);
+			transform: rotate(15deg) skewX(15deg);
+		}
+
+		&::before {
+			background-color: color(red);
+			border-right: none;
+			left: rem(16);
+			top: rem(7);
+			transform: rotate(0deg) skewX(0deg);
+		}
+	}
+
+	&.switch-toggle:checked + .switch-label {
+		&::after {
+			background-color: color(green);
+			transform: rotate(0deg) skewX(0deg);
+		}
+
+		&::before {
+			background-color: transparent;
+			transform: rotate(15deg) skewX(15deg);
+		}
 	}
 }

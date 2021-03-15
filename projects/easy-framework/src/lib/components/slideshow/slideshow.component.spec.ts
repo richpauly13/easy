@@ -17,7 +17,6 @@ describe('SlideshowComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(SlideshowComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
