@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/richpauly13/easy/compare/v1.8.0...v1.8.1) (2021-03-16)
+
+
+### Bug Fixes
+
+* **button:** fix disabled state ([8683071](https://github.com/richpauly13/easy/commit/8683071fd153b3fc738d604f8d70a756215726c1))
+
 ## [1.8.0](https://github.com/richpauly13/easy/compare/v1.7.0...v1.8.0) (2021-03-15)
 
 
