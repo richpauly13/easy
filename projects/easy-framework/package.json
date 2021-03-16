@@ -21,10 +21,6 @@
   ],
   "license": "MIT",
   "name": "easy-framework",
-  "peerDependencies": {
-    "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0"
-  },
   "private": false,
   "repository": {
     "type": "git",

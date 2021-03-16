@@ -62,45 +62,4 @@
 		background-color: color(green);
 		transform: translateX(rem(73));
 	}
-
-	/* &.switch-toggle + .switch-label {
-		height: rem(70);
-		position: relative;
-		width: rem(128);
-
-		&::after,
-		&::before {
-			border: rem(1) solid color(black);
-			height: rem(40);
-			position: absolute;
-			width: rem(48);
-		}
-
-		&::after {
-			border-left: none;
-			right: rem(16);
-			top: rem(20);
-			transform: rotate(15deg) skewX(15deg);
-		}
-
-		&::before {
-			background-color: color(red);
-			border-right: none;
-			left: rem(16);
-			top: rem(7);
-			transform: rotate(0deg) skewX(0deg);
-		}
-	}
-
-	&.switch-toggle:checked + .switch-label {
-		&::after {
-			background-color: color(green);
-			transform: rotate(0deg) skewX(0deg);
-		}
-
-		&::before {
-			background-color: transparent;
-			transform: rotate(15deg) skewX(15deg);
-		}
-	} */
 }

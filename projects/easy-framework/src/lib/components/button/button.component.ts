@@ -21,11 +21,6 @@ export class ButtonComponent {
 		}
 	}
 
-	@HostBinding('attr.disabled')
-	public get hostDisabled(): string | null {
-		return this.disabled === '' ? 'true' : null;
-	}
-
 	@HostBinding('attr.role')
 	public get hostRole(): string | null {
 		return this.class.includes('btn-group') ? 'group' : null;
@@ -38,13 +33,11 @@ export class ButtonComponent {
 
 	@Input('aria-label') public ariaLabel: string | null;
 	@Input() public class: string;
-	@Input() public disabled: string | null;
 	@Input() public type: string | null;
 
 	public constructor() {
 		this.ariaLabel = null;
 		this.class = '';
-		this.disabled = null;
 		this.type = '';
 	}
 }

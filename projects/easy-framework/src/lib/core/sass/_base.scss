@@ -154,14 +154,14 @@ textarea,
     font-family: inherit;
     text-decoration: none;
 
-	&:hover:not([disabled=true]),
-    &:focus:not([disabled=true]),
-	&:active:not([disabled=true]) {
+	&:hover:not([disabled]),
+    &:focus:not([disabled]),
+	&:active:not([disabled]) {
 		outline: none;
 		outline-offset: 0;
 	}
 
-	&:-moz-focus-inner:not([disabled=true]) {
+	&:-moz-focus-inner:not([disabled]) {
 		outline: none;
 		outline-offset: 0;
     }
@@ -179,14 +179,14 @@ input[type=submit],
 	appearance: none;
 	background-color: transparent;
 
-	&:hover:not([disabled=true]),
-    &:focus:not([disabled=true]),
-	&:active:not([disabled=true]),
-	&.active:not([disabled=true]) {
+	&:hover:not([disabled]),
+    &:focus:not([disabled]),
+	&:active:not([disabled]),
+	&.active:not([disabled]) {
 		text-decoration: underline;
     }
 
-    &:-moz-focus-inner:not([disabled=true]) {
+    &:-moz-focus-inner:not([disabled]) {
 		text-decoration: underline;
     }
 }
@@ -282,14 +282,15 @@ textarea {
 }
 
 // Disabled styles
-button[disabled=true],
+button[disabled],
 button:disabled,
-input[disabled=true],
+input[disabled],
 input:disabled,
-[disabled=true]
+[disabled]
 :disabled {
 	background-color: color(lt-gray);
 	color: color(dk-gray);
+	text-decoration: none;
 
 	&:hover {
 		cursor: not-allowed;
