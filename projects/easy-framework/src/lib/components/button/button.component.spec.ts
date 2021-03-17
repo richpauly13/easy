@@ -41,16 +41,6 @@ describe('ButtonComponent', (): void => {
 		expect(component.hostType).toBeNull();
 	});
 
-	it('should have a hostDisabled of true', (): void => {
-		component.disabled = '';
-
-		expect(component.hostDisabled).toBeTruthy();
-	});
-
-	it('should have a hostDisabled of null', (): void => {
-		expect(component.hostDisabled).toBeNull();
-	});
-
 	it('should have a hostRole of group', (): void => {
 		component.class = 'btn-group';
 
