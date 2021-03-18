@@ -10,6 +10,7 @@ $font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // Font size variables
 $font-lg: rem(24);
 $font-md: rem(18);
+$font-ml: rem(22);
 $font-sm: rem(14);
 $font-xl: rem(36);
 $font-xs: rem(12);
@@ -57,5 +58,6 @@ $space: (
 	n: 0,
 	sm: rem(16),
 	xl: rem(40),
-	xs: rem(8)
+	xs: rem(8),
+	xxl: rem(70)
 );
