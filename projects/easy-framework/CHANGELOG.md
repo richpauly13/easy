@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.2](https://github.com/richpauly13/easy/compare/v1.8.1...v1.8.2) (2021-03-19)
+
+
+### Bug Fixes
+
+* **utilities:** add xxl class to space and ml class to text and updated docs ([df6d14f](https://github.com/richpauly13/easy/commit/df6d14f4b62f5f6849695ed5e6bca18aa0eb26e3))
+
 ### [1.8.1](https://github.com/richpauly13/easy/compare/v1.8.0...v1.8.1) (2021-03-16)
 
 
