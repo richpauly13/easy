@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { AlignmentComponent } from './alignment/alignment.component';
 import { ColorComponent } from './color/color.component';
+import { ContainerComponent } from './container/container.component';
 import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
 import { PositionComponent } from './position/position.component';
@@ -17,6 +18,7 @@ import { VisibilityComponent } from './visibility/visibility.component';
 	declarations: [
 		AlignmentComponent,
 		ColorComponent,
+		ContainerComponent,
 		DimensionComponent,
 		DisplayComponent,
 		PositionComponent,
@@ -24,11 +26,13 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		TextComponent,
 		TypographyComponent,
 		UtilitiesComponent,
-		VisibilityComponent
+		VisibilityComponent,
+		ContainerComponent
 	],
 	exports: [
 		AlignmentComponent,
 		ColorComponent,
+		ContainerComponent,
 		DimensionComponent,
 		DisplayComponent,
 		PositionComponent,
@@ -37,7 +41,8 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		TypographyComponent,
 		UtilitiesComponent,
 		UtilitiesRoutingModule,
-		VisibilityComponent
+		VisibilityComponent,
+		ContainerComponent
 	],
 	imports: [
 		SharedModule

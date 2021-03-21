@@ -15,6 +15,7 @@ export class UtilitiesComponent {
 		this.navs = [
 			'alignment',
 			'color',
+			'container',
 			'dimension',
 			'display',
 			'position',
