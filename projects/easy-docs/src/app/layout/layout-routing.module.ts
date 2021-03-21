@@ -24,7 +24,7 @@ const routes: Routes = [
 				path: 'nav'
 			},
 			{
-				redirectTo: 'container',
+				redirectTo: 'flexbox',
 				pathMatch: 'full',
 				path: ''
 			}

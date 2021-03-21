@@ -41,7 +41,7 @@ Developers can use all components or only the components needed for a particular
 
 ## Installation
 
-**NPM:** `npm i --save easy-framework`
+**NPM:** `npm i easy-framework`
 
 ## Usage
 
