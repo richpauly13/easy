@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/richpauly13/easy/compare/v1.8.2...v1.9.0) (2021-03-21)
+
+
+### Features
+
+* **progress:** add progress classes, tests, and docs for components ([842a071](https://github.com/richpauly13/easy/commit/842a0711150b83311bdab2e72844da604b889972))
+
+
+### Bug Fixes
+
+* **container:** move container from layout to utilities to avoid clashes in using container in multiple components ([b8632bf](https://github.com/richpauly13/easy/commit/b8632bfb5267c22972e4a73ebe697aeb5af5f764))
+
 ### [1.8.2](https://github.com/richpauly13/easy/compare/v1.8.1...v1.8.2) (2021-03-19)
 
 
