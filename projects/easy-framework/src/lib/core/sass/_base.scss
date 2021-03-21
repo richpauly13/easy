@@ -297,33 +297,16 @@ input:disabled,
 	}
 }
 
-// Credit: https://css-tricks.com/html5-progress-element/
 progress {
 	appearance: none;
-	background-color: transparent;
-	border: rem(1) solid color(gray);
-	border-radius: rem(15);
-	color: color(blue);
+	background-color: color(lt-gray);
+	border: none;
+	border-radius: 0;
 	height: rem(15);
 	width: 100%;
 
-	&::-moz-progress-bar {
-		background-color: color(blue);
-		border-bottom-left-radius: rem(15);
-		border-top-left-radius: rem(15);
-	}
-
 	&::-webkit-progress-bar {
-		background-color: transparent;
-		border-bottom-left-radius: rem(15);
-		border-top-left-radius: rem(15);
-		color: color(blue);
-	}
-
-	&::-webkit-progress-value {
-		background-color: color(blue);
-		border-bottom-left-radius: rem(15);
-		border-top-left-radius: rem(15);
+		background-color: color(lt-gray);
 	}
 }
 

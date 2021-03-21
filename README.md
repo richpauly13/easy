@@ -23,6 +23,8 @@ EASY is a CSS framework developed on 4 core principles:
 
 Limited CSS selector specificity allows developers to easily override classes. Other than resets, HTML tags remain mostly untouched. This allows for additive development by adding color, spacing, and other CSS classes as needed.
 
+All components look and behave the same in all evergreen browsers (Chrome, Edge Chromium, Firefox, and Safari).
+
 The framework works nicely with Angular. You can use simple CSS classes to render content in different ways.
 
 ### Accessible
@@ -35,7 +37,7 @@ EASY was created with mobile first in mind. There are many layout options and th
 
 ### Lightweight
 
-Developers can use only the components needed for a particular project. This is done through module imports.
+Developers can use all components or only the components needed for a particular project. This is done through module imports.
 
 ## Installation
 

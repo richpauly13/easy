@@ -1,8 +1,95 @@
 <h1>Progress</h1>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
-    <section class="pad-a-sm bg-lt-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
 		<p class="pad-b-sm"><code>import &#123; ProgressModule &#125; from 'easy-framework';</code></p>
-        <p>Coming soon.</p>
+        <p>Progress bars are styled with a <code>.progress</code> class.</p>
+		<p><strong>Note</strong>: If a progress bar does not have a <code>value</code> attribute, it is considered indeterminate.</p>
+		<p><strong>Note</strong>: If a progress bar does not have a <code>max</code> attribute, it will be set to 100 automatically.</p>
     </section>
+
+	<section class="pad-a-sm">
+		<label class="form-label pad-b-xs" for="progress-0">determinate</label>
+		<progress class="progress mar-b-sm" value="50" id="progress-0"></progress>
+		<label class="form-label pad-b-xs" for="progress-1">indeterminate</label>
+		<progress class="progress" id="progress-1"></progress>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm border-t-gray">
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"progress-0"</span>&gt;</span>determinate<span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">progress</span> <span class="attribute">class</span>=<span class="value">"progress mar-b-sm"</span> <span class="attribute">value</span>=<span class="value">"50"</span> <span class="attribute">id</span>=<span class="value">"progress-0"</span>&gt;</span><span>&lt;/<span class="tag">progress</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"progress-1"</span>&gt;</span>indeterminate<span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">progress</span> <span class="attribute">class</span>=<span class="value">"progress"</span> <span class="attribute">id</span>=<span class="value">"progress-1"</span>&gt;</span><span>&lt;/<span class="tag">progress</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Progress Colors</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>A progress bar can be styled using a <code>bg-*</code> and a progress bar value can be styled using a <code>text-*</code> class from the <a class="text-dk-blue" href="https://richpauly13.github.io/easy/#/utilities/color">Color</a> page.</p>
+    </section>
+
+	<section class="pad-a-sm">
+		<label class="form-label pad-b-xs" for="progress-2">progress bar and value color</label>
+		<progress class="progress text-green bg-black" value="50" id="progress-2"></progress>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm border-t-gray">
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"progress-2"</span>&gt;</span>progress bar and value color<span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">progress</span> <span class="attribute">class</span>=<span class="value">"progress text-green bg-black"</span> <span class="attribute">value</span>=<span class="value">"50"</span> <span class="attribute">id</span>=<span class="value">"progress-2"</span>&gt;</span><span>&lt;/<span class="tag">progress</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Progress Rounded</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Progress bars are rounded using a <code>.rounded</code> class.</p>
+		<p><strong>Note</strong>: A progress bar's value will be vertical until it reaches 100%, then it will be rounded to match the progress bar.</p>
+    </section>
+
+	<section class="pad-a-sm">
+		<label class="form-label pad-b-xs" for="progress-3">50% of max</label>
+		<progress class="progress rounded mar-b-sm" value="50" id="progress-3"></progress>
+		<label class="form-label pad-b-xs" for="progress-4">100% of max</label>
+		<progress class="progress rounded" value="100" id="progress-4"></progress>
+    </section>
+
+	<figure>
+        <pre class="pad-a-sm border-t-gray">
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"progress-3"</span>&gt;</span>50% of max<span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">progress</span> <span class="attribute">class</span>=<span class="value">"progress rounded mar-b-sm"</span> <span class="attribute">value</span>=<span class="value">"50"</span> <span class="attribute">id</span>=<span class="value">"progress-3"</span>&gt;</span><span>&lt;/<span class="tag">progress</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"progress-4"</span>&gt;</span>100% of max<span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">progress</span> <span class="attribute">class</span>=<span class="value">"progress rounded"</span> <span class="attribute">value</span>=<span class="value">"100"</span> <span class="attribute">id</span>=<span class="value">"progress-4"</span>&gt;</span><span>&lt;/<span class="tag">progress</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Progress Striped</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Progress bars are striped using a <code>.striped</code> class.</p>
+    </section>
+
+	<section class="pad-a-sm">
+		<label class="form-label pad-b-xs" for="progress-5">striped</label>
+		<progress class="progress striped mar-b-sm" value="50" id="progress-5"></progress>
+		<label class="form-label pad-b-xs" for="progress-6">colored striped</label>
+		<progress class="progress striped text-green" value="50" id="progress-6"></progress>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm border-t-gray">
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"progress-5"</span>&gt;</span>striped<span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">progress</span> <span class="attribute">class</span>=<span class="value">"progress striped mar-b-sm"</span> <span class="attribute">value</span>=<span class="value">"50"</span> <span class="attribute">id</span>=<span class="value">"progress-5"</span>&gt;</span><span>&lt;/<span class="tag">progress</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"progress-6"</span>&gt;</span>colored striped<span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">progress</span> <span class="attribute">class</span>=<span class="value">"progress striped text-green"</span> <span class="attribute">value</span>=<span class="value">"50"</span> <span class="attribute">id</span>=<span class="value">"progress-6"</span>&gt;</span><span>&lt;/<span class="tag">progress</span>&gt;</span>
+        </pre>
+    </figure>
 </article>

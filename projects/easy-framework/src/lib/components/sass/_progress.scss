@@ -3,3 +3,81 @@
 @import "../../core/sass/variables";
 
 // Progress styles
+.progress {
+	&:indeterminate {
+		animation: animate-progress .5s linear infinite;
+		background-color: color(blue);
+		background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
+		background-size: rem(40);
+
+		&::-moz-progress-bar {
+			animation: animate-progress .5s linear infinite;
+			background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
+			background-size: rem(40);
+		}
+
+		&::-webkit-progress-bar {
+			background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.5) 25%, transparent 25%, transparent 50%, transparent 75%, transparent);
+		}
+	}
+
+	&::-moz-progress-bar {
+		background-color: color(blue);
+	}
+
+	&::-webkit-progress-value {
+		background-color: color(blue);
+	}
+
+	&.rounded {
+		border-radius: rem(15);
+
+		&::-moz-progress-bar {
+			border-bottom-left-radius: rem(15);
+			border-top-left-radius: rem(15);
+		}
+
+		&::-webkit-progress-bar {
+			border-radius: rem(15);
+		}
+
+		&::-webkit-progress-value {
+			border-bottom-left-radius: rem(15);
+			border-top-left-radius: rem(15);
+		}
+
+		&[position="0"]::-moz-progress-bar {
+			border-radius: rem(15);
+		}
+
+		&[position="1"] {
+			&::-moz-progress-bar {
+				border-radius: rem(15);
+			}
+
+			&::-webkit-progress-value {
+				border-radius: rem(15);
+			}
+		}
+	}
+
+	&.striped {
+		&::-moz-progress-bar {
+			background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
+			background-color: color(blue);
+			background-size: rem(40);
+		}
+
+		&::-webkit-progress-value {
+			background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
+			background-color: color(blue);
+			background-size: rem(40);
+		}
+	}
+
+	@keyframes animate-progress {
+		100% {
+			background-position: rem(40) 0;
+		}
+	}
+}
