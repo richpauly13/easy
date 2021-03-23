@@ -1,4 +1,4 @@
-[![CircleCI branch](https://img.shields.io/circleci/project/github/richpauly13/easy/master.svg?label=circleci)](https://circleci.com/gh/richpauly13/easy) [![Dependabot badge](https://api.dependabot.com/badges/status?host=github&repo=richpauly13/easy)](https://dependabot.com) [![Dependency Status](https://david-dm.org/richpauly13/easy.svg)](https://david-dm.org/richpauly13/easy) [![devDependency Status](https://david-dm.org/richpauly13/easy/dev-status.svg)](https://david-dm.org/richpauly13/easy?type=dev)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/richpauly13/easy/master.svg?label=circleci)](https://circleci.com/gh/richpauly13/easy) [![Known Vulnerabilities](https://snyk.io/package/npm/snyk/badge.svg)](https://snyk.io/package/npm/snyk) [![Dependency Status](https://david-dm.org/richpauly13/easy.svg)](https://david-dm.org/richpauly13/easy) [![devDependency Status](https://david-dm.org/richpauly13/easy/dev-status.svg)](https://david-dm.org/richpauly13/easy?type=dev)
 
 [![npm](https://img.shields.io/npm/v/easy-framework.svg)](https://www.npmjs.com/package/easy-framework) [![downloads](https://badgen.net/npm/dt/easy-framework)](https://www.npmjs.com/package/easy-framework) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/richpauly13/easy/blob/master/LICENSE) [![codecov.io](https://codecov.io/github/richpauly13/easy/coverage.svg?branch=master)](https://codecov.io/github/richpauly13/easy?branch=master) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-brightgreen.svg)](https://conventionalcommits.org)
 
@@ -45,7 +45,7 @@ Developers can use all components or only the components needed for a particular
 
 ## Usage
 
-Import core styles into your app root module.
+Import core styles (base and utilities) into your app root module.
 
 app.module.ts
 

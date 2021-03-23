@@ -99,7 +99,7 @@
     "test:watch": "ng test --watch",
     "update:cli": "ng update @angular/cli --next --force --allow-dirty",
     "update:core": "ng update @angular/core --next --force --allow-dirty",
-    "update:deps": "npm update --force --next && npm i",
+    "update:deps": "npm update --force && npm i",
     "update:global": "npm i -g --force npm@next @angular/cli@next @angular-devkit/core@next @angular-devkit/schematics@next @angular-eslint/schematics@canary",
     "update:ng": "run-s update:global update:cli update:core update:deps",
     "update:webdriver": "webdriver-manager update",
