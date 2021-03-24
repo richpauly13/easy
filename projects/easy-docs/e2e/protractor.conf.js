@@ -13,7 +13,10 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    browserName: 'firefox'
+	browserName: 'firefox',
+	'moz:firefoxOptions': {
+	   args: [ "--headless" ]
+	 }
   },
   directConnect: true,
   SELENIUM_PROMISE_MANAGER: false,
