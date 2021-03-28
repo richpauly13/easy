@@ -181,8 +181,6 @@
   },
   "schematics": {
     "@schematics/angular:class": {
-      "export": true,
-      "flat": true,
       "skipTests": false
     },
     "@schematics/angular:component": {
@@ -210,7 +208,6 @@
       "skipTests": false
     },
     "@schematics/angular:service": {
-      "export": true,
       "flat": true,
       "skipTests": false
     }

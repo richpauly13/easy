@@ -7,9 +7,7 @@ describe('AlertService', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [
-				AlertService
-			]
+			providers: [AlertService]
 		});
 
 		service = TestBed.inject(AlertService);
@@ -19,10 +17,9 @@ describe('AlertService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should have zero for the alertCounter', () => {
+	it('should have 0 for the alertCounter', () => {
 		service.alertCounter = 0;
 
-		// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 		expect(service.alertCounter).toEqual(0);
 	});
 });

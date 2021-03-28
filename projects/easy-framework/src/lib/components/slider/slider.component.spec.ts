@@ -9,9 +9,7 @@ import { SliderComponent } from './slider.component';
 	template: `<input class="slider-circle" type="range">`,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-class MockSliderComponent {
-
-}
+class MockSliderComponent { }
 
 describe('SliderComponent', (): void => {
 	let component: SliderComponent;
@@ -61,12 +59,12 @@ describe('SliderComponent', (): void => {
 
 	it('should have a value of 20', (): void => {
 		const event: InputEvent = new InputEvent('input', {});
-		const mockComponent: ComponentFixture<MockSliderComponent> = TestBed.createComponent(MockSliderComponent);
-		const mockInput: DebugElement = mockComponent.debugElement.query(By.css('input'));
+		const mockSliderComponent: ComponentFixture<MockSliderComponent> = TestBed.createComponent(MockSliderComponent);
+		const mockSliderInput: DebugElement = mockSliderComponent.debugElement.query(By.css('input'));
 
-		mockInput.nativeElement.value = '20';
-		mockInput.nativeElement.dispatchEvent(event);
+		mockSliderInput.nativeElement.value = '20';
+		mockSliderInput.nativeElement.dispatchEvent(event);
 
-		expect(mockInput.nativeElement.value).toEqual('20');
+		expect(mockSliderInput.nativeElement.value).toEqual('20');
 	});
 });

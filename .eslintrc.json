@@ -626,7 +626,7 @@
           "error"
         ],
         "@typescript-eslint/no-magic-numbers": [
-          "error",
+          "off"/* ,
           {
             "detectObjects": false,
             "enforceConst": true,
@@ -638,7 +638,7 @@
             "ignoreEnums": false,
             "ignoreNumericLiteralTypes": false,
             "ignoreReadonlyClassProperties": false
-          }
+          } */
         ],
         "@typescript-eslint/no-misused-new": [
           "error"
@@ -1017,7 +1017,11 @@
         ],
         "array-bracket-newline": [
           "error",
-          "always"
+          {
+            "minItems": 2,
+            "multiline": true
+
+          }
         ],
         "array-bracket-spacing": [
           "error",
