@@ -1,0 +1,25 @@
+@import "../../core/sass/functions";
+@import "../../core/sass/mixins";
+@import "../../core/sass/variables";
+
+// Container styles
+[class^=container] {
+	margin-left: auto;
+	margin-right: auto;
+    max-width: 100%;
+	width: 100%;
+}
+
+.container {
+	@include media(md) {
+		width: 80%;
+	}
+}
+
+.container-fluid {
+	max-width: rem(1366);
+}
+
+.rounded {
+	border-radius: space(xs);
+}

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AlignmentComponent } from './alignment/alignment.component';
 import { ColorComponent } from './color/color.component';
-import { ContainerComponent } from './container/container.component';
 import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
 import { PositionComponent } from './position/position.component';
@@ -25,10 +24,6 @@ const routes: Routes = [
 			{
 				component: ColorComponent,
 				path: 'color'
-			},
-			{
-				component: ContainerComponent,
-				path: 'container'
 			},
 			{
 				component: DimensionComponent,

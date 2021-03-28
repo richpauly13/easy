@@ -11,6 +11,6 @@ export class ContainerComponent implements OnInit {
 	public constructor(private title: Title) { }
 
 	public ngOnInit(): void {
-		this.title.setTitle('Utilities - Container - EASY');
+		this.title.setTitle('Layout - Container - EASY');
 	}
 }

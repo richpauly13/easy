@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { ContainerComponent } from './container/container.component';
 import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
@@ -13,6 +14,10 @@ describe('LayoutComponent', (): void => {
 			path: 'layout',
 			component: LayoutComponent,
 			children: [
+				{
+					component: ContainerComponent,
+					path: 'container'
+				},
 				{
 					component: FlexboxComponent,
 					path: 'flexbox'
@@ -36,6 +41,7 @@ describe('LayoutComponent', (): void => {
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
+				ContainerComponent,
 				FlexboxComponent,
 				GridComponent,
 				LayoutComponent,

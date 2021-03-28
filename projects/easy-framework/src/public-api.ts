@@ -28,6 +28,8 @@ export * from './lib/components/tooltip/tooltip.component';
 export * from './lib/components/tooltip/tooltip.module';
 export * from './lib/easy-framework.component';
 export * from './lib/easy-framework.module';
+export * from './lib/layout/container/container.component';
+export * from './lib/layout/container/container.module';
 export * from './lib/layout/flexbox/flexbox.component';
 export * from './lib/layout/flexbox/flexbox.module';
 export * from './lib/layout/grid/grid.component';

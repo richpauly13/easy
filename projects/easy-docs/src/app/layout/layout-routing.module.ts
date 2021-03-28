@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ContainerComponent } from './container/container.component';
 import { FlexboxComponent } from './flexbox/flexbox.component';
 import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
@@ -11,6 +12,10 @@ const routes: Routes = [
 		path: '',
 		component: LayoutComponent,
 		children: [
+			{
+				component: ContainerComponent,
+				path: 'container'
+			},
 			{
 				component: FlexboxComponent,
 				path: 'flexbox'
@@ -24,7 +29,7 @@ const routes: Routes = [
 				path: 'nav'
 			},
 			{
-				redirectTo: 'flexbox',
+				redirectTo: 'container',
 				pathMatch: 'full',
 				path: ''
 			}

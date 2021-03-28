@@ -11,6 +11,7 @@ export class LayoutComponent {
 
 	public constructor() {
 		this.navs = [
+			'container',
 			'flexbox',
 			'grid',
 			'nav'
