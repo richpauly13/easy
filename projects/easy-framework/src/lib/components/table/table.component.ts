@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 @Component({
 	selector: '.table, .table-bordered, .table-cell, .table-header, .table-header-cell, .table-hover, .table-row, .table-striped, .table-wrapper',
 	templateUrl: './table.component.html',
-	styleUrls: [
-		'./table.component.scss'
-	],
+	styleUrls: ['./table.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

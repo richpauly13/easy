@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-tab',
 	templateUrl: './tab.component.html',
-	styleUrls: [
-		'./tab.component.scss'
-	],
+	styleUrls: ['./tab.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabComponent implements OnInit {

@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-visibility',
 	templateUrl: './visibility.component.html',
-	styleUrls: [
-		'./visibility.component.scss'
-	],
+	styleUrls: ['./visibility.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VisibilityComponent implements OnInit {

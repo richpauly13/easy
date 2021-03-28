@@ -21,8 +21,6 @@ import { SharedModule } from '../shared/shared.module';
 		LayoutRoutingModule,
 		NavComponent
 	],
-	imports: [
-		SharedModule
-	]
+	imports: [SharedModule]
 })
 export class LayoutModule { }

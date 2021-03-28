@@ -19,6 +19,7 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		AlignmentComponent,
 		ColorComponent,
 		ContainerComponent,
+		ContainerComponent,
 		DimensionComponent,
 		DisplayComponent,
 		PositionComponent,
@@ -26,12 +27,12 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		TextComponent,
 		TypographyComponent,
 		UtilitiesComponent,
-		VisibilityComponent,
-		ContainerComponent
+		VisibilityComponent
 	],
 	exports: [
 		AlignmentComponent,
 		ColorComponent,
+		ContainerComponent,
 		ContainerComponent,
 		DimensionComponent,
 		DisplayComponent,
@@ -41,11 +42,8 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		TypographyComponent,
 		UtilitiesComponent,
 		UtilitiesRoutingModule,
-		VisibilityComponent,
-		ContainerComponent
+		VisibilityComponent
 	],
-	imports: [
-		SharedModule
-	]
+	imports: [SharedModule]
 })
 export class UtilitiesModule { }

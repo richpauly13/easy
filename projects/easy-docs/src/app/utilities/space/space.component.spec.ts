@@ -8,9 +8,7 @@ describe('SpaceComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				SpaceComponent
-			]
+			declarations: [SpaceComponent]
 		})
 		.compileComponents();
 	}));

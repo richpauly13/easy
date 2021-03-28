@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-table',
 	templateUrl: './table.component.html',
-	styleUrls: [
-		'./table.component.scss'
-	],
+	styleUrls: ['./table.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit {

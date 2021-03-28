@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: '.animated, .progress, .rounded, .striped',
+	selector: '.animated, .progress, .striped',
 	templateUrl: './progress.component.html',
-	styleUrls: [
-		'./progress.component.scss'
-	],
+	styleUrls: ['./progress.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

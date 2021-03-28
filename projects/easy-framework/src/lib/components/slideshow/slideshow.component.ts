@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: '.slideshow',
 	templateUrl: './slideshow.component.html',
-	styleUrls: [
-		'./slideshow.component.scss'
-	],
+	styleUrls: ['./slideshow.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, V
 @Component({
 	selector: '.slider-circle, .slider-square',
 	templateUrl: './slider.component.html',
-	styleUrls: [
-		'./slider.component.scss'
-	],
+	styleUrls: ['./slider.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -30,9 +28,7 @@ export class SliderComponent {
 		return this.value;
 	}
 
-	@HostListener('input', [
-		'$event'
-	])
+	@HostListener('input', ['$event'])
 	public onInputChange(event: InputEvent): void {
 		this.value = (event.target as HTMLInputElement).value;
 	}

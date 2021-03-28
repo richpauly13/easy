@@ -8,9 +8,7 @@ describe('AlignmentComponent', () => {
 
 	beforeEach(async() => {
 		await TestBed.configureTestingModule({
-			declarations: [
-				AlignmentComponent
-			]
+			declarations: [AlignmentComponent]
 		})
 		.compileComponents();
 	});

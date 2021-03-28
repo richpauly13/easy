@@ -1,5 +1,4 @@
 /* public API Surface of easy-framework */
-
 export * from './lib/components/alert/alert.component';
 export * from './lib/components/alert/alert.module';
 export * from './lib/components/badge/badge.component';

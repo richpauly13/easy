@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-progress',
 	templateUrl: './progress.component.html',
-	styleUrls: [
-		'./progress.component.scss'
-	],
+	styleUrls: ['./progress.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressComponent implements OnInit {

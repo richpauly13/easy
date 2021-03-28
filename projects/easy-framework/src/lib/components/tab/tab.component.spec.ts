@@ -141,6 +141,18 @@ describe('TabComponent', (): void => {
 		expect(component.hostRole).toBeNull();
 	});
 
+	it('should have a hostType of button', (): void => {
+		component.class = 'tab-btn';
+
+		expect(component.hostType).toEqual('button');
+	});
+
+	it('should not have a hostType', (): void => {
+		component.class = 'tab-link';
+
+		expect(component.hostType).toBeNull();
+	});
+
 	it('should have a aria-pressed of true', (): void => {
 		const event: MouseEvent = new MouseEvent('click', {});
 		const mockTabComponent: ComponentFixture<MockTabComponent> = TestBed.createComponent(MockTabComponent);

@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 @Component({
 	selector: '.card, .cards',
 	templateUrl: './card.component.html',
-	styleUrls: [
-		'./card.component.scss'
-	],
+	styleUrls: ['./card.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

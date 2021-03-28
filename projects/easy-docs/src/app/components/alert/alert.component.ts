@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-alert',
 	templateUrl: './alert.component.html',
-	styleUrls: [
-		'./alert.component.scss'
-	],
+	styleUrls: ['./alert.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent implements OnInit {

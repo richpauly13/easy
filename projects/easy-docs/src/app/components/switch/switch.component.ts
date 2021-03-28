@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-switch',
 	templateUrl: './switch.component.html',
-	styleUrls: [
-		'./switch.component.scss'
-	],
+	styleUrls: ['./switch.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SwitchComponent implements OnInit {

@@ -8,9 +8,7 @@ describe('NavComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				NavComponent
-			]
+			declarations: [NavComponent]
 		})
 		.compileComponents();
 	}));

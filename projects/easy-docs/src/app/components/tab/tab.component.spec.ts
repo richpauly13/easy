@@ -8,9 +8,7 @@ describe('TabComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				TabComponent
-			]
+			declarations: [TabComponent]
 		})
 		.compileComponents();
 	}));

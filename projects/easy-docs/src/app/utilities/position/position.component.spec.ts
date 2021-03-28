@@ -8,9 +8,7 @@ describe('PositionComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				PositionComponent
-			]
+			declarations: [PositionComponent]
 		})
 		.compileComponents();
 	}));

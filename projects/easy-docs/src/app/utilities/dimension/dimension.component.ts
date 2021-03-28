@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-dimension',
 	templateUrl: './dimension.component.html',
-	styleUrls: [
-		'./dimension.component.scss'
-	],
+	styleUrls: ['./dimension.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DimensionComponent implements OnInit {

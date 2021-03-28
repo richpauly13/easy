@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-alignment',
 	templateUrl: './alignment.component.html',
-	styleUrls: [
-		'./alignment.component.scss'
-	],
+	styleUrls: ['./alignment.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlignmentComponent implements OnInit {

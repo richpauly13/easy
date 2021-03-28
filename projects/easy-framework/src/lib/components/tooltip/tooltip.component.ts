@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: '.tooltip',
 	templateUrl: './tooltip.component.html',
-	styleUrls: [
-		'./tooltip.component.scss'
-	],
+	styleUrls: ['./tooltip.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

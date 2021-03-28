@@ -8,9 +8,7 @@ describe('DisplayComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				DisplayComponent
-			]
+			declarations: [DisplayComponent]
 		})
 		.compileComponents();
 	}));

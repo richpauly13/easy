@@ -9,12 +9,8 @@ describe('EasyComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				EasyComponent
-			],
-			imports: [
-				RouterTestingModule
-			]
+			declarations: [EasyComponent],
+			imports: [RouterTestingModule]
 		}).compileComponents();
 	}));
 

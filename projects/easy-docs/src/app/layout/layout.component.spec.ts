@@ -41,9 +41,7 @@ describe('LayoutComponent', (): void => {
 				LayoutComponent,
 				NavComponent
 			],
-			imports: [
-				RouterTestingModule.withRoutes(routes)
-			]
+			imports: [RouterTestingModule.withRoutes(routes)]
 		})
 		.compileComponents();
 	}));

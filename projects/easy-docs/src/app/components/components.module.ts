@@ -51,8 +51,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		TableComponent,
 		TooltipComponent
 	],
-	imports: [
-		SharedModule
-	]
+	imports: [SharedModule]
 })
 export class ComponentsModule { }

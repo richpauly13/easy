@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-position',
 	templateUrl: './position.component.html',
-	styleUrls: [
-		'./position.component.scss'
-	],
+	styleUrls: ['./position.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PositionComponent implements OnInit {

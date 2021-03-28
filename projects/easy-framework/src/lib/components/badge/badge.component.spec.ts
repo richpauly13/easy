@@ -8,9 +8,7 @@ describe('BadgeComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				BadgeComponent
-			]
+			declarations: [BadgeComponent]
 		}).compileComponents();
 	}));
 

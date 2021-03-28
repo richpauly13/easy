@@ -3,3 +3,8 @@
 @import "../../core/sass/variables";
 
 // Tab styles
+.tabs {
+	align-items: center;
+	display: flex;
+	justify-content: flex-start;
+}

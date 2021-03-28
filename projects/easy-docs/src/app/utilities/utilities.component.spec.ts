@@ -71,9 +71,7 @@ describe('UtilitiesComponent', (): void => {
 				UtilitiesComponent,
 				VisibilityComponent
 			],
-			imports: [
-				RouterTestingModule.withRoutes(routes)
-			]
+			imports: [RouterTestingModule.withRoutes(routes)]
 		})
 		.compileComponents();
 	}));

@@ -58,12 +58,18 @@ export class TabComponent implements OnInit {
 		}
 	}
 
+	@HostBinding('attr.type')
+	public get hostType(): string | null {
+		return this.class.includes('tab-btn') ? this.type || 'button' : null;
+	}
+
 	@HostListener('click', ['$event.target'])
 	public onClick(event: HTMLButtonElement): void {
 		this.renderer2.setAttribute(event, 'aria-pressed', 'true');
 	}
 
 	@Input() public class: string;
+	@Input() public type: string | null;
 
 	private get tabButtons(): ElementRef<HTMLButtonElement>[] {
 		return this.tabService.tabButtons;
@@ -78,6 +84,7 @@ export class TabComponent implements OnInit {
 
 	public constructor(private elementRef: ElementRef, private renderer2: Renderer2, private tabService: TabService) {
 		this.class = '';
+		this.type = '';
 		this.uniqueContentId = this.tabService.uniqueContentId;
 		this.uniqueTabId = this.tabService.uniqueTabId;
 	}

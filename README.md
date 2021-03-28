@@ -50,7 +50,13 @@ Import core styles (base and utilities) into your app root module.
 app.module.ts
 
 ```ts
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
 import { EasyModule } from 'easy-framework';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 ```
 
 Add the import to your app root NgModule.
@@ -60,7 +66,9 @@ app.module.ts
 ```ts
 @NgModule({
     imports: [
-        EasyModule
+		AppRoutingModule,
+		BrowserModule,
+		EasyModule        
     ]
 })
 ```
@@ -71,7 +79,12 @@ app.component.html
 
 ```html
 <ez-root>
-    <router-outlet></router-outlet>
+	<app-header></app-header>
+	<app-nav></app-nav>
+	<main>
+		<router-outlet></router-outlet>
+	</main>
+    <app-footer></app-footer>
 </ez-root>
 ```
 

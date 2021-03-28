@@ -8,9 +8,7 @@ describe('CardComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				CardComponent
-			]
+			declarations: [CardComponent]
 		}).compileComponents();
 	}));
 

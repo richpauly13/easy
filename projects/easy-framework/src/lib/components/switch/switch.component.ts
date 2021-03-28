@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, V
 @Component({
 	selector: '.switch-circle, .switch-rocker, .switch-square, .switch-label',
 	templateUrl: './switch.component.html',
-	styleUrls: [
-		'./switch.component.scss'
-	],
+	styleUrls: ['./switch.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -25,9 +23,7 @@ export class SwitchComponent {
 		return this.class.includes('switch-label') ? null : 'switch';
 	}
 
-	@HostListener('change', [
-		'$event'
-	])
+	@HostListener('change', ['$event'])
 	public onInputChange(event: InputEvent): void {
 		this.isChecked = (event.target as HTMLInputElement).checked;
 	}
