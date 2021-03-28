@@ -65,11 +65,11 @@ app.module.ts
 
 ```ts
 @NgModule({
-    imports: [
+	imports: [
 		AppRoutingModule,
 		BrowserModule,
 		EasyModule        
-    ]
+	]
 })
 ```
 
@@ -84,7 +84,7 @@ app.component.html
 	<main>
 		<router-outlet></router-outlet>
 	</main>
-    <app-footer></app-footer>
+	<app-footer></app-footer>
 </ez-root>
 ```
 

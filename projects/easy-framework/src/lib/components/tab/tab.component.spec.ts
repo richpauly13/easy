@@ -6,7 +6,14 @@ import { TabComponent } from './tab.component';
 
 @Component({
 	selector: '.mock-tab-btn',
-	template: `<button class="tab-btn" type="button">test 1</button>`,
+
+	// eslint-disable-next-line @angular-eslint/component-max-inline-declarations
+	template: `
+		<button class="tab-btn" type="button">test 1</button>
+		<button class="tab-btn" type="button">test 2</button>
+		<p class="tab-content">tab-content 1</p>
+		<p class="tab-content">tab-content 2</p>
+	`,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 class MockTabComponent { }
@@ -153,13 +160,18 @@ describe('TabComponent', (): void => {
 		expect(component.hostType).toBeNull();
 	});
 
-	it('should have a aria-pressed of true', (): void => {
+	it('should have mockButton1 with aria-pressed of false', (): void => {
 		const event: MouseEvent = new MouseEvent('click', {});
 		const mockTabComponent: ComponentFixture<MockTabComponent> = TestBed.createComponent(MockTabComponent);
-		const mockButton: DebugElement = mockTabComponent.debugElement.query(By.css('button'));
+		const mockButton1: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[0];
+		const mockButton2: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[1];
 
-		mockButton.nativeElement.dispatchEvent(event);
+		mockButton1.nativeElement.dispatchEvent(event);
+		mockTabComponent.detectChanges();
 
-		expect(mockButton.nativeElement.getAttribute('aria-pressed')).toEqual('true');
+		mockButton2.nativeElement.dispatchEvent(event);
+		mockTabComponent.detectChanges();
+
+		expect(mockButton1.nativeElement.getAttribute('aria-pressed')).toEqual('false');
 	});
 });

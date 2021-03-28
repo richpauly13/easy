@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: '.btn, .btn-full, .btn-lg, .btn-md, .btn-sm, .btn-xl, .btn-xs, .btn-group-col, .btn-group-full, .btn-group-row',
@@ -26,14 +26,14 @@ export class ButtonComponent {
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		return this.class.includes('btn-group') ? null : this.type || 'button';
+		return this.elementRef.nativeElement.tagName === 'BUTTON' ? this.type || 'button' : null;
 	}
 
 	@Input('aria-label') public ariaLabel: string | null;
 	@Input() public class: string;
 	@Input() public type: string | null;
 
-	public constructor() {
+	public constructor(private elementRef: ElementRef) {
 		this.ariaLabel = null;
 		this.class = '';
 		this.type = '';

@@ -1,22 +1,22 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class TabService {
-	public get tabButtons(): ElementRef<HTMLButtonElement>[] {
+	public get tabButtons(): HTMLButtonElement[] {
 		return this.currentTabButtons;
 	}
 
-	public get tabContents(): ElementRef<HTMLElement>[] {
+	public get tabContents(): HTMLElement[] {
 		return this.currentTabContents;
 	}
 
 	public uniqueContentId: number;
 	public uniqueTabId: number;
 
-	private currentTabButtons: ElementRef<HTMLButtonElement>[];
-	private currentTabContents: ElementRef<HTMLElement>[];
+	private currentTabButtons: HTMLButtonElement[];
+	private currentTabContents: HTMLElement[];
 
 	public constructor() {
 		this.currentTabButtons = [];

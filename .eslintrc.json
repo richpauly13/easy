@@ -1054,10 +1054,7 @@
         ],
         "arrow-body-style": [
           "error",
-          "as-needed",
-          {
-            "requireReturnForObjectLiteral": false
-          }
+          "always"
         ],
         "arrow-parens": [
           "error",

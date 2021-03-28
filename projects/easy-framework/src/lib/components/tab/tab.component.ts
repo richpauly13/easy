@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListen
 import { TabService } from './tab.service';
 
 @Component({
-	selector: '.tab-btn, .tab-content, .tab-link, .tabs',
+	selector: 'a.tab-link, button.tab-btn, .tab-content, .tabs',
 	templateUrl: './tab.component.html',
 	styleUrls: ['./tab.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -65,17 +65,29 @@ export class TabComponent implements OnInit {
 
 	@HostListener('click', ['$event.target'])
 	public onClick(event: HTMLButtonElement): void {
-		this.renderer2.setAttribute(event, 'aria-pressed', 'true');
+		this.tabButtons.forEach((tabButton: HTMLButtonElement) => {
+			if (tabButton === event) {
+				this.renderer2.addClass(event, 'active');
+				this.renderer2.setAttribute(event, 'aria-pressed', 'true');
+			} else {
+				this.renderer2.removeClass(tabButton, 'active');
+				this.renderer2.setAttribute(tabButton, 'aria-pressed', 'false');
+			}
+		});
+
+		this.tabContents.forEach((tabContent: HTMLElement) => {
+			tabContent.getAttribute('id') === event.getAttribute('aria-controls') ? this.renderer2.removeClass(tabContent, 'hide') : this.renderer2.addClass(tabContent, 'hide');
+		});
 	}
 
 	@Input() public class: string;
 	@Input() public type: string | null;
 
-	private get tabButtons(): ElementRef<HTMLButtonElement>[] {
+	private get tabButtons(): HTMLButtonElement[] {
 		return this.tabService.tabButtons;
 	}
 
-	private get tabContents(): ElementRef<HTMLElement>[] {
+	private get tabContents(): HTMLElement[] {
 		return this.tabService.tabContents;
 	}
 
@@ -94,6 +106,7 @@ export class TabComponent implements OnInit {
 			this.tabButtons.push(this.elementRef.nativeElement);
 			this.uniqueTabId = this.tabService.uniqueTabId++;
 		} else if (this.class.includes('tab-content')) {
+			this.renderer2.addClass(this.elementRef.nativeElement, 'hide');
 			this.tabContents.push(this.elementRef.nativeElement);
 			this.uniqueContentId = this.tabService.uniqueContentId++;
 		} else {

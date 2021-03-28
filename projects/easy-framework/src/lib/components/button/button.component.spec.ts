@@ -1,6 +1,20 @@
+import { By } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonComponent } from './button.component';
+
+@Component({
+	selector: '.mock-btn',
+
+	// eslint-disable-next-line @angular-eslint/component-max-inline-declarations
+	template: `
+		<button class="btn" type="button">test 1</button>
+		<button class="btn">test 2</button>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush
+})
+class MockButtonComponent { }
 
 describe('ButtonComponent', (): void => {
 	let component: ButtonComponent;
@@ -8,7 +22,10 @@ describe('ButtonComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [ButtonComponent]
+			declarations: [
+				ButtonComponent,
+				MockButtonComponent
+			]
 		}).compileComponents();
 	}));
 
@@ -21,16 +38,22 @@ describe('ButtonComponent', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have a hostType of button', (): void => {
-		component.type = 'button';
+	it('should have a type of button when type is set to button', (): void => {
+		const mockButtonComponent: ComponentFixture<MockButtonComponent> = TestBed.createComponent(MockButtonComponent);
+		const mockButton1: DebugElement = mockButtonComponent.debugElement.queryAll(By.css('button'))[0];
 
-		expect(component.hostType).toEqual('button');
+		mockButtonComponent.detectChanges();
+
+		expect(mockButton1.nativeElement.getAttribute('type')).toEqual('button');
 	});
 
-	it('should have a hostType of button', (): void => {
-		component.type = null;
+	it('should have a type of button when no type is set', (): void => {
+		const mockButtonComponent: ComponentFixture<MockButtonComponent> = TestBed.createComponent(MockButtonComponent);
+		const mockButton2: DebugElement = mockButtonComponent.debugElement.queryAll(By.css('button'))[1];
 
-		expect(component.hostType).toEqual('button');
+		mockButtonComponent.detectChanges();
+
+		expect(mockButton2.nativeElement.getAttribute('type')).toEqual('button');
 	});
 
 	it('should have a hostType of null', (): void => {
