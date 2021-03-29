@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/richpauly13/easy/compare/v1.9.0...v1.10.0) (2021-03-29)
+
+
+### Features
+
+* **tab:** add tab class, tests, and docs ([b2a500a](https://github.com/richpauly13/easy/commit/b2a500a83893f4679b6b6c3ac2448a2343559a94))
+
+
+### Bug Fixes
+
+* **button:** ensure only buttons get type of button when they have btn classes ([6c8ced4](https://github.com/richpauly13/easy/commit/6c8ced424133db0ca79d90f4b9bc4004bb287499))
+* **container:** move container back to layout module ([e3c564f](https://github.com/richpauly13/easy/commit/e3c564fcab5e2e765f294388cb9a0c4e8c7d8c24))
+* **progress:** remove .rounded as component selector to avoid selector clashes ([3cb2569](https://github.com/richpauly13/easy/commit/3cb2569d92dea97f92b8a665a243982b9e726af1))
+
 ## [1.9.0](https://github.com/richpauly13/easy/compare/v1.8.2...v1.9.0) (2021-03-21)
 
 
