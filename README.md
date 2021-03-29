@@ -65,11 +65,11 @@ app.module.ts
 
 ```ts
 @NgModule({
-	imports: [
-		AppRoutingModule,
-		BrowserModule,
-		EasyModule        
-	]
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        EasyModule        
+    ]
 })
 ```
 
@@ -79,12 +79,12 @@ app.component.html
 
 ```html
 <ez-root>
-	<app-header></app-header>
-	<app-nav></app-nav>
-	<main>
-		<router-outlet></router-outlet>
-	</main>
-	<app-footer></app-footer>
+    <app-header></app-header>
+    <app-nav></app-nav>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
 </ez-root>
 ```
 

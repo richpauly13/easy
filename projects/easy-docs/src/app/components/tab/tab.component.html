@@ -1,12 +1,14 @@
 <h1>Tab</h1>
 
 <article class="mar-b-lg box-shadow-1 border-a-gray">
-    <section class="pad-a-sm bg-lt-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
 		<p class="pad-b-sm"><code>import &#123; TabModule &#125; from 'easy-framework';</code></p>
-        <p>Coming soon.</p>
+		<p>Tabs are used to change views while on the same route.</p>
+        <p>Tabs are styled with <code>.tab-btn</code>, <code>.tab-content</code>, and <code>.tabs</code> classes.</p>
+		<p><strong>Note</strong>: A role attribute of tab, tabpanel, and tablist, respectively, will be added automatically.</p>
     </section>
 
-	<!-- <section class="pad-a-sm border-b-gray">
+	<section class="pad-a-sm border-b-gray">
         <section class="tabs">
 			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 1</button>
 			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 2</button>
@@ -19,10 +21,113 @@
 
     <figure>
         <pre class="pad-a-sm">
-            <span>&lt;<span class="tag">aside</span> <span class="attribute">class</span>=<span class="value">"alert-bad"</span>&gt;</span>bad<span>&lt;/<span class="tag">aside</span>&gt;</span>
-            <span>&lt;<span class="tag">aside</span> <span class="attribute">class</span>=<span class="value">"alert-good"</span>&gt;</span>good<span>&lt;/<span class="tag">aside</span>&gt;</span>
-            <span>&lt;<span class="tag">aside</span> <span class="attribute">class</span>=<span class="value">"alert-info"</span>&gt;</span>info<span>&lt;/<span class="tag">aside</span>&gt;</span>
-            <span>&lt;<span class="tag">aside</span> <span class="attribute">class</span>=<span class="value">"alert-warn"</span>&gt;</span>warn<span>&lt;/<span class="tag">aside</span>&gt;</span>
+            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"tabs"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 1<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 2<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 3<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;/<span class="tag">section</span>&gt;</span>
         </pre>
-    </figure> -->
+    </figure>
+</article>
+
+<h2>Tab Button</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Tab buttons are styled with a <code>.tab-btn</code> class.</p>
+		<p><strong>Note</strong>: The attributes of aria-posinset, aria-setsize, aria-controls, aria-pressed, type, and a unique id will be added and updated automatically.</p>
+		<p><strong>Note</strong>: Do not use <code>.btn-*</code> classes on the <code>.tab-btn</code> class as it will cause a component selector clash.</p>
+	</section>
+
+	<section class="pad-a-sm border-b-gray">
+        <section class="tabs">
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 1</button>
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 2</button>
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 3</button>
+			<p class="tab-content">tab-content 1</p>
+			<p class="tab-content">tab-content 2</p>
+			<p class="tab-content">tab-content 3</p>
+		</section>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"tabs"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 1<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 2<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 3<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;/<span class="tag">section</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Tab Content</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Tab contents are styled with a <code>.tab-content</code> class.</p>
+		<p><strong>Note</strong>: The attributes of aria-hidden, aria-labelledby, a unique id, and the <code>.hide</code> class will be added and updated automatically.</p>
+	</section>
+
+	<section class="pad-a-sm border-b-gray">
+        <section class="tabs">
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 1</button>
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 2</button>
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 3</button>
+			<p class="tab-content">tab-content 1</p>
+			<p class="tab-content">tab-content 2</p>
+			<p class="tab-content">tab-content 3</p>
+		</section>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"tabs"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 1<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 2<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 3<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;/<span class="tag">section</span>&gt;</span>
+        </pre>
+    </figure>
+</article>
+
+<h2>Tabs</h2>
+
+<article class="mar-b-lg box-shadow-1 border-a-gray">
+    <section class="pad-a-sm bg-lt-gray border-b-gray">
+        <p>Tab groups are styled with a <code>.tabs</code> class.</p>
+	</section>
+
+	<section class="pad-a-sm border-b-gray">
+        <section class="tabs">
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 1</button>
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 2</button>
+			<button class="tab-btn pad-lr-md pad-tb-xs" type="button">tab-btn 3</button>
+			<p class="tab-content">tab-content 1</p>
+			<p class="tab-content">tab-content 2</p>
+			<p class="tab-content">tab-content 3</p>
+		</section>
+    </section>
+
+    <figure>
+        <pre class="pad-a-sm">
+            <span>&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"tabs"</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 1<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 2<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">button</span> <span class="attribute">class</span>=<span class="value">"tab-btn pad-lr-md pad-tb-xs"</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>tab-btn 3<span>&lt;/<span class="tag">button</span>&gt;</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 1<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 2<span>&lt;/<span class="tag">p</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"tab-content"</span>&gt;</span>tab-content 3<span>&lt;/<span class="tag">p</span>&gt;</span>
+            <span>&lt;/<span class="tag">section</span>&gt;</span>
+        </pre>
+    </figure>
 </article>

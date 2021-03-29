@@ -10,7 +10,7 @@ import { TabComponent } from './tab.component';
 	// eslint-disable-next-line @angular-eslint/component-max-inline-declarations
 	template: `
 		<button class="tab-btn" type="button">test 1</button>
-		<button class="tab-btn" type="button">test 2</button>
+		<button class="tab-btn">test 2</button>
 		<p class="tab-content">tab-content 1</p>
 		<p class="tab-content">tab-content 2</p>
 	`,
@@ -142,22 +142,22 @@ describe('TabComponent', (): void => {
 		expect(component.hostRole).toEqual('tablist');
 	});
 
-	it('should not have a hostRole', (): void => {
-		component.class = 'tab-link';
+	it('should have a type of button when type is set to button', (): void => {
+		const mockTabComponent: ComponentFixture<MockTabComponent> = TestBed.createComponent(MockTabComponent);
+		const mockTab1: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[0];
 
-		expect(component.hostRole).toBeNull();
+		mockTabComponent.detectChanges();
+
+		expect(mockTab1.nativeElement.getAttribute('type')).toEqual('button');
 	});
 
-	it('should have a hostType of button', (): void => {
-		component.class = 'tab-btn';
+	it('should have a type of button when no type is set', (): void => {
+		const mockTabComponent: ComponentFixture<MockTabComponent> = TestBed.createComponent(MockTabComponent);
+		const mockTab2: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[1];
 
-		expect(component.hostType).toEqual('button');
-	});
+		mockTabComponent.detectChanges();
 
-	it('should not have a hostType', (): void => {
-		component.class = 'tab-link';
-
-		expect(component.hostType).toBeNull();
+		expect(mockTab2.nativeElement.getAttribute('type')).toEqual('button');
 	});
 
 	it('should have mockButton1 with aria-pressed of false', (): void => {

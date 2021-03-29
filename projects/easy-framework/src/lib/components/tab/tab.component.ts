@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListen
 import { TabService } from './tab.service';
 
 @Component({
-	selector: 'a.tab-link, button.tab-btn, .tab-content, .tabs',
+	selector: 'button.tab-btn, .tab-content, .tabs',
 	templateUrl: './tab.component.html',
 	styleUrls: ['./tab.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -51,16 +51,14 @@ export class TabComponent implements OnInit {
 			return 'tab';
 		} else if (this.class.includes('tab-content')) {
 			return 'tabpanel';
-		} else if (this.class.includes('tabs')) {
-			return 'tablist';
 		} else {
-			return null;
+			return 'tablist';
 		}
 	}
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		return this.class.includes('tab-btn') ? this.type || 'button' : null;
+		return this.elementRef.nativeElement.tagName === 'BUTTON' ? this.type || 'button' : null;
 	}
 
 	@HostListener('click', ['$event.target'])
@@ -76,7 +74,13 @@ export class TabComponent implements OnInit {
 		});
 
 		this.tabContents.forEach((tabContent: HTMLElement) => {
-			tabContent.getAttribute('id') === event.getAttribute('aria-controls') ? this.renderer2.removeClass(tabContent, 'hide') : this.renderer2.addClass(tabContent, 'hide');
+			if (tabContent.getAttribute('id') === event.getAttribute('aria-controls')) {
+				this.renderer2.removeAttribute(tabContent, 'aria-hidden');
+				this.renderer2.removeClass(tabContent, 'hide');
+			} else {
+				this.renderer2.setAttribute(tabContent, 'aria-hidden', 'true');
+				this.renderer2.addClass(tabContent, 'hide');
+			}
 		});
 	}
 
@@ -106,6 +110,7 @@ export class TabComponent implements OnInit {
 			this.tabButtons.push(this.elementRef.nativeElement);
 			this.uniqueTabId = this.tabService.uniqueTabId++;
 		} else if (this.class.includes('tab-content')) {
+			this.renderer2.setAttribute(this.elementRef.nativeElement, 'aria-hidden', 'true');
 			this.renderer2.addClass(this.elementRef.nativeElement, 'hide');
 			this.tabContents.push(this.elementRef.nativeElement);
 			this.uniqueContentId = this.tabService.uniqueContentId++;
