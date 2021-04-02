@@ -18,7 +18,7 @@
   },
   "description": "Documentation for EASY framework.",
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1200.0-next.6",
+    "@angular-devkit/architect": "^0.1200.0-next.7",
     "@angular-devkit/build-angular": "^0.1200.0-next.6",
     "@angular-devkit/core": "^12.0.0-next.6",
     "@angular-devkit/schematics": "^12.0.0-next.6",
