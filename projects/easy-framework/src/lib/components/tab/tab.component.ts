@@ -24,8 +24,8 @@ export class TabComponent implements OnInit {
 		return this.class.includes('tab-btn') ? `${this.uniqueTabId + 1}` : null;
 	}
 
-	@HostBinding('attr.aria-pressed')
-	public get hostAriaPressed(): null | string {
+	@HostBinding('attr.aria-selected')
+	public get hostAriaSelected(): null | string {
 		return this.class.includes('tab-btn') ? 'false' : null;
 	}
 
@@ -66,10 +66,10 @@ export class TabComponent implements OnInit {
 		this.tabButtons.forEach((tabButton: HTMLButtonElement) => {
 			if (tabButton === event) {
 				this.renderer2.addClass(event, 'active');
-				this.renderer2.setAttribute(event, 'aria-pressed', 'true');
+				this.renderer2.setAttribute(event, 'aria-selected', 'true');
 			} else {
 				this.renderer2.removeClass(tabButton, 'active');
-				this.renderer2.setAttribute(tabButton, 'aria-pressed', 'false');
+				this.renderer2.setAttribute(tabButton, 'aria-selected', 'false');
 			}
 		});
 

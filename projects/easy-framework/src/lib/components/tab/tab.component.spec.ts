@@ -76,16 +76,16 @@ describe('TabComponent', (): void => {
 		expect(component.hostAriaPosinset).toBeNull();
 	});
 
-	it('should have a hostAriaPressed of false', (): void => {
+	it('should have a hostAriaSelected of false', (): void => {
 		component.class = 'tab-btn';
 
-		expect(component.hostAriaPressed).toEqual('false');
+		expect(component.hostAriaSelected).toEqual('false');
 	});
 
-	it('should not have a hostAriaPressed', (): void => {
+	it('should not have a hostAriaSelected', (): void => {
 		component.class = 'tabs';
 
-		expect(component.hostAriaPressed).toBeNull();
+		expect(component.hostAriaSelected).toBeNull();
 	});
 
 	it('should have a hostAriaSetsize of 1', (): void => {
@@ -160,7 +160,7 @@ describe('TabComponent', (): void => {
 		expect(mockTab2.nativeElement.getAttribute('type')).toEqual('button');
 	});
 
-	it('should have mockButton1 with aria-pressed of false', (): void => {
+	it('should have mockButton1 with aria-selected of false', (): void => {
 		const event: MouseEvent = new MouseEvent('click', {});
 		const mockTabComponent: ComponentFixture<MockTabComponent> = TestBed.createComponent(MockTabComponent);
 		const mockButton1: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[0];
@@ -172,6 +172,6 @@ describe('TabComponent', (): void => {
 		mockButton2.nativeElement.dispatchEvent(event);
 		mockTabComponent.detectChanges();
 
-		expect(mockButton1.nativeElement.getAttribute('aria-pressed')).toEqual('false');
+		expect(mockButton1.nativeElement.getAttribute('aria-selected')).toEqual('false');
 	});
 });
