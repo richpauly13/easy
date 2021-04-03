@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.1](https://github.com/richpauly13/easy/compare/v1.10.0...v1.10.1) (2021-04-03)
+
+
+### Bug Fixes
+
+* **container:** move container back to utilities module to avoid component clashes with flexbox classes ([7b53a80](https://github.com/richpauly13/easy/commit/7b53a8041ec2f292f8a0d3fb2dbd83119e19726a))
+* **tab:** change aria-pressed to aria-selected and update tests and docs ([9e89271](https://github.com/richpauly13/easy/commit/9e8927190f7ef1a589c04b54261c8414b8efb627))
+* **typography:** fix hr element styling and reset ([894ed6b](https://github.com/richpauly13/easy/commit/894ed6b3993265c82f7ad82448f8958bfb562dee))
+* **visibility:** fix show-focus and show-sr with proper css ([1d4a367](https://github.com/richpauly13/easy/commit/1d4a367be576d6274d17c58b12152ba57b932fc7))
+
 ## [1.10.0](https://github.com/richpauly13/easy/compare/v1.9.0...v1.10.0) (2021-03-29)
 
 
