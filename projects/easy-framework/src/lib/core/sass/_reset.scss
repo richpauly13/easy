@@ -120,9 +120,9 @@ ul {
 blockquote,
 q {
 	quotes: none;
-    
-	&:before,
-	&:after {
+
+	&:after,
+	&:before {
 		content: "";
 		content: none;
 	}

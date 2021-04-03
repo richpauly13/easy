@@ -4,6 +4,7 @@
     "url": "https://github.com/richpauly13/easy/issues"
   },
   "dependencies": {
+    "@angular/animations": "^12.0.0-next.7",
     "@angular/common": "^12.0.0-next.7",
     "@angular/compiler": "^12.0.0-next.7",
     "@angular/core": "^12.0.0-next.7",

@@ -165,25 +165,24 @@
 // Accessibility styles
 .show-focus,
 .show-sr {
+	border: 0;
 	clip: rect(0, 0, 0, 0);
+	display: inline-block;
 	height: rem(1);
-	position: absolute;
+	margin: rem(-1);
 	overflow: hidden;
-	white-space: nowrap;
+	padding: 0;
+	position: absolute;
 	width: rem(1);
 }
 
-.show-focus {
-	&:focus {
-		clip: auto;
-		color: color(lt-black);
-		display: block;
-		height: auto;
-		left: rem(5);
-		padding: space(sm);
-		position: static;
-		top: rem(5);
-		width: auto;
-		z-index: 100;
-	}
+.show-focus:focus {
+	clip: auto;
+	height: auto;
+	margin: space(sm);
+	overflow: visible;
+	padding: space(sm);
+	position: static;
+	width: auto;
+	z-index: 100;
 }

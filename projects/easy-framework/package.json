@@ -4,7 +4,7 @@
     "url": "https://github.com/richpauly13/easy/issues"
   },
   "dependencies": {
-    "tslib": "^2.0.3"
+    "tslib": "*"
   },
   "description": "EASY CSS framework.",
   "homepage": "https://github.com/richpauly13/easy#readme",
