@@ -600,11 +600,7 @@
           "error"
         ], */
         "@typescript-eslint/no-inferrable-types": [
-          "error",
-          {
-            "ignoreParameters": false,
-            "ignoreProperties": false
-          }
+          "off"
         ],
         "@typescript-eslint/no-invalid-this": [
           "error",
@@ -2226,7 +2222,7 @@
         "max-len": [
           "error",
           {
-            "code": 160
+            "code": 200
           }
         ],
         "quotes": "off"

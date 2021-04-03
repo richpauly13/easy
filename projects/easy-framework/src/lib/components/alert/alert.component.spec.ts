@@ -21,32 +21,56 @@ describe('AlertComponent', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have a hostClass of alert-good', (): void => {
-		component.class = 'alert-good';
+	it('should have close as false', (): void => {
+		component.ngOnInit();
 
-		expect(component.hostClass).toEqual('alert-good');
+		expect(component.hasClose).toBeFalse();
 	});
 
-	it('should not have a hostClass of close', (): void => {
+	it('should not have a class of close', (): void => {
 		component.class = 'alert-good close';
 
-		expect(component.hostClass).toEqual('alert-good');
+		component.ngOnInit();
+
+		expect(component.class).toEqual('alert-good');
 	});
 
-	it('should have a hostClass of hide after onClose()', (): void => {
+	it('should have a class of hide after onClose()', (): void => {
 		component.onClose();
 
-		expect(component.hostClass).toEqual('hide');
+		expect(component.class).toEqual('hide');
 	});
 
-	it('should have a hostAriaLabelledby of alert-good-0', (): void => {
+	it('should have a hostAriaHidden of null initially', (): void => {
+		expect(component.hostAriaHidden).toBeNull();
+	});
+
+	it('should have a hostAriaHidden of true after onClose()', (): void => {
+		component.onClose();
+
+		expect(component.hostAriaHidden).toEqual('true');
+	});
+
+	it('should have an alertId of alert-0', (): void => {
+		component.alertId = 'alert-0';
+
+		expect(component.alertId).toEqual('alert-0');
+	});
+
+	it('should have a hostAriaLabelledby of alert-0', (): void => {
 		component.class = 'alert-good';
 
-		expect(component.hostAriaLabelledby).toEqual('alert-good-0');
+		expect(component.hostAriaLabelledby).toEqual('alert-0');
+	});
+
+	it('should have a hostClass of class', (): void => {
+		component.class = 'alert-good';
+
+		expect(component.hostClass).toEqual(component.class);
 	});
 
 	it('should have a hostRole of alertdialog', (): void => {
-		component.close = true;
+		component.hasClose = true;
 
 		expect(component.hostRole).toEqual('alertdialog');
 	});

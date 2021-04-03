@@ -4,17 +4,9 @@ import { Injectable } from '@angular/core';
 	providedIn: 'root'
 })
 export class AlertService {
-	public get alertCounter(): number {
-		return this.currentAlertCounter++;
-	}
-
-	public set alertCounter(alertCounter: number) {
-		this.currentAlertCounter = alertCounter;
-	}
-
-	private currentAlertCounter: number;
+	public uniqueAlertId: number;
 
 	public constructor() {
-		this.currentAlertCounter = 0;
+		this.uniqueAlertId = 0;
 	}
 }

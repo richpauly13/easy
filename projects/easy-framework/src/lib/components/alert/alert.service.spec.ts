@@ -17,9 +17,9 @@ describe('AlertService', () => {
 		expect(service).toBeTruthy();
 	});
 
-	it('should have 0 for the alertCounter', () => {
-		service.alertCounter = 0;
+	it('should have 0 for the uniqueAlertId', () => {
+		service.uniqueAlertId = 0;
 
-		expect(service.alertCounter).toEqual(0);
+		expect(service.uniqueAlertId).toEqual(0);
 	});
 });

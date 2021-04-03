@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { AlertService } from './alert.service';
 
@@ -9,29 +9,29 @@ import { AlertService } from './alert.service';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertComponent {
+export class AlertComponent implements OnInit {
+	@HostBinding('attr.aria-hidden')
+	public get hostAriaHidden(): null | string {
+		return this.class.includes('hide') ? 'true' : null;
+	}
+
 	@HostBinding('attr.aria-labelledby')
 	public get hostAriaLabelledby(): string {
-		const alertCounter: number = this.alertService.alertCounter;
+		const alertId: string = `alert-${this.uniqueAlertId}`;
 
-		this.id = `${this.class.match(/\balert\S+\b/u)![0]}-${alertCounter}`;
+		this.alertId = alertId;
 
-		return `${this.class.match(/\balert\S+\b/u)![0]}-${alertCounter}`;
+		return alertId;
 	}
 
 	@HostBinding('attr.class')
 	public get hostClass(): string {
-		if (this.class.includes('close')) {
-			this.class = this.class.replace(/ close|close /gu, '');
-			this.close = true;
-		}
-
 		return this.class;
 	}
 
 	@HostBinding('attr.role')
 	public get hostRole(): string {
-		return this.close ? 'alertdialog' : 'alert';
+		return this.hasClose ? 'alertdialog' : 'alert';
 	}
 
 	@HostBinding('attr.tabindex')
@@ -41,13 +41,42 @@ export class AlertComponent {
 
 	@Input() public class: string;
 
-	public close: boolean;
-	public id: string;
+	public get alertId(): string {
+		return this.currentAlertId;
+	}
+
+	public set alertId(alertId: string) {
+		this.currentAlertId = alertId;
+	}
+
+	public get hasClose(): boolean {
+		return this.currentHasClose;
+	}
+
+	public set hasClose(hasClose: boolean) {
+		this.currentHasClose = hasClose;
+	}
+
+	private currentAlertId: string;
+	private currentHasClose: boolean;
+	private uniqueAlertId: number;
 
 	public constructor(private alertService: AlertService) {
 		this.class = '';
-		this.close = false;
-		this.id = '';
+		this.currentAlertId = '';
+		this.currentHasClose = false;
+		this.uniqueAlertId = this.alertService.uniqueAlertId;
+	}
+
+	public ngOnInit(): void {
+		this.uniqueAlertId = this.alertService.uniqueAlertId++;
+
+		if (this.class.includes('close')) {
+			this.class = this.class.replace(/ close|close /gu, '');
+			this.hasClose = true;
+		} else {
+			this.hasClose = false;
+		}
 	}
 
 	public onClose(): void {
