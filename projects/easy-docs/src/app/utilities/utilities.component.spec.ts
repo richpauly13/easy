@@ -2,7 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { AlignmentComponent } from './alignment/alignment.component';
 import { ColorComponent } from './color/color.component';
+import { ContainerComponent } from './container/container.component';
 import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
 import { PositionComponent } from './position/position.component';
@@ -19,8 +21,16 @@ describe('UtilitiesComponent', (): void => {
 			component: UtilitiesComponent,
 			children: [
 				{
+					component: AlignmentComponent,
+					path: 'alignment'
+				},
+				{
 					component: ColorComponent,
 					path: 'color'
+				},
+				{
+					component: ContainerComponent,
+					path: 'container'
 				},
 				{
 					component: DimensionComponent,
@@ -49,6 +59,11 @@ describe('UtilitiesComponent', (): void => {
 				{
 					component: VisibilityComponent,
 					path: 'visibility'
+				},
+				{
+					redirectTo: 'alignment',
+					pathMatch: 'full',
+					path: ''
 				}
 			]
 		}
@@ -61,7 +76,9 @@ describe('UtilitiesComponent', (): void => {
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
 			declarations: [
+				AlignmentComponent,
 				ColorComponent,
+				ContainerComponent,
 				DimensionComponent,
 				DisplayComponent,
 				PositionComponent,

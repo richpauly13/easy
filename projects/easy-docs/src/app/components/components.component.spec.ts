@@ -8,6 +8,7 @@ import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
 import { ComponentsComponent } from './components.component';
 import { FormComponent } from './form/form.component';
+import { ProgressComponent } from './progress/progress.component';
 import { SharedModule } from '../shared/shared.module';
 import { SliderComponent } from './slider/slider.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
@@ -44,6 +45,10 @@ describe('ComponentsComponent', (): void => {
 					path: 'form'
 				},
 				{
+					component: ProgressComponent,
+					path: 'progress'
+				},
+				{
 					component: SliderComponent,
 					path: 'slider'
 				},
@@ -70,6 +75,11 @@ describe('ComponentsComponent', (): void => {
 				{
 					component: TooltipComponent,
 					path: 'tooltip'
+				},
+				{
+					redirectTo: 'alert',
+					pathMatch: 'full',
+					path: ''
 				}
 			]
 		}
@@ -88,6 +98,7 @@ describe('ComponentsComponent', (): void => {
 				CardComponent,
 				ComponentsComponent,
 				FormComponent,
+				ProgressComponent,
 				SliderComponent,
 				SlideshowComponent,
 				SpinnerComponent,
