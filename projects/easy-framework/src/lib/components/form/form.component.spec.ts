@@ -15,7 +15,6 @@ describe('FormComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(FormComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {

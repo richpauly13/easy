@@ -22,33 +22,27 @@ describe('TableComponent', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have a table class', (): void => {
+	it('should have a hostRole of grid', (): void => {
 		component.class = 'table';
 
-		expect(component.class).toEqual('table');
+		expect(component.hostRole).toEqual('grid');
 	});
 
-	it('should have a grid role when class is table', (): void => {
-		component.class = 'table';
-
-		expect(component.role).toEqual('grid');
-	});
-
-	it('should have a gridcell role when class is table-cell', (): void => {
+	it('should have a hostRole of gridcell', (): void => {
 		component.class = 'table-cell';
 
-		expect(component.role).toEqual('gridcell');
+		expect(component.hostRole).toEqual('gridcell');
 	});
 
-	it('should have a row role when class is table-row', (): void => {
+	it('should have a hostRole of row', (): void => {
 		component.class = 'table-row';
 
-		expect(component.role).toEqual('row');
+		expect(component.hostRole).toEqual('row');
 	});
 
-	it('should have a columnheader role when class is table-header-cell', (): void => {
+	it('should have a hostRole of columnheader', (): void => {
 		component.class = 'table-header-cell';
 
-		expect(component.role).toEqual('columnheader');
+		expect(component.hostRole).toEqual('columnheader');
 	});
 });

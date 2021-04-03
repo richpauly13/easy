@@ -8,30 +8,22 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent {
-	@HostBinding('attr.role') public role: string;
-	@Input()
-	public get class(): string {
-		return this.classList;
-	}
-
-	public set class(classList: string) {
-		if (classList.includes('table-cell')) {
-			this.role = 'gridcell';
-		} else if ((classList.includes('table-header') && !classList.includes('table-header-cell')) || classList.includes('table-row')) {
-			this.role = 'row';
-		} else if (classList.includes('table-header-cell')) {
-			this.role = 'columnheader';
+	@HostBinding('attr.role')
+	public get hostRole(): string {
+		if (this.class.includes('table-cell')) {
+			return 'gridcell';
+		} else if ((this.class.includes('table-header') && !this.class.includes('table-header-cell')) || this.class.includes('table-row')) {
+			return 'row';
+		} else if (this.class.includes('table-header-cell')) {
+			return 'columnheader';
 		} else {
-			this.role = 'grid';
+			return 'grid';
 		}
-
-		this.classList = classList;
 	}
 
-	private classList: string;
+	@Input() public class: string;
 
 	public constructor() {
-		this.classList = '';
-		this.role = '';
+		this.class = '';
 	}
 }
