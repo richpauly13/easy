@@ -5,22 +5,22 @@
 		<p class="pad-b-sm"><code>import &#123; SwitchModule &#125; from 'easy-framework';</code></p>
         <p>Switches are styled with a <code>.switch-[circle || square]</code> class on an <code>input type="checkbox"</code> element.</p>
 		<p>Switch labels are styled with a <code>.switch-label</code> class on a <code>label</code> element.</p>
-		<p><strong>Note</strong>: Switches will have <code>role="switch"</code>, <code>aria-checked</code>, and <code>checked</code> attributes added and updated automatically.</p>
+		<p><strong>Note</strong>: Switches will have <code>role="switch"</code>, a unique <code>id</code>, a unique <code>for</code>, <code>aria-label</code>, <code>class=show-sr</code>, and <code>checked</code> attributes added and updated automatically, if not present.</p>
     </section>
 
 	<section class="pad-a-sm">
-		<input class="switch-circle show-sr" type="checkbox" id="switch-0">
-		<label class="switch-label mar-r-md" for="switch-0"></label>
-		<input class="switch-square show-sr" type="checkbox" id="switch-1">
-		<label class="switch-label mar-r-md" for="switch-1"></label>
+		<input class="switch-circle" type="checkbox">
+		<label class="switch-label mar-r-md"></label>
+		<input class="switch-square" type="checkbox">
+		<label class="switch-label"></label>
     </section>
 
     <figure>
         <pre class="pad-a-sm border-tb-gray">
-			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"switch-circle show-sr"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> <span class="attribute">id</span>=<span class="value">"switch-0"</span>&gt;</span>
-			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"switch-label"</span> <span class="attribute">for</span>=<span class="value">"switch-0"</span>&gt;</span><span>&lt;/<span class="tag">label</span>&gt;</span>
-			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"switch-square show-sr"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> <span class="attribute">id</span>=<span class="value">"switch-1"</span>&gt;</span>
-			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"switch-label"</span> <span class="attribute">for</span>=<span class="value">"switch-1"</span>&gt;</span><span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"switch-circle"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"switch-label mar-r-md"</span>&gt;</span><span>&lt;/<span class="tag">label</span>&gt;</span>
+			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"switch-square"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"switch-label"</span>&gt;</span><span>&lt;/<span class="tag">label</span>&gt;</span>
         </pre>
     </figure>
 </article>

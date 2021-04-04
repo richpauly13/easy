@@ -1,21 +1,44 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
+
+import { SwitchService } from './switch.service';
 
 @Component({
-	selector: '.switch-circle, .switch-rocker, .switch-square, .switch-label',
+	selector: '.switch-circle, .switch-square, .switch-label',
 	templateUrl: './switch.component.html',
 	styleUrls: ['./switch.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SwitchComponent {
-	@HostBinding('attr.aria-checked')
-	public get hostAriaChecked(): null | string {
-		return this.class.includes('switch-label') ? null : String(this.isChecked);
+export class SwitchComponent implements OnInit {
+	@HostBinding('attr.aria-label')
+	public get hostAriaLabel(): null | string {
+		if (this.class.includes('switch-label') && this.isChecked) {
+			return 'on';
+		} else if (this.class.includes('switch-label') && !this.isChecked) {
+			return 'off';
+		} else {
+			return null;
+		}
 	}
 
 	@HostBinding('attr.checked')
 	public get hostChecked(): null | string {
-		return this.isChecked ? String(this.isChecked) : null;
+		return this.class.includes('switch-label') ? null : String(this.isChecked);
+	}
+
+	@HostBinding('attr.class')
+	public get hostClass(): string {
+		return this.class.includes('switch-label') || this.class.includes('show-sr') ? this.class : `${this.class} show-sr`;
+	}
+
+	@HostBinding('attr.for')
+	public get hostFor(): null | string {
+		return this.class.includes('switch-label') ? this.for || `switch-${this.uniqueSwitchLabelId}` : null;
+	}
+
+	@HostBinding('attr.id')
+	public get hostId(): null | string {
+		return this.class.includes('switch-label') ? null : this.id || `switch-${this.uniqueSwitchInputId}`;
 	}
 
 	@HostBinding('attr.role')
@@ -23,12 +46,14 @@ export class SwitchComponent {
 		return this.class.includes('switch-label') ? null : 'switch';
 	}
 
-	@HostListener('change', ['$event'])
-	public onInputChange(event: InputEvent): void {
-		this.isChecked = (event.target as HTMLInputElement).checked;
+	@HostListener('click', ['$event'])
+	public onClick(): void {
+		this.isChecked = !this.isChecked;
 	}
 
 	@Input() public class: string;
+	@Input() public for: null | string;
+	@Input() public id: null | string;
 
 	private get isChecked(): boolean {
 		return this.currentIsChecked;
@@ -39,9 +64,20 @@ export class SwitchComponent {
 	}
 
 	private currentIsChecked: boolean;
+	private uniqueSwitchInputId: number;
+	private uniqueSwitchLabelId: number;
 
-	public constructor() {
+	public constructor(private switchService: SwitchService) {
 		this.class = '';
 		this.currentIsChecked = false;
+		this.for = null;
+		this.id = null;
+		this.uniqueSwitchInputId = this.switchService.uniqueSwitchInputId;
+		this.uniqueSwitchLabelId = this.switchService.uniqueSwitchLabelId;
+	}
+
+	public ngOnInit(): void {
+		this.uniqueSwitchInputId = this.class.includes('switch-label') ? 0 : this.switchService.uniqueSwitchInputId++;
+		this.uniqueSwitchLabelId = this.class.includes('switch-label') ? this.switchService.uniqueSwitchLabelId++ : 0;
 	}
 }

@@ -2141,18 +2141,7 @@
           "error"
         ],
         "@angular-eslint/template/accessibility-label-for": [
-          "error",
-          {
-            "controlComponents": [
-
-            ],
-            "labelAttributes": [
-
-            ],
-            "labelComponents": [
-
-            ]
-          }
+          "error"
         ],
         "@angular-eslint/template/accessibility-table-scope": [
           "error"
@@ -2222,7 +2211,7 @@
         "max-len": [
           "error",
           {
-            "code": 200
+            "code": 160
           }
         ],
         "quotes": "off"

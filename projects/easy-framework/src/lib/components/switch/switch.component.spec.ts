@@ -1,17 +1,6 @@
-import { ChangeDetectionStrategy, Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { SwitchComponent } from './switch.component';
-
-@Component({
-	selector: '.mock-switch',
-	template: `<input class="switch-circle" type="checkbox">`,
-	changeDetection: ChangeDetectionStrategy.OnPush
-})
-class MockSwitchComponent {
-
-}
 
 describe('SwitchComponent', (): void => {
 	let component: SwitchComponent;
@@ -19,10 +8,7 @@ describe('SwitchComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				MockSwitchComponent,
-				SwitchComponent
-			]
+			declarations: [SwitchComponent]
 		}).compileComponents();
 	}));
 
@@ -35,14 +21,24 @@ describe('SwitchComponent', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have a hostAriaChecked of false', (): void => {
-		expect(component.hostAriaChecked).toEqual('false');
+	it('should have a hostAriaLabel of on', (): void => {
+		component.class = 'switch-label';
+		component['isChecked'] = true;
+
+		expect(component.hostAriaLabel).toEqual('on');
 	});
 
-	it('should have a hostAriaChecked of null', (): void => {
+	it('should have a hostAriaLabel of off', (): void => {
 		component.class = 'switch-label';
+		component['isChecked'] = false;
 
-		expect(component.hostAriaChecked).toBeNull();
+		expect(component.hostAriaLabel).toEqual('off');
+	});
+
+	it('should have a hostAriaLabel of null', (): void => {
+		component.class = 'switch-circle';
+
+		expect(component.hostAriaLabel).toBeNull();
 	});
 
 	it('should have a hostChecked of true', (): void => {
@@ -52,7 +48,53 @@ describe('SwitchComponent', (): void => {
 	});
 
 	it('should have a hostChecked of null', (): void => {
+		component.class = 'switch-label';
+
 		expect(component.hostChecked).toBeNull();
+	});
+
+	it('should have a hostClass containing show-sr', (): void => {
+		component.class = 'switch-circle';
+
+		expect(component.hostClass).toContain('show-sr');
+	});
+
+	it('should have a hostClass equal to class', (): void => {
+		component.class = 'switch-label';
+
+		expect(component.hostClass).toEqual(component.class);
+	});
+
+	it('should have a hostFor of switch-0', (): void => {
+		component.class = 'switch-label';
+
+		component.ngOnInit();
+
+		expect(component.hostFor).toEqual('switch-0');
+	});
+
+	it('should not have a hostFor', (): void => {
+		component.class = 'switch-circle';
+
+		component.ngOnInit();
+
+		expect(component.hostFor).toBeNull();
+	});
+
+	it('should have a hostId of switch-0', (): void => {
+		component.class = 'switch-circle';
+
+		component.ngOnInit();
+
+		expect(component.hostId).toEqual('switch-0');
+	});
+
+	it('should not have a hostId', (): void => {
+		component.class = 'switch-label';
+
+		component.ngOnInit();
+
+		expect(component.hostId).toBeNull();
 	});
 
 	it('should have a hostRole of switch', (): void => {
@@ -67,14 +109,9 @@ describe('SwitchComponent', (): void => {
 		expect(component.hostRole).toBeNull();
 	});
 
-	it('should have checked as true after change event', (): void => {
-		const event: InputEvent = new InputEvent('change', {});
-		const mockComponent: ComponentFixture<MockSwitchComponent> = TestBed.createComponent(MockSwitchComponent);
-		const mockInput: DebugElement = mockComponent.debugElement.query(By.css('input'));
+	it('should have isChecked as true after click event', (): void => {
+		component.onClick();
 
-		mockInput.nativeElement.checked = true;
-		mockInput.nativeElement.dispatchEvent(event);
-
-		expect(mockInput.nativeElement.checked).toBeTrue();
+		expect(component['isChecked']).toBeTrue();
 	});
 });

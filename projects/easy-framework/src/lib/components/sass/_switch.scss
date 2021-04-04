@@ -6,15 +6,25 @@
 [class*=switch]:not(.switch-label) {
 	border: rem(1) solid color(n);
 
-	&:checked + .switch-label::after,
-	&:checked + .switch-label::before {
+	&[checked=true] + .switch-label::after,
+	&[checked=true] + .switch-label::before {
 		@include animate(all);
+	}
+
+	&[checked=true] + .switch-label::before {
+		background-color: color(green);
+		transform: translateX(rem(73));
 	}
 
 	&:hover + .switch-label,
 	&:focus + .switch-label,
 	&:active + .switch-label {
 		border: rem(1) solid color(black);
+	}
+
+	&[checked=false] + .switch-label::before {
+		background-color: color(red);
+		transform: translateX(0);
 	}
 
 	+ .switch-label {
@@ -33,10 +43,8 @@
 		}
 
 		&::before {
-			background-color: color(red);
 			height: rem(26);
 			margin-top: rem(7);
-			transform: translateX(0);
 			width: rem(26);
 		}
 	}
@@ -55,11 +63,5 @@
 		&::before {
 			border-radius: rem(3);
 		}
-	}
-
-	&.switch-circle:checked + .switch-label::before,
-	&.switch-square:checked + .switch-label::before{
-		background-color: color(green);
-		transform: translateX(rem(73));
 	}
 }

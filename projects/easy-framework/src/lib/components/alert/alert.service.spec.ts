@@ -16,10 +16,4 @@ describe('AlertService', () => {
 	it('should be created', () => {
 		expect(service).toBeTruthy();
 	});
-
-	it('should have 0 for the uniqueAlertId', () => {
-		service.uniqueAlertId = 0;
-
-		expect(service.uniqueAlertId).toEqual(0);
-	});
 });
