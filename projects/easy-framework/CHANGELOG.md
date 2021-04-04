@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.2](https://github.com/richpauly13/easy/compare/v1.10.1...v1.10.2) (2021-04-04)
+
+
+### Bug Fixes
+
+* **switch:** fix and automate accessibility for switches ([5f23a51](https://github.com/richpauly13/easy/commit/5f23a510f630e8fb35ab7ee1af612e3417d94ca3))
+
 ### [1.10.1](https://github.com/richpauly13/easy/compare/v1.10.0...v1.10.1) (2021-04-03)
 
 
