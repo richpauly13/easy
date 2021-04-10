@@ -16,10 +16,15 @@ describe('GridComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(GridComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Layout - Grid - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Layout - Grid - EASY');
 	});
 });

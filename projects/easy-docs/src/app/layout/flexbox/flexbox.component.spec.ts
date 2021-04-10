@@ -16,10 +16,15 @@ describe('FlexboxComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(FlexboxComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Layout - Flexbox - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Layout - Flexbox - EASY');
 	});
 });

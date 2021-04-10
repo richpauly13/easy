@@ -16,10 +16,15 @@ describe('DisplayComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(DisplayComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Display - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Display - EASY');
 	});
 });

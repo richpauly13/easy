@@ -16,10 +16,15 @@ describe('SpinnerComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(SpinnerComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Components - Spinner - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Components - Spinner - EASY');
 	});
 });

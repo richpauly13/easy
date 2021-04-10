@@ -19,10 +19,15 @@ describe('AlertComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(AlertComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Components - Alert - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Components - Alert - EASY');
 	});
 });

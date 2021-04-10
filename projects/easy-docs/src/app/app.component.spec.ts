@@ -21,10 +21,17 @@ describe('AppComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(AppComponent);
 		app = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(app).toBeTruthy();
+	});
+
+	it('should have called trackById', (): void => {
+		const trackByIdSpy: jasmine.Spy = spyOn(app, 'trackById').and.callThrough();
+
+		app.trackById(0, 'components');
+
+		expect(trackByIdSpy).toHaveBeenCalledWith(0, 'components');
 	});
 });

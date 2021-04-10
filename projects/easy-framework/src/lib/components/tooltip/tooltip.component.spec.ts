@@ -15,7 +15,6 @@ describe('TooltipComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(TooltipComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {

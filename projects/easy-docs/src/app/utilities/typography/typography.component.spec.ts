@@ -16,10 +16,15 @@ describe('TypographyComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(TypographyComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Typeography - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Typography - EASY');
 	});
 });

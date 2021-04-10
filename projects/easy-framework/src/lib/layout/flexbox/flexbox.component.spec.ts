@@ -16,7 +16,6 @@ describe('FlexboxComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(FlexboxComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {

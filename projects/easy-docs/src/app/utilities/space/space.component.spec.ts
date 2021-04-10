@@ -16,10 +16,15 @@ describe('SpaceComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(SpaceComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Space - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Space - EASY');
 	});
 });

@@ -16,10 +16,15 @@ describe('PositionComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(PositionComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Position - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Position - EASY');
 	});
 });

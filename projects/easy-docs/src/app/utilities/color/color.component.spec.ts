@@ -16,10 +16,15 @@ describe('ColorComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(ColorComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Color - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Color - EASY');
 	});
 });

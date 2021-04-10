@@ -16,10 +16,15 @@ describe('CardComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(CardComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Components - Card - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Components - Card - EASY');
 	});
 });

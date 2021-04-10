@@ -16,10 +16,15 @@ describe('TextComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(TextComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Text - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Text - EASY');
 	});
 });

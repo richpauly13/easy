@@ -1,52 +1,16 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { FlexboxComponent } from './flexbox/flexbox.component';
-import { GridComponent } from './grid/grid.component';
 import { LayoutComponent } from './layout.component';
-import { NavComponent } from './nav/nav.component';
 
 describe('LayoutComponent', (): void => {
-	const routes: Routes = [
-		{
-			path: 'layout',
-			component: LayoutComponent,
-			children: [
-				{
-					component: FlexboxComponent,
-					path: 'flexbox'
-				},
-				{
-					component: GridComponent,
-					path: 'grid'
-				},
-				{
-					component: NavComponent,
-					path: 'nav'
-				},
-				{
-					redirectTo: 'flexbox',
-					pathMatch: 'full',
-					path: ''
-				}
-			]
-		}
-	];
-
 	let component: LayoutComponent;
 	let fixture: ComponentFixture<LayoutComponent>;
-	let router: Router;
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				FlexboxComponent,
-				GridComponent,
-				LayoutComponent,
-				NavComponent
-			],
-			imports: [RouterTestingModule.withRoutes(routes)]
+			declarations: [LayoutComponent],
+			imports: [RouterTestingModule]
 		})
 		.compileComponents();
 	}));
@@ -54,15 +18,17 @@ describe('LayoutComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(LayoutComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
-		router = TestBed.inject(Router);
-
-		fixture.ngZone!.run((): void => {
-			router.initialNavigation();
-		});
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have called trackById', (): void => {
+		const trackByIdSpy: jasmine.Spy = spyOn(component, 'trackById').and.callThrough();
+
+		component.trackById(0, 'flexbox');
+
+		expect(trackByIdSpy).toHaveBeenCalledWith(0, 'flexbox');
 	});
 });

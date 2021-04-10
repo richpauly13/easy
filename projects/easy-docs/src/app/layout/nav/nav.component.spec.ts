@@ -16,10 +16,15 @@ describe('NavComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(NavComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Layout - Nav - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Layout - Nav - EASY');
 	});
 });

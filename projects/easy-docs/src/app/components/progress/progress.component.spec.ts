@@ -16,10 +16,15 @@ describe('ProgressComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(ProgressComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Components - Progress - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Components - Progress - EASY');
 	});
 });

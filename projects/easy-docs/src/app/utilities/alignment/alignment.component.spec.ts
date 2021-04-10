@@ -16,10 +16,15 @@ describe('AlignmentComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AlignmentComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Alignment - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Alignment - EASY');
 	});
 });

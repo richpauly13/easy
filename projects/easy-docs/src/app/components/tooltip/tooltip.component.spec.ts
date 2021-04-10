@@ -16,10 +16,15 @@ describe('TooltipComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(TooltipComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Components - Tooltip - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Components - Tooltip - EASY');
 	});
 });

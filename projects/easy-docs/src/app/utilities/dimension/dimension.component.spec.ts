@@ -16,10 +16,15 @@ describe('DimensionComponent', (): void => {
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(DimensionComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
 	});
 
 	it('should be created', (): void => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have a title of Utilities - Dimension - EASY', (): void => {
+		component.ngOnInit();
+
+		expect(component['title'].getTitle()).toEqual('Utilities - Dimension - EASY');
 	});
 });
