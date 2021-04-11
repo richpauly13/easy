@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'docs-layout',
 	templateUrl: './layout.component.html',
 	styleUrls: ['./layout.component.scss'],
+	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent {

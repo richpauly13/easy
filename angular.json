@@ -121,7 +121,7 @@
         },
         "@schematics/angular:component": {
           "flat": false,
-          "style": "scss"
+          "viewEncapsulation": "Emulated"
         },
         "@schematics/angular:module": {
           "routing": true
@@ -185,6 +185,7 @@
     },
     "@schematics/angular:component": {
       "changeDetection": "OnPush",
+      "displayBlock": true,
       "export": true,
       "skipImport": false,
       "skipTests": false,
@@ -196,6 +197,14 @@
       "skipImport": false,
       "skipTests": false
     },
+    "@schematics/angular:guard": {
+      "flat": true,
+      "skipTests": false
+    },
+    "@schematics/angular:interceptor": {
+      "flat": true,
+      "skipTests": false
+    },
     "@schematics/angular:module": {
       "commonModule": false,
       "flat": false,
@@ -205,6 +214,10 @@
       "export": true,
       "flat": true,
       "skipImport": false,
+      "skipTests": false
+    },
+    "@schematics/angular:resolver": {
+      "flat": true,
       "skipTests": false
     },
     "@schematics/angular:service": {
