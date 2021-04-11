@@ -33,10 +33,59 @@ describe('SliderComponent', (): void => {
 		expect(component).toBeTruthy();
 	});
 
+	it('should have a hostAriaOrientation of horizontal', (): void => {
+		component.class = 'slider-circle';
+
+		expect(component.hostAriaOrientation).toEqual('horizontal');
+	});
+
+	it('should have a hostAriaOrientation of null', (): void => {
+		component.class = 'slider-label';
+
+		expect(component.hostAriaOrientation).toBeNull();
+	});
+
+	it('should have a hostFor of slider-0', (): void => {
+		component.class = 'slider-label';
+
+		expect(component.hostFor).toEqual('slider-0');
+	});
+
+	it('should not have a hostFor', (): void => {
+		component.class = 'slider-circle';
+
+		expect(component.hostFor).toBeNull();
+	});
+
+	it('should have a hostId of slider-0', (): void => {
+		component.class = 'slider-circle';
+
+		expect(component.hostId).toEqual('slider-0');
+	});
+
+	it('should not have a hostId', (): void => {
+		component.class = 'slider-label';
+
+		expect(component.hostId).toBeNull();
+	});
+
 	it('should have a hostMax of 5', (): void => {
 		component.max = '5';
 
 		expect(component.hostMax).toEqual('5');
+	});
+
+	it('should have a hostMax of 100', (): void => {
+		component.class = 'slider-circle';
+		component.max = null;
+
+		expect(component.hostMax).toEqual('100');
+	});
+
+	it('should have a hostMax of null', (): void => {
+		component.class = 'slider-label';
+
+		expect(component.hostMax).toBeNull();
 	});
 
 	it('should have a hostMin of 1', (): void => {
@@ -45,16 +94,55 @@ describe('SliderComponent', (): void => {
 		expect(component.hostMin).toEqual('1');
 	});
 
+	it('should have a hostMin of 0', (): void => {
+		component.class = 'slider-circle';
+		component.min = null;
+
+		expect(component.hostMin).toEqual('0');
+	});
+
+	it('should have a hostMin of null', (): void => {
+		component.class = 'slider-label';
+
+		expect(component.hostMin).toBeNull();
+	});
+
 	it('should have a hostStep of 2', (): void => {
 		component.step = '2';
 
 		expect(component.hostStep).toEqual('2');
 	});
 
+	it('should have a hostStep of 1', (): void => {
+		component.class = 'slider-circle';
+		component.step = null;
+
+		expect(component.hostStep).toEqual('1');
+	});
+
+	it('should have a hostStep of null', (): void => {
+		component.class = 'slider-label';
+
+		expect(component.hostStep).toBeNull();
+	});
+
 	it('should have a hostValue of 20', (): void => {
 		component.value = '20';
 
 		expect(component.hostValue).toEqual('20');
+	});
+
+	it('should have a hostValue of 0', (): void => {
+		component.class = 'slider-circle';
+		component.value = null;
+
+		expect(component.hostValue).toEqual('0');
+	});
+
+	it('should have a hostValue of null', (): void => {
+		component.class = 'slider-label';
+
+		expect(component.hostValue).toBeNull();
 	});
 
 	it('should have a value of 20', (): void => {
@@ -66,5 +154,21 @@ describe('SliderComponent', (): void => {
 		mockSliderInput.nativeElement.dispatchEvent(event);
 
 		expect(mockSliderInput.nativeElement.value).toEqual('20');
+	});
+
+	it('should have a uniqueSliderInputId of 0 after ngOnInit() is called', (): void => {
+		component.class = 'slider-circle';
+
+		component.ngOnInit();
+
+		expect(component['uniqueSliderInputId']).toEqual(0);
+	});
+
+	it('should have a uniqueSliderLabelId of 0 after ngOnInit() is called', (): void => {
+		component.class = 'slider-label';
+
+		component.ngOnInit();
+
+		expect(component['uniqueSliderLabelId']).toEqual(0);
 	});
 });

@@ -234,11 +234,19 @@ input[type=number] {
 
 // Credit: https://css-tricks.com/sliding-nightmare-understanding-range-input
 input[type=range] {
+	appearance: none;
 	background: transparent;
 	font: inherit;
 	margin: 0;
 	padding: 0;
 	width: 100%;
+
+	&:hover,
+	&:focus,
+	&:active {
+        border: rem(1.6) solid color(black);
+		outline: none;
+	}
 
 	&::-ms-tooltip {
 		display: none;

@@ -68,15 +68,11 @@ describe('SwitchComponent', (): void => {
 	it('should have a hostFor of switch-0', (): void => {
 		component.class = 'switch-label';
 
-		component.ngOnInit();
-
 		expect(component.hostFor).toEqual('switch-0');
 	});
 
 	it('should not have a hostFor', (): void => {
 		component.class = 'switch-circle';
-
-		component.ngOnInit();
 
 		expect(component.hostFor).toBeNull();
 	});
@@ -84,15 +80,11 @@ describe('SwitchComponent', (): void => {
 	it('should have a hostId of switch-0', (): void => {
 		component.class = 'switch-circle';
 
-		component.ngOnInit();
-
 		expect(component.hostId).toEqual('switch-0');
 	});
 
 	it('should not have a hostId', (): void => {
 		component.class = 'switch-label';
-
-		component.ngOnInit();
 
 		expect(component.hostId).toBeNull();
 	});
@@ -113,5 +105,21 @@ describe('SwitchComponent', (): void => {
 		component.onClick();
 
 		expect(component['isChecked']).toBeTrue();
+	});
+
+	it('should have a uniqueSwitchInputId of 0 after ngOnInit() is called', (): void => {
+		component.class = 'switch-circle';
+
+		component.ngOnInit();
+
+		expect(component['uniqueSwitchInputId']).toEqual(0);
+	});
+
+	it('should have a uniqueSwitchLabelId of 0 after ngOnInit() is called', (): void => {
+		component.class = 'switch-label';
+
+		component.ngOnInit();
+
+		expect(component['uniqueSwitchLabelId']).toEqual(0);
 	});
 });

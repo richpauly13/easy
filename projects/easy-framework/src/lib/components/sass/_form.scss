@@ -67,7 +67,7 @@ textarea.form-field {
 }
 
 .form-field {
-    @include animate(border, box-shadow);
+    @include animate(border);
 
     border: rem(1) solid color(gray);
     height: space(xl);
@@ -76,8 +76,9 @@ textarea.form-field {
 
     &:hover:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
 	&:focus:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
-	&:focus-visible:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
     &:active:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]) {
+		@include animate(border);
+
         border: rem(1.6) solid color(blue);
     }
 

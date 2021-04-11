@@ -6,6 +6,13 @@
 [type=range][class*=slider] {
 	height: space(sm);
 
+	&:hover,
+	&:focus,
+	&:active {
+        border: rem(1.6) solid color(blue);
+		outline: none;
+	}
+
 	&::-moz-range-thumb {
 		@include thumb;
 	}
@@ -39,6 +46,10 @@
 	&::-webkit-slider-thumb {
 		border-radius: 50%;
 	}
+}
+
+.slider-label {
+    display: block;
 }
 
 .slider-square {

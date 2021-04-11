@@ -3,22 +3,23 @@
 <article class="mar-b-lg box-shadow-1 border-a-gray">
 	<section class="pad-a-sm bg-lt-gray border-b-gray">
 		<p class="pad-b-sm"><code>import &#123; SliderModule &#125; from 'easy-framework';</code></p>
-		<p>Sliders are styled with a <code>.slider-[circle || square]</code> class on <code>&lt;input="range"&gt;</code> elements.</p>
+		<p>Sliders are styled with a <code>.slider-[circle || square || label]</code> class on <code>&lt;input="range"&gt;</code> or <code>&lt;label&gt;</code> elements.</p>
+		<p><strong>Note</strong>: If a slider does not have <code>max</code>, <code>min</code>, <code>step</code>, <code>value</code>, <code>for</code>, <code>id</code>, and/or <code>aria-orientation</code> attributes, they will be set and updated automatically.</p>
 	</section>
 
 	<section class="pad-a-sm border-b-gray">
-		<label class="form-label pad-b-xs" for="slider-circle-0">Slider Circle</label>
-		<input class="slider-circle" type="range" id="slider-circle-0">
-		<label class="form-label pad-tb-xs" for="slider-square-0">Slider Sqaure</label>
-		<input class="slider-square" type="range" id="slider-square-0">
+		<label class="slider-label pad-b-xs">Slider Circle</label>
+		<input class="slider-circle" type="range">
+		<label class="slider-label pad-tb-xs">Slider Sqaure</label>
+		<input class="slider-square" type="range">
 	</section>
 
 	<figure>
 		<pre class="pad-a-sm">
-			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"slider-circle-0"</span>&gt;</span>
-			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-circle"</span> <span class="attribute">type</span>=<span class="value">"range"</span> <span class="attribute">id</span>=<span class="value">"slider-circle-0"</span>&gt;</span>
-			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-tb-xs"</span> <span class="attribute">for</span>=<span class="value">"slider-square-0"</span>&gt;</span>
-			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-square"</span> <span class="attribute">type</span>=<span class="value">"range"</span> <span class="attribute">id</span>=<span class="value">"slider-square-0"</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"slider-label pad-b-xs"</span>&gt;</span>
+			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-circle"</span> <span class="attribute">type</span>=<span class="value">"range"</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"slider-label pad-tb-xs"</span>&gt;</span>
+			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-square"</span> <span class="attribute">type</span>=<span class="value">"range"</span>&gt;</span>
 		</pre>
 	</figure>
 </article>
@@ -31,18 +32,18 @@
 	</section>
 
 	<section class="pad-a-sm border-b-gray">
-		<label class="form-label pad-b-xs" for="slider-circle-1">Slider Circle</label>
-		<input class="slider-circle bg-green text-white" type="range" id="slider-circle-1">
-		<label class="form-label pad-tb-xs" for="slider-square-1">Slider Sqaure</label>
-		<input class="slider-square bg-blue text-black" type="range" id="slider-square-1">
+		<label class="slider-label pad-b-xs">Slider Circle</label>
+		<input class="slider-circle bg-green text-white" type="range">
+		<label class="slider-label pad-tb-xs">Slider Sqaure</label>
+		<input class="slider-square bg-blue text-black" type="range">
 	</section>
 
 	<figure>
 		<pre class="pad-a-sm">
-			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-b-xs"</span> <span class="attribute">for</span>=<span class="value">"slider-circle-1"</span>&gt;</span>
-			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-circle bg-green text-white"</span> <span class="attribute">type</span>=<span class="value">"range"</span> <span class="attribute">id</span>=<span class="value">"slider-circle-1"</span>&gt;</span>
-			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label pad-tb-xs"</span> <span class="attribute">for</span>=<span class="value">"slider-square-1"</span>&gt;</span>
-			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-square bg-blue text-black"</span> <span class="attribute">type</span>=<span class="value">"range"</span> <span class="attribute">id</span>=<span class="value">"slider-square-1"</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"slider-label pad-b-xs"</span>&gt;</span>
+			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-circle bg-green text-white"</span> <span class="attribute">type</span>=<span class="value">"range"</span>&gt;</span>
+			<span>&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"slider-label pad-tb-xs"</span> &gt;</span>
+			<span>&lt;<span class="tag">input</span> <span class="attribute">class</span>=<span class="value">"slider-square bg-blue text-black"</span> <span class="attribute">type</span>=<span class="value">"range"</span>&gt;</span>
 		</pre>
 	</figure>
 </article>
