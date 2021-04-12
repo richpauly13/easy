@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.4](https://github.com/richpauly13/easy/compare/v1.10.3...v1.10.4) (2021-04-12)
+
+
+### Bug Fixes
+
+* **progress:** add auto attributes for id and for ([e4856a1](https://github.com/richpauly13/easy/commit/e4856a1cd6b7be1d9c6d610de7f81d84283abedc))
+* **slider:** add auto attributes for aria-orientation, for, and id ([5ee0103](https://github.com/richpauly13/easy/commit/5ee01031732a6a5d6ad01d3bb887556e26e35e65))
+
 ### [1.10.3](https://github.com/richpauly13/easy/compare/v1.10.2...v1.10.3) (2021-04-04)
 
 ### [1.10.2](https://github.com/richpauly13/easy/compare/v1.10.1...v1.10.2) (2021-04-04)
