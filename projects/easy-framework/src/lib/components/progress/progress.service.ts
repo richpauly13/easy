@@ -4,5 +4,11 @@ import { Injectable } from '@angular/core';
 	providedIn: 'root'
 })
 export class ProgressService {
-	// public constructor() { }
+	public uniqueProgressInputId: number;
+	public uniqueProgressLabelId: number;
+
+	public constructor() {
+		this.uniqueProgressInputId = 0;
+		this.uniqueProgressLabelId = 0;
+	}
 }

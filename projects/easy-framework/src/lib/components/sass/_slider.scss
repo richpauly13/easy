@@ -10,7 +10,6 @@
 	&:focus,
 	&:active {
         border: rem(1.6) solid color(blue);
-		outline: none;
 	}
 
 	&::-moz-range-thumb {

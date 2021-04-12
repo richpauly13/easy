@@ -3,7 +3,7 @@
 @import "../../core/sass/variables";
 
 // Progress styles
-.progress {
+[class*=progress]:not(.progress-label) {
 	&:indeterminate {
 		animation: animate-progress .5s linear infinite;
 		background-color: color(blue);
@@ -61,23 +61,27 @@
 		}
 	}
 
-	&.striped {
-		&::-moz-progress-bar {
-			background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
-			background-color: color(blue);
-			background-size: rem(40);
-		}
-
-		&::-webkit-progress-value {
-			background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
-			background-color: color(blue);
-			background-size: rem(40);
-		}
-	}
-
 	@keyframes animate-progress {
 		100% {
 			background-position: rem(40) 0;
 		}
+	}
+}
+
+.progress-label {
+	display: block;
+}
+
+.progress-striped {
+	&::-moz-progress-bar {
+		background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
+		background-color: color(blue);
+		background-size: rem(40);
+	}
+
+	&::-webkit-progress-value {
+		background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
+		background-color: color(blue);
+		background-size: rem(40);
 	}
 }

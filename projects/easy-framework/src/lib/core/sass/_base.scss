@@ -276,6 +276,20 @@ option {
 	color: color(lt-black);
 }
 
+progress {
+	appearance: none;
+	background-color: color(lt-gray);
+	border: none;
+	border-radius: 0;
+	display: block;
+	height: rem(15);
+	width: 100%;
+
+	&::-webkit-progress-bar {
+		background-color: color(lt-gray);
+	}
+}
+
 select {
 	overflow-y: auto;
 
@@ -305,22 +319,8 @@ input:disabled,
 	}
 }
 
-progress {
-	appearance: none;
-	background-color: color(lt-gray);
-	border: none;
-	border-radius: 0;
-	height: rem(15);
-	width: 100%;
-
-	&::-webkit-progress-bar {
-		background-color: color(lt-gray);
-	}
-}
-
 // Credit: https://github.com/suitcss/base
 [tabindex="0"]:focus,
-[tabindex="-1"]:focus,
-input[type=range]:focus {
+[tabindex="-1"]:focus {
 	outline: none;
 }
