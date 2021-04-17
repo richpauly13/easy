@@ -11,7 +11,7 @@ import { AlertService } from './alert.service';
 })
 export class AlertComponent implements OnInit {
 	@HostBinding('attr.aria-hidden')
-	public get hostAriaHidden(): null | string {
+	public get hostAriaHidden(): string | null {
 		return this.class.includes('hide') ? 'true' : null;
 	}
 

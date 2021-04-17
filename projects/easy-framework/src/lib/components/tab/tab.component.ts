@@ -10,32 +10,32 @@ import { TabService } from './tab.service';
 })
 export class TabComponent implements OnInit {
 	@HostBinding('attr.aria-controls')
-	public get hostAriaControls(): null | string {
+	public get hostAriaControls(): string | null {
 		return this.class.includes('tab-btn') ? `tab-content-${this.uniqueTabId}` : null;
 	}
 
 	@HostBinding('attr.aria-labelledby')
-	public get hostAriaLabelledby(): null | string {
+	public get hostAriaLabelledby(): string | null {
 		return this.class.includes('tab-content') ? `tab-btn-${this.uniqueContentId}` : null;
 	}
 
 	@HostBinding('attr.aria-posinset')
-	public get hostAriaPosinset(): null | string {
+	public get hostAriaPosinset(): string | null {
 		return this.class.includes('tab-btn') ? `${this.uniqueTabId + 1}` : null;
 	}
 
 	@HostBinding('attr.aria-selected')
-	public get hostAriaSelected(): null | string {
+	public get hostAriaSelected(): string | null {
 		return this.class.includes('tab-btn') ? 'false' : null;
 	}
 
 	@HostBinding('attr.aria-setsize')
-	public get hostAriaSetsize(): null | string {
+	public get hostAriaSetsize(): string | null {
 		return this.class.includes('tab-btn') ? `${this.tabButtons.length}` : null;
 	}
 
 	@HostBinding('attr.id')
-	public get hostId(): null | string {
+	public get hostId(): string | null {
 		if (this.class.includes('tab-btn')) {
 			return `tab-btn-${this.uniqueTabId}`;
 		} else if (this.class.includes('tab-content')) {
@@ -46,7 +46,7 @@ export class TabComponent implements OnInit {
 	}
 
 	@HostBinding('attr.role')
-	public get hostRole(): null | string {
+	public get hostRole(): string | null {
 		if (this.class.includes('tab-btn')) {
 			return 'tab';
 		} else if (this.class.includes('tab-content')) {
@@ -95,7 +95,7 @@ export class TabComponent implements OnInit {
 		return this.tabService.tabContents;
 	}
 
-	private uniqueContentId: null | number;
+	private uniqueContentId: number | null;
 	private uniqueTabId: number;
 
 	public constructor(private elementRef: ElementRef, private renderer2: Renderer2, private tabService: TabService) {

@@ -11,37 +11,37 @@ import { SliderService } from './slider.service';
 })
 export class SliderComponent implements OnInit {
 	@HostBinding('attr.aria-orientation')
-	public get hostAriaOrientation(): null | string {
+	public get hostAriaOrientation(): string | null {
 		return this.class.includes('slider-label') ? null : 'horizontal';
 	}
 
 	@HostBinding('attr.for')
-	public get hostFor(): null | string {
+	public get hostFor(): string | null {
 		return this.class.includes('slider-label') ? this.for || `slider-${this.uniqueSliderLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
-	public get hostId(): null | string {
+	public get hostId(): string | null {
 		return this.class.includes('slider-label') ? null : this.id || `slider-${this.uniqueSliderInputId}`;
 	}
 
 	@HostBinding('attr.max')
-	public get hostMax(): null | string {
+	public get hostMax(): string | null {
 		return this.class.includes('slider-label') ? null : this.max || '100';
 	}
 
 	@HostBinding('attr.min')
-	public get hostMin(): null | string {
+	public get hostMin(): string | null {
 		return this.class.includes('slider-label') ? null : this.min || '0';
 	}
 
 	@HostBinding('attr.step')
-	public get hostStep(): null | string {
+	public get hostStep(): string | null {
 		return this.class.includes('slider-label') ? null : this.step || '1';
 	}
 
 	@HostBinding('attr.value')
-	public get hostValue(): null | string {
+	public get hostValue(): string | null {
 		return this.class.includes('slider-label') ? null : this.value || '0';
 	}
 
@@ -51,12 +51,12 @@ export class SliderComponent implements OnInit {
 	}
 
 	@Input() public class: string;
-	@Input() public for: null | string;
-	@Input() public id: null | string;
-	@Input() public max: null | string;
-	@Input() public min: null | string;
-	@Input() public step: null | string;
-	@Input() public value: null | string;
+	@Input() public for: string | null;
+	@Input() public id: string | null;
+	@Input() public max: string | null;
+	@Input() public min: string | null;
+	@Input() public step: string | null;
+	@Input() public value: string | null;
 
 	private uniqueSliderInputId: number;
 	private uniqueSliderLabelId: number;

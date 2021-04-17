@@ -11,7 +11,7 @@ import { SwitchService } from './switch.service';
 })
 export class SwitchComponent implements OnInit {
 	@HostBinding('attr.aria-label')
-	public get hostAriaLabel(): null | string {
+	public get hostAriaLabel(): string | null {
 		if (this.class.includes('switch-label') && this.isChecked) {
 			return 'on';
 		} else if (this.class.includes('switch-label') && !this.isChecked) {
@@ -22,7 +22,7 @@ export class SwitchComponent implements OnInit {
 	}
 
 	@HostBinding('attr.checked')
-	public get hostChecked(): null | string {
+	public get hostChecked(): string | null {
 		return this.class.includes('switch-label') ? null : String(this.isChecked);
 	}
 
@@ -32,17 +32,17 @@ export class SwitchComponent implements OnInit {
 	}
 
 	@HostBinding('attr.for')
-	public get hostFor(): null | string {
+	public get hostFor(): string | null {
 		return this.class.includes('switch-label') ? this.for || `switch-${this.uniqueSwitchLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
-	public get hostId(): null | string {
+	public get hostId(): string | null {
 		return this.class.includes('switch-label') ? null : this.id || `switch-${this.uniqueSwitchInputId}`;
 	}
 
 	@HostBinding('attr.role')
-	public get hostRole(): null | string {
+	public get hostRole(): string | null {
 		return this.class.includes('switch-label') ? null : 'switch';
 	}
 
@@ -52,8 +52,8 @@ export class SwitchComponent implements OnInit {
 	}
 
 	@Input() public class: string;
-	@Input() public for: null | string;
-	@Input() public id: null | string;
+	@Input() public for: string | null;
+	@Input() public id: string | null;
 
 	private get isChecked(): boolean {
 		return this.currentIsChecked;

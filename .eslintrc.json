@@ -189,19 +189,24 @@
           "error",
           {
             "types": {
-              "Boolean": {
-                "message": "Use boolean instead",
-                "fixWith": "boolean"
+              "any": {
+                "message": "Use Record<string, unknown> instead",
+                "fixWith": "Record<string, unknown>"
               },
-              "Number": {
-                "message": "Use number instead",
-                "fixWith": "number"
+              "Object": {
+                "message": "The `Object` type actually means 'any non-nullish value', so it is marginally better than `unknown`.  If you want a type meaning 'any object', you probably want `Record<string, unknown>` instead.  If you want a type meaning 'any value', you probably want `unknown` instead.",
+                "fixWith": "Record<string, unknown>"
               },
-              "String": {
-                "message": "Use string instead",
-                "fixWith": "string"
+              "object": {
+                "message": "The `object` type is currently hard to use ([see this issue](https://github.com/microsoft/TypeScript/issues/21732)).  Consider using `Record<string, unknown>` instead, as it allows you to more easily inspect and use the keys.",
+                "fixWith": "Record<string, unknown>"
+              },
+              "{}": {
+                "message": "`{}` actually means 'any non-nullish value'.  If you want a type meaning 'any object', you probably want `Record<string, unknown>` instead.  If you want a type meaning 'any value', you probably want `unknown` instead.",
+                "fixWith": "Record<string, unknown>"
               }
-            }
+            },
+            "extendDefaults": true
           }
         ],
         "@typescript-eslint/brace-style": [
@@ -244,14 +249,15 @@
         "@typescript-eslint/default-param-last": [
           "error"
         ],
-        "@typescript-eslint/dot-notation": "off"/* [
-          "error",
+        "@typescript-eslint/dot-notation": [
+          "off"/* ,
           {
             "allowKeywords": true,
             "allowPattern": "",
-            "allowPrivateClassPropertyAccess": true
-          }
-        ] */,
+            "allowPrivateClassPropertyAccess": true,
+            "allowProtectedClassPropertyAccess": true
+          } */
+        ],
         "@typescript-eslint/explicit-function-return-type": [
           "error",
           {
@@ -363,6 +369,7 @@
               "delimiter": "comma",
               "requireLast": true
             },
+            "multilineDetection": "brackets",
             "overrides": {
               "interface": {
                 "multiline": {
@@ -529,8 +536,21 @@
         "@typescript-eslint/no-confusing-non-null-assertion": [
           "error"
         ],
+        /* "@typescript-eslint/no-confusing-void-expression": [
+          "error",
+          {
+            "ignoreArrowShorthand": false,
+            "ignoreVoidOperator": false
+          }
+        ], */
         "@typescript-eslint/no-dupe-class-members": [
           "error"
+        ],
+        "@typescript-eslint/no-duplicate-imports": [
+          "error",
+          {
+            "includeExports": false
+          }
         ],
         "@typescript-eslint/no-dynamic-delete": [
           "error"
@@ -742,6 +762,12 @@
             ]
           }
         ], */
+        "@typescript-eslint/no-unnecessary-type-constraint": [
+          "error"
+        ],
+        /* "@typescript-eslint/no-unsafe-argument": [
+          "error"
+        ], */
         /* "@typescript-eslint/no-unsafe-assignment": [
           "error"
         ], */
@@ -798,6 +824,17 @@
         "@typescript-eslint/no-var-requires": [
           "error"
         ],
+        /* "@typescript-eslint/non-nullable-type-assertion-style": [
+          "error"
+        ], */
+        "@typescript-eslint/object-curly-spacing": [
+          "error",
+          "always",
+          {
+            "arraysInObjects": false,
+            "objectsInObjects": false
+          }
+        ],
         "@typescript-eslint/prefer-as-const": [
           "error"
         ],
@@ -835,10 +872,11 @@
             "onlyInlineLambdas": true
           }
         ], */
-        /* "@typescript-eslint/prefer-readonly-parameter-types": [
+       /*  "@typescript-eslint/prefer-readonly-parameter-types": [
           "error",
           {
-            "checkParameterProperties": true
+            "checkParameterProperties": true,
+            "ignoreInferredTypes": false
           }
         ], */
         /* "@typescript-eslint/prefer-reduce-type-parameter": [
@@ -909,6 +947,27 @@
             "omitLastInOneLineBlock": false
           }
         ],
+        "@typescript-eslint/sort-type-union-intersection-members": [
+          "error",
+          {
+            "checkIntersections": true,
+            "checkUnions": true,
+            "groupOrder": [
+              "named",
+              "keyword",
+              "operator",
+              "literal",
+              "function",
+              "import",
+              "conditional",
+              "object",
+              "tuple",
+              "intersection",
+              "union",
+              "nullish"
+            ]
+          }
+        ],
         "@typescript-eslint/space-before-function-paren": [
           "error",
           {
@@ -917,6 +976,12 @@
             "named": "never"
           }
         ],
+        "@typescript-eslint/space-infix-ops": [
+          "error",
+          {
+            "int32Hint": false
+            }
+          ],
         /* "@typescript-eslint/strict-boolean-expressions": [
           "error",
           {
@@ -1822,12 +1887,7 @@
           }
         ],
         "object-curly-spacing": [
-          "error",
-          "always",
-          {
-            "arraysInObjects": false,
-            "objectsInObjects": false
-          }
+          "off"
         ],
         "object-property-newline": [
           "error",
@@ -2041,12 +2101,7 @@
             }
           }
         ],
-        "space-infix-ops": [
-          "error",
-          {
-            "int32Hint": false
-          }
-        ],
+        "space-infix-ops": "off",
         "space-in-parens": [
           "error",
           "never"

@@ -10,17 +10,17 @@ import { ProgressService } from './progress.service';
 })
 export class ProgressComponent implements OnInit {
 	@HostBinding('attr.for')
-	public get hostFor(): null | string {
+	public get hostFor(): string | null {
 		return this.class.includes('progress-label') ? this.for || `progress-${this.uniqueProgressLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
-	public get hostId(): null | string {
+	public get hostId(): string | null {
 		return this.class.includes('progress-label') ? null : this.id || `progress-${this.uniqueProgressInputId}`;
 	}
 
 	@HostBinding('attr.max')
-	public get hostMax(): null | string {
+	public get hostMax(): string | null {
 		if (this.class.includes('progress-label')) {
 			return null;
 		} else if (Number(this.max) > 0) {
@@ -31,7 +31,7 @@ export class ProgressComponent implements OnInit {
 	}
 
 	@HostBinding('attr.position')
-	public get hostPosition(): null | string {
+	public get hostPosition(): string | null {
 		if (this.class.includes('progress-label')) {
 			return null;
 		} else if (this.hostValue) {
@@ -42,7 +42,7 @@ export class ProgressComponent implements OnInit {
 	}
 
 	@HostBinding('attr.value')
-	public get hostValue(): null | string {
+	public get hostValue(): string | null {
 		if (this.class.includes('progress-label') || !this.value) {
 			return null;
 		} else if (Number(this.value) >= 0 && Number(this.value) <= Number(this.max)) {
@@ -53,10 +53,10 @@ export class ProgressComponent implements OnInit {
 	}
 
 	@Input() public class: string;
-	@Input() public for: null | string;
-	@Input() public id: null | string;
-	@Input() public max: null | string;
-	@Input() public value: null | string;
+	@Input() public for: string | null;
+	@Input() public id: string | null;
+	@Input() public max: string | null;
+	@Input() public value: string | null;
 
 	private uniqueProgressInputId: number;
 	private uniqueProgressLabelId: number;
