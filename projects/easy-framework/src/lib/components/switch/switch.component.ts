@@ -33,12 +33,24 @@ export class SwitchComponent implements OnInit {
 
 	@HostBinding('attr.for')
 	public get hostFor(): string | null {
-		return this.class.includes('switch-label') ? this.for && `switch-${this.uniqueSwitchLabelId}` : null;
+		if (this.class.includes('switch-label') && this.for) {
+			return this.for;
+		} else if (this.class.includes('switch-label')) {
+			return `switch-${this.uniqueSwitchLabelId}`;
+		} else {
+			return null;
+		}
 	}
 
 	@HostBinding('attr.id')
 	public get hostId(): string | null {
-		return this.class.includes('switch-label') ? null : this.id && `switch-${this.uniqueSwitchInputId}`;
+		if (this.class.includes('switch-label')) {
+			return null;
+		} else if (this.id) {
+			return this.id;
+		} else {
+			return `switch-${this.uniqueSwitchInputId}`;
+		}
 	}
 
 	@HostBinding('attr.role')

@@ -1,5 +1,4 @@
-import { By } from '@angular/platform-browser';
-import { ChangeDetectionStrategy, Component, DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonComponent } from './button.component';
@@ -38,22 +37,18 @@ describe('ButtonComponent', (): void => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have a type of button when type is set to button', (): void => {
-		const mockButtonComponent: ComponentFixture<MockButtonComponent> = TestBed.createComponent(MockButtonComponent);
-		const mockButton1: DebugElement = mockButtonComponent.debugElement.queryAll(By.css('button'))[0];
+	it('should have a hostType of button when type is set to button', (): void => {
+		component.class = 'tab-btn';
+		component.type = 'button';
 
-		mockButtonComponent.detectChanges();
-
-		expect(mockButton1.nativeElement.getAttribute('type')).toEqual('button');
+		expect(component.hostType).toEqual('button');
 	});
 
-	it('should have a type of button when no type is set', (): void => {
-		const mockButtonComponent: ComponentFixture<MockButtonComponent> = TestBed.createComponent(MockButtonComponent);
-		const mockButton2: DebugElement = mockButtonComponent.debugElement.queryAll(By.css('button'))[1];
+	it('should have a hostType of button when no type is set', (): void => {
+		component.class = 'tab-btn';
+		component.type = null;
 
-		mockButtonComponent.detectChanges();
-
-		expect(mockButton2.nativeElement.getAttribute('type')).toEqual('button');
+		expect(component.hostType).toEqual('button');
 	});
 
 	it('should have a hostType of null', (): void => {

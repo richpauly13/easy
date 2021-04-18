@@ -22,25 +22,39 @@ describe('ProgressComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have a hostFor of progress-0', (): void => {
+	it('should have a hostFor of progress-0 when for is null and class is progress-label', (): void => {
 		component.class = 'progress-label';
 
 		expect(component.hostFor).toEqual('progress-0');
 	});
 
-	it('should not have a hostFor', (): void => {
+	it('should have a hostFor of progress-2 when for is progress-2 and class is progress-label', (): void => {
+		component.class = 'progress-label';
+		component.for = 'progress-2';
+
+		expect(component.hostFor).toEqual('progress-2');
+	});
+
+	it('should not have a hostFor when class is progress', (): void => {
 		component.class = 'progress';
 
 		expect(component.hostFor).toBeNull();
 	});
 
-	it('should have a hostId of progress-0', (): void => {
+	it('should have a hostId of progress-0 when id is null and class is progress', (): void => {
 		component.class = 'progress';
 
 		expect(component.hostId).toEqual('progress-0');
 	});
 
-	it('should not have a hostId', (): void => {
+	it('should have a hostId of progress-2 when id is progress 2 and class is progress', (): void => {
+		component.class = 'progress';
+		component.id = 'progress-2';
+
+		expect(component.hostId).toEqual('progress-2');
+	});
+
+	it('should not have a hostId when class is progress label', (): void => {
 		component.class = 'progress-label';
 
 		expect(component.hostId).toBeNull();

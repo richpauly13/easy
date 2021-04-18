@@ -45,25 +45,39 @@ describe('SliderComponent', (): void => {
 		expect(component.hostAriaOrientation).toBeNull();
 	});
 
-	it('should have a hostFor of slider-0', (): void => {
+	it('should have a hostFor of slider-0 when for is null and class is slider-label', (): void => {
 		component.class = 'slider-label';
 
 		expect(component.hostFor).toEqual('slider-0');
 	});
 
-	it('should not have a hostFor', (): void => {
+	it('should have a hostFor of slider-2 when for is slider-2 and class is slider-label', (): void => {
+		component.class = 'slider-label';
+		component.for = 'slider-2';
+
+		expect(component.hostFor).toEqual('slider-2');
+	});
+
+	it('should not have a hostFor when class is slider-circle', (): void => {
 		component.class = 'slider-circle';
 
 		expect(component.hostFor).toBeNull();
 	});
 
-	it('should have a hostId of slider-0', (): void => {
+	it('should have a hostId of slider-0 when id is null and class is slider-circle', (): void => {
 		component.class = 'slider-circle';
 
 		expect(component.hostId).toEqual('slider-0');
 	});
 
-	it('should not have a hostId', (): void => {
+	it('should have a hostId of slider-2 when id is slider 2 and class is slider-circle', (): void => {
+		component.class = 'slider-circle';
+		component.id = 'slider-2';
+
+		expect(component.hostId).toEqual('slider-2');
+	});
+
+	it('should not have a hostId when class is slider label', (): void => {
 		component.class = 'slider-label';
 
 		expect(component.hostId).toBeNull();

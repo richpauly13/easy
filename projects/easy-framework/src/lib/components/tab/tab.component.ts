@@ -58,7 +58,13 @@ export class TabComponent implements OnInit {
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		return this.elementRef.nativeElement.tagName === 'BUTTON' ? this.type && 'button' : null;
+		if (this.class.includes('tab-btn') && this.type) {
+			return this.type;
+		} else if (this.class.includes('tab-btn')) {
+			return 'button';
+		} else {
+			return null;
+		}
 	}
 
 	@HostListener('click', ['$event.target'])
@@ -107,12 +113,12 @@ export class TabComponent implements OnInit {
 
 	public ngOnInit(): void {
 		if (this.class.includes('tab-btn')) {
-			this.tabButtons.push(this.elementRef.nativeElement);
+			this.tabButtons.push(this.elementRef.nativeElement as HTMLButtonElement);
 			this.uniqueTabId = this.tabService.uniqueTabId++;
 		} else if (this.class.includes('tab-content')) {
 			this.renderer2.setAttribute(this.elementRef.nativeElement, 'aria-hidden', 'true');
 			this.renderer2.addClass(this.elementRef.nativeElement, 'hide');
-			this.tabContents.push(this.elementRef.nativeElement);
+			this.tabContents.push(this.elementRef.nativeElement as HTMLElement);
 			this.uniqueContentId = this.tabService.uniqueContentId++;
 		} else {
 			this.uniqueContentId = null;

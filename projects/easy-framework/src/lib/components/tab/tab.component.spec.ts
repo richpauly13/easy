@@ -142,22 +142,18 @@ describe('TabComponent', (): void => {
 		expect(component.hostRole).toEqual('tablist');
 	});
 
-	it('should have a type of button when type is set to button', (): void => {
-		const mockTabComponent: ComponentFixture<MockTabComponent> = TestBed.createComponent(MockTabComponent);
-		const mockTab1: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[0];
+	it('should have a hostType of button when type is set to button', (): void => {
+		component.class = 'tab-btn';
+		component.type = 'button';
 
-		mockTabComponent.detectChanges();
-
-		expect(mockTab1.nativeElement.getAttribute('type')).toEqual('button');
+		expect(component.hostType).toEqual('button');
 	});
 
-	it('should have a type of button when no type is set', (): void => {
-		const mockTabComponent: ComponentFixture<MockTabComponent> = TestBed.createComponent(MockTabComponent);
-		const mockTab2: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[1];
+	it('should have a hostType of button when no type is set', (): void => {
+		component.class = 'tab-btn';
+		component.type = null;
 
-		mockTabComponent.detectChanges();
-
-		expect(mockTab2.nativeElement.getAttribute('type')).toEqual('button');
+		expect(component.hostType).toEqual('button');
 	});
 
 	it('should have mockButton1 with aria-selected of false', (): void => {

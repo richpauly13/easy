@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 export class SpinnerComponent {
 	@HostBinding('attr.aria-label')
 	public get hostAriaLabel(): string | null {
-		return this.ariaLabel && 'please wait';
+		return this.ariaLabel ?? 'please wait';
 	}
 
 	@HostBinding('attr.role')

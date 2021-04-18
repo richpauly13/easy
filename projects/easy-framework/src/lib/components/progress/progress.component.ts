@@ -11,12 +11,24 @@ import { ProgressService } from './progress.service';
 export class ProgressComponent implements OnInit {
 	@HostBinding('attr.for')
 	public get hostFor(): string | null {
-		return this.class.includes('progress-label') ? this.for && `progress-${this.uniqueProgressLabelId}` : null;
+		if (this.class.includes('progress-label') && this.for) {
+			return this.for;
+		} else if (this.class.includes('progress-label')) {
+			return `progress-${this.uniqueProgressLabelId}`;
+		} else {
+			return null;
+		}
 	}
 
 	@HostBinding('attr.id')
 	public get hostId(): string | null {
-		return this.class.includes('progress-label') ? null : this.id && `progress-${this.uniqueProgressInputId}`;
+		if (this.class.includes('progress-label')) {
+			return null;
+		} else if (this.id) {
+			return this.id;
+		} else {
+			return `progress-${this.uniqueProgressInputId}`;
+		}
 	}
 
 	@HostBinding('attr.max')

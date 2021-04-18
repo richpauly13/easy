@@ -65,25 +65,39 @@ describe('SwitchComponent', (): void => {
 		expect(component.hostClass).toEqual(component.class);
 	});
 
-	it('should have a hostFor of switch-0', (): void => {
+	it('should have a hostFor of switch-0 when for is null and class is switch-label', (): void => {
 		component.class = 'switch-label';
 
 		expect(component.hostFor).toEqual('switch-0');
 	});
 
-	it('should not have a hostFor', (): void => {
+	it('should have a hostFor of switch-2 when for is switch-2 and class is switch-label', (): void => {
+		component.class = 'switch-label';
+		component.for = 'switch-2';
+
+		expect(component.hostFor).toEqual('switch-2');
+	});
+
+	it('should not have a hostFor when class is switch-circle', (): void => {
 		component.class = 'switch-circle';
 
 		expect(component.hostFor).toBeNull();
 	});
 
-	it('should have a hostId of switch-0', (): void => {
+	it('should have a hostId of switch-0 when id is null and class is switch-circle', (): void => {
 		component.class = 'switch-circle';
 
 		expect(component.hostId).toEqual('switch-0');
 	});
 
-	it('should not have a hostId', (): void => {
+	it('should have a hostId of switch-2 when id is switch 2 and class is switch-circle', (): void => {
+		component.class = 'switch-circle';
+		component.id = 'switch-2';
+
+		expect(component.hostId).toEqual('switch-2');
+	});
+
+	it('should not have a hostId when class is switch label', (): void => {
 		component.class = 'switch-label';
 
 		expect(component.hostId).toBeNull();
