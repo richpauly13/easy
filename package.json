@@ -36,11 +36,7 @@
     "codecov": "^4.0.0-0",
     "copyfiles": "^2.4.1",
     "eslint": "^7.24.0",
-    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsdoc": "^32.3.0",
-    "eslint-plugin-no-null": "^1.0.2",
-    "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-rxjs": "^3.1.5",
     "eslint-plugin-unicorn": "^29.0.0",
     "husky": "^6.0.0",
     "jasmine-core": "^3.7.1",
@@ -106,5 +102,8 @@
     "version": "cd projects/easy-framework && standard-version",
     "watch:easy": "ng build easy-framework --watch"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "workspaces": [
+    "projects/*"
+  ]
 }

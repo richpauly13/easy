@@ -26,8 +26,8 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		SlideshowModule,
 		SpinnerModule,
 		SwitchModule,
-		TabModule,
 		TableModule,
+		TabModule,
 		TooltipModule
 	]
 })

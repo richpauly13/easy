@@ -58,7 +58,7 @@ export class TabComponent implements OnInit {
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		return this.elementRef.nativeElement.tagName === 'BUTTON' ? this.type || 'button' : null;
+		return this.elementRef.nativeElement.tagName === 'BUTTON' ? this.type && 'button' : null;
 	}
 
 	@HostListener('click', ['$event.target'])

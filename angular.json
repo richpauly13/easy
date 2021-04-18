@@ -121,7 +121,7 @@
         },
         "@schematics/angular:component": {
           "flat": false,
-          "viewEncapsulation": "Emulated"
+          "viewEncapsulation": "ShadowDom"
         },
         "@schematics/angular:module": {
           "routing": true

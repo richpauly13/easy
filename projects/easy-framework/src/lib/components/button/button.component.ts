@@ -13,7 +13,7 @@ export class ButtonComponent {
 		if (this.ariaLabel) {
 			return this.ariaLabel;
 		} else if (this.class.includes('btn-group')) {
-			return this.class.match(/\bbtn-group\S+\b/u)![0];
+			return (/\bbtn-group\S+\b/u).exec(this.class)![0];
 		} else {
 			return null;
 		}
@@ -26,7 +26,7 @@ export class ButtonComponent {
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		return this.elementRef.nativeElement.tagName === 'BUTTON' ? this.type || 'button' : null;
+		return this.elementRef.nativeElement.tagName === 'BUTTON' ? this.type && 'button' : null;
 	}
 
 	@Input('aria-label') public ariaLabel: string | null;

@@ -2,10 +2,10 @@ import { browser, by, element } from 'protractor';
 
 export class AppPage {
 	public async getTitleText(): Promise<string> {
-		return element(by.css('ez-root h1')).getText() as Promise<string>;
+		return await element(by.css('ez-root h1')).getText();
 	}
 
-	public async navigateTo(): Promise<unknown> {
-		return browser.get(browser.baseUrl) as Promise<unknown>;
+	public async navigateTo(): Promise<string> {
+		return await browser.get(browser.baseUrl) as string;
 	}
 }

@@ -17,32 +17,32 @@ export class SliderComponent implements OnInit {
 
 	@HostBinding('attr.for')
 	public get hostFor(): string | null {
-		return this.class.includes('slider-label') ? this.for || `slider-${this.uniqueSliderLabelId}` : null;
+		return this.class.includes('slider-label') ? this.for && `slider-${this.uniqueSliderLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
 	public get hostId(): string | null {
-		return this.class.includes('slider-label') ? null : this.id || `slider-${this.uniqueSliderInputId}`;
+		return this.class.includes('slider-label') ? null : this.id && `slider-${this.uniqueSliderInputId}`;
 	}
 
 	@HostBinding('attr.max')
 	public get hostMax(): string | null {
-		return this.class.includes('slider-label') ? null : this.max || '100';
+		return this.class.includes('slider-label') ? null : this.max && '100';
 	}
 
 	@HostBinding('attr.min')
 	public get hostMin(): string | null {
-		return this.class.includes('slider-label') ? null : this.min || '0';
+		return this.class.includes('slider-label') ? null : this.min && '0';
 	}
 
 	@HostBinding('attr.step')
 	public get hostStep(): string | null {
-		return this.class.includes('slider-label') ? null : this.step || '1';
+		return this.class.includes('slider-label') ? null : this.step && '1';
 	}
 
 	@HostBinding('attr.value')
 	public get hostValue(): string | null {
-		return this.class.includes('slider-label') ? null : this.value || '0';
+		return this.class.includes('slider-label') ? null : this.value && '0';
 	}
 
 	@HostListener('input', ['$event'])

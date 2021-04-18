@@ -11,6 +11,6 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule, {
 	defaultEncapsulation: ViewEncapsulation.ShadowDom
 })
-.catch((error: Error): void => {
-	return console.error(error);
+.catch((error: string): void => {
+	throw new Error(error);
 });

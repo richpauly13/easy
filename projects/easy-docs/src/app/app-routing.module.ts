@@ -8,24 +8,24 @@ import { UtilitiesModule } from './utilities/utilities.module';
 const routes: Routes = [
 	{
 		path: 'components',
-		loadChildren: (): Promise<ComponentsModule> => {
-			return import('projects/easy-docs/src/app/components/components.module').then((module: typeof import('projects/easy-docs/src/app/components/components.module')): ComponentsModule => {
+		loadChildren: async(): Promise<ComponentsModule> => {
+			return await import('projects/easy-docs/src/app/components/components.module').then((module: typeof import('projects/easy-docs/src/app/components/components.module')): ComponentsModule => {
 				return module.ComponentsModule;
 			});
 		}
 	},
 	{
 		path: 'layout',
-		loadChildren: (): Promise<LayoutModule> => {
-			return import('projects/easy-docs/src/app/layout/layout.module').then((module: typeof import('projects/easy-docs/src/app/layout/layout.module')): LayoutModule => {
+		loadChildren: async(): Promise<LayoutModule> => {
+			return await import('projects/easy-docs/src/app/layout/layout.module').then((module: typeof import('projects/easy-docs/src/app/layout/layout.module')): LayoutModule => {
 				return module.LayoutModule;
 			});
 		}
 	},
 	{
 		path: 'utilities',
-		loadChildren: (): Promise<UtilitiesModule> => {
-			return import('projects/easy-docs/src/app/utilities/utilities.module').then((module: typeof import('projects/easy-docs/src/app/utilities/utilities.module')): UtilitiesModule => {
+		loadChildren: async(): Promise<UtilitiesModule> => {
+			return await import('projects/easy-docs/src/app/utilities/utilities.module').then((module: typeof import('projects/easy-docs/src/app/utilities/utilities.module')): UtilitiesModule => {
 				return module.UtilitiesModule;
 			});
 		}
