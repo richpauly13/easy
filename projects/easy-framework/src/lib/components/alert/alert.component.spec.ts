@@ -8,7 +8,9 @@ describe('AlertComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [AlertComponent]
+			declarations: [
+				AlertComponent
+			]
 		}).compileComponents();
 	}));
 

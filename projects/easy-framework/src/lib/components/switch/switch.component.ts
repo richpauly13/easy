@@ -5,7 +5,9 @@ import { SwitchService } from './switch.service';
 @Component({
 	selector: '.switch-circle, .switch-square, .switch-label',
 	templateUrl: './switch.component.html',
-	styleUrls: ['./switch.component.scss'],
+	styleUrls: [
+		'./switch.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -33,24 +35,12 @@ export class SwitchComponent implements OnInit {
 
 	@HostBinding('attr.for')
 	public get hostFor(): string | null {
-		if (this.class.includes('switch-label') && this.for) {
-			return this.for;
-		} else if (this.class.includes('switch-label')) {
-			return `switch-${this.uniqueSwitchLabelId}`;
-		} else {
-			return null;
-		}
+		return this.class.includes('switch-label') ? this.for ?? `switch-${this.uniqueSwitchLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
 	public get hostId(): string | null {
-		if (this.class.includes('switch-label')) {
-			return null;
-		} else if (this.id) {
-			return this.id;
-		} else {
-			return `switch-${this.uniqueSwitchInputId}`;
-		}
+		return this.class.includes('switch-label') ? null : this.id ?? `switch-${this.uniqueSwitchInputId}`;
 	}
 
 	@HostBinding('attr.role')
@@ -58,7 +48,9 @@ export class SwitchComponent implements OnInit {
 		return this.class.includes('switch-label') ? null : 'switch';
 	}
 
-	@HostListener('click', ['$event'])
+	@HostListener('click', [
+		'$event'
+	])
 	public onClick(): void {
 		this.isChecked = !this.isChecked;
 	}

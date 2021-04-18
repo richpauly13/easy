@@ -10,8 +10,12 @@ describe('AlertComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [AlertComponent],
-			imports: [AlertModule]
+			declarations: [
+				AlertComponent
+			],
+			imports: [
+				AlertModule
+			]
 		})
 		.compileComponents();
 	}));

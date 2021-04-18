@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: '.nav-h, .nav-toggle, .nav-v',
 	templateUrl: './nav.component.html',
-	styleUrls: ['./nav.component.scss'],
+	styleUrls: [
+		'./nav.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

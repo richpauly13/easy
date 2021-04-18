@@ -10,8 +10,12 @@ describe('BadgeComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [BadgeComponent],
-			imports: [BadgeModule]
+			declarations: [
+				BadgeComponent
+			],
+			imports: [
+				BadgeModule
+			]
 		})
 		.compileComponents();
 	}));

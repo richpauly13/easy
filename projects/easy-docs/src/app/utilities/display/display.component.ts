@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-display',
 	templateUrl: './display.component.html',
-	styleUrls: ['./display.component.scss'],
+	styleUrls: [
+		'./display.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -4,7 +4,9 @@ import { TabService } from './tab.service';
 @Component({
 	selector: 'button.tab-btn, .tab-content, .tabs',
 	templateUrl: './tab.component.html',
-	styleUrls: ['./tab.component.scss'],
+	styleUrls: [
+		'./tab.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -21,7 +23,7 @@ export class TabComponent implements OnInit {
 
 	@HostBinding('attr.aria-posinset')
 	public get hostAriaPosinset(): string | null {
-		return this.class.includes('tab-btn') ? `${this.uniqueTabId + 1}` : null;
+		return this.class.includes('tab-btn') ? String(this.uniqueTabId + 1) : null;
 	}
 
 	@HostBinding('attr.aria-selected')
@@ -31,7 +33,7 @@ export class TabComponent implements OnInit {
 
 	@HostBinding('attr.aria-setsize')
 	public get hostAriaSetsize(): string | null {
-		return this.class.includes('tab-btn') ? `${this.tabButtons.length}` : null;
+		return this.class.includes('tab-btn') ? String(this.tabButtons.length) : null;
 	}
 
 	@HostBinding('attr.id')
@@ -58,16 +60,12 @@ export class TabComponent implements OnInit {
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		if (this.class.includes('tab-btn') && this.type) {
-			return this.type;
-		} else if (this.class.includes('tab-btn')) {
-			return 'button';
-		} else {
-			return null;
-		}
+		return this.class.includes('tab-btn') ? this.type ?? 'button' : null;
 	}
 
-	@HostListener('click', ['$event.target'])
+	@HostListener('click', [
+		'$event.target'
+	])
 	public onClick(event: HTMLButtonElement): void {
 		this.tabButtons.forEach((tabButton: HTMLButtonElement) => {
 			if (tabButton === event) {
@@ -118,7 +116,7 @@ export class TabComponent implements OnInit {
 		} else if (this.class.includes('tab-content')) {
 			this.renderer2.setAttribute(this.elementRef.nativeElement, 'aria-hidden', 'true');
 			this.renderer2.addClass(this.elementRef.nativeElement, 'hide');
-			this.tabContents.push(this.elementRef.nativeElement as HTMLElement);
+			this.tabContents.push(this.elementRef.nativeElement as HTMLButtonElement);
 			this.uniqueContentId = this.tabService.uniqueContentId++;
 		} else {
 			this.uniqueContentId = null;

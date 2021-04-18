@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-table',
 	templateUrl: './table.component.html',
-	styleUrls: ['./table.component.scss'],
+	styleUrls: [
+		'./table.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

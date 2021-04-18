@@ -8,7 +8,9 @@ describe('VisibilityComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [VisibilityComponent]
+			declarations: [
+				VisibilityComponent
+			]
 		})
 		.compileComponents();
 	}));

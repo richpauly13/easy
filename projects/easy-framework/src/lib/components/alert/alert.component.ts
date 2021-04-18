@@ -5,7 +5,9 @@ import { AlertService } from './alert.service';
 @Component({
 	selector: '.alert-bad, .alert-good, .alert-info, .alert-warn',
 	templateUrl: './alert.component.html',
-	styleUrls: ['./alert.component.scss'],
+	styleUrls: [
+		'./alert.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

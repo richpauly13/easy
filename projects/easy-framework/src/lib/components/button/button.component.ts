@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 @Component({
 	selector: '.btn, .btn-full, .btn-lg, .btn-md, .btn-sm, .btn-xl, .btn-xs, .btn-group-col, .btn-group-full, .btn-group-row',
 	templateUrl: './button.component.html',
-	styleUrls: ['./button.component.scss'],
+	styleUrls: [
+		'./button.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -26,13 +28,7 @@ export class ButtonComponent {
 
 	@HostBinding('attr.type')
 	public get hostType(): string | null {
-		if (this.class.includes('tab-btn') && this.type) {
-			return this.type;
-		} else if (this.class.includes('tab-btn')) {
-			return 'button';
-		} else {
-			return null;
-		}
+		return this.class.includes('btn-group') ? null : this.type ?? 'button';
 	}
 
 	@Input('aria-label') public ariaLabel: string | null;

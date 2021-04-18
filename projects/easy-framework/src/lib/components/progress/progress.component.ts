@@ -4,31 +4,21 @@ import { ProgressService } from './progress.service';
 @Component({
 	selector: '..progress, .progress-label, .progress-striped',
 	templateUrl: './progress.component.html',
-	styleUrls: ['./progress.component.scss'],
+	styleUrls: [
+		'./progress.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressComponent implements OnInit {
 	@HostBinding('attr.for')
 	public get hostFor(): string | null {
-		if (this.class.includes('progress-label') && this.for) {
-			return this.for;
-		} else if (this.class.includes('progress-label')) {
-			return `progress-${this.uniqueProgressLabelId}`;
-		} else {
-			return null;
-		}
+		return this.class.includes('progress-label') ? this.for ?? `progress-${this.uniqueProgressLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
 	public get hostId(): string | null {
-		if (this.class.includes('progress-label')) {
-			return null;
-		} else if (this.id) {
-			return this.id;
-		} else {
-			return `progress-${this.uniqueProgressInputId}`;
-		}
+		return this.class.includes('progress-label') ? null : this.id ?? `progress-${this.uniqueProgressInputId}`;
 	}
 
 	@HostBinding('attr.max')

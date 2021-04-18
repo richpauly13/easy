@@ -5,7 +5,9 @@ import { SliderService } from './slider.service';
 @Component({
 	selector: '.slider-circle, .slider-label, .slider-square',
 	templateUrl: './slider.component.html',
-	styleUrls: ['./slider.component.scss'],
+	styleUrls: [
+		'./slider.component.scss'
+	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -17,71 +19,37 @@ export class SliderComponent implements OnInit {
 
 	@HostBinding('attr.for')
 	public get hostFor(): string | null {
-		if (this.class.includes('slider-label') && this.for) {
-			return this.for;
-		} else if (this.class.includes('slider-label')) {
-			return `slider-${this.uniqueSliderLabelId}`;
-		} else {
-			return null;
-		}
+		return this.class.includes('slider-label') ? this.for ?? `slider-${this.uniqueSliderLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
 	public get hostId(): string | null {
-		if (this.class.includes('slider-label')) {
-			return null;
-		} else if (this.id) {
-			return this.id;
-		} else {
-			return `slider-${this.uniqueSliderInputId}`;
-		}
+		return this.class.includes('slider-label') ? null : this.id ?? `slider-${this.uniqueSliderInputId}`;
 	}
 
 	@HostBinding('attr.max')
 	public get hostMax(): string | null {
-		if (this.class.includes('slider-label')) {
-			return null;
-		} else if (this.max) {
-			return this.max;
-		} else {
-			return '100';
-		}
+		return this.class.includes('slider-label') ? null : this.max ?? '100';
 	}
 
 	@HostBinding('attr.min')
 	public get hostMin(): string | null {
-		if (this.class.includes('slider-label')) {
-			return null;
-		} else if (this.min) {
-			return this.min;
-		} else {
-			return '0';
-		}
+		return this.class.includes('slider-label') ? null : this.min ?? '0';
 	}
 
 	@HostBinding('attr.step')
 	public get hostStep(): string | null {
-		if (this.class.includes('slider-label')) {
-			return null;
-		} else if (this.step) {
-			return this.step;
-		} else {
-			return '1';
-		}
+		return this.class.includes('slider-label') ? null : this.step ?? '1';
 	}
 
 	@HostBinding('attr.value')
 	public get hostValue(): string | null {
-		if (this.class.includes('slider-label')) {
-			return null;
-		} else if (this.value) {
-			return this.value;
-		} else {
-			return '0';
-		}
+		return this.class.includes('slider-label') ? null : this.value ?? '0';
 	}
 
-	@HostListener('input', ['$event'])
+	@HostListener('input', [
+		'$event'
+	])
 	public onInputChange(event: InputEvent): void {
 		this.value = (event.target as HTMLInputElement).value;
 	}

@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-slideshow',
 	templateUrl: './slideshow.component.html',
-	styleUrls: ['./slideshow.component.scss'],
+	styleUrls: [
+		'./slideshow.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-dimension',
 	templateUrl: './dimension.component.html',
-	styleUrls: ['./dimension.component.scss'],
+	styleUrls: [
+		'./dimension.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

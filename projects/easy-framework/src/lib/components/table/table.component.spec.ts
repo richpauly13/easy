@@ -8,7 +8,9 @@ describe('TableComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [TableComponent]
+			declarations: [
+				TableComponent
+			]
 		}).compileComponents();
 	}));
 

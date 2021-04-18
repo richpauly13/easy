@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-tooltip',
 	templateUrl: './tooltip.component.html',
-	styleUrls: ['./tooltip.component.scss'],
+	styleUrls: [
+		'./tooltip.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

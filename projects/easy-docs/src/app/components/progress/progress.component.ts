@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-progress',
 	templateUrl: './progress.component.html',
-	styleUrls: ['./progress.component.scss'],
+	styleUrls: [
+		'./progress.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

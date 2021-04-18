@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-nav',
 	templateUrl: './nav.component.html',
-	styleUrls: ['./nav.component.scss'],
+	styleUrls: [
+		'./nav.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-typography',
 	templateUrl: './typography.component.html',
-	styleUrls: ['./typography.component.scss'],
+	styleUrls: [
+		'./typography.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

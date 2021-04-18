@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-card',
 	templateUrl: './card.component.html',
-	styleUrls: ['./card.component.scss'],
+	styleUrls: [
+		'./card.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

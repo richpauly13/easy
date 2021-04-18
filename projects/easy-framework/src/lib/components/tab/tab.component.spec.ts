@@ -162,12 +162,12 @@ describe('TabComponent', (): void => {
 		const mockButton1: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[0];
 		const mockButton2: DebugElement = mockTabComponent.debugElement.queryAll(By.css('button'))[1];
 
-		mockButton1.nativeElement.dispatchEvent(event);
+		(mockButton1.nativeElement as HTMLButtonElement).dispatchEvent(event);
 		mockTabComponent.detectChanges();
 
-		mockButton2.nativeElement.dispatchEvent(event);
+		(mockButton2.nativeElement as HTMLButtonElement).dispatchEvent(event);
 		mockTabComponent.detectChanges();
 
-		expect(mockButton1.nativeElement.getAttribute('aria-selected')).toEqual('false');
+		expect((mockButton1.nativeElement as HTMLButtonElement).getAttribute('aria-selected')).toEqual('false');
 	});
 });

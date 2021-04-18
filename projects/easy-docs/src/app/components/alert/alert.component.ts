@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-alert',
 	templateUrl: './alert.component.html',
-	styleUrls: ['./alert.component.scss'],
+	styleUrls: [
+		'./alert.component.scss'
+	],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

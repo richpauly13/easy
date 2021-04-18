@@ -42,6 +42,8 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		UtilitiesRoutingModule,
 		VisibilityComponent
 	],
-	imports: [SharedModule]
+	imports: [
+		SharedModule
+	]
 })
 export class UtilitiesModule { }
