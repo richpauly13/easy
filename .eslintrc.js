@@ -1,6 +1,3 @@
-/* eslint-disable id-length */
-/* eslint-disable max-lines */
-/* eslint-disable @typescript-eslint/naming-convention */
 module.exports = {
 	ignorePatterns: [
 		'projects/**/*'
@@ -14,7 +11,6 @@ module.exports = {
 				'plugin:@angular-eslint/template/process-inline-templates'
 			],
 			files: [
-				'*.js',
 				'*.ts'
 			],
 			parserOptions: {
