@@ -1333,25 +1333,7 @@ module.exports = {
 					'never'
 				],
 				'new-cap': [
-					'error',
-					{
-						capIsNew: true,
-						capIsNewExceptions: [
-							'Component',
-							'Directive',
-							'HostBinding',
-							'HostListener',
-							'Injectable',
-							'Input',
-							'NgModule',
-							'Output',
-							'Pipe',
-							'ViewChild',
-							'ViewChildren'
-						],
-						newIsCap: true,
-						properties: true
-					}
+					'off'
 				],
 				'new-parens': [
 					'error',
