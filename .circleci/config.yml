@@ -128,6 +128,6 @@ workflows:
       - test_docs:
           requires:
             - build
-      #- e2e:
-          #requires:
-            #- build
+      - e2e:
+          requires:
+            - build

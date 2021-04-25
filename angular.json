@@ -25,14 +25,12 @@
                 }
               ],
               "buildOptimizer": true,
-              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "projects/easy-docs/src/environments/environment.ts",
                   "with": "projects/easy-docs/src/environments/environment.prod.ts"
                 }
               ],
-              "namedChunks": false,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -40,7 +38,6 @@
             }
           },
           "options": {
-            "aot": true,
             "assets": [
               "projects/easy-docs/src/favicon.ico"
             ],
@@ -51,7 +48,13 @@
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
-            "tsConfig": "projects/easy-docs/tsconfig.app.json"
+            "tsConfig": "projects/easy-docs/tsconfig.app.json",
+            "vendorChunk": true,
+            "extractLicenses": true,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": false
           }
         },
         "e2e": {
