@@ -34,8 +34,8 @@ textarea.form-field {
 			flex: 0 0 25%;
 		}
 
-		.form-label {
-			flex: none;
+		.checkbox-label,
+		.radio-label {
 			padding-left: space(sm);
 			padding-right: space(sm);
 			width: rem(80);
@@ -54,11 +54,11 @@ textarea.form-field {
     justify-content: flex-start;
     padding-bottom: space(sm);
 	padding-top: space(sm);
+}
 
-	p.form-label {
-		flex: 1 0 rem(120);
-		max-width: rem(220);
-	}
+.field-group-title {
+	flex: 1 0 rem(120);
+	max-width: rem(220);
 }
 
 .fieldset {
@@ -124,6 +124,17 @@ textarea.form-field {
 		.form-label {
 			flex: 1 0 rem(120);
 			max-width: rem(220);
+			padding-bottom: space(xs);
+		}
+
+		@include media(md) {
+			.form-label {
+				padding-bottom: 0;
+			}
+
+			&:not(:first-of-type) {
+				padding-left: space(md);
+			}
 		}
 	}
 }

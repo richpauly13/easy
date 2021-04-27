@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { FormComponent } from './form.component';
 
@@ -10,6 +11,12 @@ describe('FormComponent', (): void => {
 		TestBed.configureTestingModule({
 			declarations: [
 				FormComponent
+			],
+			imports: [
+				ReactiveFormsModule
+			],
+			providers: [
+				FormBuilder
 			]
 		})
 		.compileComponents();
