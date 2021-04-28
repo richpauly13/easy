@@ -27,7 +27,7 @@
     "@angular/cli": "^12.0.0-rc.0",
     "@angular/compiler-cli": "^12.0.0-rc.0",
     "@types/jasmine": "^3.6.10",
-    "@types/node": "^15.0.0",
+    "@types/node": "^15.0.1",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "codecov": "^4.0.0-0",
