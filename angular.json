@@ -38,23 +38,22 @@
             }
           },
           "options": {
+            "aot": true,
             "assets": [
               "projects/easy-docs/src/favicon.ico"
             ],
+            "buildOptimizer": false,
             "index": "projects/easy-docs/src/index.html",
             "main": "projects/easy-docs/src/main.ts",
+            "optimization": false,
             "outputPath": "docs",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
+            "sourceMap": true,
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
             "tsConfig": "projects/easy-docs/tsconfig.app.json",
-            "vendorChunk": true,
-            "extractLicenses": true,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": false
+            "vendorChunk": true
           }
         },
         "e2e": {
