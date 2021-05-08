@@ -12,6 +12,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
             "production": {
+              "aot": true,
               "budgets": [
                 {
                   "maximumError": "1mb",
@@ -42,8 +43,10 @@
               "projects/easy-docs/src/favicon.ico"
             ],
             "buildOptimizer": false,
+            "extractLicenses": false,
             "index": "projects/easy-docs/src/index.html",
             "main": "projects/easy-docs/src/main.ts",
+            "namedChunks": true,
             "optimization": false,
             "outputPath": "docs",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
@@ -52,9 +55,7 @@
               "projects/easy-docs/src/styles.scss"
             ],
             "tsConfig": "projects/easy-docs/tsconfig.app.json",
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "namedChunks": true
+            "vendorChunk": true
           }
         },
         "e2e": {
