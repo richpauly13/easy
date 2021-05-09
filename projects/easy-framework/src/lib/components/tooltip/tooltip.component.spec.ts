@@ -11,7 +11,8 @@ describe('TooltipComponent', (): void => {
 			declarations: [
 				TooltipComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

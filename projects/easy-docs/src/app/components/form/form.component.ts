@@ -34,9 +34,9 @@ export class FormComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.checkboxRadioGroupForm = this.formBuilder.group({
-			favoriteColor: false,
-			name: '',
-			vote: null
+			color: null,
+			like: null,
+			name: ''
 		});
 		this.fieldGroupForm = this.formBuilder.group({
 			name: ''
@@ -47,7 +47,7 @@ export class FormComponent implements OnInit {
 		});
 		this.formFieldForm = this.formBuilder.group({
 			gender: 1,
-			language: '',
+			languages: '',
 			name: '',
 			note: ''
 		});

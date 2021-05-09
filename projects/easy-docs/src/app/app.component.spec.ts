@@ -17,7 +17,8 @@ describe('AppComponent', (): void => {
 				EasyModule,
 				RouterTestingModule
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

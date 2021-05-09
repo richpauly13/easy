@@ -11,7 +11,8 @@ describe('SpinnerComponent', (): void => {
 			declarations: [
 				SpinnerComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

@@ -11,7 +11,8 @@ describe('SlideshowComponent', (): void => {
 			declarations: [
 				SlideshowComponent
 			]
-		}).compileComponents();
+		})
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

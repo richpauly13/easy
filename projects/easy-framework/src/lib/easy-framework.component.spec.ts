@@ -11,7 +11,8 @@ describe('EasyComponent', (): void => {
 			declarations: [
 				EasyComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

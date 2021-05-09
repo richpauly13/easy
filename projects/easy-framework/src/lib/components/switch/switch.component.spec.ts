@@ -11,7 +11,8 @@ describe('SwitchComponent', (): void => {
 			declarations: [
 				SwitchComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

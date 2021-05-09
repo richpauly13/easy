@@ -203,8 +203,12 @@ select:hover {
 }
 
 fieldset {
+	margin-inline: 0;
+	min-inline-size: 0;
 	min-width: 0;
 	padding: 0;
+	padding-block: 0;
+	padding-inline: 0;
 }
 
 input,
@@ -301,6 +305,7 @@ input::-webkit-outer-spin-button {
 
 legend {
 	font-size: $font-md;
+	padding-inline: 0;
 }
 
 optgroup {

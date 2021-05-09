@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEnc
 import { FormService } from './form.service';
 
 @Component({
-	selector: '.checkbox-label, .checkbox-group, .field-group, .field-group-title, .fieldset, .form-field, .form-group, .form-group-inline, .form-label, .radio-label, .radio-group',
+	selector: '.checkbox-label, .checkbox-group, .field-group, .fieldset, .form-field, .form-group, .form-group-inline, .form-label, .radio-label, .radio-group',
 	templateUrl: './form.component.html',
 	styleUrls: [
 		'./form.component.scss'
@@ -14,11 +14,11 @@ import { FormService } from './form.service';
 export class FormComponent implements OnInit {
 	@HostBinding('attr.class')
 	public get hostClass(): string {
-		if (this.class.includes('form-label') && !this.class.includes('pad-b-')) {
+		if (this.class.includes('form-label') && !this.class.includes('pad-')) {
 			return `${this.class} pad-b-xs`;
-		} else if ((this.class.includes('checkbox-label') || this.class.includes('radio-label')) && !this.class.includes('pad-l-') && !this.class.includes('pad-r-') && !this.class.includes('pad-lr-')) {
+		} else if ((this.class.includes('checkbox-label') || this.class.includes('radio-label')) && !this.class.includes('pad-')) {
 			return `${this.class} pad-lr-sm`;
-		} else if (this.class.includes('field-group') && !this.class.includes('pad-t-') && !this.class.includes('pad-b-') && !this.class.includes('pad-tb-')) {
+		} else if (this.class.includes('field-group') && !this.class.includes('pad-')) {
 			return `${this.class} pad-tb-sm`;
 		} else if (this.class.includes('form-field') && !this.class.includes('pad-')) {
 			return `${this.class} pad-a-xs`;

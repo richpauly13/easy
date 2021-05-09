@@ -11,7 +11,8 @@ describe('AlertComponent', (): void => {
 			declarations: [
 				AlertComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

@@ -21,7 +21,8 @@ describe('SliderComponent', (): void => {
 				MockSliderComponent,
 				SliderComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(SliderComponent);

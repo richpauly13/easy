@@ -20,14 +20,14 @@ select.form-field:not([multiple]) {
     flex-wrap: wrap;
     justify-content: flex-start;
 
+	&:not(:last-child) {
+		margin-bottom: space(sm);
+	}
+
 	.field-group {
-		flex: 0 0 33%;
 		flex-wrap: nowrap;
 		justify-content: center;
-
-		@include media(md) {
-			flex: 0 0 25%;
-		}
+		padding-bottom: 0;
 
 		.checkbox-label,
 		.radio-label {
@@ -47,7 +47,7 @@ select.form-field:not([multiple]) {
 				outline: none;
 
 				&:checked::before {
-					transform: translate(rem(-7.25), rem(-8));
+					transform: translate(rem(-8), rem(-8));
 					-moz-transform: translate(rem(-7.25), rem(-7.5));
 				}
 			}
@@ -78,14 +78,9 @@ select.form-field:not([multiple]) {
     justify-content: flex-start;
 }
 
-.field-group-title {
-	flex: 1 0 rem(120);
-	max-width: rem(220);
-}
-
 .fieldset {
     border: rem(1.6) solid color(blue);
-    padding: rem(6 10 12);
+    padding: rem(6 12 12);
 }
 
 .form-field {

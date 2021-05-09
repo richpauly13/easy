@@ -11,7 +11,8 @@ describe('FormComponent', (): void => {
 			declarations: [
 				FormComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

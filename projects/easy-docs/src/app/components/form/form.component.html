@@ -1,402 +1,378 @@
 <h1>Form</h1>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
 		<p class="pad-b-sm"><code>import &#123; FormModule &#125; from 'easy-framework';</code></p>
-        <p>Basic forms are styled with <code>.field-group</code>, <code>.form-label</code>, and <code>.form-field</code> classes.</p>
-    </section>
+		<p>Basic forms are styled with <code>.field-group</code>, <code>.form-label</code>, and <code>.form-field</code> classes.</p>
+		<p><strong>Note</strong>: Forms will have a unique <code>id</code>, a unique <code>for</code>, <code>role</code>, and <code>.pad-*</code> class attributes added, if not present.</p>
+	</section>
 
-    <section class="pad-a-sm">
-        <form [formGroup]="formForm">
+	<section class="pad-a-sm">
+		<form [formGroup]="formForm">
 			<section class="field-group">
 				<label class="form-label">Name</label>
 				<input formControlName="name" class="form-field" type="text">
 			</section>
-        </form>
-    </section>
+		</form>
+	</section>
 
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formForm"</span>&gt;</span>
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formForm"</span>&gt;</span>
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
-</article>
-
-<h2>Form Label</h2>
-
-<article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Form labels are styled with a <code>.form-label</code> class.</p>
-    </section>
-
-    <section class="pad-a-sm">
-        <form [formGroup]="formLabelForm">
-            <section class="field-group">
-				<label class="form-label">Name</label>
-				<input formControlName="name" class="form-field" type="text">
-			</section>
-        </form>
-    </section>
-
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formLabelForm"</span>&gt;</span>
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
-					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
-</article>
-
-<h2>Form Field</h2>
-
-<article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Form fields are styled with a <code>.form-field</code> class.&nbsp;&nbsp;Different styles are applied based on the form field.</p>
-    </section>
-
-    <section class="pad-a-sm">
-        <form [formGroup]="formFieldForm">
-            <ul class="form-group">
-                <li class="field-group">
-                    <label class="form-label">Name</label>
-                    <input formControlName="name" class="form-field" type="text">
-                </li>
-                <li class="field-group">
-                    <label class="form-label">Gender</label>
-                    <select formControlName="gender" class="form-field">
-                        <option value="1">--- Select Gender ---</option>
-                        <option value="2">Female</option>
-                        <option value="3">Male</option>
-                    </select>
-                </li>
-                <li class="field-group">
-                    <label class="form-label">Language</label>
-                    <select formControlName="language" class="form-field" multiple>
-                        <option value="1">English</option>
-                        <option value="2">French</option>
-                        <option value="3">Spanish</option>
-                    </select>
-                </li>
-                <li class="field-group">
-                    <label class="form-label">Note</label>
-                    <textarea formControlName="note" class="form-field"></textarea>
-                </li>
-            </ul>
-        </form>
-    </section>
-
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formFieldForm"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"form-group"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Gender<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">select</span> <span class="attribute">formControlName</span>=<span class="value">"gender"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"1"</span>&gt;</span>--- Select Gender ---<span>&lt;/<span class="tag">option</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"2"</span>&gt;</span>Female<span>&lt;/<span class="tag">option</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"3"</span>&gt;</span>Male<span>&lt;/<span class="tag">option</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">select</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Language<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">select</span> <span class="attribute">formControlName</span>=<span class="value">"language"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">multiple</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"1"</span>&gt;</span>English<span>&lt;/<span class="tag">option</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"2"</span>&gt;</span>French<span>&lt;/<span class="tag">option</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"3"</span>&gt;</span>Spanish<span>&lt;/<span class="tag">option</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">select</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Note<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">textarea</span> <span class="attribute">formControlName</span>=<span class="value">"note"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span>&gt;</span><span>&lt;/<span class="tag">textarea</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
 </article>
 
 <h2>Fieldset</h2>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Fieldsets are styled with a <code>.fieldset</code> class and have a <code>&lt;legend&gt;</code> tag as the first child.</p>
-    </section>
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>A fieldset is optionally styled with a <code>.fieldset</code> class and has an optional <code>&lt;legend&gt;</code> tag as the first child.</p>
+		<p>A Fieldset is used to group similar fields together both visually and for assitive technologies.</p>
+	</section>
 
-    <section class="pad-a-sm">
-        <form [formGroup]="fieldsetForm">
-            <fieldset class="fieldset">
-                <legend>Contact Information</legend>
-                <ul class="form-group">
-                    <li class="field-group">
-                        <label class="form-label">Name</label>
-                        <input formControlName="name" class="form-field" type="text">
-                    </li>
-					<li class="field-group">
-						<label class="form-label">Email</label>
-						<input formControlName="email" class="form-field" type="email">
-					</li>
-                </ul>
-            </fieldset>
-        </form>
-    </section>
+	<section class="pad-a-sm">
+		<form [formGroup]="fieldsetForm">
+			<fieldset class="fieldset">
+				<legend>Contact Information</legend>
+				<section class="field-group">
+					<label class="form-label">Name</label>
+					<input formControlName="name" class="form-field" type="text">
+				</section>
+				<section class="field-group">
+					<label class="form-label">Email</label>
+					<input formControlName="email" class="form-field" type="email">
+				</section>
+			</fieldset>
+		</form>
+	</section>
 
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"fieldsetForm"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span> <span class="attribute">class</span>=<span class="value">"fieldset"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">legend</span>&gt;</span>Contact Information<span>&lt;/<span class="tag">legend</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"form-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Email<span>&lt;/<span class="tag">label</span>&gt;</span>
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"email"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"email"</span>&gt;</span>
-                    	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"fieldsetForm"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span> <span class="attribute">class</span>=<span class="value">"fieldset"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">legend</span>&gt;</span>Contact Information<span>&lt;/<span class="tag">legend</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Email<span>&lt;/<span class="tag">label</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"email"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"email"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
 </article>
 
-<h2>Form Group</h2>
+<h2>Form Label</h2>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Form groups are styled with a <code>.form-group</code> class for vertical fields and <code>.form-group-inline</code> for horizontal fields.</p>
-    </section>
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Form labels are styled with a <code>.form-label</code> class.</p>
+	</section>
 
-    <section class="pad-a-sm">
-        <form [formGroup]="formGroupForm">
-            <ul class="form-group-inline">
-                <li class="field-group">
-                    <label class="form-label">Name</label>
-                    <input formControlName="name1" class="form-field" type="text">
-                </li>
-                <li class="field-group">
-                    <label class="form-label">Email</label>
-                    <input formControlName="email1" class="form-field" type="email">
-                </li>
-            </ul>
-            <ul class="form-group">
-                <li class="field-group">
-                    <label class="form-label">Name</label>
-                    <input formControlName="name2" class="form-field" type="text">
-                </li>
-                <li class="field-group">
-                    <label class="form-label">Email</label>
-                    <input formControlName="email2" class="form-field" type="email">
-                </li>
-            </ul>
-        </form>
-    </section>
+	<section class="pad-a-sm">
+		<form [formGroup]="formLabelForm">
+			<section class="field-group">
+				<label class="form-label">Name</label>
+				<input formControlName="name" class="form-field" type="text">
+			</section>
+		</form>
+	</section>
 
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formGroupForm"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"form-group-inline"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formLabelForm"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
+</article>
+
+<h2>Form Field</h2>
+
+<article class="mar-b-lg box-shadow-1 border-lr-gray">
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Form fields are styled with a <code>.form-field</code> class.&nbsp;&nbsp;Different styles are applied based on the form field.</p>
+	</section>
+
+	<section class="pad-a-sm">
+		<form [formGroup]="formFieldForm">
+			<fieldset>
+				<legend>Demographics</legend>
+				<section class="field-group">
+					<label class="form-label">Name</label>
+					<input formControlName="name" class="form-field" type="text">
+				</section>
+				<section class="field-group">
+					<label class="form-label">Gender</label>
+					<select formControlName="gender" class="form-field">
+						<option value="1">--- Select Gender ---</option>
+						<option value="2">Female</option>
+						<option value="3">Male</option>
+					</select>
+				</section>
+				<section class="field-group">
+					<label class="form-label">Languages</label>
+					<select formControlName="languages" class="form-field" multiple>
+						<option value="1">English</option>
+						<option value="2">French</option>
+						<option value="3">Spanish</option>
+					</select>
+				</section>
+				<section class="field-group">
+					<label class="form-label">Note</label>
+					<textarea formControlName="note" class="form-field"></textarea>
+				</section>
+			</fieldset>
+		</form>
+	</section>
+
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formFieldForm"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">legend</span>&gt;</span>Demographics<span>&lt;/<span class="tag">legend</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Gender<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">select</span> <span class="attribute">formControlName</span>=<span class="value">"gender"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"1"</span>&gt;</span>--- Select Gender ---<span>&lt;/<span class="tag">option</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"2"</span>&gt;</span>Female<span>&lt;/<span class="tag">option</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"3"</span>&gt;</span>Male<span>&lt;/<span class="tag">option</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">select</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Languages<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">select</span> <span class="attribute">formControlName</span>=<span class="value">"languages"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">multiple</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"1"</span>&gt;</span>English<span>&lt;/<span class="tag">option</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"2"</span>&gt;</span>French<span>&lt;/<span class="tag">option</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">option</span> <span class="attribute">value</span>=<span class="value">"3"</span>&gt;</span>Spanish<span>&lt;/<span class="tag">option</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">select</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Note<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">textarea</span> <span class="attribute">formControlName</span>=<span class="value">"note"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span>&gt;</span><span>&lt;/<span class="tag">textarea</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
+</article>
+
+<h2>Form Group Inline</h2>
+
+<article class="mar-b-lg box-shadow-1 border-lr-gray">
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Inline form groups are styled with <code>.form-group-inline</code> class.</p>
+	</section>
+
+	<section class="pad-a-sm">
+		<form [formGroup]="formGroupForm">
+			<fieldset class="form-group-inline">
+				<section class="field-group">
+					<label class="form-label">Name</label>
+					<input formControlName="name1" class="form-field" type="text">
+				</section>
+				<section class="field-group">
+					<label class="form-label">Email</label>
+					<input formControlName="email1" class="form-field" type="email">
+				</section>
+			</fieldset>
+		</form>
+	</section>
+
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formGroupForm"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span> <span class="attribute">class</span>=<span class="value">"form-group-inline"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name1"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Email<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"email1"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"email"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"form-group"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name2"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Email<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"email2"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"email"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name1"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Email<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"email1"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"email"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
 </article>
 
 <h2>Field Group</h2>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Field groups are styled with a <code>.field-group</code> class.</p>
-    </section>
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Field groups are styled with a <code>.field-group</code> class.</p>
+	</section>
 
-    <section class="pad-a-sm">
-        <form [formGroup]="fieldGroupForm">
+	<section class="pad-a-sm">
+		<form [formGroup]="fieldGroupForm">
 			<section class="field-group">
 				<label class="form-label">Name</label>
 				<input formControlName="name" class="form-field" type="text">
 			</section>
-        </form>
-    </section>
+		</form>
+	</section>
 
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"fieldGroupForm"</span>&gt;</span>
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"fieldGroupForm"</span>&gt;</span>
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
 					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
 </article>
 
 <h2>Checkbox/Radio Group</h2>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Checkbox and radio fields are grouped with a <code>.checkbox-group</code> or <code>.radio-group</code> and <code>.checkbox-label</code> or <code>.radio-label</code> classes.</p>
-    </section>
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Checkbox and radio fields are grouped with a <code>.checkbox-group</code> or <code>.radio-group</code> and <code>.checkbox-label</code> or <code>.radio-label</code> classes.</p>
+	</section>
 
-    <section class="pad-a-sm">
-        <form [formGroup]="checkboxRadioGroupForm">
-            <ul class="form-group">
-                <li class="field-group">
-                    <label class="form-label">Name</label>
-                    <input formControlName="name" class="form-field" type="text">
-                </li>
-                <li class="field-group">
-                    <p class="field-group-title">Vote</p>
-                    <ul class="radio-group">
-                        <li class="field-group">
-                            <input formControlName="vote" class="form-field" type="radio" value="yes">
-                            <label class="radio-label">Yes</label>
-                        </li>
-                        <li class="field-group">
-                            <input formControlName="vote" class="form-field" type="radio" value="no">
-                            <label class="radio-label">No</label>
-                        </li>
-                    </ul>
-                </li>
-                <li class="field-group">
-                    <p class="field-group-title">Favorite Color</p>
-                    <ul class="checkbox-group">
-                        <li class="field-group">
-                            <input formControlName="favoriteColor" class="form-field" type="checkbox">
-                            <label class="checkbox-label">Blue</label>
-                        </li>
-                        <li class="field-group">
-                            <input formControlName="favoriteColor" class="form-field" type="checkbox">
-                            <label class="checkbox-label">Green</label>
-                        </li>
-                        <li class="field-group">
-                            <input formControlName="favoriteColor" class="form-field" type="checkbox">
-                            <label class="checkbox-label">Red</label>
-                        </li>
-                        <li class="field-group">
-                            <input formControlName="favoriteColor" class="form-field" type="checkbox">
-                            <label class="checkbox-label">Yellow</label>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </form>
-    </section>
+	<section class="pad-a-sm">
+		<form [formGroup]="checkboxRadioGroupForm">
+			<fieldset class="fieldset">
+				<legend>Preferences</legend>
+				<section class="field-group">
+					<label class="form-label">Name</label>
+					<input formControlName="name" class="form-field" type="text">
+				</section>
+				<fieldset class="radio-group fieldset">
+					<legend>Like</legend>
+					<section class="field-group">
+						<input formControlName="like" class="form-field" type="radio" value="yes">
+						<label class="radio-label">Yes</label>
+					</section>
+					<section class="field-group">
+						<input formControlName="like" class="form-field" type="radio" value="no">
+						<label class="radio-label">No</label>
+					</section>
+				</fieldset>
+				<fieldset class="checkbox-group fieldset">
+					<legend>Color</legend>
+					<section class="field-group">
+						<input formControlName="color" class="form-field" type="checkbox">
+						<label class="checkbox-label">Blue</label>
+					</section>
+					<section class="field-group">
+						<input formControlName="color" class="form-field" type="checkbox">
+						<label class="checkbox-label">Green</label>
+					</section>
+					<section class="field-group">
+						<input formControlName="color" class="form-field" type="checkbox">
+						<label class="checkbox-label">Red</label>
+					</section>
+					<section class="field-group">
+						<input formControlName="color" class="form-field" type="checkbox">
+						<label class="checkbox-label">Yellow</label>
+					</section>
+				</fieldset>
+			</fieldset>
+		</form>
+	</section>
 
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"checkboxRadioGroupForm"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"form-group"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"field-group-title"</span>&gt;</span>Vote<span>&lt;/<span class="tag">p</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"radio-group"</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"vote"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"radio"</span> <span class="attribute">value</span>=<span class="value">"yes"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"radio-label"</span>&gt;</span>Yes<span>&lt;/<span class="tag">label</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"vote"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"radio"</span> <span class="attribute">value</span>=<span class="value">"no"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"radio-label"</span>&gt;</span>No<span>&lt;/<span class="tag">label</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">p</span> <span class="attribute">class</span>=<span class="value">"field-group-title"</span>&gt;</span>Favorite Color<span>&lt;/<span class="tag">p</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"checkbox-group"</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"favoriteColor"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Blue<span>&lt;/<span class="tag">label</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"favoriteColor"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Green<span>&lt;/<span class="tag">label</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"favoriteColor"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Red<span>&lt;/<span class="tag">label</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"favoriteColor"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Yellow<span>&lt;/<span class="tag">label</span>&gt;</span>
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"checkboxRadioGroupForm"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span> <span class="attribute">class</span>=<span class="value">"fieldset"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">legend</span>&gt;</span>Preferences<span>&lt;/<span class="tag">legend</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Name<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"name"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span> <span class="attribute">class</span>=<span class="value">"radio-group fieldset"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">legend</span>&gt;</span>Like<span>&lt;/<span class="tag">legend</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"like"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"radio"</span> <span class="attribute">value</span>=<span class="value">"yes"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"radio-label"</span>&gt;</span>Yes<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"like"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"radio"</span> <span class="attribute">value</span>=<span class="value">"no"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"radio-label"</span>&gt;</span>No<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span> <span class="attribute">class</span>=<span class="value">"checkbox-group fieldset"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">legend</span>&gt;</span>Color<span>&lt;/<span class="tag">legend</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"color"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Blue<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"color"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Green<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"color"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Red<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"color"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"checkbox-label"</span>&gt;</span>Yellow<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
 </article>
 
 <h2>State</h2>
 
 <article class="mar-b-lg box-shadow-1 border-lr-gray">
-    <section class="pad-a-sm bg-lt-gray border-tb-gray">
-        <p>Form fields can be disabled by adding a <code>disabled</code> attribute or by adding a <code>readonly</code> attribute.</p>
-    </section>
+	<section class="pad-a-sm bg-lt-gray border-tb-gray">
+		<p>Form fields can be disabled by adding a <code>disabled</code> attribute or by adding a <code>readonly</code> attribute.</p>
+	</section>
 
-    <section class="pad-a-sm">
-        <form [formGroup]="formFieldStateForm">
-            <ul class="form-group">
-                <li class="field-group">
-                    <label class="form-label">Disabled</label>
-                    <input formControlName="disabled" class="form-field" type="text">
-                </li>
-                <li class="field-group">
-                    <label class="form-label">Readonly</label>
-                    <input formControlName="readonly" class="form-field" type="text" readonly>
-                </li>
-            </ul>
-        </form>
-    </section>
+	<section class="pad-a-sm">
+		<form [formGroup]="formFieldStateForm">
+			<fieldset>
+				<legend>States</legend>
+				<section class="field-group">
+					<label class="form-label">Disabled</label>
+					<input formControlName="disabled" class="form-field" type="text">
+				</section>
+				<section class="field-group">
+					<label class="form-label">Readonly</label>
+					<input formControlName="readonly" class="form-field" type="text" readonly>
+				</section>
+			</fieldset>
+		</form>
+	</section>
 
-    <figure>
-        <pre class="pad-a-sm border-tb-gray">
-            <span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formFieldStateForm"</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">ul</span> <span class="attribute">class</span>=<span class="value">"form-group"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Disabled<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"disabled"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">li</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Readonly<span>&lt;/<span class="tag">label</span>&gt;</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"readonly"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">readonly</span>&gt;</span>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">li</span>&gt;</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">ul</span>&gt;</span>
-            <span>&lt;/<span class="tag">form</span>&gt;</span>
-        </pre>
-    </figure>
+	<figure>
+		<pre class="pad-a-sm border-tb-gray">
+			<span>&lt;<span class="tag">form</span> <span class="attribute">[formGroup]</span>=<span class="value">"formFieldStateForm"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">fieldset</span> <span class="attribute">class</span>=<span class="value">"form-group"</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">legend</span>&gt;</span>States<span>&lt;/<span class="tag">legend</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Disabled<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"disabled"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">section</span> <span class="attribute">class</span>=<span class="value">"field-group"</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">label</span> <span class="attribute">class</span>=<span class="value">"form-label"</span>&gt;</span>Readonly<span>&lt;/<span class="tag">label</span>&gt;</span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="tag">input</span> <span class="attribute">formControlName</span>=<span class="value">"readonly"</span> <span class="attribute">class</span>=<span class="value">"form-field"</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">readonly</span>&gt;</span>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">section</span>&gt;</span>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="tag">fieldset</span>&gt;</span>
+			<span>&lt;/<span class="tag">form</span>&gt;</span>
+		</pre>
+	</figure>
 </article>

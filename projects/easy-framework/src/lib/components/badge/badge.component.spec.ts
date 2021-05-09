@@ -11,7 +11,8 @@ describe('BadgeComponent', (): void => {
 			declarations: [
 				BadgeComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

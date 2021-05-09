@@ -28,7 +28,8 @@ describe('TabComponent', (): void => {
 				MockTabComponent,
 				TabComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

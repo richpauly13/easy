@@ -11,7 +11,8 @@ describe('CardComponent', (): void => {
 			declarations: [
 				CardComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {

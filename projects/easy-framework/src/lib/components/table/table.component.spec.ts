@@ -11,7 +11,8 @@ describe('TableComponent', (): void => {
 			declarations: [
 				TableComponent
 			]
-		}).compileComponents();
+		})
+.compileComponents();
 	}));
 
 	beforeEach((): void => {
