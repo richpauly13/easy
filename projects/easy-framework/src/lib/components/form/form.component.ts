@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEnc
 import { FormService } from './form.service';
 
 @Component({
-	selector: '.checkbox-group, .field-group, .fieldset, .form-field, .form-group, .form-group-inline, .form-label, .radio-group',
+	selector: '.checkbox-label, .checkbox-group, .field-group, .field-group-title, .fieldset, .form-field, .form-group, .form-group-inline, .form-label, .radio-label, .radio-group',
 	templateUrl: './form.component.html',
 	styleUrls: [
 		'./form.component.scss'
@@ -14,12 +14,18 @@ import { FormService } from './form.service';
 export class FormComponent implements OnInit {
 	@HostBinding('attr.class')
 	public get hostClass(): string {
-		return this.class.includes('form-label') && !this.class.includes('pad') ? `${this.class} pad-b-xs` : this.class;
+		if (this.class.includes('form-label') && !this.class.includes('pad-b-')) {
+			return `${this.class} pad-b-xs`;
+		} else if ((this.class.includes('checkbox-label') || this.class.includes('radio-label')) && !this.class.includes('pad-l-') && !this.class.includes('pad-r-') && !this.class.includes('pad-lr-')) {
+			return `${this.class} pad-lr-sm`;
+		} else {
+			return this.class;
+		}
 	}
 
 	@HostBinding('attr.for')
 	public get hostFor(): string | null {
-		return this.class.includes('form-label') ? this.for ?? `form-field-${this.uniqueFormFieldLabelId}` : null;
+		return this.class.includes('form-label') || this.class.includes('checkbox-label') || this.class.includes('radio-label') ? this.for ?? `form-field-${this.uniqueFormFieldLabelId}` : null;
 	}
 
 	@HostBinding('attr.id')
@@ -44,6 +50,6 @@ export class FormComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.uniqueFormFieldId = this.class.includes('form-field') ? this.formService.uniqueFormFieldId++ : 0;
-		this.uniqueFormFieldLabelId = this.class.includes('form-label') ? this.formService.uniqueFormFieldLabelId++ : 0;
+		this.uniqueFormFieldLabelId = this.class.includes('-label') ? this.formService.uniqueFormFieldLabelId++ : 0;
 	}
 }

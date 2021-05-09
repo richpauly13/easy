@@ -35,6 +35,12 @@ describe('FormComponent', (): void => {
 		expect(component.hostClass).toEqual('form-label pad-b-sm');
 	});
 
+	it('should have a hostClass of radio-label pad-lr-sm when class is radio-label without pad-*', (): void => {
+		component.class = 'radio-label';
+
+		expect(component.hostClass).toEqual('radio-label pad-lr-sm');
+	});
+
 	it('should have a hostFor of form-field-0 when for is null and class is form-label', (): void => {
 		component.class = 'form-label';
 

@@ -8,7 +8,6 @@ html {
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	box-sizing: border-box;
-	font-size: $screen-font-xs;
 	text-size-adjust: 100%;
 
 	@include media(lg) {
@@ -176,7 +175,6 @@ input[type=submit],
 [type=button],
 [type=reset],
 [type=submit] {
-	appearance: none;
 	background-color: transparent;
 
 	&:hover:not([disabled]),
@@ -191,19 +189,17 @@ input[type=submit],
     }
 }
 
-a,
-a[role=button],
-button,
-html input[type=button],
-input[type=checkbox],
-input[type=radio],
-input[type=range],
-input[type=reset],
-input[type=submit],
-select {
-	&:hover {
-		cursor: pointer;
-	}
+a:hover,
+a[role=button]:hover,
+button:hover,
+html input[type=button]:hover,
+input[type=checkbox]:hover,
+input[type=radio]:hover,
+input[type=range]:hover,
+input[type=reset]:hover,
+input[type=submit]:hover,
+select:hover {
+	cursor: pointer;
 }
 
 fieldset {
@@ -211,9 +207,48 @@ fieldset {
 	padding: 0;
 }
 
+input,
+select,
+textarea {
+	font: inherit;
+	outline: rem(1) solid color(black);
+
+	&:hover:not([disabled]),
+    &:focus:not([disabled]),
+	&:active:not([disabled]) {
+		outline: rem(1) solid color(blue);
+	}
+}
+
 input[type=checkbox],
 input[type=radio] {
+	appearance: none;
+	height: space(sm);
+	margin-block: 0;
+	margin-inline: 0;
+	width: space(sm);
 	vertical-align: middle;
+
+	&:checked::before {
+		background-color: color(black);
+		content: "";
+		display: block;
+		height: rem(12);
+		transform: translate(rem(2), rem(2));
+		width: rem(12);
+	}
+}
+
+input[type=radio] {
+	border: rem(1) solid color(black);
+	border-radius: 50%;
+	outline: none;
+
+	&:checked::before {
+		border-radius: 50%;
+		transform: translate(rem(1.25), rem(.75));
+		-moz-transform:  translate(rem(1.25), rem(1.25));
+	}
 }
 
 input[type=date],
@@ -274,6 +309,11 @@ optgroup {
 
 option {
 	color: color(lt-black);
+	min-block-size: 0;
+	min-height: 0;
+	padding: 0;
+	padding-block: 0;
+	padding-inline: 0;
 }
 
 progress {
@@ -292,6 +332,8 @@ progress {
 
 select {
 	overflow-y: auto;
+	padding-block: 0;
+	text-rendering: optimizeLegibility;
 
     &:-moz-focusring {
         color: transparent;

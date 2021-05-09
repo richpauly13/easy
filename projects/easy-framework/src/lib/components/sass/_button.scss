@@ -10,6 +10,8 @@
 .btn-sm,
 .btn-xl,
 .btn-xs {
+	border: none;
+
     &:not(:last-of-type) {
         margin-bottom: space(sm);
         margin-right: space(sm);

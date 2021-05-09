@@ -3,17 +3,12 @@
 @import "../../core/sass/variables";
 
 // Form styles
-select.form-field {
-    &[multiple] {
-        height: rem(100);
-    }
-
-    &:not([multiple]) {
-        padding-bottom: 0;
-        padding-top: 0;
-    }
+select.form-field:not([multiple]) {
+    padding-bottom: 0;
+	padding-top: 0;
 }
 
+select.form-field[multiple],
 textarea.form-field {
     height: rem(100);
 }
@@ -36,12 +31,41 @@ textarea.form-field {
 
 		.checkbox-label,
 		.radio-label {
-			padding-left: space(sm);
-			padding-right: space(sm);
 			width: rem(80);
 
 			&:hover {
 				cursor: pointer;
+			}
+		}
+
+		.form-field {
+			height: rem(20);
+			width: rem(20);
+
+			&[type=radio] {
+				border: rem(1.6) solid color(gray);
+				outline: none;
+
+				&:checked::before {
+					transform: translate(rem(-7.25), rem(-8));
+					-moz-transform:  translate(rem(-7.25), rem(-7.5));
+				}
+			}
+
+			&:checked::before {
+				background-color: color(blue);
+				height: space(sm);
+				transform:  translate(rem(-6), rem(-6));
+				width: space(sm);
+			}
+
+			&:disabled + .checkbox-label,
+			&:disabled + .radio-label {
+				color: color(dk-gray);
+
+				&:hover {
+					cursor: not-allowed;
+				}
 			}
 		}
 	}
@@ -67,33 +91,28 @@ textarea.form-field {
 }
 
 .form-field {
-    @include animate(border);
-
-    border: rem(1) solid color(gray);
-    height: space(xl);
+    outline: rem(1.6) solid color(gray);
+	height: space(xl);
     padding: space(xs);
-	width: rem(20);
 
-    &:hover:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
-	&:focus:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]),
-    &:active:not([disabled]):not([readonly]):not([type=checkbox]):not([type=radio]) {
-		@include animate(border);
+    &:hover:not([disabled]):not([readonly]),
+	&:focus:not([disabled]):not([readonly]),
+    &:active:not([disabled]):not([readonly]) {
+        outline: rem(1.6) solid color(blue);
+    }
 
-        border: rem(1.6) solid color(blue);
+	&:-moz-placeholder {
+        color: color(dk-gray);
+        opacity: 1;
+    }
+
+	&:-ms-input-placeholder {
+        color: color(dk-gray);
+        opacity: 1;
     }
 
     &:not([type=checkbox]):not([type=radio]) {
         flex: 1 0 rem(220);
-    }
-
-    &::-webkit-input-placeholder {
-        color: color(dk-gray);
-        opacity: 0.54;
-    }
-
-    &:-ms-input-placeholder {
-        color: color(dk-gray);
-        opacity: 1;
     }
 
     &::-moz-placeholder {
@@ -101,14 +120,14 @@ textarea.form-field {
         opacity: 1;
     }
 
-    &:-moz-placeholder {
+	&::placeholder {
         color: color(dk-gray);
         opacity: 1;
     }
 
-    &::placeholder {
+	&::-webkit-input-placeholder {
         color: color(dk-gray);
-        opacity: 1;
+        opacity: 0.54;
     }
 }
 

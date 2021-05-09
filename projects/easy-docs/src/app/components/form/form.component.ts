@@ -53,8 +53,6 @@ export class FormComponent implements OnInit {
 		this.formFieldStateForm = this.formBuilder.group({
 			disabled: {
 				disabled: true,
-
-				// eslint-disable-next-line id-denylist
 				value: 'disabled'
 			},
 			readonly: 'readonly'

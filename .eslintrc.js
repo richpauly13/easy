@@ -1190,8 +1190,7 @@ module.exports = {
 					'callback',
 					'cb',
 					'e',
-					'err',
-					'value'
+					'err'
 				],
 				'id-length': [
 					'error',
