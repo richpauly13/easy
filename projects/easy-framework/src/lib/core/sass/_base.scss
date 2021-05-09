@@ -247,7 +247,7 @@ input[type=radio] {
 	&:checked::before {
 		border-radius: 50%;
 		transform: translate(rem(1.25), rem(.75));
-		-moz-transform:  translate(rem(1.25), rem(1.25));
+		-moz-transform: translate(rem(1.25), rem(1.25));
 	}
 }
 
@@ -337,7 +337,7 @@ select {
 
     &:-moz-focusring {
         color: transparent;
-        text-shadow: 0 0 0 #191919;
+        text-shadow: 0 0 0 color(lt-black);
     }
 }
 

@@ -42,10 +42,11 @@ export class FormComponent implements OnInit {
 			name: ''
 		});
 		this.fieldsetForm = this.formBuilder.group({
-			name: ''
+			name: '',
+			email: ''
 		});
 		this.formFieldForm = this.formBuilder.group({
-			gender: '',
+			gender: 1,
 			language: '',
 			name: '',
 			note: ''

@@ -41,6 +41,18 @@ describe('FormComponent', (): void => {
 		expect(component.hostClass).toEqual('radio-label pad-lr-sm');
 	});
 
+	it('should have a hostClass of field-group pad-tb-sm when class is field-group without pad-*', (): void => {
+		component.class = 'field-group';
+
+		expect(component.hostClass).toEqual('field-group pad-tb-sm');
+	});
+
+	it('should have a hostClass of form-field pad-a-xs when class is form-field without pad-*', (): void => {
+		component.class = 'form-field';
+
+		expect(component.hostClass).toEqual('form-field pad-a-xs');
+	});
+
 	it('should have a hostFor of form-field-0 when for is null and class is form-label', (): void => {
 		component.class = 'form-label';
 
@@ -66,7 +78,7 @@ describe('FormComponent', (): void => {
 		expect(component.hostId).toEqual('form-field-0');
 	});
 
-	it('should have a hostId of form-field-2 when id is form-field 2 and class is form-field', (): void => {
+	it('should have a hostId of form-field-2 when id is form-field-2 and class is form-field', (): void => {
 		component.class = 'form-field';
 		component.id = 'form-field-2';
 
@@ -77,6 +89,18 @@ describe('FormComponent', (): void => {
 		component.class = 'form-label';
 
 		expect(component.hostId).toBeNull();
+	});
+
+	it('should have a hostRole of radiogroup when class is radio-group', (): void => {
+		component.class = 'radio-group';
+
+		expect(component.hostRole).toEqual('radiogroup');
+	});
+
+	it('should not have a hostRole when class is form-label', (): void => {
+		component.class = 'form-label';
+
+		expect(component.hostRole).toBeNull();
 	});
 
 	it('should have a uniqueFormFieldId of 0 after ngOnInit() is called', (): void => {
