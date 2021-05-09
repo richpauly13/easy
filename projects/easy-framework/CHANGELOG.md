@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.5](https://github.com/richpauly13/easy/compare/v1.10.4...v1.10.5) (2021-05-09)
+
+
+### Bug Fixes
+
+* **base:** add resets for form controls ([ab30d93](https://github.com/richpauly13/easy/commit/ab30d932cbab4d5a0c7b1bf94feedbe3fa56be66))
+* **form:** add auto attributes ([bf899ec](https://github.com/richpauly13/easy/commit/bf899ecb0189bd1c0290ce4c8e1dbf8592f77e3e))
+* **form:** update docs to reflect changes to easy ([e8ce1f0](https://github.com/richpauly13/easy/commit/e8ce1f038cc8d616aaac99990f90e96ca140b25c))
+* **tooltip:** remove tooltip ([9e26973](https://github.com/richpauly13/easy/commit/9e2697331baaf257cf87134728777b87cf5dae25))
+
 ### [1.10.4](https://github.com/richpauly13/easy/compare/v1.10.3...v1.10.4) (2021-04-12)
 
 
