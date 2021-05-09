@@ -12,7 +12,7 @@ describe('FormComponent', (): void => {
 				FormComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

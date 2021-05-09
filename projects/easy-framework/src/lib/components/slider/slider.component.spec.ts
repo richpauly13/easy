@@ -22,7 +22,7 @@ describe('SliderComponent', (): void => {
 				SliderComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 	beforeEach((): void => {
 		fixture = TestBed.createComponent(SliderComponent);

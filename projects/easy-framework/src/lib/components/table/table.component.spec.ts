@@ -12,7 +12,7 @@ describe('TableComponent', (): void => {
 				TableComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

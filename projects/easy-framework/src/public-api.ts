@@ -24,8 +24,6 @@ export * from './lib/components/tab/tab.component';
 export * from './lib/components/tab/tab.module';
 export * from './lib/components/table/table.component';
 export * from './lib/components/table/table.module';
-export * from './lib/components/tooltip/tooltip.component';
-export * from './lib/components/tooltip/tooltip.module';
 export * from './lib/easy-framework.component';
 export * from './lib/easy-framework.module';
 export * from './lib/layout/flexbox/flexbox.component';

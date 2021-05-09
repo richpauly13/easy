@@ -25,8 +25,7 @@ export class ComponentsComponent {
 			'spinner',
 			'switch',
 			'tab',
-			'table',
-			'tooltip'
+			'table'
 		];
 	}
 

@@ -15,7 +15,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SwitchComponent } from './switch/switch.component';
 import { TabComponent } from './tab/tab.component';
 import { TableComponent } from './table/table.component';
-import { TooltipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
 	declarations: [
@@ -31,8 +30,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		SpinnerComponent,
 		SwitchComponent,
 		TabComponent,
-		TableComponent,
-		TooltipComponent
+		TableComponent
 	],
 	exports: [
 		AlertComponent,
@@ -48,8 +46,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 		SpinnerComponent,
 		SwitchComponent,
 		TabComponent,
-		TableComponent,
-		TooltipComponent
+		TableComponent
 	],
 	imports: [
 		SharedModule

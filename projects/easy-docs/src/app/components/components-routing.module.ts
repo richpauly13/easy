@@ -14,7 +14,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SwitchComponent } from './switch/switch.component';
 import { TabComponent } from './tab/tab.component';
 import { TableComponent } from './table/table.component';
-import { TooltipComponent } from './tooltip/tooltip.component';
 
 const routes: Routes = [
 	{
@@ -68,10 +67,6 @@ const routes: Routes = [
 			{
 				component: TableComponent,
 				path: 'table'
-			},
-			{
-				component: TooltipComponent,
-				path: 'tooltip'
 			},
 			{
 				redirectTo: 'alert',

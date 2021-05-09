@@ -26,7 +26,7 @@ describe('ButtonComponent', (): void => {
 				MockButtonComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

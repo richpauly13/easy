@@ -12,7 +12,7 @@ describe('SpinnerComponent', (): void => {
 				SpinnerComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

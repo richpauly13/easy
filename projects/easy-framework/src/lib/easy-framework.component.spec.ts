@@ -12,7 +12,7 @@ describe('EasyComponent', (): void => {
 				EasyComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

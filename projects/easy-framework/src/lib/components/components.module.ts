@@ -12,7 +12,6 @@ import { SpinnerModule } from './spinner/spinner.module';
 import { SwitchModule } from './switch/switch.module';
 import { TabModule } from './tab/tab.module';
 import { TableModule } from './table/table.module';
-import { TooltipModule } from './tooltip/tooltip.module';
 
 @NgModule({
 	exports: [
@@ -27,8 +26,7 @@ import { TooltipModule } from './tooltip/tooltip.module';
 		SpinnerModule,
 		SwitchModule,
 		TableModule,
-		TabModule,
-		TooltipModule
+		TabModule
 	]
 })
 export class ComponentsModule { }

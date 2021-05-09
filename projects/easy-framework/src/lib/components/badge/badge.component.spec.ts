@@ -12,7 +12,7 @@ describe('BadgeComponent', (): void => {
 				BadgeComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

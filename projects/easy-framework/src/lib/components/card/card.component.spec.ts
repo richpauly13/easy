@@ -12,7 +12,7 @@ describe('CardComponent', (): void => {
 				CardComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

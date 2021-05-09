@@ -18,7 +18,7 @@ describe('AppComponent', (): void => {
 				RouterTestingModule
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

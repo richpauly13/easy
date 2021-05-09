@@ -29,7 +29,7 @@ describe('TabComponent', (): void => {
 				TabComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {

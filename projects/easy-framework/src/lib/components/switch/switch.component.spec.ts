@@ -12,7 +12,7 @@ describe('SwitchComponent', (): void => {
 				SwitchComponent
 			]
 		})
-.compileComponents();
+		.compileComponents();
 	}));
 
 	beforeEach((): void => {
