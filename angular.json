@@ -39,6 +39,7 @@
             }
           },
           "options": {
+            "aot": false,
             "assets": [
               "projects/easy-docs/src/favicon.ico"
             ],
@@ -55,21 +56,7 @@
               "projects/easy-docs/src/styles.scss"
             ],
             "tsConfig": "projects/easy-docs/tsconfig.app.json",
-            "vendorChunk": true,
-            "aot": false
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "configurations": {
-            "production": {
-              "devServerTarget": "easy-docs:serve:production"
-            }
-          },
-          "options": {
-            "devServerTarget": "easy-docs:serve",
-            "protractorConfig": "projects/easy-docs/e2e/protractor.conf.js",
-            "webdriverUpdate": false
+            "vendorChunk": true
           }
         },
         "extract-i18n": {

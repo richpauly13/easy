@@ -104,17 +104,6 @@ jobs:
           name: Upload docs code coverage report to codecov
           command: bash <(curl -s https://codecov.io/bash) -c -F docs
 
-  e2e:
-    <<: *job_common
-
-    steps:
-      - attach_workspace:
-          at: .
-
-      - run:
-          name: Run easy-docs e2e tests
-          command: sudo npm run e2e
-
 workflows:
   default_workflow:
     jobs:
@@ -122,12 +111,9 @@ workflows:
       - build:
           requires:
             - install
-      - test_easy:
-          requires:
-            - build
       - test_docs:
           requires:
             - build
-      #- e2e:
-          #requires:
-            #- build
+	   - test_easy:
+          requires:
+            - build

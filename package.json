@@ -14,7 +14,7 @@
     "@angular/router": "^12.0.0",
     "rxjs": "^6.6.7",
     "tslib": "^2.2.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "^0.11.4"
   },
   "description": "Documentation for EASY framework.",
   "devDependencies": {
@@ -37,7 +37,6 @@
     "eslint-plugin-unicorn": "^32.0.1",
     "husky": "^6.0.0",
     "jasmine-core": "^3.7.1",
-    "jasmine-spec-reporter": "^7.0.0",
     "karma": "^6.3.2",
     "karma-coverage": "^2.0.3",
     "karma-firefox-launcher": "^2.1.0",
@@ -47,9 +46,7 @@
     "ng-packagr": "^12.0.0",
     "npm-run-all": "^4.1.5",
     "pinst": "^2.1.6",
-    "protractor": "^7.0.0",
     "standard-version": "^9.3.0",
-    "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
   "homepage": "https://github.com/richpauly13/easy#readme",
@@ -77,7 +74,6 @@
     "build:easy": "ng build easy-framework --configuration production",
     "bump:deps": "npm run build && git add . && git commit -m \"chore(deps): bump deps\" && git push",
     "copy:md": "copyfiles {LICENSE.md,README.md} ./dist/easy-framework",
-    "e2e": "npm run update:webdriver && ng e2e",
     "lint": "ng lint --fix",
     "ng": "ng",
     "package": "run-s build:easy copy:md",
@@ -94,12 +90,7 @@
     "update:deps": "npm update && npm i",
     "update:global": "npm i -g @angular/cli@next",
     "update:ng": "run-s update:global update:core update:deps",
-    "update:webdriver": "webdriver-manager update",
-    "version": "cd projects/easy-framework && standard-version",
-    "watch:easy": "ng build easy-framework --watch"
+    "version": "cd projects/easy-framework && standard-version"
   },
-  "version": "1.0.0",
-  "workspaces": [
-    "projects/*"
-  ]
+  "version": "1.0.0"
 }

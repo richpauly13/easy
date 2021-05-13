@@ -12,8 +12,7 @@ module.exports = {
 				createDefaultProgram: true,
 				project: [
 					'projects/easy-docs/tsconfig.app.json',
-					'projects/easy-docs/tsconfig.spec.json',
-					'projects/easy-docs/e2e/tsconfig.json'
+					'projects/easy-docs/tsconfig.spec.json'
 				]
 			},
 			rules: {
