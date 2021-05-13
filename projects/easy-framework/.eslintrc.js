@@ -57,7 +57,9 @@ module.exports = {
 			files: [
 				'*.html'
 			],
-			rules: {}
+			rules: {
+
+			}
 		}
 	]
 };

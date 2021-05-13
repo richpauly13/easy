@@ -2301,6 +2301,9 @@ module.exports = {
 				'@angular-eslint/template/accessibility-label-for': [
 					'error'
 				],
+				/* '@angular-eslint/template/accessibility-label-has-associated-control': [
+					'error'
+				], */
 				'@angular-eslint/template/accessibility-table-scope': [
 					'error'
 				],

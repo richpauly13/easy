@@ -55,7 +55,8 @@
               "projects/easy-docs/src/styles.scss"
             ],
             "tsConfig": "projects/easy-docs/tsconfig.app.json",
-            "vendorChunk": true
+            "vendorChunk": true,
+            "aot": false
           }
         },
         "e2e": {
