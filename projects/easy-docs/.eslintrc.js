@@ -48,9 +48,6 @@ module.exports = {
 				'*.html'
 			],
 			rules: {
-				'@angular-eslint/template/accessibility-label-for': [
-					'off'
-				],
 				'max-len': [
 					'error',
 					{

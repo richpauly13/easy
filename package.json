@@ -90,7 +90,7 @@
     "test:docs": "ng test easy-docs",
     "test:easy": "ng test easy-framework",
     "test:watch": "ng test --watch",
-    "update:core": "ng update @angular/cli @angular/core --allow-dirty --force --next",
+    "update:core": "ng update @angular/cli @angular/core --allow-dirty --next",
     "update:deps": "npm update && npm i",
     "update:global": "npm i -g @angular/cli@next",
     "update:ng": "run-s update:global update:core update:deps",
