@@ -114,6 +114,6 @@ workflows:
       - test_docs:
           requires:
             - build
-	   - test_easy:
+      - test_easy:
           requires:
             - build
