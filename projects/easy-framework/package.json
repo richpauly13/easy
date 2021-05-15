@@ -4,7 +4,7 @@
     "url": "https://github.com/richpauly13/easy/issues"
   },
   "dependencies": {
-    "tslib": "*"
+    "tslib": "^2.1.0"
   },
   "description": "EASY CSS framework.",
   "homepage": "https://github.com/richpauly13/easy#readme",
@@ -22,8 +22,8 @@
   "license": "MIT",
   "name": "easy-framework",
   "peerDependencies": {
-    "@angular/common": "*",
-    "@angular/core": "*"
+    "@angular/common": "^12.0.0",
+    "@angular/core": "^12.0.0"
   },
   "private": false,
   "repository": {

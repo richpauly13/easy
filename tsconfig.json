@@ -1,3 +1,4 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -6,7 +7,8 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "easy-framework": [
-        "projects/easy-framework/src/public-api"
+        "dist/easy-framework/easy-framework",
+        "dist/easy-framework"
       ]
     },
     "strict": true,
@@ -18,7 +20,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2017",
     "module": "es2020",
     "lib": [
       "es2018",
@@ -27,7 +29,6 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "enableIvy": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true

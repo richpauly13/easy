@@ -50,8 +50,7 @@ const routes: Routes = [
 		RouterModule.forRoot(routes, {
 			preloadingStrategy: PreloadAllModules,
 			relativeLinkResolution: 'corrected',
-			scrollPositionRestoration: 'top',
-			useHash: true
+			scrollPositionRestoration: 'top'
 		})
 	]
 })

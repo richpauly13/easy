@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
+    "defaultCollection": "@angular-eslint/schematics",
     "packageManager": "npm"
   },
   "defaultProject": "easy-docs",
@@ -11,52 +12,51 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true,
+              "vendorChunk": true
+            },
             "production": {
-              "aot": true,
               "budgets": [
                 {
                   "maximumError": "1mb",
-                  "maximumWarning": "600kb",
+                  "maximumWarning": "500kb",
                   "type": "initial"
                 },
                 {
-                  "maximumError": "100kb",
-                  "maximumWarning": "60kb",
+                  "maximumError": "4kb",
+                  "maximumWarning": "2kb",
                   "type": "anyComponentStyle"
                 }
               ],
-              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "projects/easy-docs/src/environments/environment.ts",
                   "with": "projects/easy-docs/src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "vendorChunk": false
+              "outputHashing": "all"
             }
           },
+          "defaultConfiguration": "production",
           "options": {
-            "aot": false,
             "assets": [
               "projects/easy-docs/src/favicon.ico"
             ],
-            "buildOptimizer": false,
-            "extractLicenses": false,
             "index": "projects/easy-docs/src/index.html",
+            "inlineStyleLanguage": "scss",
             "main": "projects/easy-docs/src/main.ts",
-            "namedChunks": true,
-            "optimization": false,
             "outputPath": "docs",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
-            "sourceMap": true,
+            "scripts": [],
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
-            "tsConfig": "projects/easy-docs/tsconfig.app.json",
-            "vendorChunk": true
+            "tsConfig": "projects/easy-docs/tsconfig.app.json"
           }
         },
         "extract-i18n": {
@@ -77,13 +77,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "development": {
+              "browserTarget": "easy-docs:build:development"
+            },
             "production": {
               "browserTarget": "easy-docs:build:production"
             }
           },
-          "options": {
-            "browserTarget": "easy-docs:build"
-          }
+          "defaultConfiguration": "development"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -92,10 +93,12 @@
               "projects/easy-docs/src/favicon.ico"
             ],
             "codeCoverage": true,
+            "inlineStyleLanguage": "scss",
             "karmaConfig": "projects/easy-docs/karma.conf.js",
             "main": "projects/easy-docs/src/test.ts",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
             "progress": false,
+            "scripts": [],
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
@@ -126,13 +129,16 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "configurations": {
+            "development": {
+              "tsConfig": "projects/easy-framework/tsconfig.lib.json"
+            },
             "production": {
               "tsConfig": "projects/easy-framework/tsconfig.lib.prod.json"
             }
           },
+          "defaultConfiguration": "production",
           "options": {
-            "project": "projects/easy-framework/ng-package.json",
-            "tsConfig": "projects/easy-framework/tsconfig.lib.json"
+            "project": "projects/easy-framework/ng-package.json"
           }
         },
         "lint": {
