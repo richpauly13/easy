@@ -30,6 +30,7 @@
     "@types/node": "^15.3.0",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
+    "angular-cli-ghpages": "^1.0.0-rc.1",
     "codecov": "^4.0.0-0",
     "copyfiles": "^2.4.1",
     "eslint": "^7.26.0",
@@ -90,7 +91,8 @@
     "update:deps": "npm update && npm i",
     "update:global": "npm i -g @angular/cli@next",
     "update:ng": "run-s update:global update:core update:deps",
-    "version": "cd projects/easy-framework && standard-version"
+    "version": "cd projects/easy-framework && standard-version",
+    "watch:easy": "ng build easy-framework --watch"
   },
   "version": "1.0.0"
 }

@@ -9,7 +9,6 @@ import { ComponentsComponent } from './components.component';
 import { FormComponent } from './form/form.component';
 import { ProgressComponent } from './progress/progress.component';
 import { SliderComponent } from './slider/slider.component';
-import { SlideshowComponent } from './slideshow/slideshow.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SwitchComponent } from './switch/switch.component';
 import { TabComponent } from './tab/tab.component';
@@ -47,10 +46,6 @@ const routes: Routes = [
 			{
 				component: SliderComponent,
 				path: 'slider'
-			},
-			{
-				component: SlideshowComponent,
-				path: 'slideshow'
 			},
 			{
 				component: SpinnerComponent,

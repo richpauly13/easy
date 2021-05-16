@@ -14,8 +14,6 @@ export * from './lib/components/progress/progress.component';
 export * from './lib/components/progress/progress.module';
 export * from './lib/components/slider/slider.component';
 export * from './lib/components/slider/slider.module';
-export * from './lib/components/slideshow/slideshow.component';
-export * from './lib/components/slideshow/slideshow.module';
 export * from './lib/components/spinner/spinner.component';
 export * from './lib/components/spinner/spinner.module';
 export * from './lib/components/switch/switch.component';

@@ -59,6 +59,12 @@
             "tsConfig": "projects/easy-docs/tsconfig.app.json"
           }
         },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/easy/"
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {

@@ -7,7 +7,6 @@ import { CardModule } from './card/card.module';
 import { FormModule } from './form/form.module';
 import { ProgressModule } from './progress/progress.module';
 import { SliderModule } from './slider/slider.module';
-import { SlideshowModule } from './slideshow/slideshow.module';
 import { SpinnerModule } from './spinner/spinner.module';
 import { SwitchModule } from './switch/switch.module';
 import { TabModule } from './tab/tab.module';
@@ -22,7 +21,6 @@ import { TableModule } from './table/table.module';
 		FormModule,
 		ProgressModule,
 		SliderModule,
-		SlideshowModule,
 		SpinnerModule,
 		SwitchModule,
 		TableModule,

@@ -21,7 +21,6 @@ export class ComponentsComponent {
 			'form',
 			'progress',
 			'slider',
-			'slideshow',
 			'spinner',
 			'switch',
 			'tab',

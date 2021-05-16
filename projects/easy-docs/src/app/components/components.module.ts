@@ -10,7 +10,6 @@ import { FormComponent } from './form/form.component';
 import { ProgressComponent } from './progress/progress.component';
 import { SharedModule } from './../shared/shared.module';
 import { SliderComponent } from './slider/slider.component';
-import { SlideshowComponent } from './slideshow/slideshow.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SwitchComponent } from './switch/switch.component';
 import { TabComponent } from './tab/tab.component';
@@ -26,7 +25,6 @@ import { TableComponent } from './table/table.component';
 		FormComponent,
 		ProgressComponent,
 		SliderComponent,
-		SlideshowComponent,
 		SpinnerComponent,
 		SwitchComponent,
 		TabComponent,
@@ -42,7 +40,6 @@ import { TableComponent } from './table/table.component';
 		FormComponent,
 		ProgressComponent,
 		SliderComponent,
-		SlideshowComponent,
 		SpinnerComponent,
 		SwitchComponent,
 		TabComponent,
