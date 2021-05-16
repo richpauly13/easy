@@ -8,8 +8,6 @@
 
 **E**asy **A**ngular **S**tyles with a11**Y**
 
-_This project is a work in progress. Not all components are created or documented...yet._
-
 ## Overview
 
 EASY is a CSS framework developed on 4 core principles:
@@ -45,7 +43,51 @@ Developers can use all components or only the components needed for a particular
 
 ## Usage
 
-Import core styles (base and utilities) into your app root module.
+Import specific module(s) and core styles (utilities) of Easy into a shared module.
+
+shared.module.ts
+
+```ts
+import { ButtonModule, EasyModule, FlexboxModule } from 'easy-framework';
+```
+
+Add the exports to your shared module's NgModule.
+
+shared.module.ts
+
+```ts
+@NgModule({
+    exports: {
+        ButtonModule,
+        EasyModule,
+        FlexboxModule
+    }
+})
+```
+
+Or, import all components and/or layout module(s) along with core styles (utilities) of Easy into a shared module.
+
+shared.module.ts
+
+```ts
+import { ComponentsModule, EasyModule, LayoutModule } from 'easy-framework';
+```
+
+Add the exports(s) to your shared module's NgModule.
+
+shared.module.ts
+
+```ts
+@NgModule({
+    exports: [
+        ComponentsModule,
+        EasyModule,
+        LayoutModule
+    ]
+})
+```
+
+Import the shared module into your app module.
 
 app.module.ts
 
@@ -53,13 +95,12 @@ app.module.ts
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { EasyModule } from 'easy-framework';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 ```
 
-Add the import to your app root NgModule.
+Add the import to your app module's NgModule.
 
 app.module.ts
 
@@ -68,12 +109,12 @@ app.module.ts
     imports: [
         AppRoutingModule,
         BrowserModule,
-        EasyModule        
+        SharedModule        
     ]
 })
 ```
 
-Add the `<ez-root>` tag in your app root component's HTML.
+Add the `<ez-root>` tag to your app component's HTML.
 
 app.component.html
 
@@ -86,48 +127,6 @@ app.component.html
     </main>
     <app-footer></app-footer>
 </ez-root>
-```
-
-Then, import specific module(s) where needed.
-
-some.module.ts
-
-```ts
-import { ButtonModule, FlexboxModule } from 'easy-framework';
-```
-
-Add the import(s) to your NgModule.
-
-some.module.ts
-
-```ts
-@NgModule({
-    imports: [
-        ButtonModule,
-        FlexboxModule
-    ]
-})
-```
-
-Or, import all component and/or layout module(s).
-
-some.module.ts
-
-```ts
-import { ComponentsModule, LayoutModule } from 'easy-framework';
-```
-
-Add the import(s) to your NgModule.
-
-some.module.ts
-
-```ts
-@NgModule({
-    imports: [
-        ComponentsModule,
-        LayoutModule
-    ]
-})
 ```
 
 ## Documentation
@@ -144,10 +143,11 @@ View the [Changelog](https://github.com/richpauly13/easy/blob/master/projects/ea
 1. Review the [Contributing](https://github.com/richpauly13/easy/blob/master/CONTRIBUTING.md) guidelines
 1. Fork the repo
 1. Run `npm i`
-1. Run `npm start`
+1. Open two terminal windows
+1. Run `npm run watch:easy` in the first and `ng serve` in the second
 1. Open the projects/easy-framework/src/lib folder in your code editor
 1. Edit the code base
-1. Update the documentatation as needed
+1. Update the documentatation in projects/easy-docs/src/app folder as needed
 1. Submit a pull request
 
 ## Issues

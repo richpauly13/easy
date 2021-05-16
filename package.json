@@ -75,6 +75,7 @@
     "build:easy": "ng build easy-framework",
     "bump:deps": "npm run build && git add . && git commit -m \"chore(deps): bump deps\" && git push",
     "copy:md": "copyfiles {LICENSE.md,README.md} ./dist/easy-framework",
+    "deploy": "ng deploy",
     "lint": "ng lint --fix",
     "ng": "ng",
     "package": "run-s build:easy copy:md",
