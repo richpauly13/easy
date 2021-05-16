@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.6](https://github.com/richpauly13/easy/compare/v1.10.5...v1.10.6) (2021-05-16)
+
+
+### Bug Fixes
+
+* **slideshow:** remove slide show from easy and docs ([8e96725](https://github.com/richpauly13/easy/commit/8e967256df17c55228d0f10fa7ac45309808746f))
+
 ### [1.10.5](https://github.com/richpauly13/easy/compare/v1.10.4...v1.10.5) (2021-05-09)
 
 
