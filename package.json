@@ -12,13 +12,13 @@
     "@angular/platform-browser": "^12.1.0-next.2",
     "@angular/platform-browser-dynamic": "^12.1.0-next.2",
     "@angular/router": "^12.1.0-next.2",
-    "rxjs": "^7.0.1",
+    "rxjs": "^7.1.0",
     "tslib": "^2.2.0",
     "zone.js": "^0.11.4"
   },
   "description": "Documentation for EASY framework.",
   "devDependencies": {
-    "@angular-devkit/build-angular": "^12.0.1",
+    "@angular-devkit/build-angular": "^12.1.0-next.2",
     "@angular-eslint/builder": "^12.0.0",
     "@angular-eslint/eslint-plugin": "^12.0.0",
     "@angular-eslint/eslint-plugin-template": "^12.0.0",
