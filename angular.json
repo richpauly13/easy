@@ -52,12 +52,6 @@
             "main": "projects/easy-docs/src/main.ts",
             "outputPath": "docs",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
-            "scripts": [],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                ""
-              ]
-            },
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
@@ -109,7 +103,6 @@
             "main": "projects/easy-docs/src/test.ts",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
             "progress": false,
-            "scripts": [],
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
