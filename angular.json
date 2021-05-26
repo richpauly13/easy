@@ -53,6 +53,11 @@
             "outputPath": "docs",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
             "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                ""
+              ]
+            },
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
