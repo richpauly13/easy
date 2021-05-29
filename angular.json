@@ -23,8 +23,8 @@
             "production": {
               "budgets": [
                 {
-                  "maximumError": "1mb",
-                  "maximumWarning": "500kb",
+                  "maximumError": "6mb",
+                  "maximumWarning": "5mb",
                   "type": "initial"
                 },
                 {
@@ -48,7 +48,6 @@
               "projects/easy-docs/src/favicon.ico"
             ],
             "index": "projects/easy-docs/src/index.html",
-            "inlineStyleLanguage": "scss",
             "main": "projects/easy-docs/src/main.ts",
             "outputPath": "docs",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
@@ -98,7 +97,6 @@
               "projects/easy-docs/src/favicon.ico"
             ],
             "codeCoverage": true,
-            "inlineStyleLanguage": "scss",
             "karmaConfig": "projects/easy-docs/karma.conf.js",
             "main": "projects/easy-docs/src/test.ts",
             "polyfills": "projects/easy-docs/src/polyfills.ts",
