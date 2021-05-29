@@ -13,6 +13,7 @@ module.exports = {
 				project: [
 					'projects/easy-framework/tsconfig.lib.json',
 					'projects/easy-framework/tsconfig.lib.prod.json',
+					'projects/easy-framework/tsconfig.schematics.json',
 					'projects/easy-framework/tsconfig.spec.json'
 				]
 			},
