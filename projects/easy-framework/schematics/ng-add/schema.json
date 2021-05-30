@@ -1,0 +1,63 @@
+{
+  "$id": "easy-ng-add",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "properties": {
+    "components": {
+      "default": [
+        "All"
+      ],
+      "description": "Specifies the component module(s) to add.",
+      "items": {
+        "enum": [
+          "Alert",
+          "Badge",
+          "Button",
+          "Card",
+          "Form",
+          "Progress",
+          "Slider",
+          "Spinner",
+          "Switch",
+          "Tab",
+          "Table",
+          "All",
+          "None"
+        ],
+        "type": "string",
+        "x-prompt": "Which component module(s) would you like to add?"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "layouts": {
+      "default": [
+        "All"
+      ],
+      "description": "Specifies the layout module(s) to add.",
+      "items": {
+        "enum": [
+          "Flexbox",
+          "Grid",
+          "Nav",
+          "All",
+          "None"
+        ],
+        "type": "string",
+        "x-prompt": "Which layout module(s) would you like to add?"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "project": {
+      "$default": {
+        "$source": "projectName"
+      },
+      "description": "The name of the project.",
+      "type": "string"
+    }
+  },
+  "title": "Easy ng-add schematic",
+  "type": "object"
+}
