@@ -4,7 +4,7 @@ import { <%= imports %> } from 'easy-framework';
 
 @NgModule({
     exports: [
-        <%= imports %>
+        <%= exports %>
     ]
 })
 export class SharedModule { }

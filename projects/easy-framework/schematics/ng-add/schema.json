@@ -9,7 +9,7 @@
       "description": "Specifies the component module(s) to add.",
       "items": {
         "enum": [
-          "Com",
+          "All",
           "AlertModule",
           "BadgeModule",
           "ButtonModule",
@@ -37,9 +37,9 @@
       "items": {
         "enum": [
           "All",
-          "Flexbox",
-          "Grid",
-          "Nav"
+          "FlexboxModule",
+          "GridModule",
+          "NavModule"
         ],
         "type": "string"
       },

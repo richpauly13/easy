@@ -7,7 +7,7 @@ import { ProjectDefinition, WorkspaceDefinition } from '@angular-devkit/core/src
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 
 import { addModuleImportToRootModule, getProjectFromWorkspace } from '../utilities';
-import { Schema } from './schema';
+import { Component, Layout, Schema } from './schema';
 
 function addEasyToPackageJson(): Rule {
 	return (tree: Tree, context: SchematicContext) => {
@@ -26,22 +26,32 @@ function addSharedModuleToAppModule(options: Schema): Rule {
 	};
 }
 
-function findOrCreateSharedModule(options: Schema): Rule {
+function createSharedModule(options: Schema): Rule {
 	return (tree: Tree) => {
-		if (tree.exists('shared.module.ts')) {
+		const components: Component[] | string[] = options.components.includes(Component.All) ? [
+			'ComponentModule'
+		] : options.components;
+		const layouts: Layout[] | string[] = options.layouts.includes(Layout.All) ? [
+			'LayoutModule'
+		] : options.layouts;
+		const modules: string[] = [
+			'EasyModule',
+			...components,
+			...layouts
+		]
+		.sort();
+		const exports: string = modules.join(',\n        ');
+		const imports: string = modules.join(', ');
+
+		if (tree.exists('src/app/shared/shared.module.ts')) {
 			return tree;
 		} else {
-			const imports: string = [
-				...options.components,
-				...options.layouts
-			]
-			.sort()
-			.join(', ');
 			const templateSource: Source = apply(url('./files'), [
 				filter((path: Path) => {
 					return path.endsWith('shared.module.ts.template');
 				}),
 				applyTemplates({
+					exports: exports,
 					imports: imports,
 					...strings,
 					...options
@@ -58,7 +68,7 @@ function findOrCreateSharedModule(options: Schema): Rule {
 export function ngAdd(options: Schema): Rule {
 	return chain([
 		addEasyToPackageJson(),
-		findOrCreateSharedModule(options),
+		createSharedModule(options),
 		addSharedModuleToAppModule(options)
 	]);
 }
