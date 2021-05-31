@@ -9,26 +9,25 @@
       "description": "Specifies the component module(s) to add.",
       "items": {
         "enum": [
-          "Alert",
-          "Badge",
-          "Button",
-          "Card",
-          "Form",
-          "Progress",
-          "Slider",
-          "Spinner",
-          "Switch",
-          "Tab",
-          "Table",
-          "All",
-          "None"
+          "Com",
+          "AlertModule",
+          "BadgeModule",
+          "ButtonModule",
+          "CardModule",
+          "FormModule",
+          "ProgressModule",
+          "SliderModule",
+          "SpinnerModule",
+          "SwitchModule",
+          "TabModule",
+          "TableModule"
         ],
-        "type": "string",
-        "x-prompt": "Which component module(s) would you like to add?"
+        "type": "string"
       },
       "minItems": 1,
       "type": "array",
-      "uniqueItems": true
+      "uniqueItems": true,
+      "x-prompt": "Which component module(s) would you like to add?"
     },
     "layouts": {
       "default": [
@@ -37,18 +36,17 @@
       "description": "Specifies the layout module(s) to add.",
       "items": {
         "enum": [
+          "All",
           "Flexbox",
           "Grid",
-          "Nav",
-          "All",
-          "None"
+          "Nav"
         ],
-        "type": "string",
-        "x-prompt": "Which layout module(s) would you like to add?"
+        "type": "string"
       },
       "minItems": 1,
       "type": "array",
-      "uniqueItems": true
+      "uniqueItems": true,
+      "x-prompt": "Which layout module(s) would you like to add?"
     },
     "project": {
       "$default": {

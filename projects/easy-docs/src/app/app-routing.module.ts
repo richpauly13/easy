@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { ComponentsModule } from './components/components.module';
+import { ComponentModule } from './component/component.module';
 import { LayoutModule } from './layout/layout.module';
 import { UtilitiesModule } from './utilities/utilities.module';
 
 const routes: Routes = [
 	{
-		path: 'components',
-		loadChildren: async(): Promise<ComponentsModule> => {
-			return await import('projects/easy-docs/src/app/components/components.module').then((module: typeof import('projects/easy-docs/src/app/components/components.module')): ComponentsModule => {
-				return module.ComponentsModule;
+		path: 'component',
+		loadChildren: async(): Promise<ComponentModule> => {
+			return await import('projects/easy-docs/src/app/component/component.module').then((module: typeof import('projects/easy-docs/src/app/component/component.module')): ComponentModule => {
+				return module.ComponentModule;
 			});
 		}
 	},
@@ -33,12 +33,12 @@ const routes: Routes = [
 	{
 		path: '',
 		pathMatch: 'full',
-		redirectTo: 'components'
+		redirectTo: 'component'
 	},
 	{
 		path: '**',
 		pathMatch: 'full',
-		redirectTo: 'components'
+		redirectTo: 'component'
 	}
 ];
 

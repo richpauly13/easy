@@ -47,6 +47,7 @@
     "postpublish": "pinst --enable",
     "prepublishOnly": "pinst --disable",
     "release": "npm run version && npm run build && git push --follow-tags origin master && npm publish ../../dist/easy-framework --access=public",
+    "test": "npm run build && cd ../../../easy-test && npm link ../easy/dist/easy-framework && ng g easy-framework:ng-add",
     "version": "standard-version"
   },
   "version": "1.10.6"

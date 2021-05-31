@@ -14,7 +14,7 @@ export class AppComponent {
 
 	public constructor() {
 		this.navs = [
-			'components',
+			'component',
 			'layout',
 			'utilities'
 		];

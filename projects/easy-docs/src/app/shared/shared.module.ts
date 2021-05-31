@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ComponentsModule, EasyModule, LayoutModule } from 'easy-framework';
+import { ComponentModule, EasyModule, LayoutModule } from 'easy-framework';
 
 @NgModule({
 	exports: [
 		CommonModule,
-		ComponentsModule,
+		ComponentModule,
 		EasyModule,
 		LayoutModule,
 		ReactiveFormsModule,

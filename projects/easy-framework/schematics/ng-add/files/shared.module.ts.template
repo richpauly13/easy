@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 
+import { <%= imports %> } from 'easy-framework';
+
 @NgModule({
-    exports: []
+    exports: [
+        <%= imports %>
+    ]
 })
 export class SharedModule { }
