@@ -19,7 +19,7 @@
   "description": "Documentation for EASY framework.",
   "devDependencies": {
     "@angular-devkit/build-angular": "^12.1.1",
-    "@angular-eslint/builder": "^12.2.2",
+    "@angular-eslint/builder": "^12.3.0",
     "@angular-eslint/eslint-plugin": "^12.2.2",
     "@angular-eslint/eslint-plugin-template": "^12.2.2",
     "@angular-eslint/schematics": "^12.2.2",
