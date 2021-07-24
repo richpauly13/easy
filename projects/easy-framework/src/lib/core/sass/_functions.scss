@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Credit: https://css-tricks.com/snippets/sass/material-shadows-mixin/
 @function bottom-shadow($depth, $color) {
 	$blur: rem(nth(1 3 3 5 6, $depth) * 4);
@@ -20,7 +22,7 @@
 		@if type-of($value) == list {
 			$value: rem($value...);
 		} @else if $value != 0 {
-			$value: $value / 16 * 1rem;
+			$value: math.div($value, 16) * 1rem;
 		} @else {
 			$value: $value;
 		}
