@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/richpauly13/easy/compare/v1.10.6...v1.12.0) (2021-07-24)
+
+
+### Features
+
+* **schematics:** add ng-add support ([51601dc](https://github.com/richpauly13/easy/commit/51601dc8b677868745853f0f65aa349d9d5eed95))
+
+
+### Bug Fixes
+
+* **component:** rename componentsModule to ComponentModule for easy and docs ([e93e589](https://github.com/richpauly13/easy/commit/e93e589e5e1b1a56a2ddd1360aa9c6480020b279))
+* **scss:** add [@sass](https://github.com/sass):math module to functions for division ([c7b76b4](https://github.com/richpauly13/easy/commit/c7b76b4b75e63138800970595de8ffd01d65248b))
+
+## [1.12.0](https://github.com/richpauly13/easy/compare/v1.10.6...v1.12.0) (2021-07-24)
+
+
+### Features
+
+* **schematics:** add ng-add support ([51601dc](https://github.com/richpauly13/easy/commit/51601dc8b677868745853f0f65aa349d9d5eed95))
+
+
+### Bug Fixes
+
+* **component:** rename componentsModule to ComponentModule for easy and docs ([e93e589](https://github.com/richpauly13/easy/commit/e93e589e5e1b1a56a2ddd1360aa9c6480020b279))
+* **scss:** add [@sass](https://github.com/sass):math module to functions for division ([c7b76b4](https://github.com/richpauly13/easy/commit/c7b76b4b75e63138800970595de8ffd01d65248b))
+
+## [1.11.0](https://github.com/richpauly13/easy/compare/v1.10.6...v1.11.0) (2021-07-24)
+
+
+### Features
+
+* **schematics:** add ng-add support ([51601dc](https://github.com/richpauly13/easy/commit/51601dc8b677868745853f0f65aa349d9d5eed95))
+
+
+### Bug Fixes
+
+* **component:** rename componentsModule to ComponentModule for easy and docs ([e93e589](https://github.com/richpauly13/easy/commit/e93e589e5e1b1a56a2ddd1360aa9c6480020b279))
+* **scss:** add [@sass](https://github.com/sass):math module to functions for division ([c7b76b4](https://github.com/richpauly13/easy/commit/c7b76b4b75e63138800970595de8ffd01d65248b))
+
 ### [1.10.6](https://github.com/richpauly13/easy/compare/v1.10.5...v1.10.6) (2021-05-16)
 
 
