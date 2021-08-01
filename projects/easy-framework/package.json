@@ -4,9 +4,10 @@
     "url": "https://github.com/richpauly13/easy/issues"
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   },
   "description": "EASY CSS framework",
+  "devDependencies": {},
   "homepage": "https://github.com/richpauly13/easy#readme",
   "keywords": [
     "a11y",
@@ -25,8 +26,8 @@
     "save": "dependencies"
   },
   "peerDependencies": {
-    "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0"
+    "@angular/common": "^11.0.0 || ^12.0.0",
+    "@angular/core": "^11.0.0 || ^12.0.0"
   },
   "private": false,
   "repository": {

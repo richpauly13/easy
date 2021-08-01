@@ -51,6 +51,13 @@ module.exports = {
 					'cb',
 					'e',
 					'err'
+				],
+				'max-statements': [
+					'error',
+					14,
+					{
+						ignoreTopLevelFunctions: true
+					}
 				]
 			}
 		},
