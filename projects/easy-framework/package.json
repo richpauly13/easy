@@ -51,5 +51,5 @@
     "test": "npm run build && cd ../../../easy-test && npm link ../easy/dist/easy-framework && ng g easy-framework:ng-add",
     "version": "standard-version"
   },
-  "version": "1.12.2"
+  "version": "1.13.0"
 }

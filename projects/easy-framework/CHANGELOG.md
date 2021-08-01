@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/richpauly13/easy/compare/v1.12.2...v1.13.0) (2021-08-01)
+
+
+### Features
+
+* **ng-add:** add schematics for ng-add ([834a083](https://github.com/richpauly13/easy/commit/834a083aac3811f9fd6b4f61b3fc4cea4f627c13))
+
 ### [1.12.2](https://github.com/richpauly13/easy/compare/v1.12.0...v1.12.2) (2021-07-24)
 
 ## [1.12.0](https://github.com/richpauly13/easy/compare/v1.10.6...v1.12.0) (2021-07-24)
