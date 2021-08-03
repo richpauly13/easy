@@ -40,6 +40,7 @@ Developers can use all components or only the components needed for a particular
 ## Installation
 
 **NPM:** `npm i easy-framework`
+
 **Angular CLI:** `ng add easy-framework`
 
 ## Usage
