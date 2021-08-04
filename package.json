@@ -27,7 +27,7 @@
     "@angular/cli": "^12.1.4",
     "@angular/compiler-cli": "^12.1.4",
     "@types/jasmine": "^3.8.2",
-    "@types/node": "^16.4.10",
+    "@types/node": "^16.4.11",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "angular-cli-ghpages": "^1.0.0-rc.2",
