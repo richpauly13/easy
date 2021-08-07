@@ -12,7 +12,7 @@
     "@angular/platform-browser": "^12.2.0",
     "@angular/platform-browser-dynamic": "^12.2.0",
     "@angular/router": "^12.2.0",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.3.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.11.4"
   },
@@ -27,7 +27,7 @@
     "@angular/cli": "^12.2.0",
     "@angular/compiler-cli": "^12.2.0",
     "@types/jasmine": "^3.8.2",
-    "@types/node": "^16.4.12",
+    "@types/node": "^16.4.13",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "angular-cli-ghpages": "^1.0.0-rc.2",
