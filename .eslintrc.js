@@ -583,6 +583,12 @@ module.exports = {
 				'@typescript-eslint/no-magic-numbers': [
 					'off'
 				],
+				'@typescript-eslint/no-meaningless-void-operator': [
+					'error',
+					{
+						checkNever: true
+					}
+				],
 				'@typescript-eslint/no-misused-new': [
 					'error'
 				],
@@ -750,6 +756,78 @@ module.exports = {
 					{
 						arraysInObjects: false,
 						objectsInObjects: false
+					}
+				],
+				'@typescript-eslint/padding-line-between-statements': [
+					'error',
+					{
+						blankLine: 'always',
+						next: 'block-like',
+						prev: '*'
+					},
+					{
+						blankLine: 'always',
+						next: '*',
+						prev: 'block-like'
+					},
+					{
+						blankLine: 'always',
+						next: 'break',
+						prev: '*'
+					},
+					{
+						blankLine: 'never',
+						next: '*',
+						prev: 'break'
+					},
+					{
+						blankLine: 'never',
+						next: 'case',
+						prev: '*'
+					},
+					{
+						blankLine: 'always',
+						next: 'continue',
+						prev: '*'
+					},
+					{
+						blankLine: 'never',
+						next: 'default',
+						prev: '*'
+					},
+					{
+						blankLine: 'always',
+						next: '*',
+						prev: [
+							'const',
+							'let'
+						]
+					},
+					{
+						blankLine: 'never',
+						next: [
+							'const',
+							'let'
+						],
+						prev: [
+							'const',
+							'let'
+						]
+					},
+					{
+						blankLine: 'always',
+						next: 'let',
+						prev: 'const'
+					},
+					{
+						blankLine: 'always',
+						next: 'return',
+						prev: '*'
+					},
+					{
+						blankLine: 'always',
+						next: 'throw',
+						prev: '*'
 					}
 				],
 				'@typescript-eslint/prefer-as-const': [
@@ -1963,76 +2041,7 @@ module.exports = {
 					'never'
 				],
 				'padding-line-between-statements': [
-					'error',
-					{
-						blankLine: 'always',
-						next: 'block-like',
-						prev: '*'
-					},
-					{
-						blankLine: 'always',
-						next: '*',
-						prev: 'block-like'
-					},
-					{
-						blankLine: 'always',
-						next: 'break',
-						prev: '*'
-					},
-					{
-						blankLine: 'never',
-						next: '*',
-						prev: 'break'
-					},
-					{
-						blankLine: 'never',
-						next: 'case',
-						prev: '*'
-					},
-					{
-						blankLine: 'always',
-						next: 'continue',
-						prev: '*'
-					},
-					{
-						blankLine: 'never',
-						next: 'default',
-						prev: '*'
-					},
-					{
-						blankLine: 'always',
-						next: '*',
-						prev: [
-							'const',
-							'let'
-						]
-					},
-					{
-						blankLine: 'never',
-						next: [
-							'const',
-							'let'
-						],
-						prev: [
-							'const',
-							'let'
-						]
-					},
-					{
-						blankLine: 'always',
-						next: 'let',
-						prev: 'const'
-					},
-					{
-						blankLine: 'always',
-						next: 'return',
-						prev: '*'
-					},
-					{
-						blankLine: 'always',
-						next: 'throw',
-						prev: '*'
-					}
+					'off'
 				],
 				'prefer-arrow-callback': [
 					'error',
@@ -2049,7 +2058,7 @@ module.exports = {
 					}
 				],
 				'prefer-destructuring': [
-					'off',
+					'off'/* ,
 					{
 						AssignmentExpression:
 						{
@@ -2064,7 +2073,7 @@ module.exports = {
 					},
 					{
 						enforceForRenamedProperties: false
-					}
+					} */
 				],
 				'prefer-exponentiation-operator': [
 					'error'
