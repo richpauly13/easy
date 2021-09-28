@@ -606,6 +606,9 @@ module.exports = {
 						allowDefinitionFiles: false
 					}
 				],
+				'@typescript-eslint/no-non-null-asserted-nullish-coalescing': [
+					'error'
+				],
 				'@typescript-eslint/no-non-null-asserted-optional-chain': [
 					'error'
 				],
@@ -629,6 +632,9 @@ module.exports = {
 				],
 				'@typescript-eslint/no-require-imports': [
 					'error'
+				],
+				'@typescript-eslint/no-restricted-imports': [
+					'off'
 				],
 				'@typescript-eslint/no-shadow': [
 					'error',
@@ -659,6 +665,7 @@ module.exports = {
 						allowCallbacks: 'never',
 						allowConditionalTypes: 'never',
 						allowConstructors: 'never',
+						allowGenerics: 'never',
 						allowLiterals: 'never',
 						allowMappedTypes: 'never',
 						allowTupleTypes: 'never'
@@ -1794,7 +1801,7 @@ module.exports = {
 					}
 				],
 				'no-restricted-imports': [
-					'error'
+					'off'
 				],
 				'no-restricted-properties': [
 					'error',
