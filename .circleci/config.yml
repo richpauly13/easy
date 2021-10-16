@@ -47,11 +47,6 @@ jobs:
       # Restore cached dependencies
       - <<: *restore
 
-       # Update angular cli
-      - run:
-          name: Update angular cli
-          command: sudo npm i -g @angular/cli --silent
-
       # Update dependencies
       - run:
           name: Update dependencies
