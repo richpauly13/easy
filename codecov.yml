@@ -8,9 +8,23 @@ coverage:
   range: "100"
 
   status:
-    project: yes
+    project:
+	  easy:
+        flags:
+          - easy
+      docs:
+        flags:
+          - docs
     patch: yes
     changes: yes
+
+flags:
+  easy:
+    paths:
+      - projects/easy-framework/
+  docs:
+    paths:
+      - projects/easy-docs/
 
 parsers:
   gcov:
