@@ -4,11 +4,14 @@
 #
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@4.0.0-0
+
 # Workflow variables
 base_image: &base_image
 
   # Node version
-  image: circleci/node:14.16.1-browsers
+  image: circleci/node:14.18.0-browsers
 
 job_common: &job_common
   docker:
@@ -85,10 +88,6 @@ jobs:
           name: Run easy-framework unit tests
           command: npm run test:easy
 
-      - run:
-          name: Upload easy code coverage report to codecov
-          command: curl -Os https://uploader.codecov.io/latest/linux/codecov chmod +x codecov ./codecov | -F easy
-
   test_docs:
     <<: *job_common
 
@@ -100,9 +99,16 @@ jobs:
           name: Run easy-docs unit tests
           command: npm run test:docs
 
-      - run:
-          name: Upload docs code coverage report to codecov
-          command: curl -Os https://uploader.codecov.io/latest/linux/codecov chmod +x codecov ./codecov | -F docs
+  upload_tests:
+    <<: *job_common
+
+    steps:
+      - attach_workspace:
+          at: .
+
+      - codecov/upload:
+          file: coverage/easy-framework
+          file: coverage/easy-docs
 
 workflows:
   default_workflow:
@@ -117,3 +123,7 @@ workflows:
       - test_easy:
           requires:
             - build
+      - upload_tests:
+          requires:
+            - test_docs
+            - test_easy
