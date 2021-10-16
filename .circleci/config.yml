@@ -4,9 +4,6 @@
 #
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@3.2.0
-
 # Workflow variables
 base_image: &base_image
 
@@ -88,8 +85,9 @@ jobs:
           name: Run easy-framework unit tests
           command: npm run test:easy
 
-      - codecov/upload:
-          flags: easy
+      - run:
+          name: Upload easy code coverage report to codecov
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov chmod +x codecov ./codecov -F easy
 
   test_docs:
     <<: *job_common
@@ -102,8 +100,9 @@ jobs:
           name: Run easy-docs unit tests
           command: npm run test:docs
 
-      - codecov/upload:
-          flags: docs
+      - run:
+          name: Upload easy code coverage report to codecov
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov chmod +x codecov ./codecov -F docs
 
 workflows:
   default_workflow:
