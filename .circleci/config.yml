@@ -108,6 +108,8 @@ jobs:
 
       - codecov/upload:
           file: coverage/easy-framework
+
+      - codecov/upload:
           file: coverage/easy-docs
 
 workflows:
