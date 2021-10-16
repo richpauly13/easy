@@ -47,6 +47,11 @@ jobs:
       # Restore cached dependencies
       - <<: *restore
 
+       # Update angular cli
+      - run:
+          name: Update angular cli
+          command: sudo npm i -g angular/cli --silent
+
       # Update dependencies
       - run:
           name: Update dependencies
@@ -108,9 +113,11 @@ jobs:
 
       - codecov/upload:
           file: coverage/easy-framework
+          flags: easy
 
       - codecov/upload:
           file: coverage/easy-docs
+          flags: docs
 
 workflows:
   default_workflow:
