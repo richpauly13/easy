@@ -50,7 +50,7 @@ jobs:
        # Update angular cli
       - run:
           name: Update angular cli
-          command: sudo npm i -g angular/cli --silent
+          command: sudo npm i -g @angular/cli --silent
 
       # Update dependencies
       - run:
@@ -93,6 +93,10 @@ jobs:
           name: Run easy-framework unit tests
           command: npm run test:easy
 
+      - codecov/upload:
+          file: coverage/easy-framework
+          flags: easy
+
   test_docs:
     <<: *job_common
 
@@ -103,17 +107,6 @@ jobs:
       - run:
           name: Run easy-docs unit tests
           command: npm run test:docs
-
-  upload_tests:
-    <<: *job_common
-
-    steps:
-      - attach_workspace:
-          at: .
-
-      - codecov/upload:
-          file: coverage/easy-framework
-          flags: easy
 
       - codecov/upload:
           file: coverage/easy-docs
@@ -132,7 +125,3 @@ workflows:
       - test_easy:
           requires:
             - build
-      - upload_tests:
-          requires:
-            - test_docs
-            - test_easy
