@@ -730,13 +730,6 @@ module.exports = {
 						vars: 'all'
 					}
 				],
-				'@typescript-eslint/no-unused-vars-experimental': [
-					'error',
-					{
-						ignoreArgsIfArgsAfterAreUsed: false,
-						ignoredNamesRegex: false
-					}
-				],
 				'@typescript-eslint/no-use-before-define': [
 					'error',
 					{
@@ -1043,7 +1036,7 @@ module.exports = {
 					{
 						arrayDestructuring: true,
 						arrowParameter: true,
-						memberVariableDeclaration: true,
+						memberVariableDeclaration: false,
 						objectDestructuring: true,
 						parameter: true,
 						propertyDeclaration: true,
