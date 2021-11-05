@@ -75,7 +75,7 @@
     "build": "run-s build:easy build:docs",
     "build:docs": "ng build easy-docs",
     "build:easy": "ng build easy-framework",
-    "bump:deps": "npm run build && git add . && git commit -m \"chore(deps): bump deps\" && git push && npm run deploy",
+    "bump:deps": "npm run build && npm run deploy && git add . && git commit -m \"chore(deps): bump deps\" && git push",
     "deploy": "ng deploy",
     "lint": "ng lint --fix",
     "ng": "ng",
