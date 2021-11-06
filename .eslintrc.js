@@ -201,10 +201,6 @@ module.exports = {
 							Object: {
 								fixWith: 'Record<string, unknown>',
 								message: 'The `Object` type actually means any non-nullish value, so it is marginally better than `unknown`.  If you want a type meaning any object, you probably want `Record<string, unknown>` instead.  If you want a type meaning any value, you probably want `unknown` instead.'
-							},
-							object: {
-								fixWith: 'Record<string, unknown>',
-								message: 'The `object` type is currently hard to use ([see this issue](https://github.com/microsoft/TypeScript/issues/21732)).  Consider using `Record<string, unknown>` instead, as it allows you to more easily inspect and use the keys.'
 							}
 						}
 					}
@@ -238,6 +234,9 @@ module.exports = {
 				'@typescript-eslint/consistent-type-definitions': [
 					'error',
 					'type'
+				],
+				'@typescript-eslint/consistent-type-exports': [
+					'error'
 				],
 				'@typescript-eslint/consistent-type-imports': [
 					'error',
@@ -364,7 +363,22 @@ module.exports = {
 					{
 						'default': {
 							memberTypes: [
+
+								// Index signature
 								'signature',
+
+								// Decorators
+								'public-decorated-get',
+								'protected-decorated-get',
+								'private-decorated-get',
+
+								'decorated-get',
+
+								'public-decorated-set',
+								'protected-decorated-set',
+								'private-decorated-set',
+
+								'decorated-set',
 
 								'public-decorated-method',
 								'protected-decorated-method',
@@ -374,6 +388,56 @@ module.exports = {
 								'protected-decorated-field',
 								'private-decorated-field',
 
+								'decorated-method',
+								'decorated-field',
+
+								// Getters
+								'public-static-get',
+								'protected-static-get',
+								'private-static-get',
+
+								'public-instance-get',
+								'protected-instance-get',
+								'private-instance-get',
+
+								'public-abstract-get',
+								'protected-abstract-get',
+								'private-abstract-get',
+
+								'public-get',
+								'protected-get',
+								'private-get',
+
+								'static-get',
+								'instance-get',
+								'abstract-get',
+
+								'get',
+
+								// Setters
+								/* 'public-static-set',
+								'protected-static-set',
+								'private-static-set',
+
+								'public-instance-set',
+								'protected-instance-set',
+								'private-instance-set',
+
+								'public-abstract-set',
+								'protected-abstract-set',
+								'private-abstract-set',
+
+								'public-set',
+								'protected-set',
+								'private-set',
+
+								'static-set',
+								'instance-set',
+								'abstract-set',
+
+								'set', */
+
+								// Fields
 								'public-instance-field',
 								'protected-instance-field',
 								'private-instance-field',
@@ -390,17 +454,18 @@ module.exports = {
 								'protected-field',
 								'private-field',
 
-								'decorated-field',
 								'instance-field',
 								'static-field',
 								'abstract-field',
 								'field',
 
+								// Constructors
 								'public-constructor',
 								'protected-constructor',
 								'private-constructor',
 								'constructor',
 
+								// Methods
 								'public-instance-method',
 								'protected-instance-method',
 								'private-instance-method',
@@ -417,7 +482,6 @@ module.exports = {
 								'protected-method',
 								'private-method',
 
-								'decorated-method',
 								'instance-method',
 								'static-method',
 								'abstract-method',
@@ -846,7 +910,10 @@ module.exports = {
 					'error'
 				],
 				'@typescript-eslint/prefer-literal-enum-member': [
-					'error'
+					'error',
+					{
+						allowBitwiseExpressions: false
+					}
 				],
 				'@typescript-eslint/prefer-namespace-keyword': [
 					'error'
@@ -922,9 +989,10 @@ module.exports = {
 					'error',
 					{
 						allowAny: false,
-						allowBoolean: false,
+						allowBoolean: true,
 						allowNullish: true,
-						allowNumber: true
+						allowNumber: true,
+						allowRegExp: true
 					}
 				],
 				'@typescript-eslint/return-await': [
@@ -2058,22 +2126,22 @@ module.exports = {
 					}
 				],
 				'prefer-destructuring': [
-					'off'/* ,
+					'error',
 					{
 						AssignmentExpression:
 						{
-							array: false,
-							object: false
+							array: true,
+							object: true
 						},
 						VariableDeclarator:
 						{
-							array: true,
+							array: false,
 							object: true
 						}
 					},
 					{
 						enforceForRenamedProperties: false
-					} */
+					}
 				],
 				'prefer-exponentiation-operator': [
 					'error'
