@@ -77,6 +77,17 @@ jobs:
           paths:
             - .
 
+  lint:
+    <<: *job_common
+
+    steps:
+      - attach_workspace:
+          at: .
+
+      - run:
+          name: Run linting with with auto fixing
+          command: npm run lint
+
   test_easy:
     <<: *job_common
 
@@ -112,6 +123,9 @@ workflows:
       - build:
           requires:
             - install
+      - lint:
+          requires:
+            - build
       - test_docs:
           requires:
             - build

@@ -38,7 +38,6 @@
     "eslint": "^8.1.0",
     "eslint-plugin-jsdoc": "^37.0.3",
     "eslint-plugin-unicorn": "^38.0.0",
-    "husky": "^7.0.2",
     "jasmine-core": "^3.10.1",
     "karma": "^6.3.7",
     "karma-coverage": "^2.0.3",
@@ -48,7 +47,6 @@
     "karma-spec-reporter": "^0.0.32",
     "ng-packagr": "^13.0.2",
     "npm-run-all": "^4.1.5",
-    "pinst": "^2.1.6",
     "standard-version": "^9.3.2",
     "typescript": "^4.4.4"
   },
@@ -79,7 +77,6 @@
     "deploy": "ng deploy",
     "lint": "ng lint --fix",
     "ng": "ng",
-    "postinstall": "husky install",
     "release": "cd projects/easy-framework && npm run release",
     "start": "ng serve -o",
     "test": "ng build && ng test",
