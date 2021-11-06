@@ -16,6 +16,7 @@ base_image: &base_image
 job_common: &job_common
   docker:
     - <<: *base_image
+
   working_directory: ~/easy
 
 # Save dependencies to cache
@@ -46,6 +47,11 @@ jobs:
 
       # Restore cached dependencies
       - <<: *restore
+
+      # Update npm
+      - run:
+          name: Update npm
+          command: sudo npm i -g npm --silent
 
       # Update @angular/cli
       - run:
@@ -88,6 +94,11 @@ jobs:
       - run:
           name: Run linting with with auto-fixing
           command: npm run lint
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
   test_easy:
     <<: *job_common
