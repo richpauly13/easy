@@ -11,7 +11,7 @@ orbs:
 base_image: &base_image
 
   # Node version
-  image: circleci/node:14.18.0-browsers
+  image: circleci/node:16.13.0-browsers
 
 job_common: &job_common
   docker:
@@ -47,6 +47,11 @@ jobs:
       # Restore cached dependencies
       - <<: *restore
 
+      # Update @angular/cli
+      - run:
+          name: Update @angular/cli
+          command: sudo npm i -g @angular/cli --silent
+
       # Update dependencies
       - run:
           name: Update dependencies
@@ -64,12 +69,8 @@ jobs:
       - <<: *restore
 
       - run:
-          name: Build easy-framework
-          command: npm run build:easy
-
-      - run:
-          name: Build easy-docs
-          command: npm run build:docs
+          name: Build easy
+          command: npm run build
 
       # Add dependencies to workspace
       - persist_to_workspace:
@@ -85,7 +86,7 @@ jobs:
           at: .
 
       - run:
-          name: Run linting with with auto fixing
+          name: Run linting with with auto-fixing
           command: npm run lint
 
   test_easy:
@@ -120,15 +121,19 @@ workflows:
   default_workflow:
     jobs:
       - install
+
       - build:
           requires:
             - install
+
       - lint:
           requires:
             - build
+
       - test_docs:
           requires:
-            - build
+            - lint
+
       - test_easy:
           requires:
-            - build
+            - lint
