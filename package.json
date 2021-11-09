@@ -37,7 +37,7 @@
     "copyfiles": "^2.4.1",
     "eslint": "^8.1.0",
     "eslint-plugin-jsdoc": "^37.0.3",
-    "eslint-plugin-unicorn": "^38.0.0",
+    "eslint-plugin-unicorn": "^38.0.1",
     "jasmine-core": "^3.10.1",
     "karma": "^6.3.7",
     "karma-coverage": "^2.0.3",
