@@ -36,7 +36,7 @@ jobs:
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v2.1.0
       with:
-        files: ./coverage/easy-docs/,./coverage/easy-framework/
+        files: ./coverage/easy-docs,./coverage/easy-framework
         flags: docs,easy
         name: codecov
         fail_ci_if_error: true
