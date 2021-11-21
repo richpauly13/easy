@@ -33,10 +33,9 @@ jobs:
       run: |
         npm run test
 
-    - name: Upload coverage reports to Codecov
+    - name: Upload coverage reports
       uses: codecov/codecov-action@v2.1.0
       with:
-        files: ./coverage/easy-docs,./coverage/easy-framework
         flags: docs,easy
         name: codecov
         fail_ci_if_error: true
