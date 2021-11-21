@@ -54,7 +54,7 @@ module.exports = function (config) {
 		browsers: [
 			'FirefoxHeadless'
 		],
-		singleRun: false,
+		singleRun: true,
 		restartOnFileChange: true
 	});
 };

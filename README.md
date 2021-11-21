@@ -1,4 +1,3 @@
-[![CircleCI branch](https://img.shields.io/circleci/project/github/richpauly13/easy/master.svg?label=circleci)](https://circleci.com/gh/richpauly13/easy) 
 [![.github/workflows/main.yml](https://github.com/richpauly13/easy/actions/workflows/main.yml/badge.svg)](https://github.com/richpauly13/easy/actions/workflows/main.yml)
 [![Known Vulnerabilities](https://snyk.io/test/github/richpauly13/easy/badge.svg)](https://snyk.io/test/github/richpauly13/easy)
 

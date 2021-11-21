@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and test
 
 on: [push]
 
@@ -15,14 +15,35 @@ jobs:
       with:
         node-version: 16.x
 
-    - name: Prepare and deploy
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Install
       run: |
         npm i -g npm@latest --silent
         npm i -g @angular/cli@latest --silent
         npm i --silent
+
+    - name: Build
+      run: |
         npm run build
+
+    - name: Lint
+      run: |
         npm run lint
+
+    - name: Test
+      run: |
         npm run test
-        npm run deploy
+
+    - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage/easy-docs/,./coverage/easy-framework/
+          flags: docs,easy
+          name: codecov
+          fail_ci_if_error: true
+
+    - name: Deploy
+        if: github.ref == 'refs/heads/master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run deploy
