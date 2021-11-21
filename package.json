@@ -80,7 +80,7 @@
     "ng": "ng",
     "release": "cd projects/easy-framework && npm run release",
     "start": "ng serve -o",
-    "test": "ng build && ng test",
+    "test": "ng test",
     "test:add": "cd projects/easy-framework && npm run test",
     "test:docs": "ng test easy-docs",
     "test:easy": "ng test easy-framework",
