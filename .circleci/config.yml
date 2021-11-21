@@ -51,12 +51,12 @@ jobs:
       # Update npm
       - run:
           name: Update npm
-          command: sudo npm i -g npm --silent
+          command: sudo npm i -g npm@latest --silent
 
       # Update @angular/cli
       - run:
           name: Update @angular/cli
-          command: sudo npm i -g @angular/cli --silent
+          command: sudo npm i -g @angular/cli@latest --silent
 
       # Update dependencies
       - run:
