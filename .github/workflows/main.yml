@@ -1,0 +1,27 @@
+name: Deploy to GitHub Pages via angular-cli-ghpages
+
+ on: [push]
+
+ jobs:
+   build-and-deploy:
+     runs-on: ubuntu-latest
+
+     steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+
+     - name: Use Node.js 16.x
+       uses: actions/setup-node@v1
+       with:
+         node-version: 16.x
+
+     - name: Prepare and deploy
+       env:
+         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+       run: |
+         npm i -g @angular/cli@latest --silent
+         npm i --silent
+         npm run build
+         npm run lint
+         npm test
+         npm run deploy
