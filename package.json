@@ -71,25 +71,26 @@
     "url": "https://github.com/richpauly13/easy.git"
   },
   "scripts": {
-    "build": "run-s build:easy build:docs",
-    "build:docs": "ng build easy-docs",
-    "build:easy": "ng build easy-framework",
-    "bump:deps": "git add . && git commit -m \"chore(deps): bump deps\" && git push",
+    "add": "git add .",
+    "build": "ng build easy-framework",
+    "bump:deps": "run-s build add commit push",
+    "change": "cd projects/easy-framework",
+    "commit": "git commit -m \"chore(deps): bump deps\"",
     "deploy": "ng deploy",
     "lint": "ng lint --fix",
     "ng": "ng",
-    "release": "cd projects/easy-framework && npm run release",
+    "push": "git push",
+    "release": "run-s change release",
     "start": "ng serve -o",
-    "test": "ng test",
+    "test": "run-s build test:all",
     "test:add": "cd projects/easy-framework && npm run test",
-    "test:docs": "ng test easy-docs",
-    "test:easy": "ng test easy-framework",
+    "test:all": "ng test",
     "test:watch": "ng test --watch",
     "update:core": "ng update @angular/cli @angular/core --allow-dirty",
     "update:deps": "npm update && npm i && npm audit fix",
     "update:global": "npm i -g npm@latest @angular/cli@latest",
     "update:ng": "run-s update:global update:core update:deps",
-    "watch:easy": "ng build easy-framework --watch"
+    "watch:easy": "ng build --watch"
   },
   "version": "1.0.0"
 }

@@ -2,20 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.13.7](https://github.com/richpauly13/easy/compare/v1.13.6...v1.13.7) (2021-11-25)
-
-### [1.13.6](https://github.com/richpauly13/easy/compare/v1.13.5...v1.13.6) (2021-11-25)
-
-### [1.13.5](https://github.com/richpauly13/easy/compare/v1.13.4...v1.13.5) (2021-11-06)
-
-### [1.13.4](https://github.com/richpauly13/easy/compare/v1.13.3...v1.13.4) (2021-11-06)
-
-### [1.13.3](https://github.com/richpauly13/easy/compare/v1.13.2...v1.13.3) (2021-11-06)
-
-### [1.13.2](https://github.com/richpauly13/easy/compare/v1.13.1...v1.13.2) (2021-11-06)
-
-### [1.13.1](https://github.com/richpauly13/easy/compare/v1.13.0...v1.13.1) (2021-11-06)
-
 ## [1.13.0](https://github.com/richpauly13/easy/compare/v1.12.2...v1.13.0) (2021-08-01)
 
 
