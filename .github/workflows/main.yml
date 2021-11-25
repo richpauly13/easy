@@ -3,7 +3,7 @@ name: GitHub Actions
 on: [push]
 
 jobs:
-  build-and-deploy:
+  build-lint-test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,6 +37,10 @@ jobs:
 
     - name: Upload test coverage reports for EASY and docs
       uses: codecov/codecov-action@v2
+      with:
+        files: .coverage/easy-docs/lcov.info,.coverage/easy-framework/lcov.info
+        flags: docs,easy
+        fail_ci_if_error: true
 
     - name: Deploy docs
       env:

@@ -9,22 +9,22 @@ coverage:
 
   status:
     project:
-	  easy:
-        flags:
-          - easy
       docs:
         flags:
           - docs
+      easy:
+        flags:
+          - easy
     patch: yes
     changes: yes
 
 flags:
   easy:
     paths:
-      - projects/easy-framework/
+      - projects/easy-framework
   docs:
     paths:
-      - projects/easy-docs/
+      - projects/easy-docs
 
 parsers:
   gcov:
