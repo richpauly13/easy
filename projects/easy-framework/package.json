@@ -44,7 +44,7 @@
     "copy:md": "copyfiles -f ../../{LICENSE.md,README.md} ../../dist/easy-framework",
     "copy:schemas": "copyfiles schematics/*/schema.json ../../dist/easy-framework",
     "postbuild": "npm run copy:all",
-    "release": "npm run version && npm run build && git push --follow-tags origin master && npm publish ../../dist/easy-framework --access=public",
+    "release": "npm run version && npm run build && git add . && git push",
     "test": "npm run build && cd ../../../easy-test && npm link ../easy/dist/easy-framework && ng g easy-framework:ng-add",
     "version": "standard-version"
   },
