@@ -23,10 +23,6 @@ jobs:
       run: |
         npm run update:deps --silent
 
-    - name: Build EASY
-      run: |
-        npm run build
-
     - name: Lint EASY and docs
       run: |
         npm run lint
@@ -35,7 +31,7 @@ jobs:
       run: |
         npm run test:all
 
-    - name: Upload test coverage reports for EASY and docs
+    - name: Upload coverage reports for EASY and docs
       uses: codecov/codecov-action@v2
       with:
         fail_ci_if_error: true
