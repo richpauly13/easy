@@ -1,5 +1,5 @@
 [![.github/workflows/main.yml](https://github.com/richpauly13/easy/actions/workflows/main.yml/badge.svg)](https://github.com/richpauly13/easy/actions/workflows/main.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/richpauly13/easy/badge.svg)](https://snyk.io/test/github/richpauly13/easy)[![codecov.io](https://codecov.io/github/richpauly13/easy/coverage.svg?branch=master)](https://codecov.io/github/richpauly13/easy?branch=master) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-brightgreen.svg)](https://conventionalcommits.org)
+[![Known Vulnerabilities](https://snyk.io/test/github/richpauly13/easy/badge.svg)](https://snyk.io/test/github/richpauly13/easy) [![codecov.io](https://codecov.io/github/richpauly13/easy/coverage.svg?branch=master)](https://codecov.io/github/richpauly13/easy?branch=master) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-brightgreen.svg)](https://conventionalcommits.org)
 
 [![npm](https://img.shields.io/npm/v/easy-framework.svg)](https://www.npmjs.com/package/easy-framework) [![downloads](https://badgen.net/npm/dt/easy-framework)](https://www.npmjs.com/package/easy-framework) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/richpauly13/easy/blob/master/LICENSE) 
 
