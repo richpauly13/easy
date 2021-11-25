@@ -73,7 +73,7 @@
   "scripts": {
     "add": "git add .",
     "build": "ng build easy-framework",
-    "bump:deps": "run-s build add commit push",
+    "bump:deps": "run-s add commit push",
     "change": "cd projects/easy-framework",
     "commit": "git commit -m \"chore(deps): bump deps\"",
     "deploy": "ng deploy",
@@ -83,7 +83,7 @@
     "release": "run-s change release",
     "start": "ng serve -o",
     "test": "run-s build test:all",
-    "test:add": "cd projects/easy-framework && npm run test",
+    "test:add": "run-s change test",
     "test:all": "ng test",
     "test:watch": "ng test --watch",
     "update:core": "ng update @angular/cli @angular/core --allow-dirty",
