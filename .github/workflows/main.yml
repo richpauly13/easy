@@ -1,4 +1,4 @@
-name: Build and test
+name: GitHub Actions
 
 on: [push]
 
@@ -15,30 +15,31 @@ jobs:
       with:
         node-version: 16.x
 
-    - name: Install
+    - name: Install @angular/cli
       run: |
         npm i -g @angular/cli@latest --silent
+
+    - name: Install dependencies
+      run: |
         npm i --silent
 
-    - name: Build
+    - name: Build EASY
       run: |
-        npm run build
+        npm run build:easy
 
-    - name: Lint
+    - name: Lint EASY and docs
       run: |
         npm run lint
 
-    - name: Test
+    - name: Test EASY and docs
       run: |
         npm run test
 
-    - name: Upload coverage reports
-      uses: codecov/codecov-action@v2.1.0
-      with:
-        fail_ci_if_error: true
+    - name: Upload test coverage reports for EASY and docs
+      uses: codecov/codecov-action@v2
 
-    - name: Deploy
+    - name: Deploy docs
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         npm run deploy
