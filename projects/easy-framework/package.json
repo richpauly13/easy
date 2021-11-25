@@ -35,6 +35,7 @@
   },
   "schematics": "./schematics/collection.json",
   "scripts": {
+    "add": "git add .",
     "build": "run-s build:easy build:schematics",
     "build:easy": "ng build easy-framework",
     "build:schematics": "node ../../node_modules/typescript/bin/tsc -p tsconfig.schematics.json",
@@ -44,7 +45,8 @@
     "copy:md": "copyfiles -f ../../{LICENSE.md,README.md} ../../dist/easy-framework",
     "copy:schemas": "copyfiles schematics/*/schema.json ../../dist/easy-framework",
     "postbuild": "npm run copy:all",
-    "release": "npm run version && npm run build && git add . && git push",
+    "push": "git push",
+    "release": "run-s version build add push",
     "test": "npm run build && cd ../../../easy-test && npm link ../easy/dist/easy-framework && ng g easy-framework:ng-add",
     "version": "standard-version"
   },

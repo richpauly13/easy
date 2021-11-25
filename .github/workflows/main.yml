@@ -21,11 +21,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm i --silent
+        npm run update:deps --silent
 
     - name: Build EASY
       run: |
-        npm run build:easy
+        npm run build
 
     - name: Lint EASY and docs
       run: |
@@ -33,7 +33,7 @@ jobs:
 
     - name: Test EASY and docs
       run: |
-        npm run test
+        npm run test:all
 
     - name: Upload test coverage reports for EASY and docs
       uses: codecov/codecov-action@v2
