@@ -38,9 +38,6 @@ jobs:
     - name: Upload test coverage reports for EASY and docs
       uses: codecov/codecov-action@v2
       with:
-        directory: ./coverage/
-        files: ./easy-docs/lcov.info,./easy-framework/lcov.info
-        flags: docs,easy
         fail_ci_if_error: true
 
     - name: Deploy docs
