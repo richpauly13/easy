@@ -487,7 +487,7 @@ module.exports = {
 								'abstract-method',
 								'method'
 							],
-							order: 'alphabetically'
+							order: 'alphabetically-case-insensitive'
 						}
 					}
 				],
