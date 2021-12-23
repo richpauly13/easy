@@ -720,7 +720,11 @@ module.exports = {
 					}
 				],
 				'@typescript-eslint/no-throw-literal': [
-					'error'
+					'error',
+					{
+						allowThrowingAny: false,
+						allowThrowingUnknown: false
+					}
 				],
 				'@typescript-eslint/no-type-alias': [
 					'error',
@@ -982,6 +986,7 @@ module.exports = {
 				'@typescript-eslint/restrict-plus-operands': [
 					'error',
 					{
+						allowAny: false,
 						checkCompoundAssignments: true
 					}
 				],
