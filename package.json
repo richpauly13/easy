@@ -87,7 +87,7 @@
     "test:all": "ng test",
     "test:watch": "ng test --watch",
     "update:core": "ng update @angular/cli @angular/core --allow-dirty",
-    "update:deps": "npm update && npm i && npm audit fix",
+    "update:deps": "npm update && npm i",
     "update:global": "npm i -g npm@latest @angular/cli@latest",
     "update:ng": "run-s update:global update:core update:deps",
     "watch:easy": "ng build --watch"
