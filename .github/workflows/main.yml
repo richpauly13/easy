@@ -21,7 +21,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm run update:deps --silent
+        npm i --silent
 
     - name: Build EASY
       run: |

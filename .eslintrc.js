@@ -257,14 +257,7 @@ module.exports = {
 					}
 				],
 				'@typescript-eslint/explicit-function-return-type': [
-					'error',
-					{
-						allowConciseArrowFunctionExpressionsStartingWithVoid: false,
-						allowDirectConstAssertionInArrowFunctions: false,
-						allowExpressions: true,
-						allowHigherOrderFunctions: false,
-						allowTypedFunctionExpressions: false
-					}
+					'off'
 				],
 				'@typescript-eslint/explicit-member-accessibility': [
 					'error',
