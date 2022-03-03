@@ -687,6 +687,9 @@ module.exports = {
 						ignoreDeclarationMerge: false
 					}
 				],
+				'@typescript-eslint/no-redundant-type-constituents': [
+					'error'
+				],
 				'@typescript-eslint/no-require-imports': [
 					'error'
 				],
@@ -809,6 +812,9 @@ module.exports = {
 					'error'
 				],
 				'@typescript-eslint/non-nullable-type-assertion-style': [
+					'error'
+				],
+				'@typescript-eslint/no-useless-empty-export': [
 					'error'
 				],
 				'@typescript-eslint/object-curly-spacing': [
@@ -1023,6 +1029,14 @@ module.exports = {
 							'union',
 							'nullish'
 						]
+					}
+				],
+				'@typescript-eslint/space-before-blocks': [
+					'error',
+					{
+						classes: 'always',
+						functions: 'always',
+						keywords: 'always'
 					}
 				],
 				'@typescript-eslint/space-before-function-paren': [
@@ -2251,12 +2265,7 @@ module.exports = {
 					}
 				],
 				'space-before-blocks': [
-					'error',
-					{
-						classes: 'always',
-						functions: 'always',
-						keywords: 'always'
-					}
+					'off'
 				],
 				'space-before-function-paren': [
 					'off'
