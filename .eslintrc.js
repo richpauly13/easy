@@ -672,14 +672,6 @@ module.exports = {
 				'@typescript-eslint/no-non-null-assertion': [
 					'off'
 				],
-				'@typescript-eslint/no-parameter-properties': [
-					'error',
-					{
-						allows: [
-							'private'
-						]
-					}
-				],
 				'@typescript-eslint/no-redeclare': [
 					'error',
 					{
@@ -895,6 +887,14 @@ module.exports = {
 						blankLine: 'always',
 						next: 'throw',
 						prev: '*'
+					}
+				],
+				'@typescript-eslint/parameter-properties': [
+					'error',
+					{
+						allow: [
+							'private'
+						]
 					}
 				],
 				'@typescript-eslint/prefer-as-const': [
