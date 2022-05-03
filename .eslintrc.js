@@ -546,6 +546,9 @@ module.exports = {
 				'@typescript-eslint/no-dupe-class-members': [
 					'error'
 				],
+				'@typescript-eslint/no-duplicate-enum-values': [
+					'error'
+				],
 				'@typescript-eslint/no-duplicate-imports': [
 					'error',
 					{
