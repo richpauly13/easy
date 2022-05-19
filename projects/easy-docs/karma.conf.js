@@ -10,7 +10,7 @@ module.exports = function (config) {
 		],
 		plugins: [
 			require('karma-jasmine'),
-			require('karma-firefox-launcher'),
+			require('@chiragrupani/karma-chromium-edge-launcher'),
 			require('karma-jasmine-html-reporter'),
 			require('karma-coverage'),
 			require('karma-spec-reporter'),
@@ -52,7 +52,7 @@ module.exports = function (config) {
 		logLevel: config.LOG_INFO,
 		autoWatch: true,
 		browsers: [
-			'FirefoxHeadless'
+			'EdgeHeadless'
 		],
 		singleRun: false,
 		restartOnFileChange: true
