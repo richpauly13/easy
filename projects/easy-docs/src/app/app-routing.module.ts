@@ -1,31 +1,28 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
-import { ComponentModule } from './component/component.module';
-import { LayoutModule } from './layout/layout.module';
-import { UtilitiesModule } from './utilities/utilities.module';
 
 const routes: Routes = [
 	{
 		path: 'component',
-		loadChildren: async(): Promise<ComponentModule> => {
-			return await import('projects/easy-docs/src/app/component/component.module').then((module: typeof import('projects/easy-docs/src/app/component/component.module')): ComponentModule => {
+		loadChildren: () => {
+			return import('projects/easy-docs/src/app/component/component.module').then((module: typeof import('projects/easy-docs/src/app/component/component.module')) => {
 				return module.ComponentModule;
 			});
 		}
 	},
 	{
 		path: 'layout',
-		loadChildren: async(): Promise<LayoutModule> => {
-			return await import('projects/easy-docs/src/app/layout/layout.module').then((module: typeof import('projects/easy-docs/src/app/layout/layout.module')): LayoutModule => {
+		loadChildren: () => {
+			return import('projects/easy-docs/src/app/layout/layout.module').then((module: typeof import('projects/easy-docs/src/app/layout/layout.module')) => {
 				return module.LayoutModule;
 			});
 		}
 	},
 	{
 		path: 'utilities',
-		loadChildren: async(): Promise<UtilitiesModule> => {
-			return await import('projects/easy-docs/src/app/utilities/utilities.module').then((module: typeof import('projects/easy-docs/src/app/utilities/utilities.module')): UtilitiesModule => {
+		loadChildren: () => {
+			return import('projects/easy-docs/src/app/utilities/utilities.module').then((module: typeof import('projects/easy-docs/src/app/utilities/utilities.module')) => {
 				return module.UtilitiesModule;
 			});
 		}

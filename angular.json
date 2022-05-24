@@ -4,7 +4,6 @@
     "defaultCollection": "@angular-eslint/schematics",
     "packageManager": "npm"
   },
-  "defaultProject": "easy-docs",
   "newProjectRoot": "projects",
   "projects": {
     "easy-docs": {
