@@ -10,7 +10,7 @@
     "@angular/core": "^14.0.0-rc.1",
     "@angular/forms": "^14.0.0-rc.1",
     "@angular/platform-browser": "^14.0.0-rc.1",
-    "@angular/platform-browser-dynamic": "^14.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "^14.0.0-rc.2",
     "@angular/router": "^14.0.0-rc.1",
     "rxjs": "^7.5.5",
     "tslib": "^2.4.0",
