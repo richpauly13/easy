@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -21,7 +21,7 @@ export class FormComponent implements OnInit {
 	public formGroupForm: UntypedFormGroup;
 	public formLabelForm: UntypedFormGroup;
 
-	public constructor(private formBuilder: UntypedFormBuilder, private title: Title) {
+	public constructor(private formBuilder: NonNullableFormBuilder, private title: Title) {
 		this.checkboxRadioGroupForm = this.formBuilder.group({});
 		this.fieldGroupForm = this.formBuilder.group({});
 		this.fieldsetForm = this.formBuilder.group({});
