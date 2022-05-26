@@ -19,7 +19,7 @@
   "description": "EASY",
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.0.0-rc.1",
-    "@angular-devkit/core": "^14.0.0-rc.1",
+    "@angular-devkit/core": "^14.0.0-rc.2",
     "@angular-eslint/builder": "^13.2.1",
     "@angular-eslint/eslint-plugin": "^13.2.1",
     "@angular-eslint/eslint-plugin-template": "^13.2.1",
