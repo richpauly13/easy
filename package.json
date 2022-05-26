@@ -26,7 +26,7 @@
     "@angular-eslint/schematics": "^13.2.1",
     "@angular-eslint/template-parser": "^13.2.1",
     "@angular/cli": "^14.0.0-rc.1",
-    "@angular/compiler-cli": "^14.0.0-rc.1",
+    "@angular/compiler-cli": "^14.0.0-rc.2",
     "@types/eslint": "^8.4.2",
     "@types/estree": "^0.0.51",
     "@types/jasmine": "^4.0.3",
