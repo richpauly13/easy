@@ -38,19 +38,23 @@ export class FormComponent implements OnInit {
 			like: null,
 			name: ''
 		});
+
 		this.fieldGroupForm = this.formBuilder.group({
 			name: ''
 		});
+
 		this.fieldsetForm = this.formBuilder.group({
 			name: '',
 			email: ''
 		});
-		this.formFieldForm = this.formBuilder.group({
+		this
+		.formFieldForm = this.formBuilder.group({
 			gender: 1,
 			languages: '',
 			name: '',
 			note: ''
 		});
+
 		this.formFieldStateForm = this.formBuilder.group({
 			disabled: {
 				disabled: true,
@@ -58,19 +62,23 @@ export class FormComponent implements OnInit {
 			},
 			readonly: 'readonly'
 		});
+
 		this.formFieldStateForm.updateValueAndValidity();
 		this.formForm = this.formBuilder.group({
 			name: ''
 		});
+
 		this.formGroupForm = this.formBuilder.group({
 			email1: '',
 			email2: '',
 			name1: '',
 			name2: ''
 		});
+
 		this.formLabelForm = this.formBuilder.group({
 			name: ''
 		});
+
 		this.title.setTitle('Components - Form - EASY');
 	}
 }
