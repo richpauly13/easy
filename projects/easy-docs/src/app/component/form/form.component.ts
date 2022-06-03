@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 @Component({
