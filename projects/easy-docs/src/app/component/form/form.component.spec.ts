@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { FormComponent } from './form.component';
 
@@ -16,7 +16,7 @@ describe('FormComponent', (): void => {
 				ReactiveFormsModule
 			],
 			providers: [
-				NonNullableFormBuilder
+				FormBuilder
 			]
 		})
 		.compileComponents();
