@@ -224,6 +224,10 @@ module.exports = {
 						before: false
 					}
 				],
+				'@typescript-eslint/consistent-generic-constructors': [
+					'error',
+					'type-annotation'
+				],
 				'@typescript-eslint/consistent-type-assertions': [
 					'error',
 					{
