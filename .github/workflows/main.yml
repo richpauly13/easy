@@ -33,7 +33,7 @@ jobs:
 
     - name: Test EASY and docs
       run: |
-        npm run test:all
+        npm run test-all
 
     - name: Upload coverage reports for EASY and docs
       uses: codecov/codecov-action@v2
