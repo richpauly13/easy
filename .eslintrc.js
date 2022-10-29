@@ -769,6 +769,7 @@ module.exports = {
 				'@typescript-eslint/no-unsafe-call': [
 					'error'
 				],
+				'@typescript-eslint/no-unsafe-declaration-merging': 'error',
 				'@typescript-eslint/no-unsafe-member-access': [
 					'error'
 				],
