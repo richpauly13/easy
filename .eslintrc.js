@@ -2453,6 +2453,13 @@ module.exports = {
 						allowTwoWayDataBinding: true
 					}
 				],
+				'@angular-eslint/template/no-inline-styles': [
+					'error',
+					{
+						allowBindToStyle: false,
+						allowNgStyle: false
+					}
+				],
 				'@angular-eslint/template/no-negated-async': [
 					'error'
 				],
