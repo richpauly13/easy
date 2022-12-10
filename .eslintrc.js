@@ -399,7 +399,6 @@ module.exports = {
 
 								'public-abstract-get',
 								'protected-abstract-get',
-								'private-abstract-get',
 
 								'public-get',
 								'protected-get',
@@ -445,7 +444,6 @@ module.exports = {
 
 								'public-abstract-field',
 								'protected-abstract-field',
-								'private-abstract-field',
 
 								'public-field',
 								'protected-field',
@@ -473,7 +471,6 @@ module.exports = {
 
 								'public-abstract-method',
 								'protected-abstract-method',
-								'private-abstract-method',
 
 								'public-method',
 								'protected-method',
@@ -929,13 +926,7 @@ module.exports = {
 				'@typescript-eslint/prefer-namespace-keyword': [
 					'error'
 				],
-				'@typescript-eslint/prefer-nullish-coalescing': [
-					'error',
-					{
-						ignoreConditionalTests: false,
-						ignoreMixedLogicalExpressions: false
-					}
-				],
+				'@typescript-eslint/prefer-nullish-coalescing': ['off'],
 				'@typescript-eslint/prefer-optional-chain': [
 					'error'
 				],
