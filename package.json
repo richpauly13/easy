@@ -18,7 +18,7 @@
   },
   "description": "EASY",
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.0.3",
+    "@angular-devkit/build-angular": "^15.0.4",
     "@angular-devkit/core": "^15.0.3",
     "@angular-eslint/builder": "^15.1.0",
     "@angular-eslint/eslint-plugin": "^15.1.0",
