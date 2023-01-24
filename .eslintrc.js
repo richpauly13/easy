@@ -2451,6 +2451,9 @@ module.exports = {
 						allowNgStyle: false
 					}
 				],
+				"@angular-eslint/template/no-interpolation-in-attributes": [
+					"error"
+				],
 				'@angular-eslint/template/no-negated-async': [
 					'error'
 				],
