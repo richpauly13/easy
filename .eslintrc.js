@@ -326,6 +326,13 @@ module.exports = {
 						ignoreForLoopInit: false
 					}
 				],
+				'@typescript-eslint/key-spacing': [
+					'error',
+					{
+						afterColon: true,
+						beforeColon: false
+					}
+				],
 				'@typescript-eslint/keyword-spacing': [
 					'error',
 					{
@@ -1384,11 +1391,7 @@ module.exports = {
 					'prefer-single'
 				],
 				'key-spacing': [
-					'error',
-					{
-						afterColon: true,
-						beforeColon: false
-					}
+					'off'
 				],
 				'keyword-spacing': [
 					'off'
