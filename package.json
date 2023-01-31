@@ -30,7 +30,7 @@
     "@types/eslint": "^8.4.10",
     "@types/estree": "^1.0.0",
     "@types/jasmine": "^4.3.1",
-    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.49.0",
     "angular-cli-ghpages": "^1.0.5",
     "copyfiles": "^2.4.1",
