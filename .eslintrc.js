@@ -626,6 +626,9 @@ module.exports = {
 				'@typescript-eslint/no-implied-eval': [
 					'error'
 				],
+				'@typescript-eslint/no-import-type-side-effects': [
+					'error'
+				],
 				'@typescript-eslint/no-inferrable-types': [
 					'off'
 				],
