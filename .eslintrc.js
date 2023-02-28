@@ -670,6 +670,9 @@ module.exports = {
 						checksVoidReturn: true
 					}
 				],
+				'@typescript-eslint/no-mixed-enums': [
+					'error'
+				],
 				'@typescript-eslint/no-namespace': [
 					'error',
 					{
