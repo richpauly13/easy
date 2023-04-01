@@ -495,6 +495,13 @@ module.exports = {
 					}
 				],
 				'@typescript-eslint/no-dupe-class-members': ['error'],
+				'@typescript-eslint/no-duplicate-type-constituents': [
+					'error',
+					{
+						ignoreIntersectio: false,
+						ignoreUnions: false
+					}
+				],
 				'@typescript-eslint/no-duplicate-enum-values': ['error'],
 				'@typescript-eslint/no-duplicate-imports': [
 					'error',
