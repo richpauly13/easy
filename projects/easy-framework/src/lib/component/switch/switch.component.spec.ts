@@ -8,9 +8,7 @@ describe('SwitchComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				SwitchComponent
-			]
+			declarations: [SwitchComponent]
 		})
 		.compileComponents();
 	}));

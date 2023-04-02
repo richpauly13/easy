@@ -3,12 +3,12 @@
 @import "../../core/sass/variables";
 
 // Alert styles
-[class^=alert] {
-    align-items: center;
-    color: color(white);
-    display: flex;
-    justify-content: space-between;
-    padding: space(xs) space(sm);
+[class^="alert"] {
+	align-items: center;
+	color: color(white);
+	display: flex;
+	justify-content: space-between;
+	padding: space(xs) space(sm);
 
 	&.hide {
 		display: none;
@@ -16,20 +16,20 @@
 }
 
 .alert-bad {
-    background-color: color(red);
+	background-color: color(red);
 }
 
 .alert-good {
-    background-color: color(green);
+	background-color: color(green);
 }
 
 .alert-info {
-    background-color: color(dk-blue);
+	background-color: color(dk-blue);
 }
 
 .alert-warn {
-    background-color: color(yellow);
-    color: color(lt-black);
+	background-color: color(yellow);
+	color: color(lt-black);
 }
 
 .close {

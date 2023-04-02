@@ -5,9 +5,7 @@ import { SliderService } from './slider.service';
 @Component({
 	selector: '.slider-circle, .slider-label, .slider-square',
 	templateUrl: './slider.component.html',
-	styleUrls: [
-		'./slider.component.scss'
-	],
+	styleUrls: ['./slider.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -47,9 +45,7 @@ export class SliderComponent implements OnInit {
 		return this.class.includes('slider-label') ? null : this.value ?? '0';
 	}
 
-	@HostListener('input', [
-		'$event'
-	])
+	@HostListener('input', ['$event'])
 	public onInputChange(event: InputEvent): void {
 		this.value = (event.target as HTMLInputElement).value;
 	}

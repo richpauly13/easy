@@ -24,8 +24,8 @@
 	}
 
 	.mar-tb-#{$size} {
-		margin-top: $rem;
 		margin-bottom: $rem;
+		margin-top: $rem;
 	}
 
 	.pad-a-#{$size} {
@@ -38,7 +38,7 @@
 	}
 
 	.pad-tb-#{$size} {
-		padding-top: $rem;
 		padding-bottom: $rem;
+		padding-top: $rem;
 	}
 }

@@ -8,9 +8,7 @@ describe('GridComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				GridComponent
-			]
+			declarations: [GridComponent]
 		})
 		.compileComponents();
 	}));

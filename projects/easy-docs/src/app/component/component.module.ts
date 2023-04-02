@@ -45,8 +45,6 @@ import { TableComponent } from './table/table.component';
 		TabComponent,
 		TableComponent
 	],
-	imports: [
-		SharedModule
-	]
+	imports: [SharedModule]
 })
 export class ComponentModule { }

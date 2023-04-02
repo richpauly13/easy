@@ -4,14 +4,8 @@ import { AlertComponent } from './alert.component';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-	declarations: [
-		AlertComponent
-	],
-	exports: [
-		AlertComponent
-	],
-	imports: [
-		SharedModule
-	]
+	declarations: [AlertComponent],
+	exports: [AlertComponent],
+	imports: [SharedModule]
 })
 export class AlertModule { }

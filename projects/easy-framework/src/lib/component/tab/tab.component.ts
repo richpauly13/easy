@@ -4,9 +4,7 @@ import { TabService } from './tab.service';
 @Component({
 	selector: 'button.tab-btn, .tab-content, .tabs',
 	templateUrl: './tab.component.html',
-	styleUrls: [
-		'./tab.component.scss'
-	],
+	styleUrls: ['./tab.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -63,9 +61,7 @@ export class TabComponent implements OnInit {
 		return this.class.includes('tab-btn') ? this.type ?? 'button' : null;
 	}
 
-	@HostListener('click', [
-		'$event.target'
-	])
+	@HostListener('click', ['$event.target'])
 	public onClick(event: HTMLButtonElement): void {
 		this.tabButtons.forEach((tabButton: HTMLButtonElement) => {
 			if (tabButton === event) {

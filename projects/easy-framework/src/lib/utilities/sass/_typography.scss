@@ -28,7 +28,7 @@ blockquote {
     margin-left: rem(16);
 	padding: rem(16);
 
-    & .author {
+    .author {
         color: color(dk-gray);
         padding-left: rem(16);
         padding-top: rem(16);
@@ -90,7 +90,7 @@ pre {
 		padding-bottom: space(sm);
 	}
 
-    & .list {
+    .list {
         padding-bottom: 0;
         padding-left: space(md);
     }
@@ -99,7 +99,7 @@ pre {
 ol.list {
 	list-style: decimal;
 
-	& .list {
+	.list {
 		list-style: lower-alpha;
 	}
 }
@@ -107,7 +107,7 @@ ol.list {
 ul.list {
 	list-style: disc;
 
-	& .list {
+	.list {
         list-style: circle;
 	}
 }

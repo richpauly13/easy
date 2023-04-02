@@ -7,28 +7,28 @@
 .table-bordered,
 .table-hover,
 .table-striped {
-    display: block;
+	display: block;
 }
 
 .table-bordered {
 	border: rem(1) solid color(gray);
 
-    .table-cell:not(:last-of-type),
-    .table-header-cell:not(:last-of-type) {
-        border-right: rem(1) solid color(gray);
-    }
+	.table-cell:not(:last-of-type),
+	.table-header-cell:not(:last-of-type) {
+		border-right: rem(1) solid color(gray);
+	}
 
-    .table-header,
-    .table-row:not(:last-of-type) {
-        border-bottom: rem(1) solid color(gray);
-    }
+	.table-header,
+	.table-row:not(:last-of-type) {
+		border-bottom: rem(1) solid color(gray);
+	}
 }
 
 .table-cell,
 .table-header,
 .table-header-cell,
 .table-row {
-    align-items: center;
+	align-items: center;
 	display: flex;
 }
 
@@ -66,14 +66,14 @@
 	background-color: color(lt-white);
 }
 
-.table-striped  .table-row:nth-child(even) {
-    background-color: color(lt-white);
+.table-striped .table-row:nth-child(even) {
+	background-color: color(lt-white);
 }
 
 .table-wrapper {
-    max-width: 100%;
-    overflow: auto;
-    width: rem(550);
+	max-width: 100%;
+	overflow: auto;
+	width: rem(550);
 
 	@include media(md) {
 		width: auto;

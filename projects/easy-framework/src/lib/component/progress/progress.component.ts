@@ -4,9 +4,7 @@ import { ProgressService } from './progress.service';
 @Component({
 	selector: '..progress, .progress-label, .progress-striped',
 	templateUrl: './progress.component.html',
-	styleUrls: [
-		'./progress.component.scss'
-	],
+	styleUrls: ['./progress.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

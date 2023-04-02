@@ -8,9 +8,7 @@ describe('FlexboxComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				FlexboxComponent
-			]
+			declarations: [FlexboxComponent]
 		})
 		.compileComponents();
 	}));

@@ -1,11 +1,13 @@
+@import "../../../../../easy-framework/src/lib/core/sass/functions";
+
 :host {
 	display: block;
 }
 
 .flex-sticky-footer {
-	height: 12.5rem;
+	height: rem(200);
 
-    & .main {
+	.main {
 		padding: 0;
-    }
+	}
 }

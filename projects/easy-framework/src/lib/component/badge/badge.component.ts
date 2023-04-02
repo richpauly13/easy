@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: '.badge-sm, .badge-md, .badge-lg',
 	templateUrl: './badge.component.html',
-	styleUrls: [
-		'./badge.component.scss'
-	],
+	styleUrls: ['./badge.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

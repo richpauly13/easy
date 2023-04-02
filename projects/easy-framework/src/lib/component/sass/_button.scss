@@ -12,62 +12,62 @@
 .btn-xs {
 	border: none;
 
-    &:not(:last-of-type) {
-        margin-bottom: space(sm);
-        margin-right: space(sm);
-    }
+	&:not(:last-of-type) {
+		margin-bottom: space(sm);
+		margin-right: space(sm);
+	}
 
-    &.rounded {
-        border-radius: space(md);
-    }
+	&.rounded {
+		border-radius: space(md);
+	}
 }
 
 // Button sizes
 .btn-full,
 .btn-md {
-    padding: rem(12 30);
+	padding: rem(12 30);
 }
 
 .btn-full {
-    width: 100%;
+	width: 100%;
 }
 
 .btn-lg {
-    padding: rem(14) space(xl);
+	padding: rem(14) space(xl);
 }
 
 .btn-sm {
-    padding: rem(10 20);
+	padding: rem(10 20);
 }
 
 .btn-xl {
-    padding: space(sm) rem(50);
+	padding: space(sm) rem(50);
 }
 
 .btn-xs {
-    padding: space(xs) rem(10);
+	padding: space(xs) rem(10);
 }
 
 // Button groups
-[class*=btn-group] {
-    align-items: flex-start;
+[class*="btn-group"] {
+	align-items: flex-start;
 	display: flex;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
 	justify-content: flex-start;
-    padding-bottom: space(sm);
-    padding-top: space(sm);
+	padding-bottom: space(sm);
+	padding-top: space(sm);
 
-    [class*=btn] {
-        border-bottom: rem(1) solid color(white);
-        border-right: rem(1) solid color(white);
-        margin: 0;
-    }
+	[class*="btn"] {
+		border-bottom: rem(1) solid color(white);
+		border-right: rem(1) solid color(white);
+		margin: 0;
+	}
 }
 
 .btn-group-col {
-    flex-direction: column;
+	flex-direction: column;
 }
 
-.btn-group-full [class*=btn] {
+.btn-group-full [class*="btn"] {
 	@include flex(1, 0, auto);
 }

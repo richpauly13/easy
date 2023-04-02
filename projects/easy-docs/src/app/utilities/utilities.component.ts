@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'docs-utilities',
 	templateUrl: './utilities.component.html',
-	styleUrls: [
-		'./utilities.component.scss'
-	],
+	styleUrls: ['./utilities.component.scss'],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -19,7 +17,6 @@ export class UtilitiesComponent {
 			'container',
 			'dimension',
 			'display',
-			'position',
 			'space',
 			'text',
 			'typography',

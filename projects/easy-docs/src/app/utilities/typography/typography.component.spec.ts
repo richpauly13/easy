@@ -8,9 +8,7 @@ describe('TypographyComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				TypographyComponent
-			]
+			declarations: [TypographyComponent]
 		})
 		.compileComponents();
 	}));

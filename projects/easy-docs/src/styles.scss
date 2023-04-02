@@ -1,3 +1,4 @@
+/* stylelint-disable property-disallowed-list */
 @import "../../easy-framework/src/lib/core/sass/functions";
 @import "../../easy-framework/src/lib/core/sass/mixins";
 @import "../../easy-framework/src/lib/core/sass/variables";
@@ -41,7 +42,7 @@ h2 + article section.bg-lt-gray p {
 			top: 0;
 			z-index: 1000;
 
-			& + p {
+			+ p {
 				padding-bottom: rem(1000);
 			}
 		}
@@ -50,7 +51,7 @@ h2 + article section.bg-lt-gray p {
 	&.col {
 		height: rem(400);
 
-		& * {
+		* {
 			width: 100%;
 		}
 	}
@@ -59,7 +60,7 @@ h2 + article section.bg-lt-gray p {
 .flexbox {
 	align-items: flex-start;
 	display: flex;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 
 	ul {
@@ -95,7 +96,7 @@ h2 + article section.bg-lt-gray p {
 			align-items: center;
 			background-color: color(blue);
 			color: color(white);
-            display: flex;
+			display: flex;
 			justify-content: center;
 			min-height: rem(100);
 			min-width: rem(120);
@@ -134,22 +135,68 @@ h2 + article section.bg-lt-gray p {
 	padding-bottom: space(lg);
 	padding-left: rem(220);
 	padding-right: space(md);
-    padding-top: rem(156);
+	padding-top: rem(156);
 
-    code {
-        color: color(purple);
-    }
+	code {
+		color: color(purple);
+	}
+}
+
+.pos-a {
+	position: absolute;
+}
+
+.pos-f-b,
+.pos-f-l,
+.pos-f-r,
+.pos-f-t {
+	position: fixed;
+	z-index: 100;
+}
+
+.pos-f-b,
+.pos-f-t {
+	width: 100%;
+}
+
+.pos-f-l,
+.pos-f-r {
+	overflow-y: auto;
+}
+
+.pos-f-b {
+	bottom: 0;
+}
+
+.pos-f-l {
+	left: 0;
+}
+
+.pos-f-r {
+	right: 0;
+}
+
+.pos-f-t {
+	top: 0;
+}
+
+.pos-r {
+	position: relative;
+}
+
+.pos-s {
+	position: sticky;
 }
 
 .pos-f-l.nav-v {
 	left: space(sm);
-    top: rem(164);
-    width: rem(180);
+	top: rem(164);
+	width: rem(180);
 }
 
 .tag {
 	color: color(red);
-	font-weight: normal;
+	font-weight: 400;
 }
 
 .value {

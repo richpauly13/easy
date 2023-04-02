@@ -9,12 +9,8 @@ describe('LayoutComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				LayoutComponent
-			],
-			imports: [
-				RouterTestingModule
-			]
+			declarations: [LayoutComponent],
+			imports: [RouterTestingModule]
 		})
 		.compileComponents();
 	}));

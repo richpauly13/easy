@@ -1,6 +1,3 @@
-@import "../../core/sass/functions";
-@import "../../core/sass/variables";
-
 @mixin animate($types...) {
 	transition-duration: .3s;
 	transition-property: $types;

@@ -5,9 +5,7 @@ import { FormService } from './form.service';
 @Component({
 	selector: '.checkbox-label, .checkbox-group, .field-group, .fieldset, .form-field, .form-group, .form-group-inline, .form-label, .radio-label, .radio-group',
 	templateUrl: './form.component.html',
-	styleUrls: [
-		'./form.component.scss'
-	],
+	styleUrls: ['./form.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

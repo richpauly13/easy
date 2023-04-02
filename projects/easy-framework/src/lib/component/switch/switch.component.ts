@@ -5,9 +5,7 @@ import { SwitchService } from './switch.service';
 @Component({
 	selector: '.switch-circle, .switch-square, .switch-label',
 	templateUrl: './switch.component.html',
-	styleUrls: [
-		'./switch.component.scss'
-	],
+	styleUrls: ['./switch.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -48,9 +46,7 @@ export class SwitchComponent implements OnInit {
 		return this.class.includes('switch-label') ? null : 'switch';
 	}
 
-	@HostListener('click', [
-		'$event'
-	])
+	@HostListener('click', ['$event'])
 	public onClick(): void {
 		this.isChecked = !this.isChecked;
 	}

@@ -3,13 +3,13 @@
 @import "../../core/sass/variables";
 
 // Slider styles credit: https://css-tricks.com/sliding-nightmare-understanding-range-input
-[type=range][class*=slider] {
+[type="range"][class*="slider"] {
 	height: space(sm);
 
 	&:hover,
 	&:focus,
 	&:active {
-        border: rem(1.6) solid color(blue);
+		border: rem(1.6) solid color(blue);
 	}
 
 	&::-moz-range-thumb {
@@ -48,7 +48,7 @@
 }
 
 .slider-label {
-    display: block;
+	display: block;
 }
 
 .slider-square {

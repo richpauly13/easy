@@ -8,9 +8,7 @@ describe('DimensionComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				DimensionComponent
-			]
+			declarations: [DimensionComponent]
 		})
 		.compileComponents();
 	}));

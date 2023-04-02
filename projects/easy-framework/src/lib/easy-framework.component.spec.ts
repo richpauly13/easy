@@ -8,9 +8,7 @@ describe('EasyComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				EasyComponent
-			]
+			declarations: [EasyComponent]
 		})
 		.compileComponents();
 	}));

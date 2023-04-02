@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-slider',
 	templateUrl: './slider.component.html',
-	styleUrls: [
-		'./slider.component.scss'
-	],
+	styleUrls: ['./slider.component.scss'],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

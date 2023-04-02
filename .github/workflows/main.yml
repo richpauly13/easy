@@ -27,9 +27,13 @@ jobs:
       run: |
         npm run build
 
-    - name: Lint EASY and docs
+    - name: Lint EASY and docs ts files
       run: |
         npm run lint
+
+    - name: Lint EASY and docs scss files
+      run: |
+        npm run lint:scss
 
     - name: Test EASY and docs
       run: |

@@ -4,14 +4,13 @@
 
 // Color styles
 @each $name, $color in $colors {
-
 	// Background color styles
 	@if $name != lt-black {
 		.bg-#{"" + $name},
 		.bg-hover-#{"" + $name}:hover {
 			background-color: $color;
 
-			&[type=range][class*=slider] {
+			&[type="range"][class*="slider"] {
 				&::-moz-range-track {
 					background: $color;
 				}
@@ -25,7 +24,7 @@
 				}
 			}
 
-			&[class*=progress]:not(.progress-label)::-webkit-progress-bar {
+			&[class*="progress"]:not(.progress-label)::-webkit-progress-bar {
 				background-color: $color;
 			}
 		}
@@ -37,7 +36,7 @@
         .text-hover-#{"" + $name}:hover {
 			color: $color;
 
-			&[type=range][class*=slider] {
+			&[type="range"][class*="slider"] {
 				&::-moz-range-thumb {
 					background: $color;
 				}
@@ -51,7 +50,7 @@
 				}
 			}
 
-			&[class*=progress]:not(.progress-label) {
+			&[class*="progress"]:not(.progress-label) {
 				&::-moz-progress-bar {
 					background-color: $color;
 				}
@@ -91,8 +90,8 @@
 		}
 
 		.border-tb-#{"" + $name} {
-			border-top: rem(1) solid $color;
 			border-bottom: rem(1) solid $color;
+			border-top: rem(1) solid $color;
         }
 
         // Box shadow styles

@@ -1,10 +1,13 @@
+/* stylelint-disable scss/no-duplicate-dollar-variables */
+/* stylelint-disable unit-disallowed-list */
+@use "sass:list";
 @use "sass:math";
 
 // Credit: https://css-tricks.com/snippets/sass/material-shadows-mixin/
 @function bottom-shadow($depth, $color) {
-	$blur: rem(nth(1 3 3 5 6, $depth) * 4);
-	$color: rgba(color($color), nth(0.24 0.23 0.23 0.22 0.22, $depth));
-	$offset: rem(nth(1.5 3 6 10 15, $depth));
+	$blur: rem(list.nth(1 3 3 5 6, $depth) * 4);
+	$color: rgba(color($color), list.nth(.24 .23 .23 .22 .22, $depth));
+	$offset: rem(list.nth(1.5 3 6 10 15, $depth));
 
 	@return 0 $offset $blur $color;
 }
@@ -16,7 +19,7 @@
 // Credit: https://github.com/pierreburel/sass-rem
 @function rem($values...) {
 	$rems: ();
-	$separator: list-separator($values);
+	$separator: list.separator($values);
 
 	@each $value in $values {
 		@if type-of($value) == list {
@@ -27,7 +30,7 @@
 			$value: $value;
 		}
 
-		$rems: append($rems, $value, $separator);
+		$rems: list.append($rems, $value, $separator);
 	}
 
 	@return $rems;
@@ -39,9 +42,9 @@
 
 // Credit: https://css-tricks.com/snippets/sass/material-shadows-mixin/
 @function top-shadow($depth, $color) {
-	$blur: rem(nth(1.5 3 10 14 19, $depth) * 4);
-	$color: rgba(color($color), nth(0.12 0.16 0.19 0.25 0.3, $depth));
-	$offset: rem(nth(1.5 3 10 14 19, $depth));
+	$blur: rem(list.nth(1.5 3 10 14 19, $depth) * 4);
+	$color: rgba(color($color), list.nth(.12 .16 .19 .25 .3, $depth));
+	$offset: rem(list.nth(1.5 3 10 14 19, $depth));
 
 	@return 0 $offset $blur $color;
 }

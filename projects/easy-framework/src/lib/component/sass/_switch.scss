@@ -3,15 +3,15 @@
 @import "../../core/sass/variables";
 
 // Switch styles
-[class*=switch]:not(.switch-label) {
+[class*="switch"]:not(.switch-label) {
 	border: rem(1) solid color(n);
 
-	&[checked=true] + .switch-label::after,
-	&[checked=true] + .switch-label::before {
+	&[checked="true"] + .switch-label::after,
+	&[checked="true"] + .switch-label::before {
 		@include animate(all);
 	}
 
-	&[checked=true] + .switch-label::before {
+	&[checked="true"] + .switch-label::before {
 		background-color: color(green);
 		transform: translateX(rem(73));
 	}
@@ -22,7 +22,7 @@
 		border: rem(1) solid color(black);
 	}
 
-	&[checked=false] + .switch-label::before {
+	&[checked="false"] + .switch-label::before {
 		background-color: color(red);
 		transform: translateX(0);
 	}

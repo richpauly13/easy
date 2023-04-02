@@ -9,15 +9,9 @@ describe('FormComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				FormComponent
-			],
-			imports: [
-				ReactiveFormsModule
-			],
-			providers: [
-				FormBuilder
-			]
+			declarations: [FormComponent],
+			imports: [ReactiveFormsModule],
+			providers: [FormBuilder]
 		})
 		.compileComponents();
 	}));

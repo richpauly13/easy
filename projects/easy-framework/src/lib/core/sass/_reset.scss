@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+
 a,
 abbr,
 acronym,
@@ -85,8 +86,8 @@ ul,
 var,
 video {
 	border: 0;
-	font-size: 100%;
 	font: inherit;
+	font-size: 100%;
 	margin: 0;
 	padding: 0;
 	vertical-align: baseline;
@@ -121,9 +122,8 @@ blockquote,
 q {
 	quotes: none;
 
-	&:after,
-	&:before {
-		content: "";
+	&::after,
+	&::before {
 		content: none;
 	}
 }

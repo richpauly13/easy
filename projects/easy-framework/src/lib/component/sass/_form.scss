@@ -5,20 +5,20 @@
 // Form styles
 select.form-field[multiple],
 textarea.form-field {
-    height: rem(100);
+	height: rem(100);
 }
 
 select.form-field:not([multiple]) {
-    padding-bottom: 0;
+	padding-bottom: 0;
 	padding-top: 0;
 }
 
 .checkbox-group,
 .radio-group {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
 
 	&:not(:last-child) {
 		margin-bottom: space(sm);
@@ -42,13 +42,12 @@ select.form-field:not([multiple]) {
 			height: rem(20);
 			width: rem(20);
 
-			&[type=radio] {
+			&[type="radio"] {
 				border: rem(1.6) solid color(gray);
 				outline: none;
 
 				&:checked::before {
-					transform: translate(rem(-8), rem(-8));
-					-moz-transform: translate(rem(-7.25), rem(-7.5));
+					transform: translate(rem(-7.25), rem(-7.5));
 				}
 			}
 
@@ -72,68 +71,68 @@ select.form-field:not([multiple]) {
 }
 
 .field-group {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
 }
 
 .fieldset {
-    border: rem(1.6) solid color(blue);
-    padding: rem(6 12 12);
+	border: rem(1.6) solid color(blue);
+	padding: rem(6 12 12);
 }
 
 .form-field {
-    outline: rem(1.6) solid color(gray);
 	height: space(xl);
+	outline: rem(1.6) solid color(gray);
 
-    &:hover:not([disabled]):not([readonly]),
-	&:focus:not([disabled]):not([readonly]),
-    &:active:not([disabled]):not([readonly]) {
-        outline: rem(1.6) solid color(blue);
-    }
+	&:hover:not([disabled], [readonly]),
+	&:focus:not([disabled], [readonly]),
+	&:active:not([disabled], [readonly]) {
+		outline: rem(1.6) solid color(blue);
+	}
 
 	&:-moz-placeholder {
-        color: color(dk-gray);
-        opacity: 1;
-    }
+		color: color(dk-gray);
+		opacity: 1;
+	}
 
 	&:-ms-input-placeholder {
-        color: color(dk-gray);
-        opacity: 1;
-    }
+		color: color(dk-gray);
+		opacity: 1;
+	}
 
-    &:not([type=checkbox]):not([type=radio]) {
-        flex: 1 0 rem(220);
-    }
+	&:not([type="checkbox"], [type="radio"]) {
+		flex: 1 0 rem(220);
+	}
 
-    &::-moz-placeholder {
-        color: color(dk-gray);
-        opacity: 1;
-    }
+	&::-moz-placeholder {
+		color: color(dk-gray);
+		opacity: 1;
+	}
 
 	&::placeholder {
-        color: color(dk-gray);
-        opacity: 1;
-    }
+		color: color(dk-gray);
+		opacity: 1;
+	}
 
 	&::-webkit-input-placeholder {
-        color: color(dk-gray);
-        opacity: 0.54;
-    }
+		color: color(dk-gray);
+		opacity: .54;
+	}
 }
 
 .form-group-inline {
-    align-items: flex-start;
+	align-items: flex-start;
 	display: block;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 
 	@include media(md) {
 		display: flex;
 	}
 
-    .field-group {
+	.field-group {
 		flex: 1 1 rem(220);
 
 		@include media(md) {
@@ -155,6 +154,6 @@ select.form-field:not([multiple]) {
 }
 
 .form-label {
-    display: block;
+	display: block;
 	width: 100%;
 }

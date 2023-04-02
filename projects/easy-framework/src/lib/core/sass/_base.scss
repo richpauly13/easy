@@ -1,13 +1,9 @@
-@import "../../core/sass/functions";
-@import "../../core/sass/mixins";
-@import "../../core/sass/variables";
-
 // Responsive fonts
 html {
+	box-sizing: border-box;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgb(0 0 0 / 0);
 	text-size-adjust: 100%;
 
 	@include media(lg) {
@@ -39,6 +35,8 @@ body {
 	background-color: color(lt-white);
 	color: color(lt-black);
 	font-family: $font-stack;
+
+	/* stylelint-disable-next-line unit-disallowed-list */
 	font-size: 1rem;
 	line-height: 1;
 	overflow-x: hidden;
@@ -47,22 +45,22 @@ body {
 	input,
 	select,
 	textarea {
-		font-size: 1.3333rem;
+		font-size: rem(21.3328);
 
 		@include media(lg) {
-			font-size: 1.0667rem;
+			font-size: rem(17.0672);
 		}
 
 		@include media(md) {
-			font-size: 1.1429rem;
+			font-size: rem(18.2864);
 		}
 
 		@include media(sm) {
-			font-size: 1.2308rem;
+			font-size: rem(19.6928);
 		}
 
 		@include media(xl) {
-			font-size: 1rem;
+			font-size: rem(16);
 		}
 	}
 }
@@ -136,25 +134,25 @@ th {
 
 // Form, link, and button resets
 a,
-a[role=button],
+a[role="button"],
 button,
-html input[type=button],
+html input[type="button"],
 input,
-input[type=reset],
-input[type=submit],
+input[type="reset"],
+input[type="submit"],
 optgroup,
 select,
 textarea,
-[type=button],
-[type=reset],
-[type=submit] {
+[type="button"],
+[type="reset"],
+[type="submit"] {
 	border: 0;
 	border-radius: 0;
-    font-family: inherit;
-    text-decoration: none;
+	font-family: inherit;
+	text-decoration: none;
 
 	&:hover:not([disabled]),
-    &:focus:not([disabled]),
+	&:focus:not([disabled]),
 	&:active:not([disabled]) {
 		outline: none;
 		outline-offset: 0;
@@ -163,41 +161,41 @@ textarea,
 	&:-moz-focus-inner:not([disabled]) {
 		outline: none;
 		outline-offset: 0;
-    }
+	}
 }
 
 a,
-a[role=button],
+a[role="button"],
 button,
-html input[type=button],
-input[type=reset],
-input[type=submit],
-[type=button],
-[type=reset],
-[type=submit] {
+html input[type="button"],
+input[type="reset"],
+input[type="submit"],
+[type="button"],
+[type="reset"],
+[type="submit"] {
 	background-color: transparent;
 
 	&:hover:not([disabled]),
-    &:focus:not([disabled]),
+	&:focus:not([disabled]),
 	&:active:not([disabled]),
 	&.active:not([disabled]) {
 		text-decoration: underline;
-    }
+	}
 
-    &:-moz-focus-inner:not([disabled]) {
+	&:-moz-focus-inner:not([disabled]) {
 		text-decoration: underline;
-    }
+	}
 }
 
 a:hover,
-a[role=button]:hover,
+a[role="button"]:hover,
 button:hover,
-html input[type=button]:hover,
-input[type=checkbox]:hover,
-input[type=radio]:hover,
-input[type=range]:hover,
-input[type=reset]:hover,
-input[type=submit]:hover,
+html input[type="button"]:hover,
+input[type="checkbox"]:hover,
+input[type="radio"]:hover,
+input[type="range"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
 select:hover {
 	cursor: pointer;
 }
@@ -218,20 +216,20 @@ textarea {
 	outline: rem(1) solid color(black);
 
 	&:hover:not([disabled]),
-    &:focus:not([disabled]),
+	&:focus:not([disabled]),
 	&:active:not([disabled]) {
 		outline: rem(1) solid color(blue);
 	}
 }
 
-input[type=checkbox],
-input[type=radio] {
+input[type="checkbox"],
+input[type="radio"] {
 	appearance: none;
 	height: space(sm);
 	margin-block: 0;
 	margin-inline: 0;
-	width: space(sm);
 	vertical-align: middle;
+	width: space(sm);
 
 	&:checked::before {
 		background-color: color(black);
@@ -243,36 +241,35 @@ input[type=radio] {
 	}
 }
 
-input[type=radio] {
+input[type="radio"] {
 	border: rem(1) solid color(black);
 	border-radius: 50%;
 	outline: none;
 
 	&:checked::before {
 		border-radius: 50%;
-		transform: translate(rem(1.25), rem(.75));
-		-moz-transform: translate(rem(1.25), rem(1.25));
+		transform: translate(rem(1.25), rem(1.25));
 	}
 }
 
-input[type=date],
-input[type=datetime-local],
-input[type=month],
-input[type=time] {
-	-webkit-appearance: listbox;
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"] {
+	appearance: listbox;
 }
 
-input[type=file] {
+input[type="file"] {
 	height: auto;
 	padding: 0;
 }
 
-input[type=number] {
-	-moz-appearance: textfield;
+input[type="number"] {
+	appearance: textfield;
 }
 
 // Credit: https://css-tricks.com/sliding-nightmare-understanding-range-input
-input[type=range] {
+input[type="range"] {
 	appearance: none;
 	background: transparent;
 	font: inherit;
@@ -283,7 +280,7 @@ input[type=range] {
 	&:hover,
 	&:focus,
 	&:active {
-        border: rem(1.6) solid color(black);
+		border: rem(1.6) solid color(black);
 		outline: none;
 	}
 
@@ -293,13 +290,13 @@ input[type=range] {
 
 	&,
 	&::-webkit-slider-thumb {
-		-webkit-appearance: none;
+		appearance: none;
 	}
 }
 
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
-	-webkit-appearance: none;
+	appearance: none;
 	margin: 0;
 }
 
@@ -309,7 +306,7 @@ legend {
 }
 
 optgroup {
-	font-weight: bolder;
+	font-weight: 700;
 }
 
 option {
@@ -340,10 +337,10 @@ select {
 	padding-block: 0;
 	text-rendering: optimizeLegibility;
 
-    &:-moz-focusring {
-        color: transparent;
-        text-shadow: 0 0 0 color(lt-black);
-    }
+	&:-moz-focusring {
+		color: transparent;
+		text-shadow: 0 0 0 color(lt-black);
+	}
 }
 
 textarea {
@@ -355,8 +352,7 @@ button[disabled],
 button:disabled,
 input[disabled],
 input:disabled,
-[disabled]
-:disabled {
+[disabled] :disabled {
 	background-color: color(lt-gray);
 	color: color(dk-gray);
 	text-decoration: none;

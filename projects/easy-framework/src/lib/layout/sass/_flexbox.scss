@@ -27,12 +27,12 @@
 }
 
 // Flexbox container alignment styles
-.align-b:not(.grid):not(.col),
+.align-b:not(.grid, .col),
 .col.align-r {
 	align-items: flex-end;
 }
 
-.align-c:not(.grid):not(.col),
+.align-c:not(.grid, .col),
 .col.align-m {
 	justify-content: center;
 }
@@ -42,17 +42,17 @@
 	justify-content: center;
 }
 
-.align-l:not(.grid):not(.col),
+.align-l:not(.grid, .col),
 .col.align-t {
 	justify-content: flex-start;
 }
 
-.align-m:not(.grid):not(.col),
+.align-m:not(.grid, .col),
 .col.align-c {
 	align-items: center;
 }
 
-.align-r:not(.grid):not(.col),
+.align-r:not(.grid, .col),
 .col.align-b {
 	justify-content: flex-end;
 }
@@ -73,13 +73,13 @@
 	align-items: stretch;
 }
 
-.align-t:not(.grid):not(.col),
+.align-t:not(.grid, .col),
 .col.align-l {
 	align-items: flex-start;
 }
 
 // Flexbox container wrap styles
-[class*=wrap]:not(.wrap-n) {
+[class*="wrap"]:not(.wrap-n) {
 	flex-wrap: wrap;
 }
 
@@ -121,7 +121,7 @@
 }
 
 .col .item-c,
-.item-m:not(.grid .item-m):not(.col .item-m) {
+.item-m:not(.grid .item-m, .col .item-m) {
 	align-self: center;
 }
 
@@ -132,7 +132,7 @@
 }
 
 .col .item-l,
-.item-t:not(.grid .item-t):not(.col .item-t) {
+.item-t:not(.grid .item-t, .col .item-t) {
 	align-self: flex-start;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .col .item-r,
-.item-b:not(.grid .item-b):not(.col .item-b) {
+.item-b:not(.grid .item-b, .col .item-b) {
 	align-self: flex-end;
 }
 
@@ -150,22 +150,22 @@
 	margin-bottom: auto;
 }
 
-.item-c:not(.grid .item-c):not(.col .item-c) {
+.item-c:not(.grid .item-c, .col .item-c) {
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.item-cm:not(.grid .item-cm):not(.col .item-cm) {
+.item-cm:not(.grid .item-cm, .col .item-cm) {
 	align-self: center;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.item-l:not(.grid .item-l):not(.col .item-l) {
+.item-l:not(.grid .item-l, .col .item-l) {
 	margin-right: auto;
 }
 
-.item-r:not(.grid .item-r):not(.col .item-r) {
+.item-r:not(.grid .item-r, .col .item-r) {
 	margin-left: auto;
 }
 
@@ -201,12 +201,12 @@
 	flex-direction: column;
 	min-height: 100%;
 
-	& > * {
+	> * {
 		flex-shrink: 0;
 	}
 
-	& main,
-	& .main {
+	main,
+	.main {
 		flex: 1 0 auto;
 	}
 }

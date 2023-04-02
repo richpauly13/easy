@@ -1,26 +1,30 @@
+/* stylelint-disable unit-disallowed-list */
+/* stylelint-disable scss/map-keys-quotes */
+/* stylelint-disable color-no-hex */
+/* stylelint-disable scss/double-slash-comment-inline */
 // Breakpoint variables
-$screen-lg: 64em; // 1024px
-$screen-md: 48em; // 768px
-$screen-sm: 30em; // 480px
-$screen-xl: 85.375em; // 1366px
+$screen-lg: 64em !default; // 1024px
+$screen-md: 48em !default; // 768px
+$screen-sm: 30em !default; // 480px
+$screen-xl: 85.375em !default; // 1366px
 
 // Font family variable
-$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 // Font size variables
-$font-lg: rem(24);
-$font-md: rem(18);
-$font-ml: rem(22);
-$font-sm: rem(14);
-$font-xl: rem(36);
-$font-xs: rem(12);
+$font-lg: rem(24) !default;
+$font-md: rem(18) !default;
+$font-ml: rem(22) !default;
+$font-sm: rem(14) !default;
+$font-xl: rem(36) !default;
+$font-xs: rem(12) !default;
 
 // Root font size variables - must remain in px for rem to work
-$screen-font-lg: 15px;
-$screen-font-md: 14px;
-$screen-font-sm: 13px;
-$screen-font-xl: 16px;
-$screen-font-xs: 12px;
+$screen-font-lg: 15px !default;
+$screen-font-md: 14px !default;
+$screen-font-sm: 13px !default;
+$screen-font-xl: 16px !default;
+$screen-font-xs: 12px !default;
 
 // Colors map variable
 $colors: (
@@ -38,7 +42,7 @@ $colors: (
 	red: #ba000d,
 	white: #fff,
     yellow: #ffeb3b
-);
+) !default;
 
 // Headings list variable
 $headings: (
@@ -48,7 +52,7 @@ $headings: (
     (h4, rem(16)),
     (h5, rem(13.28)),
     (h6, rem(12))
-);
+) !default;
 
 // Space map variable
 $space: (
@@ -60,4 +64,4 @@ $space: (
 	xl: rem(40),
 	xs: rem(8),
 	xxl: rem(70)
-);
+) !default;

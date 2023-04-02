@@ -6,7 +6,6 @@ import { ColorComponent } from './color/color.component';
 import { ContainerComponent } from './container/container.component';
 import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
-import { PositionComponent } from './position/position.component';
 import { SpaceComponent } from './space/space.component';
 import { TextComponent } from './text/text.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -39,10 +38,6 @@ const routes: Routes = [
 				path: 'display'
 			},
 			{
-				component: PositionComponent,
-				path: 'position'
-			},
-			{
 				component: SpaceComponent,
 				path: 'space'
 			},
@@ -68,11 +63,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	exports: [
-		RouterModule
-	],
-	imports: [
-		RouterModule.forChild(routes)
-	]
+	exports: [RouterModule],
+	imports: [RouterModule.forChild(routes)]
 })
 export class UtilitiesRoutingModule { }

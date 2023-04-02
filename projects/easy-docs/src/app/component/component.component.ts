@@ -3,9 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'docs-component',
 	templateUrl: './component.component.html',
-	styleUrls: [
-		'./component.component.scss'
-	],
+	styleUrls: ['./component.component.scss'],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

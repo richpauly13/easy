@@ -10,9 +10,7 @@ describe('AppComponent', (): void => {
 
 	beforeEach(waitForAsync((): void => {
 		TestBed.configureTestingModule({
-			declarations: [
-				AppComponent
-			],
+			declarations: [AppComponent],
 			imports: [
 				EasyModule,
 				RouterTestingModule

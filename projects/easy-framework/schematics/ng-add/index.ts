@@ -28,12 +28,8 @@ function addSharedModuleToAppModule(options: Schema): Rule {
 
 function createSharedModule(options: Schema): Rule {
 	return (tree: Tree) => {
-		const components: Component[] | string[] = options.components.includes(Component.All) ? [
-			'ComponentModule'
-		] : options.components;
-		const layouts: Layout[] | string[] = options.layouts.includes(Layout.All) ? [
-			'LayoutModule'
-		] : options.layouts;
+		const components: Component[] | string[] = options.components.includes(Component.All) ? ['ComponentModule'] : options.components;
+		const layouts: Layout[] | string[] = options.layouts.includes(Layout.All) ? ['LayoutModule'] : options.layouts;
 		const moduleNames: string[] = [
 			'EasyModule',
 			...components,

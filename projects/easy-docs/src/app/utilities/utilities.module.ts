@@ -5,7 +5,6 @@ import { ColorComponent } from './color/color.component';
 import { ContainerComponent } from './container/container.component';
 import { DimensionComponent } from './dimension/dimension.component';
 import { DisplayComponent } from './display/display.component';
-import { PositionComponent } from './position/position.component';
 import { SharedModule } from '../shared/shared.module';
 import { SpaceComponent } from './space/space.component';
 import { TextComponent } from './text/text.component';
@@ -21,7 +20,6 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		ContainerComponent,
 		DimensionComponent,
 		DisplayComponent,
-		PositionComponent,
 		SpaceComponent,
 		TextComponent,
 		TypographyComponent,
@@ -34,7 +32,6 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		ContainerComponent,
 		DimensionComponent,
 		DisplayComponent,
-		PositionComponent,
 		SpaceComponent,
 		TextComponent,
 		TypographyComponent,
@@ -42,8 +39,6 @@ import { VisibilityComponent } from './visibility/visibility.component';
 		UtilitiesRoutingModule,
 		VisibilityComponent
 	],
-	imports: [
-		SharedModule
-	]
+	imports: [SharedModule]
 })
 export class UtilitiesModule { }

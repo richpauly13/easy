@@ -3,16 +3,16 @@
 @import "../../core/sass/variables";
 
 // Spinner styles
-[class^=spinner] {
+[class^="spinner"] {
 	animation: spinner 1.5s linear infinite;
 	border: space(xs) solid color(lt-gray);
-    border-radius: 50%;
-    height: space(xl);
-    width: space(xl);
+	border-radius: 50%;
+	height: space(xl);
+	width: space(xl);
 }
 
 .spinner {
-    border-left-color: color(blue);
+	border-left-color: color(blue);
 }
 
 .spinner-2 {
@@ -30,7 +30,7 @@
 }
 
 @keyframes spinner {
-    to {
-        transform: rotate(360deg);
-    }
+	100% {
+		transform: rotate(360deg);
+	}
 }

@@ -2,6 +2,9 @@
 @import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable media-feature-name-allowed-list */
+
 // Visibility styles
 .hide,
 .hide-xs,
@@ -30,19 +33,19 @@
 }
 
 .hide-sm {
-	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+	@media (min-width: $screen-sm) and (max-width: $screen-md) {
 		display: none;
 	}
 }
 
 .hide-md {
-	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+	@media (min-width: $screen-md) and (max-width: $screen-lg) {
 		display: none;
 	}
 }
 
 .hide-lg {
-	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl) {
 		display: none;
 	}
 }
@@ -67,19 +70,19 @@
 }
 
 .hidden-sm {
-	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+	@media (min-width: $screen-sm) and (max-width: $screen-md) {
 		visibility: hidden;
 	}
 }
 
 .hidden-md {
-	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+	@media (min-width: $screen-md) and (max-width: $screen-lg) {
 		visibility: hidden;
 	}
 }
 
 .hidden-lg {
-	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl) {
 		visibility: hidden;
 	}
 }
@@ -102,19 +105,19 @@
 }
 
 .show-sm {
-	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+	@media (min-width: $screen-sm) and (max-width: $screen-md) {
 		display: inherit;
 	}
 }
 
 .show-md {
-	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+	@media (min-width: $screen-md) and (max-width: $screen-lg) {
 		display: inherit;
 	}
 }
 
 .show-lg {
-	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl) {
 		display: inherit;
 	}
 }
@@ -139,19 +142,19 @@
 }
 
 .shown-sm {
-	@media (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+	@media (min-width: $screen-sm) and (max-width: $screen-md) {
 		visibility: visible;
 	}
 }
 
 .shown-md {
-	@media (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+	@media (min-width: $screen-md) and (max-width: $screen-lg) {
 		visibility: visible;
 	}
 }
 
 .shown-lg {
-	@media (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+	@media (min-width: $screen-lg) and (max-width: $screen-xl) {
 		visibility: visible;
 	}
 }

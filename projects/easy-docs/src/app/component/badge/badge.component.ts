@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-badge',
 	templateUrl: './badge.component.html',
-	styleUrls: [
-		'./badge.component.scss'
-	],
+	styleUrls: ['./badge.component.scss'],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

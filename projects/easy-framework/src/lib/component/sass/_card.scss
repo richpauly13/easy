@@ -2,36 +2,37 @@
 @import "../../core/sass/mixins";
 @import "../../core/sass/variables";
 
+/* stylelint-disable unit-disallowed-list */
 // Card styles
-[class^=card] {
-    max-width: 100%;
+[class^="card"] {
+	max-width: 100%;
 }
 
 .card {
-    @include shadow(1);
+	@include shadow(1);
 
-    background-color: color(white);
-    border: rem(1) solid color(gray);
-    border-radius: space(xs);
-    flex: 1 0 rem(500);
-    margin: space(xs);
-    padding: space(sm);
+	background-color: color(white);
+	border: rem(1) solid color(gray);
+	border-radius: space(xs);
+	flex: 1 0 rem(500);
+	margin: space(xs);
+	padding: space(sm);
 
-    @include media(sm) {
-        max-width: calc(50% - 1.1rem);
-    }
+	@include media(sm) {
+		max-width: calc(50% - 1.1rem);
+	}
 
-    @include media(md) {
-        max-width: calc(33% - 1.1rem);
-    }
+	@include media(md) {
+		max-width: calc(33% - 1.1rem);
+	}
 
-    @include media(lg) {
-        max-width: calc(25% - 1.1rem);
-    }
+	@include media(lg) {
+		max-width: calc(25% - 1.1rem);
+	}
 
-    @include media(xl) {
-        max-width: calc(20% - 1.1rem);
-    }
+	@include media(xl) {
+		max-width: calc(20% - 1.1rem);
+	}
 
 	&.card-focus:hover,
 	&.card-focus:focus,
@@ -42,7 +43,7 @@
 
 // Cards styles
 .cards {
+	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
 }

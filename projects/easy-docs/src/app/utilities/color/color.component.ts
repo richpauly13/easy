@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-color',
 	templateUrl: './color.component.html',
-	styleUrls: [
-		'./color.component.scss'
-	],
+	styleUrls: ['./color.component.scss'],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })

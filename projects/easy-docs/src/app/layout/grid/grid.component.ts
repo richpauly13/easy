@@ -4,9 +4,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
 	selector: 'docs-grid',
 	templateUrl: './grid.component.html',
-	styleUrls: [
-		'./grid.component.scss'
-	],
+	styleUrls: ['./grid.component.scss'],
 	encapsulation: ViewEncapsulation.Emulated,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
