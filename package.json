@@ -80,7 +80,7 @@
     "commit": "git commit -m \"chore(deps): bump deps\"",
     "deploy": "ng deploy",
     "lint": "ng lint --fix",
-    "lint:scss": "stylelint \"**/*.scss\"",
+    "lint:scss": "stylelint \"**/*.scss\" --fix",
     "ng": "ng",
     "push": "git push",
     "release": "run-s change release",
