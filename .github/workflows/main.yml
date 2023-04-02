@@ -29,11 +29,11 @@ jobs:
 
     - name: Lint EASY and docs ts files
       run: |
-        npm run lint
+        npm run lint --fix
 
     - name: Lint EASY and docs scss files
       run: |
-        npm run lint:scss
+        npm run lint:scss --fix
 
     - name: Test EASY and docs
       run: |
