@@ -50,9 +50,3 @@ jobs:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
         npm run deploy
-
-    - name: Publish EASY
-      uses: JS-DevTools/npm-publish@v1
-      with:
-        token: ${{secrets.NPM_AUTH_TOKEN}}
-        package: ./projects/easy-framework/package.json
