@@ -1,12 +1,11 @@
-/* eslint-disable max-lines */
-/* eslint-disable @typescript-eslint/naming-convention */
 module.exports = {
 	ignorePatterns: ['projects/**/*'],
 	root: true,
 	overrides: [
 		{
 			'extends': [
-				'plugin:@angular-eslint/ng-cli-compat--formatting-add-on',
+				'eslint:recommended',
+				'plugin:@typescript-eslint/recommended',
 				'plugin:@angular-eslint/recommended',
 				'plugin:@angular-eslint/template/process-inline-templates'
 			],
@@ -1913,15 +1912,13 @@ module.exports = {
 			}
 		},
 		{
-			'extends': ['plugin:@angular-eslint/template/recommended'],
+			'extends': [
+				'plugin:@angular-eslint/template/recommended',
+				'plugin:@angular-eslint/template/accessibility'
+			],
 			files: ['*.html'],
 			rules: {
-				'@angular-eslint/template/accessibility-alt-text': ['error'],
-				'@angular-eslint/template/accessibility-elements-content': ['error'],
-				'@angular-eslint/template/accessibility-label-for': ['error'],
-				'@angular-eslint/template/accessibility-label-has-associated-control': ['error'],
-				'@angular-eslint/template/accessibility-table-scope': ['error'],
-				'@angular-eslint/template/accessibility-valid-aria': ['error'],
+				'@angular-eslint/template/alt-text': ['error'],
 				'@angular-eslint/template/banana-in-box': ['error'],
 				'@angular-eslint/template/click-events-have-key-events': ['error'],
 				'@angular-eslint/template/conditional-complexity': [
@@ -1936,6 +1933,7 @@ module.exports = {
 						maxComplexity: 6
 					}
 				],
+				'@angular-eslint/template/elements-content': ['error'],
 				'@angular-eslint/template/eqeqeq': [
 					'error',
 					{
@@ -1943,6 +1941,7 @@ module.exports = {
 					}
 				],
 				'@angular-eslint/template/i18n': ['off'],
+				'@angular-eslint/template/label-has-associated-control': ['error'],
 				'@angular-eslint/template/mouse-events-have-key-events': ['error'],
 				'@angular-eslint/template/no-any': ['error'],
 				'@angular-eslint/template/no-autofocus': ['error'],
@@ -1964,7 +1963,9 @@ module.exports = {
 				'@angular-eslint/template/no-interpolation-in-attributes': ['error'],
 				'@angular-eslint/template/no-negated-async': ['error'],
 				'@angular-eslint/template/no-positive-tabindex': ['error'],
+				'@angular-eslint/template/table-scope': ['error'],
 				'@angular-eslint/template/use-track-by-function': ['error'],
+				'@angular-eslint/template/valid-aria': ['error'],
 				'@typescript-eslint/quotes': [
 					'error',
 					'double',

@@ -1,13 +1,9 @@
 module.exports = {
-	extends: '../../.eslintrc.js',
-	ignorePatterns: [
-		'!**/*'
-	],
+	'extends': '../../.eslintrc.js',
+	ignorePatterns: ['!**/*'],
 	overrides: [
 		{
-			files: [
-				'*.ts'
-			],
+			files: ['*.ts'],
 			parserOptions: {
 				createDefaultProgram: true,
 				project: [
@@ -37,14 +33,10 @@ module.exports = {
 				'@angular-eslint/pipe-prefix': [
 					'error',
 					{
-						prefixes: [
-							'ez'
-						]
+						prefixes: ['ez']
 					}
 				],
-				'@angular-eslint/use-component-view-encapsulation': [
-					'off'
-				],
+				'@angular-eslint/use-component-view-encapsulation': ['off'],
 				'id-denylist': [
 					'error',
 					'callback',
@@ -59,14 +51,6 @@ module.exports = {
 						ignoreTopLevelFunctions: true
 					}
 				]
-			}
-		},
-		{
-			files: [
-				'*.html'
-			],
-			rules: {
-
 			}
 		}
 	]

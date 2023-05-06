@@ -1,13 +1,9 @@
 module.exports = {
-	extends: '../../.eslintrc.js',
-	ignorePatterns: [
-		'!**/*'
-	],
+	'extends': '../../.eslintrc.js',
+	ignorePatterns: ['!**/*'],
 	overrides: [
 		{
-			files: [
-				'*.ts'
-			],
+			files: ['*.ts'],
 			parserOptions: {
 				createDefaultProgram: true,
 				project: [
@@ -35,17 +31,13 @@ module.exports = {
 				'@angular-eslint/pipe-prefix': [
 					'error',
 					{
-						prefixes: [
-							'docs'
-						]
+						prefixes: ['docs']
 					}
 				]
 			}
 		},
 		{
-			files: [
-				'*.html'
-			],
+			files: ['*.html'],
 			rules: {
 				'max-len': [
 					'error',
