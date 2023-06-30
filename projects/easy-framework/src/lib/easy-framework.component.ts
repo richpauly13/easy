@@ -7,6 +7,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EasyComponent {
-
-}
+export class EasyComponent { }
