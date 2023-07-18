@@ -91,6 +91,7 @@ module.exports = {
 				],
 				'@angular-eslint/prefer-on-push-component-change-detection': ['error'],
 				'@angular-eslint/prefer-output-readonly': ['error'],
+				"@angular-eslint/prefer-standalone-component": ["error"],
 				'@angular-eslint/relative-url-prefix': ['error'],
 				'@angular-eslint/sort-ngmodule-metadata-arrays': ['error'],
 				'@angular-eslint/use-component-selector': ['error'],
@@ -634,19 +635,6 @@ module.exports = {
 					{
 						allowThrowingAny: false,
 						allowThrowingUnknown: false
-					}
-				],
-				'@typescript-eslint/no-type-alias': [
-					'error',
-					{
-						allowAliases: 'never',
-						allowCallbacks: 'never',
-						allowConditionalTypes: 'never',
-						allowConstructors: 'never',
-						allowGenerics: 'never',
-						allowLiterals: 'never',
-						allowMappedTypes: 'never',
-						allowTupleTypes: 'never'
 					}
 				],
 				'@typescript-eslint/no-unnecessary-boolean-literal-compare': [
@@ -1963,6 +1951,7 @@ module.exports = {
 				'@angular-eslint/template/no-interpolation-in-attributes': ['error'],
 				'@angular-eslint/template/no-negated-async': ['error'],
 				'@angular-eslint/template/no-positive-tabindex': ['error'],
+				"@angular-eslint/template/prefer-self-closing-tags": ["error"],
 				'@angular-eslint/template/table-scope': ['error'],
 				'@angular-eslint/template/use-track-by-function': ['error'],
 				'@angular-eslint/template/valid-aria': ['error'],
