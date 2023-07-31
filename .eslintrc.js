@@ -91,7 +91,7 @@ module.exports = {
 				],
 				'@angular-eslint/prefer-on-push-component-change-detection': ['error'],
 				'@angular-eslint/prefer-output-readonly': ['error'],
-				"@angular-eslint/prefer-standalone-component": ["error"],
+				"@angular-eslint/prefer-standalone-component": ["off"],
 				'@angular-eslint/relative-url-prefix': ['error'],
 				'@angular-eslint/sort-ngmodule-metadata-arrays': ['error'],
 				'@angular-eslint/use-component-selector': ['error'],
@@ -146,6 +146,14 @@ module.exports = {
 				'@typescript-eslint/class-literal-property-style': [
 					'error',
 					'getters'
+				],
+				'@typescript-eslint/class-methods-use-this': [
+					'error',
+					{
+						ignoreClassesThatImplementAnInterface: false,
+						ignoreOverrideMethods: false
+
+					}
 				],
 				'@typescript-eslint/comma-dangle': [
 					'error',
