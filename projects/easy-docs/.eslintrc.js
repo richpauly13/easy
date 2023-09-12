@@ -8,6 +8,7 @@ module.exports = {
 				createDefaultProgram: true,
 				project: [
 					'projects/easy-docs/tsconfig.app.json',
+					'projects/easy-docs/tsconfig.eslint.json',
 					'projects/easy-docs/tsconfig.spec.json'
 				]
 			},

@@ -17,7 +17,8 @@ module.exports = {
 			},
 			plugins: [
 				'eslint-plugin-jsdoc',
-				'eslint-plugin-unicorn'
+				'eslint-plugin-unicorn',
+				'import'
 			],
 			rules: {
 				'@angular-eslint/component-class-suffix': [
@@ -150,7 +151,7 @@ module.exports = {
 				'@typescript-eslint/class-methods-use-this': [
 					'error',
 					{
-						ignoreClassesThatImplementAnInterface: false,
+						ignoreClassesThatImplementAnInterface: true,
 						ignoreOverrideMethods: false
 
 					}
@@ -504,12 +505,6 @@ module.exports = {
 				],
 				'@typescript-eslint/no-dupe-class-members': ['error'],
 				'@typescript-eslint/no-duplicate-enum-values': ['error'],
-				'@typescript-eslint/no-duplicate-imports': [
-					'error',
-					{
-						includeExports: false
-					}
-				],
 				'@typescript-eslint/no-duplicate-type-constituents': [
 					'error',
 					{
@@ -559,12 +554,6 @@ module.exports = {
 				],
 				'@typescript-eslint/no-floating-promises': ['off'],
 				'@typescript-eslint/no-for-in-array': ['error'],
-				'@typescript-eslint/no-implicit-any-catch': [
-					'error',
-					{
-						allowExplicitAny: false
-					}
-				],
 				'@typescript-eslint/no-implied-eval': ['error'],
 				'@typescript-eslint/no-import-type-side-effects': ['error'],
 				'@typescript-eslint/no-inferrable-types': ['off'],
@@ -840,7 +829,11 @@ module.exports = {
 					'error',
 					{
 						allowAny: false,
-						checkCompoundAssignments: true
+						allowBoolean: false,
+						allowNullish: false,
+						allowNumberAndString: false,
+						allowRegExp: false,
+						skipCompoundAssignments: true
 					}
 				],
 				'@typescript-eslint/restrict-template-expressions': [
@@ -864,7 +857,7 @@ module.exports = {
 						omitLastInOneLineBlock: false
 					}
 				],
-				'@typescript-eslint/sort-type-union-intersection-members': [
+				'@typescript-eslint/sort-type-constituents': [
 					'error',
 					{
 						checkIntersections: true,
@@ -1904,7 +1897,14 @@ module.exports = {
 					{
 						exceptRange: false
 					}
-				]
+				],
+				'import/no-duplicates': [
+					'error',
+					{
+						considerQueryString: false,
+						'prefer-inline': true
+					}
+				],
 			}
 		},
 		{
