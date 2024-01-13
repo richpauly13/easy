@@ -10,15 +10,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Use Node.js 18.x
+    - name: Use Node.js 20.x
       uses: actions/setup-node@v3
       with:
-        node-version: 18.x
+        node-version: 20.x
         cache: npm
 
     - name: Install @angular/cli
       run: |
-        npm i -g @angular/cli
+        npm i -g @angular/cli@latest
 
     - name: Install dependencies
       run: |
@@ -49,4 +49,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
-        npm run deploy
+        npx angular-cli-ghpages --dir=dist/easy/browser
