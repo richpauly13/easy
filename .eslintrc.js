@@ -148,14 +148,7 @@ module.exports = {
 					'error',
 					'getters'
 				],
-				'@typescript-eslint/class-methods-use-this': [
-					'error',
-					{
-						ignoreClassesThatImplementAnInterface: true,
-						ignoreOverrideMethods: false
-
-					}
-				],
+				'@typescript-eslint/class-methods-use-this': ['off'],
 				'@typescript-eslint/comma-dangle': [
 					'error',
 					'never'

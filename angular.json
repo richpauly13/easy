@@ -69,7 +69,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "easy-docs:build"
+            "buildTarget": "easy-docs:build"
           }
         },
         "lint": {
@@ -85,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "easy-docs:build:development"
+              "buildTarget": "easy-docs:build:development"
             },
             "production": {
-              "browserTarget": "easy-docs:build:production"
+              "buildTarget": "easy-docs:build:production"
             }
           },
           "defaultConfiguration": "development"
