@@ -80,7 +80,7 @@
     "bump-deps": "run-s add commit push",
     "change": "cd projects/easy-framework",
     "commit": "git commit -m \"chore(deps): bump deps\"",
-    "deploy": "npx angular-cli-ghpages --dir=dist/easy/browser",
+    "deploy": "ng deploy",
     "lint": "ng lint --fix",
     "lint:scss": "stylelint \"**/*.scss\" --fix",
     "ng": "ng",
