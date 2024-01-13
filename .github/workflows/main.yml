@@ -49,4 +49,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       run: |
-        npx angular-cli-ghpages --dir=dist/easy/browser
+        npm run deploy
