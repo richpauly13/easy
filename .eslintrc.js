@@ -16,6 +16,7 @@ module.exports = {
 				tsconfigRootDir: __dirname
 			},
 			plugins: [
+				'@stylistic',
 				'eslint-plugin-jsdoc',
 				'eslint-plugin-unicorn',
 				'import'
@@ -92,7 +93,7 @@ module.exports = {
 				],
 				'@angular-eslint/prefer-on-push-component-change-detection': ['error'],
 				'@angular-eslint/prefer-output-readonly': ['error'],
-				"@angular-eslint/prefer-standalone-component": ["off"],
+				'@angular-eslint/prefer-standalone-component': ['off'],
 				'@angular-eslint/relative-url-prefix': ['error'],
 				'@angular-eslint/sort-ngmodule-metadata-arrays': ['error'],
 				'@angular-eslint/use-component-selector': ['error'],
@@ -100,6 +101,51 @@ module.exports = {
 				'@angular-eslint/use-injectable-provided-in': ['error'],
 				'@angular-eslint/use-lifecycle-interface': ['error'],
 				'@angular-eslint/use-pipe-transform-interface': ['error'],
+				'@stylistic/array-bracket-newline': [
+					'error',
+					{
+						minItems: 2,
+						multiline: true
+
+					}
+				],
+				'@stylistic/array-bracket-spacing': [
+					'error',
+					'never',
+					{
+						arraysInArrays: false,
+						objectsInArrays: false,
+						singleValue: false
+					}
+				],
+				'@stylistic/array-element-newline': [
+					'error',
+					{
+						ArrayExpression: {
+							minItems: 1,
+							multiline: true
+						},
+						ArrayPattern: {
+							minItems: 1,
+							multiline: true
+						}
+					}
+				],
+				'@stylistic/arrow-parens': [
+					'error',
+					'always'
+				],
+				'@stylistic/arrow-spacing': [
+					'error',
+					{
+						after: true,
+						before: true
+					}
+				],
+				'@stylistic/block-spacing': [
+					'error',
+					'never'
+				],
 				'@typescript-eslint/adjacent-overload-signatures': ['error'],
 				'@typescript-eslint/array-type': [
 					'error',
@@ -797,7 +843,7 @@ module.exports = {
 					{
 						allowAny: false,
 						allowedPromiseNames: ['Thenable'],
-						checkArrowFunctions: true,
+						checkArrowFunctions: false,
 						checkFunctionDeclarations: true,
 						checkFunctionExpressions: true,
 						checkMethodDeclarations: true
@@ -977,23 +1023,6 @@ module.exports = {
 						setWithoutGet: true
 					}
 				],
-				'array-bracket-newline': [
-					'error',
-					{
-						minItems: 2,
-						multiline: true
-
-					}
-				],
-				'array-bracket-spacing': [
-					'error',
-					'never',
-					{
-						arraysInArrays: false,
-						objectsInArrays: false,
-						singleValue: false
-					}
-				],
 				'array-callback-return': [
 					'error',
 					{
@@ -1001,39 +1030,11 @@ module.exports = {
 						checkForEach: true
 					}
 				],
-				'array-element-newline': [
-					'error',
-					{
-						ArrayExpression: {
-							minItems: 1,
-							multiline: true
-						},
-						ArrayPattern: {
-							minItems: 1,
-							multiline: true
-						}
-					}
-				],
 				'arrow-body-style': [
 					'error',
 					'always'
 				],
-				'arrow-parens': [
-					'error',
-					'always'
-				],
-				'arrow-spacing': [
-					'error',
-					{
-						after: true,
-						before: true
-					}
-				],
 				'block-scoped-var': ['error'],
-				'block-spacing': [
-					'error',
-					'never'
-				],
 				'brace-style': ['off'],
 				camelcase: ['off'],
 				'capitalized-comments': [
@@ -1183,6 +1184,13 @@ module.exports = {
 					'error',
 					'beside'
 				],
+				'import/no-duplicates': [
+					'error',
+					{
+						considerQueryString: false,
+						'prefer-inline': true
+					}
+				],
 				indent: ['off'],
 				'init-declarations': ['off'],
 				'jsx-quotes': [
@@ -1218,14 +1226,7 @@ module.exports = {
 						code: 330
 					}
 				],
-				'max-lines': [
-					'error',
-					{
-						max: 300,
-						skipBlankLines: true,
-						skipComments: true
-					}
-				],
+				'max-lines': ['off'],
 				'max-lines-per-function': [
 					'error',
 					{
@@ -1890,14 +1891,7 @@ module.exports = {
 					{
 						exceptRange: false
 					}
-				],
-				'import/no-duplicates': [
-					'error',
-					{
-						considerQueryString: false,
-						'prefer-inline': true
-					}
-				],
+				]
 			}
 		},
 		{
@@ -1952,7 +1946,7 @@ module.exports = {
 				'@angular-eslint/template/no-interpolation-in-attributes': ['error'],
 				'@angular-eslint/template/no-negated-async': ['error'],
 				'@angular-eslint/template/no-positive-tabindex': ['error'],
-				"@angular-eslint/template/prefer-self-closing-tags": ["error"],
+				'@angular-eslint/template/prefer-self-closing-tags': ['error'],
 				'@angular-eslint/template/table-scope': ['error'],
 				'@angular-eslint/template/use-track-by-function': ['error'],
 				'@angular-eslint/template/valid-aria': ['error'],
