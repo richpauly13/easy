@@ -37,17 +37,6 @@ module.exports = {
 					}
 				]
 			}
-		},
-		{
-			files: ['*.html'],
-			rules: {
-				'max-len': [
-					'error',
-					{
-						code: 1100
-					}
-				]
-			}
 		}
 	]
 };

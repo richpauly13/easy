@@ -11,15 +11,13 @@
     "easy-docs": {
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "configurations": {
             "development": {
-              "buildOptimizer": false,
               "extractLicenses": false,
               "namedChunks": true,
               "optimization": false,
-              "sourceMap": true,
-              "vendorChunk": true
+              "sourceMap": true
             },
             "production": {
               "budgets": [
@@ -49,13 +47,17 @@
               "projects/easy-docs/src/favicon.ico"
             ],
             "index": "projects/easy-docs/src/index.html",
-            "main": "projects/easy-docs/src/main.ts",
-            "outputPath": "dist/easy-docs",
-            "polyfills": "projects/easy-docs/src/polyfills.ts",
+            "outputPath": {
+              "base": "dist/easy-docs"
+            },
+            "polyfills": [
+              "projects/easy-docs/src/polyfills.ts"
+            ],
             "styles": [
               "projects/easy-docs/src/styles.scss"
             ],
-            "tsConfig": "projects/easy-docs/tsconfig.app.json"
+            "tsConfig": "projects/easy-docs/tsconfig.app.json",
+            "browser": "projects/easy-docs/src/main.ts"
           }
         },
         "deploy": {

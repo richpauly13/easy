@@ -123,12 +123,12 @@ app.component.html
 
 ```html
 <ez-root>
-    <app-header></app-header>
-    <app-nav></app-nav>
+    <app-header />
+    <app-nav />
     <main>
-        <router-outlet></router-outlet>
+        <router-outlet />
     </main>
-    <app-footer></app-footer>
+    <app-footer />
 </ez-root>
 ```
 
