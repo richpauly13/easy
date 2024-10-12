@@ -24,8 +24,8 @@ module.exports = {
 			},
 			plugins: [
 				'@stylistic',
-				'eslint-plugin-jsdoc',
-				'eslint-plugin-unicorn',
+				'jsdoc',
+				'unicorn',
 				'import'
 			],
 			rules: {
@@ -683,6 +683,10 @@ module.exports = {
 							colon: {
 								after: true,
 								before: false
+							},
+							operator: {
+								after: true,
+								before: true
 							},
 							parameter: {
 								after: true,
